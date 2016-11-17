@@ -1,0 +1,36 @@
+{
+	"$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema.1.0.0",
+	"definitions": {
+		"context": {
+			"type": "string",
+			"format": "uri",
+			"readonly": true,
+			"longDescription": "The value of this property shall be the context URL that describes the resource according to OData-Protocol and shall be of the form defined in the Redfish specification."
+		},		
+		"id":{
+			"type": "string",
+			"format": "uri",
+			"readonly": true,
+			"longDescription": "The value of this property shall be the unique identifier for the resource and it shall be of the form defined in the Redfish specification."
+		},		
+		"idRef":{
+            "type": "object",
+            "properties": {
+                "@odata.id" :{
+                    "$ref": "#/definitions/id"
+                }
+            },
+			"longDescription": "The value of this property shall be used for references to a resource."
+        },
+        "type":{
+			"type": "string",
+			"readonly": true,
+			"longDescription": "The value of this property shall be an absolute URL that specifies the type of the resource and it shall be of the form defined in the Redfish specification."
+		},
+		"count":{
+			"type": "number",
+			"readonly": true,
+			"longDescription": "The value of this property shall be an integer representing the number of items in a collection."
+		}
+	}
+}

@@ -1,0 +1,45 @@
+{ 
+   "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema.1.0.0", 
+   "title": "#ExtendedInfo.1.0.0.ExtendedInfo", 
+   "type": "object", 
+   "additionalProperties": false, 
+   "description": "This is the schema definition for Extended Info.  Extended errors using this definition can be returned in the body of operation responses.  They augment the HTTP error codes with more meaningful information about why the error occurred.", 
+   "longDescription": "This resource shall be used to represent extended information for responses in a Redfish implementation.", 
+   "properties": { 
+       "error": { 
+            "type": "object", 
+            "properties": { 
+                "code": { 
+                    "type": "string", 
+                    "description": "This is the key for this message which can be used to look up the message in a message registry.", 
+                    "pattern": "^[A-Za-z0-9]+\\.\\d+\\.\\d+.[A-Za-z0-9.]+$", 
+                    "readonly": true, 
+                    "longDescription": "This property shall be a key into message registry as described in the Redfish specification." 
+                }, 
+                "message": { 
+                    "type": "string", 
+                    "description": "A human readable message corresponding to the message in the message registry.", 
+                    "readonly": true, 
+                    "longDescription": "This property shall contain a human readable message." 
+                }, 
+                "@Message.ExtendedInfo": { 
+		            "type": "array", 
+		            "items": { 
+			            "$ref": "Message.1.0.0.json#/definitions/Message" 
+		            } 
+                }
+            }, 
+            "longDescription": "The value of this resource shall be an array of Message objects used to describe one or more conditions related to the request.", 
+            "required":  [ 
+                "code", 
+                "message", 
+                "@Message.ExtendedInfo" 
+            ] 
+        } 
+    }, 
+    "required": [ 
+        "error" 
+    ], 
+    "copyright": "Copyright 2014-2015 Distributed Management Task Force, Inc. (DMTF). All rights reserved." 
+} 
+
