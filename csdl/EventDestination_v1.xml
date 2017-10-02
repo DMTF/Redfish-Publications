@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  EventDestination  v1.2.0-->
+<!--# Redfish Schema:  EventDestination  v1.2.1-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -124,15 +124,15 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EventDestination.v1_1_0">
       <EntityType Name="EventDestination" BaseType="EventDestination.v1_0_2.EventDestination">
-        <NavigationProperty Name="OriginResources" Type="Collection(Resource.Item)">
+        <NavigationProperty Name="OriginResources" Type="Collection(Resource.ItemOrCollection)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="A list of resources for which the service will only send related events."/>
-          <Annotation Term="OData.LongDescription" String="The value of this property shall specify an array of Referenceable Members that are the only allowable values for the OriginOfCondition property within an EventRecord sent to the subscriber.  Events originating from Referenceable Members not contained in this array shall not be sent to the subscriber."/>
+          <Annotation Term="OData.Description" String="A list of resources for which the service will only send related events.  If this property is absent or the array is empty, then Events originating from any resource will be sent to the subscriber."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall specify an array of Resources, Resource Collections, or Referenceable Members that are the only allowable values for the OriginOfCondition property within an EventRecord sent to the subscriber.  Events originating from Resources, Resource Collections, or Referenceable Members not contained in this array shall not be sent to the subscriber.  If this property is absent or the array is empty, the service shall send Events originating from any Resource, Resource Collection, or Referenceable Member to the subscriber."/>
         </NavigationProperty>
         <Property Name="MessageIds" Type="Collection(Edm.String)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="A list of MessageIds that the service will only send."/>
-          <Annotation Term="OData.LongDescription" String="The value of this property shall specify an array of MessageIds that are the only allowable values for the MessageId property within an EventRecord sent to the subscriber.  Events with MessageIds not contained in this array shall not be sent to the subscriber."/>
+          <Annotation Term="OData.Description" String="A list of MessageIds that the service will only send.  If this property is absent or the array is empty, then Events with any MessageId will be sent to the subscriber."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall specify an array of MessageIds that are the only allowable values for the MessageId property within an EventRecord sent to the subscriber.  Events with MessageIds not contained in this array shall not be sent to the subscriber.  If this property is absent or the array is empty, the service shall send Events with any MessageId to the subscriber."/>
         </Property>
       </EntityType>
     </Schema>
@@ -145,6 +145,11 @@
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EventDestination.v1_1_2">
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
       <EntityType Name="EventDestination" BaseType="EventDestination.v1_1_1.EventDestination"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EventDestination.v1_1_3">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="EventDestination" BaseType="EventDestination.v1_1_2.EventDestination"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EventDestination.v1_2_0">
@@ -167,6 +172,11 @@
         <Annotation Term="OData.Description" String="The available OEM specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain any additional OEM actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EventDestination.v1_2_1">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="EventDestination" BaseType="EventDestination.v1_2_0.EventDestination"/>
     </Schema>
 
   </edmx:DataServices>

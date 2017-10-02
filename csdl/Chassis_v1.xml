@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Chassis  v1.5.0-->
+<!--# Redfish Schema:  Chassis  v1.5.1-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -291,16 +291,20 @@
       <EnumType Name="IndicatorLED">
         <Member Name="Unknown">
           <Annotation Term="OData.Description" String="The state of the Indicator LED cannot be determined."/>
+          <Annotation Term="OData.LongDescription" String="This value shall represent the Indicator LED is in an unknown state.  The service shall reject PATCH or PUT requests containing this value by returning HTTP 400 (Bad Request)."/>
           <Annotation Term="Redfish.Deprecated" String="This value has been Deprecated in favor of returning null if the state is unknown."/>
         </Member>
         <Member Name="Lit">
           <Annotation Term="OData.Description" String="The Indicator LED is lit."/>
+          <Annotation Term="OData.LongDescription" String="This value shall represent the Indicator LED is in a solid on state.  If this value is not supported by the service, the service shall reject PATCH or PUT requests containing this value by returning HTTP 400 (Bad Request)."/>
         </Member>
         <Member Name="Blinking">
           <Annotation Term="OData.Description" String="The Indicator LED is blinking."/>
+          <Annotation Term="OData.LongDescription" String="This value shall represent the Indicator LED is in a blinking state where the LED is being turned on and off in repetition.  If this value is not supported by the service, the service shall reject PATCH or PUT requests containing this value by returning HTTP 400 (Bad Request)."/>
         </Member>
         <Member Name="Off">
           <Annotation Term="OData.Description" String="The Indicator LED is off."/>
+          <Annotation Term="OData.LongDescription" String="This value shall represent the Indicator LED is in a solid off state.  If this value is not supported by the service, the service shall reject PATCH or PUT requests containing this value by returning HTTP 400 (Bad Request)."/>
         </Member>
       </EnumType>
 
@@ -346,6 +350,11 @@
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_0_4">
       <Annotation Term="OData.Description" String="This version was created to remove the Nullable facet on NavigationProperties of type Collection and to use Redfish.Deprecated on certain enum values."/>
       <EntityType Name="Chassis" BaseType="Chassis.v1_0_3.Chassis"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_0_5">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="Chassis" BaseType="Chassis.v1_0_4.Chassis"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_1_0">
@@ -415,6 +424,11 @@
       <EntityType Name="Chassis" BaseType="Chassis.v1_1_3.Chassis"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_1_5">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="Chassis" BaseType="Chassis.v1_1_4.Chassis"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_2_0">
       <EntityType Name="Chassis" BaseType="Chassis.v1_1_2.Chassis">
         <Property Name="Location" Type="Resource.v1_1_0.Location" Nullable="false"/>
@@ -452,6 +466,11 @@
       <EntityType Name="Chassis" BaseType="Chassis.v1_2_1.Chassis"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_2_3">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="Chassis" BaseType="Chassis.v1_2_2.Chassis"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_3_0">
       <Annotation Term="OData.Description" String="This version was created to show the ChassisType enumerated list was updated."/>
       <EntityType Name="Chassis" BaseType="Chassis.v1_2_0.Chassis"/>
@@ -465,6 +484,11 @@
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_3_2">
       <Annotation Term="OData.Description" String="This version was created to remove the Nullable facet on NavigationProperties of type Collection and to use Redfish.Deprecated on certain enum values."/>
       <EntityType Name="Chassis" BaseType="Chassis.v1_3_1.Chassis"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_3_3">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="Chassis" BaseType="Chassis.v1_3_2.Chassis"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_4_0">
@@ -520,6 +544,11 @@
       <EntityType Name="Chassis" BaseType="Chassis.v1_4_0.Chassis"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_4_2">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="Chassis" BaseType="Chassis.v1_4_1.Chassis"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_5_0">
       <EntityType Name="Chassis" BaseType="Chassis.v1_4_1.Chassis"/>
 
@@ -531,6 +560,11 @@
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.v1_5_1">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+      <EntityType Name="Chassis" BaseType="Chassis.v1_5_0.Chassis"/>
     </Schema>
 
   </edmx:DataServices>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  EventService  v1.0.4-->
+<!--# Redfish Schema:  EventService  v1.0.5-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -105,8 +105,8 @@
         </Property>
         <Property Name="DeliveryRetryAttempts" Type="Edm.Int64" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="This is the number of attempts an event posting is retried before the subscription is terminated."/>
-          <Annotation Term="OData.LongDescription" String="The value of this property shall be the number of retrys attempted for any given event to the subscription destination before the subscription is terminated."/>
+          <Annotation Term="OData.Description" String="This is the number of attempts an event posting is retried before the subscription is terminated.  This retry is at the service level, meaning the HTTP POST to the Event Destination was returned by the HTTP operation as unsuccessful (4xx or 5xx return code) or an HTTP timeout occurred this many times before the Event Destination subscription is terminated."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the number of retrys attempted for any given event to the subscription destination before the subscription is terminated.  This retry is at the service level, meaning the HTTP POST to the Event Destination was returned by the HTTP operation as unsuccessful (4xx or 5xx return code) or an HTTP timeout occurred this many times before the Event Destination subscription is terminated."/>
         </Property>
         <Property Name="DeliveryRetryIntervalSeconds" Type="Edm.Int64" Nullable="false">
           <Annotation Term="Measures.Unit" String="s"/>
@@ -162,5 +162,10 @@
       <EntityType Name="EventService" BaseType="EventService.v1_0_3.EventService"/>
     </Schema>
 
+   <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EventService.v1_0_5">
+      <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated.  In this case, DeliveryRetryAttempts description was updated."/>
+      <EntityType Name="EventService" BaseType="EventService.v1_0_4.EventService"/>
+    </Schema>
+    
   </edmx:DataServices>
 </edmx:Edmx>
