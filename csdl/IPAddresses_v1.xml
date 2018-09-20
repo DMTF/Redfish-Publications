@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  IPAddresses  v1.0.5-->
+<!--# Redfish Schema:  IPAddresses  v1.0.6-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -24,12 +24,34 @@
 
   <edmx:DataServices>
 
-    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses.v1_0_0">
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
-      <ComplexType Name="IPv4Address">
+      <ComplexType Name="IPv4Address" Abstract="true">
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="OData.Description" String="This type describes an IPv4 Address."/>
         <Annotation Term="OData.LongDescription" String="This type shall describe an IPv4 address assigned to an interface."/>
+      </ComplexType>
+
+      <ComplexType Name="IPv6Address" Abstract="true">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="This type describes an IPv6 Address."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe an IPv6 address assigned to an interface."/>
+      </ComplexType>
+
+      <ComplexType Name="IPv6StaticAddress" Abstract="true">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="This object represents a single IPv6 static address to be assigned on a network interface."/>
+        <Annotation Term="OData.LongDescription" String="This type shall represent a single IPv6 static address to be assigned on a network interface."/>
+      </ComplexType>
+
+    </Schema>
+
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses.v1_0_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+
+      <ComplexType Name="IPv4Address" BaseType="IPAddresses.IPv4Address">
         <Property Name="Oem" Type="Resource.Oem" Nullable="false"/>
         <Property Name="Address" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -55,10 +77,7 @@
         </Property>
       </ComplexType>
 
-      <ComplexType Name="IPv6Address">
-        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
-        <Annotation Term="OData.Description" String="This type describes an IPv6 Address."/>
-        <Annotation Term="OData.LongDescription" String="This type shall describe an IPv6 address assigned to an interface."/>
+      <ComplexType Name="IPv6Address" BaseType="IPAddresses.IPv6Address">
         <Property Name="Oem" Type="Resource.Oem" Nullable="false"/>
         <Property Name="Address" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -137,10 +156,7 @@
         </Member>
       </EnumType>
 
-      <ComplexType Name="IPv6StaticAddress">
-        <Annotation Term="OData.Description" String="This object represents a single IPv6 static address to be assigned on a network interface."/>
-        <Annotation Term="OData.LongDescription" String="This type shall represent a single IPv6 static address to be assigned on a network interface."/>
-        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+      <ComplexType Name="IPv6StaticAddress" BaseType="IPAddresses.IPv6StaticAddress">
         <Property Name="Oem" Type="Resource.Oem" Nullable="false"/>
         <Property Name="Address" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -150,7 +166,7 @@
           <Annotation Term="Redfish.IPv6Format"/>
         </Property>
         <Property Name="PrefixLength" Type="IPAddresses.v1_0_0.PrefixLength">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The Prefix Length of this IPv6 address."/>
           <Annotation Term="OData.LongDescription" String="Provides the IPv6 network prefix length in bits for this address."/>
           <Annotation Term="Redfish.Required"/>
@@ -160,19 +176,28 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses.v1_0_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses.v1_0_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses.v1_0_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="IPAddresses.v1_0_6">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to add an abstract base type for IPv4Address, IPv6Address, and IPv6StaticAddress.  It was also created to make PrefixLength in IPv6StaticAddress writable."/>
     </Schema>
 
   </edmx:DataServices>

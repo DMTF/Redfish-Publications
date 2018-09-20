@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  SecureBoot v1.0.2-->
+<!--# Redfish Schema:  SecureBoot v1.0.3-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -20,10 +20,14 @@
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Resource_v1.xml">
     <edmx:Include Namespace="Resource.v1_0_0"/>
   </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/RedfishExtensions_v1.xml">
+    <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
+  </edmx:Reference>
 
   <edmx:DataServices>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="SecureBoot" BaseType="Resource.v1_0_0.Resource" Abstract="true">
         <Annotation Term="OData.Description" String="This resource contains UEFI Secure Boot information. It represents properties for managing the UEFI Secure Boot functionality of a system."/>
@@ -48,9 +52,9 @@
 
       <Action Name="ResetKeys" IsBound="true">
         <Parameter Name="SecureBoot" Type="SecureBoot.v1_0_0.Actions"/>
-        <Parameter Name="ResetKeysType" Type="SecureBoot.v1_0_0.ResetKeysType">
-          <Annotation Term="OData.Description" String="The type of reset to be performed."/>
-          <Annotation Term="OData.LongDescription" String="This defines the property name for the action."/>
+        <Parameter Name="ResetKeysType" Type="SecureBoot.v1_0_0.ResetKeysType" Nullable="false">
+          <Annotation Term="OData.Description" String="The type of keys to reset or delete."/>
+          <Annotation Term="OData.LongDescription" String="This parameter shall specify the type of keys to reset or delete."/>
         </Parameter>
         <Annotation Term="OData.Description" String="This action is used to reset the Secure Boot keys."/>
         <Annotation Term="OData.LongDescription" String="This action shall perform a reset of the Secure Boot key databases. The ResetAllKeysToDefault value shall reset the UEFI Secure Boot key databases to their default values. The DeleteAllKeys value shall delete the content of the UEFI Secure Boot key databases. The DeletePK value shall delete the content of the PK Secure boot key."/>
@@ -59,6 +63,7 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot.v1_0_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="SecureBoot" BaseType="SecureBoot.SecureBoot">
         <Property Name="SecureBootEnable" Type="Edm.Boolean">
@@ -134,13 +139,21 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
       <EntityType Name="SecureBoot" BaseType="SecureBoot.v1_0_0.SecureBoot"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
       <EntityType Name="SecureBoot" BaseType="SecureBoot.v1_0_1.SecureBoot"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot.v1_0_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to add requirements on the action parameters to show they are mandatory via Nullable=false.  It was also created to correct the Descriptions and LongDescriptions used in the defined Actions."/>
+      <EntityType Name="SecureBoot" BaseType="SecureBoot.v1_0_2.SecureBoot"/>
     </Schema>
 
   </edmx:DataServices>

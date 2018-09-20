@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ResourceBlock  v1.0.0-->
+<!--# Redfish Schema:  ResourceBlock  v1.1.0-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF).                  -->
+<!--# Copyright 2014-2018 Distributed Management Task Force, Inc. (DMTF).                  -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -19,6 +19,7 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/RedfishExtensions_v1.xml">
     <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
+    <edmx:Include Namespace="Validation.v1_0_0" Alias="Validation"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Resource_v1.xml">
     <edmx:Include Namespace="Resource"/>
@@ -55,6 +56,7 @@
   <edmx:DataServices>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ResourceBlock">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="ResourceBlock" BaseType="Resource.v1_0_0.Resource" Abstract="true">
         <Annotation Term="OData.Description" String="This is the schema definition of the Resource Block, its components, and affinity to composed devices."/>
@@ -80,6 +82,7 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ResourceBlock.v1_0_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="ResourceBlock" BaseType="ResourceBlock.ResourceBlock">
         <Annotation Term="OData.Description" String="This schema defines a Resource Block resource."/>
@@ -225,6 +228,9 @@
         <Member Name="Composing">
           <Annotation Term="OData.Description" String="Intermediate state indicating composition is in progress."/>
         </Member>
+        <Member Name="ComposedAndAvailable">
+          <Annotation Term="OData.Description" String="Indicates the Resource Block is currently participating in one or more compositions, and is available to be used in more compositions."/>
+        </Member>
         <Member Name="Composed">
           <Annotation Term="OData.Description" String="Final successful state of a Resource Block which has participated in composition."/>
         </Member>
@@ -232,9 +238,41 @@
           <Annotation Term="OData.Description" String="Indicates the Resource Block is free and can participate in composition."/>
         </Member>
         <Member Name="Failed">
-          <Annotation Term="OData.Description" String="The final composition resulted in failure and manual intervention is required to fix it."/>
+          <Annotation Term="OData.Description" String="The final composition resulted in failure and manual intervention may be required to fix it."/>
         </Member>
       </EnumType>
+
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ResourceBlock.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+
+      <EntityType Name="ResourceBlock" BaseType="ResourceBlock.v1_0_0.ResourceBlock"/>
+
+      <ComplexType Name="CompositionStatus" BaseType="ResourceBlock.v1_0_0.CompositionStatus">
+        <Property Name="SharingCapable" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Indicates if this Resource Block is capable of participating in multiple compositions simultaneously."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a boolean indicating whether this Resource Block is capable of participating in multiple compositions simultaneously.  If this property is not provided, it shall be assumed that this Resource Block is not capable of being shared."/>
+        </Property>
+        <Property Name="SharingEnabled" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="Indicates if this Resource Block is allowed to participate in multiple compositions simultaneously."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a boolean indicating whether this Resource Block is allowed to participate in multiple compositions simultaneously.  The service shall reject modifications of this property with HTTP 400 Bad Request if this Resource Block already being used as part of a composed resource.  If this property is set to false, the service shall not use the ComposedAndAvailable state for this Resource Block."/>
+        </Property>
+        <Property Name="MaxCompositions" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The maximum number of compositions in which this Resource Block is capable of participating simultaneously."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a number indicating the maximum number of compositions in which this Resource Block is capable of participating simultaneously.  Services may have additional constraints that prevent this value from being achieved, such as due to system topology and current composed resource utilization.  If SharingCapable is set to false, this value shall be set to 1.  The service shall support this property if SharingCapable supported."/>
+          <Annotation Term="Validation.Minimum" Int="1"/>
+        </Property>
+        <Property Name="NumberOfCompositions" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of compositions in which this Resource Block is currently participating."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the number of compositions in which this Resource Block is currently participating."/>
+          <Annotation Term="Validation.Minimum" Int="0"/>
+        </Property>
+      </ComplexType>
 
     </Schema>
 

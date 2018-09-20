@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  SerialInterface  v1.1.1-->
+<!--# Redfish Schema:  SerialInterface  v1.1.2-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -27,6 +27,7 @@
   <edmx:DataServices>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="SerialInterface" BaseType="Resource.v1_0_0.Resource" Abstract="true">
         <Annotation Term="OData.Description" String="This resource describes an asynchronous serial interface, such as an RS-232 interface, available to a system or device."/>
@@ -52,6 +53,7 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_0_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="SerialInterface" BaseType="SerialInterface.SerialInterface">
         <Annotation Term="OData.Description" String="This schema defines an asynchronous serial interface resource."/>
@@ -104,8 +106,12 @@
       </EntityType>
 
       <EnumType Name="SignalType">
-        <Member Name="Rs232"/>
-        <Member Name="Rs485"/>
+        <Member Name="Rs232">
+          <Annotation Term="OData.Description" String="The serial interface follows RS232."/>
+        </Member>
+        <Member Name="Rs485">
+          <Annotation Term="OData.Description" String="The serial interface follows RS485."/>
+        </Member>
       </EnumType>
 
       <TypeDefinition Name="BitRate" UnderlyingType="Edm.String">
@@ -113,41 +119,60 @@
           <Collection>
             <Record>
               <PropertyValue Property="Member" String="1200"/>
+              <Annotation Term="OData.Description" String="A bit rate of 1200bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="2400"/>
+              <Annotation Term="OData.Description" String="A bit rate of 2400bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="4800"/>
+              <Annotation Term="OData.Description" String="A bit rate of 4800bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="9600"/>
+              <Annotation Term="OData.Description" String="A bit rate of 9600bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="19200"/>
+              <Annotation Term="OData.Description" String="A bit rate of 19200bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="38400"/>
+              <Annotation Term="OData.Description" String="A bit rate of 38400bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="57600"/>
+              <Annotation Term="OData.Description" String="A bit rate of 57600bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="115200"/>
+              <Annotation Term="OData.Description" String="A bit rate of 115200bps."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="230400"/>
+              <Annotation Term="OData.Description" String="A bit rate of 230400bps."/>
             </Record>
           </Collection>
         </Annotation>
       </TypeDefinition>
 
       <EnumType Name="Parity">
-        <Member Name="None"/>
-        <Member Name="Even"/>
-        <Member Name="Odd"/>
-        <Member Name="Mark"/>
-        <Member Name="Space"/>
+        <Member Name="None">
+          <Annotation Term="OData.Description" String="No parity bit."/>
+        </Member>
+        <Member Name="Even">
+          <Annotation Term="OData.Description" String="An even parity bit."/>
+        </Member>
+        <Member Name="Odd">
+          <Annotation Term="OData.Description" String="An odd parity bit."/>
+        </Member>
+        <Member Name="Mark">
+          <Annotation Term="OData.Description" String="A mark parity bit."/>
+        </Member>
+        <Member Name="Space">
+          <Annotation Term="OData.Description" String="A space parity bit."/>
+        </Member>
       </EnumType>
 
       <TypeDefinition Name="DataBits" UnderlyingType="Edm.String">
@@ -155,15 +180,19 @@
           <Collection>
             <Record>
               <PropertyValue Property="Member" String="5"/>
+              <Annotation Term="OData.Description" String="5 bits of data following the start bit."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="6"/>
+              <Annotation Term="OData.Description" String="6 bits of data following the start bit."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="7"/>
+              <Annotation Term="OData.Description" String="7 bits of data following the start bit."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="8"/>
+              <Annotation Term="OData.Description" String="8 bits of data following the start bit."/>
             </Record>
           </Collection>
         </Annotation>
@@ -174,9 +203,11 @@
           <Collection>
             <Record>
               <PropertyValue Property="Member" String="1"/>
+              <Annotation Term="OData.Description" String="1 stop bit following the data bits."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="2"/>
+              <Annotation Term="OData.Description" String="2 stop bits following the data bits."/>
             </Record>
           </Collection>
         </Annotation>
@@ -195,9 +226,15 @@
       </EnumType>
 
       <EnumType Name="PinOut">
-        <Member Name="Cisco"/>
-        <Member Name="Cyclades"/>
-        <Member Name="Digi"/>
+        <Member Name="Cisco">
+          <Annotation Term="OData.Description" String="The Cisco pin configuration."/>
+        </Member>
+        <Member Name="Cyclades">
+          <Annotation Term="OData.Description" String="The Cyclades pin configuration."/>
+        </Member>
+        <Member Name="Digi">
+          <Annotation Term="OData.Description" String="The Digi pin configuration."/>
+        </Member>
       </EnumType>
 
       <TypeDefinition Name="ConnectorType" UnderlyingType="Edm.String">
@@ -205,30 +242,39 @@
           <Collection>
             <Record>
               <PropertyValue Property="Member" String="RJ45"/>
+              <Annotation Term="OData.Description" String="An RJ45 connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="RJ11"/>
+              <Annotation Term="OData.Description" String="An RJ11 connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="DB9 Female"/>
+              <Annotation Term="OData.Description" String="A DB9 Female connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="DB9 Male"/>
+              <Annotation Term="OData.Description" String="A DB9 Male connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="DB25 Female"/>
+              <Annotation Term="OData.Description" String="A DB25 Female connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="DB25 Male"/>
+              <Annotation Term="OData.Description" String="A DB25 Male connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="USB"/>
+              <Annotation Term="OData.Description" String="A USB connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="mUSB"/>
+              <Annotation Term="OData.Description" String="A mUSB connector."/>
             </Record>
             <Record>
               <PropertyValue Property="Member" String="uUSB"/>
+              <Annotation Term="OData.Description" String="A uUSB connector."/>
             </Record>
           </Collection>
         </Annotation>
@@ -237,21 +283,31 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
       <EntityType Name="SerialInterface" BaseType="SerialInterface.v1_0_0.SerialInterface"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_0_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated."/>
       <EntityType Name="SerialInterface" BaseType="SerialInterface.v1_0_2.SerialInterface"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_0_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct the ConnectorType enum values to match orginal publication."/>
       <EntityType Name="SerialInterface" BaseType="SerialInterface.v1_0_3.SerialInterface"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_0_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to add descriptions to various enum values."/>
+      <EntityType Name="SerialInterface" BaseType="SerialInterface.v1_0_4.SerialInterface"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <EntityType Name="SerialInterface" BaseType="SerialInterface.v1_0_3.SerialInterface">
         <Property Name="Actions" Type="SerialInterface.v1_1_0.Actions" Nullable="false">
           <Annotation Term="OData.Description" String="The available actions for this resource."/>
@@ -274,8 +330,15 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct the ConnectorType enum values to match orginal publication."/>
       <EntityType Name="SerialInterface" BaseType="SerialInterface.v1_1_0.SerialInterface"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SerialInterface.v1_1_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to add descriptions to various enum values."/>
+      <EntityType Name="SerialInterface" BaseType="SerialInterface.v1_1_1.SerialInterface"/>
     </Schema>
 
   </edmx:DataServices>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  AttributeRegistry  v1.1.0-->
+<!--# Redfish Schema:  AttributeRegistry  v1.2.0-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -28,9 +28,10 @@
   <edmx:DataServices>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="AttributeRegistry" BaseType="Resource.v1_0_0.Resource" Abstract="true">
-        <Annotation Term="OData.Description" String="An Attribute Registry is a set of key-value pairs which are specific to a particular implementation or product, such that creating standardized property names would be impractical.  This schema describes the structure of a Registry, and also includes mechanisms for building user interfaces (menus) allowing consistent navigation of the contents."/>
+        <Annotation Term="OData.Description" String="The AttributeRegistry schema contains a set of key-value pairs that represents the structure of a Registry. It includes mechanisms for building user interfaces (menus), allowing consistent navigation of the contents. The Attribute Registry is specific to a particular implementation or product. The attributes and property names are not standardized."/>
         <Annotation Term="OData.LongDescription" String="This resource shall be used to represent an Attribute registry for a Redfish implementation."/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
@@ -52,6 +53,7 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_0_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.AttributeRegistry">
         <Property Name="Language" Type="Edm.String" Nullable="false">
@@ -167,7 +169,7 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="A path that describes the menu hierarchy of this attribute."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be a string indicating the menu hierarchy of this attribute, in the form of a path to the menu names."/>
-          <Annotation Term="Validation.Pattern" String="^[.]?[A-Za-z0-9//]+$"/>
+          <Annotation Term="Validation.Pattern" String="^[.]?[A-Za-z0-9_//]+$"/>
         </Property>
         <Property Name="ReadOnly" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -238,7 +240,7 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The unique name string of this menu."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the name of this menu that is unique in this registry."/>
-          <Annotation Term="Validation.Pattern" String="^[A-Z][A-Za-z0-9]+$"/>
+          <Annotation Term="Validation.Pattern" String="^[A-Za-z][A-Za-z0-9_]+$"/>
         </Property>
         <Property Name="DisplayName" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -264,7 +266,7 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="A path that describes this menu hierarchy relative to other menus."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be a string indicating the menu hierarchy of this menu, in the form of a path to the menu names."/>
-          <Annotation Term="Validation.Pattern" String="^[.]?[A-Za-z0-9//]+$"/>
+          <Annotation Term="Validation.Pattern" String="^[.]?[A-Za-z0-9_//]+$"/>
         </Property>
       </ComplexType>
 
@@ -279,7 +281,7 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The AttributeName of the attribute whose change triggers the evaluation of this dependency expression."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the AttributeName of the attribute whose change triggers the evaluation of this dependency expression."/>
-          <Annotation Term="Validation.Pattern" String="^[A-Z][A-Za-z0-9]+$"/>
+          <Annotation Term="Validation.Pattern" String="^[A-Za-z][A-Za-z0-9_]+$"/>
         </Property>
         <Property Name="Type" Type="AttributeRegistry.v1_0_0.DependencyType" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -315,7 +317,7 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The Name of the attribute that is affected by this dependency expression."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the AttributeName of the attribute that is affected by this dependency expression."/>
-          <Annotation Term="Validation.Pattern" String="^[A-Z][A-Za-z0-9]+$"/>
+          <Annotation Term="Validation.Pattern" String="^[A-Za-z][A-Za-z0-9_]+$"/>
         </Property>
         <Property Name="MapToProperty" Type="AttributeRegistry.v1_0_0.MapToProperty" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -336,7 +338,7 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The attribute that is used to evaluate this dependency expression."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the AttributeName of the attribute that is used in evaluating this dependency expression term."/>
-          <Annotation Term="Validation.Pattern" String="^[A-Z][A-Za-z0-9]+$"/>
+          <Annotation Term="Validation.Pattern" String="^[A-Za-z][A-Za-z0-9_]+$"/>
         </Property>
         <Property Name="MapFromProperty" Type="AttributeRegistry.v1_0_0.MapFromProperty" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -507,16 +509,25 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to add explicit Permissions annotations to all properties for clarity."/>
       <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.v1_0_0.AttributeRegistry"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to show annotations in previous namespaces were updated, and to remove the duplicate ProductName property in the SupportedSystems object."/>
       <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.v1_0_1.AttributeRegistry"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_0_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct regex patterns for different attribute properties."/>
+      <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.v1_0_2.AttributeRegistry"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.v1_0_2.AttributeRegistry">
         <Property Name="Actions" Type="AttributeRegistry.v1_1_0.Actions" Nullable="false">
           <Annotation Term="OData.Description" String="The available actions for this resource."/>
@@ -536,13 +547,55 @@
         <Annotation Term="OData.Description" String="The available OEM specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain any additional OEM actions for this resource."/>
       </ComplexType>
-      
+
       <ComplexType Name="SupportedSystems" BaseType="AttributeRegistry.v1_0_0.SupportedSystems">
         <Property Name="FirmwareVersion" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="Firmware version."/>
           <Annotation Term="OData.LongDescription" String="The version of the component firmware image that this registry applies to."/>
-        </Property>        
+        </Property>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to perform editoral updates of descriptions defined in this schema."/>
+      <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.v1_1_0.AttributeRegistry"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_1_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct regex patterns for different attribute properties."/>
+      <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.v1_1_1.AttributeRegistry"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AttributeRegistry.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <EntityType Name="AttributeRegistry" BaseType="AttributeRegistry.v1_1_2.AttributeRegistry"/>
+
+      <ComplexType Name="Attributes" BaseType="AttributeRegistry.v1_0_0.Attributes">
+        <Annotation Term="OData.Description" String="An attribute and its possible values."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe an attribute and its possible values and other metadata."/>
+        <Property Name="ResetRequired" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="True if changing the value of this attribute requires a system or device reset in order to take effect."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a boolean describing the requirement for a system or device reset for this attribute value change to take effect."/>
+        </Property>
+        <Property Name="UefiDevicePath" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The UEFI device path that qualifies this attribute."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the UEFI device path string used to qualify and locate the specific device for this Attribute, as defined by the UEFI Specification."/>
+        </Property>
+        <Property Name="UefiKeywordName" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The UEFI KeywordString of the attribute."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the configuration KeywordString of this attribute, as defined in the UEFI Specification."/>
+        </Property>
+        <Property Name="UefiNamespaceId" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The UEFI NamespaceId of the attribute."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the configuration NamespaceId of this attribute, as defined in the UEFI Specification."/>
+        </Property>
       </ComplexType>
     </Schema>
 
