@@ -1,0 +1,300 @@
+components:
+  schemas:
+    DurableNameFormat:
+      enum:
+      - NAA
+      - iQN
+      - FC_WWN
+      - UUID
+      - EUI
+      - NQN
+      - NSID
+      type: string
+      x-enumDescriptions:
+        EUI: IEEE-defined 64-bit Extended Unique Identifier.
+        FC_WWN: Fibre Channel World Wide Name.
+        NAA: Name Address Authority Format.
+        NQN: NVMe Qualified Name.
+        NSID: NVM Namespace Identifier.
+        UUID: Universally Unique Identifier.
+        iQN: iSCSI Qualified Name.
+      x-enumLongDescriptions:
+        EUI: This durable name shall be the hexadecimal representation of the IEEE-defined
+          64-bit Extended Unique Identifier as defined in the IEEE's Guidelines for
+          64-bit Global Identifier (EUI-64) Specification.
+        FC_WWN: This durable name shall be a hexadecimal representation of the World
+          Wide Name format as defined in the T11 Fibre Channel Physical and Signaling
+          Interface Specification.
+        NAA: This durable name shall be a hexadecimal representation of the Name Address
+          Authority structure as defined in the T11 Fibre Channel - Framing and Signaling
+          - 3 (FC-FS-3) specification.
+        NQN: This durable name shall be in the NVMe Qualified Name format as defined
+          in the NVN Express over Fabric Specification.
+        NSID: This durable name shall be in the NVM Namespace Identifier format as
+          defined in the NVN Express Specification.
+        UUID: This durable name shall be the hexadecimal representation of the Universal
+          Unique Identifier as defined in the Internation Telecom Union's OSI networking
+          and system aspects - Naming, Addressing and Registration Specification.
+        iQN: This durable name shall be in the iSCSI Qualified Name format as defined
+          in RFC 3720 and RFC 3721.
+    Health:
+      enum:
+      - OK
+      - Warning
+      - Critical
+      type: string
+      x-enumDescriptions:
+        Critical: A critical condition exists that requires immediate attention.
+        OK: Normal.
+        Warning: A condition exists that requires attention.
+    Identifier:
+      additionalProperties: false
+      description: This type describes any additional identifiers for a resource.
+      properties:
+        DurableName:
+          description: This indicates the world wide, persistent name of the resource.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the world wide unique identifier
+            for the resource. The string shall be in the format described by the value
+            of the Identifier.DurableNameFormat property.
+        DurableNameFormat:
+          $ref: '#/components/schemas/DurableNameFormat'
+          description: This represents the format of the DurableName property.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall represent the format of the DurableName
+            property.
+      type: object
+      x-longDescription: This type shall contain any additional identifiers of a resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    IndicatorLED:
+      deprecated: true
+      enum:
+      - Lit
+      - Blinking
+      - 'Off'
+      type: string
+      x-deprecatedReason: This definition has been moved to the unversioned namespace
+        so that external references can pick up changes over time.
+      x-enumDescriptions:
+        Blinking: The Indicator LED is blinking.
+        Lit: The Indicator LED is lit.
+        'Off': The Indicator LED is off.
+      x-enumLongDescriptions:
+        Blinking: This value shall represent the Indicator LED is in a blinking state
+          where the LED is being turned on and off in repetition.  If this value is
+          not supported by the service, the service shall reject PATCH or PUT requests
+          containing this value by returning HTTP 400 (Bad Request).
+        Lit: This value shall represent the Indicator LED is in a solid on state.  If
+          this value is not supported by the service, the service shall reject PATCH
+          or PUT requests containing this value by returning HTTP 400 (Bad Request).
+        'Off': This value shall represent the Indicator LED is in a solid off state.  If
+          this value is not supported by the service, the service shall reject PATCH
+          or PUT requests containing this value by returning HTTP 400 (Bad Request).
+    Location:
+      additionalProperties: false
+      description: This type describes the location of a resource.
+      properties:
+        Info:
+          deprecated: true
+          description: This indicates the location of the resource.
+          nullable: true
+          readOnly: true
+          type: string
+          x-deprecatedReason: This property has been Deprecated in favor of new properties
+            defined in Resource.v1_3_0.Location and Resource.v1_5_0.Location.
+          x-longDescription: This property shall represent the location of the resource.
+        InfoFormat:
+          deprecated: true
+          description: This represents the format of the Info property.
+          nullable: true
+          readOnly: true
+          type: string
+          x-deprecatedReason: This property has been Deprecated in favor of new properties
+            defined in Resource.v1_3_0.Location and Resource.v1_5_0.Location.
+          x-longDescription: This property shall represent the format of the Info
+            property.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+      type: object
+      x-longDescription: This type shall describe the location of a resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerState:
+      deprecated: true
+      enum:
+      - 'On'
+      - 'Off'
+      - PoweringOn
+      - PoweringOff
+      type: string
+      x-deprecatedReason: This definition has been moved to the unversioned namespace
+        so that external references can pick up changes over time.
+      x-enumDescriptions:
+        'Off': The state is powered Off.
+        'On': The state is powered On.
+        PoweringOff: A temporary state between On and Off.
+        PoweringOn: A temporary state between Off and On.
+    ReferenceableMember:
+      additionalProperties: false
+      description: This is the base type for addressable members of an array.
+      properties:
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+        MemberId:
+          description: This is the identifier for the member within the collection.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this string shall uniquely identify the
+            member within the collection.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+      required:
+      - MemberId
+      - '@odata.id'
+      type: object
+      x-longDescription: Array members can be referenced using the value returned
+        in the @odata.id property which may or may not be a dereferenceable URL. The
+        @odata.id of this entity shall be the location of this element within an Item.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    ResetType:
+      enum:
+      - 'On'
+      - ForceOff
+      - GracefulShutdown
+      - GracefulRestart
+      - ForceRestart
+      - Nmi
+      - ForceOn
+      - PushPowerButton
+      - PowerCycle
+      type: string
+      x-enumDescriptions:
+        ForceOff: Turn the unit off immediately (non-graceful shutdown).
+        ForceOn: Turn the unit on immediately.
+        ForceRestart: Perform an immediate (non-graceful) shutdown, followed by a
+          restart.
+        GracefulRestart: Perform a graceful shutdown followed by a restart of the
+          system.
+        GracefulShutdown: Perform a graceful shutdown and power off.
+        Nmi: Generate a Diagnostic Interrupt (usually an NMI on x86 systems) to cease
+          normal operations, perform diagnostic actions and typically halt the system.
+        'On': Turn the unit on.
+        PowerCycle: Perform a power cycle of the unit.
+        PushPowerButton: Simulate the pressing of the physical power button on this
+          unit.
+    Resource:
+      additionalProperties: false
+      description: This is the base type for resources and referenceable members.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+      required:
+      - Id
+      - Name
+      - '@odata.id'
+      - '@odata.type'
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    ResourceCollection:
+      additionalProperties: false
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+      required:
+      - Name
+      - '@odata.id'
+      - '@odata.type'
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    State:
+      enum:
+      - Enabled
+      - Disabled
+      - StandbyOffline
+      - StandbySpare
+      - InTest
+      - Starting
+      - Absent
+      - UnavailableOffline
+      - Deferring
+      - Quiesced
+      - Updating
+      type: string
+      x-enumDescriptions:
+        Absent: This function or resource is not present or not detected.
+        Deferring: The element will not process any commands but will queue new requests.
+        Disabled: This function or resource has been disabled.
+        Enabled: This function or resource has been enabled.
+        InTest: This function or resource is undergoing testing.
+        Quiesced: The element is enabled but only processes a restricted set of commands.
+        StandbyOffline: This function or resource is enabled, but awaiting an external
+          action to activate it.
+        StandbySpare: This function or resource is part of a redundancy set and is
+          awaiting a failover or other external action to activate it.
+        Starting: This function or resource is starting.
+        UnavailableOffline: This function or resource is present but cannot be used.
+        Updating: The element is updating and may be unavailable or degraded.
+title: '#Resource.v1_2_5'
+x-copyright: Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF

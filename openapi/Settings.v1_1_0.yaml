@@ -1,0 +1,121 @@
+components:
+  schemas:
+    ApplyTime:
+      enum:
+      - Immediate
+      - OnReset
+      - AtMaintenanceWindowStart
+      - InMaintenanceWindowOnReset
+      type: string
+      x-enumDescriptions:
+        AtMaintenanceWindowStart: Apply during a maintenance window as specified by
+          an administrator.
+        Immediate: Apply immediately.
+        InMaintenanceWindowOnReset: Apply after a reset but within maintenance window
+          as specified by an adminstrator.
+        OnReset: Apply on a reset.
+      x-enumLongDescriptions:
+        AtMaintenanceWindowStart: This ApplyTime value shall be used to indicate the
+          values within the Settings resource are applied during the maintenance window
+          specified by the MaintenanceWindowStartTime and MaintenanceWindowDurationInSeconds
+          properties.  A service may perform resets during this maintenance window.
+        Immediate: This ApplyTime value shall be used to indicate the values within
+          the Settings resource are applied immediately.
+        InMaintenanceWindowOnReset: This ApplyTime value shall be used to indicate
+          the values within the Settings resource are applied during the maintenance
+          window specified by the MaintenanceWindowStartTime and MaintenanceWindowDurationInSeconds
+          properties, and if a reset occurs within the maintenance window.
+        OnReset: This ApplyTime value shall be used to indicate the values within
+          the Settings resource are applied when the system or service is reset.
+    PreferredApplyTime:
+      additionalProperties: true
+      description: This object indicates when the future configuration (i.e. Settings
+        resource) should be applied.
+      properties:
+        ApplyTime:
+          $ref: '#/components/schemas/ApplyTime'
+          description: This property indicates when the future configuration (i.e.
+            Settings resource) should be applied.
+          readOnly: false
+          x-longDescription: The value of this property shall indicate the preference
+            on to when to apply the values in this Settings resource.
+        MaintenanceWindowDurationInSeconds:
+          description: The value of this property as specified by client indicates
+            the expiry time of maintenance window in seconds.
+          minimum: 0
+          readOnly: false
+          type: number
+          x-longDescription: The value of this property shall indicate the end of
+            the maintenance window as the number of seconds after the time specified
+            by the MaintenanceWindowStartTime property.  This property shall be required
+            if the ApplyTime property is specified as AtMaintenanceWindowStart or
+            InMaintenanceWindowOnReset.
+          x-units: s
+        MaintenanceWindowStartTime:
+          description: The value of this property as specified by client to indicate
+            the start time of a maintenance window.
+          format: date-time
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall indicate the date and
+            time as to when the service is allowed to start applying the future configuration
+            as part of a maintenance window.  This property shall be required if the
+            ApplyTime property is specified as AtMaintenanceWindowStart or InMaintenanceWindowOnReset.
+      type: object
+      x-longDescription: This object shall be specified by client in a request to
+        indicate its preference on when to apply the values in this Settings resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    Settings:
+      additionalProperties: false
+      description: This type describes the settings of a resouce.
+      properties:
+        ETag:
+          description: The ETag of the resource to which the settings were applied,
+            after the application.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the ETag of the resource
+            to which the settings were applied, after the application.  This is here
+            so that the client can check it against the ETag of the current resource
+            to see if any other changes have also happened to the resource.
+        Messages:
+          description: This is an array of messages associated with the task.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          type: array
+          x-longDescription: The value of this property shall be an array of messages
+            associated with the task.
+        SettingsObject:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+          description: Reference to the resource the client may PUT/PATCH to in order
+            to change this resource.
+          readOnly: true
+          x-longDescription: The value of this property shall be the URI of the resource
+            to which a client must do a PUT or PATCh in order to modify this resource.
+        SupportedApplyTimes:
+          description: This property indicates when a Settings resource can be applied.
+          items:
+            $ref: '#/components/schemas/ApplyTime'
+          readOnly: true
+          type: array
+          x-longDescription: A service shall advertise its applytime capabilities
+            using this property as to when a Setting resource can be applied.
+        Time:
+          description: Indicates the time the settings were applied.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall indicate the time that
+            the settings object was applied to the resource.
+      type: object
+      x-longDescription: This type shall describe any attributes of a resouce.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Settings.v1_1_0'
+x-copyright: Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

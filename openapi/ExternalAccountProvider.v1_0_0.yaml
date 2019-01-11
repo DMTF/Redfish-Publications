@@ -1,0 +1,338 @@
+components:
+  schemas:
+    AccountProviderTypes:
+      enum:
+      - RedfishService
+      - ActiveDirectoryService
+      - LDAPService
+      - OEM
+      type: string
+      x-enumDescriptions:
+        ActiveDirectoryService: An external Active Directory Service.
+        LDAPService: A generic external LDAP Service.
+        OEM: An OEM specific external authentication or directory service.
+        RedfishService: An external Redfish Service.
+      x-enumLongDescriptions:
+        ActiveDirectoryService: The external account provider shall be a service conforming
+          to the Microsoft Active Directory Technical specification. The format of
+          ServiceAddresses shall be a collection of FQDNs or Netbios names that references
+          the set of domain servers for the Active Directory service.
+        LDAPService: The external account provider shall be a service conforming to
+          RFC4511. The format of ServiceAddresses shall be a collection of FQDNs that
+          references the set of LDAP servers for the service.
+        RedfishService: The external account provider shall be a service conforming
+          to the DMTF Redfish specification. The format of ServiceAddresses shall
+          be a collection of URIs which corresponds to a Redfish AccountService entity.
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    Authentication:
+      additionalProperties: false
+      description: Contains the authentication information for the external service.
+      properties:
+        AuthenticationType:
+          $ref: '#/components/schemas/AuthenticationTypes'
+          description: This property contains the type of authentication used to connect
+            to the external account provider.
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall be the type of authentication
+            used to connect to the external account provider.
+        KerberosKeytab:
+          description: This property is used with a PATCH or PUT to write a base64
+            encoded version of the kerberos keytab for the account.  This property
+            is null on a GET.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be a base64 encoded
+            version of the kerberos keytab for this account service.  The value shall
+            be null for GET requests.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+        Password:
+          description: This property is used with a PATCH or PUT to write the password
+            for the account service.  This property is null on a GET.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the password for
+            this account service.  The value shall be null for GET requests.
+        Token:
+          description: This property is used with a PATCH or PUT to write the token
+            for the account.  This property is null on a GET.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the token for this
+            account service.  The value shall be null for GET requests.
+        Username:
+          description: This property contains the user name for the account service.
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the user name for
+            this account service.
+      type: object
+      x-longDescription: This type shall contain all the required information to authenticate
+        to the external service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    AuthenticationTypes:
+      enum:
+      - Token
+      - KerberosKeytab
+      - UsernameAndPassword
+      - OEM
+      type: string
+      x-enumDescriptions:
+        KerberosKeytab: A kerberos keytab.
+        OEM: An OEM specific authentication mechanism.
+        Token: An opaque authentication token.
+        UsernameAndPassword: Username and password combination.
+    ExternalAccountProvider:
+      additionalProperties: false
+      description: A remote service that can provide accounts for this manager to
+        utilize for authentication.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/type
+        AccountProviderType:
+          $ref: '#/components/schemas/AccountProviderTypes'
+          description: This property contains the type of external account provider
+            this resource references.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be the type of external
+            account provider referenced by this resource.
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        Authentication:
+          $ref: '#/components/schemas/Authentication'
+          description: This property contains the authentication information for the
+            external account provider.
+          nullable: true
+          x-longDescription: The value of this property shall contain the authentication
+            information for the external account provider.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        LDAPService:
+          $ref: '#/components/schemas/LDAPService'
+          description: This property contains additional mapping information needed
+            to parse a generic LDAP service.
+          nullable: true
+          x-longDescription: The value of this property shall contain any additional
+            mapping information needed to parse a generic LDAP service.
+        Links:
+          $ref: '#/components/schemas/Links'
+          description: Contains references to other resources that are related to
+            this resource.
+          x-longDescription: The Links property, as described by the Redfish Specification,
+            shall contain references to resources that are related to, but not contained
+            by (subordinate to), this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        RemoteRoleMapping:
+          description: This property contains a collection of the mapping rules to
+            convert the external account providers account information to the local
+            Redfish Role.
+          items:
+            $ref: '#/components/schemas/RoleMapping'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain a collection of the mapping
+            rules to convert the external account providers account information to
+            the local Redfish Role.
+        ServiceAddresses:
+          description: This property contains the addresses of the user account providers
+            this resource references. The format of this field depends on the Type.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: The value of this property shall be the addresses of
+            the account providers this resource references. The format of this field
+            depends on the Type of the ExternalAccountProvider. Each item in the array
+            shall contain a single address. Services may define their own behavior
+            for managing multiple addresses.
+        ServiceEnabled:
+          description: This indicates whether this service is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether this service is enabled.
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent resources that represent
+        external user account services for this manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - AccountProviderType
+    LDAPSearchSettings:
+      additionalProperties: false
+      description: Contains settings for searching a generic LDAP service.
+      properties:
+        BaseDistinguishedNames:
+          description: The base distinguished names to use when searching the LDAP
+            service.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: The value of this property shall be a collection of base
+            distinguished names to use when searching the LDAP service.
+        GroupNameAttribute:
+          description: The attribute name that contains the name of the Group.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the attribute name
+            that contains the name of the Group.
+        GroupsAttribute:
+          description: The attribute name that contains the Groups for a user.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the attribute name
+            that contains the Groups for a user.
+        UsernameAttribute:
+          description: The attribute name that contains the Username.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the attribute name
+            that contains the Username.
+      type: object
+      x-longDescription: This type shall contain all the required settings for searching
+        a generic LDAP service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    LDAPService:
+      additionalProperties: false
+      description: Contains settings for parsing a generic LDAP service.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+        SearchSettings:
+          $ref: '#/components/schemas/LDAPSearchSettings'
+          description: This property contains the settings needed to search an external
+            LDAP service.
+          nullable: true
+          x-longDescription: The value of this property shall contain the settings
+            needed to search an external LDAP service.
+      type: object
+      x-longDescription: This type shall contain all the required settings for parsing
+        a generic LDAP service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    Links:
+      additionalProperties: false
+      description: Contains references to other resources that are related to this
+        resource.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+      type: object
+      x-longDescription: This type, as described by the Redfish Specification, shall
+        contain references to resources that are related to, but not contained by
+        (subordinate to), this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    RoleMapping:
+      additionalProperties: false
+      description: Contains mapping rules to convert the external account providers
+        account information to the local Redfish Role.
+      properties:
+        LocalRole:
+          description: The name of the local role in which to map the remote user
+            or group.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall contain the value of
+            the RoleId property within a Role resource on this Redfish service in
+            which to map the remote user or group.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+        RemoteGroup:
+          description: This property is the name of the remote group (or in the case
+            of a Redfish Service, remote role) that will be mapped to the local role
+            referenced by this entity.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall contain the name of
+            the remote group (or in the case of a Redfish Service, remote role) that
+            will be mapped to the local role referenced by this entity.
+        RemoteUser:
+          description: This property is the name of the remote user that will be mapped
+            to the local role referenced by this entity.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall contain the name of
+            the remote user that will be mapped to the local role referenced by this
+            entity.
+      type: object
+      x-longDescription: This type shall contain mapping rules to convert the external
+        account providers account information to the local Redfish Role.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#ExternalAccountProvider.v1_0_0.ExternalAccountProvider'
+x-copyright: Copyright 2014-2018 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF

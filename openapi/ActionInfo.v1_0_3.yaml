@@ -1,0 +1,121 @@
+components:
+  schemas:
+    ActionInfo:
+      additionalProperties: false
+      description: The ActionInfo schema describes the parameters and other information
+        necessary to perform a Redfish Action on a particular Action target. Parameter
+        support can differ between vendors and even between instances of a resource.
+        This data can be used to ensure Action requests from applications contain
+        supported parameters.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/context
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        Parameters:
+          description: The parameters associated with the specified Redfish Action.
+          items:
+            $ref: '#/components/schemas/Parameters'
+          type: array
+          x-longDescription: This property shall contain a list of parameters associated
+            with a Redfish Action associated with this resource.
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent information about
+        the supported parameters for an Action within a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    ParameterTypes:
+      enum:
+      - Boolean
+      - Number
+      - NumberArray
+      - String
+      - StringArray
+      - Object
+      - ObjectArray
+      type: string
+      x-enumDescriptions:
+        Boolean: A boolean (true or false).
+        Number: A number.
+        NumberArray: An array of numbers.
+        Object: An embedded JSON object.
+        ObjectArray: An array of JSON objects.
+        String: A string.
+        StringArray: An array of strings.
+    Parameters:
+      additionalProperties: false
+      description: A parameter associated with the specified Redfish Action.
+      properties:
+        AllowableValues:
+          description: A list of values for this parameter supported by this Action
+            target.
+          items:
+            nullable: true
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall indicate the allowable values for
+            this parameter as applied to this Action target.
+        DataType:
+          $ref: '#/components/schemas/ParameterTypes'
+          description: The JSON property type used for this parameter.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall indicate the JSON property type of
+            the parameter.
+        Name:
+          description: The name of the parameter for this Action.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the parameter
+            used by the associated Redfish Action.
+        ObjectDataType:
+          description: The OData Type of an object-based parameter.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall describe the entity type definition
+            (in @odata.type format) for the parameter.  This property shall be required
+            for parameters with a DataType of Object or ObjectArray, and shall not
+            be present for parameters with other DataType(s).
+        Required:
+          description: Indicates whether the parameter is required to perform this
+            Action.
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall return true if the parameter is required
+            to be present to perform the associated Action, and shall be false if
+            the parameter is not required (optional) to perform the associated Action.
+      required:
+      - Name
+      type: object
+      x-longDescription: This property shall contain information about a specific
+        parameter associated with a Redfish Action associated with this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#ActionInfo.v1_0_3.ActionInfo'
+x-copyright: Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

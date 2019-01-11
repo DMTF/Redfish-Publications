@@ -1,0 +1,26 @@
+components:
+  schemas:
+    InitializeType:
+      enum:
+      - Fast
+      - Slow
+      type: string
+      x-enumDescriptions:
+        Fast: The volume is prepared for use quickly, typically by erasing just the
+          begining and end of the space so that partitioning can be performed.
+        Slow: The volume is prepared for use slowly, typically by completely erasing
+          the volume.
+    Volume:
+      anyOf:
+      - $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+      - $ref: http://redfish.dmtf.org/schemas/v1/Volume.v1_0_0.yaml#/components/schemas/Volume
+      - $ref: http://redfish.dmtf.org/schemas/v1/Volume.v1_0_1.yaml#/components/schemas/Volume
+      - $ref: http://redfish.dmtf.org/schemas/v1/Volume.v1_0_2.yaml#/components/schemas/Volume
+      - $ref: http://redfish.dmtf.org/schemas/v1/Volume.v1_0_3.yaml#/components/schemas/Volume
+      description: Volume contains properties used to describe a volume, virtual disk,
+        LUN, or other logical storage entity for any system.
+      x-longDescription: This resource shall be used to represent a volume, virtual
+        disk, logical disk, LUN, or other logical storage for a Redfish implementation.
+title: '#Volume.Volume'
+x-copyright: Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF

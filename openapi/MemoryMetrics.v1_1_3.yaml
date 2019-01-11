@@ -1,0 +1,268 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#MemoryMetrics.ClearCurrentPeriod':
+          $ref: '#/components/schemas/ClearCurrentPeriod'
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    AlarmTrips:
+      additionalProperties: false
+      description: Alarm trip information about the memory.  These alarms are reset
+        when the system resets.  Note that if they are re-discovered they can be reasserted.
+      properties:
+        AddressParityError:
+          description: Address parity error detected status.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be true if an Address
+            Parity Error was detected which could not be corrected by retry.
+        CorrectableECCError:
+          description: Correctable data error threshold crossing alarm trip detected
+            status.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be true if the correctable
+            error threshold crossing alarm trip was detected.
+        SpareBlock:
+          description: Spare block capacity crossing alarm trip detected status.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be true if the spare
+            block capacity crossing alarm trip was detected.
+        Temperature:
+          description: Temperature threshold crossing alarm trip detected status.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be true if a temperature
+            threshold alarm trip was detected.
+        UncorrectableECCError:
+          description: Uncorrectable data error threshold crossing alarm trip detected
+            status.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be true if the uncorrectable
+            error threshold alarm trip was detected.
+      type: object
+      x-longDescription: This type shall contain properties describing the types of
+        alarms that have been raised by the memory.  These alarams shall be reset
+        when the system resets.  Note that if they are re-discovered they can be reasserted.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    ClearCurrentPeriod:
+      additionalProperties: false
+      description: This sets the CurrentPeriod object values to zero.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod object property values
+        to zero.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    ClearCurrentPeriodRequestBody:
+      additionalProperties: false
+      description: This sets the CurrentPeriod object values to zero.
+      properties: {}
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod object property values
+        to zero.
+    CurrentPeriod:
+      additionalProperties: false
+      description: This object contains the Memory metrics since last reset or ClearCurrentPeriod
+        action.
+      properties:
+        BlocksRead:
+          description: Number of blocks read since reset.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be number of blocks
+            read since reset.
+        BlocksWritten:
+          description: Number of blocks written since reset.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be mumber of blocks
+            written since reset.
+      type: object
+      x-longDescription: This type shall describe the metrics of the memory since
+        last time the ClearCurrentPeriod Action was performed or the system reset.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    HealthData:
+      additionalProperties: false
+      description: This type describes the health information of the memory.
+      properties:
+        AlarmTrips:
+          $ref: '#/components/schemas/AlarmTrips'
+          description: Alarm trip information about the memory.
+          x-longDescription: This object shall contain properties describe the types
+            of alarms that have been raised by the memory.
+        DataLossDetected:
+          description: Data loss detection status.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be data loss detection
+            status, with true indicating data loss detected.
+        LastShutdownSuccess:
+          description: Status of last shutdown.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be the status ofthe  last
+            shutdown, with true indicating success.
+        PerformanceDegraded:
+          description: Performance degraded mode status.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be performance degraded
+            mode status, with true indicating perfomance degraded.
+        PredictedMediaLifeLeftPercent:
+          description: The percentage of reads and writes that are predicted to still
+            be available for the media.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain an indicator of the percentage
+            of life remaining in the media.
+        RemainingSpareBlockPercentage:
+          description: Remaining spare blocks in percentage.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be the remaining spare
+            blocks in percentage.
+      type: object
+      x-longDescription: This type shall contain properties which describe the HealthData
+        metrics for the current resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    LifeTime:
+      additionalProperties: false
+      description: This object contains the Memory metrics for the lifetime of the
+        Memory.
+      properties:
+        BlocksRead:
+          description: Number of blocks read for the lifetime of the Memory.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be number of blocks
+            read for the lifetime of the Memory.
+        BlocksWritten:
+          description: Number of blocks written for the lifetime of the Memory.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be number of blocks
+            written for the lifetime of the Memory.
+      type: object
+      x-longDescription: This type shall describe the metrics of the memory since
+        manufacturing.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics:
+      additionalProperties: false
+      description: MemoryMetrics contains usage and health statistics for a single
+        Memory module or device instance.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/context
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        BlockSizeBytes:
+          description: Block size in bytes.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be the block size in
+            bytes of all stucture elements.
+          x-units: By
+        CurrentPeriod:
+          $ref: '#/components/schemas/CurrentPeriod'
+          description: This object contains the Memory metrics since last reset or
+            ClearCurrentPeriod action.
+          x-longDescription: This object shall contain properties which describe the
+            CurrentPeriod metrics for the current resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        HealthData:
+          $ref: '#/components/schemas/HealthData'
+          description: This object describes the health information of the memory.
+          x-longDescription: This object shall contain properties which describe the
+            HealthData metrics for the current resource.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        LifeTime:
+          $ref: '#/components/schemas/LifeTime'
+          description: This object contains the Memory metrics for the lifetime of
+            the Memory.
+          x-longDescription: This object shall contain properties which describe the
+            LifeTime metrics for the current resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent the Memory Metrics
+        for a single Memory device in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#MemoryMetrics.v1_1_3.MemoryMetrics'
+x-copyright: Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

@@ -1,0 +1,245 @@
+components:
+  schemas:
+    DeviceClass:
+      enum:
+      - UnclassifiedDevice
+      - MassStorageController
+      - NetworkController
+      - DisplayController
+      - MultimediaController
+      - MemoryController
+      - Bridge
+      - CommunicationController
+      - GenericSystemPeripheral
+      - InputDeviceController
+      - DockingStation
+      - Processor
+      - SerialBusController
+      - WirelessController
+      - IntelligentController
+      - SatelliteCommunicationsController
+      - EncryptionController
+      - SignalProcessingController
+      - ProcessingAccelerators
+      - NonEssentialInstrumentation
+      - Coprocessor
+      - UnassignedClass
+      - Other
+      type: string
+      x-enumDescriptions:
+        Bridge: A bridge.
+        CommunicationController: A communication controller.
+        Coprocessor: A coprocessor.
+        DisplayController: A display controller.
+        DockingStation: A docking station.
+        EncryptionController: An encryption controller.
+        GenericSystemPeripheral: A generic system peripheral.
+        InputDeviceController: An input device controller.
+        IntelligentController: An intelligent controller.
+        MassStorageController: A mass storage controller.
+        MemoryController: A memory controller.
+        MultimediaController: A multimedia controller.
+        NetworkController: A network controller.
+        NonEssentialInstrumentation: A non-essential instrumentation.
+        Other: A other class. The function Device Class Id needs to be verified.
+        ProcessingAccelerators: A processing accelerators.
+        Processor: A processor.
+        SatelliteCommunicationsController: A satellite communications controller.
+        SerialBusController: A serial bus controller.
+        SignalProcessingController: A signal processing controller.
+        UnassignedClass: An unassigned class.
+        UnclassifiedDevice: An unclassified device.
+        WirelessController: A wireless controller.
+    FunctionType:
+      enum:
+      - Physical
+      - Virtual
+      type: string
+      x-enumDescriptions:
+        Physical: A physical PCie function.
+        Virtual: A virtual PCIe function.
+    Links:
+      additionalProperties: false
+      description: Contains references to other resources that are related to this
+        resource.
+      properties:
+        Drives:
+          description: An array of references to the drives which the PCIe device
+            produces.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall reference a resource
+            of type Drive that represents the storage drives associated with this
+            resource.
+        Drives@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+        EthernetInterfaces:
+          description: An array of references to the ethernet interfaces which the
+            PCIe device produces.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall reference a resource
+            of type EthernetInterface that represents the network interfaces associated
+            with this resource.
+        EthernetInterfaces@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+        PCIeDevice:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          description: A reference to the PCIeDevice on which this function resides.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be a reference to the
+            resource that this function is a part of and shall reference a resource
+            of type PCIeDevice.
+        StorageControllers:
+          description: An array of references to the storage controllers which the
+            PCIe device produces.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Storage.yaml#/components/schemas/StorageController
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall reference a resource
+            of type StorageController that represents the storage controllers associated
+            with this resource.
+        StorageControllers@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+      type: object
+      x-longDescription: This type, as described by the Redfish Specification, shall
+        contain references to resources that are related to, but not contained by
+        (subordinate to), this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    PCIeFunction:
+      additionalProperties: false
+      description: This is the schema definition for the PCIeFunction resource.  It
+        represents the properties of a PCIeFunction attached to a System.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+        ClassCode:
+          description: The Class Code of this PCIe function.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){3}$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Class Code
+            of the PCIe device function.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        DeviceClass:
+          $ref: '#/components/schemas/DeviceClass'
+          description: The class for this PCIe Function.
+          readOnly: true
+          x-longDescription: The value of this property shall be the device class
+            of the PCIe device function such as Storage, Network, Memory etc.
+        DeviceId:
+          description: The Device ID of this PCIe function.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Device ID
+            of the PCIe device function.
+        FunctionId:
+          description: The the PCIe Function identifier.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall the PCIe device function
+            number within a given PCIe device.
+        FunctionType:
+          $ref: '#/components/schemas/FunctionType'
+          description: The type of the PCIe Function.
+          readOnly: true
+          x-longDescription: The value of this property shall be the function type
+            of the PCIe device function such as Physical or Virtual.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/Links'
+          description: The links object contains the links to other resources that
+            are related to this resource.
+          x-longDescription: The Links property, as described by the Redfish Specification,
+            shall contain references to resources that are related to, but not contained
+            by (subordinate to), this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        RevisionId:
+          description: The Revision ID of this PCIe function.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){1}$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Revision
+            ID of the PCIe device function.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: This property describes the status and health of the resource
+            and its children.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        SubsystemId:
+          description: The Subsystem ID of this PCIe function.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Subsystem
+            ID of the PCIe device function.
+        SubsystemVendorId:
+          description: The Subsystem Vendor ID of this PCIe function.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Subsystem
+            Vendor ID of the PCIe device function.
+        VendorId:
+          description: The Vendor ID of this PCIe function.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Vendor ID
+            of the PCIe device function.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent a PCIeFunction attached
+        to a System.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#PCIeFunction.v1_0_4.PCIeFunction'
+x-copyright: Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF

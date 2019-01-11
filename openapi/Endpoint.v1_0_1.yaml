@@ -1,0 +1,292 @@
+components:
+  schemas:
+    ConnectedEntity:
+      additionalProperties: true
+      description: Represents a remote resource that is connected to the network accessible
+        to this endpoint.
+      properties:
+        EntityLink:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          description: A link to the associated entity.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall be a reference to an entity of the
+            type specified by the description of the value of the EntityType property.
+        EntityPciId:
+          $ref: '#/components/schemas/PciId'
+          description: The PCI ID of the connected entity.
+          nullable: true
+          x-longDescription: The value of this property shall be the PCI ID of the
+            connected PCIe entity.
+        EntityRole:
+          $ref: '#/components/schemas/EntityRole'
+          description: The role of the connected entity.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall indicate if the specified
+            entity is an initiator, target, or both.
+        EntityType:
+          $ref: '#/components/schemas/EntityType'
+          description: The type of the connected entity.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall indicate if type of
+            connected entity.
+        Identifiers:
+          description: Identifiers for the remote entity.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Identifier
+            nullable: true
+          type: array
+          x-longDescription: Identifiers for the remote entity shall be unique in
+            the context of other resources that can reached over the connected network.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          nullable: true
+        PciClassCode:
+          description: The Class Code and Subclass code of this PCIe function.
+          nullable: true
+          pattern: /0[xX](([a-fA-F]|[0-9]){2}){2}
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Class Code
+            and Subclass code of the PCIe device function.
+        PciFunctionNumber:
+          description: The PCI ID of the connected entity.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be the PCI Function
+            Number of the connected PCIe entity.
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    Endpoint:
+      additionalProperties: false
+      description: This is the schema definition for the Endpoint resource. It represents
+        the properties of an entity that sends or receives protocol defined messages
+        over a transport.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+        Actions:
+          additionalProperties: false
+          description: The Actions object contains the available custom actions on
+            this resource.
+          properties:
+            Oem:
+              additionalProperties: true
+              nullable: true
+              properties: {}
+              type: object
+              x-patternProperties:
+                ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+                  description: This property shall specify a valid odata or Redfish
+                    property.
+          type: object
+          x-patternProperties:
+            ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+              description: This property shall specify a valid odata or Redfish property.
+        ConnectedEntities:
+          description: All the entities connected to this endpoint.
+          items:
+            $ref: '#/components/schemas/ConnectedEntity'
+            nullable: true
+          type: array
+          x-longDescription: This value of this property shall contain all the entities
+            which this endpoint allows access to.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        EndpointProtocol:
+          $ref: http://redfish.dmtf.org/schemas/v1/Storage.v1_0_0.yaml#/components/schemas/Protocol
+          description: The protocol supported by this endpoint.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall contain the protocol
+            this endpoint uses to communicate with other endpoints on this fabric.
+        HostReservationMemoryBytes:
+          description: The amount of memory in Bytes that the Host should allocate
+            to connect to this endpoint.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be the amount of memory
+            in Bytes that the Host should allocate to connect to this endpoint.
+          x-units: By
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Identifiers:
+          description: Identifiers for this endpoint.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Identifier
+            nullable: true
+          type: array
+          x-longDescription: Identifiers for this endpoint shall be unique in the
+            context of other endpoints that can reached over the connected network.
+        Links:
+          additionalProperties: false
+          description: The links object contains the links to other resources that
+            are related to this resource.
+          properties:
+            MutuallyExclusiveEndpoints:
+              description: An array of references to the endpoints that may not be
+                used in zones if this endpoint is used in a zone.
+              items:
+                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+              readOnly: true
+              type: array
+              x-longDescription: The value of this property shall be an array of references
+                of type Endpoint that cannot be used in a zone if this endpoint is
+                used in a zone.
+            MutuallyExclusiveEndpoints@odata.count:
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+            MutuallyExclusiveEndpoints@odata.navigationLink:
+              format: uri
+              type: string
+            Oem:
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              description: Oem extension object.
+              x-longDescription: This object represents the Oem property.  All values
+                for resources described by this schema shall comply to the requirements
+                as described in the Redfish specification.
+            Ports:
+              description: An array of references to the the physical ports associated
+                with this endpoint.
+              items:
+                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+              readOnly: true
+              type: array
+              x-longDescription: The value of this property shall be an array of references
+                of type Port that are utilized by this endpoint.
+            Ports@odata.count:
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+            Ports@odata.navigationLink:
+              format: uri
+              type: string
+          type: object
+          x-patternProperties:
+            ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+              description: This property shall specify a valid odata or Redfish property.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        PciId:
+          $ref: '#/components/schemas/PciId'
+          description: The PCI ID of the endpoint.
+          nullable: true
+          x-longDescription: The value of this property shall be the PCI ID of the
+            endpoint.
+        Redundancy:
+          description: Redundancy information for the lower level endpoints supporting
+            this endpoint.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          type: array
+        Redundancy@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+        Redundancy@odata.navigationLink:
+          format: uri
+          type: string
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          nullable: true
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent a fabric endpoint
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    EntityRole:
+      enum:
+      - Initiator
+      - Target
+      - Both
+      type: string
+      x-enumDescriptions:
+        Both: The entity is acting as both an initiator and a target.
+        Initiator: The entity is acting as an initiator.
+        Target: The entity is acting as a target.
+    EntityType:
+      enum:
+      - StorageInitiator
+      - RootComplex
+      - NetworkController
+      - Drive
+      - StorageExpander
+      - DisplayController
+      - Bridge
+      - Processor
+      type: string
+      x-enumDescriptions:
+        Bridge: The entity is a PCI(e) bridge.
+        DisplayController: The entity is a display controller.
+        Drive: The entity is a disk drive. The EntityLink property (if present) should
+          be a Drive.Drive entity.
+        NetworkController: The entity is a network controller. The EntityLink property
+          (if present) should be an EthernetInterface.EthernetInterface entity.
+        Processor: The entity is a processor device.
+        RootComplex: The entity is a PCI(e) root complex. The EntityLink property
+          (if present) should be a ComputerSystem.ComputerSystem entity.
+        StorageExpander: The entity is a storage expander. The EntityLink property
+          (if present) should be a Chassis.Chassis entity.
+        StorageInitiator: The entity is a storage initator. The EntityLink property
+          (if present) should be a Storage.StorageController entity.
+    PciId:
+      additionalProperties: true
+      properties:
+        DeviceId:
+          description: The Device ID of this PCIe function.
+          nullable: true
+          pattern: /0[xX](([a-fA-F]|[0-9]){2}){2}
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Subsystem
+            Vendor ID of the PCIe device function.
+        SubsystemId:
+          description: The Subsystem ID of this PCIe function.
+          nullable: true
+          pattern: /0[xX](([a-fA-F]|[0-9]){2}){2}
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Subsystem
+            Vendor ID of the PCIe device function.
+        SubsystemVendorId:
+          description: The Subsystem Vendor ID of this PCIe function.
+          nullable: true
+          pattern: /0[xX](([a-fA-F]|[0-9]){2}){2}
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Subsystem
+            Vendor ID of the PCIe device function.
+        VendorId:
+          description: The Vendor ID of this PCIe function.
+          nullable: true
+          pattern: /0[xX](([a-fA-F]|[0-9]){2}){2}
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the PCI Vendor ID
+            of the PCIe device function.
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Endpoint.v1_0_1.Endpoint'
+x-copyright: Copyright 2014-2016 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

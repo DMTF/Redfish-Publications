@@ -1,0 +1,211 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    Assembly:
+      additionalProperties: false
+      description: This is the schema definition for the Assembly properties.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/context
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        Assemblies:
+          description: This is the definition for an assembly information record.
+          items:
+            $ref: '#/components/schemas/AssemblyData'
+          readOnly: false
+          type: array
+          x-longDescription: These properties shall be the definition for assembly
+            records  for a Redfish implementation.
+        Assemblies@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/count
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent an assembly information
+        resource for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    AssemblyData:
+      additionalProperties: false
+      properties:
+        Actions:
+          $ref: '#/components/schemas/AssemblyDataActions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        BinaryDataURI:
+          description: URI that provides the ability to access an image of the assembly
+            information.
+          format: uri
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a URI at which the
+            Service provides for the download of the OEM-specific binary image of
+            the assembly data.  An HTTP GET from this URI shall return a response
+            payload of MIME time application/octet-stream. An HTTP PUT to this URI,
+            if supported by the Service, shall replace the binary image of the assembly.
+        Description:
+          description: Description of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a description of
+            this assembly.
+        EngineeringChangeLevel:
+          description: Engineering change level of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the Engineering Change
+            Level (ECL) or revision of the assembly.
+        MemberId:
+          description: This is the identifier for the member within the collection.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this string shall uniquely identify the
+            member within the collection.
+        Model:
+          description: Model number of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name by which
+            the manufacturer generally refers to the assembly.
+        Name:
+          description: Name of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of the assembly.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        PartNumber:
+          description: Part number of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of the assembly.
+        Producer:
+          description: Producer or manufacturer of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of the company
+            which supplied or manufactured this assembly. This value shall be equal
+            to the 'Manufacturer' field in a PLDM FRU structure, if applicable, for
+            this assembly.
+        ProductionDate:
+          description: Production date of the Assembly.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the date of production
+            or manufacture for this assembly.
+        SKU:
+          description: SKU of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of the assembly.
+        SparePartNumber:
+          description: Spare part number of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of the assembly.
+        Vendor:
+          description: Vendor of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of the company
+            which provides the final product that includes this assembly. This value
+            shall be equal to the 'Vendor' field in a PLDM FRU structure, if applicable,
+            for this assembly.
+        Version:
+          description: Version of the Assembly.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the version of the
+            assembly as determined by the vendor or supplier.
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    AssemblyDataActions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/AssemblyDataOemActions'
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    AssemblyDataOemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Assembly.v1_0_0.Assembly'
+x-copyright: Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

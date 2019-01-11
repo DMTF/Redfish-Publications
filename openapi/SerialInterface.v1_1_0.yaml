@@ -1,0 +1,187 @@
+components:
+  schemas:
+    BitRate:
+      enum:
+      - '1200'
+      - '2400'
+      - '4800'
+      - '9600'
+      - '19200'
+      - '38400'
+      - '57600'
+      - '115200'
+      - '230400'
+      type: string
+    ConnectorType:
+      enum:
+      - RJ45.
+      - RJ11.
+      - DB9 Female.
+      - DB9 Male.
+      - DB25 Female.
+      - DB25 Male.
+      - USB.
+      - mUSB.
+      - uUSB.
+      type: string
+    DataBits:
+      enum:
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      type: string
+    FlowControl:
+      enum:
+      - None
+      - Software
+      - Hardware
+      type: string
+      x-enumDescriptions:
+        Hardware: Out of band flow control imposed.
+        None: No flow control imposed.
+        Software: XON/XOFF in-band flow control imposed.
+    Parity:
+      enum:
+      - None
+      - Even
+      - Odd
+      - Mark
+      - Space
+      type: string
+    PinOut:
+      enum:
+      - Cisco
+      - Cyclades
+      - Digi
+      type: string
+    SerialInterface:
+      additionalProperties: false
+      description: This schema defines an asynchronous serial interface resource.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+        Actions:
+          additionalProperties: false
+          description: The available actions for this resource.
+          properties:
+            Oem:
+              additionalProperties: true
+              description: The available OEM specific actions for this resource.
+              properties: {}
+              type: object
+              x-longDescription: This type shall contain any additional OEM actions
+                for this resource.
+              x-patternProperties:
+                ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+                  description: This property shall specify a valid odata or Redfish
+                    property.
+          type: object
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+          x-patternProperties:
+            ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+              description: This property shall specify a valid odata or Redfish property.
+        BitRate:
+          $ref: '#/components/schemas/BitRate'
+          description: The receive and transmit rate of data flow, typically in bits-per-second
+            (bps), over the serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate the transmit and receive
+            speed of the serial connection.
+        ConnectorType:
+          $ref: '#/components/schemas/ConnectorType'
+          description: The type of connector used for this interface.
+          readOnly: true
+          x-longDescription: This property shall indicate the type of phyiscal connector
+            used for this serial connection.
+        DataBits:
+          $ref: '#/components/schemas/DataBits'
+          description: The number of data bits that will follow the start bit over
+            the serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate number of data bits for
+            the serial connection.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        FlowControl:
+          $ref: '#/components/schemas/FlowControl'
+          description: The type of flow control, if any, that will be imposed on the
+            serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate the flow control mechanism
+            for the serial connection.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        InterfaceEnabled:
+          description: This indicates whether this interface is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether this interface is enabled.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        Parity:
+          $ref: '#/components/schemas/Parity'
+          description: The type of parity used by the sender and receiver in order
+            to detect errors over the serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate parity information for a
+            serial connection.
+        PinOut:
+          $ref: '#/components/schemas/PinOut'
+          description: The physical pin configuration needed for a serial connector.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall indicate the physical pin out for
+            the serial connection.
+        SignalType:
+          $ref: '#/components/schemas/SignalType'
+          description: The type of signal used for the communication connection -
+            RS232 or RS485.
+          readOnly: true
+          x-longDescription: This property shall indicate the type of serial signalling
+            that will be utilized for the serial connection.
+        StopBits:
+          $ref: '#/components/schemas/StopBits'
+          description: The period of time before the next start bit is transmitted.
+          readOnly: false
+          x-longDescription: This property shall indicate the stop bits for the serial
+            connection.
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent serial resources
+        as part of the Redfish specification.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    SignalType:
+      enum:
+      - Rs232
+      - Rs485
+      type: string
+    StopBits:
+      enum:
+      - '1'
+      - '2'
+      type: string
+title: '#SerialInterface.v1_1_0.SerialInterface'
+x-copyright: Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

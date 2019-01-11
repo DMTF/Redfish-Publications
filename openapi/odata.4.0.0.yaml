@@ -1,0 +1,38 @@
+components:
+  schemas:
+    context:
+      description: The OData description of a payload.
+      format: uri
+      readOnly: true
+      type: string
+      x-longDescription: The value of this property shall be the context URL that
+        describes the resource according to OData-Protocol and shall be of the form
+        defined in the Redfish specification.
+    count:
+      description: The number of items in a collection.
+      readOnly: true
+      type: number
+      x-longDescription: The value of this property shall be an integer representing
+        the number of items in a collection.
+    id:
+      description: The unique identifier for a resource.
+      format: uri
+      readOnly: true
+      type: string
+      x-longDescription: The value of this property shall be the unique identifier
+        for the resource and it shall be of the form defined in the Redfish specification.
+    idRef:
+      description: A reference to a resource.
+      properties:
+        '@odata.id':
+          $ref: '#/components/schemas/id'
+      type: object
+      x-longDescription: The value of this property shall be used for references to
+        a resource.
+    type:
+      description: The type of a resource.
+      readOnly: true
+      type: string
+      x-longDescription: The value of this property shall be an absolute URL that
+        specifies the type of the resource and it shall be of the form defined in
+        the Redfish specification.

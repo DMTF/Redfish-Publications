@@ -1,0 +1,675 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    AuthenticationMethod:
+      enum:
+      - None
+      - CHAP
+      - MutualCHAP
+      type: string
+      x-enumDescriptions:
+        CHAP: iSCSI Challenge Handshake Authentication Protocol (CHAP) authentication
+          is used.
+        MutualCHAP: iSCSI Mutual Challenge Handshake Authentication Protocol (CHAP)
+          authentication is used.
+        None: No iSCSI authentication is used.
+    BootMode:
+      enum:
+      - Disabled
+      - PXE
+      - iSCSI
+      - FibreChannel
+      - FibreChannelOverEthernet
+      type: string
+      x-enumDescriptions:
+        Disabled: Do not indicate to UEFI/BIOS that this device is bootable.
+        FibreChannel: Boot this device using the embedded Fibre Channel support and
+          configuration.  Only applicable if the NetworkDeviceFunctionType is set
+          to FibreChannel.
+        FibreChannelOverEthernet: Boot this device using the embedded Fibre Channel
+          over Ethernet (FCoE) boot support and configuration.  Only applicable if
+          the NetworkDeviceFunctionType is set to FibreChannelOverEthernet.
+        PXE: Boot this device using the embedded PXE support.  Only applicable if
+          the NetworkDeviceFunctionType is set to Ethernet.
+        iSCSI: Boot this device using the embedded iSCSI boot support and configuration.  Only
+          applicable if the NetworkDeviceFunctionType is set to iSCSI.
+    BootTargets:
+      additionalProperties: false
+      description: A Fibre Channel boot target configured for a network device function.
+      properties:
+        BootPriority:
+          description: The relative priority for this entry in the boot targets array.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the relative priority
+            for this entry in the boot targets array.  Lower numbers shall represent
+            higher priority, with zero being the highest priority.  The BootPriority
+            shall be unique for all entries of the BootTargets array.
+        LUNID:
+          description: The Logical Unit Number (LUN) ID to boot from on the device
+            referred to by the corresponding WWPN.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the Logical Unit
+            Number (LUN) ID to boot from on the device referred to by the corresponding
+            WWPN.
+        WWPN:
+          description: The World-Wide Port Name to boot from.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be World-Wide Port Name
+            (WWPN) to boot from.
+      type: object
+      x-longDescription: This type shall describe a Fibre Channel boot target configured
+        for a network device function.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    Ethernet:
+      additionalProperties: false
+      description: This type describes Ethernet capabilities, status, and configuration
+        of a network device function.
+      properties:
+        MACAddress:
+          description: This is the currently configured MAC address of the (logical
+            port) network device function.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the effective current
+            MAC Address of this network device function. If an assignable MAC address
+            is not supported, this is a read only alias of the PermanentMACAddress.
+        MTUSize:
+          description: The Maximum Transmission Unit (MTU) configured for this network
+            device function.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The Maximum Transmission Unit (MTU) configured for this
+            Network Device Function.  This value serves as a default for the OS driver
+            when booting.  The value only takes-effect on boot.
+        PermanentMACAddress:
+          description: This is the permanent MAC address assigned to this network
+            device function (physical function).
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the Permanent MAC
+            Address of this network device function (physical function). This value
+            is typically programmed during the manufacturing time. This address is
+            not assignable.
+      type: object
+      x-longDescription: This type shall describe the Ethernet capabilities, status,
+        and configuration values for a network device function.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    FibreChannel:
+      additionalProperties: false
+      description: This type describes Fibre Channel capabilities, status, and configuration
+        of a network device function.
+      properties:
+        AllowFIPVLANDiscovery:
+          description: Whether the FCoE Initialization Protocol (FIP) is used for
+            populating the FCoE VLAN Id.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: For FCoE connections, the value of this property shall
+            be a boolean indicating whether the FIP VLAN Discovery Protocol is used
+            to determine the FCoE VLAN ID selected by the network device function
+            for the FCoE connection.  If true, and the FIP VLAN Discovery succeeds,
+            the FCoEActiveVLANId property shall reflect the FCoE VLAN ID to be used
+            for all FCoE traffic.  If false, or if the FIP VLAN Discovery protocol
+            fails, the FCoELocalVLANId shall be used for all FCoE traffic and the
+            FCoEActiveVLANId shall reflect the FCoELocalVLANId.
+        BootTargets:
+          description: An array of Fibre Channel boot targets configured for this
+            network device function.
+          items:
+            $ref: '#/components/schemas/BootTargets'
+            nullable: true
+          type: array
+          x-longDescription: The value of this property shall be an array of Fibre
+            Channel boot targets configured for this network device function.
+        FCoEActiveVLANId:
+          description: The active FCoE VLAN ID.
+          maximum: 4094
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: For FCoE connections, the value of this property shall
+            be null or a VLAN ID currently being used for FCoE traffic.  When the
+            FCoE link is down this value shall be null.  When the FCoE link is up
+            this value shall be either the FCoELocalVLANId property or a VLAN discovered
+            via the FIP protocol.
+        FCoELocalVLANId:
+          description: The locally configured FCoE VLAN ID.
+          maximum: 4094
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: For FCoE connections, the value of this property shall
+            be the VLAN ID configured locally by setting this property.  This value
+            shall be used for FCoE traffic to this network device function during
+            boot unless AllowFIPVLANDiscovery is true and a valid FCoE VLAN ID is
+            found via the FIP VLAN Discovery Protocol.
+        PermanentWWNN:
+          description: This is the permanent WWNN address assigned to this network
+            device function (physical function).
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the permanent World-Wide
+            Node Name (WWNN) of this network device function (physical function).
+            This value is typically programmed during the manufacturing time. This
+            address is not assignable.
+        PermanentWWPN:
+          description: This is the permanent WWPN address assigned to this network
+            device function (physical function).
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the permanent World-Wide
+            Port Name (WWPN) of this network device function (physical function).
+            This value is typically programmed during the manufacturing time. This
+            address is not assignable.
+        WWNN:
+          description: This is the currently configured WWNN address of the network
+            device function (physical function).
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the effective current
+            World-Wide Node Name (WWNN) of this network device function (physical
+            function). If an assignable WWNN is not supported, this is a read only
+            alias of the PermanentWWNN.
+        WWNSource:
+          $ref: '#/components/schemas/WWNSource'
+          description: The configuration source of the WWNs for this connection (WWPN
+            and WWNN).
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall be the configuration
+            source of the World-Wide Names (WWNs) for this connection (WWPN and WWNN).
+        WWPN:
+          description: This is the currently configured WWPN address of the network
+            device function (physical function).
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the effective current
+            World-Wide Port Name (WWPN) of this network device function (physical
+            function). If an assignable WWPN is not supported, this is a read only
+            alias of the PermanentWWPN.
+      type: object
+      x-longDescription: This object shall describe the Fibre Channel capabilities,
+        status, and configuration values for a network device function.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    IPAddressType:
+      enum:
+      - IPv4
+      - IPv6
+      type: string
+      x-enumDescriptions:
+        IPv4: IPv4 addressing is used for all IP-fields in this object.
+        IPv6: IPv6 addressing is used for all IP-fields in this object.
+    Links:
+      additionalProperties: false
+      description: Contains references to other resources that are related to this
+        resource.
+      properties:
+        Endpoints:
+          description: An array of references to endpoints associated with this network
+            device function.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: The type shall contain an array property who's members
+            reference resources, of type Endpoint, which are associated with this
+            network device function.
+        Endpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+        PCIeFunction:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          description: A reference to the PCIeFunction associated with this Network
+            Device Function.
+          readOnly: true
+          x-longDescription: The value of this property shall be a references of type
+            PCIeFunction that represents the PCI-e Function associated with this Network
+            Device Function.
+      type: object
+      x-longDescription: This type, as described by the Redfish Specification, shall
+        contain references to resources that are related to, but not contained by
+        (subordinate to), this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    NetworkDeviceFunction:
+      additionalProperties: false
+      description: A Network Device Function represents a logical interface exposed
+        by the network adapter.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        AssignablePhysicalPorts:
+          description: The array of physical port references that this network device
+            function may be assigned to.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be an array of physical
+            port references that this network device function may be assigned to.
+        AssignablePhysicalPorts@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+        BootMode:
+          $ref: '#/components/schemas/BootMode'
+          description: The boot mode configured for this network device function.
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall be the boot mode configured
+            for this network device function.  If the value is not quot;Disabled",
+            this network device function shall be configured for boot using the specified
+            technology.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        DeviceEnabled:
+          description: Whether the network device function is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether the network device function is enabled.  Disabled network device
+            functions shall not be enumerated or seen by the operating system.
+        Ethernet:
+          $ref: '#/components/schemas/Ethernet'
+          description: Ethernet.
+          nullable: true
+          x-longDescription: This object shall contain Ethernet capabilities, status,
+            and configuration values for this network device function.
+        FibreChannel:
+          $ref: '#/components/schemas/FibreChannel'
+          description: Fibre Channel.
+          nullable: true
+          x-longDescription: This object shall contain Fibre Channel capabilities,
+            status, and configuration values for this network device function.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/Links'
+          description: Links.
+          x-longDescription: Links for this NetworkDeviceFunction.
+        MaxVirtualFunctions:
+          description: The number of virtual functions (VFs) that are available for
+            this Network Device Function.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be the number of virtual
+            functions (VFs) that are available for this Network Device Function.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        NetDevFuncCapabilities:
+          description: Capabilities of this network device function.
+          items:
+            $ref: '#/components/schemas/NetworkDeviceTechnology'
+            nullable: true
+          readOnly: true
+          type: array
+          x-longDescription: This object shall contain an array of capabilities of
+            this network device function.
+        NetDevFuncType:
+          $ref: '#/components/schemas/NetworkDeviceTechnology'
+          description: The configured capability of this network device function.
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall be the configured capability
+            of this network device function.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        PhysicalPortAssignment:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          deprecated: true
+          description: The physical port that this network device function is currently
+            assigned to.
+          readOnly: true
+          x-deprecatedReason: This property has been deprecated and moved to the Links
+            section to avoid loops on expand.
+          x-longDescription: The value of this property shall be the physical port
+            that this network device function is currently assigned to. This value
+            shall be one of the AssignablePhysicalPorts array members.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: This property describes the status and health of the resource
+            and its children.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        VirtualFunctionsEnabled:
+          description: Whether Single Root I/O Virtualization (SR-IOV) Virual Functions
+            (VFs) are enabled for this Network Device Function.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether Single Root I/O Virtualization (SR-IOV) Virual Functions (VFs)
+            are enabled for this Network Device Function.
+        iSCSIBoot:
+          $ref: '#/components/schemas/iSCSIBoot'
+          description: iSCSI Boot.
+          nullable: true
+          x-longDescription: This object shall contain iSCSI boot capabilities, status,
+            and configuration values for this network device function.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: A Network Device Function represents a logical interface
+        exposed by the network adapter.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    NetworkDeviceTechnology:
+      enum:
+      - Disabled
+      - Ethernet
+      - FibreChannel
+      - iSCSI
+      - FibreChannelOverEthernet
+      type: string
+      x-enumDescriptions:
+        Disabled: Neither enumerated nor visible to the operating system.
+        Ethernet: Appears to the operating system as an Ethernet device.
+        FibreChannel: Appears to the operating system as a Fibre Channel device.
+        FibreChannelOverEthernet: Appears to the operating system as an FCoE device.
+        iSCSI: Appears to the operating system as an iSCSI device.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    WWNSource:
+      enum:
+      - ConfiguredLocally
+      - ProvidedByFabric
+      type: string
+      x-enumDescriptions:
+        ConfiguredLocally: The set of FC/FCoE boot targets was applied locally through
+          API or UI.
+        ProvidedByFabric: The set of FC/FCoE boot targets was applied by the Fibre
+          Channel fabric.
+    iSCSIBoot:
+      additionalProperties: false
+      description: This type describes iSCSI boot capabilities, status, and configuration
+        of a network device function.
+      properties:
+        AuthenticationMethod:
+          $ref: '#/components/schemas/AuthenticationMethod'
+          description: The iSCSI boot authentication method for this network device
+            function.
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall be the iSCSI boot authentication
+            method for this network device function.
+        CHAPSecret:
+          description: The shared secret for CHAP authentication.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the shared secret
+            for CHAP authentication.
+        CHAPUsername:
+          description: The username for CHAP authentication.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall behe username for CHAP
+            authentication.
+        IPAddressType:
+          $ref: '#/components/schemas/IPAddressType'
+          description: The type of IP address (IPv6 or IPv4) being populated in the
+            iSCSIBoot IP address fields.
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall behe type of IP address
+            (IPv6 or IPv4) being populated in the iSCSIBoot IP address fields.  Mixing
+            of IPv6 and IPv4 addresses on the same network device function shall not
+            be permissible.
+        IPMaskDNSViaDHCP:
+          description: Whether the iSCSI boot initiator uses DHCP to obtain the iniator
+            name, IP address, and netmask.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether the iSCSI boot initiator uses DHCP to obtain the iniator name,
+            IP address, and netmask.
+        InitiatorDefaultGateway:
+          description: The IPv6 or IPv4 iSCSI boot default gateway.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the IPv6 or IPv4
+            iSCSI boot default gateway.
+        InitiatorIPAddress:
+          description: The IPv6 or IPv4 address of the iSCSI initiator.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the IPv6 or IPv4
+            address of the iSCSI boot initiator.
+        InitiatorName:
+          description: The iSCSI initiator name.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the iSCSI boot initiator
+            name.  The value of this property should match formats defined in RFC3720
+            or RFC3721.
+        InitiatorNetmask:
+          description: The IPv6 or IPv4 netmask of the iSCSI boot initiator.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the IPv6 or IPv4
+            netmask of the iSCSI boot initiator.
+        MutualCHAPSecret:
+          description: The CHAP Secret for 2-way CHAP authentication.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the CHAP Secret for
+            2-way CHAP authentication.
+        MutualCHAPUsername:
+          description: The CHAP Username for 2-way CHAP authentication.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the CHAP Username
+            for 2-way CHAP authentication.
+        PrimaryDNS:
+          description: The IPv6 or IPv4 address of the primary DNS server for the
+            iSCSI boot initiator.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the IPv6 or IPv4
+            address of the primary DNS server for the iSCSI boot initiator.
+        PrimaryLUN:
+          description: The logical unit number (LUN) for the primary iSCSI boot target.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the logical unit
+            number (LUN) for the primary iSCSI boot target.
+        PrimaryTargetIPAddress:
+          description: The IP address (IPv6 or IPv4) for the primary iSCSI boot target.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the IP address (IPv6
+            or IPv4) for the primary iSCSI boot target.
+        PrimaryTargetName:
+          description: The name of the iSCSI primary boot target.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the name of the primary
+            iSCSI boot target.  The value of this property should match formats defined
+            in RFC3720 or RFC3721.
+        PrimaryTargetTCPPort:
+          description: The TCP port for the primary iSCSI boot target.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the TCP port for
+            the primary iSCSI boot target.
+        PrimaryVLANEnable:
+          description: This indicates if the primary VLAN is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be used to indicate
+            if this VLAN is enabled for the primary iSCSI boot target.
+        PrimaryVLANId:
+          description: The 802.1q VLAN ID to use for iSCSI boot from the primary target.
+          maximum: 4094
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the 802.1q VLAN ID
+            to use for iSCSI boot from the primary target.  This VLAN ID is only used
+            if PrimaryVLANEnable is true.
+        RouterAdvertisementEnabled:
+          description: Whether IPv6 router advertisement is enabled for the iSCSI
+            boot target.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether IPv6 router advertisement is enabled for the iSCSI boot target.  This
+            setting shall only apply to IPv6 configurations.
+        SecondaryDNS:
+          description: The IPv6 or IPv4 address of the secondary DNS server for the
+            iSCSI boot initiator.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the IPv6 or IPv4
+            address of the secondary DNS server for the iSCSI boot initiator.
+        SecondaryLUN:
+          description: The logical unit number (LUN) for the secondary iSCSI boot
+            target.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the logical unit
+            number (LUN) for the secondary iSCSI boot target.
+        SecondaryTargetIPAddress:
+          description: The IP address (IPv6 or IPv4) for the secondary iSCSI boot
+            target.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the IP address (IPv6
+            or IPv4) for the secondary iSCSI boot target.
+        SecondaryTargetName:
+          description: The name of the iSCSI secondary boot target.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the name of the secondary
+            iSCSI boot target.  The value of this property should match formats defined
+            in RFC3720 or RFC3721.
+        SecondaryTargetTCPPort:
+          description: The TCP port for the secondary iSCSI boot target.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the TCP port for
+            the secondary iSCSI boot target.
+        SecondaryVLANEnable:
+          description: This indicates if the secondary VLAN is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be used to indicate
+            if this VLAN is enabled for the secondary iSCSI boot target.
+        SecondaryVLANId:
+          description: The 802.1q VLAN ID to use for iSCSI boot from the secondary
+            target.
+          maximum: 4094
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the 802.1q VLAN ID
+            to use for iSCSI boot from the secondary target.  This VLAN ID is only
+            used if SecondaryVLANEnable is true.
+        TargetInfoViaDHCP:
+          description: Whether the iSCSI boot target name, LUN, IP address, and netmask
+            should be obtained from DHCP.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether the iSCSI boot target name, LUN, IP address, and netmask should
+            be obtained from DHCP.
+      type: object
+      x-longDescription: This type shall describe the iSCSI boot capabilities, status,
+        and configuration values for a network device function.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#NetworkDeviceFunction.v1_2_2.NetworkDeviceFunction'
+x-copyright: Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF

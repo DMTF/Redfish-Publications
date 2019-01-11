@@ -1,0 +1,207 @@
+components:
+  schemas:
+    Port:
+      additionalProperties: false
+      description: Port contains properties describing a port of a switch.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+        Actions:
+          additionalProperties: false
+          description: The available actions for this resource.
+          properties:
+            '#Port.Reset':
+              $ref: '#/components/schemas/Reset'
+            Oem:
+              additionalProperties: true
+              description: The available OEM specific actions for this resource.
+              properties: {}
+              type: object
+              x-longDescription: This type shall contain any additional OEM actions
+                for this resource.
+              x-patternProperties:
+                ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+                  description: This property shall specify a valid odata or Redfish
+                    property.
+          type: object
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+          x-patternProperties:
+            ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+              description: This property shall specify a valid odata or Redfish property.
+        CurrentSpeedGbps:
+          description: The current speed of this port.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be the speed of this
+            port currently negotiated and running.
+          x-units: Gbit/s
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Links:
+          additionalProperties: false
+          description: Contains references to other resources that are related to
+            this resource.
+          properties:
+            AssociatedEndpoints:
+              description: An array of references to the endpoints that connect to
+                the switch through this port.
+              items:
+                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+              readOnly: true
+              type: array
+              x-longDescription: The value of this property shall be a reference to
+                the resources that this port is associated with and shall reference
+                a resource of type Endpoint.
+            AssociatedEndpoints@odata.count:
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+            AssociatedEndpoints@odata.navigationLink:
+              format: uri
+              type: string
+            ConnectedSwitchPorts:
+              description: An array of references to the ports that connect to the
+                switch through this port.
+              items:
+                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+              readOnly: true
+              type: array
+              x-longDescription: The value of this property shall be a reference to
+                the resources that this port is associated with and shall reference
+                a resource of type Port.
+            ConnectedSwitchPorts@odata.count:
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+            ConnectedSwitchPorts@odata.navigationLink:
+              format: uri
+              type: string
+            ConnectedSwitches:
+              description: An array of references to the switches that connect to
+                the switch through this port.
+              items:
+                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+              readOnly: true
+              type: array
+              x-longDescription: The value of this property shall be a reference to
+                the resources that this port is associated with and shall reference
+                a resource of type Switch.
+            ConnectedSwitches@odata.count:
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+            ConnectedSwitches@odata.navigationLink:
+              format: uri
+              type: string
+            Oem:
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              description: Oem extension object.
+              x-longDescription: This object represents the Oem property.  All values
+                for resources described by this schema shall comply to the requirements
+                as described in the Redfish specification.
+          type: object
+          x-longDescription: The Links property, as described by the Redfish Specification,
+            shall contain references to resources that are related to, but not contained
+            by (subordinate to), this resource.
+          x-patternProperties:
+            ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+              description: This property shall specify a valid odata or Redfish property.
+        MaxSpeedGbps:
+          description: The maximum speed of this port as currently configured.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be the maximum speed
+            of which this port is capable of being configured.  If capable of auto-negotiation,
+            the system shall attempt to negotiate at the maximum speed set.
+          x-units: Gbit/s
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        PortId:
+          description: This is the label of this port on the physical switch package.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of the switch
+            port as indicated on the outside of the switch.
+        PortProtocol:
+          $ref: http://redfish.dmtf.org/schemas/v1/Storage.v1_0_0.yaml#/components/schemas/Protocol
+          description: The protocol being sent over this port.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall contain the protocol
+            being sent over this port.
+        PortType:
+          $ref: '#/components/schemas/PortType'
+          description: This is the type of this port.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be the port type for
+            this port.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+        Width:
+          description: The number of lanes, phys, or other physical transport links
+            that this port contains.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: The value of this property shall be the number of physical
+            transport links that this port contains.
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent a simple switch
+        port for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    PortType:
+      enum:
+      - UpstreamPort
+      - DownstreamPort
+      - InterswitchPort
+      - ManagementPort
+      - BidirectionalPort
+      - UnconfiguredPort
+      type: string
+      x-enumDescriptions:
+        BidirectionalPort: This port connects to any type of device.
+        DownstreamPort: This port connects to a target device.
+        InterswitchPort: This port connects to another switch.
+        ManagementPort: This port connects to a switch manager.
+        UnconfiguredPort: This port has not yet been configured.
+        UpstreamPort: This port connects to a host device.
+    Reset:
+      additionalProperties: false
+      description: This action is used to reset this switch.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This defines the name of the custom action supported on this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Port.v1_0_2.Port'
+x-copyright: Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

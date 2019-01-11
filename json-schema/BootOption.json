@@ -1,18 +1,29 @@
 {
     "$ref": "#/definitions/BootOption",
-    "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema.v1_4_0.json",
-    "copyright": "Copyright 2014-2018 Distributed Management Task Force, Inc. (DMTF). For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
+    "copyright": "Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
         "BootOption": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.json#/definitions/idRef"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.json#/definitions/idRef"
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/BootOption.v1_0_0.json#/definitions/BootOption"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/BootOption.v1_0_1.json#/definitions/BootOption"
                 }
             ],
-            "description": "The BootOption resource reports information about a single BootOption contained within a system."
+            "deletable": true,
+            "description": "The BootOption resource reports information about a single BootOption contained within a system.",
+            "insertable": false,
+            "longDescription": "This resource shall be used to represent a single boot option contained within a system.",
+            "updatable": false,
+            "uris": [
+                "/redfish/v1/Systems/{ComputerSystemId}/BootOptions/{BootOptionId}",
+                "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/BootOptions/{BootOptionId}"
+            ]
         }
     },
     "owningEntity": "DMTF",

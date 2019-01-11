@@ -1,0 +1,139 @@
+components:
+  schemas:
+    ResetKeys:
+      additionalProperties: false
+      description: This action is used to reset the Secure Boot keys.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall perform a reset of the Secure Boot key
+        databases. The ResetAllKeysToDefault value shall reset the UEFI Secure Boot
+        key databases to their default values. The DeleteAllKeys value shall delete
+        the content of the UEFI Secure Boot key databases. The DeletePK value shall
+        delete the content of the PK Secure boot key.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    ResetKeysType:
+      enum:
+      - ResetAllKeysToDefault
+      - DeleteAllKeys
+      - DeletePK
+      type: string
+      x-enumDescriptions:
+        DeleteAllKeys: Delete the content of all UEFI Secure Boot key databases (PK,
+          KEK, DB, DBX). This puts the system in Setup Mode.
+        DeletePK: Delete the content of the PK UEFI Secure Boot database. This puts
+          the system in Setup Mode.
+        ResetAllKeysToDefault: Reset the content of all UEFI Secure Boot key databases
+          (PK, KEK, DB, DBX) to their default values.
+    SecureBoot:
+      additionalProperties: false
+      description: This resource contains UEFI Secure Boot information. It represents
+        properties for managing the UEFI Secure Boot functionality of a system.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+        Actions:
+          additionalProperties: false
+          description: The available actions for this resource.
+          properties:
+            '#SecureBoot.ResetKeys':
+              $ref: '#/components/schemas/ResetKeys'
+            Oem:
+              additionalProperties: true
+              description: The available OEM specific actions for this resource.
+              properties: {}
+              type: object
+              x-longDescription: This type shall contain any additional OEM actions
+                for this resource.
+              x-patternProperties:
+                ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+                  description: This property shall specify a valid odata or Redfish
+                    property.
+          type: object
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+          x-patternProperties:
+            ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+              description: This property shall specify a valid odata or Redfish property.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        SecureBootCurrentBoot:
+          $ref: '#/components/schemas/SecureBootCurrentBootType'
+          description: Secure Boot state during the current boot cycle.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall indicate the UEFI Secure
+            Boot state during the current boot cycle.
+        SecureBootEnable:
+          description: Enable or disable UEFI Secure Boot (takes effect on next boot).
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: Setting this property to true enables UEFI Secure Boot,
+            and setting it to false disables it. This property can be enabled only
+            in UEFI boot mode.
+        SecureBootMode:
+          $ref: '#/components/schemas/SecureBootModeType'
+          description: Current Secure Boot Mode.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the current Secure Boot mode,
+            as defined in the UEFI Specification.
+      required:
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent a UEFI Secure Boot
+        resource for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecureBootCurrentBootType:
+      enum:
+      - Enabled
+      - Disabled
+      type: string
+      x-enumDescriptions:
+        Disabled: Secure Boot is currently disabled.
+        Enabled: Secure Boot is currently enabled.
+    SecureBootModeType:
+      enum:
+      - SetupMode
+      - UserMode
+      - AuditMode
+      - DeployedMode
+      type: string
+      x-enumDescriptions:
+        AuditMode: Secure Boot is currently in Audit Mode.
+        DeployedMode: Secure Boot is currently in Deployed Mode.
+        SetupMode: Secure Boot is currently in Setup Mode.
+        UserMode: Secure Boot is currently in User Mode.
+title: '#SecureBoot.v1_0_2.SecureBoot'
+x-copyright: Copyright 2014-2017 Distributed Management Task Force, Inc. (DMTF). For
+  the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright

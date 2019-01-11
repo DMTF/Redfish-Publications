@@ -1,0 +1,55 @@
+components:
+  schemas:
+    Event:
+      anyOf:
+      - $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_0_0.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_0_2.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_0_3.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_0_4.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_0_5.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_0_6.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_0_7.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_1_0.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_1_1.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_1_2.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_1_3.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_1_4.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_1_5.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_2_0.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_2_1.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_2_2.yaml#/components/schemas/Event
+      - $ref: http://redfish.dmtf.org/schemas/v1/Event.v1_3_0.yaml#/components/schemas/Event
+      description: The Event schema describes the JSON payload received by an Event
+        Destination (which has subscribed to event notification) when events occurs.  This
+        resource contains data about event(s), including descriptions, severity and
+        MessageId reference to a Message Registry that can be accessed for further
+        information.
+      x-longDescription: This resource shall be used to represent an event for a Redfish
+        implementation.
+    EventType:
+      deprecated: true
+      enum:
+      - StatusChange
+      - ResourceUpdated
+      - ResourceAdded
+      - ResourceRemoved
+      - Alert
+      - MetricReport
+      type: string
+      x-deprecatedReason: This property has been deprecated.  Starting Redfish Spec
+        1.6 (Event 1.3), subscriptions are based on RegistryId and ResourceType and
+        not EventType.
+      x-enumDescriptions:
+        Alert: A condition exists which requires attention.
+        MetricReport: A metric report managed by the Telemetry Service is being sent.
+        ResourceAdded: A resource has been added.
+        ResourceRemoved: A resource has been removed.
+        ResourceUpdated: The value of this resource has been updated.
+        StatusChange: The status of this resource has changed.
+      x-enumLongDescriptions:
+        MetricReport: Events of type MetricReport shall be sent to a client in accordance
+          with the MetricReport schema definition.
+title: '#Event.Event'
+x-copyright: Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
