@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  EthernetInterface  v1.4.1-->
+<!--# Redfish Schema:  EthernetInterface  v1.5.0-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2018 DMTF.                                                            -->
+<!--# Copyright 2014-2019 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -77,6 +77,8 @@
             <String>/redfish/v1/Systems/{ComputerSystemId}/EthernetInterfaces/{EthernetInterfaceId}</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/EthernetInterfaces/{EthernetInterfaceId}</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/EthernetInterfaces/{EthernetInterfaceId}</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/EthernetInterfaces/{EthernetInterfaceId}</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/EthernetInterfaces/{EthernetInterfaceId}</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -85,6 +87,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_0_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="1.0"/>
 
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.EthernetInterface">
         <Annotation Term="OData.Description" String="The EthernetInterface schema represents a single, logical ethernet interface or network interface controller (NIC)."/>
@@ -149,7 +152,7 @@
           <Annotation Term="OData.Description" String="This indicates the maximum number of Static IPv6 addresses that can be configured on this interface."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall indicate the number of array items supported by IPv6StaticAddresses."/>
         </Property>
-        <Property Name="VLAN" Type="VLanNetworkInterface.VLAN">
+        <Property Name="VLAN" Type="VLanNetworkInterface.VLAN" Nullable="false">
           <Annotation Term="OData.Description" String="If this Network Interface supports more than one VLAN, this property is not present. VLANs collections appear in the Link section of this resource."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the VLAN for this interface.  If this interface supports more than one VLAN, the VLAN property shall not be present and the VLANS collection link shall be present instead."/>
         </Property>
@@ -249,8 +252,15 @@
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_0_5.EthernetInterface"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_0_7">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_0_6.EthernetInterface"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2016.2"/>
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_0_2.EthernetInterface">
         <Property Name="LinkStatus" Type="EthernetInterface.v1_1_0.LinkStatus">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -311,8 +321,15 @@
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_1_3.EthernetInterface"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_1_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_1_4.EthernetInterface"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2016.3"/>
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_1_1.EthernetInterface"/>
 
       <ComplexType Name="Links" BaseType="EthernetInterface.v1_1_0.Links">
@@ -343,8 +360,15 @@
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_2_2.EthernetInterface"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_2_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_2_3.EthernetInterface"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2017.1"/>
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_2_1.EthernetInterface">
         <Property Name="Actions" Type="EthernetInterface.v1_3_0.Actions" Nullable="false">
           <Annotation Term="OData.Description" String="The available actions for this resource."/>
@@ -390,18 +414,25 @@
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_3_1.EthernetInterface"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_3_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_3_2.EthernetInterface"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_4_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2017.3"/>
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_3_1.EthernetInterface">
-        <Property Name="DHCPv4" Type="EthernetInterface.v1_4_0.DHCPv4Configuration">
+        <Property Name="DHCPv4" Type="EthernetInterface.v1_4_0.DHCPv4Configuration" Nullable="false">
           <Annotation Term="OData.Description" String="DHCPv4 configuration for this interface."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the configuration of DHCP v4."/>
         </Property>
-        <Property Name="DHCPv6" Type="EthernetInterface.v1_4_0.DHCPv6Configuration">
+        <Property Name="DHCPv6" Type="EthernetInterface.v1_4_0.DHCPv6Configuration" Nullable="false">
           <Annotation Term="OData.Description" String="DHCPv6 configuration for this interface."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the configuration of DHCP v6."/>
         </Property>
-        <Property Name="StatelessAddressAutoConfig" Type="EthernetInterface.v1_4_0.StatelessAddressAutoConfiguration">
+        <Property Name="StatelessAddressAutoConfig" Type="EthernetInterface.v1_4_0.StatelessAddressAutoConfiguration" Nullable="false">
           <Annotation Term="OData.Description" String="Stateless Address Automatic Configuration (SLAAC) parameters for this interface."/>
           <Annotation Term="OData.LongDescription" String="This object shall contain the IPv4 and IPv6 Stateless Address Automatic Configuration (SLAAC) properties for this interface."/>
         </Property>
@@ -409,7 +440,7 @@
           <Annotation Term="OData.Description" String="The IPv6 static default gateways for this interface."/>
           <Annotation Term="OData.LongDescription" String="The values in this array shall represent the IPv6 static default gateway addresses for this interface."/>
         </Property>
-        <Property Name="StaticNameServers" Type="Collection(Edm.String)" Nullable="false">
+        <Property Name="StaticNameServers" Type="Collection(Edm.String)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="A statically defined set of DNS server IP addresses (both IPv4 and IPv6)."/>
           <Annotation Term="OData.LongDescription" String="A statically defined set of DNS server IP addresses to be used when DHCP provisioning is not in enabled for name server configuration. As an implementation option they may also be used in addition to DHCP provided addresses, or in cases where the DHCP server provides no DNS assigments."/>
@@ -524,6 +555,41 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that OData properties are marked as required, and integer properties are marked as integer rather than number.  It was also created to correct type used in IPv6StaticDefaultGateways."/>
       <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_4_0.EthernetInterface"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_4_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to allow for null in StaticNameServers.  It was also created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_4_1.EthernetInterface"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EthernetInterface.v1_5_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2019.1"/>
+      <EntityType Name="EthernetInterface" BaseType="EthernetInterface.v1_4_2.EthernetInterface"/>
+
+      <ComplexType Name="DHCPv4Configuration" BaseType="EthernetInterface.v1_4_0.DHCPv4Configuration">
+        <Property Name="FallbackAddress" Type="EthernetInterface.v1_5_0.DHCPFallback">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="DHCPv4 fallback address method for this interface."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the fallback address method of DHCPv4."/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="DHCPFallback">
+        <Member Name="Static">
+          <Annotation Term="OData.Description" String="Fall back to a static address specified by IPv4StaticAddresses."/>
+          <Annotation Term="OData.LongDescription" String="DHCP shall fall back to a static address specified by IPv4StaticAddresses."/>
+        </Member>
+        <Member Name="AutoConfig">
+          <Annotation Term="OData.Description" String="Fall back to an autoconfigured address."/>
+          <Annotation Term="OData.LongDescription" String="DHCP shall fall back to an address generated by the implementation."/>
+        </Member>
+        <Member Name="None">
+          <Annotation Term="OData.Description" String="Continue attempting DHCP without a fallback address."/>
+          <Annotation Term="OData.LongDescription" String="DHCP shall continue trying to obtain an address without falling back to a fixed address."/>
+        </Member>
+      </EnumType>
     </Schema>
 
   </edmx:DataServices>

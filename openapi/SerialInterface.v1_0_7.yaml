@@ -1,0 +1,212 @@
+components:
+  schemas:
+    BitRate:
+      enum:
+      - '1200'
+      - '2400'
+      - '4800'
+      - '9600'
+      - '19200'
+      - '38400'
+      - '57600'
+      - '115200'
+      - '230400'
+      type: string
+      x-enumDescriptions:
+        '115200': A bit rate of 115200bps.
+        '1200': A bit rate of 1200bps.
+        '19200': A bit rate of 19200bps.
+        '230400': A bit rate of 230400bps.
+        '2400': A bit rate of 2400bps.
+        '38400': A bit rate of 38400bps.
+        '4800': A bit rate of 4800bps.
+        '57600': A bit rate of 57600bps.
+        '9600': A bit rate of 9600bps.
+    ConnectorType:
+      enum:
+      - RJ45
+      - RJ11
+      - DB9 Female
+      - DB9 Male
+      - DB25 Female
+      - DB25 Male
+      - USB
+      - mUSB
+      - uUSB
+      type: string
+      x-enumDescriptions:
+        DB25 Female: A DB25 Female connector.
+        DB25 Male: A DB25 Male connector.
+        DB9 Female: A DB9 Female connector.
+        DB9 Male: A DB9 Male connector.
+        RJ11: An RJ11 connector.
+        RJ45: An RJ45 connector.
+        USB: A USB connector.
+        mUSB: A mUSB connector.
+        uUSB: A uUSB connector.
+    DataBits:
+      enum:
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      type: string
+      x-enumDescriptions:
+        '5': 5 bits of data following the start bit.
+        '6': 6 bits of data following the start bit.
+        '7': 7 bits of data following the start bit.
+        '8': 8 bits of data following the start bit.
+    FlowControl:
+      enum:
+      - None
+      - Software
+      - Hardware
+      type: string
+      x-enumDescriptions:
+        Hardware: Out of band flow control imposed.
+        None: No flow control imposed.
+        Software: XON/XOFF in-band flow control imposed.
+    Parity:
+      enum:
+      - None
+      - Even
+      - Odd
+      - Mark
+      - Space
+      type: string
+      x-enumDescriptions:
+        Even: An even parity bit.
+        Mark: A mark parity bit.
+        None: No parity bit.
+        Odd: An odd parity bit.
+        Space: A space parity bit.
+    PinOut:
+      enum:
+      - Cisco
+      - Cyclades
+      - Digi
+      type: string
+      x-enumDescriptions:
+        Cisco: The Cisco pin configuration.
+        Cyclades: The Cyclades pin configuration.
+        Digi: The Digi pin configuration.
+    SerialInterface:
+      additionalProperties: false
+      description: This schema defines an asynchronous serial interface resource.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        BitRate:
+          $ref: '#/components/schemas/BitRate'
+          description: The receive and transmit rate of data flow, typically in bits-per-second
+            (bps), over the serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate the transmit and receive
+            speed of the serial connection.
+        ConnectorType:
+          $ref: '#/components/schemas/ConnectorType'
+          description: The type of connector used for this interface.
+          readOnly: true
+          x-longDescription: This property shall indicate the type of phyiscal connector
+            used for this serial connection.
+        DataBits:
+          $ref: '#/components/schemas/DataBits'
+          description: The number of data bits that will follow the start bit over
+            the serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate number of data bits for
+            the serial connection.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        FlowControl:
+          $ref: '#/components/schemas/FlowControl'
+          description: The type of flow control, if any, that will be imposed on the
+            serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate the flow control mechanism
+            for the serial connection.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        InterfaceEnabled:
+          description: This indicates whether this interface is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether this interface is enabled.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        Parity:
+          $ref: '#/components/schemas/Parity'
+          description: The type of parity used by the sender and receiver in order
+            to detect errors over the serial connection.
+          readOnly: false
+          x-longDescription: This property shall indicate parity information for a
+            serial connection.
+        PinOut:
+          $ref: '#/components/schemas/PinOut'
+          description: The physical pin configuration needed for a serial connector.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall indicate the physical pin out for
+            the serial connection.
+        SignalType:
+          $ref: '#/components/schemas/SignalType'
+          description: The type of signal used for the communication connection -
+            RS232 or RS485.
+          readOnly: true
+          x-longDescription: This property shall indicate the type of serial signalling
+            that will be utilized for the serial connection.
+        StopBits:
+          $ref: '#/components/schemas/StopBits'
+          description: The period of time before the next start bit is transmitted.
+          readOnly: false
+          x-longDescription: This property shall indicate the stop bits for the serial
+            connection.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent serial resources
+        as part of the Redfish specification.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SignalType:
+      enum:
+      - Rs232
+      - Rs485
+      type: string
+      x-enumDescriptions:
+        Rs232: The serial interface follows RS232.
+        Rs485: The serial interface follows RS485.
+    StopBits:
+      enum:
+      - '1'
+      - '2'
+      type: string
+      x-enumDescriptions:
+        '1': 1 stop bit following the data bits.
+        '2': 2 stop bits following the data bits.
+title: '#SerialInterface.v1_0_7.SerialInterface'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

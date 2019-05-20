@@ -1,0 +1,185 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PCIeLinks:
+      additionalProperties: false
+      description: Contains references to other resources that are related to this
+        resource.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+        PCIeDevice:
+          description: An array of references to the PCIe Devices contained in this
+            slot.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be an array of references
+            to the resources that this physical slot is associated with and shall
+            reference resources of type PCIeDevice. If the Status.State of this slot
+            has a value of Absent, this property shall not appear in the resource.
+        PCIeDevice@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+      type: object
+      x-longDescription: This type, as described by the Redfish Specification, shall
+        contain references to resources that are related to, but not contained by
+        (subordinate to), this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PCIeSlot:
+      additionalProperties: false
+      description: This is the definition for a PCI slot information object.
+      properties:
+        Lanes:
+          description: This is the number of PCIe lanes supported by this slot.
+          maximum: 32
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be the maximum number
+            of PCIe lanes supported by the slot.
+        Links:
+          $ref: '#/components/schemas/PCIeLinks'
+          description: Contains references to other resources that are related to
+            this resource.
+          x-longDescription: This type, as described by the Redfish Specification,
+            shall contain references to resources that are related to, but not contained
+            by (subordinate to), this resource.
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Location
+          description: The Location of the PCIe slot.
+          x-longDescription: This property shall contain part location information,
+            including a ServiceLable of the associated PCIe Slot.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+        PCIeType:
+          $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.yaml#/components/schemas/PCIeTypes
+          description: This is the PCIe specification supported by this slot.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be the maximum PCIe
+            specification that this slot supports.
+        SlotType:
+          $ref: '#/components/schemas/SlotTypes'
+          description: This is the PCIe slot type for this slot.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be the slot type as
+            specified by the PCIe specification.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: This property describes the status and health of the resource
+            and its children.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      type: object
+      x-longDescription: These properties shall be the definition for a PCIe Slot
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PCIeSlots:
+      additionalProperties: false
+      description: This is the schema definition for the PCIe Slot properties.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        Slots:
+          description: An array of PCI Slot information.
+          items:
+            $ref: '#/components/schemas/PCIeSlot'
+          type: array
+          x-longDescription: This array shall contain an entry for each PCIe slot,
+            including empty slots (with no device or card installed).
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent an set of PCIe slot  information
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SlotTypes:
+      enum:
+      - FullLength
+      - HalfLength
+      - LowProfile
+      - Mini
+      - M2
+      - OEM
+      type: string
+      x-enumDescriptions:
+        FullLength: Full-Length PCIe slot.
+        HalfLength: Half-Length PCIe slot.
+        LowProfile: Low-Profile or Slim PCIe slot.
+        M2: PCIe M.2 slot.
+        Mini: Mini PCIe slot.
+        OEM: And OEM-specific slot.
+title: '#PCIeSlots.v1_0_1.PCIeSlots'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.2'

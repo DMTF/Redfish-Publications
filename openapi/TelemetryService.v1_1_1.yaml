@@ -1,0 +1,260 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#TelemetryService.SubmitTestMetricReport':
+          $ref: '#/components/schemas/SubmitTestMetricReport'
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CollectionFunction:
+      description: An operation to perform over the sample.
+      enum:
+      - Average
+      - Maximum
+      - Minimum
+      - Summation
+      type: string
+      x-enumDescriptions:
+        Average: An averaging function.
+        Maximum: A maximum function.
+        Minimum: A minimum function.
+        Summation: A summation function.
+      x-longDescription: If present, the metric value shall be computed according
+        to this function.
+    MetricValue:
+      additionalProperties: false
+      description: A metric value.
+      properties:
+        MetricDefinition:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: A link to the Metric Definition.
+          readOnly: true
+          x-longDescription: The value shall be reference to the Metric Definition
+            resource that describes what this Metric Report is capturing.
+          x-versionAdded: v1_1_0
+        MetricId:
+          description: The metric definitions identifier for this metric.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value shall be the same as the Id property of the
+            source metric within the associated MetricDefinition.
+          x-versionAdded: v1_1_0
+        MetricProperty:
+          description: The URI for the property from which this metric is derived.
+          format: uri-reference
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value shall be URI to the a property following the
+            JSON fragment notation, as defined by RFC6901, to identify an individual
+            property in a Redfish resource.
+          x-versionAdded: v1_1_0
+        MetricValue:
+          description: The value identifies this resource.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of the metric represented as a string.
+          x-versionAdded: v1_1_0
+        Timestamp:
+          description: The time when the value of the metric is obtained. A management
+            application may establish a time series of metric data by retrieving the
+            instances of metric value and sorting them according to their Timestamp.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value shall time when the metric value was obtained.  Note
+            that this may be different from the time when this instance is created.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: A metric value in the context of a Metric.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SubmitTestMetricReport:
+      additionalProperties: false
+      description: This action is used to generate a metric report.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall cause the event service to immediately
+        generate the metric report, as an Alert Event. This message should then be
+        sent to any appropriate ListenerDestination targets.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SubmitTestMetricReportRequestBody:
+      additionalProperties: false
+      description: This action is used to generate a metric report.
+      properties:
+        GeneratedMetricReportValues:
+          description: The content of the MetricReportValues in the generated metric
+            report.
+          items:
+            $ref: '#/components/schemas/MetricValue'
+          type: array
+          x-longDescription: This parameter shall contain the contents of the MetricReportValues
+            array property in the generated metric report.
+          x-versionAdded: v1_1_0
+        MetricReportName:
+          description: The Name property of the metric report in generated metric
+            report.
+          type: string
+          x-longDescription: This parameter shall be the value of the Name property
+            in the generated metric report.
+        MetricReportValues:
+          deprecated: true
+          description: The content of MetricReportValues array in generated metric
+            report.
+          type: string
+          x-deprecatedReason: This property has been Deprecated in favor of using
+            the property 'GeneratedMetricReportValues'.
+          x-longDescription: This parameter shall contain the contents of the MetricReportValues
+            array property in the generated metric report.
+          x-versionDeprecated: v1_1_0
+      required:
+      - GeneratedMetricReportValues
+      - MetricReportName
+      type: object
+      x-longDescription: This action shall cause the event service to immediately
+        generate the metric report, as an Alert Event. This message should then be
+        sent to any appropriate ListenerDestination targets.
+    TelemetryService:
+      additionalProperties: false
+      description: This is the schema definition for the Metrics Service.  It represents
+        the properties for the service itself and has links to collections of metric
+        definitions and metric report definitions.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        LogService:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: This is a reference to a Log Service used by the Telemetry
+            Service.
+          readOnly: true
+          x-longDescription: The value of this property shall contain a reference
+            to a LogService for the use by this Telemetry Service.
+        MaxReports:
+          description: The maximum number of metric reports supported by this service.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value shall be the maximum number of metric reports
+            supported by this service.
+        MetricDefinitions:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: A link to the collection of Metric Definitions.
+          readOnly: true
+          x-longDescription: The entries of shall be resources of type MetricDefinitionCollection.
+        MetricReportDefinitions:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: A link to the collection of Metric Report Definitions.
+          readOnly: true
+          x-longDescription: The value shall be a link to a resource of type MetricReportDefinitionCollection.
+        MetricReports:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: A link to the collection of Metric Reports.
+          readOnly: true
+          x-longDescription: The value shall be a link to a resource of type MetricReportCollection.
+        MinCollectionInterval:
+          description: The minimum time interval between collections supported by
+            this service.
+          nullable: true
+          pattern: -?P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?
+          readOnly: true
+          type: string
+          x-longDescription: The value shall be the minimum time interval between
+            collections supported by this service.  The value shall conform to the
+            Duration format.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: This property describes the status and health of the resource
+            and its children.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        SupportedCollectionFunctions:
+          description: The functions that can be performed over each metric.
+          items:
+            $ref: '#/components/schemas/CollectionFunction'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: The value shall define the function to apply over the
+            collection duration.
+        Triggers:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: A link to the collection of Triggers, which apply to metrics.
+          readOnly: true
+          x-longDescription: The value shall be a link to a resource of type TriggersCollection.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent an Metrics Service
+        for a Redfish implementation.  It represents the properties that affect the
+        service itself.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#TelemetryService.v1_1_1.TelemetryService'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.3'

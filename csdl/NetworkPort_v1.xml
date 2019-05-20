@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  NetworkPort  v1.2.0-->
+<!--# Redfish Schema:  NetworkPort  v1.2.2-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2018 DMTF.                                                            -->
+<!--# Copyright 2014-2019 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -66,6 +66,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_0_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2016.3"/>
 
       <EntityType Name="NetworkPort" BaseType="NetworkPort.NetworkPort">
         <Annotation Term="OData.Description" String="A Network Port represents a discrete physical port capable of connecting to a network."/>
@@ -84,7 +85,7 @@
           <Annotation Term="OData.Description" String="The status of the link between this port and its link partner."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the link status between this port and its link partner."/>
         </Property>
-        <Property Name="SupportedLinkCapabilities" Type="Collection(NetworkPort.v1_0_0.SupportedLinkCapabilities)">
+        <Property Name="SupportedLinkCapabilities" Type="Collection(NetworkPort.v1_0_0.SupportedLinkCapabilities)" Nullable="false">
           <Annotation Term="OData.Description" String="The self-described link capabilities of this port."/>
           <Annotation Term="OData.LongDescription" String="This object shall describe the static capabilities of the port, irrespective of transient conditions such as cabling, interface module presence, or remote link parter status or configuration."/>
         </Property>
@@ -98,11 +99,11 @@
           <Annotation Term="OData.Description" String="The set of Ethernet capabilities that this port supports."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be an array of zero or more Ethernet capabilities supported by this port."/>
         </Property>
-        <Property Name="NetDevFuncMinBWAlloc" Type="Collection(NetworkPort.v1_0_0.NetDevFuncMinBWAlloc)">
+        <Property Name="NetDevFuncMinBWAlloc" Type="Collection(NetworkPort.v1_0_0.NetDevFuncMinBWAlloc)" Nullable="false">
           <Annotation Term="OData.Description" String="The array of minimum bandwidth allocation percentages for the Network Device Functions associated with this port."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be an array of minimum bandwidth percentage allocations for each of the network device functions associated with this port."/>
         </Property>
-        <Property Name="NetDevFuncMaxBWAlloc" Type="Collection(NetworkPort.v1_0_0.NetDevFuncMaxBWAlloc)">
+        <Property Name="NetDevFuncMaxBWAlloc" Type="Collection(NetworkPort.v1_0_0.NetDevFuncMaxBWAlloc)" Nullable="false">
           <Annotation Term="OData.Description" String="The array of maximum bandwidth allocation percentages for the Network Device Functions associated with this port."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be an array of maximum bandwidth allocation percentages for the Network Device Functions associated with this port."/>
         </Property>
@@ -155,8 +156,16 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The speed of the link in Mbps when this link network technology is active."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the speed of the link in megabits per second (Mbps) for this port when this link network technology is active."/>
-          <Annotation Term="Redfish.Deprecated" String="This property has been Deprecated in favor of the CapableLinkSpeedMbps collection found in NetworkPort.v1_2_0."/>
           <Annotation Term="Measures.Unit" String="Mbit/s"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_2_0"/>
+                <PropertyValue Property="Description" String="This property has been Deprecated in favor of the CapableLinkSpeedMbps."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </Property>
       </ComplexType>
 
@@ -253,8 +262,21 @@
       <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_0_1.NetworkPort"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_0_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to make use of the new Revisions annotation."/>
+      <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_0_2.NetworkPort"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_0_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_0_3.NetworkPort"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2017.1"/>
       <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_0_1.NetworkPort">
         <Property Name="Actions" Type="NetworkPort.v1_1_0.Actions" Nullable="false">
           <Annotation Term="OData.Description" String="The available actions for this resource."/>
@@ -285,8 +307,21 @@
       <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_1_0.NetworkPort"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_1_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to make use of the new Revisions annotation."/>
+      <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_1_1.NetworkPort"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_1_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_1_2.NetworkPort"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2018.2"/>
       <Annotation Term="OData.Description" String="This version was created to add FibreChannel properties."/>
       <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_1_1.NetworkPort">
         <Property Name="FCPortConnectionType" Type="NetworkPort.v1_2_0.PortConnectionType">
@@ -360,6 +395,18 @@
           <Annotation Term="OData.LongDescription" String="The value of this property shall be indicate whether the port is capable of auto-negotiating speed."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_2_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to make use of the new Revisions annotation."/>
+      <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_2_0.NetworkPort"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkPort.v1_2_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="NetworkPort" BaseType="NetworkPort.v1_2_1.NetworkPort"/>
     </Schema>
 
   </edmx:DataServices>

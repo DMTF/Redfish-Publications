@@ -1,0 +1,762 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AttributeRegistry:
+      additionalProperties: false
+      description: The AttributeRegistry schema contains a set of key-value pairs
+        that represents the structure of a Registry. It includes mechanisms for building
+        user interfaces (menus), allowing consistent navigation of the contents. The
+        Attribute Registry is specific to a particular implementation or product.
+        The attributes and property names are not standardized.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+          x-versionAdded: v1_1_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Language:
+          description: This is the RFC 5646 compliant language code for the registry.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string consisting
+            of an RFC 5646 language code.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        OwningEntity:
+          description: This is the organization or company that publishes this registry.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string that represents
+            the publisher of this registry.
+        RegistryEntries:
+          $ref: '#/components/schemas/RegistryEntries'
+          description: List of all attributes and their metadata for this component.
+          x-longDescription: The value of this property shall a list of all attributes
+            for this component, along with their possible values, dependencies, and
+            other metadata.
+        RegistryVersion:
+          description: This is the attribute registry version which is used in the
+            middle portion of a AttributeRegistry.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the version of this
+            attribute registry. The format of this string shall be of the format majorversion.minorversion.errata
+            in compliance with Protocol Version section of the Redfish specification.
+        SupportedSystems:
+          description: Array of systems supported by this attribute registry.
+          items:
+            $ref: '#/components/schemas/SupportedSystems'
+          type: array
+          x-longDescription: The value of this property shall be an array containing
+            a list of systems supported by this attribute registry.
+      required:
+      - Language
+      - RegistryVersion
+      - OwningEntity
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent an Attribute registry
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AttributeType:
+      enum:
+      - Enumeration
+      - String
+      - Integer
+      - Boolean
+      - Password
+      type: string
+      x-enumDescriptions:
+        Boolean: The attributes that are true or false.
+        Enumeration: The attributes that include a list of the known possible enumerated
+          values.
+        Integer: The attributes that have integer numeric values.
+        Password: The attributes that include password values and are not displayed
+          as plain text. The value shall be null for GET requests.
+        String: The attributes that include free form text in their values.
+    AttributeValue:
+      additionalProperties: false
+      description: A possible value for attributes of type 'Enumeration'.
+      properties:
+        ValueDisplayName:
+          description: A user-readable display string of the value of the attribute
+            in the defined 'Language'.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string representing
+            the user-readable display string of the value of the attribute in the
+            defined 'Language'.
+        ValueName:
+          description: The unique value name of the attribute.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string representing
+            the value name of the attribute. ValueName is a unique string within the
+            list of possible values in the 'Value' array of a given attribute.
+      required:
+      - ValueName
+      type: object
+      x-longDescription: This type shall describe a possible value of an attribute
+        of type 'Enumeration'.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Attributes:
+      additionalProperties: false
+      description: An attribute and its possible values.
+      properties:
+        AttributeName:
+          description: The unique name of the attribute.
+          pattern: ^[A-Za-z][A-Za-z0-9_]+$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of this
+            attribute that is unique in this registry.
+        CurrentValue:
+          description: Placeholder of the current value of the attribute.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: Placeholder of the current value of the attribute, to
+            aid in evaluating dependencies. The current value of an attribute might
+            be affected by the results of evaluating the 'Dependencies' array.
+        DefaultValue:
+          description: The default current value of the attribute.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the default value
+            of the attribute.
+        DisplayName:
+          description: The user-readable display string of the attribute in the defined
+            'Language'.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the user-readable
+            display string of the attribute in the defined 'Language'.
+        DisplayOrder:
+          description: The numeric value describing the ascending order that the attribute
+            is displayed relative to other attributes.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be a number the describes
+            the ascending order in which this attribute is displayed, relative to
+            other attributes.
+        GrayOut:
+          description: The gray-out state of this attribute.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the gray-out state of this attribute. When set to true, a grayed-out attribute
+            should be grayed out in user interfaces. But, unlike ReadOnly, the value
+            of grayed-out attributes might still be modified. The grayout state of
+            an attribute might be affected by the results of evaluating the 'Dependencies'
+            array.
+        HelpText:
+          description: The help text for the attribute.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the help text of
+            the attribute.
+        Hidden:
+          description: The hidden state of this attribute.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the visibility state of this attribute. When set to true, a hidden attribute
+            should be hidden in user interfaces. The hidden state of an attribute
+            might be affected by the results of evaluating the 'Dependencies' array.
+        Immutable:
+          description: Defines whether this attribute is immutable or not.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the immutable state of this attribute. Immutable attributes should not
+            be modified and are typically used to reflect a hardware state.
+        IsSystemUniqueProperty:
+          description: Defines whether this attribute is unique for this system and
+            should not be replicated.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            this attribute is unique or not. A value of true indicates that the attribute
+            is unique and should not be replicated.
+        LowerBound:
+          description: The lower limit of the value of an attribute of type 'Integer'.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be a number indicating
+            the lower limit of the value of an attribute of type 'Integer'.
+        MaxLength:
+          description: The maximum character length of the value of an attribute of
+            type 'String'.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be a number indicating
+            the maximum character length of the value of an attribute of type 'String'.
+        MenuPath:
+          description: A path that describes the menu hierarchy of this attribute.
+          nullable: true
+          pattern: ^\.\/([^/]+(\/[^/]+)*)?$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string indicating
+            the menu hierarchy of this attribute, in the form of a path to the menu
+            names.  It shall start with './' to indicate the root menu, followed by
+            the menu names with '/' characters to delineate the menu traversal.
+        MinLength:
+          description: The minimum character length of the value of an attribute of
+            type 'String'.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be a number indicating
+            the minimum character length of the value of an attribute of type 'String'.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+          x-versionAdded: v1_3_0
+        ReadOnly:
+          description: The read-only state of this attribute.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the read-only state of attribute. A read-only attribute cannot be modified,
+            and should be grayed out in user interfaces. The read-only state of an
+            attribute might be affected by the results of evaluating the 'Dependencies'
+            array.
+        ResetRequired:
+          description: True if changing the value of this attribute requires a system
+            or device reset in order to take effect.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the requirement for a system or device reset for this attribute value
+            change to take effect.
+          x-versionAdded: v1_2_0
+        ScalarIncrement:
+          description: The amount to increment or decrement the value of an attribute
+            of type 'Integer' each time a user requests a value change.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be a number indicating
+            the amount to increment or decrement the value of an attribute of type
+            'Integer' each time a user requests a value change. A ScalarIncrement
+            value of 0 indicates a free-form numeric user input.
+        Type:
+          $ref: '#/components/schemas/AttributeType'
+          description: The type of the attribute.
+          readOnly: true
+          x-longDescription: The value of this property shall be an enumeration describing
+            type of the attribute.
+        UefiDevicePath:
+          description: The UEFI device path that qualifies this attribute.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the UEFI device path string
+            used to qualify and locate the specific device for this Attribute, as
+            defined by the UEFI Specification.
+          x-versionAdded: v1_2_0
+        UefiKeywordName:
+          description: The UEFI KeywordString of the attribute.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the configuration
+            KeywordString of this attribute, as defined in the UEFI Specification.
+          x-versionAdded: v1_2_0
+        UefiNamespaceId:
+          description: The UEFI NamespaceId of the attribute.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the configuration
+            NamespaceId of this attribute, as defined in the UEFI Specification.
+          x-versionAdded: v1_2_0
+        UpperBound:
+          description: The upper limit of the value of an attribute of type 'Integer'.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be a number indicating
+            the upper limit of the value of an attribute of type 'Integer'.
+        Value:
+          description: The array containing possible values for attributes of type
+            'Enumeration'.
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+          type: array
+          x-longDescription: The value of this property shall be an array containing
+            the possible values of an attribute of type 'Enumeration'.
+        ValueExpression:
+          description: A regular expression that is used to validate the value of
+            the attribute. This is only applicable to attributes of type 'String'
+            or 'Integer'.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a regular expression
+            that is valid according to the Perl regular expression dialect. This string
+            is used to validate the value of the attribute. This is only applicable
+            to attributes of type 'String' or 'Integer'.
+        WarningText:
+          description: The warning text for changing the attribute.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the warning text
+            of the attribute.
+        WriteOnly:
+          description: Defines whether this attribute is write-only. Such attributes
+            revert back to their initial value after settings are applied.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the write-only state of this attribute. A write-only attribute reverts
+            back to it's initial value after settings are applied.
+      required:
+      - AttributeName
+      type: object
+      x-longDescription: This type shall describe an attribute and its possible values
+        and other metadata.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Dependencies:
+      additionalProperties: false
+      description: A dependency of attributes on this component.
+      properties:
+        Dependency:
+          $ref: '#/components/schemas/Dependency'
+          description: The dependency expression for one or more Attributes in this
+            Attribute Registry.
+          x-longDescription: The value of this property shall be the dependency expression
+            for one or more Attributes in this Attribute Registry.
+        DependencyFor:
+          description: The AttributeName of the attribute whose change triggers the
+            evaluation of this dependency expression.
+          pattern: ^[A-Za-z][A-Za-z0-9_]+$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the AttributeName
+            of the attribute whose change triggers the evaluation of this dependency
+            expression.
+        Type:
+          $ref: '#/components/schemas/DependencyType'
+          description: The type of the dependency structure.
+          readOnly: true
+          x-longDescription: The value of this property shall be an enumeration describing
+            type of the attribute dependency.
+      type: object
+      x-longDescription: This type shall describe a dependency of attributes on this
+        component.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Dependency:
+      additionalProperties: false
+      description: The dependency expression for one or more Attributes in this Attribute
+        Registry.
+      properties:
+        MapFrom:
+          description: Array of the map-from conditions for mapping dependency.
+          items:
+            $ref: '#/components/schemas/MapFrom'
+          type: array
+          x-longDescription: The value of this property shall be an array containing
+            the map-from conditions for a dependency of Type 'Map'.
+        MapToAttribute:
+          description: The Name of the attribute that is affected by this dependency
+            expression.
+          pattern: ^[A-Za-z][A-Za-z0-9_]+$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the AttributeName
+            of the attribute that is affected by this dependency expression.
+        MapToProperty:
+          $ref: '#/components/schemas/MapToProperty'
+          description: The meta-data property of the attribute specified in MapFromAttribute
+            that is used to evaluate this dependency expression.
+          readOnly: true
+          x-longDescription: The value of this property shall be the meta-data property
+            of the attribute specified in MapFromAttribute that is used to evaluate
+            this dependency expression. For example, this could be the MapFromAttribute
+            CurrentValue, or ReadOnly state.
+        MapToValue:
+          description: The value that MapToProperty is changed to if the dependency
+            expression evaluates to true.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value that the property specified in MapToProperty
+            (in the attribute specified in MapToAttribute) is changed to if the dependency
+            expression evaluates to true.
+      type: object
+      x-longDescription: This type shall describe the dependency expression for one
+        or more Attributes in this Attribute Registry.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    DependencyType:
+      enum:
+      - Map
+      type: string
+      x-enumDescriptions:
+        Map: A simple mapping dependency. The attribute value or state is changed
+          to the mapped value if the condition evaluates to true.
+    MapFrom:
+      additionalProperties: false
+      description: A map-from condition for mapping dependency.
+      properties:
+        MapFromAttribute:
+          description: The attribute that is used to evaluate this dependency expression.
+          pattern: ^[A-Za-z][A-Za-z0-9_]+$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the AttributeName
+            of the attribute that is used in evaluating this dependency expression
+            term.
+        MapFromCondition:
+          $ref: '#/components/schemas/MapFromCondition'
+          description: The condition that is used to evaluate this dependency expression.
+          readOnly: true
+          x-longDescription: The value of this property shall be the condition that
+            is used to evaluate this dependency expression. For example, 'EQU' or
+            'NEQ'.
+        MapFromProperty:
+          $ref: '#/components/schemas/MapFromProperty'
+          description: The meta-data property of the attribute specified in MapFromAttribute
+            that is used to evaluate this dependency expression.
+          readOnly: true
+          x-longDescription: The value of this property shall be the meta-data property
+            of the attribute specified in MapFromAttribute that is used to evaluate
+            this dependency expression. For example, this could be the MapFromAttribute
+            CurrentValue, or ReadOnly state.
+        MapFromValue:
+          description: The value that the is used property specified in MapFromProperty
+            that is used to evaluate this dependency expression.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value that the property specified in MapFromProperty
+            (in the attribute specified in MapFromAttribute) that is used to evaluate
+            this dependency expression.
+        MapTerms:
+          $ref: '#/components/schemas/MapTerms'
+          description: The logical term used to combine two or more MapFrom conditions
+            in this dependency expression.
+          readOnly: true
+          x-longDescription: The value of this property shall be the logical term
+            used to combine two or more MapFrom conditions in this dependency expression.
+            For example, 'AND' for logical AND, or 'OR' for logical OR of the conditions.
+      type: object
+      x-longDescription: This type shall describe a map-from condition for a dependency
+        of Type 'Map'.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MapFromCondition:
+      enum:
+      - EQU
+      - NEQ
+      - GTR
+      - GEQ
+      - LSS
+      - LEQ
+      type: string
+      x-enumDescriptions:
+        EQU: The logical operation for 'Equal'.
+        GEQ: The logical operation for 'Greater than or Equal'.
+        GTR: The logical operation for 'Greater than'.
+        LEQ: The logical operation for 'Less than or Equal'.
+        LSS: The logical operation for 'Less than'.
+        NEQ: The logical operation for 'Not Equal'.
+    MapFromProperty:
+      enum:
+      - CurrentValue
+      - DefaultValue
+      - ReadOnly
+      - WriteOnly
+      - GrayOut
+      - Hidden
+      - LowerBound
+      - UpperBound
+      - MinLength
+      - MaxLength
+      - ScalarIncrement
+      type: string
+      x-enumDescriptions:
+        CurrentValue: The dependency on an attribute's CurrentValue.
+        DefaultValue: The dependency on an attribute's DefaultValue.
+        GrayOut: The dependency on an attribute's GrayOut state.
+        Hidden: The dependency on an attribute's Hidden state.
+        LowerBound: The dependency on an attribute's LowerBound.
+        MaxLength: The dependency on an attribute's MaxLength.
+        MinLength: The dependency on an attribute's MinLength.
+        ReadOnly: The dependency on an attribute's ReadOnly state.
+        ScalarIncrement: The dependency on an attribute's ScalarIncrement.
+        UpperBound: The dependency on an attribute's UpperBound.
+        WriteOnly: The dependency on an attribute's WriteOnly state.
+    MapTerms:
+      enum:
+      - AND
+      - OR
+      type: string
+      x-enumDescriptions:
+        AND: The operation used for logical 'AND' of dependency terms.
+        OR: The operation used for logical 'OR' of dependency terms.
+    MapToProperty:
+      enum:
+      - CurrentValue
+      - DefaultValue
+      - ReadOnly
+      - WriteOnly
+      - GrayOut
+      - Hidden
+      - Immutable
+      - HelpText
+      - WarningText
+      - DisplayName
+      - DisplayOrder
+      - LowerBound
+      - UpperBound
+      - MinLength
+      - MaxLength
+      - ScalarIncrement
+      - ValueExpression
+      type: string
+      x-enumDescriptions:
+        CurrentValue: The dependency that affects an attribute's CurrentValue.
+        DefaultValue: The dependency that affects an attribute's DefaultValue.
+        DisplayName: The dependency that affects an attribute's DisplayName.
+        DisplayOrder: The dependency that affects an attribute's DisplayName.
+        GrayOut: The dependency that affects an attribute's GrayOut state.
+        HelpText: The dependency that affects an attribute's HelpText.
+        Hidden: The dependency that affects an attribute's Hidden state.
+        Immutable: The dependency that affects an attribute's Immutable state.
+        LowerBound: The dependency that affects an attribute's LowerBound.
+        MaxLength: The dependency that affects an attribute's MaxLength.
+        MinLength: The dependency that affects an attribute's MinLength.
+        ReadOnly: The dependency that affects an attribute's ReadOnly state.
+        ScalarIncrement: The dependency that affects an attribute's ScalarIncrement.
+        UpperBound: The dependency that affects an attribute's UpperBound.
+        ValueExpression: The dependency that affects an attribute's ValueExpression.
+        WarningText: The dependency that affects an attribute's WarningText.
+        WriteOnly: The dependency that affects an attribute's WriteOnly state.
+    Menus:
+      additionalProperties: false
+      description: A menu and its hierarchy.
+      properties:
+        DisplayName:
+          description: The user-readable display string of this menu in the defined
+            'Language'.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the user-readable
+            display string of the menu in the defined 'Language'.
+        DisplayOrder:
+          description: The numeric value describing the ascending order in which this
+            menu is displayed relative to other menus.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be a number the describes
+            the ascending order in which this menu is displayed, relative to other
+            menus.
+        GrayOut:
+          description: The gray-out state of this menu. A grayed-only menu is not
+            accessible in user interfaces.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the gray-out state of this menu. When set to true, a grayed-only menu
+            is not accessible in user interfaces.
+        Hidden:
+          description: The hidden state of this menu.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the visibility state of this menu. When set to true, a hidden menu should
+            be hidden in user interfaces. The hidden state of a menu might be affected
+            by the results of evaluating the 'Dependencies' array.
+          x-versionAdded: v1_3_0
+        MenuName:
+          description: The unique name string of this menu.
+          pattern: ^[^/]+$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the name of this
+            menu that is unique in this registry.
+        MenuPath:
+          description: A path that describes this menu hierarchy relative to other
+            menus.
+          nullable: true
+          pattern: ^\.\/([^/]+(\/[^/]+)*)?$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string indicating
+            the menu hierarchy of this menu, in the form of a path to the menu names.  It
+            shall start with './' to indicate the root menu, followed by the menu
+            names with '/' characters to delineate the menu traversal.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+          x-versionAdded: v1_3_0
+        ReadOnly:
+          description: The read-only state of this menu.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean describing
+            the read-only state of this menu. A read-only menu is not accessible in
+            user interfaces, and all properties contained in that menu and its sub-menus
+            become read-only.
+      type: object
+      x-longDescription: This type shall describe an attribute's menu and its hierarchy.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    RegistryEntries:
+      additionalProperties: false
+      description: List of all attributes and their metadata for this component.
+      properties:
+        Attributes:
+          description: The array containing the attributes and their possible values.
+          items:
+            $ref: '#/components/schemas/Attributes'
+          type: array
+          x-longDescription: The value of this property shall be an array containing
+            the attributes and their possible values and other metadata.
+        Dependencies:
+          description: The array containing a list of dependencies of attributes on
+            this component.
+          items:
+            $ref: '#/components/schemas/Dependencies'
+          type: array
+          x-longDescription: The value of this property shall be an array containing
+            a list of dependencies of attributes on this component.
+        Menus:
+          description: The array containing the attributes menus and their hierarchy.
+          items:
+            $ref: '#/components/schemas/Menus'
+          type: array
+          x-longDescription: The value of this property shall be an array containing
+            the attributes menus and their hierarchy.
+      type: object
+      x-longDescription: This type shall describe a list of all attributes for this
+        component, along with their possible values, dependencies, and other metadata.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SupportedSystems:
+      additionalProperties: false
+      description: A system supported by this attribute registry.
+      properties:
+        FirmwareVersion:
+          description: Firmware version.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The version of the component firmware image that this
+            registry applies to.
+          x-versionAdded: v1_1_0
+        ProductName:
+          description: The product name of the system.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the product name
+            of the computer system that this registry applies to.
+        SystemId:
+          description: The system ID of the system.
+          nullable: true
+          pattern: ^[A-Za-z0-9]+$
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the system ID that
+            identifies the computer system model that this registry applies to.
+      type: object
+      x-longDescription: This type shall describe a system supported by this attribute
+        registry.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#AttributeRegistry.v1_3_1.AttributeRegistry'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.3'

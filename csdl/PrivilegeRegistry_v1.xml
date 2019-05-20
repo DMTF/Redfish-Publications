@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PrivilegeRegistry  v1.1.2-->
+<!--# Redfish Schema:  PrivilegeRegistry  v1.1.3-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2018 DMTF.                                                            -->
+<!--# Copyright 2014-2019 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -57,6 +57,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PrivilegeRegistry.v1_0_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2016.3"/>
 
       <EntityType Name="PrivilegeRegistry" BaseType="PrivilegeRegistry.PrivilegeRegistry">
         <Annotation Term="OData.Description" String="This is the schema definition for Operation to Privilege mapping."/>
@@ -85,15 +86,15 @@
           <Annotation Term="OData.Description" String="Indicates entity name. e.g., Manager."/>
           <Annotation Term="OData.LongDescription" String="Indicates entity name. e.g., Manager."/>
         </Property>
-        <Property Name="SubordinateOverrides" Type="Collection(PrivilegeRegistry.v1_0_0.Target_PrivilegeMap)" Nullable="true">
+        <Property Name="SubordinateOverrides" Type="Collection(PrivilegeRegistry.v1_0_0.Target_PrivilegeMap)" Nullable="false">
           <Annotation Term="OData.Description" String="Indicates privilege overrides of subordinate resource."/>
           <Annotation Term="OData.LongDescription" String="Indicates privilege overrides of subordinate resource. Target lists referenced by Entity."/>
         </Property>
-        <Property Name="ResourceURIOverrides" Type="Collection(PrivilegeRegistry.v1_0_0.Target_PrivilegeMap)" Nullable="true">
+        <Property Name="ResourceURIOverrides" Type="Collection(PrivilegeRegistry.v1_0_0.Target_PrivilegeMap)" Nullable="false">
           <Annotation Term="OData.Description" String="Indicates privilege overrides of Resource URI."/>
           <Annotation Term="OData.LongDescription" String="Indicates privilege overrides of Resource URI. Target lists Resource URI."/>
         </Property>
-        <Property Name="PropertyOverrides" Type="Collection(PrivilegeRegistry.v1_0_0.Target_PrivilegeMap)" Nullable="true">
+        <Property Name="PropertyOverrides" Type="Collection(PrivilegeRegistry.v1_0_0.Target_PrivilegeMap)" Nullable="false">
           <Annotation Term="OData.Description" String="Indicates privilege overrides of property or element within a entity."/>
           <Annotation Term="OData.LongDescription" String="Indicates privilege overrides of property or element. e.g., password property."/>
         </Property>
@@ -106,12 +107,12 @@
       <ComplexType Name="Target_PrivilegeMap">
         <Annotation Term="OData.Description" String="This type describes a mapping between one or more targets and the HTTP operations associated with them."/>
         <Annotation Term="OData.LongDescription" String="This type shall describe a mapping between one or more targets and the HTTP operations associated with them."/>
-        <Property Name="Targets" Type="Collection(Edm.String)" Nullable="true">
+        <Property Name="Targets" Type="Collection(Edm.String)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="Indicates the URI or Entity."/>
           <Annotation Term="OData.LongDescription" String="Indicates the set of URI(s) or Entity(s) or property(s). e.g./redfish/v1/Systems/1, Manager, Password. When targets property is not mentioned, then there is no override."/>
         </Property>
-        <Property Name="OperationMap" Type="PrivilegeRegistry.v1_0_0.OperationMap" >
+        <Property Name="OperationMap" Type="PrivilegeRegistry.v1_0_0.OperationMap" Nullable="false">
           <Annotation Term="OData.Description" String="List mapping between HTTP operation and privilege needed to perform operation."/>
           <Annotation Term="OData.LongDescription" String="List mapping between HTTP operation and privilege needed to perform operation."/>
         </Property>
@@ -177,8 +178,15 @@
       <EntityType Name="PrivilegeRegistry" BaseType="PrivilegeRegistry.v1_0_2.PrivilegeRegistry"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PrivilegeRegistry.v1_0_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="PrivilegeRegistry" BaseType="PrivilegeRegistry.v1_0_3.PrivilegeRegistry"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PrivilegeRegistry.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2017.1"/>
       <EntityType Name="PrivilegeRegistry" BaseType="PrivilegeRegistry.v1_0_1.PrivilegeRegistry">
         <Property Name="Actions" Type="PrivilegeRegistry.v1_1_0.Actions" Nullable="false">
           <Annotation Term="OData.Description" String="The available actions for this resource."/>
@@ -213,6 +221,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that OData properties are marked as required, and integer properties are marked as integer rather than number.  It was also created to fix the Permission term in several properties."/>
       <EntityType Name="PrivilegeRegistry" BaseType="PrivilegeRegistry.v1_1_1.PrivilegeRegistry"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PrivilegeRegistry.v1_1_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="PrivilegeRegistry" BaseType="PrivilegeRegistry.v1_1_2.PrivilegeRegistry"/>
     </Schema>
 
   </edmx:DataServices>

@@ -1,0 +1,415 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    DirectionOfCrossingEnum:
+      description: The direction of crossing which corresponds to a trigger.
+      enum:
+      - Increasing
+      - Decreasing
+      type: string
+      x-enumDescriptions:
+        Decreasing: A trigger occurs when the metric value crosses the trigger value
+          while decreasing.
+        Increasing: A trigger occurs when the metric value crosses the trigger value
+          while increasing.
+      x-longDescription: The value shall indicate the direction of crossing which
+        corresponds to a trigger.
+    DiscreteTrigger:
+      additionalProperties: false
+      description: The characteristics of the discrete trigger.
+      properties:
+        DwellTime:
+          description: This time the trigger occurance persists before a trigger event
+            has occurred.
+          nullable: true
+          pattern: -?P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the time that a trigger occurance
+            persists before the MetricAction is performed.
+        Name:
+          description: The name of trigger.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a name for the trigger.
+        Severity:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Health
+          description: This property contains the value of the Severity property in
+            the Event message.
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall be used for the Severity
+            property in the Event message.
+        Value:
+          description: The value of the discrete metric that constitutes a trigger
+            occurance.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the value discrete metric
+            that constitutes a trigger event.  The DwellTimeMilliSeconds shall be
+            measured from this point in time.
+      type: object
+      x-longDescription: This object shall contain the characteristics of the discrete
+        trigger.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    DiscreteTriggerConditionEnum:
+      description: Specifies the condition, in relationship to the discrete trigger
+        values, which constitutes a trigger.
+      enum:
+      - Specified
+      - Changed
+      type: string
+      x-enumDescriptions:
+        Changed: A discrete trigger occures whenever the value of the metric changes.
+        Specified: A discrete trigger occurs when the value of the metric becomes
+          one of the values listed in the DiscreteTriggers property.
+      x-longDescription: The value shall specify the condition, in relationship to
+        the discrete trigger values, which constitutes a trigger.
+    Links:
+      additionalProperties: false
+      description: Contains references to other resources that are related to this
+        resource.
+      properties:
+        MetricReportDefinitions:
+          description: The metric report definitions that will generate new metric
+            reports when a trigger occurs when the TriggerActions property contains
+            the value RedfishMetricReport.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          readOnly: false
+          type: array
+          x-longDescription: The value shall be a set of references to metric report
+            definitions that will generate new metric reports when a trigger occurs
+            when the TriggerActions property contains the value RedfishMetricReport.
+          x-versionAdded: v1_1_0
+        MetricReportDefinitions@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+      type: object
+      x-longDescription: This type, as described by the Redfish Specification, shall
+        contain references to resources that are related to, but not contained by
+        (subordinate to), this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MetricTypeEnum:
+      description: Specifies the type of metric for which the trigger is configured.
+      enum:
+      - Numeric
+      - Discrete
+      type: string
+      x-enumDescriptions:
+        Discrete: The trigger is for a discrete sensor.
+        Numeric: The trigger is for numeric sensor.
+      x-longDescription: The value shall specify the type of metric for which the
+        trigger is configured.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Threshold:
+      additionalProperties: false
+      description: A threshold definition for a sensor.
+      properties:
+        Activation:
+          $ref: '#/components/schemas/ThresholdActivation'
+          description: The direction of crossing that activates this threshold.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall indicate the direction of crossing
+            of the Reading value for this Sensor that triggers the threshold.
+        DwellTime:
+          description: The time interval over which the sensor reading must have passed
+            through this Threshold value before the threshold is considered to be
+            violated.
+          nullable: true
+          pattern: -?P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?
+          readOnly: false
+          type: string
+          x-longDescription: This property shall indicate the time interval over which
+            the sensor reading must have passed through this Threshold value before
+            the threshold is considered to be violated.
+        Reading:
+          description: The threshold value.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall indicate the Reading value of this
+            Sensor that triggers the threshold.  The units of this property shall
+            follow the same units as the property described by MetricProperties.
+      type: object
+      x-longDescription: This type shall contain the properties for an individual
+        threshold for this sensor.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ThresholdActivation:
+      enum:
+      - Increasing
+      - Decreasing
+      - Either
+      type: string
+      x-enumDescriptions:
+        Decreasing: Value decreases below the threshold.
+        Either: Value crosses the threshold in either direction.
+        Increasing: Value increases above the threshold.
+      x-enumLongDescriptions:
+        Decreasing: This threshold is activated when the value of Reading changes
+          from a value higher than the threshold to a value lower than the threshold.
+        Either: This threshold is activated when either the Increasing or Decreasing
+          conditions are met.
+        Increasing: This threshold is activated when the value of Reading changes
+          from a value lower than the threshold to a value higher than the threshold.
+    Thresholds:
+      additionalProperties: false
+      description: The set of thresholds defined for a sensor.
+      properties:
+        LowerCritical:
+          $ref: '#/components/schemas/Threshold'
+          description: Below normal range and requires attention.
+          x-longDescription: The value of this property shall indicate the Reading
+            is below the normal range and may require attention.  The units shall
+            be the same units as the Reading.
+        LowerWarning:
+          $ref: '#/components/schemas/Threshold'
+          description: Below normal range.
+          x-longDescription: The value of this property shall indicate the Reading
+            is below the normal range.  The units shall be the same units as the Reading.
+        UpperCritical:
+          $ref: '#/components/schemas/Threshold'
+          description: Above normal range and requires attention.
+          x-longDescription: The value of this property shall indicate the Reading
+            is above the normal range and may require attention.  The units shall
+            be the same units as the Reading.
+        UpperWarning:
+          $ref: '#/components/schemas/Threshold'
+          description: Above normal range.
+          x-longDescription: The value of this property shall indicate the Reading
+            is above the normal range.  The units shall be the same units as the Reading.
+      type: object
+      x-longDescription: This structure shall contain a set of thresholds defined
+        for a sensor.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    TriggerActionEnum:
+      description: Specifies the actions to perform when a trigger occurs.
+      enum:
+      - LogToLogService
+      - RedfishEvent
+      - RedfishMetricReport
+      type: string
+      x-enumDescriptions:
+        LogToLogService: Upon a trigger, record in a log.
+        RedfishEvent: Upon a trigger, send a Redfish Event message of type Event.
+        RedfishMetricReport: Upon a trigger, force an update of the specified Metric
+          Reports.
+      x-enumLongDescriptions:
+        LogToLogService: When a trigger condition is met, the service shall log the
+          occurrence of the condition to the log indicated by the LogService property
+          in the TelemetryService resource.
+        RedfishEvent: When a trigger condition is met, the service shall produce a
+          Redfish Event of type Event to matching subscribers indicated in the EventSubscription
+          collection found on the EventService.
+        RedfishMetricReport: When a trigger condition is met, the service shall force
+          the Metric Reports managed by the MetricReportDefinitions specified by the
+          MetricReportDefinitions property to be updated, regardless of the MetricReportDefinitionType
+          property.  The actions specified in the ReportActions property of each MetricReportDefinition
+          shall be performed.
+      x-enumVersionAdded:
+        RedfishMetricReport: v1_1_0
+      x-longDescription: The value shall specify the actions to perform when a trigger
+        occurs.
+    Triggers:
+      additionalProperties: false
+      description: Triggers which apply to a list of metrics.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        DiscreteTriggerCondition:
+          $ref: '#/components/schemas/DiscreteTriggerConditionEnum'
+          description: Specifies the conditions when a discrete metric triggers.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall specify the conditions
+            when a discrete metric triggers.
+        DiscreteTriggers:
+          description: List of discrete triggers.
+          items:
+            $ref: '#/components/schemas/DiscreteTrigger'
+          type: array
+          x-longDescription: This property shall contains a list of value to which
+            a metric reading will be compared.  This property shall be present when
+            the DiscreteTriggerCondition property has a value of 'Specified'.
+        EventTriggers:
+          description: A list of MessageIds that specify when a trigger occurs based
+            on an event.
+          items:
+            nullable: true
+            type: string
+          pattern: ^[A-Za-z0-9]+\.\d+\.\d+\.[A-Za-z0-9.]+$
+          readOnly: false
+          type: array
+          x-longDescription: The value of this property shall be an array of MessageIds
+            that specify when a trigger occurs based on an event.  When an event is
+            generated by the service, if it contains a MessageId within this list,
+            a trigger condition shall be met.
+          x-versionAdded: v1_1_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/Links'
+          description: Contains references to other resources that are related to
+            this resource.
+          x-longDescription: The Links property, as described by the Redfish Specification,
+            shall contain references to resources that are related to, but not contained
+            by (subordinate to), this resource.
+          x-versionAdded: v1_1_0
+        MetricProperties:
+          description: A list of URIs with wildcards and property identifiers for
+            which this trigger is defined. If a URI has wildcards, the wildcards are
+            substituted as specified in the Wildcards array property.
+          format: uri-reference
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This array property shall contain a list of URIs with
+            wildcards and property identifiers for which this trigger is defined.
+            Each wildcard in the URI shall be delimited by a set of curly braces.
+            Each wildcard shall be substituted as specified by the corresponding entry
+            in the Wildcard array property.  Once an URI with wildcards has had its
+            wildcards fully substituted, it shall reference a resource property for
+            which the metric definition applies. The property identifiers portion
+            of the URI shall follow JSON fragment notation rules defined by RFC6901.
+        MetricType:
+          $ref: '#/components/schemas/MetricTypeEnum'
+          description: The type of trigger.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall specific the type of
+            trigger.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        NumericThresholds:
+          $ref: '#/components/schemas/Thresholds'
+          description: Specifies the thresholds when a numeric metric triggers.
+          x-longDescription: This property shall contain list of thresholds to which
+            a numeric metric value shall be compared.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: This property describes the status and health of the resource
+            and its children.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        TriggerActions:
+          description: This property specifies the actions to perform when the trigger
+            occurs.
+          items:
+            $ref: '#/components/schemas/TriggerActionEnum'
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall specify the actions
+            to perform when the trigger occurs.
+        Wildcards:
+          description: A list of wildcards and their substitution values to be applied
+            to the entries in the MetricProperties array property.
+          items:
+            $ref: '#/components/schemas/Wildcard'
+          type: array
+          x-longDescription: The property shall contain a list of wildcards and their
+            replacement strings, which are applied to the MetricProperties array property.
+            Each wildcard shall have a corresponding entry in this array property.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall specify triggers, which apply to a list
+        of metrics.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Wildcard:
+      additionalProperties: false
+      description: Contains a wildcard and its substitution values.
+      properties:
+        Name:
+          description: The string used as a wildcard.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the string used as a wildcard.
+        Values:
+          description: An array of values to substitute for the wildcard.
+          items:
+            nullable: true
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the list of values to susubstitute
+            for the wildcard.
+      type: object
+      x-longDescription: This property shall contain a wildcard and its substitution
+        values.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Triggers.v1_1_0.Triggers'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.1'

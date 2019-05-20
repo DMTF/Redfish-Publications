@@ -1,12 +1,13 @@
 {
+    "$id": "http://redfish.dmtf.org/schemas/v1/Port.json",
     "$ref": "#/definitions/Port",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "copyright": "Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
         "Port": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.json#/definitions/idRef"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Port.v1_0_0.json#/definitions/Port"
@@ -24,19 +25,30 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Port.v1_0_4.json#/definitions/Port"
                 },
                 {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Port.v1_0_5.json#/definitions/Port"
+                },
+                {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Port.v1_1_0.json#/definitions/Port"
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Port.v1_1_1.json#/definitions/Port"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Port.v1_1_2.json#/definitions/Port"
                 }
             ],
             "deletable": false,
-            "description": "Port contains properties describing a port of a switch.",
+            "description": "Port contains properties describing a port of a switch, controller, chassis, or any other device that could be connected to another entity.",
             "insertable": false,
-            "longDescription": "This resource shall be used to represent a simple switch port for a Redfish implementation.",
+            "longDescription": "This resource shall be used to represent a simple port for a Redfish implementation.",
             "updatable": false,
             "uris": [
-                "/redfish/v1/Fabrics/{FabricId}/Switches/{SwitchId}/Ports/{PortId}"
+                "/redfish/v1/Fabrics/{FabricId}/Switches/{SwitchId}/Ports/{PortId}",
+                "/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}",
+                "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}",
+                "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}",
+                "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}",
+                "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}"
             ]
         }
     },

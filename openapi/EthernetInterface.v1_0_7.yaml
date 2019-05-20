@@ -1,0 +1,246 @@
+components:
+  schemas:
+    EthernetInterface:
+      additionalProperties: false
+      description: The EthernetInterface schema represents a single, logical ethernet
+        interface or network interface controller (NIC).
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        AutoNeg:
+          description: This indicates if the speed and duplex are automatically negotiated
+            and configured on this interface.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be true if auto negotiation
+            of speed and duplex is enabled on this interface and false if it is disabled.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        FQDN:
+          description: This is the complete, fully qualified domain name obtained
+            by DNS for this interface.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the fully qualified
+            domain name for this interface.
+        FullDuplex:
+          description: This indicates if the interface is in Full Duplex mode or not.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall represent the duplex
+            status of the Ethernet connection on this interface.
+        HostName:
+          description: The DNS Host Name, without any domain information.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be host name for this
+            interface.
+        IPv4Addresses:
+          description: The IPv4 addresses currently assigned to this interface.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv4Address
+          type: array
+          x-longDescription: The value of this property shall be an array of objects
+            used to represent the IPv4 connection characteristics for this interface.
+            It is recommended that this propety be regarded as read-only, with configuration
+            of static addresses performed by updating the values within IPv4StaticAddessses.
+            Services may reject updates to this array for this reason.
+        IPv6AddressPolicyTable:
+          description: An array representing the RFC 6724 Address Selection Policy
+            Table.
+          items:
+            $ref: '#/components/schemas/IPv6AddressPolicyEntry'
+          type: array
+          x-longDescription: The value of this property shall be an array of objects
+            used to represent the Address Selection Policy Table as defined in RFC
+            6724.
+        IPv6Addresses:
+          description: Enumerates in an array all of the currently assigned IPv6 addresses
+            on this interface.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv6Address
+          type: array
+          x-longDescription: The value of this property shall be an array of objects
+            used to represent the IPv6 connection characteristics for this interface.
+        IPv6DefaultGateway:
+          description: This is the IPv6 default gateway address that is currently
+            in use on this interface.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the current IPv6
+            default gateway address that is in use on this interface.
+        IPv6StaticAddresses:
+          description: Represents in an array all of the IPv6 static addresses to
+            be assigned on this interface.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv6StaticAddress
+          type: array
+          x-longDescription: The value of this property shall be an array of objects
+            used to represent the IPv6 static connection characteristics for this
+            interface.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        InterfaceEnabled:
+          description: This indicates whether this interface is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether this interface is enabled.
+        MACAddress:
+          $ref: '#/components/schemas/MACAddress'
+          description: This is the currently configured MAC address of the (logical
+            port) interface.
+          nullable: true
+          readOnly: false
+          x-longDescription: The value of this property shall be the effective current
+            MAC Address of this interface. If an assignable MAC address is not supported,
+            this is a read only alias of the PermanentMACAddress.
+        MTUSize:
+          description: This is the currently configured Maximum Transmission Unit
+            (MTU) in bytes on this interface.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the size in bytes
+            of largest Protocol Data Unit (PDU) that can be passed in an Ethernet
+            (MAC) frame on this interface.
+        MaxIPv6StaticAddresses:
+          description: This indicates the maximum number of Static IPv6 addresses
+            that can be configured on this interface.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall indicate the number
+            of array items supported by IPv6StaticAddresses.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        NameServers:
+          description: This represents DNS name servers that are currently in use
+            on this interface.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be the DNS name servers
+            used on this interface.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        PermanentMACAddress:
+          $ref: '#/components/schemas/MACAddress'
+          description: This is the permanent MAC address assigned to this interface
+            (port).
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be the Permanent MAC
+            Address of this interface (port). This value is typically programmed during
+            the manufacturing time. This address is not assignable.
+        SpeedMbps:
+          description: This is the current speed in Mbps of this interface.
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value of this property shall be the link speed of
+            the interface in Mbps.
+          x-units: Mbit/s
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: This property describes the status and health of the resource
+            and its children.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        UefiDevicePath:
+          description: The UEFI device path for this interface.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the UEFI device path
+            to the device which implements this interface (port).
+        VLAN:
+          $ref: http://redfish.dmtf.org/schemas/v1/VLanNetworkInterface.yaml#/components/schemas/VLAN
+          description: If this Network Interface supports more than one VLAN, this
+            property is not present. VLANs collections appear in the Link section
+            of this resource.
+          x-longDescription: The value of this property shall be the VLAN for this
+            interface.  If this interface supports more than one VLAN, the VLAN property
+            shall not be present and the VLANS collection link shall be present instead.
+        VLANs:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: This is a reference to a collection of VLANs and is only used
+            if the interface supports more than one VLANs.
+          readOnly: true
+          x-longDescription: The value of this property shall reference a collection
+            of VLAN resources. If this property is used, the VLANEnabled and VLANId
+            property shall not be used.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent NIC resources as
+        part of the Redfish specification.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    IPv6AddressPolicyEntry:
+      additionalProperties: false
+      description: A entry in the RFC 6724 Address Selection Policy Table.
+      properties:
+        Label:
+          description: The IPv6 Label (as defined in RFC 6724 section 2.1).
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the IPv6 Label value for
+            this table entry as defined in RFC 6724 section 2.1.
+        Precedence:
+          description: The IPv6 Precedence (as defined in RFC 6724 section 2.1.
+          maximum: 100
+          minimum: 1
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the IPv6 Precedence value
+            for this table entry as defined in RFC 6724 section 2.1.
+        Prefix:
+          description: The IPv6 Address Prefix (as defined in RFC 6724 section 2.1).
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the IPv6 Address Prefix for
+            this table entry as defined in RFC 6724 section 2.1.
+      type: object
+      x-longDescription: This type shall describe and entry in the Address Selection
+        Policy Table as defined in RFC 6724.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MACAddress:
+      pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+      type: string
+title: '#EthernetInterface.v1_0_7.EthernetInterface'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

@@ -1,0 +1,230 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#UpdateService.SimpleUpdate':
+          $ref: '#/components/schemas/SimpleUpdate'
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    SimpleUpdate:
+      additionalProperties: false
+      description: This action is used to update software components.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall perform an update of installed software
+        component(s) as contained within a software image file located at a URI referenced
+        by the ImageURI parameter.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+    SimpleUpdateRequestBody:
+      additionalProperties: false
+      description: This action is used to update software components.
+      properties:
+        ImageURI:
+          description: The URI of the software image to be installed.
+          type: string
+          x-longDescription: This parameter shall contain a URI referencing a software
+            image to be retreived by the UpdateService for the purpose of installing
+            software contained within the image.
+        Targets:
+          description: The array of URIs indicating where the update image is to be
+            applied.
+          format: uri
+          items:
+            type: string
+          type: array
+          x-longDescription: This array property shall contain zero or more URIs indicating
+            where the update image is to be applied. These targets should correspond
+            to SoftwareInventory instances or their RelatedItems. If this property
+            is not present or contains zero targets, the Service shall apply the software
+            image to all applicable targets (as determined by the Service).
+          x-versionAdded: v1_2_0
+        TransferProtocol:
+          $ref: '#/components/schemas/TransferProtocolType'
+          description: The network protocol used by the Update Service to retrieve
+            the software image file located at the URI provided in ImageURI, if the
+            URI does not contain a scheme.
+          x-longDescription: This parameter shall contain the network protocol that
+            the Update Service shall use to retreive the software image located at
+            the ImageURI.  If this parameter is not provided (or supported), and a
+            transfer protocol is not specified by a scheme contained within ImageURI,
+            the Update Service shall use HTTP to retrieve the image.
+      required:
+      - ImageURI
+      type: object
+      x-longDescription: This action shall perform an update of installed software
+        component(s) as contained within a software image file located at a URI referenced
+        by the ImageURI parameter.
+    TransferProtocolType:
+      enum:
+      - CIFS
+      - FTP
+      - SFTP
+      - HTTP
+      - HTTPS
+      - NSF
+      - SCP
+      - TFTP
+      - OEM
+      type: string
+      x-enumDescriptions:
+        CIFS: Common Internet File System protocol.
+        FTP: File Transfer Protocol.
+        HTTP: Hypertext Transfer Protocol.
+        HTTPS: HTTP Secure protocol.
+        NSF: Network File System protocol.
+        OEM: A protocol defined by the manufacturer.
+        SCP: Secure File Copy protocol.
+        SFTP: Secure File Transfer Protocol.
+        TFTP: Trivial File Transfer Protocol.
+      x-enumVersionAdded:
+        SFTP: v1_1_0
+    UpdateService:
+      additionalProperties: false
+      description: This is the schema definition for the Update Service. It represents
+        the properties for the service itself and has links to collections of firmware
+        and software inventory.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        FirmwareInventory:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          description: An inventory of firmware.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be a link to a resource
+            of type SoftwareInventoryCollection.
+        HttpPushUri:
+          description: The URI used to perform an HTTP or HTTPS push update to the
+            Update Service.
+          format: uri
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a URI at which the UpdateService
+            supports an HTTP or HTTPS POST of a software image for the purpose of
+            installing software contained within the image.  Access to this URI shall
+            require the same privilege as access to the Update Service.
+          x-versionAdded: v1_1_0
+        HttpPushUriTargets:
+          description: The array of URIs indicating the target for applying the update
+            image.
+          format: uri
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain zero or more URIs indicating
+            the targets for applying the update image when using HttpPushUri to push
+            a software image. These targets should correspond to SoftwareInventory
+            instances or their RelatedItems. If this property is not present or contains
+            zero targets, the Service shall apply the software image to all applicable
+            targets (as determined by the Service).
+          x-versionAdded: v1_2_0
+        HttpPushUriTargetsBusy:
+          description: This represents if the HttpPushUriTargets property is reserved
+            by any client.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall be a boolean that determines when
+            the HttpPushUriTargets property is being used by a client for firmware
+            updates. A client should set this property to True when it is using HttpPushUriTargets
+            for firmware update, and should set it to False when it is no longer using
+            HttpPushUriTargets for updates. The property can provide multiple clients
+            a way to negotiate ownership of HttpPushUriTargets. This will help clients
+            to know if a firmware update using HttpPushUriTargets is used by another
+            client. This property has no functional requirements for the Service.
+          x-versionAdded: v1_2_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        ServiceEnabled:
+          description: This indicates whether this service is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: The value of this property shall be a boolean indicating
+            whether this service is enabled.
+        SoftwareInventory:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          description: An inventory of software.
+          nullable: true
+          readOnly: true
+          x-longDescription: The value of this property shall be a link to a resource
+            of type SoftwareInventoryCollection.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: This property describes the status and health of the resource
+            and its children.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent an Update Service
+        for a Redfish implementation. It represents the properties that affect the
+        service itself.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#UpdateService.v1_2_3.UpdateService'
+x-copyright: Copyright 2014-2018 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2017.1'

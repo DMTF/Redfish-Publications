@@ -1,0 +1,163 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Links:
+      additionalProperties: false
+      description: Contains references to other resources that are related to this
+        resource.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+        Role:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: A reference to the Role object defining Privileges for this
+            account--returned when the resource is read. The ID of the role is the
+            same as property RoleId.
+          readOnly: true
+          x-longDescription: The value of this property shall be a link to a Role
+            object instance, and should reference the object identified by property
+            RoleId.
+      type: object
+      x-longDescription: This type, as described by the Redfish Specification, shall
+        contain references to resources that are related to, but not contained by
+        (subordinate to), this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerAccount:
+      additionalProperties: false
+      description: The user accounts, owned by a Manager, are defined in this resource.  Changes
+        to a Manager Account may affect the current Redfish service connection if
+        this manager is responsible for the Redfish service.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+          x-versionAdded: v1_1_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Enabled:
+          description: This property is used by a User Administrator to disable an
+            account w/o having to delet the user information.  When set to true, the
+            user can login.  When set to false, the account is administratively disabled
+            and the user cannot login.
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall enable (if set to true) or disable
+            (if set to false) the account for future logins. The value of Enable over-rides
+            the locked property.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/Links'
+          description: Contains references to other resources that are related to
+            this resource.
+          x-longDescription: The Links property, as described by the Redfish Specification,
+            shall contain references to resources that are related to, but not contained
+            by (subordinate to), this resource.
+        Locked:
+          description: This property indicates that the account has been auto-locked
+            by the account service because the lockout threshold has been exceeded.  When
+            set to true, the account is locked. A user admin can write the property
+            to false to manually unlock, or the account service will unlock it once
+            the lockout duration period has passed.
+          readOnly: false
+          type: boolean
+          x-longDescription: This property (when set to true) shall indicate that
+            the account service has automatically locked the account due to the accountLockoutThreshold
+            having been exceeded. If set to true, the account is locked.  If set to
+            false, the account is not locked.  A user admin shall be able to write
+            a false to the property to clear the lockout condition, prior to the lockout
+            duration period.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        Password:
+          description: This property is used with a PATCH or PUT to write the password
+            for the account.  This property is null on a GET.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the password for
+            this account.  The value shall be null for GET requests.
+        RoleId:
+          description: This property contains the Role for this account.
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the ID (the RoleId)
+            of the Role resource that configured for this account.  The service shall
+            reject POST, PATCH, or PUT operations that provide a RoleId that does
+            not exist by returning HTTP 400 (Bad Request).
+        UserName:
+          description: This property contains the user name for the account.
+          readOnly: false
+          type: string
+          x-longDescription: The value of this property shall be the user name for
+            this account.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent resources that represent
+        the user accounts for the manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - Password
+      - UserName
+      - RoleId
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#ManagerAccount.v1_1_4.ManagerAccount'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2017.1'

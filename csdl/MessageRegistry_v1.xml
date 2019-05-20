@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MessageRegistry  v1.2.0-->
+<!--# Redfish Schema:  MessageRegistry  v1.3.0-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2018 DMTF.                                                            -->
+<!--# Copyright 2014-2019 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -55,6 +55,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MessageRegistry.v1_0_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="1.0"/>
 
       <EntityType Name="MessageRegistry" BaseType="MessageRegistry.MessageRegistry">
         <Property Name="Language" Type="Edm.String" Nullable="false">
@@ -134,7 +135,7 @@
         <Property Name="ParamTypes" Type="Collection(MessageRegistry.v1_0_0.ParamType)" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The MessageArg types, in order, for the message."/>
-          <Annotation Term="OData.LongDescription" String="The value of this property shall be an ordered array of parameter types which match the types of the MessageArgs, in order."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be an ordered array of argument data types which match the data types of the MessageArgs, in order."/>
         </Property>
         <Property Name="Resolution" Type="Edm.String" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -150,10 +151,10 @@
 
       <EnumType Name="ParamType">
         <Member Name="string">
-          <Annotation Term="OData.Description" String="The parameter is a string."/>
+          <Annotation Term="OData.Description" String="The argument is a string."/>
         </Member>
         <Member Name="number">
-          <Annotation Term="OData.Description" String="The parameter is a number."/>
+          <Annotation Term="OData.Description" String="The argument is a number."/>
         </Member>
       </EnumType>
 
@@ -189,8 +190,15 @@
       <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_0_5.MessageRegistry"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MessageRegistry.v1_0_7">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference."/>
+      <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_0_6.MessageRegistry"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MessageRegistry.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2017.1"/>
       <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_0_4.MessageRegistry">
         <Property Name="Actions" Type="MessageRegistry.v1_1_0.Actions" Nullable="false">
           <Annotation Term="OData.Description" String="The available actions for this resource."/>
@@ -227,14 +235,21 @@
       <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_1_1.MessageRegistry"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MessageRegistry.v1_1_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference."/>
+      <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_1_2.MessageRegistry"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MessageRegistry.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2018.2"/>
       <Annotation Term="OData.Description" String="This version was created to add ClearingLogic to a MessageRegistry."/>
 
       <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_1_2.MessageRegistry"/>
 
       <ComplexType Name="Message" BaseType="MessageRegistry.v1_0_0.Message">
-        <Property Name="ClearingLogic" Type="MessageRegistry.v1_2_0.ClearingLogic">
+        <Property Name="ClearingLogic" Type="MessageRegistry.v1_2_0.ClearingLogic" Nullable="false">
           <Annotation Term="OData.Description" String="The clearing logic associated with this message.  The properties within indicate that what messages are cleared by this message as well as under what conditions."/>
           <Annotation Term="OData.LongDescription" String="This type shall contain the available actions for this resource."/>
         </Property>
@@ -267,7 +282,39 @@
           <Annotation Term="OData.Description" String="Indicates the message is cleared by the other message(s) listed in the ClearingLogic object, provided the OriginOfCondition for both Events are the same."/>
         </Member>
       </EnumType>
-
     </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MessageRegistry.v1_2_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on ClearingLogic to not allow it to be null."/>
+      <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_2_0.MessageRegistry"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MessageRegistry.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2019.1"/>
+      <Annotation Term="OData.Description" String="This version was created to add LongDescription, ArgDescriptions, and ArgLongDescriptions to a MessageRegistry. It also corrected terminology usage in descriptions to consistently use 'argument' instead of 'parameter'."/>
+
+      <EntityType Name="MessageRegistry" BaseType="MessageRegistry.v1_2_1.MessageRegistry"/>
+		
+      <ComplexType Name="Message" BaseType="MessageRegistry.v1_2_0.Message">
+        <Property Name="LongDescription" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The normative language describing the usage of this Message."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the normative language describing the usage of this Message in a Redfish implementation."/>
+        </Property>
+        <Property Name="ArgDescriptions" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The MessageArg descriptions, in order, used for this Message."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an ordered array of text describing each argument used as substitution in the Message."/>
+        </Property>
+        <Property Name="ArgLongDescriptions" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The MessageArg normative descriptions, in order, used for this Message."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an ordered array of normative language for each argument used as substitution in the Message."/>
+        </Property>
+      </ComplexType>
+    </Schema>
+
   </edmx:DataServices>
 </edmx:Edmx>

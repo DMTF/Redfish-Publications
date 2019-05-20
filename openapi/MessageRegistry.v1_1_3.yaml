@@ -1,0 +1,210 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Message:
+      additionalProperties: false
+      description: This type shall reprensent how a message is defined within the
+        registry.
+      properties:
+        Description:
+          description: This is a short description of how and when this message is
+            to be used.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall indicate how and when
+            this message is returned by the Redfish service.
+        Message:
+          description: The actual message.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the message to be
+            displayed.  If a %integer is included in part of the string, it shall
+            be used to represent a string substitution for any MessageArgs accompanying
+            the message, in order.
+        NumberOfArgs:
+          description: The number of arguments to be expected to be passed in as MessageArgs
+            for this message.
+          minimum: 0
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be the number of MessageArgs
+            that are expected to be substituted in the Message in the locations within
+            the Message marked by %<integer>.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: Oem extension object.
+          x-longDescription: This object represents the Oem property.  All values
+            for resources described by this schema shall comply to the requirements
+            as described in the Redfish specification.
+        ParamTypes:
+          description: The MessageArg types, in order, for the message.
+          items:
+            $ref: '#/components/schemas/ParamType'
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be an ordered array
+            of argument data types which match the data types of the MessageArgs,
+            in order.
+        Resolution:
+          description: Used to provide suggestions on how to resolve the situation
+            that caused the error.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain an override of the Resolution
+            of the message in message registry, if present.
+        Severity:
+          description: This is the severity of the message.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the severity of the
+            condition resulting in the message, as defined in the Status section of
+            the Redfish specification.
+      required:
+      - Description
+      - Message
+      - Severity
+      - NumberOfArgs
+      - Resolution
+      type: object
+      x-longDescription: The type shall represent how a message is defined within
+        within a message registry.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MessageProperty:
+      additionalProperties: false
+      description: The pattern type indicates that a free-form string is the unique
+        identifier for the message within the registry.
+      properties: {}
+      type: object
+      x-longDescription: The pattern type shall represent the suffix to be used in
+        the MessageId and shall be unique within this message registry.
+      x-patternProperties:
+        '[A-Za-z0-9]+':
+          $ref: '#/components/schemas/Message'
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MessageRegistry:
+      additionalProperties: false
+      description: This is the schema definition for all Message Registries.  It represents
+        the properties for the registries themselves.  The MessageId is formed per
+        the Redfish specification.  It consists of the RegistryPrefix concatenated
+        with the version concatenated with the unique identifier for the message registry
+        entry.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+          x-versionAdded: v1_1_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Language:
+          description: This is the RFC 5646 compliant language code for the registry.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string consisting
+            of an RFC 5646 language code.
+        Messages:
+          $ref: '#/components/schemas/MessageProperty'
+          description: The pattern property indicates that a free-form string is the
+            unique identifier for the message within the registry.
+          x-longDescription: The pattern property shall represent the suffix to be
+            used in the MessageId and shall be unique within this message registry.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: This is the manufacturer/provider specific extension moniker
+            used to divide the Oem object into sections.
+          x-longDescription: The value of this string shall be of the format for the
+            reserved word *Oem*.
+        OwningEntity:
+          description: This is the organization or company that publishes this registry.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be a string that represents
+            the publisher of this registry.
+        RegistryPrefix:
+          description: This is the single word prefix used to form a messageID structure.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the prefix used in
+            messageIDs which uniquely identifies all of the messages in this registry
+            as belonging to this registry.
+        RegistryVersion:
+          description: This is the message registry version which is used in the middle
+            portion of a messageID.
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall be the version of this
+            message registry.   The format of this string shall be of the format majorversion.minorversion.errata
+            in compliance with Protocol Version section of the Redfish specification.
+      required:
+      - Language
+      - RegistryPrefix
+      - RegistryVersion
+      - OwningEntity
+      - Messages
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent a message registry
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ParamType:
+      enum:
+      - string
+      - number
+      type: string
+      x-enumDescriptions:
+        number: The argument is a number.
+        string: The argument is a string.
+title: '#MessageRegistry.v1_1_3.MessageRegistry'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2017.1'

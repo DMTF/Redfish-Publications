@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  NetworkAdapter  v1.2.0-->
+<!--# Redfish Schema:  NetworkAdapter  v1.2.1-->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2018 DMTF.                                                            -->
+<!--# Copyright 2014-2019 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -83,6 +83,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_0_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2016.3"/>
 
       <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.NetworkAdapter">
         <Annotation Term="OData.Description" String="A NetworkAdapter represents the physical network adapter capable of connecting to a computer network.  Examples include but are not limited to Ethernet, Fibre Channel, and converged network adapters."/>
@@ -128,7 +129,7 @@
           <Annotation Term="OData.Description" String="Part number for this network adapter."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall contain the part number for the network adapter as defined by the manufacturer."/>
         </Property>
-        <Property Name="Controllers" Type="Collection(NetworkAdapter.v1_0_0.Controllers)">
+        <Property Name="Controllers" Type="Collection(NetworkAdapter.v1_0_0.Controllers)" Nullable="false">
           <Annotation Term="OData.Description" String="The set of network controllers ASICs that make up this NetworkAdapter."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall contain the set of network controllers ASICs that make up this NetworkAdapter."/>
         </Property>
@@ -166,7 +167,7 @@
           <Annotation Term="OData.Description" String="Links."/>
           <Annotation Term="OData.LongDescription" String="Links for this controller."/>
         </Property>
-        <Property Name="ControllerCapabilities" Type="NetworkAdapter.v1_0_0.ControllerCapabilities">
+        <Property Name="ControllerCapabilities" Type="NetworkAdapter.v1_0_0.ControllerCapabilities" Nullable="false">
           <Annotation Term="OData.Description" String="The capabilities of this controller."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall contain the capabilities of this controller."/>
         </Property>
@@ -185,15 +186,15 @@
           <Annotation Term="OData.Description" String="The maximum number of physical functions available on this controller."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall be the number of physical functions available on this controller."/>
         </Property>
-        <Property Name="DataCenterBridging" Type="NetworkAdapter.v1_0_0.DataCenterBridging">
+        <Property Name="DataCenterBridging" Type="NetworkAdapter.v1_0_0.DataCenterBridging" Nullable="false">
           <Annotation Term="OData.Description" String="Data Center Bridging (DCB) for this controller."/>
           <Annotation Term="OData.LongDescription" String="This object shall contain capability, status, and configuration values related to Data Center Bridging (DCB) for this controller."/>
         </Property>
-        <Property Name="VirtualizationOffload" Type="NetworkAdapter.v1_0_0.VirtualizationOffload">
+        <Property Name="VirtualizationOffload" Type="NetworkAdapter.v1_0_0.VirtualizationOffload" Nullable="false">
           <Annotation Term="OData.Description" String="Virtualization offload for this controller."/>
           <Annotation Term="OData.LongDescription" String="This object shall contain capability, status, and configuration values related to virtualization offload for this controller."/>
         </Property>
-        <Property Name="NPIV" Type="NetworkAdapter.v1_0_0.NPIV">
+        <Property Name="NPIV" Type="NetworkAdapter.v1_0_0.NPIV" Nullable="false">
           <Annotation Term="OData.Description" String="N_Port ID Virtualization (NPIV) capabilties for this controller."/>
           <Annotation Term="OData.LongDescription" String="This object shall contain N_Port ID Virtualization (NPIV) capabilties for this controller."/>
         </Property>
@@ -265,11 +266,11 @@
       <ComplexType Name="VirtualizationOffload">
         <Annotation Term="OData.Description" String="A Virtualization offload capability of a controller."/>
         <Annotation Term="OData.LongDescription" String="This type shall describe the capability, status, and configuration values related to a virtualization offload for a controller."/>
-        <Property Name="VirtualFunction" Type="NetworkAdapter.v1_0_0.VirtualFunction">
+        <Property Name="VirtualFunction" Type="NetworkAdapter.v1_0_0.VirtualFunction" Nullable="false">
           <Annotation Term="OData.Description" String="The virtual function of the controller."/>
           <Annotation Term="OData.LongDescription" String="This property shall describe the capability, status, and configuration values related to the virtual function for this controller."/>
         </Property>
-        <Property Name="SRIOV" Type="NetworkAdapter.v1_0_0.SRIOV">
+        <Property Name="SRIOV" Type="NetworkAdapter.v1_0_0.SRIOV" Nullable="false">
           <Annotation Term="OData.Description" String="Single-Root Input/Output Virtualization (SR-IOV) capabilities."/>
           <Annotation Term="OData.LongDescription" String="This object shall contain Single-Root Input/Output Virtualization (SR-IOV) capabilities."/>
         </Property>
@@ -304,8 +305,15 @@
       <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_0_1.NetworkAdapter"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_0_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_0_2.NetworkAdapter"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2017.3"/>
       <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_0_1.NetworkAdapter">
         <NavigationProperty Name="Assembly" Type="Assembly.Assembly" ContainsTarget="true" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -329,19 +337,26 @@
       <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_1_0.NetworkAdapter"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_1_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_1_1.NetworkAdapter"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2018.2"/>
       <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_1_1.NetworkAdapter"/>
 
       <ComplexType Name="Controllers" BaseType="NetworkAdapter.v1_1_0.Controllers">
-        <Property Name="PCIeInterface" Type="PCIeDevice.PCIeInterface">
+        <Property Name="PCIeInterface" Type="PCIeDevice.PCIeInterface" Nullable="false">
           <Annotation Term="OData.Description" String="The PCIe interface details for this controller."/>
           <Annotation Term="OData.LongDescription" String="This object shall contain details on the PCIe interface used to connect this PCIe-based controller to its host."/>
         </Property>
       </ComplexType>
 
       <ComplexType Name="ControllerCapabilities" BaseType="NetworkAdapter.v1_0_0.ControllerCapabilities">
-        <Property Name="NPAR" Type="NetworkAdapter.v1_2_0.NicPartitioning">
+        <Property Name="NPAR" Type="NetworkAdapter.v1_2_0.NicPartitioning" Nullable="false">
           <Annotation Term="OData.Description" String="NIC Partitioning (NPAR) capabilities for this controller."/>
           <Annotation Term="OData.LongDescription" String="This object shall contain capability, status, and configuration values related to NIC partitioning for this controller."/>
         </Property>
@@ -361,6 +376,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall indicate whether or not NIC function partitioning is active on this controller."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_2_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to force the regeneration of JSON Schema so that URI properties use the format of uri-reference.  It was also created to add a missing term on several properties to not allow them to be null."/>
+      <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_2_0.NetworkAdapter"/>
     </Schema>
 
   </edmx:DataServices>
