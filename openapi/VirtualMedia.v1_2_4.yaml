@@ -1,0 +1,221 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this Resource.
+      properties:
+        '#VirtualMedia.EjectMedia':
+          $ref: '#/components/schemas/EjectMedia'
+        '#VirtualMedia.InsertMedia':
+          $ref: '#/components/schemas/InsertMedia'
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: The available OEM-specific actions for this Resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this Resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ConnectedVia:
+      enum:
+      - NotConnected
+      - URI
+      - Applet
+      - Oem
+      type: string
+      x-enumDescriptions:
+        Applet: Connected to a client application.
+        NotConnected: No current connection.
+        Oem: Connected through an OEM-defined method.
+        URI: Connected to a URI location.
+    EjectMedia:
+      additionalProperties: false
+      description: This action detaches remote media from virtual media.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall detach the remote media from the virtual
+        media.  At the completion of the operation, inserted shall be set to `false`
+        and the image name shall be cleared.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_2_0
+    EjectMediaRequestBody:
+      additionalProperties: false
+      description: This action detaches remote media from virtual media.
+      properties: {}
+      type: object
+      x-longDescription: This action shall detach the remote media from the virtual
+        media.  At the completion of the operation, inserted shall be set to `false`
+        and the image name shall be cleared.
+    InsertMedia:
+      additionalProperties: false
+      description: This action attaches remote media to virtual media.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall attach remote media to virtual media.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_2_0
+    InsertMediaRequestBody:
+      additionalProperties: false
+      description: This action attaches remote media to virtual media.
+      properties:
+        Image:
+          description: The URI of the remote media to attach to the virtual media.
+          type: string
+          x-longDescription: This parameter shall specify the URI of the remote media
+            to be attached to the virtual media.
+        Inserted:
+          description: An indication of whether the image is treated as inserted upon
+            completion of the action.  The default is `true`.
+          type: boolean
+          x-longDescription: This parameter shall indicate whether the image is treated
+            as inserted upon completion of the action.  If the client does not provide
+            this parameter, the service shall default this value to `true`.
+        WriteProtected:
+          description: An indication of whether the remote media is treated as write-protected.  The
+            default is `true`.
+          type: boolean
+          x-longDescription: This parameter shall indicate whether the remote media
+            is treated as write-protected.  If the client does not provide this parameter,
+            the service shall default this value to `true`.
+      required:
+      - Image
+      type: object
+      x-longDescription: This action shall attach remote media to virtual media.
+    MediaType:
+      enum:
+      - CD
+      - Floppy
+      - USBStick
+      - DVD
+      type: string
+      x-enumDescriptions:
+        CD: A CD-ROM format (ISO) image.
+        DVD: A DVD-ROM format image.
+        Floppy: A floppy disk image.
+        USBStick: An emulation of a USB storage device.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this Resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    VirtualMedia:
+      additionalProperties: false
+      description: The VirtualMedia schema contains properties related to the monitor
+        and control of an instance of virtual media, such as a remote CD, DVD, or
+        USB device.  A manager for a system or device provides virtual media functionality.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this Resource.
+          x-longDescription: This property shall contain the available actions for
+            this Resource.
+          x-versionAdded: v1_1_0
+        ConnectedVia:
+          $ref: '#/components/schemas/ConnectedVia'
+          description: The current virtual media connection method.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the current connection method
+            from a client to the virtual media that this Resource represents.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Image:
+          description: The URI of the location of the selected image.
+          format: uri-reference
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain an URI.  A null value indicated
+            no image connection.
+        ImageName:
+          description: The current image name.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the image.
+        Inserted:
+          description: An indication of whether virtual media is inserted into the
+            virtual device.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether media is present
+            in the virtual media device.
+        MediaTypes:
+          description: The media types supported as virtual media.
+          items:
+            $ref: '#/components/schemas/MediaType'
+          readOnly: true
+          type: array
+          x-longDescription: The values of this array shall be the supported media
+            types for this connection.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        WriteProtected:
+          description: An indication of whether the media is write-protected.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the remote device
+            media prevents writing to that media.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent a virtual media service for
+        a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#VirtualMedia.v1_2_4.VirtualMedia'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2017.3'

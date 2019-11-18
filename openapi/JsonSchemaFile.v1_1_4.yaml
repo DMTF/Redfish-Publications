@@ -1,0 +1,158 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this Resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: The available OEM-specific actions for this Resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this Resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    JsonSchemaFile:
+      additionalProperties: false
+      description: The JsonSchemaFile schema contains the properties that describe
+        the locations, as URIs, of a Redfish Schema definition that a Redfish Service
+        implements or references.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this Resource.
+          x-longDescription: This property shall contain the available actions for
+            this Resource.
+          x-versionAdded: v1_1_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Languages:
+          description: The RFC5646-conformant language codes for the available schemas.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property contains a set of RFC5646-conformant language
+            codes.
+        Location:
+          description: Location information for this schema file.
+          items:
+            $ref: '#/components/schemas/Location'
+          type: array
+          x-longDescription: This property shall contain the location information
+            for this schema file.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Schema:
+          description: The @odata.type name this schema describes.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the @odata.type property
+            value for that schema and shall conform to the Redfish Specification-specified
+            syntax for the Type property.
+      required:
+      - Languages
+      - Schema
+      - Location
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent the schema file locator Resource
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Location:
+      additionalProperties: false
+      description: Location information for a schema file.
+      properties:
+        ArchiveFile:
+          description: The name of the file in the archive, if the schema is hosted
+            on the service in an archive file.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the file name of the individual
+            schema file within the archive file that the ArchiveUri property specifies.  The
+            file name shall conform to the Redfish Specification-described format.
+        ArchiveUri:
+          description: The link to an archive file, if the schema is hosted on the
+            service in an archive file.
+          format: uri-reference
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a URI colocated with the
+            Redfish Service that specifies the location of the schema file, which
+            can be retrieved using the Redfish protocol and authentication methods.  This
+            property shall be used for only archive files, in zip or other formats.  The
+            ArchiveFile value shall be the individual schema file name within the
+            archive file.
+        Language:
+          description: The language code for the schema file.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain an RFC5646-conformant language
+            code or the `default` string.
+        PublicationUri:
+          description: The link to publicly available (canonical) URI for schema.
+          format: uri-reference
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a URI not colocated with
+            the Redfish Service that specifies the canonical location of the schema
+            file.  This property shall be used for only individual schema files.
+        Uri:
+          description: The link to locally available URI for schema.
+          format: uri-reference
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a URI colocated with the
+            Redfish Service that specifies the location of the schema file, which
+            can be retrieved using the Redfish protocol and authentication methods.  This
+            property shall be used for only individual schema files.  The file name
+            portion of the URI shall conform to the format specified in the Redfish
+            Specification.
+      type: object
+      x-longDescription: This type shall describe location information for a schema
+        file.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this Resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#JsonSchemaFile.v1_1_4.JsonSchemaFile'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2017.1'

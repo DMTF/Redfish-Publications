@@ -1,0 +1,154 @@
+components:
+  schemas:
+    AccountService:
+      additionalProperties: false
+      description: The AccountService schema defines an Account Service.  The properties
+        are common to, and enable management of, all user accounts.  The properties
+        include the password requirements and control features, such as account lockout.  The
+        schema also contains links to the manager accounts and roles.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        AccountLockoutCounterResetAfter:
+          description: The period of time, in seconds, between the last failed login
+            attempt and the reset of the lockout threshold counter.  This value must
+            be less than or equal to the AccountLockoutDuration value.  A reset sets
+            the counter to `0`.
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the period of time, in seconds,
+            from the last failed login attempt when the AccountLockoutThreshold counter,
+            which counts the number of failed login attempts, is reset to `0`.  Then,
+            AccountLockoutThreshold failures are required before the account is locked.  This
+            value shall be less than or equal to the AccountLockoutDuration value.  The
+            threshold counter also resets to `0` after each successful login.  If
+            the AccountLockoutCounterResetEnabled value is `false`, this property
+            shall be ignored.
+          x-units: s
+        AccountLockoutDuration:
+          description: The period of time, in seconds, that an account is locked after
+            the number of failed login attempts reaches the account lockout threshold,
+            within the period between the last failed login attempt and the reset
+            of the lockout threshold counter.  If this value is `0`, no lockout will
+            occur.  If the AccountLockoutCounterResetEnabled value is `false`, this
+            property is ignored.
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the period of time, in seconds,
+            that an account is locked after the number of failed login attempts reaches
+            the AccountLockoutThreshold value, within the AccountLockoutCounterResetAfter
+            window of time.  The value shall be greater than or equal to the AccountLockoutResetAfter
+            value.  If this value is `0`, no lockout shall occur.  If AccountLockoutCounterResetEnabled
+            value is `false`, this property shall be ignored.
+          x-units: s
+        AccountLockoutThreshold:
+          description: The number of allowed failed login attempts before a user account
+            is locked for a specified duration.  If `0`, the account is never locked.
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the threshold of failed login
+            attempts before a user account is locked.  If `0`, the account shall never
+            be locked.
+        Accounts:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: The collection of manager accounts.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource Collection
+            of type ManagerAccountCollection.
+        AuthFailureLoggingThreshold:
+          description: The number of authorization failures that are allowed before
+            the failed attempt is logged to the manager log.
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the threshold for when an
+            authorization failure is logged.  This value represents a modulo function.  The
+            failure shall be logged every `n`th occurrence, where `n` represents this
+            property.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        MaxPasswordLength:
+          description: The maximum password length for this Account Service.
+          minimum: 0
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum password length
+            that the implementation allows for this Account Service.
+        MinPasswordLength:
+          description: The minimum password length for this Account Service.
+          minimum: 0
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the minimum password length
+            that the implementation allows for this Account Service.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Roles:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: The collection of Redfish Roles.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource Collection
+            of type RoleCollection.
+        ServiceEnabled:
+          description: An indication of whether the Account Service is enabled.  If
+            `true`, it is enabled.  If `false`, it is disabled and users cannot be
+            created, deleted, or modified, and new sessions cannot be started.  However,
+            established sessions may still continue to run.  Any service, such as
+            the Session Service, that attempts to access the disabled Account Service
+            fails.  However, this does not affect HTTP Basic Authentication connections.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the Account Service
+            is enabled.  If `true`, it is enabled.  If `false`, it is disabled and
+            users cannot be created, deleted, or modified, and new sessions cannot
+            be started.  However, established sessions may still continue to run.  Any
+            service, such as the Session Service, that attempts to access the disabled
+            Account Service fails.  However, this does not affect HTTP Basic Authentication
+            connections.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: The status and health of the Resource and its subordinate or
+            dependent Resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the Resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent an Account Service for a Redfish
+        implementation.  The properties are common to, and enable management of, all
+        user accounts.  The properties include the password requirements and control
+        features, such as account lockout.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#AccountService.v1_0_8.AccountService'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

@@ -11,8 +11,8 @@
                 },
                 {
                     "additionalProperties": false,
-                    "description": "A Collection of Task resource instances.",
-                    "longDescription": "This resource shall be used to represent a Resource Collection of Task instances for a Redfish implementation.",
+                    "description": "The TaskCollection schema describes a collection of task instances.",
+                    "longDescription": "This Resource shall represent a Resource Collection of Task instances for a Redfish implementation.",
                     "patternProperties": {
                         "^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\\.[a-zA-Z_][a-zA-Z0-9_]*$": {
                             "description": "This property shall specify a valid odata or Redfish property.",
@@ -52,11 +52,11 @@
                             "readonly": true
                         },
                         "Members": {
-                            "description": "Contains the members of this collection.",
+                            "description": "The members of this collection.",
                             "items": {
                                 "$ref": "http://redfish.dmtf.org/schemas/v1/Task.json#/definitions/Task"
                             },
-                            "longDescription": "This property shall contain an array of references to the members of this collection.",
+                            "longDescription": "This property shall contain an array of links to the members of this collection.",
                             "readonly": true,
                             "type": "array"
                         },
@@ -72,12 +72,13 @@
                         },
                         "Oem": {
                             "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Oem",
-                            "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
-                            "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+                            "description": "The OEM extension property.",
+                            "longDescription": "This property shall contain the OEM extensions.  All values for properties contained in this object shall conform to the Redfish Specification-described requirements."
                         }
                     },
                     "required": [
                         "Members",
+                        "Members@odata.count",
                         "@odata.id",
                         "@odata.type",
                         "Name"

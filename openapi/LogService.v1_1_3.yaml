@@ -1,0 +1,186 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this Resource.
+      properties:
+        '#LogService.ClearLog':
+          $ref: '#/components/schemas/ClearLog'
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: The available OEM-specific actions for this Resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this Resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ClearLog:
+      additionalProperties: false
+      description: The action to clear the log for this Log Service.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall delete all entries found in the Entries
+        collection for this Log Service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ClearLogRequestBody:
+      additionalProperties: false
+      description: The action to clear the log for this Log Service.
+      properties: {}
+      type: object
+      x-longDescription: This action shall delete all entries found in the Entries
+        collection for this Log Service.
+    LogEntryTypes:
+      enum:
+      - Event
+      - SEL
+      - Multiple
+      - OEM
+      type: string
+      x-enumDescriptions:
+        Event: The log contains Redfish-defined messages.
+        Multiple: The log contains multiple log entry types and, therefore, the Log
+          Service cannot guarantee a single entry type.
+        OEM: The log contains entries in an OEM-defined format.
+        SEL: The log contains legacy IPMI System Event Log (SEL) entries.
+    LogService:
+      additionalProperties: false
+      description: The LogService schema contains properties for monitoring and configuring
+        a Log Service.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this Resource.
+          x-longDescription: This property shall contain the available actions for
+            this Resource.
+        DateTime:
+          description: The current date and time, with UTC offset, that the Log Service
+            uses to set or read time.
+          format: date-time
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall represent the current DateTime value,
+            with UTC offset, in Redfish Timestamp format that the Log Service uses
+            to set or read time.
+        DateTimeLocalOffset:
+          description: The UTC offset that the current DateTime property value contains
+            in the `+HH:MM` format.
+          nullable: true
+          pattern: ^([-+][0-1][0-9]:[0-5][0-9])$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall represent the UTC offset that the
+            current DateTime property value contains.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Entries:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          description: The link to the log entry collection.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource Collection
+            of type LogEntryCollection.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        LogEntryType:
+          $ref: '#/components/schemas/LogEntryTypes'
+          description: The format of the log entries.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall represent the EntryType of all LogEntry
+            Resources contained in the Entries collection.  If the service cannot
+            determine or guarantee a single EntryType for all LogEntry Resources,
+            this property's value shall be `Multiple`.
+          x-versionAdded: v1_1_0
+        MaxNumberOfRecords:
+          description: The maximum number of log entries that this service can have.
+          minimum: 0
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum number of LogEntry
+            Resources in the Entries collection for this service.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OverWritePolicy:
+          $ref: '#/components/schemas/OverWritePolicy'
+          description: The overwrite policy for this service that takes place when
+            the log is full.
+          readOnly: true
+          x-longDescription: This property shall indicate the policy of the Log Service
+            when the MaxNumberOfRecords has been reached.
+        ServiceEnabled:
+          description: An indication of whether this service is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this service is
+            enabled.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: The status and health of the Resource and its subordinate or
+            dependent Resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the Resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent a Log Service for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this Resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OverWritePolicy:
+      enum:
+      - Unknown
+      - WrapsWhenFull
+      - NeverOverWrites
+      type: string
+      x-enumDescriptions:
+        NeverOverWrites: When full, new entries to the log are discarded.
+        Unknown: The overwrite policy is not known or is undefined.
+        WrapsWhenFull: When full, new entries to the log overwrite earlier entries.
+title: '#LogService.v1_1_3.LogService'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2017.3'

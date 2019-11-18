@@ -1,0 +1,115 @@
+components:
+  schemas:
+    ConnectedVia:
+      enum:
+      - NotConnected
+      - URI
+      - Applet
+      - Oem
+      type: string
+      x-enumDescriptions:
+        Applet: Connected to a client application.
+        NotConnected: No current connection.
+        Oem: Connected through an OEM-defined method.
+        URI: Connected to a URI location.
+    MediaType:
+      enum:
+      - CD
+      - Floppy
+      - USBStick
+      - DVD
+      type: string
+      x-enumDescriptions:
+        CD: A CD-ROM format (ISO) image.
+        DVD: A DVD-ROM format image.
+        Floppy: A floppy disk image.
+        USBStick: An emulation of a USB storage device.
+    VirtualMedia:
+      additionalProperties: false
+      description: The VirtualMedia schema contains properties related to the monitor
+        and control of an instance of virtual media, such as a remote CD, DVD, or
+        USB device.  A manager for a system or device provides virtual media functionality.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        ConnectedVia:
+          $ref: '#/components/schemas/ConnectedVia'
+          description: The current virtual media connection method.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the current connection method
+            from a client to the virtual media that this Resource represents.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Image:
+          description: The URI of the location of the selected image.
+          format: uri-reference
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain an URI.  A null value indicated
+            no image connection.
+        ImageName:
+          description: The current image name.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the image.
+        Inserted:
+          description: An indication of whether virtual media is inserted into the
+            virtual device.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether media is present
+            in the virtual media device.
+        MediaTypes:
+          description: The media types supported as virtual media.
+          items:
+            $ref: '#/components/schemas/MediaType'
+          readOnly: true
+          type: array
+          x-longDescription: The values of this array shall be the supported media
+            types for this connection.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        WriteProtected:
+          description: An indication of whether the media is write-protected.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the remote device
+            media prevents writing to that media.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent a virtual media service for
+        a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#VirtualMedia.v1_0_7.VirtualMedia'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

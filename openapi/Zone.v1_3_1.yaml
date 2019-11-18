@@ -1,0 +1,176 @@
+components:
+  schemas:
+    Actions:
+      additionalProperties: false
+      description: The available actions for this Resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OemActions'
+          description: The available OEM-specific actions for this Resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this Resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ExternalAccessibility:
+      enum:
+      - GloballyAccessible
+      - NonZonedAccessible
+      - ZoneOnly
+      type: string
+      x-enumDescriptions:
+        GloballyAccessible: Any external entity with the correct access details, which
+          may include authorization information, can access the endpoints that this
+          zone lists.
+        NonZonedAccessible: Any external entity that another zone does not explicitly
+          list can access the endpoints that this zone lists.
+        ZoneOnly: Only accessible by endpoints that this zone explicitly lists.
+      x-enumLongDescriptions:
+        GloballyAccessible: This value shall indicate that any external entity with
+          the correct access details, which may include authorization information,
+          can access the endpoints that this zone lists, regardless of zone.
+        NonZonedAccessible: This value shall indicate that any external entity that
+          another zone does not explicitly list can access the endpoints that this
+          zone lists.
+        ZoneOnly: This value shall indicate that endpoints in this zone are only accessible
+          by endpoints that this zone explicitly lists.
+    Links:
+      additionalProperties: false
+      description: The links to other Resources that are related to this Resource.
+      properties:
+        Endpoints:
+          description: The links to the endpoints that this zone contains.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain a link to the Resources of
+            the Endpoint type that this zone contains.
+        Endpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+        InvolvedSwitches:
+          description: The links to the collection of switches in this zone.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the links to the Resource
+            Collection of type Switch in this zone.
+        InvolvedSwitches@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        ResourceBlocks:
+          description: The links to the Resource Blocks with which this zone is associated.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to Resources
+            of the ResourceBlock type with which this zone is associated.
+          x-versionAdded: v1_1_0
+        ResourceBlocks@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to Resources that are not contained in or subordinate to this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this Resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Zone:
+      additionalProperties: false
+      description: The Zone schema describes a simple fabric zone for a Redfish implementation.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+        Actions:
+          $ref: '#/components/schemas/Actions'
+          description: The available actions for this Resource.
+          x-longDescription: This property shall contain the available actions for
+            this Resource.
+          x-versionAdded: v1_1_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          nullable: true
+          readOnly: true
+        ExternalAccessibility:
+          $ref: '#/components/schemas/ExternalAccessibility'
+          description: Indicates accessiblity of endpoints in this zone to endpoints
+            outside of this zone.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain and indication of accessiblity
+            of endpoints in this zone to endpoints outside of this zone.
+          x-versionAdded: v1_3_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          readOnly: true
+        Identifiers:
+          description: The identifiers for this zone.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Identifier
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain a Resource Collection of
+            identifiers for this zone, which shall be unique in the context of other
+            zones.
+          x-versionAdded: v1_2_0
+        Links:
+          $ref: '#/components/schemas/Links'
+          description: The links to Resources related to but not subordinate to this
+            Resource.
+          x-longDescription: This Redfish Specification-described property shall contain
+            links to Resources related to but not subordinate to this Resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          description: The status and health of the Resource and its subordinate or
+            dependent Resources.
+          x-longDescription: This property shall contain the status and health properties
+            of the Resource and its children.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent a simple fabric zone for a
+        Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Zone.v1_3_1.Zone'
+x-copyright: Copyright 2014-2019 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.1'
