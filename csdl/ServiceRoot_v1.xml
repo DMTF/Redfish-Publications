@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ServiceRoot v1.5.2                                                  -->
+<!--# Redfish Schema:  ServiceRoot v1.7.0                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2019 DMTF.                                                            -->
+<!--# Copyright 2014-2020 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -81,6 +81,12 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/ResourceBlockCollection_v1.xml">
     <edmx:Include Namespace="ResourceBlockCollection"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/FacilityCollection_v1.xml">
+    <edmx:Include Namespace="FacilityCollection"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/PowerEquipment_v1.xml">
+    <edmx:Include Namespace="PowerEquipment"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -580,6 +586,67 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to update descriptions that this schema defines."/>
       <EntityType Name="ServiceRoot" BaseType="ServiceRoot.v1_5_1.ServiceRoot"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ServiceRoot.v1_6_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2019.4"/>
+
+      <EntityContainer Name="ServiceContainer" Extends="ServiceRoot.v1_5_0.ServiceContainer">
+        <Singleton Name="PowerEquipment" Type="PowerEquipment.PowerEquipment"/>
+        <Singleton Name="Facilities" Type="FacilityCollection.FacilityCollection"/>
+      </EntityContainer>
+
+      <EntityType Name="ServiceRoot" BaseType="ServiceRoot.v1_5_2.ServiceRoot">
+        <NavigationProperty Name="PowerEquipment" Type="PowerEquipment.PowerEquipment" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to a set of power equipment."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type PowerEquipment."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="Facilities" Type="FacilityCollection.FacilityCollection" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to a collection of facilities."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type FacilityCollection."/>
+        </NavigationProperty>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ServiceRoot.v1_7_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2020.1"/>
+
+      <EntityType Name="ServiceRoot" BaseType="ServiceRoot.v1_6_0.ServiceRoot"/>
+
+      <ComplexType Name="ProtocolFeaturesSupported" BaseType="ServiceRoot.v1_4_0.ProtocolFeaturesSupported">
+        <Property Name="DeepOperations" Type="ServiceRoot.v1_7_0.DeepOperations" Nullable="false">
+          <Annotation Term="OData.Description" String="The information about deep operations that the service supports."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain information about deep operations that the service supports."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="DeepOperations">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="The information about deep operations that the service supports."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain information about deep operations that the service supports."/>
+        <Property Name="DeepPATCH" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An indication of whether the service supports the deep PATCH operation."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether this service supports the Redfish Specification-defined deep PATCH operation."/>
+        </Property>
+        <Property Name="DeepPOST" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An indication of whether the service supports the deep POST operation."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether this service supports the Redfish Specification-defined deep POST operation."/>
+        </Property>
+        <Property Name="MaxLevels" Type="Edm.Int64" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The maximum levels of resources allowed in deep operations."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum levels of resources allowed in deep operations."/>
+          <Annotation Term="Validation.Minimum" Int="1"/>
+          <Annotation Term="Validation.Maximum" Int="6"/>
+        </Property>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>
