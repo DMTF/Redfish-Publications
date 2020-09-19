@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    MessageRegistry_v1_3_0_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/MessageRegistry_v1_3_0_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ClearingLogic:
+    MessageRegistry_v1_3_0_ClearingLogic:
       additionalProperties: false
       description: The clearing logic associated with this message.  The properties
         within indicate that what messages are cleared by this message as well as
@@ -32,7 +32,7 @@ components:
             and messages are cleared provided the ClearsIf condition is met.
           x-versionAdded: v1_2_0
         ClearsIf:
-          $ref: '#/components/schemas/ClearingType'
+          $ref: '#/components/schemas/MessageRegistry_v1_3_0_ClearingType'
           description: This property contains the available OEM specific actions for
             this resource.
           nullable: true
@@ -59,7 +59,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ClearingType:
+    MessageRegistry_v1_3_0_ClearingType:
       description: The enumerations of ClearingType specify the choice of conditions
         on when an event is cleared.
       enum:
@@ -69,7 +69,7 @@ components:
         SameOriginOfCondition: Indicates the message is cleared by the other message(s)
           listed in the ClearingLogic object, provided the OriginOfCondition for both
           Events are the same.
-    Message:
+    MessageRegistry_v1_3_0_Message:
       additionalProperties: false
       description: This type shall reprensent how a message is defined within the
         registry.
@@ -96,7 +96,7 @@ components:
             language for each argument used as substitution in the Message.
           x-versionAdded: v1_3_0
         ClearingLogic:
-          $ref: '#/components/schemas/ClearingLogic'
+          $ref: '#/components/schemas/MessageRegistry_v1_3_0_ClearingLogic'
           description: The clearing logic associated with this message.  The properties
             within indicate that what messages are cleared by this message as well
             as under what conditions.
@@ -136,7 +136,7 @@ components:
             that are expected to be substituted in the Message in the locations within
             the Message marked by %<integer>.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -144,7 +144,7 @@ components:
         ParamTypes:
           description: The MessageArg types, in order, for the message.
           items:
-            $ref: '#/components/schemas/ParamType'
+            $ref: '#/components/schemas/MessageRegistry_v1_3_0_ParamType'
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an ordered array
@@ -176,7 +176,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MessageProperty:
+    MessageRegistry_v1_3_0_MessageProperty:
       additionalProperties: false
       description: The pattern type indicates that a free-form string is the unique
         identifier for the message within the registry.
@@ -186,10 +186,10 @@ components:
         the MessageId and shall be unique within this message registry.
       x-patternProperties:
         '[A-Za-z0-9]+':
-          $ref: '#/components/schemas/Message'
+          $ref: '#/components/schemas/MessageRegistry_v1_3_0_Message'
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MessageRegistry:
+    MessageRegistry_v1_3_0_MessageRegistry:
       additionalProperties: false
       description: This is the schema definition for all Message Registries.  It represents
         the properties for the registries themselves.  The MessageId is formed per
@@ -198,25 +198,25 @@ components:
         entry.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/MessageRegistry_v1_3_0_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
           x-versionAdded: v1_1_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Language:
           description: This is the RFC 5646 compliant language code for the registry.
@@ -225,16 +225,16 @@ components:
           x-longDescription: The value of this property shall be a string consisting
             of an RFC 5646 language code.
         Messages:
-          $ref: '#/components/schemas/MessageProperty'
+          $ref: '#/components/schemas/MessageRegistry_v1_3_0_MessageProperty'
           description: The pattern property indicates that a free-form string is the
             unique identifier for the message within the registry.
           x-longDescription: The pattern property shall represent the suffix to be
             used in the MessageId and shall be unique within this message registry.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -276,7 +276,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    MessageRegistry_v1_3_0_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -286,7 +286,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ParamType:
+    MessageRegistry_v1_3_0_ParamType:
       enum:
       - string
       - number

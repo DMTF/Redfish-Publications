@@ -1,6 +1,6 @@
 components:
   schemas:
-    AccelerationFunction:
+    AccelerationFunction_v1_0_2_AccelerationFunction:
       additionalProperties: false
       description: The AccelerationFunction schema describes an acceleration function
         that a processor implements.  This can include functions such as audio processing,
@@ -8,27 +8,27 @@ components:
         or video processing.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         AccelerationFunctionType:
-          $ref: '#/components/schemas/AccelerationFunctionType'
+          $ref: '#/components/schemas/AccelerationFunction_v1_0_2_AccelerationFunctionType'
           description: The acceleration function type.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the string that identifies
             the acceleration function type.
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/AccelerationFunction_v1_0_2_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         FpgaReconfigurationSlots:
@@ -41,10 +41,10 @@ components:
           x-longDescription: This property shall contain an array of the FPGA reconfiguration
             slot identifiers that this acceleration function occupies.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/AccelerationFunction_v1_0_2_Links'
           description: The links to other Resources that are related to this Resource.
           x-longDescription: This property shall contain links to Resources that are
             related to but are not contained by, or subordinate to, this Resource.
@@ -55,10 +55,10 @@ components:
           x-longDescription: This property shall contain a string that identifies
             the manufacturer of the acceleration function.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -71,13 +71,13 @@ components:
             power consumption, in watts.
           x-units: W
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-longDescription: This property shall contain any status or health properties
             of the Resource.
         UUID:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/UUID
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_UUID
           description: The UUID for this acceleration function.
           nullable: true
           readOnly: true
@@ -105,7 +105,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    AccelerationFunctionType:
+    AccelerationFunction_v1_0_2_AccelerationFunctionType:
       enum:
       - Encryption
       - Compression
@@ -125,12 +125,12 @@ components:
         PacketSwitch: A packet switch function.
         Scheduler: A scheduler function.
         VideoProcessing: A video processing function.
-    Actions:
+    AccelerationFunction_v1_0_2_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/AccelerationFunction_v1_0_2_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -139,7 +139,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Links:
+    AccelerationFunction_v1_0_2_Links:
       additionalProperties: false
       description: The links to other Resources that are related to this Resource.
       properties:
@@ -147,15 +147,15 @@ components:
           description: An array of links to the endpoints that connect to this acceleration
             function.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to Resources
             of the Endpoint type that are associated with this acceleration function.
         Endpoints@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -164,14 +164,14 @@ components:
           description: An array of links to the PCIeFunctions associated with this
             acceleration function.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links of the
             PCIeFunction type that represent the PCIe functions associated with this
             acceleration function.
         PCIeFunctions@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
       type: object
       x-longDescription: This Redfish Specification-described type shall contain links
         to Resources that are related to but are not contained by, or subordinate
@@ -179,7 +179,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    AccelerationFunction_v1_0_2_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}

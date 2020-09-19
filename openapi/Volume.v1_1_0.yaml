@@ -1,19 +1,17 @@
 components:
   schemas:
-    Actions:
+    Volume_v1_1_0_Actions:
       additionalProperties: false
       properties:
         '#Volume.CheckConsistency':
-          $ref: '#/components/schemas/CheckConsistency'
-        '#Volume.Initialize':
-          $ref: '#/components/schemas/Initialize'
+          $ref: '#/components/schemas/Volume_v1_1_0_CheckConsistency'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Volume_v1_1_0_OemActions'
       type: object
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    CheckConsistency:
+    Volume_v1_1_0_CheckConsistency:
       additionalProperties: false
       description: This action is used to force a check of the Volume's parity or
         redundant data to ensure it matches calculated values.
@@ -31,7 +29,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    CheckConsistencyRequestBody:
+    Volume_v1_1_0_CheckConsistencyRequestBody:
       additionalProperties: false
       description: This action is used to force a check of the Volume's parity or
         redundant data to ensure it matches calculated values.
@@ -39,58 +37,11 @@ components:
       type: object
       x-longDescription: This defines the name of the custom action supported on this
         resource.
-    EncryptionTypes:
-      enum:
-      - NativeDriveEncryption
-      - ControllerAssisted
-      - SoftwareAssisted
-      type: string
-      x-enumDescriptions:
-        ControllerAssisted: The volume is being encrypted by the storage controller
-          entity.
-        NativeDriveEncryption: The volume is utilizing the native drive encryption
-          capabilities of the drive hardware.
-        SoftwareAssisted: The volume is being encrypted by software running on the
-          system or the operating system.
-    Initialize:
-      additionalProperties: false
-      description: This action is used to prepare the contents of the volume for use
-        by the system. If InitializeType is not specified in the request body, the
-        InitializeType should be Fast.
-      properties:
-        target:
-          description: Link to invoke action
-          format: uri-reference
-          type: string
-        title:
-          description: Friendly action name
-          type: string
-      type: object
-      x-longDescription: This defines the name of the custom action supported on this
-        resource. If InitializeType is not specified in the request body, the InitializeType
-        should be Fast.
-      x-patternProperties:
-        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
-          description: This property shall specify a valid odata or Redfish property.
-    InitializeRequestBody:
-      additionalProperties: false
-      description: This action is used to prepare the contents of the volume for use
-        by the system. If InitializeType is not specified in the request body, the
-        InitializeType should be Fast.
-      properties:
-        InitializeType:
-          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/InitializeType
-          description: The type of initialization to be performed.
-          x-longDescription: This defines the property name for the action.
-      type: object
-      x-longDescription: This defines the name of the custom action supported on this
-        resource. If InitializeType is not specified in the request body, the InitializeType
-        should be Fast.
-    Links:
+    Volume_v1_1_0_Links:
       additionalProperties: false
       properties:
         ClassOfService:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The ClassOfService that this storage volume conforms to.
           readOnly: true
           x-longDescription: This property shall contain a reference to the ClassOfService
@@ -101,7 +52,7 @@ components:
             This will reference Drives that either wholly or only partly contain this
             volume.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be a reference to the
@@ -110,9 +61,9 @@ components:
             which are currently members of the Volume, not hot spare Drives which
             are not currently a member of the volume.
         Drives@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -121,18 +72,18 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Volume_v1_1_0_OemActions:
       additionalProperties: true
       properties: {}
       type: object
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Operation:
+    Volume_v1_1_0_Operation:
       additionalProperties: false
       properties:
-        AssociatedTask:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+        AssociatedFeaturesRegistry:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the task associated with the operation if any.
           readOnly: true
         OperationName:
@@ -149,35 +100,35 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Volume:
+    Volume_v1_1_0_Volume:
       additionalProperties: false
       description: Volume contains properties used to describe a volume, virtual disk,
         LUN, or other logical storage entity for any system.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         AccessCapabilities:
           description: Supported IO access capabilities.
           items:
-            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/DataStorageLoSCapabilities.yaml#/components/schemas/StorageAccessCapability
+            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/DataStorageLoSCapabilities.yaml#/components/schemas/DataStorageLoSCapabilities_StorageAccessCapability
             nullable: true
           readOnly: false
           type: array
           x-longDescription: Each entry shall specify a current storage access capability.
           x-versionAdded: v1_1_0
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Volume_v1_1_0_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
         AllocatedPools:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: An array of references to StoragePools allocated from this
             Volume.
           readOnly: true
@@ -194,7 +145,7 @@ components:
             unit of the associated volume.
           x-units: By
         Capacity:
-          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.v1_0_0.yaml#/components/schemas/Capacity
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.v1_0_0.yaml#/components/schemas/Capacity_v1_0_0_Capacity
           description: Capacity utilization.
           x-longDescription: Information about the utilization of capacity allocated
             to this storage volume.
@@ -210,7 +161,7 @@ components:
         CapacitySources:
           description: An array of space allocations to this volume.
           items:
-            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.yaml#/components/schemas/CapacitySource
+            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.yaml#/components/schemas/Capacity_CapacitySource
           readOnly: false
           type: array
           x-autoExpand: true
@@ -219,9 +170,9 @@ components:
             resource.
           x-versionAdded: v1_1_0
         CapacitySources@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Encrypted:
@@ -234,23 +185,23 @@ components:
         EncryptionTypes:
           description: The types of encryption used by this Volume.
           items:
-            $ref: '#/components/schemas/EncryptionTypes'
+            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_EncryptionTypes
           readOnly: false
           type: array
           x-longDescription: This property shall contain the types of encryption used
             by this Volume.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Identifiers:
           description: The Durable names for the volume.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Identifier
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Identifier
           type: array
           x-longDescription: This property shall contain a list of all known durable
             names for the associated volume.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Volume_v1_1_0_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
@@ -294,10 +245,10 @@ components:
             a specific storage volume implementation.
           x-versionAdded: v1_1_0
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -305,7 +256,7 @@ components:
         Operations:
           description: The operations currently running on the Volume.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: '#/components/schemas/Volume_v1_1_0_Operation'
           type: array
           x-longDescription: This property shall contain a list of all currently running
             on the Volume.
@@ -319,17 +270,17 @@ components:
             size. For physical disks, this describes the physical sector size.
           x-units: By
         ReplicaInfo:
-          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo.v1_3_0.yaml#/components/schemas/ReplicaInfo
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo.v1_3_0.yaml#/components/schemas/StorageReplicaInfo_v1_3_0_ReplicaInfo
           description: Describes this storage volume in its role as a target replica.
           x-longDescription: This property shall describe the replica relationship
             between this storage volume and a corresponding source volume.
           x-versionAdded: v1_1_0
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The property contains the status of the Volume.
           x-longDescription: The property shall contain the status of the Volume.
         StorageGroups:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: An array of references to Storage Groups that includes this
             volume.
           readOnly: true
@@ -337,7 +288,7 @@ components:
             all storage groups that include this volume.
           x-versionAdded: v1_1_0
         VolumeType:
-          $ref: '#/components/schemas/VolumeType'
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_VolumeType
           deprecated: true
           description: The type of this volume.
           nullable: true
@@ -356,25 +307,6 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    VolumeType:
-      enum:
-      - RawDevice
-      - NonRedundant
-      - Mirrored
-      - StripedWithParity
-      - SpannedMirrors
-      - SpannedStripesWithParity
-      type: string
-      x-enumDescriptions:
-        Mirrored: The volume is a mirrored device.
-        NonRedundant: The volume is a non-redundant storage device.
-        RawDevice: The volume is a raw physical device without any RAID or other virtualization
-          applied.
-        SpannedMirrors: The volume is a spanned set of mirrored devices.
-        SpannedStripesWithParity: The volume is a spanned set of devices which uses
-          parity to retain redundant information.
-        StripedWithParity: The volume is a device which uses parity to retain redundant
-          information.
 title: '#Volume.v1_1_0.Volume'
 x-copyright: Copyright 2016-2019 Storage Networking Industry Association (SNIA), USA.
   All rights reserved. For the full SNIA copyright policy, see http://www.snia.org/about/corporate_info/copyright

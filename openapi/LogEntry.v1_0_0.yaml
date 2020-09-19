@@ -1,12 +1,12 @@
 components:
   schemas:
-    EventSeverity:
+    LogEntry_v1_0_0_EventSeverity:
       enum:
       - OK
       - Warning
       - Critical
       type: string
-    LogEntry:
+    LogEntry_v1_0_0_LogEntry:
       additionalProperties: false
       description: This resource defines the record format for a log.  It is designed
         to be used for SEL logs (from IPMI) as well as Event Logs and OEM-specific
@@ -14,11 +14,11 @@ components:
         includes several additional properties dependent on the EntryType.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Created:
           description: The time the log entry was created.
           format: date-time
@@ -27,10 +27,10 @@ components:
           x-longDescription: The value of this property shall be the time at which
             the log entry was created.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
         EntryCode:
-          $ref: '#/components/schemas/LogEntryCode'
+          $ref: '#/components/schemas/LogEntry_v1_0_0_LogEntryCode'
           description: If the EntryType is SEL, this will have the entry code for
             the log entry.
           nullable: true
@@ -39,7 +39,7 @@ components:
             is SEL.  These enumerations are the values from table 42-1 and 42-2 of
             the IPMI specification
         EntryType:
-          $ref: '#/components/schemas/LogEntryType'
+          $ref: '#/components/schemas/LogEntry_v1_0_0_LogEntryType'
           description: his is the type of log entry.
           readOnly: true
           x-longDescription: This property shall represent the type of LogEntry.  If
@@ -47,20 +47,20 @@ components:
             the resource represents an Event log, the value shall be Event.  If the
             resource represents an OEM log format, the value shall be Oem.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
         Links:
           additionalProperties: false
           description: Contains references to other resources that are related to
             this resource.
           properties:
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
                 as described in the Redfish specification.
             OriginOfCondition:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
               description: This is the URI of the resource that caused the log entry
               readOnly: true
               x-longDescription: The value of this property shall be an href that
@@ -103,9 +103,9 @@ components:
             SEL and OEM Specific if the EntryType is OEM.  The format of this property
             shall be as defined in the Redfish specification.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -130,7 +130,7 @@ components:
             from IPMI spec if EntryType is SEL, the count of events if EntryType is
             Event and OEM Specific if the EntryType is OEM.
         SensorType:
-          $ref: '#/components/schemas/SensorType'
+          $ref: '#/components/schemas/LogEntry_v1_0_0_SensorType'
           description: If the EntryType is SEL, this will have the sensor type that
             the log entry pertains to.
           nullable: true
@@ -138,7 +138,7 @@ components:
           x-longDescription: This property shall be present if the EntryType value
             is SEL.
         Severity:
-          $ref: '#/components/schemas/EventSeverity'
+          $ref: '#/components/schemas/LogEntry_v1_0_0_EventSeverity'
           description: This is the severity of the log entry.
           nullable: true
           readOnly: true
@@ -157,7 +157,7 @@ components:
           description: This property shall specify a valid odata or Redfish property.
       x-requiredOnCreate:
       - EntryType
-    LogEntryCode:
+    LogEntry_v1_0_0_LogEntryCode:
       enum:
       - Assert
       - Deassert
@@ -219,13 +219,13 @@ components:
       - D2 Power State
       - D3 Power State
       type: string
-    LogEntryType:
+    LogEntry_v1_0_0_LogEntryType:
       enum:
       - Event
       - SEL
       - Oem
       type: string
-    SensorType:
+    LogEntry_v1_0_0_SensorType:
       enum:
       - Platform Security Violation Attempt
       - Temperature

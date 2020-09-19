@@ -1,15 +1,15 @@
 components:
   schemas:
-    Actions:
+    CertificateService_v1_0_2_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         '#CertificateService.GenerateCSR':
-          $ref: '#/components/schemas/GenerateCSR'
+          $ref: '#/components/schemas/CertificateService_v1_0_2_GenerateCSR'
         '#CertificateService.ReplaceCertificate':
-          $ref: '#/components/schemas/ReplaceCertificate'
+          $ref: '#/components/schemas/CertificateService_v1_0_2_ReplaceCertificate'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/CertificateService_v1_0_2_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -18,42 +18,42 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    CertificateService:
+    CertificateService_v1_0_2_CertificateService:
       additionalProperties: false
       description: The CertificateService schema describes a Certificate Service that
         represents the actions available to manage certificates and links to the certificates.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/CertificateService_v1_0_2_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
         CertificateLocations:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The information about the location of certificates.
           readOnly: true
           x-longDescription: This property shall contain the link to a Resource of
             type CertificateLocations.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -69,7 +69,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    GenerateCSR:
+    CertificateService_v1_0_2_GenerateCSR:
       additionalProperties: false
       description: This action makes a certificate signing request.
       properties:
@@ -89,7 +89,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    GenerateCSRRequestBody:
+    CertificateService_v1_0_2_GenerateCSRRequestBody:
       additionalProperties: false
       description: This action makes a certificate signing request.
       properties:
@@ -102,7 +102,7 @@ components:
             names of the component to secure, as defined by the RFC5280 'subjectAltName'
             attribute.
         CertificateCollection:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The URI of the Certificate Resource Collection where the certificate
             is installed after the certificate authority (CA) signs the certificate.
           x-longDescription: This parameter shall contain the URI of the Certificate
@@ -181,7 +181,7 @@ components:
         KeyUsage:
           description: The usage of the key contained in the certificate.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/KeyUsage
+            $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/Certificate_KeyUsage
           type: array
           x-longDescription: This parameter shall contain the usage of the key contained
             in the certificate.  If the client does not provide this value, the service
@@ -230,7 +230,7 @@ components:
         must sign.  The Service should retain the private key that was generated during
         this request for installation of the certificate.  The private key should
         not be part of the response.
-    GenerateCSRResponse:
+    CertificateService_v1_0_2_GenerateCSRResponse:
       additionalProperties: false
       description: The response body for the GenerateCSR action.
       properties:
@@ -243,7 +243,7 @@ components:
             the certificate signing request.  The private key should not be part of
             the string.
         CertificateCollection:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the Certificate Resource Collection where the certificate
             is installed.
           readOnly: true
@@ -259,7 +259,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    CertificateService_v1_0_2_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -269,7 +269,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ReplaceCertificate:
+    CertificateService_v1_0_2_ReplaceCertificate:
       additionalProperties: false
       description: This action replaces a certificate.
       properties:
@@ -286,7 +286,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ReplaceCertificateRequestBody:
+    CertificateService_v1_0_2_ReplaceCertificateRequestBody:
       additionalProperties: false
       description: This action replaces a certificate.
       properties:
@@ -301,12 +301,12 @@ components:
             the client shall provide the private key as part of the string in the
             POST request.
         CertificateType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/CertificateType
+          $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/Certificate_CertificateType
           description: The format of the certificate.
           x-longDescription: This parameter shall contain the format type for the
             certificate.
         CertificateUri:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the certificate that is being replaced.
           x-longDescription: This parameter shall contain the URI of the Certificate
             Resource that is being replaced.

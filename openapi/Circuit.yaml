@@ -1,6 +1,6 @@
 components:
   schemas:
-    BreakerStates:
+    Circuit_BreakerStates:
       enum:
       - Normal
       - Tripped
@@ -10,14 +10,15 @@ components:
         Normal: The breaker is powered on.
         'Off': The breaker is off.
         Tripped: The breaker has been tripped.
-    Circuit:
+    Circuit_Circuit:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
-      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_0_1.yaml#/components/schemas/Circuit
+      - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_0_1.yaml#/components/schemas/Circuit_v1_0_1_Circuit
+      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_1_0.yaml#/components/schemas/Circuit_v1_1_0_Circuit
       description: This is the schema definition for an electrical circuit.
       x-longDescription: This resource shall be used to represent an electrical circuit
         for a Redfish implementation.
-    NominalVoltageType:
+    Circuit_NominalVoltageType:
       enum:
       - AC100To240V
       - AC100To277V
@@ -53,7 +54,7 @@ components:
         DC240V: DC 240V nominal.
         DC380V: High Voltage DC (380V).
         DCNeg48V: -48V DC.
-    PhaseWiringType:
+    Circuit_PhaseWiringType:
       enum:
       - OnePhase3Wire
       - TwoPhase3Wire
@@ -86,7 +87,7 @@ components:
           Protective Earth) wiring.
         TwoPhase4Wire: This value shall represent a Two-phase / 4-Wire (Line1, Line2,
           Neutral, Protective Earth) wiring.
-    PlugType:
+    Circuit_PlugType:
       enum:
       - NEMA_5_15P
       - NEMA_L5_15P
@@ -228,7 +229,7 @@ components:
           locking L6-20 plug (Single-phase 250V; 20A; 2P3W).
         NEMA_L6_30P: This value shall represent a plug that matches the NEMA specified
           locking L6-30 plug (Single-phase 250V; 30A; 2P3W).
-    PowerRestorePolicyTypes:
+    Circuit_PowerRestorePolicyTypes:
       description: The enumerations of PowerRestorePolicyTypes specify the choice
         of power state when power is applied.
       enum:
@@ -241,7 +242,7 @@ components:
         AlwaysOn: Always power on when external power is applied.
         LastState: Return to the last power state (on or off) when external power
           is applied.
-    PowerState:
+    Circuit_PowerState:
       enum:
       - 'On'
       - 'Off'

@@ -1,6 +1,6 @@
 components:
   schemas:
-    ConnectedVia:
+    VirtualMedia_v1_1_0_ConnectedVia:
       enum:
       - NotConnected
       - URI
@@ -12,7 +12,7 @@ components:
         NotConnected: No current connection.
         Oem: Connected via an OEM-defined method.
         URI: Connected to a URI location.
-    MediaType:
+    VirtualMedia_v1_1_0_MediaType:
       enum:
       - CD
       - Floppy
@@ -24,18 +24,18 @@ components:
         DVD: A DVD-ROM format image.
         Floppy: A floppy disk image.
         USBStick: An emulation of a USB storage device.
-    VirtualMedia:
+    VirtualMedia_v1_1_0_VirtualMedia:
       additionalProperties: false
       description: This resource allows monitoring and control of an instance of virtual
         media (e.g. a remote CD, DVD, or USB device) functionality provided by a Manager
         for a system or device.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Actions:
           additionalProperties: false
           description: The available actions for this resource.
@@ -58,7 +58,7 @@ components:
             ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
               description: This property shall specify a valid odata or Redfish property.
         ConnectedVia:
-          $ref: '#/components/schemas/ConnectedVia'
+          $ref: '#/components/schemas/VirtualMedia_v1_1_0_ConnectedVia'
           description: Current virtual media connection methods.
           nullable: true
           readOnly: true
@@ -68,11 +68,11 @@ components:
             value of URI shall indicate that a remote connection via a URI reference
             type is being used.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Image:
           description: A URI providing the location of the selected image.
@@ -99,16 +99,16 @@ components:
         MediaTypes:
           description: This is the media types supported as virtual media.
           items:
-            $ref: '#/components/schemas/MediaType'
+            $ref: '#/components/schemas/VirtualMedia_v1_1_0_MediaType'
           readOnly: true
           type: array
           x-longDescription: The values of this array shall be the supported media
             types for this connection.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the

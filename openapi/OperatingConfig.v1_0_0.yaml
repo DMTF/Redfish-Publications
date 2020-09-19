@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    OperatingConfig_v1_0_0_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/OperatingConfig_v1_0_0_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -14,7 +14,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    BaseSpeedPrioritySettings:
+    OperatingConfig_v1_0_0_BaseSpeedPrioritySettings:
       additionalProperties: false
       description: The clock speed for a set of cores.
       properties:
@@ -53,7 +53,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    OperatingConfig_v1_0_0_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -63,21 +63,21 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OperatingConfig:
+    OperatingConfig_v1_0_0_OperatingConfig:
       additionalProperties: false
       description: The OperatingConfig schema specifies a configuration that can be
         used when the processor is operational.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/OperatingConfig_v1_0_0_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
@@ -94,17 +94,17 @@ components:
           description: The clock speed for sets of cores when the configuration is
             operational.
           items:
-            $ref: '#/components/schemas/BaseSpeedPrioritySettings'
+            $ref: '#/components/schemas/OperatingConfig_v1_0_0_BaseSpeedPrioritySettings'
             nullable: true
           type: array
           x-longDescription: This property shall contain an array of objects that
             specify the clock speed for sets of cores when the configuration is operational.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         MaxJunctionTemperatureCelsius:
           description: The maximum temperature of the junction in degrees Celsius.
@@ -125,10 +125,10 @@ components:
             which the processor can be configured in MHz.
           x-units: MHz
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -154,7 +154,7 @@ components:
           description: The turbo profiles for the processor.  A turbo profile is the
             maximum turbo clock speed as a function of the number of active cores.
           items:
-            $ref: '#/components/schemas/TurboProfileDatapoint'
+            $ref: '#/components/schemas/OperatingConfig_v1_0_0_TurboProfileDatapoint'
             nullable: true
           type: array
           x-longDescription: The property shall contain an array of objects that specify
@@ -170,7 +170,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    TurboProfileDatapoint:
+    OperatingConfig_v1_0_0_TurboProfileDatapoint:
       additionalProperties: false
       description: The turbo profile for a set of active cores.
       properties:

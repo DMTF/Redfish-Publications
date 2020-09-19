@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    LogEntry_v1_2_6_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/LogEntry_v1_2_6_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    EventSeverity:
+    LogEntry_v1_2_6_EventSeverity:
       enum:
       - OK
       - Warning
@@ -25,18 +25,18 @@ components:
         Critical: A critical condition that requires immediate attention.
         OK: Informational or operating normally.
         Warning: A condition that requires attention.
-    Links:
+    LogEntry_v1_2_6_Links:
       additionalProperties: false
       description: The links to other Resources that are related to this Resource.
       properties:
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
             Specification-described requirements.
         OriginOfCondition:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The URI of the Resource that caused the log entry.
           readOnly: true
           x-longDescription: This property shall contain a link to the Resource that
@@ -48,7 +48,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    LogEntry:
+    LogEntry_v1_2_6_LogEntry:
       additionalProperties: false
       description: The LogEntry schema defines the record format for a log.  It is
         designed for Redfish event logs, OEM-specific log formats, and the IPMI System
@@ -56,15 +56,15 @@ components:
         includes several additional properties dependent on the EntryType.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/LogEntry_v1_2_6_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
@@ -77,11 +77,11 @@ components:
           x-longDescription: This property shall contain the date and time when the
             log entry was created.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EntryCode:
-          $ref: '#/components/schemas/LogEntryCode'
+          $ref: '#/components/schemas/LogEntry_v1_2_6_LogEntryCode'
           description: The entry code for the log entry if the entry type is `SEL`.
           nullable: true
           readOnly: true
@@ -89,7 +89,7 @@ components:
             entry if the EntryType is `SEL`.  Tables 42-1 and 42-2 of the IPMI Specification
             describe these enumerations.
         EntryType:
-          $ref: '#/components/schemas/LogEntryType'
+          $ref: '#/components/schemas/LogEntry_v1_2_6_LogEntryType'
           description: The type of log entry.
           readOnly: true
           x-longDescription: This property shall represent the type of log entry.  If
@@ -114,17 +114,17 @@ components:
             shall contain the date and time when the event occurred.
           x-versionAdded: v1_1_0
         EventType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           description: The type of event recorded in this log.
           readOnly: true
           x-longDescription: If present, this LogEntry records an event and the value
             shall indicate the type of event.
           x-versionAdded: v1_1_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/LogEntry_v1_2_6_Links'
           description: The links to other Resources that are related to this Resource.
           x-longDescription: This Redfish Specification-described property shall contain
             links to Resources that are related to but are not contained by or subordinate
@@ -169,10 +169,10 @@ components:
             Event Data 3 byte, corresponding with bytes 13-16 in the IPMI SEL Event
             Record.  Otherwise, this property contains OEM-specific information.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -202,7 +202,7 @@ components:
             the sensor number.  If the entry type is `Event`, this property contains
             the count of events.  Otherwise, this property contains OEM-specific information.
         SensorType:
-          $ref: '#/components/schemas/SensorType'
+          $ref: '#/components/schemas/LogEntry_v1_2_6_SensorType'
           description: The sensor type to which the log entry pertains if the entry
             type is `SEL`.
           nullable: true
@@ -211,7 +211,7 @@ components:
             the log entry pertains if the entry type is `SEL`.  Table 42-3 in the
             IPMI Specification describes these enumerations.
         Severity:
-          $ref: '#/components/schemas/EventSeverity'
+          $ref: '#/components/schemas/LogEntry_v1_2_6_EventSeverity'
           description: The severity of the log entry.
           nullable: true
           readOnly: true
@@ -232,7 +232,7 @@ components:
           description: This property shall specify a valid odata or Redfish property.
       x-requiredOnCreate:
       - EntryType
-    LogEntryCode:
+    LogEntry_v1_2_6_LogEntryCode:
       enum:
       - Assert
       - Deassert
@@ -377,7 +377,7 @@ components:
           threshold while going high.
         Upper Non-recoverable - going low: The reading crossed the Upper Non-recoverable
           threshold while going low.
-    LogEntryType:
+    LogEntry_v1_2_6_LogEntryType:
       enum:
       - Event
       - SEL
@@ -387,7 +387,7 @@ components:
         Event: A Redfish-defined message.
         Oem: An entry in an OEM-defined format.
         SEL: A legacy IPMI System Event Log (SEL) entry.
-    OemActions:
+    LogEntry_v1_2_6_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -397,7 +397,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SensorType:
+    LogEntry_v1_2_6_SensorType:
       enum:
       - Platform Security Violation Attempt
       - Temperature

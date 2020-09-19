@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    MemoryMetrics_v1_1_7_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#MemoryMetrics.ClearCurrentPeriod':
-          $ref: '#/components/schemas/ClearCurrentPeriod'
+          $ref: '#/components/schemas/MemoryMetrics_v1_1_7_ClearCurrentPeriod'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/MemoryMetrics_v1_1_7_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    AlarmTrips:
+    MemoryMetrics_v1_1_7_AlarmTrips:
       additionalProperties: false
       description: The alarm trip information about the memory.  These alarms are
         reset when the system resets.  Note that if they are re-discovered they can
@@ -69,7 +69,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ClearCurrentPeriod:
+    MemoryMetrics_v1_1_7_ClearCurrentPeriod:
       additionalProperties: false
       description: This action sets the CurrentPeriod property's values to 0.
       properties:
@@ -86,14 +86,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ClearCurrentPeriodRequestBody:
+    MemoryMetrics_v1_1_7_ClearCurrentPeriodRequestBody:
       additionalProperties: false
       description: This action sets the CurrentPeriod property's values to 0.
       properties: {}
       type: object
       x-longDescription: This action shall set the CurrentPeriod property's values
         to 0.
-    CurrentPeriod:
+    MemoryMetrics_v1_1_7_CurrentPeriod:
       additionalProperties: false
       description: The memory metrics since the last system reset or ClearCurrentPeriod
         action.
@@ -120,12 +120,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    HealthData:
+    MemoryMetrics_v1_1_7_HealthData:
       additionalProperties: false
       description: The health information of the memory.
       properties:
         AlarmTrips:
-          $ref: '#/components/schemas/AlarmTrips'
+          $ref: '#/components/schemas/MemoryMetrics_v1_1_7_AlarmTrips'
           description: Alarm trip information about the memory.
           x-longDescription: This object shall contain properties describe the types
             of alarms that have been raised by the memory.  When this resource is
@@ -181,7 +181,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    LifeTime:
+    MemoryMetrics_v1_1_7_LifeTime:
       additionalProperties: false
       description: The memory metrics for the lifetime of the memory.
       properties:
@@ -208,21 +208,21 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MemoryMetrics:
+    MemoryMetrics_v1_1_7_MemoryMetrics:
       additionalProperties: false
       description: The usage and health statistics for a memory device or system memory
         summary.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/MemoryMetrics_v1_1_7_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
@@ -236,33 +236,33 @@ components:
             object, this property is not applicable.
           x-units: By
         CurrentPeriod:
-          $ref: '#/components/schemas/CurrentPeriod'
+          $ref: '#/components/schemas/MemoryMetrics_v1_1_7_CurrentPeriod'
           description: The memory metrics since the last reset or ClearCurrentPeriod
             action.
           x-longDescription: This property shall contain properties that describe
             the memory metrics for the current period.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         HealthData:
-          $ref: '#/components/schemas/HealthData'
+          $ref: '#/components/schemas/MemoryMetrics_v1_1_7_HealthData'
           description: The health information of the memory.
           x-longDescription: This property shall contain properties that describe
             the health data memory metrics for the memory.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         LifeTime:
-          $ref: '#/components/schemas/LifeTime'
+          $ref: '#/components/schemas/MemoryMetrics_v1_1_7_LifeTime'
           description: The memory metrics for the lifetime of the memory.
           x-longDescription: This property shall contain properties that describe
             the memory metrics for the lifetime of the memory.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -278,7 +278,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    MemoryMetrics_v1_1_7_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}

@@ -1,6 +1,6 @@
 components:
   schemas:
-    AddressState:
+    IPAddresses_v1_0_2_AddressState:
       enum:
       - Preferred
       - Deprecated
@@ -16,7 +16,7 @@ components:
           lifetimes as defined in RFC 4862.
         Tentative: This address is currently undergoing Duplicate Address Detection
           testing as defined in RFC 4862 section 5.4.
-    IPv4Address:
+    IPAddresses_v1_0_2_IPv4Address:
       additionalProperties: false
       properties:
         Address:
@@ -28,7 +28,7 @@ components:
             to this interface.  If DHCPv4 is enabled on the interface, this property
             becomes read-only.
         AddressOrigin:
-          $ref: '#/components/schemas/IPv4AddressOrigin'
+          $ref: '#/components/schemas/IPAddresses_v1_0_2_IPv4AddressOrigin'
           description: This indicates how the address was determined.
           nullable: true
           readOnly: true
@@ -43,9 +43,9 @@ components:
             and is configured to set the IPv4 default gateway address, this property
             becomes read-only.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
         SubnetMask:
-          $ref: '#/components/schemas/SubnetMask'
+          $ref: '#/components/schemas/IPAddresses_v1_0_2_SubnetMask'
           description: This is the IPv4 Subnet mask.
           nullable: true
           x-longDescription: The value of this property shall be the IPv4 subnet mask
@@ -55,7 +55,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    IPv4AddressOrigin:
+    IPAddresses_v1_0_2_IPv4AddressOrigin:
       enum:
       - Static
       - DHCP
@@ -67,7 +67,7 @@ components:
         DHCP: Address is provided by a DHCPv4 service
         IPv4LinkLocal: Address is valid only for this network segment (link)
         Static: A static address as configured by the user
-    IPv6Address:
+    IPAddresses_v1_0_2_IPv6Address:
       additionalProperties: false
       properties:
         Address:
@@ -77,14 +77,14 @@ components:
           x-longDescription: This property lists an IPv6 address that is currently
             assigned on this interface.
         AddressOrigin:
-          $ref: '#/components/schemas/IPv6AddressOrigin'
+          $ref: '#/components/schemas/IPAddresses_v1_0_2_IPv6AddressOrigin'
           description: This indicates how the address was determined.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall be the IPv6 address
             origin for this interface.
         AddressState:
-          $ref: '#/components/schemas/AddressState'
+          $ref: '#/components/schemas/IPAddresses_v1_0_2_AddressState'
           description: The current state of this address as defined in RFC 4862.
           nullable: true
           readOnly: true
@@ -95,9 +95,9 @@ components:
             address in the Failed state is not in use on the network stack, and corrective
             action will be needed to remedy this condition.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
         PrefixLength:
-          $ref: '#/components/schemas/PrefixLength'
+          $ref: '#/components/schemas/IPAddresses_v1_0_2_PrefixLength'
           description: This is the IPv6 Address Prefix Length.
           nullable: true
           readOnly: true
@@ -107,7 +107,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    IPv6AddressOrigin:
+    IPAddresses_v1_0_2_IPv6AddressOrigin:
       enum:
       - Static
       - DHCPv6
@@ -120,7 +120,7 @@ components:
         SLAAC: Address is provided by a Stateless Address AutoConfiguration (SLAAC)
           service
         Static: A static address as configured by the user
-    IPv6StaticAddress:
+    IPAddresses_v1_0_2_IPv6StaticAddress:
       additionalProperties: false
       description: This object represents a single IPv6 static address to be assigned
         on a network interface.
@@ -132,9 +132,9 @@ components:
           x-longDescription: This property provides access to a static IPv6 address
             that is currently assigned on a network interface.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
         PrefixLength:
-          $ref: '#/components/schemas/PrefixLength'
+          $ref: '#/components/schemas/IPAddresses_v1_0_2_PrefixLength'
           description: The Prefix Length of this IPv6 address.
           nullable: true
           readOnly: true
@@ -147,11 +147,11 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PrefixLength:
+    IPAddresses_v1_0_2_PrefixLength:
       maximum: 128
       minimum: 1
       type: number
-    SubnetMask:
+    IPAddresses_v1_0_2_SubnetMask:
       pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
       type: string
 title: '#IPAddresses.v1_0_2'

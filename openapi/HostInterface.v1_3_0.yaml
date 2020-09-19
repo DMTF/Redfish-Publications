@@ -1,0 +1,335 @@
+components:
+  schemas:
+    HostInterface_v1_3_0_Actions:
+      additionalProperties: false
+      description: The available actions for this Resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/HostInterface_v1_3_0_OemActions'
+          description: The available OEM-specific actions for this Resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this Resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    HostInterface_v1_3_0_AuthenticationMode:
+      enum:
+      - AuthNone
+      - BasicAuth
+      - RedfishSessionAuth
+      - OemAuth
+      type: string
+      x-enumDescriptions:
+        AuthNone: Requests without any sort of authentication are allowed.
+        BasicAuth: Requests using HTTP Basic Authentication are allowed.
+        OemAuth: Requests using OEM authentication mechanisms are allowed.
+        RedfishSessionAuth: Requests using Redfish Session Authentication are allowed.
+    HostInterface_v1_3_0_CredentialBootstrapping:
+      additionalProperties: false
+      description: The credential bootstrapping settings for this interface.
+      properties:
+        EnableAfterReset:
+          description: An indication of whether credential bootstrapping is enabled
+            after a reset for this interface.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether credential bootstrapping
+            is enabled after a reset for this interface.  If `true`, services shall
+            set the Enabled property to `true` after a reset of the host or the service.
+          x-versionAdded: v1_3_0
+        Enabled:
+          description: An indication of whether credential bootstrapping is enabled
+            for this interface.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether credential bootstrapping
+            is enabled for this interface.
+          x-versionAdded: v1_3_0
+        RoleId:
+          description: The role used for the bootstrap account created for this interface.
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the Id property of the role
+            resource that is used for the bootstrap account created for this interface.
+          x-versionAdded: v1_3_0
+      type: object
+      x-longDescription: This type shall contain settings for the Redfish Host Interface
+        Specification-defined 'credential bootstrapping via IPMI commands' feature
+        for this interface.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    HostInterface_v1_3_0_HostInterface:
+      additionalProperties: false
+      description: The properties associated with a Host Interface.  A Host Interface
+        is a connection between host software and a Redfish Service.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/HostInterface_v1_3_0_Actions'
+          description: The available actions for this Resource.
+          x-longDescription: This property shall contain the available actions for
+            this Resource.
+          x-versionAdded: v1_1_0
+        AuthNoneRoleId:
+          description: The role when no authentication on this interface is used.
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the Id property of the Role
+            Resource that is used when no authentication on this interface is performed.  This
+            property shall contain absent if AuthNone is not supported by the service
+            for the AuthenticationModes property.
+          x-versionAdded: v1_2_0
+        AuthenticationModes:
+          description: The authentication modes available on this interface.
+          items:
+            $ref: '#/components/schemas/HostInterface_v1_3_0_AuthenticationMode'
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array consisting of the
+            authentication modes allowed on this interface.
+        CredentialBootstrapping:
+          $ref: '#/components/schemas/HostInterface_v1_3_0_CredentialBootstrapping'
+          description: The credential bootstrapping settings for this interface.
+          x-longDescription: This property shall contain settings for the Redfish
+            Host Interface Specification-defined 'credential bootstrapping via IPMI
+            commands' feature for this interface.  This property shall be absent if
+            credential bootstrapping is not supported by the service.
+          x-versionAdded: v1_3_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        ExternallyAccessible:
+          description: An indication of whether external entities can access this
+            interface.  External entities are non-host entities.  For example, if
+            the host and manager are connected through a switch and the switch also
+            exposes an external port on the system, external clients can also use
+            the interface, and this property value is `true`.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether external entities
+            can access this interface.  External entities are non-host entities.  For
+            example, if the host and manager are connected through a switch and the
+            switch also exposes an external port on the system, external clients can
+            also use the interface, and this property value is `true`.
+        FirmwareAuthEnabled:
+          deprecated: true
+          description: An indication of whether this firmware authentication is enabled
+            for this interface.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-deprecatedReason: This property has been deprecated in favor of newer
+            methods of negotiating credentials.
+          x-longDescription: This property shall indicate whether firmware authentication
+            is enabled for this interface.
+          x-versionDeprecated: v1_3_0
+        FirmwareAuthRoleId:
+          deprecated: true
+          description: The Role used for firmware authentication on this interface.
+          readOnly: false
+          type: string
+          x-deprecatedReason: This property has been deprecated in favor of newer
+            methods of negotiating credentials.
+          x-longDescription: This property shall contain the Id property of the Role
+            Resource that is configured for firmware authentication on this interface.
+          x-versionDeprecated: v1_3_0
+        HostEthernetInterfaces:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the collection of network interface controllers or
+            cards (NICs) that a computer system uses to communicate with this Host
+            Interface.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource Collection
+            of type EthernetInterface that computer systems use as the Host Interface
+            to this manager.
+        HostInterfaceType:
+          $ref: '#/components/schemas/HostInterface_v1_3_0_HostInterfaceType'
+          description: The Host Interface type for this interface.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain an enumeration that describes
+            the type of the interface.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InterfaceEnabled:
+          description: An indication of whether this interface is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this interface is
+            enabled.
+        KernelAuthEnabled:
+          deprecated: true
+          description: An indication of whether this kernel authentication is enabled
+            for this interface.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-deprecatedReason: This property has been deprecated in favor of newer
+            methods of negotiating credentials.
+          x-longDescription: This property shall indicate whether kernel authentication
+            is enabled for this interface.
+          x-versionDeprecated: v1_3_0
+        KernelAuthRoleId:
+          deprecated: true
+          description: The Role used for kernel authentication on this interface.
+          readOnly: false
+          type: string
+          x-deprecatedReason: This property has been deprecated in favor of newer
+            methods of negotiating credentials.
+          x-longDescription: This property shall contain the Id property of the Role
+            Resource that is configured for kernel authentication on this interface.
+          x-versionDeprecated: v1_3_0
+        Links:
+          $ref: '#/components/schemas/HostInterface_v1_3_0_Links'
+          description: The links to other Resources that are related to this Resource.
+          x-longDescription: The Redfish Specification-described Links Property shall
+            contain links to Resources related to but not subordinate to this Resource.
+        ManagerEthernetInterface:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to a single network interface controllers or cards (NIC)
+            that this manager uses for network communication with this Host Interface.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource of type
+            EthernetInterface that represents the network interface that this manager
+            uses as the Host Interface.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        NetworkProtocol:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the network services and their settings that the
+            manager controls.  In this property, clients find configuration options
+            for the network and network services.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource of type
+            ManagerNetworkProtocol that represents the network services for this manager.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the Resource and its subordinate or
+            dependent Resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the Resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent a Host Interface as part of
+        the Redfish Specification.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    HostInterface_v1_3_0_HostInterfaceType:
+      enum:
+      - NetworkHostInterface
+      type: string
+      x-enumDescriptions:
+        NetworkHostInterface: This interface is a Network Host Interface.
+    HostInterface_v1_3_0_Links:
+      additionalProperties: false
+      description: References to other Resources related to this Resource.
+      properties:
+        AuthNoneRole:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the Redfish Role that contains the privileges on
+            this Host Interface when no authentication is performed.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource of type
+            Role, and should link to the Resource identified by property AuthNoneRoleId.  This
+            property shall be absent if AuthNone is not supported by the service for
+            the AuthenticationModes property.
+          x-versionAdded: v1_2_0
+        ComputerSystems:
+          description: An array of links to the computer systems connected to this
+            Host Interface.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to Resources
+            of the ComputerSystem type that are connected to this Host Interface.
+        ComputerSystems@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        CredentialBootstrappingRole:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the role that contains the privileges for the bootstrap
+            account created for this interface.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Role, and should link to the resource identified by the RoleId property
+            within CredentialBootstrapping.  This property shall be absent if the
+            Redfish Host Interface Specification-defined 'credential bootstrapping
+            via IPMI commands' feature is not supported by the service.
+          x-versionAdded: v1_3_0
+        FirmwareAuthRole:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          deprecated: true
+          description: The link to the Redfish Role that has firmware authentication
+            privileges on this Host Interface.
+          readOnly: true
+          x-deprecatedReason: This property has been deprecated in favor of newer
+            methods of negotiating credentials.
+          x-longDescription: This property shall contain a link to a Resource of type
+            Role, and should link to the Resource identified by property FirmwareAuthRoleId.
+          x-versionDeprecated: v1_3_0
+        KernelAuthRole:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          deprecated: true
+          description: The link to the Redfish Role defining privileges for this Host
+            Interface when using kernel authentication.
+          readOnly: true
+          x-deprecatedReason: This property has been deprecated in favor of newer
+            methods of negotiating credentials.
+          x-longDescription: This property shall contain a link to a Resource of type
+            Role, and should link to the Resource identified by property KernelAuthRoleId.
+          x-versionDeprecated: v1_3_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: The Redfish Specification-described type shall contain links
+        to Resources related to but not subordinate to this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    HostInterface_v1_3_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this Resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#HostInterface.v1_3_0.HostInterface'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.3'

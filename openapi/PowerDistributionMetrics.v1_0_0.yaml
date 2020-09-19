@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    PowerDistributionMetrics_v1_0_0_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#PowerDistributionMetrics.ResetMetrics':
-          $ref: '#/components/schemas/ResetMetrics'
+          $ref: '#/components/schemas/PowerDistributionMetrics_v1_0_0_ResetMetrics'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/PowerDistributionMetrics_v1_0_0_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    PowerDistributionMetrics_v1_0_0_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -26,30 +26,30 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerDistributionMetrics:
+    PowerDistributionMetrics_v1_0_0_PowerDistributionMetrics:
       additionalProperties: false
       description: This is the schema definition for the metrics of a power distribution
         component or unit, such as a floor power distribution unit (PDU) or switchgear.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/PowerDistributionMetrics_v1_0_0_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EnergykWh:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The energy consumption of this unit.
           nullable: true
           readOnly: true
@@ -58,19 +58,19 @@ components:
             in kilowatt-hours (kWh), for this unit, that represents the `Total` ElectricalContext
             sensor when multiple energy sensors exist.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         PowerWatts:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The total power reading for this equipment.
           nullable: true
           readOnly: true
@@ -89,7 +89,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetMetrics:
+    PowerDistributionMetrics_v1_0_0_ResetMetrics:
       additionalProperties: false
       description: This action resets the summary metrics related to this equipment.
       properties:
@@ -106,7 +106,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetMetricsRequestBody:
+    PowerDistributionMetrics_v1_0_0_ResetMetricsRequestBody:
       additionalProperties: false
       description: This action resets the summary metrics related to this equipment.
       properties: {}

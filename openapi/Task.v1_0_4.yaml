@@ -1,18 +1,18 @@
 components:
   schemas:
-    Task:
+    Task_v1_0_4_Task:
       additionalProperties: false
       description: This resource contains information about a specific Task scheduled
         by or being executed by a Redfish service's Task Service.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/odata_v4_0_1_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/odata_v4_0_1_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_1.yaml#/components/schemas/odata_v4_0_1_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EndTime:
@@ -23,20 +23,20 @@ components:
           x-longDescription: The value of this property shall indicate the time the
             task was completed.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Messages:
           description: This is an array of messages associated with the task.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message_Message
           type: array
           x-longDescription: The value of this property shall be an array of messages
             associated with the task.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -49,7 +49,7 @@ components:
           x-longDescription: The value of this property shall indicate the time the
             task was started.
         TaskState:
-          $ref: '#/components/schemas/TaskState'
+          $ref: '#/components/schemas/Task_v1_0_4_TaskState'
           description: The state of the task.
           readOnly: true
           x-longDescription: The value of this property shall indicate the state of
@@ -74,7 +74,7 @@ components:
             that supports problem discovery, or resolution, or both.  This state is
             used when a corrective action is possible.
         TaskStatus:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Health
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
           description: This is the completion status of the task.
           readOnly: true
           x-longDescription: The value of this property shall be the completion status
@@ -89,7 +89,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    TaskState:
+    Task_v1_0_4_TaskState:
       enum:
       - New
       - Starting

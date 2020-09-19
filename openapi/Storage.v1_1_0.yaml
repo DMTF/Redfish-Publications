@@ -1,6 +1,6 @@
 components:
   schemas:
-    Protocol:
+    Storage_v1_1_0_Protocol:
       enum:
       - PCIe
       - AHCI
@@ -80,7 +80,7 @@ components:
           Forum Universal Serial Bus Specification.
         iSCSI: This value shall mean that this device conforms to the IETF Internet
           Small Computer Systems Interface (iSCSI) Specification.
-    SetEncryptionKey:
+    Storage_v1_1_0_SetEncryptionKey:
       additionalProperties: false
       description: This action is used to set the encryption key for the storage subsystem.
       properties:
@@ -97,24 +97,24 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Storage:
+    Storage_v1_1_0_Storage:
       additionalProperties: false
       description: This schema defines a storage subsystem and its respective properties.  A
         storage subsystem represents a set of storage controllers (physical or virtual)
         and the resources such as volumes that can be accessed from that subsystem.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Actions:
           additionalProperties: false
           description: The available actions for this resource.
           properties:
             '#Storage.SetEncryptionKey':
-              $ref: '#/components/schemas/SetEncryptionKey'
+              $ref: '#/components/schemas/Storage_v1_1_0_SetEncryptionKey'
             Oem:
               additionalProperties: true
               properties: {}
@@ -131,24 +131,24 @@ components:
             ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
               description: This property shall specify a valid odata or Redfish property.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
         Drives:
           description: The set of drives attached to the storage controllers represented
             by this resource.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: A collection that indicates all the drives attached to
             the storage controllers that this resource represents.
         Drives@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Drives@odata.navigationLink:
           format: uri
           type: string
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
         Links:
           additionalProperties: false
           description: Contains references to other resources that are related to
@@ -158,19 +158,19 @@ components:
               description: An array of references to the chassis to which this storage
                 subsystem is attached
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall reference a resource
                 of type Chassis that represents the physical containers attached to
                 this resource.
             Enclosures@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             Enclosures@odata.navigationLink:
               format: uri
               type: string
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
@@ -184,9 +184,9 @@ components:
             ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
               description: This property shall specify a valid odata or Redfish property.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -194,31 +194,31 @@ components:
         Redundancy:
           description: Redundancy information for the storage subsystem
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           readOnly: true
           type: array
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Redundancy@odata.navigationLink:
           format: uri
           type: string
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         StorageControllers:
           description: The set of storage controllers represented by this resource.
           items:
-            $ref: '#/components/schemas/StorageController'
+            $ref: '#/components/schemas/Storage_v1_1_0_StorageController'
           readOnly: true
           type: array
           x-longDescription: A collection that indicates all the storage controllers
             that this resource represents.
         StorageControllers@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         StorageControllers@odata.navigationLink:
           format: uri
           type: string
         Volumes:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The set of volumes produced by the storage controllers represented
             by this resource.
           readOnly: true
@@ -233,7 +233,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    StorageController:
+    Storage_v1_1_0_StorageController:
       additionalProperties: false
       description: This schema defines a storage controller and its respective properties.  A
         storage controller represents a storage device (physical or virtual) that
@@ -255,7 +255,7 @@ components:
         Identifiers:
           description: The Durable names for the storage controller
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Identifier
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Resource_v1_1_0_Identifier
           readOnly: true
           type: array
           x-longDescription: This property shall contain a list of all known durable
@@ -269,19 +269,19 @@ components:
               description: An array of references to the endpoints that connect to
                 this controller.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be a reference to
                 the resources that this controller is associated with and shall reference
                 a resource of type Endpoint.
             Endpoints@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             Endpoints@odata.navigationLink:
               format: uri
               type: string
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
@@ -316,7 +316,7 @@ components:
           x-longDescription: The value of this property shall be the name by which
             the manufacturer generally refers to the storage controller.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -353,12 +353,12 @@ components:
             of the Storage bus interface (in Gigabits per second).
           x-units: Gbit/s
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         SupportedControllerProtocols:
           description: This represents the protocols by which this storage controller
             can be communicated to.
           items:
-            $ref: '#/components/schemas/Protocol'
+            $ref: '#/components/schemas/Storage_v1_1_0_Protocol'
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be the set of protocols
@@ -367,7 +367,7 @@ components:
           description: This represents the protocols which the storage controller
             can use to communicate with attached devices.
           items:
-            $ref: '#/components/schemas/Protocol'
+            $ref: '#/components/schemas/Storage_v1_1_0_Protocol'
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be the set of protocols

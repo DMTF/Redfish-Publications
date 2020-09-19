@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    Switch_v1_3_0_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         '#Switch.Reset':
-          $ref: '#/components/schemas/Reset'
+          $ref: '#/components/schemas/Switch_v1_3_0_Reset'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Switch_v1_3_0_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -16,12 +16,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Links:
+    Switch_v1_3_0_Links:
       additionalProperties: false
       description: The links to other Resources that are related to this Resource.
       properties:
         Chassis:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the chassis that contains this switch.
           readOnly: true
           x-longDescription: This property shall contain a link to the Resource of
@@ -29,26 +29,26 @@ components:
         Endpoints:
           description: An array of links to the endpoints that connect to this switch.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain a link to the Resources of
             type Endpoint with which this switch is associated.
           x-versionAdded: v1_3_0
         Endpoints@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         ManagedBy:
           description: An array of links to the managers that manage this switch.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain a link to the Resource of
             type Manager with which this switch is associated.
         ManagedBy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -59,7 +59,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Switch_v1_3_0_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -69,7 +69,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Reset:
+    Switch_v1_3_0_Reset:
       additionalProperties: false
       description: This action resets this switch.
       properties:
@@ -85,32 +85,32 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetRequestBody:
+    Switch_v1_3_0_ResetRequestBody:
       additionalProperties: false
       description: This action resets this switch.
       properties:
         ResetType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/ResetType
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
           description: The type of reset.
           x-longDescription: This parameter shall contain the type of reset.  The
             Service may accept a request without this parameter and can complete an
             implementation-specific default reset.
       type: object
       x-longDescription: This action shall reset this switch.
-    Switch:
+    Switch_v1_3_0_Switch:
       additionalProperties: false
       description: The Switch schema contains properties that describe a fabric switch.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Switch_v1_3_0_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
@@ -122,7 +122,7 @@ components:
           x-longDescription: This property shall contain the user-assigned asset tag,
             which is an identifying string that tracks the drive for inventory purposes.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         DomainID:
@@ -142,10 +142,10 @@ components:
             by the manufacturer for the associated switch.
           x-versionAdded: v1_2_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         IndicatorLED:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/IndicatorLED
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_IndicatorLED
           description: The state of the indicator LED, which identifies the switch.
           nullable: true
           readOnly: false
@@ -160,18 +160,18 @@ components:
           x-longDescription: This property shall indicate whether this switch is in
             a managed or unmanaged state.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Switch_v1_3_0_Links'
           description: The links to other Resources that are related to this Resource.
           x-longDescription: The Redfish Specification-described Links Property shall
             contain links to Resources related to but not subordinate to this Resource.
         Location:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Location
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
           description: The location of the switch.
           x-longDescription: This property shall contain location information of the
             associated switch.
           x-versionAdded: v1_1_0
         LogServices:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the collection of Log Services associated with
             this switch.
           readOnly: true
@@ -194,10 +194,10 @@ components:
           x-longDescription: This property shall contain the manufacturer-provided
             model information of this switch.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -210,13 +210,13 @@ components:
           x-longDescription: This property shall contain the manufacturer-provided
             part number for the switch.
         Ports:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the collection ports for this switch.
           readOnly: true
           x-longDescription: This property shall contain a link to a Resource Collection
             of type PortCollection.
         PowerState:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/PowerState
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_PowerState
           description: The current power state of the switch.
           nullable: true
           readOnly: true
@@ -224,13 +224,13 @@ components:
         Redundancy:
           description: Redundancy information for the switches.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           type: array
           x-autoExpand: true
           x-longDescription: This property shall contain an array that shows how this
             switch is grouped with other switches for form redundancy sets.
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         SKU:
           description: The SKU for this switch.
           nullable: true
@@ -245,7 +245,7 @@ components:
           x-longDescription: This property shall contain a manufacturer-allocated
             number that identifies the switch.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-longDescription: This property shall contain any status or health properties
@@ -253,7 +253,7 @@ components:
         SupportedProtocols:
           description: The protocols this switch supports.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol
+            $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol_Protocol
           readOnly: true
           type: array
           x-longDescription: The property shall contain an array of protocols this
@@ -261,7 +261,7 @@ components:
             property shall be required.
           x-versionAdded: v1_3_0
         SwitchType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol
+          $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol_Protocol
           description: The protocol being sent over this switch.
           nullable: true
           readOnly: true
@@ -279,7 +279,7 @@ components:
             lanes, phys, or other physical transport links that this switch contains.  For
             PCIe, this value shall be the lane count.
         UUID:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/UUID
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_UUID
           description: The UUID for this switch.
           nullable: true
           readOnly: true

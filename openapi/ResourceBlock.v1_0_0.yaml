@@ -1,6 +1,6 @@
 components:
   schemas:
-    CompositionState:
+    ResourceBlock_v1_0_0_CompositionState:
       enum:
       - Composing
       - Composed
@@ -14,12 +14,12 @@ components:
         Failed: The final composition resulted in failure and manual intervention
           is required to fix it.
         Unused: Indicates the Resource Block is free and can participate in composition.
-    CompositionStatus:
+    ResourceBlock_v1_0_0_CompositionStatus:
       additionalProperties: true
       description: Composition status of the Resource Block.
       properties:
         CompositionState:
-          $ref: '#/components/schemas/CompositionState'
+          $ref: '#/components/schemas/ResourceBlock_v1_0_0_CompositionState'
           description: This property represents the current state of the Resource
             Block from a composition perspective.
           nullable: true
@@ -43,16 +43,16 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ResourceBlock:
+    ResourceBlock_v1_0_0_ResourceBlock:
       additionalProperties: false
       description: This schema defines a Resource Block resource.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Actions:
           additionalProperties: false
           description: The available actions for this resource.
@@ -75,7 +75,7 @@ components:
             ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
               description: This property shall specify a valid odata or Redfish property.
         CompositionStatus:
-          $ref: '#/components/schemas/CompositionStatus'
+          $ref: '#/components/schemas/ResourceBlock_v1_0_0_CompositionStatus'
           description: This property describes the composition status details for
             this Resource Block.
           x-longDescription: The value of this property shall contain composition
@@ -84,36 +84,36 @@ components:
           description: An array of references to the Computer Systems available in
             this Resource Block.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type ComputerSystem that are in this Resource Block.
         ComputerSystems@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         ComputerSystems@odata.navigationLink:
           format: uri
           type: string
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EthernetInterfaces:
           description: An array of references to the Ethernet Interfaces available
             in this Resource Block.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type EthernetInterface that are in this Resource Block.
         EthernetInterfaces@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         EthernetInterfaces@odata.navigationLink:
           format: uri
           type: string
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
           additionalProperties: false
@@ -124,14 +124,14 @@ components:
               description: An array of references to the Chassis in which this Resource
                 Block is contained.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be an array of references
                 of type Chassis that represent the physical container associated with
                 this Resource Block.
             Chassis@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             Chassis@odata.navigationLink:
               format: uri
               type: string
@@ -139,19 +139,19 @@ components:
               description: An array of references to the Computer Systems that are
                 composed from this Resource Block.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be an array of references
                 of type ComputerSystem that represent the Computer Systems composed
                 from this Resource Block.
             ComputerSystems@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             ComputerSystems@odata.navigationLink:
               format: uri
               type: string
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
@@ -160,14 +160,14 @@ components:
               description: An array of references to the Zones in which this Resource
                 Block is bound.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be an array of references
                 of type Zone that represent the binding constraints associated with
                 this Resource Block.
             Zones@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             Zones@odata.navigationLink:
               format: uri
               type: string
@@ -182,35 +182,35 @@ components:
           description: An array of references to the Memory available in this Resource
             Block.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type Memory that are in this Resource Block.
         Memory@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Memory@odata.navigationLink:
           format: uri
           type: string
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NetworkInterfaces:
           description: An array of references to the Network Interfaces available
             in this Resource Block.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type NetworkInterface that are in this Resource Block.
         NetworkInterfaces@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         NetworkInterfaces@odata.navigationLink:
           format: uri
           type: string
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -219,13 +219,13 @@ components:
           description: An array of references to the Processors available in this
             Resource Block.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type Processor that are in this Resource Block.
         Processors@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Processors@odata.navigationLink:
           format: uri
           type: string
@@ -233,7 +233,7 @@ components:
           description: This property represents the types of resources available on
             this Resource Block.
           items:
-            $ref: '#/components/schemas/ResourceBlockType'
+            $ref: '#/components/schemas/ResourceBlock_v1_0_0_ResourceBlockType'
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of enumerated
@@ -242,29 +242,29 @@ components:
           description: An array of references to the Simple Storage available in this
             Resource Block.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type SimpleStorage that are in this Resource Block.
         SimpleStorage@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         SimpleStorage@odata.navigationLink:
           format: uri
           type: string
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         Storage:
           description: An array of references to the Storage available in this Resource
             Block.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type Storage that are in this Resource Block.
         Storage@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Storage@odata.navigationLink:
           format: uri
           type: string
@@ -279,7 +279,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ResourceBlockType:
+    ResourceBlock_v1_0_0_ResourceBlockType:
       enum:
       - Compute
       - Processor

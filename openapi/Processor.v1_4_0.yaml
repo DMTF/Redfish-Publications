@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    Processor_v1_4_0_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Processor_v1_4_0_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    EthernetInterface:
+    Processor_v1_4_0_EthernetInterface:
       additionalProperties: false
       description: This is the definition for an Ethernet Interface object.
       properties:
@@ -38,7 +38,7 @@ components:
           x-units: Mbit/s
           x-versionAdded: v1_4_0
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -50,14 +50,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    FPGA:
+    Processor_v1_4_0_FPGA:
       additionalProperties: false
       description: The properties of the FPGA device.
       properties:
         ExternalInterfaces:
           description: An array of the FPGA external interfaces.
           items:
-            $ref: '#/components/schemas/FpgaInterface'
+            $ref: '#/components/schemas/Processor_v1_4_0_FpgaInterface'
           type: array
           x-longDescription: The value of this property shall be an array of objects
             that describe the external connectivity of the FPGA.
@@ -84,14 +84,14 @@ components:
             the FPGA firmware version.
           x-versionAdded: v1_4_0
         FpgaType:
-          $ref: '#/components/schemas/FpgaType'
+          $ref: '#/components/schemas/Processor_v1_4_0_FpgaType'
           description: The FPGA type.
           readOnly: true
           x-longDescription: The value of this property shall be a type of the FPGA
             device.
           x-versionAdded: v1_4_0
         HostInterface:
-          $ref: '#/components/schemas/FpgaInterface'
+          $ref: '#/components/schemas/Processor_v1_4_0_FpgaInterface'
           description: The FPGA interface to the host.
           x-longDescription: The value of this property shall be an object that describes
             the connectivity to the host for system software to use.
@@ -104,7 +104,7 @@ components:
             device.
           x-versionAdded: v1_4_0
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -134,7 +134,7 @@ components:
             slot is used by an FPGA to contain an acceleration function that can change
             as the FPGA is being provisioned.
           items:
-            $ref: '#/components/schemas/FpgaReconfigurationSlot'
+            $ref: '#/components/schemas/Processor_v1_4_0_FpgaReconfigurationSlot'
           type: array
           x-longDescription: The value of this property shall be an array of the structures
             describing the FPGA reconfiguration slots that can be programmed with
@@ -146,12 +146,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    FpgaInterface:
+    Processor_v1_4_0_FpgaInterface:
       additionalProperties: false
       description: This type describes an interface to the FPGA.
       properties:
         Ethernet:
-          $ref: '#/components/schemas/EthernetInterface'
+          $ref: '#/components/schemas/Processor_v1_4_0_EthernetInterface'
           description: Describes the Ethernet related information about this FPGA
             interface.
           nullable: true
@@ -159,7 +159,7 @@ components:
             the Ethernet related information about this FPGA interface.
           x-versionAdded: v1_4_0
         InterfaceType:
-          $ref: '#/components/schemas/FpgaInterfaceType'
+          $ref: '#/components/schemas/Processor_v1_4_0_FpgaInterfaceType'
           description: The FPGA interface type.
           nullable: true
           readOnly: true
@@ -167,7 +167,7 @@ components:
             the type of interface to the FPGA.
           x-versionAdded: v1_4_0
         PCIe:
-          $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.yaml#/components/schemas/PCIeInterface
+          $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.yaml#/components/schemas/PCIeDevice_PCIeInterface
           description: Describes the PCI-e related information about this FPGA interface.
           nullable: true
           x-longDescription: The value of this property shall be an object the describes
@@ -179,7 +179,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    FpgaInterfaceType:
+    Processor_v1_4_0_FpgaInterfaceType:
       enum:
       - QPI
       - UPI
@@ -193,14 +193,14 @@ components:
         PCIe: A PCI Express interface.
         QPI: The Intel QuickPath Interconnect.
         UPI: The Intel UltraPath Interconnect.
-    FpgaReconfigurationSlot:
+    Processor_v1_4_0_FpgaReconfigurationSlot:
       additionalProperties: false
       description: This type describes the FPGA reconfiguration slot.  A reconfiguration
         slot is used by an FPGA to contain an acceleration function that can change
         as the FPGA is being provisioned.
       properties:
         AccelerationFunction:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A link to the Acceleration Function provided by the code programmed
             into a reconfiguration slot.
           nullable: true
@@ -230,7 +230,7 @@ components:
             slot identifier.
           x-versionAdded: v1_4_0
         UUID:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/UUID
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_UUID
           description: The universal unique identifier (UUID) for this reconfiguration
             slot.
           nullable: true
@@ -244,7 +244,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    FpgaType:
+    Processor_v1_4_0_FpgaType:
       enum:
       - Integrated
       - Discrete
@@ -253,7 +253,7 @@ components:
         Discrete: The discrete FPGA device.
         Integrated: The FPGA device integrasted with other porcessor in the single
           chip.
-    InstructionSet:
+    Processor_v1_4_0_InstructionSet:
       enum:
       - x86
       - x86-64
@@ -277,13 +277,13 @@ components:
         x86-64: x86 64-bit.
       x-enumVersionAdded:
         PowerISA: v1_4_0
-    Links:
+    Processor_v1_4_0_Links:
       additionalProperties: false
       description: Contains references to other resources that are related to this
         resource.
       properties:
         Chassis:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Chassis which contains this Processor.
           readOnly: true
           x-longDescription: The value of this property shall be a reference to a
@@ -294,34 +294,34 @@ components:
           description: An array of references to the processors directly connected
             to this processor.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type Processor that are directly connected to this Processor.
           x-versionAdded: v1_4_0
         ConnectedProcessors@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Endpoints:
           description: An array of references to the endpoints that connect to this
             processor.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type Endpoint that represent Endpoints accociated with this Processor.
           x-versionAdded: v1_4_0
         Endpoints@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
             as described in the Redfish specification.
         PCIeDevice:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the PCIeDevice associated with this Processor.
           nullable: true
           readOnly: true
@@ -332,7 +332,7 @@ components:
           description: An array of references to the PCIeFunctions associated with
             this Processor.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
@@ -340,7 +340,7 @@ components:
             this Processor.
           x-versionAdded: v1_4_0
         PCIeFunctions@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
       type: object
       x-longDescription: This type, as described by the Redfish Specification, shall
         contain references to resources that are related to, but not contained by
@@ -348,7 +348,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Processor_v1_4_0_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -358,21 +358,21 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Processor:
+    Processor_v1_4_0_Processor:
       additionalProperties: false
       description: This is the schema definition for the Processor resource.  It represents
         the properties of a processor attached to a System.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         AccelerationFunctions:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Acceleration Functions associated
             with this Processor.
           readOnly: true
@@ -380,41 +380,41 @@ components:
             of type AccelerationFunctionCollection.
           x-versionAdded: v1_4_0
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Processor_v1_4_0_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
           x-versionAdded: v1_1_0
         Assembly:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Assembly resource associated with this processor.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a resource
             of type Assembly.
           x-versionAdded: v1_2_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         FPGA:
-          $ref: '#/components/schemas/FPGA'
+          $ref: '#/components/schemas/Processor_v1_4_0_FPGA'
           description: The properties specific for Processors of type FPGA.
           nullable: true
           x-longDescription: The value of this property shall be an object containing
             properties specific for Processors of type FPGA.
           x-versionAdded: v1_4_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         InstructionSet:
-          $ref: '#/components/schemas/InstructionSet'
+          $ref: '#/components/schemas/Processor_v1_4_0_InstructionSet'
           description: The instruction set of the processor.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the string which identifies
             the instruction set of the processor contained in this socket.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Processor_v1_4_0_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
@@ -422,7 +422,7 @@ components:
             by (subordinate to), this resource.
           x-versionAdded: v1_1_0
         Location:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Location
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
           description: The Location of the processor.
           x-longDescription: This property shall contain location information of the
             associated processor.
@@ -452,7 +452,7 @@ components:
           x-units: W
           x-versionAdded: v1_4_0
         Metrics:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Metrics associated with this Processor.
           nullable: true
           readOnly: true
@@ -467,36 +467,36 @@ components:
           x-longDescription: This property shall indicate the model information as
             provided by the manufacturer of this processor.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         ProcessorArchitecture:
-          $ref: '#/components/schemas/ProcessorArchitecture'
+          $ref: '#/components/schemas/Processor_v1_4_0_ProcessorArchitecture'
           description: The architecture of the processor.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the string which identifies
             the architecture of the processor contained in this Socket.
         ProcessorId:
-          $ref: '#/components/schemas/ProcessorId'
+          $ref: '#/components/schemas/Processor_v1_4_0_ProcessorId'
           description: Identification information for this processor.
           x-longDescription: This object shall contain identification information
             for this processor.
         ProcessorMemory:
           description: The memory directly attached or integrated witin this Procesor.
           items:
-            $ref: '#/components/schemas/ProcessorMemory'
+            $ref: '#/components/schemas/Processor_v1_4_0_ProcessorMemory'
           type: array
           x-longDescription: The value of this property shall be the memory directly
             attached or integrated witin this Processor.
           x-versionAdded: v1_4_0
         ProcessorType:
-          $ref: '#/components/schemas/ProcessorType'
+          $ref: '#/components/schemas/Processor_v1_4_0_ProcessorType'
           description: The type of processor.
           nullable: true
           readOnly: true
@@ -510,13 +510,13 @@ components:
           x-longDescription: This property shall contain the string which identifies
             the physical location or socket of the processor.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
             of the resource.
         SubProcessors:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Sub-Processors associated
             with this system, such as cores or threads that are part of a processor.
           readOnly: true
@@ -547,7 +547,7 @@ components:
           x-longDescription: This property shall indicate the total count of independent
             execution threads supported by this processor.
         UUID:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/UUID
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_UUID
           description: The universal unique identifier (UUID) for this processor.
           nullable: true
           readOnly: true
@@ -569,7 +569,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ProcessorArchitecture:
+    Processor_v1_4_0_ProcessorArchitecture:
       enum:
       - x86
       - IA-64
@@ -587,7 +587,7 @@ components:
         x86: x86 or x86-64.
       x-enumVersionAdded:
         Power: v1_4_0
-    ProcessorId:
+    Processor_v1_4_0_ProcessorId:
       additionalProperties: false
       description: This type describes the Identification information for a processor.
       properties:
@@ -640,7 +640,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ProcessorMemory:
+    Processor_v1_4_0_ProcessorMemory:
       additionalProperties: false
       description: This type describes the memory directly attached or integrated
         within a processor.
@@ -665,7 +665,7 @@ components:
             is discrete memory attached to the Processor.
           x-versionAdded: v1_4_0
         MemoryType:
-          $ref: '#/components/schemas/ProcessorMemoryType'
+          $ref: '#/components/schemas/Processor_v1_4_0_ProcessorMemoryType'
           description: The type of memory used by this processor.
           nullable: true
           readOnly: true
@@ -686,7 +686,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ProcessorMemoryType:
+    Processor_v1_4_0_ProcessorMemoryType:
       enum:
       - L1Cache
       - L2Cache
@@ -744,7 +744,7 @@ components:
         SDRAM: Synchronous dynamic random-access memory.
         SGRAM: Synchronous graphics RAM.
         SRAM: Static random-access memory.
-    ProcessorType:
+    Processor_v1_4_0_ProcessorType:
       enum:
       - CPU
       - GPU

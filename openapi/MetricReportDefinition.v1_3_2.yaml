@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    MetricReportDefinition_v1_3_2_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -14,7 +14,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    CalculationAlgorithmEnum:
+    MetricReportDefinition_v1_3_2_CalculationAlgorithmEnum:
       description: The function to apply to the list of metric properties.
       enum:
       - Average
@@ -42,7 +42,7 @@ components:
           CollectionDuration property value.
       x-longDescription: This type shall specify the function to apply to the list
         of metric properties.
-    CollectionTimeScope:
+    MetricReportDefinition_v1_3_2_CollectionTimeScope:
       description: The time scope of the related metric values.
       enum:
       - Point
@@ -78,12 +78,12 @@ components:
           and timestamp.
       x-longDescription: This type shall specify the time scope of the corresponding
         metric values.
-    Links:
+    MetricReportDefinition_v1_3_2_Links:
       additionalProperties: false
       description: The links to other resources that are related to this resource.
       properties:
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -93,7 +93,7 @@ components:
             a new metric report upon a trigger occurrence when the TriggerActions
             property contains `RedfishMetricReport`.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain a set of triggers that cause
@@ -101,7 +101,7 @@ components:
             when the TriggerActions property contains `RedfishMetricReport`.
           x-versionAdded: v1_2_0
         Triggers@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
       type: object
       x-longDescription: This Redfish Specification-described type shall contain links
         to resources that are related to but are not contained by, or subordinate
@@ -109,7 +109,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Metric:
+    MetricReportDefinition_v1_3_2_Metric:
       additionalProperties: false
       description: Specifies a metric to include in the metric report.  The metrics
         are derived by applying a calculation on each of the listed metric properties.
@@ -123,7 +123,7 @@ components:
           x-longDescription: This property shall specify the duration over which the
             function is computed.
         CollectionFunction:
-          $ref: '#/components/schemas/CalculationAlgorithmEnum'
+          $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_CalculationAlgorithmEnum'
           description: Specifies the function to perform on each of the metric properties
             listed in the MetricProperties property.
           nullable: true
@@ -131,7 +131,7 @@ components:
           x-longDescription: The property shall specify the function to perform on
             each of the metric properties listed in the MetricProperties property.
         CollectionTimeScope:
-          $ref: '#/components/schemas/CollectionTimeScope'
+          $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_CollectionTimeScope'
           description: The scope of time over which the function is applied.
           nullable: true
           readOnly: false
@@ -172,21 +172,21 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MetricReportDefinition:
+    MetricReportDefinition_v1_3_2_MetricReportDefinition:
       additionalProperties: false
       description: The MetricReportDefinition schema describes set of metrics that
         are collected into a metric report.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
@@ -203,14 +203,14 @@ components:
             the ReportUpdates property.  This property shall be required if ReportUpdates
             is either AppendWrapsWhenFull or AppendStopsWhenFull.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_Links'
           description: The links to other resources that are related to this resource.
           x-longDescription: This property shall contain links to resources that are
             related to but are not contained by, or subordinate to, this resource.
@@ -233,7 +233,7 @@ components:
             to include in the metric report.  The property identifiers portion of
             the URI shall follow RFC6901-specified JSON fragment notation rules.
         MetricReport:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The location where the resultant metric report is placed.
           readOnly: true
           x-longDescription: This property shall contain a link to a resource of type
@@ -248,7 +248,7 @@ components:
             new metric reports is enabled.
           x-versionAdded: v1_2_0
         MetricReportDefinitionType:
-          $ref: '#/components/schemas/MetricReportDefinitionType'
+          $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_MetricReportDefinitionType'
           description: Specifies when the metric report is generated.
           nullable: true
           readOnly: false
@@ -275,16 +275,16 @@ components:
           description: The list of metrics to include in the metric report.  The metrics
             might include metric properties or calculations applied to a metric property.
           items:
-            $ref: '#/components/schemas/Metric'
+            $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_Metric'
           type: array
           x-longDescription: The property shall contain a list of metrics to include
             in the metric report.  The metrics might include metric properties or
             calculations that are applied to a metric property.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -292,7 +292,7 @@ components:
         ReportActions:
           description: The set of actions to perform when a metric report is generated.
           items:
-            $ref: '#/components/schemas/ReportActionsEnum'
+            $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_ReportActionsEnum'
           readOnly: true
           type: array
           x-longDescription: This property shall contain the set of actions to perform
@@ -308,7 +308,7 @@ components:
             report can cover.
           x-versionAdded: v1_3_0
         ReportUpdates:
-          $ref: '#/components/schemas/ReportUpdatesEnum'
+          $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_ReportUpdatesEnum'
           description: The behavior for how subsequent metric reports are handled
             in relationship to an existing metric report created from the metric report
             definition.  Namely, whether to overwrite, append, or create a report
@@ -319,7 +319,7 @@ components:
             created from the metric report definition.  This property should be ignored
             if MetricReportDefinitionType contains the value `OnRequest`.
         Schedule:
-          $ref: http://redfish.dmtf.org/schemas/v1/Schedule.yaml#/components/schemas/Schedule
+          $ref: http://redfish.dmtf.org/schemas/v1/Schedule.yaml#/components/schemas/Schedule_Schedule
           description: The schedule for generating the metric report.
           x-longDescription: This property shall contain the schedule of the metric
             report.  The metric report shall be generated at an interval specified
@@ -330,7 +330,7 @@ components:
             property should be set to `false` when the specified number of occurrences
             is reached.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the resource and its subordinate or
             dependent resources.
           x-longDescription: This property shall contain any status or health properties
@@ -358,7 +358,7 @@ components:
           description: The set of wildcards and their substitution values for the
             entries in the MetricProperties property.
           items:
-            $ref: '#/components/schemas/Wildcard'
+            $ref: '#/components/schemas/MetricReportDefinition_v1_3_2_Wildcard'
           type: array
           x-longDescription: The property shall contain a set of wildcards and their
             replacement strings, which are applied to the MetricProperties property.  Each
@@ -375,7 +375,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MetricReportDefinitionType:
+    MetricReportDefinition_v1_3_2_MetricReportDefinitionType:
       description: Indicates when the metric report is generated.
       enum:
       - Periodic
@@ -389,7 +389,7 @@ components:
         Periodic: The metric report is generated at a periodic time interval, specified
           in the Schedule property.
       x-longDescription: This type shall specify when the metric report is generated.
-    OemActions:
+    MetricReportDefinition_v1_3_2_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -399,7 +399,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ReportActionsEnum:
+    MetricReportDefinition_v1_3_2_ReportActionsEnum:
       description: Actions to perform when a metric report is generated.
       enum:
       - LogToMetricReportsCollection
@@ -418,7 +418,7 @@ components:
           of the event service.
       x-longDescription: This type shall specify the actions to perform when a metric
         report is generated.
-    ReportUpdatesEnum:
+    MetricReportDefinition_v1_3_2_ReportUpdatesEnum:
       description: Handling of subsequent metric reports when a metric report exists.
       enum:
       - Overwrite
@@ -454,7 +454,7 @@ components:
           referenced by the MetricReport property.
       x-longDescription: This type shall indicate how the service handles subsequent
         metric reports when a metric report exists.
-    Wildcard:
+    MetricReportDefinition_v1_3_2_Wildcard:
       additionalProperties: false
       description: The wildcard and its substitution values.
       properties:

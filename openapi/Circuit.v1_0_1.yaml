@@ -1,17 +1,17 @@
 components:
   schemas:
-    Actions:
+    Circuit_v1_0_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#Circuit.BreakerControl':
-          $ref: '#/components/schemas/BreakerControl'
+          $ref: '#/components/schemas/Circuit_v1_0_1_BreakerControl'
         '#Circuit.PowerControl':
-          $ref: '#/components/schemas/PowerControl'
+          $ref: '#/components/schemas/Circuit_v1_0_1_PowerControl'
         '#Circuit.ResetMetrics':
-          $ref: '#/components/schemas/ResetMetrics'
+          $ref: '#/components/schemas/Circuit_v1_0_1_ResetMetrics'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Circuit_v1_0_1_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -20,7 +20,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    BreakerControl:
+    Circuit_v1_0_1_BreakerControl:
       additionalProperties: false
       description: This action attempts to reset the circuit breaker.
       properties:
@@ -37,12 +37,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    BreakerControlRequestBody:
+    Circuit_v1_0_1_BreakerControlRequestBody:
       additionalProperties: false
       description: This action attempts to reset the circuit breaker.
       properties:
         PowerState:
-          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/PowerState
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PowerState
           description: The desired power state of the circuit if the breaker is reset
             successfully.
           x-longDescription: This parameter shall contain the desired power state
@@ -50,32 +50,32 @@ components:
       type: object
       x-longDescription: This action shall control the state of the circuit breaker
         or over-current protection device.
-    Circuit:
+    Circuit_v1_0_1_Circuit:
       additionalProperties: false
       description: This is the schema definition for an electrical circuit.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Circuit_v1_0_1_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
         BreakerState:
-          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/BreakerStates
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_BreakerStates
           description: The state of the over current protection device.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the state of the over current
             protection device.
         CircuitType:
-          $ref: '#/components/schemas/CircuitType'
+          $ref: '#/components/schemas/Circuit_v1_0_1_CircuitType'
           description: The type of circuit.
           nullable: true
           readOnly: true
@@ -90,7 +90,7 @@ components:
             that could affect the state of the circuit.  The value shall be `true`
             if the circuit is deemed critical, and `false` if the circuit is not critical.
         CurrentAmps:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorCurrentExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
           description: The current reading for this single phase circuit.
           nullable: true
           readOnly: true
@@ -99,18 +99,18 @@ components:
             Amperes, for this single phase circuit.  This property shall not appear
             in resource instances representing poly-phase circuits.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         ElectricalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/ElectricalContext
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_ElectricalContext
           description: The combination of current-carrying conductors.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the combination of current-carrying
             conductors that distribute power.
         EnergykWh:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The energy reading for this circuit.
           nullable: true
           readOnly: true
@@ -119,7 +119,7 @@ components:
             in kilowatt-hours (kW.h), for this circuit, that represents the `Total`
             ElectricalContext sensor when multiple energy sensors exist for this circuit.
         FrequencyHz:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
           description: The frequency reading for this circuit.
           nullable: true
           readOnly: true
@@ -127,38 +127,38 @@ components:
           x-longDescription: This property shall contain the frequency sensor for
             this circuit.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         IndicatorLED:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/IndicatorLED
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_IndicatorLED
           description: The state of the indicator LED, which identifies the circuit.
           nullable: true
           readOnly: false
           x-longDescription: This property shall contain the indicator light state
             for the indicator light associated with this circuit.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Circuit_v1_0_1_Links'
           description: The links to other resources that are related to this resource.
           x-longDescription: This property shall contain links to resources that are
             related to but are not contained by, or subordinate to, this resource.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NominalVoltage:
-          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/NominalVoltageType
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_NominalVoltageType
           description: The nominal voltage for this circuit.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the nominal voltage for this
             circuit, in Volts.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         PhaseWiringType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/PhaseWiringType
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PhaseWiringType
           description: The number of ungrounded current-carrying conductors (phases)
             and the total number of conductors (wires).
           nullable: true
@@ -167,14 +167,14 @@ components:
             current-carrying conductors (phases) and the total number of conductors
             (wires).
         PlugType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/PlugType
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PlugType
           description: The type of plug according to NEMA, IEC, or regional standards.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the type of physical plug
             used for this circuit, as defined by IEC, NEMA, or regional standard.
         PolyPhaseCurrentAmps:
-          $ref: '#/components/schemas/CurrentSensors'
+          $ref: '#/components/schemas/Circuit_v1_0_1_CurrentSensors'
           description: The current readings for this circuit.
           nullable: true
           x-longDescription: This property shall contain the current sensor(s) for
@@ -183,7 +183,7 @@ components:
             if present.  For poly-phase circuits this property should contain multiple
             current sensor readings used to fully describe the circuit.
         PolyPhaseEnergykWh:
-          $ref: '#/components/schemas/EnergySensors'
+          $ref: '#/components/schemas/Circuit_v1_0_1_EnergySensors'
           description: The energy readings for this circuit.
           nullable: true
           x-longDescription: This property shall contain the energy sensor(s) for
@@ -192,7 +192,7 @@ components:
             if present.  For poly-phase circuits this property should contain multiple
             energy sensor readings used to fully describe the circuit.
         PolyPhasePowerWatts:
-          $ref: '#/components/schemas/PowerSensors'
+          $ref: '#/components/schemas/Circuit_v1_0_1_PowerSensors'
           description: The power readings for this circuit.
           nullable: true
           x-longDescription: This property shall contain the power sensor(s) for this
@@ -201,7 +201,7 @@ components:
             poly-phase circuits this property should contain multiple power sensor
             readings used to fully describe the circuit.
         PolyPhaseVoltage:
-          $ref: '#/components/schemas/VoltageSensors'
+          $ref: '#/components/schemas/Circuit_v1_0_1_VoltageSensors'
           description: The voltage readings for this circuit.
           nullable: true
           x-longDescription: This property shall contain the voltage sensor(s) for
@@ -254,7 +254,7 @@ components:
             delay power on after a power fault.  The value `0` shall indicate no delay
             to power on.
         PowerRestorePolicy:
-          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/PowerRestorePolicyTypes
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PowerRestorePolicyTypes
           description: The desired power state of the circuit when power is restored
             after a power loss.
           readOnly: false
@@ -262,13 +262,13 @@ components:
             the circuit when power is applied.  The value `LastState` shall return
             the circuit to the PowerState it was in when power was lost.
         PowerState:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/PowerState
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_PowerState
           description: The power state of the circuit.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the power state of the circuit.
         PowerWatts:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The power reading for this circuit.
           nullable: true
           readOnly: true
@@ -287,13 +287,13 @@ components:
             agency or other regulatory requirements, has been applied.
           x-units: A
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the resource and its subordinate or
             dependent resources.
           x-longDescription: This property shall contain any status or health properties
             of the resource.
         Voltage:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorVoltageExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
           description: The voltage reading for this single phase circuit.
           nullable: true
           readOnly: true
@@ -302,7 +302,7 @@ components:
             Volts, for this single phase circuit.  This property shall not appear
             in resource instances representing poly-phase circuits.
         VoltageType:
-          $ref: '#/components/schemas/VoltageType'
+          $ref: '#/components/schemas/Circuit_v1_0_1_VoltageType'
           description: The type of voltage applied to the circuit.
           nullable: true
           readOnly: true
@@ -319,7 +319,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    CircuitType:
+    Circuit_v1_0_1_CircuitType:
       enum:
       - Mains
       - Branch
@@ -331,12 +331,12 @@ components:
         Feeder: A feeder (output) circuit.
         Mains: A mains input or utility circuit.
         Subfeed: A subfeed (output) circuit.
-    CurrentSensors:
+    Circuit_v1_0_1_CurrentSensors:
       additionalProperties: false
       description: The current sensors for this circuit.
       properties:
         Line1:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorCurrentExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
           description: Line 1 current sensor.
           nullable: true
           readOnly: true
@@ -345,7 +345,7 @@ components:
             measures current for L1.  This property shall not be present if the circuit
             does not include an L1 measurement.
         Line2:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorCurrentExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
           description: Line 2 current sensor.
           nullable: true
           readOnly: true
@@ -354,7 +354,7 @@ components:
             measures current for L2.  This property shall not be present if the circuit
             does not include an L2 measurement.
         Line3:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorCurrentExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
           description: Line 3 current sensor.
           nullable: true
           readOnly: true
@@ -363,7 +363,7 @@ components:
             measures current for L3.  This property shall not be present if the circuit
             does not include an L3 measurement.
         Neutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorCurrentExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
           description: Neutral line current sensor.
           nullable: true
           readOnly: true
@@ -377,12 +377,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    EnergySensors:
+    Circuit_v1_0_1_EnergySensors:
       additionalProperties: false
       description: The energy readings for this circuit.
       properties:
         Line1ToLine2:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The Line 1 to Line 2 energy reading for this circuit.
           nullable: true
           readOnly: true
@@ -391,7 +391,7 @@ components:
             that measures energy between L1 and L2.  This property shall not be present
             if the circuit does not include an L1-L2 measurement.
         Line1ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The Line 1 to Neutral energy reading for this circuit.
           nullable: true
           readOnly: true
@@ -400,7 +400,7 @@ components:
             that measures energy between L1 and Neutral.  This property shall not
             be present if the circuit does not include an L1-Neutral measurement.
         Line2ToLine3:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The Line 2 to Line 3 energy reading for this circuit.
           nullable: true
           readOnly: true
@@ -409,7 +409,7 @@ components:
             that measures energy between L2 and L3.  This property shall not be present
             if the circuit does not include an L2-L3 measurement.
         Line2ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The Line 2 to Neutral energy reading for this circuit.
           nullable: true
           readOnly: true
@@ -418,7 +418,7 @@ components:
             that measures energy between L2 and Neutral.  This property shall not
             be present if the circuit does not include an L2-Neutral measurement.
         Line3ToLine1:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The Line 3 to Line 1 energy reading for this circuit.
           nullable: true
           readOnly: true
@@ -427,7 +427,7 @@ components:
             that measures energy between L3 and L1.  This property shall not be present
             if the circuit does not include an L3-L1 measurement.
         Line3ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorEnergykWhExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
           description: The Line 3 to Neutral energy reading for this circuit.
           nullable: true
           readOnly: true
@@ -441,19 +441,19 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Links:
+    Circuit_v1_0_1_Links:
       additionalProperties: false
       description: The links to other resources that are related to this resource.
       properties:
         BranchCircuit:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the branch circuit related to this circuit.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain a link to a resource of type
             Circuit that represents the branch circuit associated with this circuit.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -461,13 +461,13 @@ components:
         Outlets:
           description: An array of references to the outlets contained by this circuit.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type Outlet that represent the outlets associated with this circuit.
         Outlets@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
       type: object
       x-longDescription: This Redfish Specification-described type shall contain links
         to resources that are related to but are not contained by, or subordinate
@@ -475,7 +475,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Circuit_v1_0_1_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -485,7 +485,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerControl:
+    Circuit_v1_0_1_PowerControl:
       additionalProperties: false
       description: This action turns the circuit on or off.
       properties:
@@ -501,23 +501,23 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerControlRequestBody:
+    Circuit_v1_0_1_PowerControlRequestBody:
       additionalProperties: false
       description: This action turns the circuit on or off.
       properties:
         PowerState:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/PowerState
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_PowerState
           description: The desired power state of the circuit.
           x-longDescription: This parameter shall contain the desired power state
             of the circuit.
       type: object
       x-longDescription: This action shall control the power state of the circuit.
-    PowerSensors:
+    Circuit_v1_0_1_PowerSensors:
       additionalProperties: false
       description: This property contains the power sensors.
       properties:
         Line1ToLine2:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The Line 1 to Line 2 power reading for this circuit.
           nullable: true
           readOnly: true
@@ -526,7 +526,7 @@ components:
             measures power between L1 and L2.  This property shall not be present
             if the circuit does not include an L1-L2 measurement.
         Line1ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The Line 1 to Neutral power reading for this circuit.
           nullable: true
           readOnly: true
@@ -535,7 +535,7 @@ components:
             measures power between L1 and Neutral.  This property shall not be present
             if the circuit does not include an L1-Neutral measurement.
         Line2ToLine3:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The Line 2 to Line 3 power reading for this circuit.
           nullable: true
           readOnly: true
@@ -544,7 +544,7 @@ components:
             measures power between L2 and L3.  This property shall not be present
             if the circuit does not include an L2-L3 measurement.
         Line2ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The Line 2 to Neutral power reading for this circuit.
           nullable: true
           readOnly: true
@@ -553,7 +553,7 @@ components:
             measures power between L2 and Neutral.  This property shall not be present
             if the circuit does not include an L2-Neutral measurement.
         Line3ToLine1:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The Line 3 to Line 1 power reading for this circuit.
           nullable: true
           readOnly: true
@@ -562,7 +562,7 @@ components:
             measures power between L3 and L1.  This property shall not be present
             if the circuit does not include an L3-L1 measurement.
         Line3ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorPowerExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
           description: The Line 3 to Neutral power reading for this circuit.
           nullable: true
           readOnly: true
@@ -576,7 +576,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetMetrics:
+    Circuit_v1_0_1_ResetMetrics:
       additionalProperties: false
       description: This action resets metrics related to this circuit.
       properties:
@@ -593,19 +593,19 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetMetricsRequestBody:
+    Circuit_v1_0_1_ResetMetricsRequestBody:
       additionalProperties: false
       description: This action resets metrics related to this circuit.
       properties: {}
       type: object
       x-longDescription: This action shall reset any time intervals or counted values
         for this circuit.
-    VoltageSensors:
+    Circuit_v1_0_1_VoltageSensors:
       additionalProperties: false
       description: The voltage readings for this circuit.
       properties:
         Line1ToLine2:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorVoltageExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
           description: The Line 1 to Line 2 voltage reading for this circuit.
           nullable: true
           readOnly: true
@@ -614,7 +614,7 @@ components:
             measures voltage between L1 and L2.  This property shall not be present
             if the circuit does not include an L1-L2 measurement.
         Line1ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorVoltageExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
           description: The Line 1 to Neutral voltage reading for this circuit.
           nullable: true
           readOnly: true
@@ -623,7 +623,7 @@ components:
             measures voltage between L1 and Neutral.  This property shall not be present
             if the circuit does not include an L1-Neutral measurement.
         Line2ToLine3:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorVoltageExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
           description: The Line 2 to Line 3 voltage reading for this circuit.
           nullable: true
           readOnly: true
@@ -632,7 +632,7 @@ components:
             measures voltage between L2 and L3.  This property shall not be present
             if the circuit does not include an L2-L3 measurement.
         Line2ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorVoltageExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
           description: The Line 2 to Neutral voltage reading for this circuit.
           nullable: true
           readOnly: true
@@ -641,7 +641,7 @@ components:
             measures voltage between L2 and Neutral.  This property shall not be present
             if the circuit does not include an L2-Neutral measurement.
         Line3ToLine1:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorVoltageExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
           description: The Line 3 to Line 1 voltage reading for this circuit.
           nullable: true
           readOnly: true
@@ -650,7 +650,7 @@ components:
             measures voltage between L3 and L1.  This property shall not be present
             if the circuit does not include an L3-L1 measurement.
         Line3ToNeutral:
-          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/SensorVoltageExcerpt
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
           description: The Line 3 to Neutral voltage reading for this circuit.
           nullable: true
           readOnly: true
@@ -664,7 +664,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    VoltageType:
+    Circuit_v1_0_1_VoltageType:
       enum:
       - AC
       - DC

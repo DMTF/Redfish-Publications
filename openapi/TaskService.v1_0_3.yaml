@@ -1,6 +1,6 @@
 components:
   schemas:
-    OverWritePolicy:
+    TaskService_v1_0_3_OverWritePolicy:
       enum:
       - Manual
       - Oldest
@@ -8,20 +8,20 @@ components:
       x-enumDescriptions:
         Manual: Completed tasks are not automatically overwritten.
         Oldest: Oldest completed tasks are overwritten.
-    TaskService:
+    TaskService_v1_0_3_TaskService:
       additionalProperties: false
       description: This is the schema definition for the Task Service.  It represents
         the properties for the service itself and has links to the actual list of
         tasks.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         CompletedTaskOverWritePolicy:
-          $ref: '#/components/schemas/OverWritePolicy'
+          $ref: '#/components/schemas/TaskService_v1_0_3_OverWritePolicy'
           description: Overwrite policy of completed tasks.
           readOnly: true
           x-longDescription: The value of this property shall indicate how completed
@@ -37,11 +37,11 @@ components:
             DateTime value for the TaskService, with offset from UTC, in Redfish Timestamp
             format.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         LifeCycleEventOnTaskStateChange:
           description: Send an Event upon Task State Change.
@@ -51,10 +51,10 @@ components:
             that the service shall send a LifeCycle event to ListenerDestinations
             registered for such events upon change of task state.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -67,9 +67,9 @@ components:
           x-longDescription: The value of this property shall be a boolean indicating
             whether this service is enabled.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         Tasks:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: References to the Tasks collection.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a resource

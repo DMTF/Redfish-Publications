@@ -1,0 +1,222 @@
+components:
+  schemas:
+    IPAddresses_v1_1_3_AddressState:
+      enum:
+      - Preferred
+      - Deprecated
+      - Tentative
+      - Failed
+      type: string
+      x-enumDescriptions:
+        Deprecated: This address is currently within its valid lifetime but is now
+          outside its RFC4862-defined preferred lifetime.
+        Failed: This address has failed Duplicate Address Detection (DAD) testing,
+          as defined in RFC4862, section 5.4, and is not currently in use.
+        Preferred: This address is currently within both its RFC4862-defined valid
+          and preferred lifetimes.
+        Tentative: This address is currently undergoing Duplicate Address Detection
+          (DAD) testing, as defined in RFC4862, section 5.4.
+    IPAddresses_v1_1_3_IPv4Address:
+      additionalProperties: false
+      description: This type describes an IPv4 address.
+      properties:
+        Address:
+          description: The IPv4 address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain an IPv4 address assigned
+            to this interface.  If DHCPv4 is enabled on the interface, this property
+            becomes read-only.
+        AddressOrigin:
+          $ref: '#/components/schemas/IPAddresses_v1_1_3_IPv4AddressOrigin'
+          description: This indicates how the address was determined.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the IP address origin for
+            this network interface.
+        Gateway:
+          description: The IPv4 gateway for this address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the IPv4 default gateway
+            address for this interface.  If DHCPv4 is enabled on the interface and
+            is configured to set the IPv4 default gateway address, this property becomes
+            read-only.  If multiple IPv4 addresses are present on the same interface
+            only a single default gateway is allowed.  Any additional IPv4 addresses
+            shall not have a default gateway specified.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        SubnetMask:
+          $ref: '#/components/schemas/IPAddresses_v1_1_3_SubnetMask'
+          description: The IPv4 subnet mask.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the IPv4 subnet mask for
+            this address.  If DHCPv4 is enabled on the interface, this property becomes
+            read-only.
+      type: object
+      x-longDescription: This type shall describe an IPv4 address assigned to an interface.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    IPAddresses_v1_1_3_IPv4AddressOrigin:
+      enum:
+      - Static
+      - DHCP
+      - BOOTP
+      - IPv4LinkLocal
+      type: string
+      x-enumDescriptions:
+        BOOTP: A BOOTP service-provided address.
+        DHCP: A DHCPv4 service-provided address.
+        IPv4LinkLocal: The address is valid for only this network segment, or link.
+        Static: A user-configured static address.
+    IPAddresses_v1_1_3_IPv6Address:
+      additionalProperties: false
+      description: This type describes an IPv6 address.
+      properties:
+        Address:
+          description: The IPv6 address.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property lists an IPv6 address that is currently
+            assigned on this interface.
+        AddressOrigin:
+          $ref: '#/components/schemas/IPAddresses_v1_1_3_IPv6AddressOrigin'
+          description: This indicates how the address was determined.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the IPv6 address origin for
+            this interface.
+        AddressState:
+          $ref: '#/components/schemas/IPAddresses_v1_1_3_AddressState'
+          description: The current RFC4862-defined state of this address.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the current RFC4862-defined
+            state of this address.  Preferred and Deprecated states follow the definitions
+            in RFC4862, section 5.5.4.  The Tentative state indicates that the address
+            is undergoing Duplicate Address Detection (DAD), as defined in RFC4862,
+            section 5.4.  The Failed state indicates a static address that did not
+            pass DAD.  A static address in the Failed state is not in use on the network
+            stack, and corrective action is required to remedy this condition.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PrefixLength:
+          $ref: '#/components/schemas/IPAddresses_v1_1_3_PrefixLength'
+          description: The IPv6 address prefix Length.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the IPv6 address prefix length
+            for this interface.
+      type: object
+      x-longDescription: This type shall describe an IPv6 address assigned to an interface.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    IPAddresses_v1_1_3_IPv6AddressOrigin:
+      enum:
+      - Static
+      - DHCPv6
+      - LinkLocal
+      - SLAAC
+      type: string
+      x-enumDescriptions:
+        DHCPv6: A DHCPv6 service-provided address.
+        LinkLocal: The address is valid for only this network segment, or link.
+        SLAAC: A stateless autoconfiguration (SLAAC) service-provided address.
+        Static: A static user-configured address.
+    IPAddresses_v1_1_3_IPv6GatewayStaticAddress:
+      additionalProperties: false
+      description: This type represents a single IPv6 static address to be assigned
+        on a network interface.
+      properties:
+        Address:
+          description: A valid IPv6 address.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property provides access to a static IPv6 address
+            that is currently assigned on a network interface.
+          x-versionAdded: v1_1_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+          x-versionAdded: v1_1_0
+        PrefixLength:
+          $ref: '#/components/schemas/IPAddresses_v1_1_3_PrefixLength'
+          description: The IPv6 network prefix length, in bits, for this address.
+          nullable: true
+          readOnly: false
+          x-longDescription: Provides the IPv6 network prefix length, in bits, for
+            this address.
+          x-versionAdded: v1_1_0
+      required:
+      - Address
+      type: object
+      x-longDescription: This type shall represent a single IPv6 static address to
+        be assigned on a network interface.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    IPAddresses_v1_1_3_IPv6StaticAddress:
+      additionalProperties: false
+      description: This type represents a single IPv6 static address to be assigned
+        on a network interface.
+      properties:
+        Address:
+          description: A valid IPv6 address.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property provides access to a static IPv6 address
+            that is currently assigned on a network interface.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PrefixLength:
+          $ref: '#/components/schemas/IPAddresses_v1_1_3_PrefixLength'
+          description: The prefix length, in bits, of this IPv6 address.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the IPv6 network prefix length,
+            in bits, for this address.
+      required:
+      - Address
+      - PrefixLength
+      type: object
+      x-longDescription: This type shall represent a single IPv6 static address to
+        be assigned on a network interface.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    IPAddresses_v1_1_3_PrefixLength:
+      maximum: 128
+      minimum: 0
+      type: integer
+    IPAddresses_v1_1_3_SubnetMask:
+      pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+      type: string
+title: '#IPAddresses.v1_1_3'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.2'

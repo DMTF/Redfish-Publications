@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    Processor_v1_2_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Processor_v1_2_1_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    InstructionSet:
+    Processor_v1_2_1_InstructionSet:
       enum:
       - x86
       - x86-64
@@ -35,20 +35,20 @@ components:
         OEM: OEM-defined.
         x86: x86 32-bit.
         x86-64: x86 64-bit.
-    Links:
+    Processor_v1_2_1_Links:
       additionalProperties: false
       description: Contains references to other resources that are related to this
         resource.
       properties:
         Chassis:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Chassis which contains this Processor.
           readOnly: true
           x-longDescription: The value of this property shall be a reference to a
             resource of type Chassis that represent the physical container associated
             with this Processor.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -60,7 +60,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Processor_v1_2_1_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -70,53 +70,53 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Processor:
+    Processor_v1_2_1_Processor:
       additionalProperties: false
       description: This is the schema definition for the Processor resource.  It represents
         the properties of a processor attached to a System.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Processor_v1_2_1_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
         Assembly:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Assembly resource associated with this processor.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a resource
             of type Assembly.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         InstructionSet:
-          $ref: '#/components/schemas/InstructionSet'
+          $ref: '#/components/schemas/Processor_v1_2_1_InstructionSet'
           description: The instruction set of the processor.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the string which identifies
             the instruction set of the processor contained in this socket.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Processor_v1_2_1_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
             shall contain references to resources that are related to, but not contained
             by (subordinate to), this resource.
         Location:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Location
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
           description: The Location of the processor.
           x-longDescription: This property shall contain location information of the
             associated processor.
@@ -143,28 +143,28 @@ components:
           x-longDescription: This property shall indicate the model information as
             provided by the manufacturer of this processor.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         ProcessorArchitecture:
-          $ref: '#/components/schemas/ProcessorArchitecture'
+          $ref: '#/components/schemas/Processor_v1_2_1_ProcessorArchitecture'
           description: The architecture of the processor.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the string which identifies
             the architecture of the processor contained in this Socket.
         ProcessorId:
-          $ref: '#/components/schemas/ProcessorId'
+          $ref: '#/components/schemas/Processor_v1_2_1_ProcessorId'
           description: Identification information for this processor.
           x-longDescription: This object shall contain identification information
             for this processor.
         ProcessorType:
-          $ref: '#/components/schemas/ProcessorType'
+          $ref: '#/components/schemas/Processor_v1_2_1_ProcessorType'
           description: The type of processor.
           nullable: true
           readOnly: true
@@ -178,7 +178,7 @@ components:
           x-longDescription: This property shall contain the string which identifies
             the physical location or socket of the processor.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -208,7 +208,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ProcessorArchitecture:
+    Processor_v1_2_1_ProcessorArchitecture:
       enum:
       - x86
       - IA-64
@@ -222,7 +222,7 @@ components:
         MIPS: MIPS.
         OEM: OEM-defined.
         x86: x86 or x86-64.
-    ProcessorId:
+    Processor_v1_2_1_ProcessorId:
       additionalProperties: false
       description: This type describes the Identification information for a processor.
       properties:
@@ -275,7 +275,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ProcessorType:
+    Processor_v1_2_1_ProcessorType:
       enum:
       - CPU
       - GPU

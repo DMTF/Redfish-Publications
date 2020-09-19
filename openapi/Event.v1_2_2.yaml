@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    Event_v1_2_2_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Event_v1_2_2_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Event:
+    Event_v1_2_2_Event:
       additionalProperties: false
       description: The Event schema describes the JSON payload received by an Event
         Destination (which has subscribed to event notification) when events occurs.  This
@@ -24,15 +24,15 @@ components:
         information.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Event_v1_2_2_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -44,28 +44,28 @@ components:
           x-longDescription: This property shall contain a client supplied context
             for the Event Destination to which this event is being sent.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Events:
           description: Each event in this array has a set of properties that describe
             the event.  Since this is an array, more than one event can be sent simultaneously.
           items:
-            $ref: '#/components/schemas/EventRecord'
+            $ref: '#/components/schemas/Event_v1_2_2_EventRecord'
           type: array
           x-autoExpand: true
           x-longDescription: The value of this resource shall be an array of Event
             objects used to represent the occurrence of one or more events.
         Events@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -82,13 +82,13 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    EventRecord:
+    Event_v1_2_2_EventRecord:
       additionalProperties: false
       properties:
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         Actions:
-          $ref: '#/components/schemas/EventRecordActions'
+          $ref: '#/components/schemas/Event_v1_2_2_EventRecordActions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -117,7 +117,7 @@ components:
             event occurred where the value shall be consistent with the Redfish service
             time that is also used for the values of the Modified property.
         EventType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           deprecated: true
           description: This indicates the type of event sent, according to the definitions
             in the EventService.
@@ -157,13 +157,13 @@ components:
           x-longDescription: This property shall be a key into message registry as
             described in the Redfish specification.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         OriginOfCondition:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_idRef
           description: This indicates the resource that originated the condition that
             caused the event to be generated.
           readOnly: true
@@ -184,12 +184,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    EventRecordActions:
+    Event_v1_2_2_EventRecordActions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/EventRecordOemActions'
+          $ref: '#/components/schemas/Event_v1_2_2_EventRecordOemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -199,7 +199,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    EventRecordOemActions:
+    Event_v1_2_2_EventRecordOemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -209,7 +209,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    EventType:
+    Event_v1_2_2_EventType:
       deprecated: true
       enum:
       - StatusChange
@@ -226,7 +226,7 @@ components:
         ResourceRemoved: A resource has been removed.
         ResourceUpdated: The value of this resource has been updated.
         StatusChange: The status of this resource has changed.
-    OemActions:
+    Event_v1_2_2_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}

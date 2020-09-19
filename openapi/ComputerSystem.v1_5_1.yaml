@@ -1,15 +1,15 @@
 components:
   schemas:
-    Actions:
+    ComputerSystem_v1_5_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#ComputerSystem.Reset':
-          $ref: '#/components/schemas/Reset'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_Reset'
         '#ComputerSystem.SetDefaultBootOrder':
-          $ref: '#/components/schemas/SetDefaultBootOrder'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_SetDefaultBootOrder'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -19,7 +19,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Boot:
+    ComputerSystem_v1_5_1_Boot:
       additionalProperties: false
       description: This object contains the boot information for the current resource.
       properties:
@@ -36,7 +36,7 @@ components:
             for UEFI BootNext as this setting is defined in UEFI as a one-time boot
             only.
         BootOptions:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of the UEFI Boot Options associated
             with this Computer System.
           readOnly: true
@@ -55,7 +55,7 @@ components:
             of this computer system. For UEFI systems, this is the UEFI BootOrder
             as defined by the UEFI Specification.
         BootSourceOverrideEnabled:
-          $ref: '#/components/schemas/BootSourceOverrideEnabled'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_BootSourceOverrideEnabled'
           description: Describes the state of the Boot Source Override feature.
           nullable: true
           readOnly: false
@@ -66,7 +66,7 @@ components:
             have been completed. Changes to this property do not alter the BIOS persistent
             boot order configuration.
         BootSourceOverrideMode:
-          $ref: '#/components/schemas/BootSourceOverrideMode'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_BootSourceOverrideMode'
           description: The BIOS Boot Mode (either Legacy or UEFI) to be used when
             BootSourceOverrideTarget boot source is booted from.
           nullable: true
@@ -75,7 +75,7 @@ components:
             BIOS boot or UEFI for UEFI boot from boot source specified in BootSourceOverrideTarget
             property.
         BootSourceOverrideTarget:
-          $ref: http://redfish.dmtf.org/schemas/v1/ComputerSystem.yaml#/components/schemas/BootSource
+          $ref: http://redfish.dmtf.org/schemas/v1/ComputerSystem.yaml#/components/schemas/ComputerSystem_BootSource
           description: The current boot source to be used at next boot instead of
             the normal boot device, if BootSourceOverrideEnabled is true.
           nullable: true
@@ -108,7 +108,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    BootSource:
+    ComputerSystem_v1_5_1_BootSource:
       deprecated: true
       enum:
       - None
@@ -146,7 +146,7 @@ components:
           property.
         Usb: Boot from a USB device as specified by the system BIOS.
         Utilities: Boot the manufacturer's Utilities program(s).
-    BootSourceOverrideEnabled:
+    ComputerSystem_v1_5_1_BootSourceOverrideEnabled:
       enum:
       - Disabled
       - Once
@@ -159,7 +159,7 @@ components:
         Once: On its next boot cycle, the system will boot (one time) to the Boot
           Source Override Target. The value of BootSourceOverrideEnabled is then reset
           back to Disabled.
-    BootSourceOverrideMode:
+    ComputerSystem_v1_5_1_BootSourceOverrideMode:
       enum:
       - Legacy
       - UEFI
@@ -168,22 +168,22 @@ components:
         Legacy: The system will boot in non-UEFI boot mode to the Boot Source Override
           Target.
         UEFI: The system will boot in UEFI boot mode to the Boot Source Override Target.
-    ComputerSystem:
+    ComputerSystem_v1_5_1_ComputerSystem:
       additionalProperties: false
       description: This schema defines a computer system and its respective properties.  A
         computer system represents a machine (physical or virtual) and the local resources
         such as memory, cpu and other devices that can be accessed from that machine.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -196,7 +196,7 @@ components:
           x-longDescription: The value of this property shall contain the value of
             the asset tag of the system.
         Bios:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the BIOS settings associated with this system.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a resource
@@ -211,16 +211,16 @@ components:
             systems, the value may contain a version string representing the primary
             system firmware.
         Boot:
-          $ref: '#/components/schemas/Boot'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_Boot'
           description: Information about the boot settings for this system.
           x-longDescription: This object shall contain properties which describe boot
             information for the current resource.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EthernetInterfaces:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Ethernet interfaces associated
             with this system.
           readOnly: true
@@ -236,43 +236,43 @@ components:
             value is typically provided to the Manager by a service running in the
             host operating system.
         HostWatchdogTimer:
-          $ref: '#/components/schemas/WatchdogTimer'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_WatchdogTimer'
           description: This object describes the Host Watchdog Timer functionality
             for this system.
           x-longDescription: This object shall contain properties which describe the
             host watchdog timer functionality for this ComputerSystem.
         HostedServices:
-          $ref: '#/components/schemas/HostedServices'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_HostedServices'
           description: The services that this computer system supports.
           x-longDescription: The values of this collection shall describe services
             supported by this computer system.
         HostingRoles:
           description: The hosing roles that this computer system supports.
           items:
-            $ref: '#/components/schemas/HostingRole'
+            $ref: '#/components/schemas/ComputerSystem_v1_5_1_HostingRole'
           readOnly: true
           type: array
           x-longDescription: The values of this collection shall be the hosting roles
             supported by this computer system.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         IndicatorLED:
-          $ref: '#/components/schemas/IndicatorLED'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_IndicatorLED'
           description: The state of the indicator LED, used to identify the system.
           nullable: true
           readOnly: false
           x-longDescription: The value of this property shall contain the indicator
             light state for the indicator light associated with this system.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
             shall contain references to resources that are related to, but not contained
             by (subordinate to), this resource.
         LogServices:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Log Services associated with
             this system.
           readOnly: true
@@ -286,14 +286,14 @@ components:
           x-longDescription: The value of this property shall contain a value that
             represents the manufacturer of the system.
         Memory:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Memory associated with this
             system.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a collection
             of type MemoryCollection.
         MemoryDomains:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Memory Domains associated
             with this system.
           nullable: true
@@ -301,7 +301,7 @@ components:
           x-longDescription: The value of this property shall be a link to a collection
             of type MemoryDomainCollection.
         MemorySummary:
-          $ref: '#/components/schemas/MemorySummary'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_MemorySummary'
           description: This object describes the central memory of the system in general
             detail.
           x-longDescription: This object shall contain properties which describe the
@@ -316,17 +316,17 @@ components:
             about how the manufacturer references this system. This is typically the
             product name, without the manufacturer name.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NetworkInterfaces:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Network Interfaces associated
             with this system.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a collection
             of type NetworkInterfaceCollection.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -335,24 +335,24 @@ components:
           description: A reference to a collection of PCIe Devices used by this computer
             system.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type PCIeDevice.
         PCIeDevices@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         PCIeFunctions:
           description: A reference to a collection of PCIe Functions used by this
             computer system.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type PCIeFunction.
         PCIeFunctions@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         PartNumber:
           description: The part number for this system.
           nullable: true
@@ -361,20 +361,20 @@ components:
           x-longDescription: The value of this property shall contain the part number
             for the system as defined by the manufacturer.
         PowerState:
-          $ref: '#/components/schemas/PowerState'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_PowerState'
           description: This is the current power state of the system.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall contain the power state
             of the system.
         ProcessorSummary:
-          $ref: '#/components/schemas/ProcessorSummary'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_ProcessorSummary'
           description: This object describes the central processors of the system
             in general detail.
           x-longDescription: This object shall contain properties which describe the
             central processors for the current resource.
         Processors:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Processors associated with
             this system.
           readOnly: true
@@ -384,7 +384,7 @@ components:
           description: A reference to a collection of Redundancy entities that each
             name a set of computer systems that provide redundancy for this ComputerSystem.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           readOnly: true
           type: array
           x-autoExpand: true
@@ -393,7 +393,7 @@ components:
             of other ComputerSystems that provide the specified redundancy to this
             ComputerSystem.
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         SKU:
           description: The manufacturer SKU for this system.
           nullable: true
@@ -402,7 +402,7 @@ components:
           x-longDescription: The value of this property shall contain the Stock Keeping
             Unit (SKU) for the system.
         SecureBoot:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the UEFI SecureBoot resource associated with
             this system.
           readOnly: true
@@ -416,20 +416,20 @@ components:
           x-longDescription: The value of this property shall contain the serial number
             for the system.
         SimpleStorage:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of storage devices associated
             with this system.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a collection
             of type SimpleStorageCollection.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
             of the resource.
         Storage:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of storage devices associated
             with this system.
           readOnly: true
@@ -444,7 +444,7 @@ components:
             about the sub-model (or config) of the system. This shall not include
             the model/product name or the manufacturer name.
         SystemType:
-          $ref: '#/components/schemas/SystemType'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_SystemType'
           description: The type of computer system represented by this resource.
           readOnly: true
           x-longDescription: An enumeration that indicates the kind of system that
@@ -452,12 +452,12 @@ components:
         TrustedModules:
           description: This object describes the array of Trusted Modules in the system.
           items:
-            $ref: '#/components/schemas/TrustedModules'
+            $ref: '#/components/schemas/ComputerSystem_v1_5_1_TrustedModules'
           type: array
           x-longDescription: This object shall contain an array of objects with properties
             which describe the truted modules for the current resource.
         UUID:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/UUID
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_UUID
           description: The universal unique identifier (UUID) for this system.
           nullable: true
           readOnly: true
@@ -482,19 +482,19 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    HostedServices:
+    ComputerSystem_v1_5_1_HostedServices:
       additionalProperties: false
       description: This object describes services that may be running or installed
         on the system.
       properties:
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
             as described in the Redfish specification.
         StorageServices:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to a collection of storage services supported by
             this computer system.
           readOnly: true
@@ -506,7 +506,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    HostingRole:
+    ComputerSystem_v1_5_1_HostingRole:
       description: The enumerations of HostingRoles specify different features that
         the hosting ComputerSystem supports.
       enum:
@@ -521,7 +521,7 @@ components:
           as a storage server.
         Switch: The system hosts functionality that supports the system acting as
           a switch.
-    IndicatorLED:
+    ComputerSystem_v1_5_1_IndicatorLED:
       enum:
       - Unknown
       - Lit
@@ -550,7 +550,7 @@ components:
         Unknown: This value shall represent the Indicator LED is in an unknown state.  The
           service shall reject PATCH or PUT requests containing this value by returning
           HTTP 400 (Bad Request).
-    InterfaceType:
+    ComputerSystem_v1_5_1_InterfaceType:
       enum:
       - TPM1_2
       - TPM2_0
@@ -560,7 +560,7 @@ components:
         TCM1_0: Trusted Cryptography Module (TCM) 1.0.
         TPM1_2: Trusted Platform Module (TPM) 1.2.
         TPM2_0: Trusted Platform Module (TPM) 2.0.
-    InterfaceTypeSelection:
+    ComputerSystem_v1_5_1_InterfaceTypeSelection:
       description: The enumerations of InterfaceTypeSelection specify the method for
         switching the TrustedModule InterfaceType, for instance between TPM1_2 and
         TPM2_0, if supported.
@@ -578,7 +578,7 @@ components:
         None: The TrustedModule does not support switching the InterfaceType.
         OemMethod: The TrustedModule supports switching InterfaceType via an OEM proprietary
           mechanism.
-    Links:
+    ComputerSystem_v1_5_1_Links:
       additionalProperties: false
       description: Contains references to other resources that are related to this
         resource.
@@ -587,63 +587,63 @@ components:
           description: An array of references to the chassis in which this system
             is contained.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall reference a resource
             of type Chassis that represents the physical container associated with
             this resource.
         Chassis@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         ConsumingComputerSystems:
           description: An array of references to ComputerSystems that are realized,
             in whole or in part, from this ComputerSystem.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value shall be an array of references to ComputerSystems
             that are realized, in whole or in part, from this ComputerSystem.
         ConsumingComputerSystems@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         CooledBy:
           description: An array of ID[s] of resources that cool this computer system.
             Normally the ID will be a chassis or a specific set of fans.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of IDs containing
             pointers consistent with JSON pointer syntax to the resource that powers
             this computer system.
         CooledBy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Endpoints:
           description: An array of references to the endpoints that connect to this
             system.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be a reference to the
             resources that this system is associated with and shall reference a resource
             of type Endpoint.
         Endpoints@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         ManagedBy:
           description: An array of references to the Managers responsible for this
             system.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall reference a resource
             of type manager that represents the resource with management responsibility
             for this resource.
         ManagedBy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -652,37 +652,37 @@ components:
           description: An array of ID[s] of resources that power this computer system.
             Normally the ID will be a chassis or a specific set of Power Supplies.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of IDs containing
             pointers consistent with JSON pointer syntax to the resource that powers
             this computer system.
         PoweredBy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         ResourceBlocks:
           description: An array of references to the Resource Blocks that are used
             in this Computer System.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: false
           type: array
           x-longDescription: The value of this property shall be an array of references
             of type ResourceBlock that show the Resource Blocks that are used in this
             Computer System.
         ResourceBlocks@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         SupplyingComputerSystems:
           description: An array of references to ComputerSystems that contribute,
             in whole or in part, to the implementation of this ComputerSystem.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value shall be an array of references to ComputerSystems
             that contribute, in whole or in part, to the implementation of this ComputerSystem.
         SupplyingComputerSystems@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
       type: object
       x-longDescription: This type, as described by the Redfish Specification, shall
         contain references to resources that are related to, but not contained by
@@ -690,7 +690,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    MemoryMirroring:
+    ComputerSystem_v1_5_1_MemoryMirroring:
       enum:
       - System
       - DIMM
@@ -705,12 +705,12 @@ components:
         None: The system does not support DIMM mirroring.
         System: The system supports DIMM mirroring at the System level.  Individual
           DIMMs are not paired for mirroring in this mode.
-    MemorySummary:
+    ComputerSystem_v1_5_1_MemorySummary:
       additionalProperties: false
       description: This object describes the memory of the system in general detail.
       properties:
         MemoryMirroring:
-          $ref: '#/components/schemas/MemoryMirroring'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_MemoryMirroring'
           description: The ability and type of memory mirroring supported by this
             system.
           nullable: true
@@ -718,7 +718,7 @@ components:
           x-longDescription: This property shall contain the ability and type of memory
             mirring supported by this system.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -749,7 +749,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    ComputerSystem_v1_5_1_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -759,7 +759,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerState:
+    ComputerSystem_v1_5_1_PowerState:
       enum:
       - 'On'
       - 'Off'
@@ -774,7 +774,7 @@ components:
           take time while the OS is in the shutdown process.
         PoweringOn: A temporary state between Off and On. This temporary state can
           be very short.
-    ProcessorSummary:
+    ComputerSystem_v1_5_1_ProcessorSummary:
       additionalProperties: false
       description: This object describes the central processors of the system in general
         detail.
@@ -806,7 +806,7 @@ components:
             Information - Processor Family section of the SMBIOS Specification DSP0134
             2.8 or later.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -817,7 +817,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Reset:
+    ComputerSystem_v1_5_1_Reset:
       additionalProperties: false
       description: This action is used to reset the system.
       properties:
@@ -838,12 +838,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetRequestBody:
+    ComputerSystem_v1_5_1_ResetRequestBody:
       additionalProperties: false
       description: This action is used to reset the system.
       properties:
         ResetType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/ResetType
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
           description: The type of reset to be performed.
           x-longDescription: This parameter shall define the type of reset to be performed.  The
             service may accept a request without the parameter and perform an implementation
@@ -855,7 +855,7 @@ components:
         shall remove power from the system or perform an ACPI Power Button Override
         (commonly known as a 4-second hold of the Power Button).  The ForceRestart
         value shall perform a ForceOff action followed by a On action.
-    SetDefaultBootOrder:
+    ComputerSystem_v1_5_1_SetDefaultBootOrder:
       additionalProperties: false
       description: This action is used to set the Boot Order to the default settings.
       properties:
@@ -872,14 +872,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    SetDefaultBootOrderRequestBody:
+    ComputerSystem_v1_5_1_SetDefaultBootOrderRequestBody:
       additionalProperties: false
       description: This action is used to set the Boot Order to the default settings.
       properties: {}
       type: object
       x-longDescription: This action shall perform a set the BootOrder to the default
         values.
-    SystemType:
+    ComputerSystem_v1_5_1_SystemType:
       enum:
       - Physical
       - Virtual
@@ -913,7 +913,7 @@ components:
         VirtuallyPartitioned: A SystemType of VirtuallyPartition is typically used
           when representating a single system constructed from one or more virtual
           systems via a software-based service.
-    TrustedModules:
+    ComputerSystem_v1_5_1_TrustedModules:
       additionalProperties: false
       description: This object describes the inventory of a Trusted Modules installed
         in the system.
@@ -933,14 +933,14 @@ components:
           x-longDescription: This property shall contain the 2nd firmware version,
             if applicable, as defined by the manufacturer for the Trusted Module.
         InterfaceType:
-          $ref: '#/components/schemas/InterfaceType'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_InterfaceType'
           description: This property indicates the interface type of the Trusted Module.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the interface type of the
             installed Trusted Module.
         InterfaceTypeSelection:
-          $ref: '#/components/schemas/InterfaceTypeSelection'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_InterfaceTypeSelection'
           description: The Interface Type selection supported by this Trusted Module.
           nullable: true
           readOnly: true
@@ -948,13 +948,13 @@ components:
             method (for example to switch between TPM1_2 and TPM2_0) that is supported
             by this TrustedModule.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
             as described in the Redfish specification.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -964,7 +964,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    WatchdogTimeoutActions:
+    ComputerSystem_v1_5_1_WatchdogTimeoutActions:
       description: The enumerations of WatchdogTimeoutActions specify the choice of
         action to take when the Host Watchdog Timer reaches its timeout value.
       enum:
@@ -980,7 +980,7 @@ components:
         PowerCycle: Power cycle the system.
         PowerDown: Power down the system.
         ResetSystem: Reset the system.
-    WatchdogTimer:
+    ComputerSystem_v1_5_1_WatchdogTimer:
       additionalProperties: false
       description: This type describes the Host Watchdog Timer functionality for this
         system.
@@ -997,19 +997,19 @@ components:
             indicates only that the functionality is enabled or disabled by the user,
             and updates to this property shall not initiate a watchdog timer countdown.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
             as described in the Redfish specification.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
             of the resource.
         TimeoutAction:
-          $ref: '#/components/schemas/WatchdogTimeoutActions'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_WatchdogTimeoutActions'
           description: This property indicates the action to perform when the Watchdog
             Timer reaches its timeout value.
           nullable: true
@@ -1017,7 +1017,7 @@ components:
           x-longDescription: This property shall contain the action to perform upon
             the  expiration of the Watchdog Timer.
         WarningAction:
-          $ref: '#/components/schemas/WatchdogWarningActions'
+          $ref: '#/components/schemas/ComputerSystem_v1_5_1_WatchdogWarningActions'
           description: This property indicates the action to perform when the Watchdog
             Timer is close (typically 3-10 seconds) to reaching its timeout value.
           nullable: true
@@ -1035,7 +1035,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    WatchdogWarningActions:
+    ComputerSystem_v1_5_1_WatchdogWarningActions:
       description: The enumerations of WatchdogWarningActions specify the choice of
         action to take when the Host Watchdog Timer is close (typically 3-10 seconds)
         to reaching its timeout value.

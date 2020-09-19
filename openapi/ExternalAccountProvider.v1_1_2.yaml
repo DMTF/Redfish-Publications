@@ -1,6 +1,6 @@
 components:
   schemas:
-    AccountProviderTypes:
+    ExternalAccountProvider_v1_1_2_AccountProviderTypes:
       enum:
       - RedfishService
       - ActiveDirectoryService
@@ -25,12 +25,12 @@ components:
         RedfishService: The external account provider shall be a DMTF Redfish Specification-comformant
           service.  The ServiceAddresses format shall contain a collection of URIs
           that correspond to a Redfish Account Service entity.
-    Actions:
+    ExternalAccountProvider_v1_1_2_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -39,12 +39,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Authentication:
+    ExternalAccountProvider_v1_1_2_Authentication:
       additionalProperties: false
       description: The information required to authenticate to the external service.
       properties:
         AuthenticationType:
-          $ref: '#/components/schemas/AuthenticationTypes'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_AuthenticationTypes'
           description: The type of authentication used to connect to the external
             account provider.
           nullable: true
@@ -62,7 +62,7 @@ components:
             of the Kerberos keytab for this Service.  A PATCH or PUT operation writes
             the keytab.  The value shall be `null` in responses.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -96,7 +96,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    AuthenticationTypes:
+    ExternalAccountProvider_v1_1_2_AuthenticationTypes:
       enum:
       - Token
       - KerberosKeytab
@@ -108,21 +108,21 @@ components:
         OEM: An OEM-specific authentication mechanism.
         Token: An opaque authentication token.
         UsernameAndPassword: A user name and password combination.
-    ExternalAccountProvider:
+    ExternalAccountProvider_v1_1_2_ExternalAccountProvider:
       additionalProperties: false
       description: The remote service that provides accounts for this manager to use
         for authentication.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         AccountProviderType:
-          $ref: '#/components/schemas/AccountProviderTypes'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_AccountProviderTypes'
           description: The type of external account provider to which this Service
             connects.
           nullable: true
@@ -130,17 +130,17 @@ components:
           x-longDescription: This property shall contain the type of external account
             provider to which this Service connects.
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
         Authentication:
-          $ref: '#/components/schemas/Authentication'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_Authentication'
           description: The authentication information for the external account provider.
           x-longDescription: This property shall contain the authentication information
             for the external account provider.
         Certificates:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to a collection of certificates that the external
             account provider uses.
           readOnly: true
@@ -148,29 +148,29 @@ components:
             of type CertificateCollection.
           x-versionAdded: v1_1_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         LDAPService:
-          $ref: '#/components/schemas/LDAPService'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_LDAPService'
           description: The additional mapping information needed to parse a generic
             LDAP service.
           x-longDescription: This property shall contain any additional mapping information
             needed to parse a generic LDAP service.  This property should only be
             present if AccountProviderType is LDAPService.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_Links'
           description: The links to other Resources that are related to this Resource.
           x-longDescription: The Redfish Specification-define Links Property shall
             contain links to Resources related to but not subordinate to this Resource.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -179,7 +179,7 @@ components:
           description: The mapping rules to convert the external account providers
             account information to the local Redfish Role.
           items:
-            $ref: '#/components/schemas/RoleMapping'
+            $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_RoleMapping'
             nullable: true
           type: array
           x-longDescription: This property shall contain a collection of the mapping
@@ -219,7 +219,7 @@ components:
           description: This property shall specify a valid odata or Redfish property.
       x-requiredOnCreate:
       - AccountProviderType
-    LDAPSearchSettings:
+    ExternalAccountProvider_v1_1_2_LDAPSearchSettings:
       additionalProperties: false
       description: The settings to search a generic LDAP service.
       properties:
@@ -260,18 +260,18 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    LDAPService:
+    ExternalAccountProvider_v1_1_2_LDAPService:
       additionalProperties: false
       description: The settings required to parse a generic LDAP service.
       properties:
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
             Specification-described requirements.
         SearchSettings:
-          $ref: '#/components/schemas/LDAPSearchSettings'
+          $ref: '#/components/schemas/ExternalAccountProvider_v1_1_2_LDAPSearchSettings'
           description: The required settings to search an external LDAP service.
           x-longDescription: This property shall contain the required settings to
             search an external LDAP service.
@@ -281,12 +281,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Links:
+    ExternalAccountProvider_v1_1_2_Links:
       additionalProperties: false
       description: The links to other Resources that are related to this Resource.
       properties:
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -297,7 +297,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    ExternalAccountProvider_v1_1_2_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -307,7 +307,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    RoleMapping:
+    ExternalAccountProvider_v1_1_2_RoleMapping:
       additionalProperties: false
       description: The mapping rules to convert the external account providers account
         information to the local Redfish Role.
@@ -322,7 +322,7 @@ components:
             within a Role Resource on this Redfish Service to which to map the remote
             user or group.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish

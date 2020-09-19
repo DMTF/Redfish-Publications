@@ -1,0 +1,362 @@
+components:
+  schemas:
+    MemoryMetrics_v1_4_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#MemoryMetrics.ClearCurrentPeriod':
+          $ref: '#/components/schemas/MemoryMetrics_v1_4_0_ClearCurrentPeriod'
+        Oem:
+          $ref: '#/components/schemas/MemoryMetrics_v1_4_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics_v1_4_0_AlarmTrips:
+      additionalProperties: false
+      description: The alarm trip information about the memory.  These alarms are
+        reset when the system resets.  Note that if they are re-discovered they can
+        be reasserted.
+      properties:
+        AddressParityError:
+          description: An indication of whether an address parity error was detected
+            that a retry could not correct.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether an address parity
+            error was detected that a retry could not correct.
+        CorrectableECCError:
+          description: An indication of whether the correctable error threshold crossing
+            alarm trip was detected.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the correctable
+            error threshold crossing alarm trip was detected.
+        SpareBlock:
+          description: An indication of whether the spare block capacity crossing
+            alarm trip was detected.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the spare block
+            capacity crossing alarm trip was detected.
+        Temperature:
+          description: An indication of whether a temperature threshold alarm trip
+            was detected.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicates whether a temperature threshold
+            alarm trip was detected.
+        UncorrectableECCError:
+          description: An indication of whether the uncorrectable error threshold
+            alarm trip was detected.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the uncorrectable
+            error threshold alarm trip was detected.
+      type: object
+      x-longDescription: This type shall contain properties that describe the types
+        of alarms that have been raised by the memory.  These alarms shall be reset
+        when the system resets.  Note that if they are re-discovered they can be reasserted.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics_v1_4_0_ClearCurrentPeriod:
+      additionalProperties: false
+      description: This action sets the CurrentPeriod property's values to 0.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod property's values
+        to 0.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics_v1_4_0_ClearCurrentPeriodRequestBody:
+      additionalProperties: false
+      description: This action sets the CurrentPeriod property's values to 0.
+      properties: {}
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod property's values
+        to 0.
+    MemoryMetrics_v1_4_0_CurrentPeriod:
+      additionalProperties: false
+      description: The memory metrics since the last system reset or ClearCurrentPeriod
+        action.
+      properties:
+        BlocksRead:
+          description: The number of blocks read since reset.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of blocks read
+            since reset.  When this resource is subordinate to the MemorySummary object,
+            this property shall be the sum of BlocksRead over all memory.
+        BlocksWritten:
+          description: The number of blocks written since reset.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of blocks written
+            since reset.  When this resource is subordinate to the MemorySummary object,
+            this property shall be the sum of BlocksWritten over all memory.
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors since reset.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            errors since reset.  When this resource is subordinate to the MemorySummary
+            object, this property shall be the sum of CorrectableECCErrorCount over
+            all memory.
+          x-versionAdded: v1_4_0
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors since reset.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            errors since reset.  When this resource is subordinate to the MemorySummary
+            object, this property shall be the sum of UncorrectableECCErrorCount over
+            all memory.
+          x-versionAdded: v1_4_0
+      type: object
+      x-longDescription: This type shall describe the memory metrics since last system
+        reset or ClearCurrentPeriod action.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics_v1_4_0_HealthData:
+      additionalProperties: false
+      description: The health information of the memory.
+      properties:
+        AlarmTrips:
+          $ref: '#/components/schemas/MemoryMetrics_v1_4_0_AlarmTrips'
+          description: Alarm trip information about the memory.
+          x-longDescription: This object shall contain properties describe the types
+            of alarms that have been raised by the memory.  When this resource is
+            subordinate to the MemorySummary object, this property shall indicate
+            whether an alarm of a given type have been raised by any area of memory.
+        DataLossDetected:
+          description: An indication of whether data loss was detected.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether data loss was detected.  When
+            this resource is subordinate to the MemorySummary object, this property
+            shall indicate whether any data loss was detected in any area of memory.
+        LastShutdownSuccess:
+          description: An indication of whether the last shutdown succeeded.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the last shutdown
+            succeeded.
+        PerformanceDegraded:
+          description: An indication of whether performance has degraded.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether performance has
+            degraded.  When this resource is subordinate to the MemorySummary object,
+            this property shall indicate whether degraded performance mode status
+            is detected in any area of memory.
+        PredictedMediaLifeLeftPercent:
+          description: The percentage of reads and writes that are predicted to still
+            be available for the media.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain an indicator of the percentage
+            of life remaining in the media.
+          x-units: '%'
+          x-versionAdded: v1_1_0
+        RemainingSpareBlockPercentage:
+          description: The remaining spare blocks, as a percentage.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the remaining spare blocks
+            as a percentage.  When this resource is subordinate to the MemorySummary
+            object, this property shall be the RemainingSpareBlockPercentage over
+            all memory.
+          x-units: '%'
+      type: object
+      x-longDescription: This type shall contain properties that describe the HealthData
+        metrics for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics_v1_4_0_LifeTime:
+      additionalProperties: false
+      description: The memory metrics for the lifetime of the memory.
+      properties:
+        BlocksRead:
+          description: The number of blocks read for the lifetime of the memory.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of blocks read
+            for the lifetime of the memory.  When this resource is subordinate to
+            the MemorySummary object, this property shall be the sum of BlocksRead
+            over all memory.
+        BlocksWritten:
+          description: The number of blocks written for the lifetime of the memory.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of blocks written
+            for the lifetime of the memory.  When this resource is subordinate to
+            the MemorySummary object, this property shall be the sum of BlocksWritten
+            over all memory.
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors for the lifetime of the
+            memory.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the correctable
+            errors for the lifetime of the memory.  When this resource is subordinate
+            to the MemorySummary object, this property shall be the sum of CorrectableECCErrorCount
+            over all memory.
+          x-versionAdded: v1_4_0
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors for the lifetime of
+            the memory.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the uncorrectable
+            errors for the lifetime of the memory.  When this resource is subordinate
+            to the MemorySummary object, this property shall be the sum of UncorrectableECCErrorCount
+            over all memory.
+          x-versionAdded: v1_4_0
+      type: object
+      x-longDescription: This type shall describe the memory metrics since manufacturing.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics_v1_4_0_MemoryMetrics:
+      additionalProperties: false
+      description: The usage and health statistics for a memory device or system memory
+        summary.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/MemoryMetrics_v1_4_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        BandwidthPercent:
+          description: The memory bandwidth utilization as a percentage.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain memory bandwidth utilization
+            as a percentage.  When this resource is subordinate to the MemorySummary
+            object, this property shall be the memory bandwidth utilization over all
+            memory as a percentage.
+          x-units: '%'
+          x-versionAdded: v1_2_0
+        BlockSizeBytes:
+          description: The block size, in bytes.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the block size, in bytes,
+            of all stucture elements.  When this resource is subordinate to the MemorySummary
+            object, this property is not applicable.
+          x-units: By
+        CurrentPeriod:
+          $ref: '#/components/schemas/MemoryMetrics_v1_4_0_CurrentPeriod'
+          description: The memory metrics since the last reset or ClearCurrentPeriod
+            action.
+          x-longDescription: This property shall contain properties that describe
+            the memory metrics for the current period.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        HealthData:
+          $ref: '#/components/schemas/MemoryMetrics_v1_4_0_HealthData'
+          description: The health information of the memory.
+          x-longDescription: This property shall contain properties that describe
+            the health data memory metrics for the memory.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        LifeTime:
+          $ref: '#/components/schemas/MemoryMetrics_v1_4_0_LifeTime'
+          description: The memory metrics for the lifetime of the memory.
+          x-longDescription: This property shall contain properties that describe
+            the memory metrics for the lifetime of the memory.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OperatingSpeedMHz:
+          description: Operating speed of memory in MHz or MT/s as appropriate.
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the operating speed of memory
+            in MHz or MT/s (mega-transfers per second) as reported by the memory device.  Memory
+            devices that operate at their bus speed shall report the operating speed
+            in MHz (bus speed), while memory devices that transfer data faster than
+            their bus speed, such as DDR memory, shall report the operating speed
+            in MT/s (mega-transfers/second).  The reported value shall match the conventionally
+            reported values for the technology used by the memory device.
+          x-units: MHz
+          x-versionAdded: v1_3_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: The MemoryMetrics schema shall contain the memory metrics
+        for a memory device or system memory summary in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryMetrics_v1_4_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#MemoryMetrics.v1_4_0.MemoryMetrics'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.3'

@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    UpdateService_v1_3_3_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         '#UpdateService.SimpleUpdate':
-          $ref: '#/components/schemas/SimpleUpdate'
+          $ref: '#/components/schemas/UpdateService_v1_3_3_SimpleUpdate'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/UpdateService_v1_3_3_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    UpdateService_v1_3_3_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -26,7 +26,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SimpleUpdate:
+    UpdateService_v1_3_3_SimpleUpdate:
       additionalProperties: false
       description: This action updates software components.
       properties:
@@ -43,7 +43,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SimpleUpdateRequestBody:
+    UpdateService_v1_3_3_SimpleUpdateRequestBody:
       additionalProperties: false
       description: This action updates software components.
       properties:
@@ -69,7 +69,7 @@ components:
             image to all applicable targets, as determined by the Service.
           x-versionAdded: v1_2_0
         TransferProtocol:
-          $ref: '#/components/schemas/TransferProtocolType'
+          $ref: '#/components/schemas/UpdateService_v1_3_3_TransferProtocolType'
           description: The network protocol that the Update Service uses to retrieve
             the software image file located at the URI provided in ImageURI, if the
             URI does not contain a scheme.
@@ -83,7 +83,7 @@ components:
       type: object
       x-longDescription: This action shall update installed software components in
         a software image file located at an ImageURI parameter-specified URI.
-    TransferProtocolType:
+    UpdateService_v1_3_3_TransferProtocolType:
       enum:
       - CIFS
       - FTP
@@ -114,7 +114,7 @@ components:
         SFTP: v1_1_0
       x-enumVersionDeprecated:
         NSF: v1_3_0
-    UpdateService:
+    UpdateService_v1_3_3_UpdateService:
       additionalProperties: false
       description: The UpdateService schema describes the Update Service and the properties
         for the Service itself with links to collections of firmware and software
@@ -122,24 +122,24 @@ components:
         and firmware of the Resources in a Redfish Service.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/UpdateService_v1_3_3_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         FirmwareInventory:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: An inventory of firmware.
           readOnly: true
           x-longDescription: This property shall contain a link to a Resource of type
@@ -189,13 +189,13 @@ components:
             property has no functional requirements for the Service.
           x-versionAdded: v1_2_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -208,13 +208,13 @@ components:
           x-longDescription: This property shall indicate whether this service is
             enabled.
         SoftwareInventory:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: An inventory of software.
           readOnly: true
           x-longDescription: This property shall contain a link to a Resource of type
             SoftwareInventoryCollection.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-longDescription: This property shall contain any status or health properties

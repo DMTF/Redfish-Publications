@@ -1,6 +1,6 @@
 components:
   schemas:
-    Fan:
+    Thermal_v1_2_2_Fan:
       additionalProperties: false
       description: This is the base type for addressable members of an array.
       properties:
@@ -13,7 +13,7 @@ components:
           x-deprecatedReason: This property has been Deprecated in favor of Thermal.v1_1_0.Thermal.Fan.Name
           x-longDescription: The value of this property shall be the name of the fan.
         IndicatorLED:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/IndicatorLED
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Resource_v1_1_0_IndicatorLED
           description: The state of the indicator LED, used to identify this Fan.
           nullable: true
           readOnly: false
@@ -87,7 +87,7 @@ components:
           type: string
           x-longDescription: The value of this property shall be the name of the fan.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -100,7 +100,7 @@ components:
           x-longDescription: This property shall contain the part number as defined
             by the manufacturer for the associated fan.
         PhysicalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.v1_0_0.yaml#/components/schemas/PhysicalContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.v1_0_0.yaml#/components/schemas/PhysicalContext_v1_0_0_PhysicalContext
           description: Describes the area or device associated with this fan.
           readOnly: true
           x-longDescription: The value of this property shall be a description of
@@ -114,7 +114,7 @@ components:
           x-longDescription: The value of this property shall be the current value
             of the fan sensor's reading.
         ReadingUnits:
-          $ref: '#/components/schemas/ReadingUnits'
+          $ref: '#/components/schemas/Thermal_v1_2_2_ReadingUnits'
           description: Units in which the reading and thresholds are measured.
           nullable: true
           readOnly: true
@@ -124,28 +124,28 @@ components:
           description: This structure is used to show redundancy for fans.  The Component
             ids will reference the members of the redundancy groups.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           type: array
           x-longDescription: The values of the properties in this array shall be used
             to show redundancy for fans and other elements in this resource.  The
             use of IDs within these arrays shall reference the members of the redundancy
             groups.
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Redundancy@odata.navigationLink:
           format: uri
           type: string
         RelatedItem:
           description: The ID(s) of the resources serviced with this fan.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of IDs containing
             pointers consistent with JSON pointer syntax to the resource that are
             being serviced by this fan.
         RelatedItem@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         RelatedItem@odata.navigationLink:
           format: uri
           type: string
@@ -164,7 +164,7 @@ components:
           x-longDescription: This property shall contain the spare or replacement
             part number as defined by the manufacturer for the associated fan.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         UpperThresholdCritical:
           description: Above normal range but not yet fatal.
           nullable: true
@@ -196,7 +196,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ReadingUnits:
+    Thermal_v1_2_2_ReadingUnits:
       enum:
       - RPM
       - Percent
@@ -205,7 +205,7 @@ components:
         Percent: Indicates that the fan reading and thresholds are measured in percentage.
         RPM: Indicates that the fan reading and thresholds are measured in rotations
           per minute.
-    Temperature:
+    Thermal_v1_2_2_Temperature:
       additionalProperties: false
       description: This is the base type for addressable members of an array.
       properties:
@@ -268,13 +268,13 @@ components:
           x-longDescription: The value of this property shall be the name of the temperature
             sensor.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         PhysicalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.v1_0_0.yaml#/components/schemas/PhysicalContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.v1_0_0.yaml#/components/schemas/PhysicalContext_v1_0_0_PhysicalContext
           description: Describes the area or device to which this temperature measurement
             applies.
           readOnly: true
@@ -293,13 +293,13 @@ components:
           description: Describes the areas or devices to which this temperature measurement
             applies.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall the array of IDs of
             areas or devices to which this temperature measurement applies.
         RelatedItem@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         RelatedItem@odata.navigationLink:
           format: uri
           type: string
@@ -311,7 +311,7 @@ components:
           x-longDescription: The value of this property shall be a numerical identifier
             for this temperature sensor that is unique within this resource.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         UpperThresholdCritical:
           description: Above normal range but not yet fatal.
           nullable: true
@@ -346,42 +346,42 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Thermal:
+    Thermal_v1_2_2_Thermal:
       additionalProperties: false
       description: This is the schema definition for the Thermal properties.  It represents
         the properties for Temperature and Cooling.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Fans:
           description: This is the definition for fans.
           items:
-            $ref: '#/components/schemas/Fan'
+            $ref: '#/components/schemas/Thermal_v1_2_2_Fan'
           readOnly: false
           type: array
           x-longDescription: These properties shall be the definition for fans for
             a Redfish implementation.
         Fans@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Fans@odata.navigationLink:
           format: uri
           type: string
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -390,29 +390,29 @@ components:
           description: This structure is used to show redundancy for fans.  The Component
             ids will reference the members of the redundancy groups.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           type: array
           x-longDescription: The values of the properties in this array shall be used
             to show redundancy for fans and other elements in this resource.  The
             use of IDs within these arrays shall reference the members of the redundancy
             groups.
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Redundancy@odata.navigationLink:
           format: uri
           type: string
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         Temperatures:
           description: This is the definition for temperature sensors.
           items:
-            $ref: '#/components/schemas/Temperature'
+            $ref: '#/components/schemas/Thermal_v1_2_2_Temperature'
           readOnly: false
           type: array
           x-longDescription: These properties shall be the definition for temperature
             sensors for a Redfish implementation.
         Temperatures@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Temperatures@odata.navigationLink:
           format: uri
           type: string

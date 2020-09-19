@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    ManagerNetworkProtocol_v1_6_0_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    EngineId:
+    ManagerNetworkProtocol_v1_6_0_EngineId:
       additionalProperties: false
       description: The engine ID.
       properties:
@@ -59,12 +59,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    HTTPSProtocol:
+    ManagerNetworkProtocol_v1_6_0_HTTPSProtocol:
       additionalProperties: false
       description: The settings for a network protocol associated with a manager.
       properties:
         Certificates:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to a collection of certificates used for HTTPS by
             this manager.
           readOnly: true
@@ -92,38 +92,38 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ManagerNetworkProtocol:
+    ManagerNetworkProtocol_v1_6_0_ManagerNetworkProtocol:
       additionalProperties: false
       description: The network service settings for the manager.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Actions'
           description: The available actions for this Resource.
           x-longDescription: The actions property shall contain the available actions
             for this Resource.
           x-versionAdded: v1_2_0
         DHCP:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's DHCPv4 protocol support.
           x-longDescription: This object shall contain the DHCPv4 protocol settings
             for the manager.
           x-versionAdded: v1_1_0
         DHCPv6:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's DHCPv6 protocol support.
           x-longDescription: This object shall contain the DHCPv6 protocol settings
             for the manager.
           x-versionAdded: v1_3_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         FQDN:
@@ -135,13 +135,13 @@ components:
           x-longDescription: This property shall contain the fully qualified domain
             name for the manager.
         HTTP:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's HTTP protocol support.
           x-longDescription: This object shall contain the HTTP protocol settings
             for the manager.  The default Port property value should be `80` for compatibility
             with established client implementations.
         HTTPS:
-          $ref: '#/components/schemas/HTTPSProtocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_HTTPSProtocol'
           description: The settings for this manager's HTTPS protocol support.
           x-longDescription: This object shall contain the HTTPS/SSL protocol settings
             for this manager.  The default Port property value should be `443` for
@@ -154,55 +154,55 @@ components:
           x-longDescription: This property shall contain the host name without any
             domain information.
         IPMI:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's IPMI-over-LAN protocol support.
           x-longDescription: This object shall contain the IPMI over LAN protocol
             settings for the manager.  The default Port property value should be `623`
             for compatibility with established client implementations.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         KVMIP:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's KVM-IP protocol support.
           x-longDescription: This object shall contain the KVM-IP (Keyboard, Video,
             Mouse over IP) protocol settings for the manager.
         NTP:
-          $ref: '#/components/schemas/NTPProtocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_NTPProtocol'
           description: The settings for this manager's NTP protocol support.
           x-longDescription: This object shall contain the NTP protocol settings for
             the manager.
           x-versionAdded: v1_2_0
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         RDP:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's Remote Desktop Protocol support.
           x-longDescription: This object shall contain the Remote Desktop Protocol
             settings for the manager.
           x-versionAdded: v1_3_0
         RFB:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's Remote Frame Buffer protocol
             support, which can support VNC.
           x-longDescription: This object shall contain the Remote Frame Buffer protocol
             settings for the manager.
           x-versionAdded: v1_3_0
         SNMP:
-          $ref: '#/components/schemas/SNMPProtocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_SNMPProtocol'
           description: The settings for this manager's SNMP support.
           x-longDescription: This object shall contain the SNMP protocol settings
             for this manager.  The default Port property value should be `161` for
             compatibility with established client implementations.
         SSDP:
-          $ref: '#/components/schemas/SSDProtocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_SSDProtocol'
           description: The settings for this manager's SSDP support.
           x-longDescription: This object shall contain the SSDP protocol settings
             for this manager.  Simple Service Discovery Protocol (SSDP) is for network
@@ -210,26 +210,26 @@ components:
             property value should be `1900` for compatibility with established client
             implementations.
         SSH:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's Secure Shell (SSH) protocol
             support.
           x-longDescription: This object shall contain the Secure Shell (SSH) protocol
             settings for the manager.  The default value should be 22 for compatibility
             with established client implementations.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-longDescription: This property shall contain any status or health properties
             of the Resource.
         Telnet:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's Telnet protocol support.
           x-longDescription: This object shall contain the Telnet protocol settings
             for this manager.  The default Port property value should be `23` for
             compatibility with established client implementations.
         VirtualMedia:
-          $ref: '#/components/schemas/Protocol'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_Protocol'
           description: The settings for this manager's virtual media support.
           x-longDescription: This object shall contain the virtual media protocol
             settings for this manager.  The Port property shall contain the TCP port
@@ -245,7 +245,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    NTPProtocol:
+    ManagerNetworkProtocol_v1_6_0_NTPProtocol:
       additionalProperties: false
       description: The settings for a network protocol associated with a manager.
       properties:
@@ -280,7 +280,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    NotifyIPv6Scope:
+    ManagerNetworkProtocol_v1_6_0_NotifyIPv6Scope:
       enum:
       - Link
       - Site
@@ -291,7 +291,7 @@ components:
         Organization: SSDP NOTIFY messages are sent to addresses in the IPv6 local
           organization scope.
         Site: SSDP NOTIFY messages are sent to addresses in the IPv6 local site scope.
-    OemActions:
+    ManagerNetworkProtocol_v1_6_0_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -301,7 +301,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Protocol:
+    ManagerNetworkProtocol_v1_6_0_Protocol:
       additionalProperties: false
       description: The settings for a network protocol associated with a manager.
       properties:
@@ -326,7 +326,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SNMPAuthenticationProtocols:
+    ManagerNetworkProtocol_v1_6_0_SNMPAuthenticationProtocols:
       enum:
       - Account
       - CommunityString
@@ -347,12 +347,12 @@ components:
           to the RFC3414-defined HMAC-MD5-96 authentication protocol.
         HMAC_SHA96: This value shall indicate authentication for SNMPv3 access conforms
           to the RFC3414-defined HMAC-SHA-96 authentication protocol.
-    SNMPCommunity:
+    ManagerNetworkProtocol_v1_6_0_SNMPCommunity:
       additionalProperties: false
       description: An SNMP community strings.
       properties:
         AccessMode:
-          $ref: '#/components/schemas/SNMPCommunityAccessMode'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_SNMPCommunityAccessMode'
           description: The access level of the SNMP community.
           nullable: true
           readOnly: false
@@ -382,7 +382,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SNMPCommunityAccessMode:
+    ManagerNetworkProtocol_v1_6_0_SNMPCommunityAccessMode:
       enum:
       - Full
       - Limited
@@ -393,7 +393,7 @@ components:
       x-enumLongDescriptions:
         Full: This value shall indicate the RFC1157-defined READ-WRITE access mode.
         Limited: This value shall indicate the RFC1157-defined READ-ONLY access mode.
-    SNMPEncryptionProtocols:
+    ManagerNetworkProtocol_v1_6_0_SNMPEncryptionProtocols:
       enum:
       - None
       - Account
@@ -413,19 +413,19 @@ components:
         CFB128_AES128: This value shall indicate encryption conforms to the RFC3414-defined
           CFB128-AES-128 encryption protocol.
         None: This value shall indicate there is no encryption.
-    SNMPProtocol:
+    ManagerNetworkProtocol_v1_6_0_SNMPProtocol:
       additionalProperties: false
       description: The settings for a network protocol associated with a manager.
       properties:
         AuthenticationProtocol:
-          $ref: '#/components/schemas/SNMPAuthenticationProtocols'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_SNMPAuthenticationProtocols'
           description: The authentication protocol for SNMP.
           nullable: true
           readOnly: false
           x-longDescription: This property shall contain the SNMP authentication protocol.
           x-versionAdded: v1_5_0
         CommunityAccessMode:
-          $ref: '#/components/schemas/SNMPCommunityAccessMode'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_SNMPCommunityAccessMode'
           description: The access level of the SNMP community.
           nullable: true
           readOnly: false
@@ -435,7 +435,7 @@ components:
         CommunityStrings:
           description: The SNMP community strings.
           items:
-            $ref: '#/components/schemas/SNMPCommunity'
+            $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_SNMPCommunity'
             nullable: true
           type: array
           x-longDescription: This property shall contain an array of the SNMP community
@@ -466,14 +466,14 @@ components:
             on this manager using the SNMPv3 protocol is enabled.
           x-versionAdded: v1_5_0
         EncryptionProtocol:
-          $ref: '#/components/schemas/SNMPEncryptionProtocols'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_SNMPEncryptionProtocols'
           description: The encryption protocol for SNMPv3.
           nullable: true
           readOnly: false
           x-longDescription: This property shall contain the SNMPv3 encryption protocol.
           x-versionAdded: v1_5_0
         EngineId:
-          $ref: '#/components/schemas/EngineId'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_EngineId'
           description: The engine ID.
           nullable: true
           x-longDescription: This property shall contain the RFC3411-defined engine
@@ -508,12 +508,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SSDProtocol:
+    ManagerNetworkProtocol_v1_6_0_SSDProtocol:
       additionalProperties: false
       description: The settings for a network protocol associated with a manager.
       properties:
         NotifyIPv6Scope:
-          $ref: '#/components/schemas/NotifyIPv6Scope'
+          $ref: '#/components/schemas/ManagerNetworkProtocol_v1_6_0_NotifyIPv6Scope'
           description: The IPv6 scope for multicast NOTIFY messages for SSDP.
           nullable: true
           readOnly: false

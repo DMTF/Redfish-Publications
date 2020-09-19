@@ -30,9 +30,6 @@
                 "#Volume.CreateReplicaTarget": {
                     "$ref": "#/definitions/CreateReplicaTarget"
                 },
-                "#Volume.Initialize": {
-                    "$ref": "#/definitions/Initialize"
-                },
                 "#Volume.RemoveReplicaRelationship": {
                     "$ref": "#/definitions/RemoveReplicaRelationship"
                 },
@@ -194,57 +191,6 @@
             },
             "type": "object",
             "versionAdded": "v1_4_0"
-        },
-        "EncryptionTypes": {
-            "enum": [
-                "NativeDriveEncryption",
-                "ControllerAssisted",
-                "SoftwareAssisted"
-            ],
-            "enumDescriptions": {
-                "ControllerAssisted": "The volume is being encrypted by the storage controller entity.",
-                "NativeDriveEncryption": "The volume is utilizing the native drive encryption capabilities of the drive hardware.",
-                "SoftwareAssisted": "The volume is being encrypted by software running on the system or the operating system."
-            },
-            "type": "string"
-        },
-        "Initialize": {
-            "additionalProperties": false,
-            "description": "This action is used to prepare the contents of the volume for use by the system. If InitializeType is not specified in the request body, the InitializeType should be Fast.",
-            "longDescription": "This defines the name of the custom action supported on this resource. If InitializeType is not specified in the request body, the InitializeType should be Fast.",
-            "parameters": {
-                "InitializeType": {
-                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/InitializeType",
-                    "description": "The type of initialization to be performed.",
-                    "longDescription": "This defines the property name for the action."
-                }
-            },
-            "patternProperties": {
-                "^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\\.[a-zA-Z_][a-zA-Z0-9_]*$": {
-                    "description": "This property shall specify a valid odata or Redfish property.",
-                    "type": [
-                        "array",
-                        "boolean",
-                        "integer",
-                        "number",
-                        "null",
-                        "object",
-                        "string"
-                    ]
-                }
-            },
-            "properties": {
-                "target": {
-                    "description": "Link to invoke action",
-                    "format": "uri-reference",
-                    "type": "string"
-                },
-                "title": {
-                    "description": "Friendly action name",
-                    "type": "string"
-                }
-            },
-            "type": "object"
         },
         "Links": {
             "additionalProperties": false,
@@ -412,8 +358,8 @@
                 }
             },
             "properties": {
-                "AssociatedTask": {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Task.json#/definitions/Task",
+                "AssociatedFeaturesRegistry": {
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/FeaturesRegistry.json#/definitions/FeaturesRegistry",
                     "description": "A reference to the task associated with the operation if any.",
                     "readonly": true
                 },
@@ -435,19 +381,6 @@
                 }
             },
             "type": "object"
-        },
-        "ReadCachePolicyType": {
-            "enum": [
-                "ReadAhead",
-                "AdaptiveReadAhead",
-                "Off"
-            ],
-            "enumDescriptions": {
-                "AdaptiveReadAhead": "A caching technique in which the controller dynamically determines whether to pre-fetch data anticipating future read requests, based on previous cache hit ratio.",
-                "Off": "The read cache is disabled.",
-                "ReadAhead": "A caching technique in which the controller pre-fetches data anticipating future read requests."
-            },
-            "type": "string"
         },
         "RemoveReplicaRelationship": {
             "additionalProperties": false,
@@ -807,7 +740,7 @@
                 "EncryptionTypes": {
                     "description": "The types of encryption used by this Volume.",
                     "items": {
-                        "$ref": "#/definitions/EncryptionTypes"
+                        "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/EncryptionTypes"
                     },
                     "longDescription": "This property shall contain the types of encryption used by this Volume.",
                     "readonly": false,
@@ -959,7 +892,7 @@
                 "ReadCachePolicy": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/ReadCachePolicyType"
+                            "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/ReadCachePolicyType"
                         },
                         {
                             "type": "null"
@@ -1035,7 +968,7 @@
                 "VolumeType": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/VolumeType"
+                            "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/VolumeType"
                         },
                         {
                             "type": "null"
@@ -1049,7 +982,7 @@
                 "VolumeUsage": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/VolumeUsageType"
+                            "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/VolumeUsageType"
                         },
                         {
                             "type": "null"
@@ -1063,7 +996,7 @@
                 "WriteCachePolicy": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/WriteCachePolicyType"
+                            "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/WriteCachePolicyType"
                         },
                         {
                             "type": "null"
@@ -1077,7 +1010,7 @@
                 "WriteCacheState": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/WriteCacheStateType"
+                            "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/WriteCacheStateType"
                         },
                         {
                             "type": "null"
@@ -1089,7 +1022,7 @@
                     "versionAdded": "v1_4_0"
                 },
                 "WriteHoleProtectionPolicy": {
-                    "$ref": "#/definitions/WriteHoleProtectionPolicyType",
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/WriteHoleProtectionPolicyType",
                     "description": "The policy that the RAID volume is using to address the write hole issue.",
                     "longDescription": "This property specifies the policy that is enabled to address the write hole issue on the RAID volume. If no policy is enabled at the moment, this property shall be set to 'Off'.",
                     "readonly": false,
@@ -1103,112 +1036,6 @@
                 "Name"
             ],
             "type": "object"
-        },
-        "VolumeType": {
-            "enum": [
-                "RawDevice",
-                "NonRedundant",
-                "Mirrored",
-                "StripedWithParity",
-                "SpannedMirrors",
-                "SpannedStripesWithParity"
-            ],
-            "enumDescriptions": {
-                "Mirrored": "The volume is a mirrored device.",
-                "NonRedundant": "The volume is a non-redundant storage device.",
-                "RawDevice": "The volume is a raw physical device without any RAID or other virtualization applied.",
-                "SpannedMirrors": "The volume is a spanned set of mirrored devices.",
-                "SpannedStripesWithParity": "The volume is a spanned set of devices which uses parity to retain redundant information.",
-                "StripedWithParity": "The volume is a device which uses parity to retain redundant information."
-            },
-            "type": "string"
-        },
-        "VolumeUsageType": {
-            "enum": [
-                "Data",
-                "SystemData",
-                "CacheOnly",
-                "SystemReserve",
-                "ReplicationReserve"
-            ],
-            "enumDescriptions": {
-                "CacheOnly": "The volume is allocated for use as a non-consumable cache only volume.",
-                "Data": "The volume is allocated for use as a consumable data volume.",
-                "ReplicationReserve": "The volume is allocated for use as a non-consumable reserved volume for replication use.",
-                "SystemData": "The volume is allocated for use as a consumable data volume reserved for system use.",
-                "SystemReserve": "The volume is allocated for use as a non-consumable system reserved volume."
-            },
-            "enumLongDescriptions": {
-                "CacheOnly": "The volume shall be allocated for use as a non-consumable cache only volume.",
-                "Data": "The volume shall be allocated for use as a consumable data volume.",
-                "ReplicationReserve": "The volume shall be allocated for use as a non-consumable reserved volume for replication use.",
-                "SystemData": "The volume shall be allocated for use as a consumable data volume reserved for system use.",
-                "SystemReserve": "The volume shall be allocated for use as a non-consumable system reserved volume."
-            },
-            "type": "string"
-        },
-        "WriteCachePolicyType": {
-            "enum": [
-                "WriteThrough",
-                "ProtectedWriteBack",
-                "UnprotectedWriteBack",
-                "Off"
-            ],
-            "enumDescriptions": {
-                "Off": "The write cache is disabled.",
-                "ProtectedWriteBack": "A caching technique in which the completion of a write request is signaled as soon as the data is in cache, and actual writing to non-volatile media is guaranteed to occur at a later time.",
-                "UnprotectedWriteBack": "A caching technique in which the completion of a write request is signaled as soon as the data is in cache; actual writing to non-volatile media is not guaranteed to occur at a later time.",
-                "WriteThrough": "A caching technique in which the completion of a write request is not signaled until data is safely stored on non-volatile media."
-            },
-            "enumLongDescriptions": {
-                "Off": "Indicates that the write cache shall be disabled.",
-                "ProtectedWriteBack": "A caching technique in which the completion of a write request is signaled as soon as the data is in cache, and actual writing to non-volatile media is guaranteed to occur at a later time.",
-                "UnprotectedWriteBack": "A caching technique in which the completion of a write request is signaled as soon as the data is in cache; actual writing to non-volatile media is not guaranteed to occur at a later time.",
-                "WriteThrough": "A caching technique in which the completion of a write request is not signaled until data is safely stored on non-volatile media."
-            },
-            "enumVersionAdded": {
-                "Off": "v1_4_1"
-            },
-            "type": "string"
-        },
-        "WriteCacheStateType": {
-            "enum": [
-                "Unprotected",
-                "Protected",
-                "Degraded"
-            ],
-            "enumDescriptions": {
-                "Degraded": "Indicates an issue with the cache state in which the cache space is diminished or disabled due to a failure or an outside influence such as a discharged battery.",
-                "Protected": "Indicates that the cache state type in use generally protects write requests on non-volatile media.",
-                "Unprotected": "Indicates that the cache state type in use generally does not protect write requests on non-volatile media."
-            },
-            "enumLongDescriptions": {
-                "Degraded": "Indicates an issue with the cache state in which the cache space is diminished or disabled due to a failure or an outside influence such as a discharged battery.",
-                "Protected": "Indicates that the cache state type in use generally protects write requests on non-volatile media.",
-                "Unprotected": "Indicates that the cache state type in use generally does not protect write requests on non-volatile media."
-            },
-            "type": "string"
-        },
-        "WriteHoleProtectionPolicyType": {
-            "enum": [
-                "Off",
-                "Journaling",
-                "DistributedLog",
-                "Oem"
-            ],
-            "enumDescriptions": {
-                "DistributedLog": "The policy that distributes additional log among the volume's capacity sources to address write hole issue.",
-                "Journaling": "The policy that uses separate block device for write-ahead logging to adddress write hole issue.",
-                "Oem": "The policy that is Oem specific.",
-                "Off": "The volume is not using any policy to address the write hole issue."
-            },
-            "enumLongDescriptions": {
-                "DistributedLog": "The policy that distributes additional log (e.q. cheksum of the parity) among the volume's capacity sources to address write hole issue. Additional data is used to detect data corruption on the volume.",
-                "Journaling": "The policy that uses separate block device for write-ahead logging to adddress write hole issue. All write operations on the RAID volume are first logged on dedicated journaling device that is not part of the volume.",
-                "Oem": "The policy that is Oem specific. The mechanism details are unknown unless provided separatly by the Oem.",
-                "Off": "The support for addressing the write hole issue is disabled. The volume is not performing any additional activities to close the RAID write hole."
-            },
-            "type": "string"
         }
     },
     "owningEntity": "SNIA",

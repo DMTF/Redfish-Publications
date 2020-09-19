@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    EthernetInterface_v1_4_2_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    DHCPv4Configuration:
+    EthernetInterface_v1_4_2_DHCPv4Configuration:
       additionalProperties: false
       description: DHCPv4 configuration for this interface.
       properties:
@@ -73,12 +73,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    DHCPv6Configuration:
+    EthernetInterface_v1_4_2_DHCPv6Configuration:
       additionalProperties: false
       description: DHCPv6 configuration for this interface.
       properties:
         OperatingMode:
-          $ref: '#/components/schemas/DHCPv6OperatingMode'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_DHCPv6OperatingMode'
           description: Determines the DHCPv6 operating mode for this interface.
           nullable: true
           readOnly: false
@@ -128,7 +128,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    DHCPv6OperatingMode:
+    EthernetInterface_v1_4_2_DHCPv6OperatingMode:
       enum:
       - Stateful
       - Stateless
@@ -147,21 +147,21 @@ components:
           stateless mode allows configuring the interface using DHCP options but does
           not configure addresses. It is always enabled by default whenever DHCPv6
           Stateful mode is also enabled.
-    EthernetInterface:
+    EthernetInterface_v1_4_2_EthernetInterface:
       additionalProperties: false
       description: The EthernetInterface schema represents a single, logical ethernet
         interface or network interface controller (NIC).
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -175,19 +175,19 @@ components:
           x-longDescription: The value of this property shall be true if auto negotiation
             of speed and duplex is enabled on this interface and false if it is disabled.
         DHCPv4:
-          $ref: '#/components/schemas/DHCPv4Configuration'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_DHCPv4Configuration'
           description: DHCPv4 configuration for this interface.
           x-longDescription: This property shall contain the configuration of DHCP
             v4.
           x-versionAdded: v1_4_0
         DHCPv6:
-          $ref: '#/components/schemas/DHCPv6Configuration'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_DHCPv6Configuration'
           description: DHCPv6 configuration for this interface.
           x-longDescription: This property shall contain the configuration of DHCP
             v6.
           x-versionAdded: v1_4_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         FQDN:
@@ -215,7 +215,7 @@ components:
         IPv4Addresses:
           description: The IPv4 addresses currently assigned to this interface.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv4Address
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPAddresses_IPv4Address
           type: array
           x-longDescription: The value of this property shall be an array of objects
             used to represent the IPv4 connection characteristics for this interface.
@@ -225,7 +225,7 @@ components:
         IPv4StaticAddresses:
           description: The IPv4 static addresses assigned to this interface.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv4Address
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPAddresses_IPv4Address
           type: array
           x-longDescription: The value of this property shall be an array of objects
             used to represent all IPv4 static addresses assigned (but not necessarily
@@ -236,7 +236,7 @@ components:
           description: An array representing the RFC 6724 Address Selection Policy
             Table.
           items:
-            $ref: '#/components/schemas/IPv6AddressPolicyEntry'
+            $ref: '#/components/schemas/EthernetInterface_v1_4_2_IPv6AddressPolicyEntry'
           type: array
           x-longDescription: The value of this property shall be an array of objects
             used to represent the Address Selection Policy Table as defined in RFC
@@ -245,7 +245,7 @@ components:
           description: Enumerates in an array all of the currently assigned IPv6 addresses
             on this interface.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv6Address
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPAddresses_IPv6Address
           type: array
           x-longDescription: The value of this property shall be an array of objects
             used to represent the IPv6 connection characteristics for this interface.
@@ -261,7 +261,7 @@ components:
           description: Represents in an array all of the IPv6 static addresses to
             be assigned on this interface.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv6StaticAddress
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPAddresses_IPv6StaticAddress
           type: array
           x-longDescription: The value of this property shall be an array of objects
             used to represent the IPv6 static connection characteristics for this
@@ -269,13 +269,13 @@ components:
         IPv6StaticDefaultGateways:
           description: The IPv6 static default gateways for this interface.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv6GatewayStaticAddress
+            $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPAddresses_IPv6GatewayStaticAddress
           type: array
           x-longDescription: The values in this array shall represent the IPv6 static
             default gateway addresses for this interface.
           x-versionAdded: v1_4_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         InterfaceEnabled:
           description: This indicates whether this interface is enabled.
@@ -285,7 +285,7 @@ components:
           x-longDescription: The value of this property shall be a boolean indicating
             whether this interface is enabled.
         LinkStatus:
-          $ref: '#/components/schemas/LinkStatus'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_LinkStatus'
           description: The link status of this interface (port).
           nullable: true
           readOnly: true
@@ -293,7 +293,7 @@ components:
             this interface (port).
           x-versionAdded: v1_1_0
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
@@ -301,7 +301,7 @@ components:
             by (subordinate to), this resource.
           x-versionAdded: v1_1_0
         MACAddress:
-          $ref: '#/components/schemas/MACAddress'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_MACAddress'
           description: This is the currently configured MAC address of the (logical
             port) interface.
           nullable: true
@@ -327,7 +327,7 @@ components:
           x-longDescription: The value of this property shall indicate the number
             of array items supported by IPv6StaticAddresses.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NameServers:
           description: This represents DNS name servers that are currently in use
@@ -339,13 +339,13 @@ components:
           x-longDescription: The value of this property shall be the DNS name servers
             used on this interface.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         PermanentMACAddress:
-          $ref: '#/components/schemas/MACAddress'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_MACAddress'
           description: This is the permanent MAC address assigned to this interface
             (port).
           nullable: true
@@ -362,7 +362,7 @@ components:
             the interface in Mbps.
           x-units: Mbit/s
         StatelessAddressAutoConfig:
-          $ref: '#/components/schemas/StatelessAddressAutoConfiguration'
+          $ref: '#/components/schemas/EthernetInterface_v1_4_2_StatelessAddressAutoConfiguration'
           description: Stateless Address Automatic Configuration (SLAAC) parameters
             for this interface.
           x-longDescription: This object shall contain the IPv4 and IPv6 Stateless
@@ -383,7 +383,7 @@ components:
             assigments.
           x-versionAdded: v1_4_0
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -396,7 +396,7 @@ components:
           x-longDescription: The value of this property shall be the UEFI device path
             to the device which implements this interface (port).
         VLAN:
-          $ref: http://redfish.dmtf.org/schemas/v1/VLanNetworkInterface.yaml#/components/schemas/VLAN
+          $ref: http://redfish.dmtf.org/schemas/v1/VLanNetworkInterface.yaml#/components/schemas/VLanNetworkInterface_VLAN
           description: If this Network Interface supports more than one VLAN, this
             property is not present. VLANs collections appear in the Link section
             of this resource.
@@ -404,7 +404,7 @@ components:
             interface.  If this interface supports more than one VLAN, the VLAN property
             shall not be present and the VLANS collection link shall be present instead.
         VLANs:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a collection of VLANs and is only used
             if the interface supports more than one VLANs.
           readOnly: true
@@ -422,7 +422,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    IPv6AddressPolicyEntry:
+    EthernetInterface_v1_4_2_IPv6AddressPolicyEntry:
       additionalProperties: false
       description: A entry in the RFC 6724 Address Selection Policy Table.
       properties:
@@ -457,7 +457,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    LinkStatus:
+    EthernetInterface_v1_4_2_LinkStatus:
       enum:
       - LinkUp
       - NoLink
@@ -467,13 +467,13 @@ components:
         LinkDown: There is no link on this interface, but the interface is connected.
         LinkUp: The link is available for communication on this interface.
         NoLink: There is no link or connection detected on this interface.
-    Links:
+    EthernetInterface_v1_4_2_Links:
       additionalProperties: false
       description: Contains references to other resources that are related to this
         resource.
       properties:
         Chassis:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Chassis which contains this Ethernet Interface.
           readOnly: true
           x-longDescription: The value of this property shall be a reference to a
@@ -484,7 +484,7 @@ components:
           description: An array of references to the endpoints that connect to this
             ethernet interface.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be a reference to the
@@ -492,9 +492,9 @@ components:
             a resource of type Endpoint.
           x-versionAdded: v1_1_0
         Endpoints@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         HostInterface:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a Host Interface that is associated
             with this Ethernet Interface.
           readOnly: true
@@ -503,7 +503,7 @@ components:
             a host to communicate with a Manager.
           x-versionAdded: v1_2_0
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -515,10 +515,10 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MACAddress:
+    EthernetInterface_v1_4_2_MACAddress:
       pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
       type: string
-    OemActions:
+    EthernetInterface_v1_4_2_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -528,7 +528,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    StatelessAddressAutoConfiguration:
+    EthernetInterface_v1_4_2_StatelessAddressAutoConfiguration:
       additionalProperties: false
       description: Stateless Address Automatic Configuration (SLAAC) parameters for
         this interface.

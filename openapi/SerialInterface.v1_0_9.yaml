@@ -1,6 +1,6 @@
 components:
   schemas:
-    BitRate:
+    SerialInterface_v1_0_9_BitRate:
       enum:
       - '1200'
       - '2400'
@@ -22,7 +22,7 @@ components:
         '4800': A bit rate of 4800 bit/s.
         '57600': A bit rate of 57600 bit/s.
         '9600': A bit rate of 9600 bit/s.
-    ConnectorType:
+    SerialInterface_v1_0_9_ConnectorType:
       enum:
       - RJ45
       - RJ11
@@ -44,7 +44,7 @@ components:
         USB: A USB connector.
         mUSB: A mUSB connector.
         uUSB: A uUSB connector.
-    DataBits:
+    SerialInterface_v1_0_9_DataBits:
       enum:
       - '5'
       - '6'
@@ -56,7 +56,7 @@ components:
         '6': Six bits of data following the start bit.
         '7': Seven bits of data following the start bit.
         '8': Eight bits of data following the start bit.
-    FlowControl:
+    SerialInterface_v1_0_9_FlowControl:
       enum:
       - None
       - Software
@@ -66,7 +66,7 @@ components:
         Hardware: Out-of-band flow control imposed.
         None: No flow control imposed.
         Software: XON/XOFF in-band flow control imposed.
-    Parity:
+    SerialInterface_v1_0_9_Parity:
       enum:
       - None
       - Even
@@ -80,7 +80,7 @@ components:
         None: No parity bit.
         Odd: An odd parity bit.
         Space: A space parity bit.
-    PinOut:
+    SerialInterface_v1_0_9_PinOut:
       enum:
       - Cisco
       - Cyclades
@@ -90,52 +90,52 @@ components:
         Cisco: The Cisco pinout configuration.
         Cyclades: The Cyclades pinout configuration.
         Digi: The Digi pinout configuration.
-    SerialInterface:
+    SerialInterface_v1_0_9_SerialInterface:
       additionalProperties: false
       description: The SerialInterface schema describes an asynchronous serial interface,
         such as an RS-232 interface, available to a system or device.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         BitRate:
-          $ref: '#/components/schemas/BitRate'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_BitRate'
           description: The receive and transmit rate of data flow, typically in bits
             per second (bit/s), over the serial connection.
           readOnly: false
           x-longDescription: This property shall indicate the transmit and receive
             speed of the serial connection.
         ConnectorType:
-          $ref: '#/components/schemas/ConnectorType'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_ConnectorType'
           description: The type of connector used for this interface.
           readOnly: true
           x-longDescription: This property shall indicate the type of physical connector
             used for this serial connection.
         DataBits:
-          $ref: '#/components/schemas/DataBits'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_DataBits'
           description: The number of data bits that follow the start bit over the
             serial connection.
           readOnly: false
           x-longDescription: This property shall indicate number of data bits for
             the serial connection.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         FlowControl:
-          $ref: '#/components/schemas/FlowControl'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_FlowControl'
           description: The type of flow control, if any, that is imposed on the serial
             connection.
           readOnly: false
           x-longDescription: This property shall indicate the flow control mechanism
             for the serial connection.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         InterfaceEnabled:
           description: An indication of whether this interface is enabled.
@@ -145,36 +145,36 @@ components:
           x-longDescription: This property shall indicate whether this interface is
             enabled.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         Parity:
-          $ref: '#/components/schemas/Parity'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_Parity'
           description: The type of parity used by the sender and receiver to detect
             errors over the serial connection.
           readOnly: false
           x-longDescription: This property shall indicate parity information for a
             serial connection.
         PinOut:
-          $ref: '#/components/schemas/PinOut'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_PinOut'
           description: The physical pinout configuration for a serial connector.
           nullable: true
           readOnly: true
           x-longDescription: This property shall indicate the physical pinout for
             the serial connector.
         SignalType:
-          $ref: '#/components/schemas/SignalType'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_SignalType'
           description: The type of signal used for the communication connection.
           readOnly: true
           x-longDescription: This property shall contain the type of serial signalling
             in use for the serial connection.
         StopBits:
-          $ref: '#/components/schemas/StopBits'
+          $ref: '#/components/schemas/SerialInterface_v1_0_9_StopBits'
           description: The period of time before the next start bit is transmitted.
           readOnly: false
           x-longDescription: This property shall indicate the stop bits for the serial
@@ -190,7 +190,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SignalType:
+    SerialInterface_v1_0_9_SignalType:
       enum:
       - Rs232
       - Rs485
@@ -198,7 +198,7 @@ components:
       x-enumDescriptions:
         Rs232: The serial interface follows RS232.
         Rs485: The serial interface follows RS485.
-    StopBits:
+    SerialInterface_v1_0_9_StopBits:
       enum:
       - '1'
       - '2'

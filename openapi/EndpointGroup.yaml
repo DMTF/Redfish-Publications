@@ -1,0 +1,43 @@
+components:
+  schemas:
+    EndpointGroup_AccessState:
+      description: Describes the options for the access characteristics of an endpoint.
+      enum:
+      - Optimized
+      - NonOptimized
+      - Standby
+      - Unavailable
+      - Transitioning
+      type: string
+      x-enumDescriptions:
+        NonOptimized: The endpoints are in an active and non-optimized state.
+        Optimized: The endpoints are in an active and optimized state.
+        Standby: The endpoints are in a standby state.
+        Transitioning: The endpoints are transitioning to a new state.
+        Unavailable: The endpoints are in an unavailable state.
+      x-enumLongDescriptions:
+        NonOptimized: This value shall indicate each endpoint is in an active and
+          non-optimized state.
+        Optimized: This value shall indicate each endpoint is in an active and optimized
+          state.
+        Standby: This value shall indicate each endpoint is in a standby state.
+        Transitioning: This value shall indicate each endpoint is transitioning to
+          a new state.
+        Unavailable: This value shall indicate each endpoint is in an unavailable
+          state.
+      x-longDescription: This type shall describe the access to all associated resources
+        through all aggregated endpoints.
+    EndpointGroup_EndpointGroup:
+      anyOf:
+      - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+      - $ref: http://redfish.dmtf.org/schemas/v1/EndpointGroup.v1_0_3.yaml#/components/schemas/EndpointGroup_v1_0_3_EndpointGroup
+      - $ref: http://redfish.dmtf.org/schemas/v1/EndpointGroup.v1_1_4.yaml#/components/schemas/EndpointGroup_v1_1_4_EndpointGroup
+      - $ref: http://redfish.dmtf.org/schemas/v1/EndpointGroup.v1_2_2.yaml#/components/schemas/EndpointGroup_v1_2_2_EndpointGroup
+      - $ref: http://redfish.dmtf.org/schemas/v1/EndpointGroup.v1_3_0.yaml#/components/schemas/EndpointGroup_v1_3_0_EndpointGroup
+      description: The EndpointGroup schema describes group of endpoints that are
+        managed as a unit.
+      x-longDescription: This resource shall represent a group of endpoints that are
+        managed as a unit for a Redfish implementation.
+title: '#EndpointGroup.EndpointGroup'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF

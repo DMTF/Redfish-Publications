@@ -1,10 +1,10 @@
 components:
   schemas:
-    InputRange:
+    Power_v1_1_0_InputRange:
       additionalProperties: false
       properties:
         InputType:
-          $ref: '#/components/schemas/InputType'
+          $ref: '#/components/schemas/Power_v1_1_0_InputType'
           description: The Input type (AC or DC)
           nullable: true
           readOnly: true
@@ -49,7 +49,7 @@ components:
             minimum line input voltage which the power supply is capable of consuming
             for this range.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
         OutputWattage:
           description: The maximum capacity of this Power Supply when operating in
             this input range
@@ -64,7 +64,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    InputType:
+    Power_v1_1_0_InputType:
       enum:
       - AC
       - DC
@@ -72,7 +72,7 @@ components:
       x-enumDescriptions:
         AC: Alternating Current (AC) input range
         DC: Direct Current (DC) input range
-    LineInputVoltageType:
+    Power_v1_1_0_LineInputVoltageType:
       enum:
       - Unknown
       - ACLowLine
@@ -100,26 +100,26 @@ components:
         DC380V: High Voltage DC input (380V)
         DCNeg48V: -48V DC input
         Unknown: The power supply line input voltage type cannot be determined
-    Power:
+    Power_v1_1_0_Power:
       additionalProperties: false
       description: This is the schema definition for the Power Metrics.  It represents
         the properties for Power Consumption and Power Limiting.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -127,13 +127,13 @@ components:
         PowerControl:
           description: This is the definition for power control function (power reading/limiting).
           items:
-            $ref: '#/components/schemas/PowerControl'
+            $ref: '#/components/schemas/Power_v1_1_0_PowerControl'
           readOnly: false
           type: array
           x-longDescription: These properties shall be the definition for power control
             (power reading and limiting) for a Redfish implementation.
         PowerControl@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         PowerControl@odata.navigationLink:
           format: uri
           type: string
@@ -141,13 +141,13 @@ components:
           description: Details of the power supplies associated with this system or
             device
           items:
-            $ref: '#/components/schemas/PowerSupply'
+            $ref: '#/components/schemas/Power_v1_1_0_PowerSupply'
           readOnly: false
           type: array
           x-longDescription: This object shall contain details of the power supplies
             associated with this system or device
         PowerSupplies@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         PowerSupplies@odata.navigationLink:
           format: uri
           type: string
@@ -155,24 +155,24 @@ components:
           description: Redundancy information for the power subsystem of this system
             or device
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           readOnly: true
           type: array
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Redundancy@odata.navigationLink:
           format: uri
           type: string
         Voltages:
           description: This is the definition for voltage sensors.
           items:
-            $ref: '#/components/schemas/Voltage'
+            $ref: '#/components/schemas/Power_v1_1_0_Voltage'
           readOnly: false
           type: array
           x-longDescription: These properties shall be the definition for voltage
             sensors for a Redfish implementation.
         Voltages@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Voltages@odata.navigationLink:
           format: uri
           type: string
@@ -185,7 +185,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerControl:
+    Power_v1_1_0_PowerControl:
       additionalProperties: false
       description: This is the base type for addressable members of an array.
       properties:
@@ -202,7 +202,7 @@ components:
           x-longDescription: The value of this property shall be the name of the Voltage
             sensor.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -246,12 +246,12 @@ components:
           x-longDescription: The value of this property shall represent the actual
             power being consumed (in Watts) by the chassis.
         PowerLimit:
-          $ref: '#/components/schemas/PowerLimit'
+          $ref: '#/components/schemas/Power_v1_1_0_PowerLimit'
           description: Power limit status and configuration information for this chassis
           x-longDescription: This object shall contain power limit status and configuration
             information for this chassis
         PowerMetrics:
-          $ref: '#/components/schemas/PowerMetric'
+          $ref: '#/components/schemas/Power_v1_1_0_PowerMetric'
           description: Power readings for this chassis.
           x-longDescription: This object shall contain power metrics for power readings
             (interval, min/max/ave power consumption) for the chassis.
@@ -269,18 +269,18 @@ components:
         RelatedItem:
           description: The ID(s) of the resources associated with this Power Limit
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
           type: array
           x-longDescription: The value of this property shall be an array of IDs containing
             pointers consistent with JSON pointer syntax to the resource that is being
             limited.
         RelatedItem@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         RelatedItem@odata.navigationLink:
           format: uri
           type: string
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
       type: object
       x-longDescription: Array members can be referenced using the value returned
         in the @odata.id property which may or may not be a dereferenceable URL. The
@@ -288,7 +288,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerLimit:
+    Power_v1_1_0_PowerLimit:
       additionalProperties: false
       description: This object contains power limit status and configuration information
         for the chassis.
@@ -302,7 +302,7 @@ components:
             in ms required for the limiting process to react and reduce the power
             consumption below the limit.
         LimitException:
-          $ref: '#/components/schemas/PowerLimitException'
+          $ref: '#/components/schemas/Power_v1_1_0_PowerLimitException'
           description: The action that is taken if the power cannot be maintained
             below the LimitInWatts.
           nullable: true
@@ -321,7 +321,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerLimitException:
+    Power_v1_1_0_PowerLimitException:
       enum:
       - NoAction
       - HardPowerOff
@@ -334,7 +334,7 @@ components:
           action.
         NoAction: Take no action when the limit is exceeded.
         Oem: Take an OEM-defined action.
-    PowerMetric:
+    Power_v1_1_0_PowerMetric:
       additionalProperties: false
       properties:
         AverageConsumedWatts:
@@ -378,7 +378,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerSupply:
+    Power_v1_1_0_PowerSupply:
       additionalProperties: false
       description: Details of a power supplies associated with this system or device
       properties:
@@ -392,7 +392,7 @@ components:
         InputRanges:
           description: This is the input ranges that the power supply can use.
           items:
-            $ref: '#/components/schemas/InputRange'
+            $ref: '#/components/schemas/Power_v1_1_0_InputRange'
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be a collection of ranges
@@ -414,7 +414,7 @@ components:
             line input voltage (measured or configured for) that the power supply
             has been configured to operate with or is currently receiving.
         LineInputVoltageType:
-          $ref: '#/components/schemas/LineInputVoltageType'
+          $ref: '#/components/schemas/Power_v1_1_0_LineInputVoltageType'
           description: The line voltage type supported as an input to this Power Supply
           nullable: true
           readOnly: true
@@ -449,7 +449,7 @@ components:
           x-longDescription: This property shall contain a descriptive name for the
             associated power supply.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -470,7 +470,7 @@ components:
           x-longDescription: This property shall contiain the maximum amount of power,
             in Watts, that the associated power supply is rated to deliver.
         PowerSupplyType:
-          $ref: '#/components/schemas/PowerSupplyType'
+          $ref: '#/components/schemas/Power_v1_1_0_PowerSupplyType'
           description: The Power Supply type (AC or DC)
           nullable: true
           readOnly: true
@@ -480,7 +480,7 @@ components:
           description: This structure is used to show redundancy for power supplies.  The
             Component ids will reference the members of the redundancy groups.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           readOnly: true
           type: array
           x-longDescription: The values of the properties in this array shall be used
@@ -488,20 +488,20 @@ components:
             use of IDs within these arrays shall reference the members of the redundancy
             groups.
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         Redundancy@odata.navigationLink:
           format: uri
           type: string
         RelatedItem:
           description: The ID(s) of the resources associated with this Power Limit
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
           type: array
           x-longDescription: The value of this property shall be an array of IDs containing
             pointers consistent with JSON pointer syntax to the resource that is being
             limited.
         RelatedItem@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         RelatedItem@odata.navigationLink:
           format: uri
           type: string
@@ -520,7 +520,7 @@ components:
           x-longDescription: This property shall contain the spare or replacement
             part number as defined by the manufacturer for the associated power supply.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
       type: object
       x-longDescription: Array members can be referenced using the value returned
         in the @odata.id property which may or may not be a dereferenceable URL. The
@@ -528,7 +528,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerSupplyType:
+    Power_v1_1_0_PowerSupplyType:
       enum:
       - Unknown
       - AC
@@ -540,7 +540,7 @@ components:
         ACorDC: Power Supply supports both DC or AC
         DC: Direct Current (DC) power supply
         Unknown: The power supply type cannot be determined
-    Voltage:
+    Power_v1_1_0_Voltage:
       additionalProperties: false
       description: This is the base type for addressable members of an array.
       properties:
@@ -597,13 +597,13 @@ components:
           x-longDescription: The value of this property shall be the name of the Voltage
             sensor.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         PhysicalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.v1_0_0.yaml#/components/schemas/PhysicalContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.v1_0_0.yaml#/components/schemas/PhysicalContext_v1_0_0_PhysicalContext
           description: Describes the area or device to which this voltage measurement
             applies.
           readOnly: true
@@ -621,14 +621,14 @@ components:
           description: Describes the areas or devices to which this voltage measurement
             applies.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of IDs containing
             pointers consistent with JSON pointer syntax to the areas or devices to
             which this voltage measurement applies.
         RelatedItem@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         RelatedItem@odata.navigationLink:
           format: uri
           type: string
@@ -640,7 +640,7 @@ components:
           x-longDescription: 'The value of this property shall be a numerical identifier
             for this voltage sensor that is unique within this resource. '
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         UpperThresholdCritical:
           description: Above normal range but not yet fatal.
           nullable: true

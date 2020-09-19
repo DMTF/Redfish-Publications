@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    TelemetryService_v1_0_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#TelemetryService.SubmitTestMetricReport':
-          $ref: '#/components/schemas/SubmitTestMetricReport'
+          $ref: '#/components/schemas/TelemetryService_v1_0_1_SubmitTestMetricReport'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/TelemetryService_v1_0_1_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -17,7 +17,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    CollectionFunction:
+    TelemetryService_v1_0_1_CollectionFunction:
       description: An operation to perform over the sample.
       enum:
       - Average
@@ -32,7 +32,7 @@ components:
         Summation: A summation function.
       x-longDescription: If present, the metric value shall be computed according
         to this function.
-    OemActions:
+    TelemetryService_v1_0_1_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -42,7 +42,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SubmitTestMetricReport:
+    TelemetryService_v1_0_1_SubmitTestMetricReport:
       additionalProperties: false
       description: This action is used to generate a metric report.
       properties:
@@ -60,7 +60,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SubmitTestMetricReportRequestBody:
+    TelemetryService_v1_0_1_SubmitTestMetricReportRequestBody:
       additionalProperties: false
       description: This action is used to generate a metric report.
       properties:
@@ -82,34 +82,34 @@ components:
       x-longDescription: This action shall cause the event service to immediately
         generate the metric report, as an Alert Event. This message should then be
         sent to any appropriate ListenerDestination targets.
-    TelemetryService:
+    TelemetryService_v1_0_1_TelemetryService:
       additionalProperties: false
       description: This is the schema definition for the Metrics Service.  It represents
         the properties for the service itself and has links to collections of metric
         definitions and metric report definitions.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/TelemetryService_v1_0_1_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         LogService:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a Log Service used by the Telemetry
             Service.
           readOnly: true
@@ -123,17 +123,17 @@ components:
           x-longDescription: The value shall be the maximum number of metric reports
             supported by this service.
         MetricDefinitions:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A link to the collection of Metric Definitions.
           readOnly: true
           x-longDescription: The entries of shall be resources of type MetricDefinitionCollection.
         MetricReportDefinitions:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A link to the collection of Metric Report Definitions.
           readOnly: true
           x-longDescription: The value shall be a link to a resource of type MetricReportDefinitionCollection.
         MetricReports:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A link to the collection of Metric Reports.
           readOnly: true
           x-longDescription: The value shall be a link to a resource of type MetricReportCollection.
@@ -148,16 +148,16 @@ components:
             collections supported by this service.  The value shall conform to the
             Duration format.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -165,14 +165,14 @@ components:
         SupportedCollectionFunctions:
           description: The functions that can be performed over each metric.
           items:
-            $ref: '#/components/schemas/CollectionFunction'
+            $ref: '#/components/schemas/TelemetryService_v1_0_1_CollectionFunction'
             nullable: true
           readOnly: false
           type: array
           x-longDescription: The value shall define the function to apply over the
             collection duration.
         Triggers:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A link to the collection of Triggers, which apply to metrics.
           readOnly: true
           x-longDescription: The value shall be a link to a resource of type TriggersCollection.

@@ -24,9 +24,6 @@
                 "#Volume.CheckConsistency": {
                     "$ref": "#/definitions/CheckConsistency"
                 },
-                "#Volume.Initialize": {
-                    "$ref": "#/definitions/Initialize"
-                },
                 "Oem": {
                     "$ref": "#/definitions/OemActions"
                 }
@@ -38,57 +35,6 @@
             "description": "This action is used to force a check of the Volume's parity or redundant data to ensure it matches calculated values.",
             "longDescription": "This defines the name of the custom action supported on this resource.",
             "parameters": {},
-            "patternProperties": {
-                "^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\\.[a-zA-Z_][a-zA-Z0-9_]*$": {
-                    "description": "This property shall specify a valid odata or Redfish property.",
-                    "type": [
-                        "array",
-                        "boolean",
-                        "integer",
-                        "number",
-                        "null",
-                        "object",
-                        "string"
-                    ]
-                }
-            },
-            "properties": {
-                "target": {
-                    "description": "Link to invoke action",
-                    "format": "uri-reference",
-                    "type": "string"
-                },
-                "title": {
-                    "description": "Friendly action name",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "EncryptionTypes": {
-            "enum": [
-                "NativeDriveEncryption",
-                "ControllerAssisted",
-                "SoftwareAssisted"
-            ],
-            "enumDescriptions": {
-                "ControllerAssisted": "The volume is being encrypted by the storage controller entity.",
-                "NativeDriveEncryption": "The volume is utilizing the native drive encryption capabilities of the drive hardware.",
-                "SoftwareAssisted": "The volume is being encrypted by software running on the system or the operating system."
-            },
-            "type": "string"
-        },
-        "Initialize": {
-            "additionalProperties": false,
-            "description": "This action is used to prepare the contents of the volume for use by the system. If InitializeType is not specified in the request body, the InitializeType should be Fast.",
-            "longDescription": "This defines the name of the custom action supported on this resource. If InitializeType is not specified in the request body, the InitializeType should be Fast.",
-            "parameters": {
-                "InitializeType": {
-                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/InitializeType",
-                    "description": "The type of initialization to be performed.",
-                    "longDescription": "This defines the property name for the action."
-                }
-            },
             "patternProperties": {
                 "^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\\.[a-zA-Z_][a-zA-Z0-9_]*$": {
                     "description": "This property shall specify a valid odata or Redfish property.",
@@ -196,8 +142,8 @@
                 }
             },
             "properties": {
-                "AssociatedTask": {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Task.json#/definitions/Task",
+                "AssociatedFeaturesRegistry": {
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/FeaturesRegistry.json#/definitions/FeaturesRegistry",
                     "description": "A reference to the task associated with the operation if any.",
                     "readonly": true
                 },
@@ -343,7 +289,7 @@
                 "EncryptionTypes": {
                     "description": "The types of encryption used by this Volume.",
                     "items": {
-                        "$ref": "#/definitions/EncryptionTypes"
+                        "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/EncryptionTypes"
                     },
                     "longDescription": "This property shall contain the types of encryption used by this Volume.",
                     "readonly": false,
@@ -459,7 +405,7 @@
                 "VolumeType": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/VolumeType"
+                            "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json#/definitions/VolumeType"
                         },
                         {
                             "type": "null"
@@ -478,25 +424,6 @@
                 "Name"
             ],
             "type": "object"
-        },
-        "VolumeType": {
-            "enum": [
-                "RawDevice",
-                "NonRedundant",
-                "Mirrored",
-                "StripedWithParity",
-                "SpannedMirrors",
-                "SpannedStripesWithParity"
-            ],
-            "enumDescriptions": {
-                "Mirrored": "The volume is a mirrored device.",
-                "NonRedundant": "The volume is a non-redundant storage device.",
-                "RawDevice": "The volume is a raw physical device without any RAID or other virtualization applied.",
-                "SpannedMirrors": "The volume is a spanned set of mirrored devices.",
-                "SpannedStripesWithParity": "The volume is a spanned set of devices which uses parity to retain redundant information.",
-                "StripedWithParity": "The volume is a device which uses parity to retain redundant information."
-            },
-            "type": "string"
         }
     },
     "owningEntity": "SNIA",

@@ -1,17 +1,17 @@
 components:
   schemas:
-    Actions:
+    Manager_v1_4_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#Manager.ForceFailover':
-          $ref: '#/components/schemas/ForceFailover'
+          $ref: '#/components/schemas/Manager_v1_4_1_ForceFailover'
         '#Manager.ModifyRedundancySet':
-          $ref: '#/components/schemas/ModifyRedundancySet'
+          $ref: '#/components/schemas/Manager_v1_4_1_ModifyRedundancySet'
         '#Manager.Reset':
-          $ref: '#/components/schemas/Reset'
+          $ref: '#/components/schemas/Manager_v1_4_1_Reset'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Manager_v1_4_1_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -21,7 +21,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    CommandConnectTypesSupported:
+    Manager_v1_4_1_CommandConnectTypesSupported:
       enum:
       - SSH
       - Telnet
@@ -36,7 +36,7 @@ components:
         SSH: The controller supports a Command Shell connection using the SSH protocol.
         Telnet: The controller supports a Command Shell connection using the Telnet
           protocol.
-    CommandShell:
+    Manager_v1_4_1_CommandShell:
       additionalProperties: false
       description: Information about a Command Shell service provided by a manager.
       properties:
@@ -44,7 +44,7 @@ components:
           description: This object is used to enumerate the Command Shell connection
             types allowed by the implementation.
           items:
-            $ref: '#/components/schemas/CommandConnectTypesSupported'
+            $ref: '#/components/schemas/Manager_v1_4_1_CommandConnectTypesSupported'
           readOnly: true
           type: array
           x-longDescription: The value of ConnectTypesSupported shall be an array
@@ -72,7 +72,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ForceFailover:
+    Manager_v1_4_1_ForceFailover:
       additionalProperties: false
       description: The ForceFailover action forces a failover of this manager to the
         manager used in the parameter.
@@ -90,13 +90,13 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ForceFailoverRequestBody:
+    Manager_v1_4_1_ForceFailoverRequestBody:
       additionalProperties: false
       description: The ForceFailover action forces a failover of this manager to the
         manager used in the parameter.
       properties:
         NewManager:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This parameter specifies the Manager in which to fail over.  In
             this case, a valid reference is supported.
           x-longDescription: This parameter shall contain a resource reference of
@@ -106,7 +106,7 @@ components:
       type: object
       x-longDescription: This action shall perform a forced failover of the manager's
         redundancy to the manager supplied as a parameter.
-    GraphicalConnectTypesSupported:
+    Manager_v1_4_1_GraphicalConnectTypesSupported:
       enum:
       - KVMIP
       - Oem
@@ -116,7 +116,7 @@ components:
           (redirection of Keyboard, Video, Mouse over IP) protocol.
         Oem: The controller supports a Graphical Console connection using an OEM-specific
           protocol.
-    GraphicalConsole:
+    Manager_v1_4_1_GraphicalConsole:
       additionalProperties: false
       description: Information about a Graphical Console service provided by a manager.
       properties:
@@ -124,7 +124,7 @@ components:
           description: This object is used to enumerate the Graphical Console connection
             types allowed by the implementation.
           items:
-            $ref: '#/components/schemas/GraphicalConnectTypesSupported'
+            $ref: '#/components/schemas/Manager_v1_4_1_GraphicalConnectTypesSupported'
           readOnly: true
           type: array
           x-longDescription: The value of ConnectTypesSupported shall be an array
@@ -152,7 +152,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Links:
+    Manager_v1_4_1_Links:
       additionalProperties: false
       description: Contains references to other resources that are related to this
         resource.
@@ -161,44 +161,44 @@ components:
           description: This property is an array of references to the chassis that
             this manager has control over.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of references to
             Chassis resources of which this Manager instance has control.
         ManagerForChassis@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         ManagerForServers:
           description: This property is an array of references to the systems that
             this manager has control over.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of references to
             ComputerSystem resources of which this Manager instance has control.
         ManagerForServers@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         ManagerForSwitches:
           description: This property is an array of references to the switches that
             this manager has control over.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of references to
             Switch resources of which this Manager instance has control.
         ManagerForSwitches@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         ManagerInChassis:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This property is a reference to the chassis that this manager
             is located in.
           readOnly: true
           x-longDescription: This property shall contain a reference to the chassis
             that this manager is located in.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -210,22 +210,22 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Manager:
+    Manager_v1_4_1_Manager:
       additionalProperties: false
       description: This is the schema definition for a Manager.  Examples of managers
         are BMCs, Enclosure Managers, Management Controllers and other subsystems
         assigned managability functions.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Manager_v1_4_1_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -239,7 +239,7 @@ components:
             DateTime.  It shall be true if Automatic DST adjustment is enabled and
             false if disabled.
         CommandShell:
-          $ref: '#/components/schemas/CommandShell'
+          $ref: '#/components/schemas/Manager_v1_4_1_CommandShell'
           description: Information about the Command Shell service provided by this
             manager.
           x-longDescription: The value of this property shall contain information
@@ -264,11 +264,11 @@ components:
           x-longDescription: The value is property shall represent the offset from
             UTC time that the current value of DataTime property contains.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EthernetInterfaces:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a collection of NICs that this manager
             uses for network communication.  It is here that clients will find NIC
             configuration options and settings.
@@ -283,13 +283,13 @@ components:
           x-longDescription: This property shall contain the firwmare version as defined
             by the manufacturer for the associated manager.
         GraphicalConsole:
-          $ref: '#/components/schemas/GraphicalConsole'
+          $ref: '#/components/schemas/Manager_v1_4_1_GraphicalConsole'
           description: The value of this property shall contain the information about
             the Graphical Console (KVM-IP) service of this manager.
           x-longDescription: The value of this property shall contain the information
             about the Graphical Console (KVM-IP) service of this manager.
         HostInterfaces:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a collection of Host Interfaces that
             this manager uses for local host communication.  It is here that clients
             will find Host Interface configuration options and settings.
@@ -297,24 +297,24 @@ components:
           x-longDescription: The value of this property shall be a link to a collection
             of type HostInterfaceCollection.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Manager_v1_4_1_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
             shall contain references to resources that are related to, but not contained
             by (subordinate to), this resource.
         LogServices:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a collection of Logs used by the manager.
           readOnly: true
           x-longDescription: The value of this property shall contain a reference
             to a collection of type LogServiceCollection which are for the use of
             this manager.
         ManagerType:
-          $ref: '#/components/schemas/ManagerType'
+          $ref: '#/components/schemas/Manager_v1_4_1_ManagerType'
           description: This property represents the type of manager that this resource
             represents.
           readOnly: true
@@ -332,10 +332,10 @@ components:
           x-longDescription: The value of this property shall contain the information
             about how the manufacturer references this manager.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NetworkProtocol:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to the network services and their settings
             that the manager controls.  It is here that clients will find network
             configuration options as well as network services.
@@ -344,13 +344,13 @@ components:
             to a resource of type ManagerNetworkProtocol which represents the network
             services for this manager.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         PowerState:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/PowerState
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_PowerState
           description: This is the current power state of the Manager.
           nullable: true
           readOnly: true
@@ -359,22 +359,22 @@ components:
         Redundancy:
           description: Redundancy information for the managers of this system.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           type: array
           x-autoExpand: true
           x-longDescription: The values of the properties in this array shall be used
             to show how this manager is grouped with other managers for form redundancy
             sets.
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         SerialConsole:
-          $ref: '#/components/schemas/SerialConsole'
+          $ref: '#/components/schemas/Manager_v1_4_1_SerialConsole'
           description: Information about the Serial Console service provided by this
             manager.
           x-longDescription: The value of this property shall contain information
             about the Serial Console service of this manager.
         SerialInterfaces:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a collection of serial interfaces that
             this manager uses for serial and console communication.  It is here that
             clients will find serial configuration options and settings.
@@ -382,7 +382,7 @@ components:
           x-longDescription: The value of this property shall be a link to a collection
             of type SerialInterfaceCollection which are for the use of this manager.
         ServiceEntryPointUUID:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/UUID
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_UUID
           description: The UUID of the Redfish Service provided by this manager.
           nullable: true
           readOnly: true
@@ -392,20 +392,20 @@ components:
             name of the property may imply otherwise).  This property shall not be
             present if this manager does not provide a Redfish Service Entry Point.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
             of the resource.
         UUID:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/UUID
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_UUID
           description: The Universal Unique Identifier (UUID) for this Manager.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall contain the universal
             unique identifier number for the manager.
         VirtualMedia:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to the Virtual Media services for this
             particular manager.
           readOnly: true
@@ -423,7 +423,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ManagerService:
+    Manager_v1_4_1_ManagerService:
       additionalProperties: false
       description: Used for describing services like Serial Console, Command Shell
         or Graphical Console.
@@ -447,7 +447,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ManagerType:
+    Manager_v1_4_1_ManagerType:
       enum:
       - ManagementController
       - EnclosureManager
@@ -468,7 +468,7 @@ components:
         RackManager: A controller which provides management functions for a whole
           or part of a rack.
         Service: A software-based service which provides management functions.
-    ModifyRedundancySet:
+    Manager_v1_4_1_ModifyRedundancySet:
       additionalProperties: false
       description: The ModifyRedundancySet operation is used to add or remove members
         to a redundant group of manager.
@@ -486,7 +486,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ModifyRedundancySetRequestBody:
+    Manager_v1_4_1_ModifyRedundancySetRequestBody:
       additionalProperties: false
       description: The ModifyRedundancySet operation is used to add or remove members
         to a redundant group of manager.
@@ -495,7 +495,7 @@ components:
           description: This array defines the Managers to add to the redundancy set.  In
             this case, a valid reference is supported.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           type: array
           x-longDescription: This parameter shall contain an array of resource references
             of the Managers to add to the redundancy set.
@@ -503,14 +503,14 @@ components:
           description: This array defines the Managers to remove from the redundancy
             set.  In this case, a valid reference is supported.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           type: array
           x-longDescription: This parameter shall contain an array of resource references
             of the Managers to remove from the redundancy set.
       type: object
       x-longDescription: The ModifyRedundancySet operation shall be used to add or
         remove members to a redundant group of manager.
-    OemActions:
+    Manager_v1_4_1_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -520,7 +520,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Reset:
+    Manager_v1_4_1_Reset:
       additionalProperties: false
       description: The reset action resets/reboots the manager.
       properties:
@@ -536,19 +536,19 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetRequestBody:
+    Manager_v1_4_1_ResetRequestBody:
       additionalProperties: false
       description: The reset action resets/reboots the manager.
       properties:
         ResetType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/ResetType
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
           description: This is the type of reset to be performed.
           x-longDescription: This parameter shall define the type of reset to be performed.  The
             service may accept a request without the parameter and perform an implementation
             specific default reset.
       type: object
       x-longDescription: This action shall perform a reset of the manager.
-    SerialConnectTypesSupported:
+    Manager_v1_4_1_SerialConnectTypesSupported:
       enum:
       - SSH
       - Telnet
@@ -563,7 +563,7 @@ components:
         SSH: The controller supports a Serial Console connection using the SSH protocol.
         Telnet: The controller supports a Serial Console connection using the Telnet
           protocol.
-    SerialConsole:
+    Manager_v1_4_1_SerialConsole:
       additionalProperties: false
       description: Information about a Serial Console service provided by a manager.
       properties:
@@ -571,7 +571,7 @@ components:
           description: This object is used to enumerate the Serial Console connection
             types allowed by the implementation.
           items:
-            $ref: '#/components/schemas/SerialConnectTypesSupported'
+            $ref: '#/components/schemas/Manager_v1_4_1_SerialConnectTypesSupported'
           readOnly: true
           type: array
           x-longDescription: The value of ConnectTypesSupported shall be an array

@@ -1,15 +1,15 @@
 components:
   schemas:
-    Actions:
+    VirtualMedia_v1_3_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#VirtualMedia.EjectMedia':
-          $ref: '#/components/schemas/EjectMedia'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_EjectMedia'
         '#VirtualMedia.InsertMedia':
-          $ref: '#/components/schemas/InsertMedia'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_InsertMedia'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -20,7 +20,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ConnectedVia:
+    VirtualMedia_v1_3_1_ConnectedVia:
       enum:
       - NotConnected
       - URI
@@ -32,7 +32,7 @@ components:
         NotConnected: No current connection.
         Oem: Connected via an OEM-defined method.
         URI: Connected to a URI location.
-    EjectMedia:
+    VirtualMedia_v1_3_1_EjectMedia:
       additionalProperties: false
       description: This action is used to detach remote media from virtual media.
       properties:
@@ -51,7 +51,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
       x-versionAdded: v1_2_0
-    EjectMediaRequestBody:
+    VirtualMedia_v1_3_1_EjectMediaRequestBody:
       additionalProperties: false
       description: This action is used to detach remote media from virtual media.
       properties: {}
@@ -59,7 +59,7 @@ components:
       x-longDescription: This action shall detach the remote media from the virtual
         media.  At the completion of the operation, inserted shall be set to false
         and the image name shall be cleared.
-    InsertMedia:
+    VirtualMedia_v1_3_1_InsertMedia:
       additionalProperties: false
       description: This action is used to attach remote media to virtual media.
       properties:
@@ -76,7 +76,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
       x-versionAdded: v1_2_0
-    InsertMediaRequestBody:
+    VirtualMedia_v1_3_1_InsertMediaRequestBody:
       additionalProperties: false
       description: This action is used to attach remote media to virtual media.
       properties:
@@ -100,13 +100,13 @@ components:
             password to be used when accessing the URI specified by the Image parameter.
           x-versionAdded: v1_3_0
         TransferMethod:
-          $ref: '#/components/schemas/TransferMethod'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_TransferMethod'
           description: Transfer method to use with the given Image.
           x-longDescription: This parameter shall contain a value describing how the
             image transfer is done.
           x-versionAdded: v1_3_0
         TransferProtocolType:
-          $ref: '#/components/schemas/TransferProtocolType'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_TransferProtocolType'
           description: Network protocol to use with the image.
           x-longDescription: This parameter shall contain a value representing the
             network protocol to use with the specified image URI.
@@ -129,7 +129,7 @@ components:
       - Image
       type: object
       x-longDescription: This action shall attach remote media to virtual media.
-    MediaType:
+    VirtualMedia_v1_3_1_MediaType:
       enum:
       - CD
       - Floppy
@@ -141,7 +141,7 @@ components:
         DVD: A DVD-ROM format image.
         Floppy: A floppy disk image.
         USBStick: An emulation of a USB storage device.
-    OemActions:
+    VirtualMedia_v1_3_1_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -151,7 +151,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    TransferMethod:
+    VirtualMedia_v1_3_1_TransferMethod:
       enum:
       - Stream
       - Upload
@@ -159,7 +159,7 @@ components:
       x-enumDescriptions:
         Stream: Stream image file data from the source URI.
         Upload: Upload the entire image file from the source URI to the service.
-    TransferProtocolType:
+    VirtualMedia_v1_3_1_TransferProtocolType:
       enum:
       - CIFS
       - FTP
@@ -181,7 +181,7 @@ components:
         SCP: Secure File Copy protocol.
         SFTP: Secure File Transfer Protocol.
         TFTP: Trivial File Transfer Protocol.
-    VirtualMedia:
+    VirtualMedia_v1_3_1_VirtualMedia:
       additionalProperties: false
       description: The VirtualMedia schema contains properties related to monitoring
         and control of an instance of virtual media such as a remote CD, DVD, or USB
@@ -189,21 +189,21 @@ components:
         or device.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
           x-versionAdded: v1_1_0
         ConnectedVia:
-          $ref: '#/components/schemas/ConnectedVia'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_ConnectedVia'
           description: Current virtual media connection methods.
           nullable: true
           readOnly: true
@@ -213,11 +213,11 @@ components:
             value of URI shall indicate that a remote connection via a URI reference
             type is being used.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Image:
           description: A URI providing the location of the selected image.
@@ -244,16 +244,16 @@ components:
         MediaTypes:
           description: This is the media types supported as virtual media.
           items:
-            $ref: '#/components/schemas/MediaType'
+            $ref: '#/components/schemas/VirtualMedia_v1_3_1_MediaType'
           readOnly: true
           type: array
           x-longDescription: The values of this array shall be the supported media
             types for this connection.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -269,7 +269,7 @@ components:
             The value shall be null for GET requests.
           x-versionAdded: v1_3_0
         TransferMethod:
-          $ref: '#/components/schemas/TransferMethod'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_TransferMethod'
           description: Transfer method to use with the given Image.
           nullable: true
           readOnly: false
@@ -277,7 +277,7 @@ components:
             image transfer is done.
           x-versionAdded: v1_3_0
         TransferProtocolType:
-          $ref: '#/components/schemas/TransferProtocolType'
+          $ref: '#/components/schemas/VirtualMedia_v1_3_1_TransferProtocolType'
           description: Network protocol to use with the image.
           nullable: true
           readOnly: false

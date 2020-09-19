@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    SecureBoot_v1_0_5_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#SecureBoot.ResetKeys':
-          $ref: '#/components/schemas/ResetKeys'
+          $ref: '#/components/schemas/SecureBoot_v1_0_5_ResetKeys'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/SecureBoot_v1_0_5_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -17,7 +17,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    SecureBoot_v1_0_5_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -27,7 +27,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetKeys:
+    SecureBoot_v1_0_5_ResetKeys:
       additionalProperties: false
       description: This action is used to reset the Secure Boot keys.
       properties:
@@ -47,12 +47,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetKeysRequestBody:
+    SecureBoot_v1_0_5_ResetKeysRequestBody:
       additionalProperties: false
       description: This action is used to reset the Secure Boot keys.
       properties:
         ResetKeysType:
-          $ref: '#/components/schemas/ResetKeysType'
+          $ref: '#/components/schemas/SecureBoot_v1_0_5_ResetKeysType'
           description: The type of keys to reset or delete.
           x-longDescription: This parameter shall specify the type of keys to reset
             or delete.
@@ -64,7 +64,7 @@ components:
         key databases to their default values. The DeleteAllKeys value shall delete
         the content of the UEFI Secure Boot key databases. The DeletePK value shall
         delete the content of the PK Secure boot key.
-    ResetKeysType:
+    SecureBoot_v1_0_5_ResetKeysType:
       enum:
       - ResetAllKeysToDefault
       - DeleteAllKeys
@@ -77,42 +77,42 @@ components:
           the system in Setup Mode.
         ResetAllKeysToDefault: Reset the content of all UEFI Secure Boot key databases
           (PK, KEK, DB, DBX) to their default values.
-    SecureBoot:
+    SecureBoot_v1_0_5_SecureBoot:
       additionalProperties: false
       description: This resource contains UEFI Secure Boot information. It represents
         properties for managing the UEFI Secure Boot functionality of a system.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/SecureBoot_v1_0_5_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         SecureBootCurrentBoot:
-          $ref: '#/components/schemas/SecureBootCurrentBootType'
+          $ref: '#/components/schemas/SecureBoot_v1_0_5_SecureBootCurrentBootType'
           description: Secure Boot state during the current boot cycle.
           nullable: true
           readOnly: true
@@ -127,7 +127,7 @@ components:
             and setting it to false disables it. This property can be enabled only
             in UEFI boot mode.
         SecureBootMode:
-          $ref: '#/components/schemas/SecureBootModeType'
+          $ref: '#/components/schemas/SecureBoot_v1_0_5_SecureBootModeType'
           description: Current Secure Boot Mode.
           nullable: true
           readOnly: true
@@ -144,7 +144,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SecureBootCurrentBootType:
+    SecureBoot_v1_0_5_SecureBootCurrentBootType:
       enum:
       - Enabled
       - Disabled
@@ -152,7 +152,7 @@ components:
       x-enumDescriptions:
         Disabled: Secure Boot is currently disabled.
         Enabled: Secure Boot is currently enabled.
-    SecureBootModeType:
+    SecureBoot_v1_0_5_SecureBootModeType:
       enum:
       - SetupMode
       - UserMode

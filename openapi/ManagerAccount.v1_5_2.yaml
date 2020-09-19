@@ -1,6 +1,6 @@
 components:
   schemas:
-    AccountTypes:
+    ManagerAccount_v1_5_2_AccountTypes:
       enum:
       - Redfish
       - SNMP
@@ -10,12 +10,12 @@ components:
         OEM: OEM account type.
         Redfish: Allow access to the Redfish service.
         SNMP: Allow access to SNMP services.
-    Actions:
+    ManagerAccount_v1_5_2_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/ManagerAccount_v1_5_2_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -25,18 +25,18 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Links:
+    ManagerAccount_v1_5_2_Links:
       additionalProperties: false
       description: The links to other resources that are related to this resource.
       properties:
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
             Specification-described requirements.
         Role:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the Redfish role that defines the privileges for
             this account.
           readOnly: true
@@ -49,24 +49,24 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ManagerAccount:
+    ManagerAccount_v1_5_2_ManagerAccount:
       additionalProperties: false
       description: The ManagerAccount schema defines the user accounts that are owned
         by a manager.  Changes to a manager account might affect the current Redfish
         service connection if this manager is responsible for the Redfish service.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         AccountTypes:
           description: The account types.
           items:
-            $ref: '#/components/schemas/AccountTypes'
+            $ref: '#/components/schemas/ManagerAccount_v1_5_2_AccountTypes'
             nullable: true
           readOnly: false
           type: array
@@ -76,20 +76,20 @@ components:
             `Redfish`.
           x-versionAdded: v1_4_0
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/ManagerAccount_v1_5_2_Actions'
           description: The available actions for this resource.
           x-longDescription: The actions property shall contain the available actions
             for this resource.
           x-versionAdded: v1_1_0
         Certificates:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to a collection of certificates used for this account.
           readOnly: true
           x-longDescription: This property shall contain a link to a resource collection
             of type CertificateCollection.
           x-versionAdded: v1_2_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Enabled:
@@ -103,10 +103,10 @@ components:
             `true`, the account is enabled and the user can log in.  If `false`, the
             account is disabled and, in the future, the user cannot log in.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/ManagerAccount_v1_5_2_Links'
           description: The links to other resources that are related to this resource.
           x-longDescription: This property shall contain links to resources that are
             related to but are not contained by, or subordinate to, this resource.
@@ -123,7 +123,7 @@ components:
             period, an administrator shall be able to change the property to `false`
             to clear the lockout condition.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         OEMAccountTypes:
           description: The OEM account types.
@@ -137,7 +137,7 @@ components:
             contains `OEM`.
           x-versionAdded: v1_4_0
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -173,7 +173,7 @@ components:
             PUT operations that provide a RoleId that does not exist by returning
             the HTTP 400 (Bad Request) status code.
         SNMP:
-          $ref: '#/components/schemas/SNMPUserInfo'
+          $ref: '#/components/schemas/ManagerAccount_v1_5_2_SNMPUserInfo'
           description: The SNMP settings for this account.
           nullable: true
           x-longDescription: This property shall contain the SNMP settings for this
@@ -200,7 +200,7 @@ components:
       - Password
       - UserName
       - RoleId
-    OemActions:
+    ManagerAccount_v1_5_2_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -210,7 +210,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SNMPAuthenticationProtocols:
+    ManagerAccount_v1_5_2_SNMPAuthenticationProtocols:
       enum:
       - None
       - HMAC_MD5
@@ -226,7 +226,7 @@ components:
         HMAC_SHA96: This value shall indicate authentication conforms to the RFC3414-defined
           HMAC-SHA-96 authentication protocol.
         None: This value shall indicate authentication is not required.
-    SNMPEncryptionProtocols:
+    ManagerAccount_v1_5_2_SNMPEncryptionProtocols:
       enum:
       - None
       - CBC_DES
@@ -242,7 +242,7 @@ components:
         CFB128_AES128: This value shall indicate encryption conforms to the RFC3826-defined
           CFB128-AES-128 encryption protocol.
         None: This value shall indicate there is no encryption.
-    SNMPUserInfo:
+    ManagerAccount_v1_5_2_SNMPUserInfo:
       additionalProperties: false
       description: The SNMP settings for an account.
       properties:
@@ -273,7 +273,7 @@ components:
             shall contain `false`.
           x-versionAdded: v1_5_0
         AuthenticationProtocol:
-          $ref: '#/components/schemas/SNMPAuthenticationProtocols'
+          $ref: '#/components/schemas/ManagerAccount_v1_5_2_SNMPAuthenticationProtocols'
           description: The authentication protocol for SNMPv3.
           nullable: true
           readOnly: false
@@ -307,7 +307,7 @@ components:
             contain `false`.
           x-versionAdded: v1_5_0
         EncryptionProtocol:
-          $ref: '#/components/schemas/SNMPEncryptionProtocols'
+          $ref: '#/components/schemas/ManagerAccount_v1_5_2_SNMPEncryptionProtocols'
           description: The encryption protocol for SNMPv3.
           nullable: true
           readOnly: false

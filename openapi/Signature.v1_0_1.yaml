@@ -1,0 +1,112 @@
+components:
+  schemas:
+    Signature_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Signature_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Signature_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Signature_v1_0_1_Signature:
+      additionalProperties: false
+      description: The Signature schema describes a signature or a hash.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Signature_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        SignatureString:
+          description: The string for the signature.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the string of the signature,
+            and the format shall follow the requirements specified by the value of
+            the SignatureType property.  If the signature contains any private keys,
+            they shall be removed from the string in reponses.  If the private key
+            for the signature is not known by the service and is needed to use the
+            signature, the client shall provide the private key as part of the string
+            in the POST request.
+        SignatureType:
+          description: The format of the signature.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the format type for the signature.  The
+            format is qualified by the value of the SignatureTypeRegisty property.
+        SignatureTypeRegistry:
+          $ref: http://redfish.dmtf.org/schemas/v1/Signature.yaml#/components/schemas/Signature_SignatureTypeRegistry
+          description: The type of the signature.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type for the signature.
+        UefiSignatureOwner:
+          description: The UEFI signature owner for this signature.
+          nullable: true
+          pattern: ([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
+          readOnly: true
+          type: string
+          x-longDescription: The value of this property shall contain the GUID of
+            the UEFI signature owner for this signature as defined by the UEFI Specification.  This
+            property shall only be present if the SignatureTypeRegistry property is
+            `UEFI`.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains a signature for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - SignatureTypeRegistry
+      - SignatureType
+      - SignatureString
+title: '#Signature.v1_0_1.Signature'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.1'

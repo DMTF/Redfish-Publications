@@ -1,6 +1,6 @@
 components:
   schemas:
-    Event:
+    Event_v1_1_9_Event:
       additionalProperties: false
       description: The Event schema describes the JSON payload received by an event
         destination, which has subscribed to event notification, when events occur.  This
@@ -9,9 +9,9 @@ components:
         information.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Context:
           description: A context can be supplied at subscription time.  This property
             is the context value supplied by the subscriber.
@@ -21,7 +21,7 @@ components:
             for the event destination to which this event is being sent.
           x-versionAdded: v1_1_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Events:
@@ -29,21 +29,21 @@ components:
             the event.  Because this is an array, more than one event can be sent
             simultaneously.
           items:
-            $ref: '#/components/schemas/EventRecord'
+            $ref: '#/components/schemas/Event_v1_1_9_EventRecord'
           type: array
           x-autoExpand: true
           x-longDescription: This property shall contain an array of objects that
             represent the occurrence of one or more events.
         Events@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -58,7 +58,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    EventRecord:
+    Event_v1_1_9_EventRecord:
       additionalProperties: false
       properties:
         Context:
@@ -89,7 +89,7 @@ components:
             where the value shall be consistent with the Redfish service time that
             is also used for the values of the Modified property.
         EventType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           description: The type of event.
           readOnly: true
           x-longDescription: This property shall indicate the type of event.
@@ -124,13 +124,13 @@ components:
           x-longDescription: This property shall contain a MessageId, as defined in
             the Redfish Specification.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         OriginOfCondition:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A link to the resource or object that originated the condition
             that caused the event to be generated.
           readOnly: true

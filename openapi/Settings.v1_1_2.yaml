@@ -1,6 +1,6 @@
 components:
   schemas:
-    ApplyTime:
+    Settings_v1_1_2_ApplyTime:
       enum:
       - Immediate
       - OnReset
@@ -27,12 +27,12 @@ components:
           and if a reset occurs within the maintenance window.
         OnReset: This value shall indicate the values within Settings Resource are
           applied when the system or service is reset.
-    PreferredApplyTime:
+    Settings_v1_1_2_PreferredApplyTime:
       additionalProperties: false
       description: The preferred time to apply configuration settings.
       properties:
         ApplyTime:
-          $ref: '#/components/schemas/ApplyTime'
+          $ref: '#/components/schemas/Settings_v1_1_2_ApplyTime'
           description: The time when to apply the settings.
           readOnly: false
           x-longDescription: This property shall indicate when to apply the values
@@ -65,7 +65,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Settings:
+    Settings_v1_1_2_Settings:
       additionalProperties: false
       description: The Resource settings.
       properties:
@@ -82,12 +82,12 @@ components:
         Messages:
           description: An array of messages associated with the settings.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message
+            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message_Message
           type: array
           x-longDescription: This property shall contain an array of messages associated
             with the settings.
         SettingsObject:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the Resource that the client may PUT or PATCH to
             modify the Resource.
           readOnly: true
@@ -96,7 +96,7 @@ components:
         SupportedApplyTimes:
           description: The time when the settings can be applied.
           items:
-            $ref: '#/components/schemas/ApplyTime'
+            $ref: '#/components/schemas/Settings_v1_1_2_ApplyTime'
           readOnly: true
           type: array
           x-longDescription: A service shall advertise its applytime capabilities

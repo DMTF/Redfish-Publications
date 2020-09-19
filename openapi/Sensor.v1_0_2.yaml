@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    Sensor_v1_0_2_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         '#Sensor.ResetStatistics':
-          $ref: '#/components/schemas/ResetStatistics'
+          $ref: '#/components/schemas/Sensor_v1_0_2_ResetStatistics'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Sensor_v1_0_2_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ElectricalContext:
+    Sensor_v1_0_2_ElectricalContext:
       enum:
       - Line1
       - Line2
@@ -112,7 +112,7 @@ components:
           TwoPhase4Wire, or ThreePhase5Wire.
         Total: This property shall contain the circuits formed by all current-carrying
           conductors for any PhaseWiringType.
-    OemActions:
+    Sensor_v1_0_2_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -122,7 +122,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ReadingType:
+    Sensor_v1_0_2_ReadingType:
       enum:
       - Temperature
       - Humidity
@@ -202,7 +202,7 @@ components:
           of instantaneous voltage calculated over an integer number of line cycles
           for a circuit.  Voltage is expressed in Volts units and the ReadingUnits
           value shall be `V`.
-    ResetStatistics:
+    Sensor_v1_0_2_ResetStatistics:
       additionalProperties: false
       description: Resets statistics related to this sensor.
       properties:
@@ -219,25 +219,25 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetStatisticsRequestBody:
+    Sensor_v1_0_2_ResetStatisticsRequestBody:
       additionalProperties: false
       description: Resets statistics related to this sensor.
       properties: {}
       type: object
       x-longDescription: This action shall reset any time intervals or counted values
         for this sensor.
-    Sensor:
+    Sensor_v1_0_2_Sensor:
       additionalProperties: false
       description: The Sensor schema describes a sensor and its properties.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Accuracy:
           description: The estimated percent error of measured versus actual values.
           nullable: true
@@ -247,7 +247,7 @@ components:
             the measured versus actual values of the Reading property.
           x-units: '%'
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
@@ -286,18 +286,18 @@ components:
             may appear in sensors of the Power ReadingType, and shall not appear in
             sensors of other ReadingType values.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         ElectricalContext:
-          $ref: '#/components/schemas/ElectricalContext'
+          $ref: '#/components/schemas/Sensor_v1_0_2_ElectricalContext'
           description: The combination of current-carrying conductors.
           nullable: true
           readOnly: true
           x-longDescription: This property shall represent the combination of current-carrying
             conductors that distribute power.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         LoadPercent:
           description: The power load utilization for this sensor.
@@ -310,7 +310,7 @@ components:
             ReadingType, and shall not appear in sensors of other ReadingType values.
           x-units: '%'
         Location:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Location
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
           description: The location information for this sensor.
           x-longDescription: This property shall indicate the location information
             for this sensor.
@@ -331,11 +331,11 @@ components:
             value for the equipment that this sensor monitors, as specified by a standards
             body, manufacturer, or both.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
           x-excerpt: Sensor
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -358,7 +358,7 @@ components:
           x-longDescription: This property shall contain the date and time when the
             peak sensor value was observed.
         PhysicalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
           description: The area or device to which this sensor measurement applies.
           nullable: true
           readOnly: true
@@ -367,7 +367,7 @@ components:
             component or region within the equipment to which this sensor measurement
             applies.
         PhysicalSubContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalSubContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalSubContext
           description: The usage or location within a device to which this sensor
             measurement applies.
           nullable: true
@@ -435,7 +435,7 @@ components:
             readings for this sensor.  Values outside this range are discarded as
             reading errors.
         ReadingType:
-          $ref: '#/components/schemas/ReadingType'
+          $ref: '#/components/schemas/Sensor_v1_0_2_ReadingType'
           description: The type of sensor.
           nullable: true
           readOnly: true
@@ -466,19 +466,19 @@ components:
             ResetStatistics action was last performed or the service last reset the
             time-based property values.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-excerpt: Sensor
           x-longDescription: This property shall contain the status and health of
             the Resource and its children.
         Thresholds:
-          $ref: '#/components/schemas/Thresholds'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Thresholds'
           description: The set of thresholds defined for this sensor.
           x-longDescription: This property shall contain the set of thresholds that
             derive a sensor's health and operational range.
         VoltageType:
-          $ref: '#/components/schemas/VoltageType'
+          $ref: '#/components/schemas/Sensor_v1_0_2_VoltageType'
           description: The voltage type for this sensor.
           nullable: true
           readOnly: true
@@ -494,7 +494,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SensorExcerpt:
+    Sensor_v1_0_2_SensorExcerpt:
       additionalProperties: false
       description: The Sensor schema describes a sensor and its properties.
       properties:
@@ -508,7 +508,7 @@ components:
           x-longDescription: This property shall contain a URI to the Resource that
             provides the source of the Excerpt contained within this copy.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
           x-excerpt: Sensor
         PeakReading:
@@ -521,7 +521,7 @@ components:
             the last ResetStatistics action was performed or the service last reset
             the time-based property values.
         PhysicalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
           description: The area or device to which this sensor measurement applies.
           nullable: true
           readOnly: true
@@ -530,7 +530,7 @@ components:
             component or region within the equipment to which this sensor measurement
             applies.
         PhysicalSubContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalSubContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalSubContext
           description: The usage or location within a device to which this sensor
             measurement applies.
           nullable: true
@@ -556,7 +556,7 @@ components:
           x-longDescription: This property shall contain the units of the sensor's
             reading and thresholds.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-excerpt: Sensor
@@ -570,7 +570,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SensorPowerExcerpt:
+    Sensor_v1_0_2_SensorPowerExcerpt:
       additionalProperties: false
       description: The Sensor schema describes a sensor and its properties.
       properties:
@@ -606,7 +606,7 @@ components:
             ReadingType, and shall not appear in sensors of other ReadingType values.
           x-units: '%'
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
           x-excerpt: Sensor
         PeakReading:
@@ -619,7 +619,7 @@ components:
             the last ResetStatistics action was performed or the service last reset
             the time-based property values.
         PhysicalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
           description: The area or device to which this sensor measurement applies.
           nullable: true
           readOnly: true
@@ -628,7 +628,7 @@ components:
             component or region within the equipment to which this sensor measurement
             applies.
         PhysicalSubContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalSubContext
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalSubContext
           description: The usage or location within a device to which this sensor
             measurement applies.
           nullable: true
@@ -679,7 +679,7 @@ components:
           x-longDescription: This property shall contain the units of the sensor's
             reading and thresholds.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-excerpt: Sensor
@@ -693,12 +693,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Threshold:
+    Sensor_v1_0_2_Threshold:
       additionalProperties: false
       description: The threshold definition for a sensor.
       properties:
         Activation:
-          $ref: '#/components/schemas/ThresholdActivation'
+          $ref: '#/components/schemas/Sensor_v1_0_2_ThresholdActivation'
           description: The direction of crossing that activates this threshold.
           nullable: true
           readOnly: false
@@ -727,7 +727,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ThresholdActivation:
+    Sensor_v1_0_2_ThresholdActivation:
       enum:
       - Increasing
       - Decreasing
@@ -744,44 +744,44 @@ components:
           conditions are met.
         Increasing: This threshold is activated when the reading changes from a value
           lower than the threshold to a value higher than the threshold.
-    Thresholds:
+    Sensor_v1_0_2_Thresholds:
       additionalProperties: false
       description: The set of thresholds defined for a sensor.
       properties:
         LowerCaution:
-          $ref: '#/components/schemas/Threshold'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Threshold'
           description: The value at which the reading is below normal range.
           x-longDescription: This property shall contain the value at which the Reading
             property is below normal range.  The value of the property shall use the
             same units as the Reading property.
         LowerCritical:
-          $ref: '#/components/schemas/Threshold'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Threshold'
           description: The value at which the reading is below normal range but not
             yet fatal.
           x-longDescription: This property shall contain the value at which the Reading
             property is below the normal range but is not yet fatal.  The value of
             the property shall use the same units as the Reading property.
         LowerFatal:
-          $ref: '#/components/schemas/Threshold'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Threshold'
           description: The value at which the reading is below normal range and fatal.
           x-longDescription: This property shall contain the value at which the Reading
             property is below the normal range and is fatal.  The value of the property
             shall use the same units as the Reading property.
         UpperCaution:
-          $ref: '#/components/schemas/Threshold'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Threshold'
           description: The value at which the reading is above normal range.
           x-longDescription: This property shall contain the value at which the Reading
             property is above the normal range.  The value of the property shall use
             the same units as the Reading property.
         UpperCritical:
-          $ref: '#/components/schemas/Threshold'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Threshold'
           description: The value at which the reading is above normal range but not
             yet fatal.
           x-longDescription: This property shall contain the value at which the Reading
             property is above the normal range but is not yet fatal.  The value of
             the property shall use the same units as the Reading property.
         UpperFatal:
-          $ref: '#/components/schemas/Threshold'
+          $ref: '#/components/schemas/Sensor_v1_0_2_Threshold'
           description: The value at which the reading is above normal range and fatal.
           x-longDescription: This property shall contain the value at which the Reading
             property is above the normal range and is fatal.  The value of the property
@@ -792,7 +792,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    VoltageType:
+    Sensor_v1_0_2_VoltageType:
       enum:
       - AC
       - DC

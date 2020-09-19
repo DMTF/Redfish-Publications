@@ -1,6 +1,6 @@
 components:
   schemas:
-    DeviceType:
+    PCIeDevice_v1_0_5_DeviceType:
       enum:
       - SingleFunction
       - MultiFunction
@@ -11,7 +11,7 @@ components:
         Simulated: A PCIe device that is not currently physically present, but is
           being simulated by the PCIe infrastructure.
         SingleFunction: A single-function PCIe device.
-    Links:
+    PCIeDevice_v1_0_5_Links:
       additionalProperties: false
       description: The links to other Resources that are related to this Resource.
       properties:
@@ -19,15 +19,15 @@ components:
           description: An array of links to the chassis in which the PCIe device is
             contained.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall link to a Resource of type Chassis
             that represents the physical container associated with this Resource.
         Chassis@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -35,32 +35,32 @@ components:
         PCIeFunctions:
           description: An array of links to PCIeFunctions exposed by this device.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain a link to the Resources of
             the PCIeFunction type that this device exposes.
         PCIeFunctions@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
       type: object
       x-longDescription: The Redfish Specification-described type shall contain links
         to Resources related to but not subordinate to this Resource.
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PCIeDevice:
+    PCIeDevice_v1_0_5_PCIeDevice:
       additionalProperties: false
       description: The PCIeDevice schema describes the properties of a PCIe device
         that is attached to a system.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         AssetTag:
           description: The user-assigned asset tag for this PCIe device.
           nullable: true
@@ -69,11 +69,11 @@ components:
           x-longDescription: This property shall contain an identifying string that
             tracks the PCIe device for inventory purposes.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         DeviceType:
-          $ref: '#/components/schemas/DeviceType'
+          $ref: '#/components/schemas/PCIeDevice_v1_0_5_DeviceType'
           description: The device type for this PCIe device.
           readOnly: true
           x-longDescription: This property shall contain the device type of the PCIe
@@ -86,10 +86,10 @@ components:
           x-longDescription: This property shall contain the firmware version of the
             PCIe device.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/PCIeDevice_v1_0_5_Links'
           description: The links to other Resources that are related to this Resource.
           x-longDescription: This property shall contain links to Resources that are
             related to but are not contained by, or subordinate to, this Resource.
@@ -110,10 +110,10 @@ components:
           x-longDescription: This property shall contain the name by which the manufacturer
             generally refers to the PCIe device.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -141,7 +141,7 @@ components:
           x-longDescription: This property shall contain a manufacturer-allocated
             number that identifies the PCIe device.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the Resource and its subordinate or
             dependent Resources.
           x-longDescription: This property shall contain any status or health properties

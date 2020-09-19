@@ -1,12 +1,12 @@
 components:
   schemas:
-    Description:
+    Resource_Description:
       description: The description of this resource.  Used for commonality in the
         schema definitions.
       type: string
       x-longDescription: This object represents the description of this resource.  The
         resource values shall comply with the Redfish Specification-described requirements.
-    Health:
+    Resource_Health:
       enum:
       - OK
       - Warning
@@ -16,27 +16,28 @@ components:
         Critical: A critical condition requires immediate attention.
         OK: Normal.
         Warning: A condition requires attention.
-    Id:
+    Resource_Id:
       description: The identifier that uniquely identifies the resource within the
         collection of similar resources.
       type: string
       x-longDescription: This property represents an identifier for the resource.  The
         resource values shall comply with the Redfish Specification-described requirements.
-    Identifier:
+    Resource_Identifier:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_11.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_10.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_9.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_8.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_7.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_6.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_5.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.yaml#/components/schemas/Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_2.yaml#/components/schemas/Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_11.yaml#/components/schemas/Resource_v1_1_11_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_10.yaml#/components/schemas/Resource_v1_2_10_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_9.yaml#/components/schemas/Resource_v1_3_9_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_8.yaml#/components/schemas/Resource_v1_4_8_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_7.yaml#/components/schemas/Resource_v1_5_7_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_6.yaml#/components/schemas/Resource_v1_6_6_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_5.yaml#/components/schemas/Resource_v1_7_5_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.yaml#/components/schemas/Resource_v1_8_5_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_3.yaml#/components/schemas/Resource_v1_9_3_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_10_0.yaml#/components/schemas/Resource_v1_10_0_Identifier
       description: Any additional identifiers for a resource.
       x-longDescription: This type shall contain any additional identifiers for a
         resource.
-    IndicatorLED:
+    Resource_IndicatorLED:
       enum:
       - Lit
       - Blinking
@@ -58,20 +59,20 @@ components:
           state.  If the service does not support this value, it shall reject PATCH
           or PUT requests containing this value by returning the HTTP 400 (Bad Request)
           status code.
-    Item:
+    Resource_Item:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/ReferenceableMember
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ReferenceableMember
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Resource
       description: The base type for resources and members that can be linked to.
-    ItemOrCollection:
+    Resource_ItemOrCollection:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Item
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/ResourceCollection
-    Links:
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Item
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResourceCollection
+    Resource_Links:
       additionalProperties: false
       properties:
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -80,26 +81,27 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Location:
+    Resource_Location:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_11.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_10.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_9.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_8.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_7.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_6.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_5.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.yaml#/components/schemas/Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_2.yaml#/components/schemas/Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_11.yaml#/components/schemas/Resource_v1_1_11_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_10.yaml#/components/schemas/Resource_v1_2_10_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_9.yaml#/components/schemas/Resource_v1_3_9_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_8.yaml#/components/schemas/Resource_v1_4_8_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_7.yaml#/components/schemas/Resource_v1_5_7_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_6.yaml#/components/schemas/Resource_v1_6_6_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_5.yaml#/components/schemas/Resource_v1_7_5_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.yaml#/components/schemas/Resource_v1_8_5_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_3.yaml#/components/schemas/Resource_v1_9_3_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_10_0.yaml#/components/schemas/Resource_v1_10_0_Location
       description: The location of a resource.
       x-longDescription: This type shall describe the location of a resource.
-    Name:
+    Resource_Name:
       description: The name of the resource or array member.
       type: string
       x-longDescription: This object represents the name of this resource or array
         member.  The resource values shall comply with the Redfish Specification-described
         requirements.  This string value shall be of the 'Name' reserved word format.
-    Oem:
+    Resource_Oem:
       additionalProperties: true
       description: The OEM extension.
       properties: {}
@@ -110,8 +112,8 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
         ^[A-Za-z0-9_]+$:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/OemObject
-    OemObject:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_OemObject
+    Resource_OemObject:
       additionalProperties: true
       description: The base type for an OEM extension.
       properties: {}
@@ -121,7 +123,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerState:
+    Resource_PowerState:
       enum:
       - 'On'
       - 'Off'
@@ -133,10 +135,10 @@ components:
         'On': The state is powered on.
         PoweringOff: A temporary state between on and off.
         PoweringOn: A temporary state between off and on.
-    ReferenceableMember:
+    Resource_ReferenceableMember:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.yaml#/components/schemas/ReferenceableMember
-    ResetType:
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.yaml#/components/schemas/Resource_v1_0_0_ReferenceableMember
+    Resource_ResetType:
       enum:
       - 'On'
       - ForceOff
@@ -158,18 +160,54 @@ components:
           to stop normal operations, complete diagnostic actions, and, typically,
           halt the system.
         'On': Turn on the unit.
-        PowerCycle: Power cycle the unit.
+        PowerCycle: Power cycle the unit.  Behaves like a full power removal, followed
+          by a power restore to the resource.
         PushPowerButton: Simulate the pressing of the physical power button on this
           unit.
+      x-enumLongDescriptions:
+        ForceOff: This value shall indicate the resource will transition to a power
+          off state.  The transition will start immediately.  Upon successful completion,
+          the PowerState property, if supported, shall contain the value `Off`.
+        ForceOn: This value shall indicate the resource will transition to a power
+          on state.  The transition will start immediately.  Upon successful completion,
+          the PowerState property shall contain the value `On`.
+        ForceRestart: This value shall indicate the resource will transition to a
+          power on state, after transiting through a restart.  The transion will start
+          immediately.  Upon successful completion, the PowerState property, if supported,
+          shall shall contain the value `On`.
+        GracefulRestart: This value shall indicate the resource will transition to
+          a power on state, after transiting through a restart.  The transion will
+          start after first performing tasks to safely shutdown the resource.  For
+          example, when shutting down a computer system, the hosted operating system
+          is allowed to safely shutting down processes and close connections.  Upon
+          successful completion, the PowerState property, if supported, shall contain
+          the value `On`.
+        GracefulShutdown: This value shall indicate the resource will transition to
+          a power off state.  The transition will start after first performing tasks
+          to safely shutdown the resource.  For example, when shutting down a computer
+          system, the hosted operating system is allowed to safely shutdown processes
+          and close connections.  Upon successful completion, the PowerState property,
+          if supported, shall contain the value `Off`.
+        Nmi: This value shall indicate the resource will generate a diagnostic interrupt.
+        'On': This value shall indicate the resource will transition to a power on
+          state.  Upon successful completion, the PowerState property, if supported,
+          shall contain the value `On`.
+        PowerCycle: This value shall indicate the resource will transition to a power
+          off state, then transition to a power on state.  Upon successful completion,
+          the PowerState property, if supported, shall contain the value `On`.
+        PushPowerButton: This value shall indicate the resource will behave as if
+          the physical power button is pressed.  The behavior of pressing the physical
+          power button might be dependent on the state of the unit and the behavior
+          might be configurable.
       x-enumVersionAdded:
         PowerCycle: v1_4_0
-    Resource:
+    Resource_Resource:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.yaml#/components/schemas/Resource
-    ResourceCollection:
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.yaml#/components/schemas/Resource_v1_0_0_Resource
+    Resource_ResourceCollection:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.yaml#/components/schemas/ResourceCollection
-    State:
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.yaml#/components/schemas/Resource_v1_0_0_ResourceCollection
+    Resource_State:
       enum:
       - Enabled
       - Disabled
@@ -206,12 +244,12 @@ components:
         Quiesced: v1_2_0
         UnavailableOffline: v1_1_0
         Updating: v1_2_0
-    Status:
+    Resource_Status:
       additionalProperties: false
       description: The status and health of a resource and its children.
       properties:
         Health:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Health
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
           description: The health state of this resource in the absence of its dependent
             resources.
           nullable: true
@@ -220,7 +258,7 @@ components:
             resource without considering its dependent resources.  The values shall
             conform to those defined in the Redfish Specification.
         HealthRollup:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Health
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
           description: The overall health state from the view of this resource.
           nullable: true
           readOnly: true
@@ -228,13 +266,13 @@ components:
             resource and its dependent resources.  The values shall conform to those
             defined in the Redfish Specification.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
             Specification-described requirements.
         State:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/State
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_State
           description: The known state of the resource, such as, enabled.
           nullable: true
           readOnly: true
@@ -251,7 +289,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    UUID:
+    Resource_UUID:
       pattern: ([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
       type: string
 title: '#Resource'

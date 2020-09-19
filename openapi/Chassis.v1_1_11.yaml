@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    Chassis_v1_1_11_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#Chassis.Reset':
-          $ref: '#/components/schemas/Reset'
+          $ref: '#/components/schemas/Chassis_v1_1_11_Reset'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Chassis_v1_1_11_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Chassis:
+    Chassis_v1_1_11_Chassis:
       additionalProperties: false
       description: The Chassis schema represents the physical components of a system.  This
         resource represents the sheet-metal confined spaces and logical zones such
@@ -26,15 +26,15 @@ components:
         of a system's data plane are not accessible to software that runs on the system.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Chassis_v1_1_11_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
@@ -46,32 +46,32 @@ components:
           x-longDescription: This property shall contain an identifying string that
             tracks the chassis for inventory purposes.
         ChassisType:
-          $ref: '#/components/schemas/ChassisType'
+          $ref: '#/components/schemas/Chassis_v1_1_11_ChassisType'
           description: The type of physical form factor of the chassis.
           readOnly: true
           x-longDescription: This property shall indicate the physical form factor
             for the type of chassis.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         IndicatorLED:
-          $ref: '#/components/schemas/IndicatorLED'
+          $ref: '#/components/schemas/Chassis_v1_1_11_IndicatorLED'
           description: The state of the indicator LED, which identifies the chassis.
           nullable: true
           readOnly: false
           x-longDescription: This property shall contain the indicator light state
             for the indicator light associated with this system.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Chassis_v1_1_11_Links'
           description: The links to other resources that are related to this resource.
           x-longDescription: This property shall contain links to resources that are
             related to but are not contained by, or subordinate to, this resource.
         LogServices:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the logs for this chassis.
           readOnly: true
           x-longDescription: This property shall contain a link to a resource collection
@@ -93,10 +93,10 @@ components:
           x-longDescription: This property shall contain the name by which the manufacturer
             generally refers to the chassis.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -110,20 +110,20 @@ components:
             the organization that is responsible for producing or manufacturing the
             chassis.
         PhysicalSecurity:
-          $ref: '#/components/schemas/PhysicalSecurity'
+          $ref: '#/components/schemas/Chassis_v1_1_11_PhysicalSecurity'
           description: The state of the physical security sensor.
           x-longDescription: This property shall contain the sensor state of the physical
             security.
           x-versionAdded: v1_1_0
         Power:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the power properties, or power supplies, power
             policies, and sensors, for this chassis.
           readOnly: true
           x-longDescription: This property shall contain a link to a resource of type
             Power that represents the power characteristics of this chassis.
         PowerState:
-          $ref: '#/components/schemas/PowerState'
+          $ref: '#/components/schemas/Chassis_v1_1_11_PowerState'
           description: The current power state of the chassis.
           nullable: true
           readOnly: true
@@ -144,13 +144,13 @@ components:
           x-longDescription: This property shall contain a manufacturer-allocated
             number that identifies the chassis.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the resource and its subordinate or
             dependent resources.
           x-longDescription: This property shall contain any status or health properties
             of the resource.
         Thermal:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the thermal properties, such as fans, cooling,
             and sensors, for this chassis.
           readOnly: true
@@ -168,7 +168,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ChassisType:
+    Chassis_v1_1_11_ChassisType:
       enum:
       - Rack
       - Blade
@@ -221,7 +221,7 @@ components:
           chassis.
         Zone: A logical division or portion of a physical chassis that contains multiple
           devices or systems that cannot be physically separated.
-    IndicatorLED:
+    Chassis_v1_1_11_IndicatorLED:
       enum:
       - Unknown
       - Lit
@@ -247,7 +247,7 @@ components:
         Unknown: This value shall represent the indicator LED is in an unknown state.  The
           service shall reject PATCH or PUT requests containing this value by returning
           the HTTP 400 (Bad Request) status code.
-    IntrusionSensor:
+    Chassis_v1_1_11_IntrusionSensor:
       enum:
       - Normal
       - HardwareIntrusion
@@ -258,7 +258,7 @@ components:
           system hardware from being accessed is detected to be in an insecure state.
         Normal: No abnormal physical security condition is detected at this time.
         TamperingDetected: Physical tampering of the monitored entity is detected.
-    IntrusionSensorReArm:
+    Chassis_v1_1_11_IntrusionSensorReArm:
       enum:
       - Manual
       - Automatic
@@ -267,7 +267,7 @@ components:
         Automatic: Because no abnormal physical security condition is detected, this
           sensor is automatically restored to the normal state.
         Manual: A manual re-arm of this sensor restores it to the normal state.
-    Links:
+    Chassis_v1_1_11_Links:
       additionalProperties: false
       description: The links to other resources that are related to this resource.
       properties:
@@ -275,7 +275,7 @@ components:
           description: An array of links to the computer systems that this chassis
             directly and wholly contains.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
@@ -283,9 +283,9 @@ components:
             a chassis also links to a computer system to which this resource also
             links, this chassis shall not link to that computer system.
         ComputerSystems@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         ContainedBy:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the chassis that contains this chassis.
           readOnly: true
           x-longDescription: This property shall contain a link to a resource of type
@@ -294,38 +294,38 @@ components:
           description: An array of links to any other chassis that this chassis has
             in it.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type Chassis that represent the chassis instances that this chassis
             contains.
         Contains@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         CooledBy:
           description: An array of links to resources or objects that cool this chassis.  Normally,
             the link is for either a chassis or a specific set of fans.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             or objects that cool this chassis.
         CooledBy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         ManagedBy:
           description: An array of links to the managers responsible for managing
             this chassis.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type Manager that manage this chassis.
         ManagedBy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -334,13 +334,13 @@ components:
           description: An array of links to resources or objects that power this chassis.  Normally,
             the link is for either a chassis or a specific set of power supplies.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             or objects that power this chassis.
         PoweredBy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
       type: object
       x-longDescription: This Redfish Specification-described type shall contain links
         to resources that are related to but are not contained by, or subordinate
@@ -348,7 +348,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Chassis_v1_1_11_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -358,12 +358,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PhysicalSecurity:
+    Chassis_v1_1_11_PhysicalSecurity:
       additionalProperties: false
       description: The state of the physical security sensor.
       properties:
         IntrusionSensor:
-          $ref: '#/components/schemas/IntrusionSensor'
+          $ref: '#/components/schemas/Chassis_v1_1_11_IntrusionSensor'
           description: This indicates the known state of the physical security sensor,
             such as if it is hardware intrusion detected.
           nullable: true
@@ -382,7 +382,7 @@ components:
             this physical security sensor that is unique within this resource.
           x-versionAdded: v1_1_0
         IntrusionSensorReArm:
-          $ref: '#/components/schemas/IntrusionSensorReArm'
+          $ref: '#/components/schemas/Chassis_v1_1_11_IntrusionSensorReArm'
           description: The method that restores this physical security sensor to the
             normal state.
           nullable: true
@@ -398,7 +398,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerState:
+    Chassis_v1_1_11_PowerState:
       enum:
       - 'On'
       - 'Off'
@@ -413,7 +413,7 @@ components:
           the chassis can take time to process the power off action.
         PoweringOn: A temporary state between off and on.  The components within the
           chassis can take time to process the power on action.
-    Reset:
+    Chassis_v1_1_11_Reset:
       additionalProperties: false
       description: This action resets the chassis but does not reset systems or other
         contained resources, although side effects may occur that affect those resources.
@@ -432,13 +432,13 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetRequestBody:
+    Chassis_v1_1_11_ResetRequestBody:
       additionalProperties: false
       description: This action resets the chassis but does not reset systems or other
         contained resources, although side effects may occur that affect those resources.
       properties:
         ResetType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/ResetType
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
           description: The type of reset.
           x-longDescription: This parameter shall contain the type of reset.  The
             service may accept a request without the parameter and complete an implementation-specific

@@ -1,12 +1,12 @@
 components:
   schemas:
-    Capability:
+    CollectionCapabilities_v1_0_0_Capability:
       additionalProperties: false
       description: This type describes a specific capability of a collection for a
         given use case.
       properties:
         CapabilitiesObject:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
           description: Reference to the resource the client may GET to in order to
             understand how to form a POST request for a given collection.
           readOnly: true
@@ -19,7 +19,7 @@ components:
             this resource.
           properties:
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
@@ -27,19 +27,19 @@ components:
             RelatedItem:
               description: The ID(s) of the resources associated with this capability.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be an array of IDs
                 containing pointers consistent with JSON pointer syntax to the resource
                 that is related to this capability.
             RelatedItem@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             RelatedItem@odata.navigationLink:
               format: uri
               type: string
             TargetCollection:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/ResourceCollection
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResourceCollection
               description: Reference to the collection that this capabilities structure
                 is describing.
               readOnly: true
@@ -57,7 +57,7 @@ components:
             ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
               description: This property shall specify a valid odata or Redfish property.
         UseCase:
-          $ref: '#/components/schemas/UseCase'
+          $ref: '#/components/schemas/CollectionCapabilities_v1_0_0_UseCase'
           description: This property represents the use case in which a client may
             issue a POST request to the collection.
           readOnly: true
@@ -74,7 +74,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    CollectionCapabilities:
+    CollectionCapabilities_v1_0_0_CollectionCapabilities:
       additionalProperties: false
       description: This type describes the capabilities of a collection.
       properties:
@@ -82,7 +82,7 @@ components:
           description: This property contains the list of capabilities supported by
             this resource.
           items:
-            $ref: '#/components/schemas/Capability'
+            $ref: '#/components/schemas/CollectionCapabilities_v1_0_0_Capability'
           type: array
           x-longDescription: The value of this property shall be an array of Capability
             structures.
@@ -92,7 +92,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    UseCase:
+    CollectionCapabilities_v1_0_0_UseCase:
       enum:
       - ComputerSystemComposition
       - VolumeCreation

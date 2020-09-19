@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    Certificate_v1_0_3_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Certificate_v1_0_3_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -14,21 +14,21 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Certificate:
+    Certificate_v1_0_3_Certificate:
       additionalProperties: false
       description: The Certificate schema describes a certificate that proves the
         identify of a component, account, or service.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Certificate_v1_0_3_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
@@ -45,20 +45,20 @@ components:
             the client shall provide the private key as part of the string in the
             POST request.
         CertificateType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/CertificateType
+          $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/Certificate_CertificateType
           description: The format of the certificate.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the format type for the certificate.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Issuer:
-          $ref: '#/components/schemas/Identifier'
+          $ref: '#/components/schemas/Certificate_v1_0_3_Identifier'
           description: The issuer of the certificate.
           x-longDescription: This property shall contain an object containing information
             about the issuer of the certificate.
@@ -66,23 +66,23 @@ components:
           description: The key usage extension, which defines the purpose of the public
             keys in this certificate.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/KeyUsage
+            $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/Certificate_KeyUsage
             nullable: true
           readOnly: true
           type: array
           x-longDescription: This property shall contain the key usage extension,
             which defines the purpose of the public keys in this certificate.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         Subject:
-          $ref: '#/components/schemas/Identifier'
+          $ref: '#/components/schemas/Certificate_v1_0_3_Identifier'
           description: The subject of the certificate.
           x-longDescription: This property shall contain an object containing information
             about the subject of the certificate.
@@ -114,7 +114,7 @@ components:
       x-requiredOnCreate:
       - CertificateString
       - CertificateType
-    Identifier:
+    Certificate_v1_0_3_Identifier:
       additionalProperties: false
       description: The identifier information about a certificate.
       properties:
@@ -169,7 +169,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Certificate_v1_0_3_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}

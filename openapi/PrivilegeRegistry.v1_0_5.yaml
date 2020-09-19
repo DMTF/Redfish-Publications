@@ -1,6 +1,6 @@
 components:
   schemas:
-    Mapping:
+    PrivilegeRegistry_v1_0_5_Mapping:
       additionalProperties: false
       description: The mapping between a Resource type and the relevant privileges
         that accesses the Resource.
@@ -12,7 +12,7 @@ components:
           x-longDescription: This property shall contain the Resource name, such as
             `Manager`.
         OperationMap:
-          $ref: '#/components/schemas/OperationMap'
+          $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationMap'
           description: List mapping between HTTP methods and privilege required for
             the Resource.
           x-longDescription: This property shall list the mapping between HTTP methods
@@ -20,21 +20,21 @@ components:
         PropertyOverrides:
           description: The privilege overrides of properties within a Resource.
           items:
-            $ref: '#/components/schemas/Target_PrivilegeMap'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_Target_PrivilegeMap'
           type: array
           x-longDescription: This property shall contain the privilege overrides of
             properties, such as the `Password` property in the `ManagerAccount` Resource.
         ResourceURIOverrides:
           description: The privilege overrides of Resource URIs.
           items:
-            $ref: '#/components/schemas/Target_PrivilegeMap'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_Target_PrivilegeMap'
           type: array
           x-longDescription: This property shall contain the privilege overrides of
             Resource URIs.  The target lists the Resource URI and the new privileges.
         SubordinateOverrides:
           description: The privilege overrides of the subordinate Resource.
           items:
-            $ref: '#/components/schemas/Target_PrivilegeMap'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_Target_PrivilegeMap'
           type: array
           x-longDescription: This property shall contain the privilege overrides of
             the subordinate Resource.  The target lists are identified by Resource
@@ -45,49 +45,49 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OperationMap:
+    PrivilegeRegistry_v1_0_5_OperationMap:
       additionalProperties: false
       description: The specific privileges required to complete a set of HTTP operations.
       properties:
         DELETE:
           description: The privilege required to complete an HTTP DELETE operation.
           items:
-            $ref: '#/components/schemas/OperationPrivilege'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationPrivilege'
           type: array
           x-longDescription: This property shall contain the privilege required to
             complete an HTTP DELETE operation.
         GET:
           description: The privilege required to complete an HTTP GET operation.
           items:
-            $ref: '#/components/schemas/OperationPrivilege'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationPrivilege'
           type: array
           x-longDescription: This property shall contain the privilege required to
             complete an HTTP GET operation.
         HEAD:
           description: The privilege required to complete an HTTP HEAD operation.
           items:
-            $ref: '#/components/schemas/OperationPrivilege'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationPrivilege'
           type: array
           x-longDescription: This property shall contain the privilege required to
             complete an HTTP HEAD operation.
         PATCH:
           description: The privilege required to complete an HTTP PATCH operation.
           items:
-            $ref: '#/components/schemas/OperationPrivilege'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationPrivilege'
           type: array
           x-longDescription: This property shall contain the privilege required to
             complete an HTTP PATCH operation.
         POST:
           description: The privilege required to complete an HTTP POST operation.
           items:
-            $ref: '#/components/schemas/OperationPrivilege'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationPrivilege'
           type: array
           x-longDescription: This property shall contain the privilege required to
             complete an HTTP POST operation.
         PUT:
           description: The privilege required to complete an HTTP PUT operation.
           items:
-            $ref: '#/components/schemas/OperationPrivilege'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationPrivilege'
           type: array
           x-longDescription: This property shall contain the privilege required to
             complete an HTTP PUT operation.
@@ -97,7 +97,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OperationPrivilege:
+    PrivilegeRegistry_v1_0_5_OperationPrivilege:
       additionalProperties: false
       description: The privileges for a specific HTTP operation.
       properties:
@@ -118,30 +118,30 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PrivilegeRegistry:
+    PrivilegeRegistry_v1_0_5_PrivilegeRegistry:
       additionalProperties: false
       description: The PrivilegeRegistry schema describes the operation-to-privilege
         mappings.
       properties:
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Mappings:
           description: The mappings between entities and the relevant privileges that
             access those entities.
           items:
-            $ref: '#/components/schemas/Mapping'
+            $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_Mapping'
           type: array
           x-longDescription: This property shall describe the mappings between entities
             and the relevant privileges that access those entities.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         OEMPrivilegesUsed:
           description: The set of OEM privileges used in this mapping.
@@ -152,7 +152,7 @@ components:
           x-longDescription: This property shall contain an array of OEM privileges
             used in this mapping.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -160,7 +160,7 @@ components:
         PrivilegesUsed:
           description: The set of Redfish standard privileges used in this mapping.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Privileges.yaml#/components/schemas/PrivilegeType
+            $ref: http://redfish.dmtf.org/schemas/v1/Privileges.yaml#/components/schemas/Privileges_PrivilegeType
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of Redfish standard
@@ -174,13 +174,13 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Target_PrivilegeMap:
+    PrivilegeRegistry_v1_0_5_Target_PrivilegeMap:
       additionalProperties: false
       description: This type describes a mapping between one or more targets and the
         HTTP operations associated with them.
       properties:
         OperationMap:
-          $ref: '#/components/schemas/OperationMap'
+          $ref: '#/components/schemas/PrivilegeRegistry_v1_0_5_OperationMap'
           description: The mapping between the HTTP operation and the privilege required
             to complete the operation.
           x-longDescription: This property shall contain the mapping between the HTTP

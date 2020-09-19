@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    ProcessorMetrics_v1_0_0_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/ProcessorMetrics_v1_0_0_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    CStateResidency:
+    ProcessorMetrics_v1_0_0_CStateResidency:
       additionalProperties: false
       description: The C-state residency of the processor.
       properties:
@@ -42,7 +42,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    CacheMetrics:
+    ProcessorMetrics_v1_0_0_CacheMetrics:
       additionalProperties: false
       description: The processor core metrics.
       properties:
@@ -97,14 +97,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    CoreMetrics:
+    ProcessorMetrics_v1_0_0_CoreMetrics:
       additionalProperties: false
       description: The processor core metrics.
       properties:
         CStateResidency:
           description: The C-state residency of this core in the processor.
           items:
-            $ref: '#/components/schemas/CStateResidency'
+            $ref: '#/components/schemas/ProcessorMetrics_v1_0_0_CStateResidency'
             nullable: true
           type: array
           x-longDescription: This property shall contain properties that describe
@@ -112,7 +112,7 @@ components:
         CoreCache:
           description: The cache metrics of this core in the processor.
           items:
-            $ref: '#/components/schemas/CacheMetrics'
+            $ref: '#/components/schemas/ProcessorMetrics_v1_0_0_CacheMetrics'
             nullable: true
           type: array
           x-longDescription: This property shall contain properties that describe
@@ -157,7 +157,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    ProcessorMetrics_v1_0_0_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -167,21 +167,21 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ProcessorMetrics:
+    ProcessorMetrics_v1_0_0_ProcessorMetrics:
       additionalProperties: false
       description: ProcessorMetrics contains usage and health statistics for a Processor
         (all Cores).
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/ProcessorMetrics_v1_0_0_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -205,7 +205,7 @@ components:
         Cache:
           description: The processor cache metrics.
           items:
-            $ref: '#/components/schemas/CacheMetrics'
+            $ref: '#/components/schemas/ProcessorMetrics_v1_0_0_CacheMetrics'
             nullable: true
           type: array
           x-longDescription: This property shall contain properties that describe
@@ -221,13 +221,13 @@ components:
         CoreMetrics:
           description: The processor core metrics.
           items:
-            $ref: '#/components/schemas/CoreMetrics'
+            $ref: '#/components/schemas/ProcessorMetrics_v1_0_0_CoreMetrics'
             nullable: true
           type: array
           x-longDescription: This property shall contain properties that describe
             the cores of this processor.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         FrequencyRatio:
@@ -238,7 +238,7 @@ components:
           x-longDescription: The value of this property shall be the frequency relative
             to the nominal processor frequency ratio of this processor.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         KernelPercent:
           description: The percentage of time spent in kernel mode.
@@ -258,10 +258,10 @@ components:
             bandwidth usage of this processor in bytes.
           x-units: By
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the

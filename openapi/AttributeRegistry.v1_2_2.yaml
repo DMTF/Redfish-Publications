@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    AttributeRegistry_v1_2_2_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -16,7 +16,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    AttributeRegistry:
+    AttributeRegistry_v1_2_2_AttributeRegistry:
       additionalProperties: false
       description: The AttributeRegistry schema contains a set of key-value pairs
         that represents the structure of a Registry. It includes mechanisms for building
@@ -25,25 +25,25 @@ components:
         The attributes and property names are not standardized.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
           x-versionAdded: v1_1_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Language:
           description: This is the RFC 5646 compliant language code for the registry.
@@ -52,10 +52,10 @@ components:
           x-longDescription: The value of this property shall be a string consisting
             of an RFC 5646 language code.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -67,7 +67,7 @@ components:
           x-longDescription: The value of this property shall be a string that represents
             the publisher of this registry.
         RegistryEntries:
-          $ref: '#/components/schemas/RegistryEntries'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_RegistryEntries'
           description: List of all attributes and their metadata for this component.
           x-longDescription: The value of this property shall a list of all attributes
             for this component, along with their possible values, dependencies, and
@@ -83,7 +83,7 @@ components:
         SupportedSystems:
           description: Array of systems supported by this attribute registry.
           items:
-            $ref: '#/components/schemas/SupportedSystems'
+            $ref: '#/components/schemas/AttributeRegistry_v1_2_2_SupportedSystems'
           type: array
           x-longDescription: The value of this property shall be an array containing
             a list of systems supported by this attribute registry.
@@ -101,7 +101,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    AttributeType:
+    AttributeRegistry_v1_2_2_AttributeType:
       enum:
       - Enumeration
       - String
@@ -117,7 +117,7 @@ components:
         Password: The attributes that include password values and are not displayed
           as plain text. The value shall be null for GET requests.
         String: The attributes that include free form text in their values.
-    AttributeValue:
+    AttributeRegistry_v1_2_2_AttributeValue:
       additionalProperties: false
       description: A possible value for attributes of type 'Enumeration'.
       properties:
@@ -145,7 +145,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Attributes:
+    AttributeRegistry_v1_2_2_Attributes:
       additionalProperties: false
       description: An attribute and its possible values.
       properties:
@@ -296,7 +296,7 @@ components:
             'Integer' each time a user requests a value change. A ScalarIncrement
             value of 0 indicates a free-form numeric user input.
         Type:
-          $ref: '#/components/schemas/AttributeType'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_AttributeType'
           description: The type of the attribute.
           readOnly: true
           x-longDescription: The value of this property shall be an enumeration describing
@@ -335,7 +335,7 @@ components:
           description: The array containing possible values for attributes of type
             'Enumeration'.
           items:
-            $ref: '#/components/schemas/AttributeValue'
+            $ref: '#/components/schemas/AttributeRegistry_v1_2_2_AttributeValue'
           type: array
           x-longDescription: The value of this property shall be an array containing
             the possible values of an attribute of type 'Enumeration'.
@@ -374,12 +374,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Dependencies:
+    AttributeRegistry_v1_2_2_Dependencies:
       additionalProperties: false
       description: A dependency of attributes on this component.
       properties:
         Dependency:
-          $ref: '#/components/schemas/Dependency'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_Dependency'
           description: The dependency expression for one or more Attributes in this
             Attribute Registry.
           x-longDescription: The value of this property shall be the dependency expression
@@ -394,7 +394,7 @@ components:
             of the attribute whose change triggers the evaluation of this dependency
             expression.
         Type:
-          $ref: '#/components/schemas/DependencyType'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_DependencyType'
           description: The type of the dependency structure.
           readOnly: true
           x-longDescription: The value of this property shall be an enumeration describing
@@ -405,7 +405,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Dependency:
+    AttributeRegistry_v1_2_2_Dependency:
       additionalProperties: false
       description: The dependency expression for one or more Attributes in this Attribute
         Registry.
@@ -413,7 +413,7 @@ components:
         MapFrom:
           description: Array of the map-from conditions for mapping dependency.
           items:
-            $ref: '#/components/schemas/MapFrom'
+            $ref: '#/components/schemas/AttributeRegistry_v1_2_2_MapFrom'
           type: array
           x-longDescription: The value of this property shall be an array containing
             the map-from conditions for a dependency of Type 'Map'.
@@ -426,7 +426,7 @@ components:
           x-longDescription: The value of this property shall be the AttributeName
             of the attribute that is affected by this dependency expression.
         MapToProperty:
-          $ref: '#/components/schemas/MapToProperty'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_MapToProperty'
           description: The meta-data property of the attribute specified in MapFromAttribute
             that is used to evaluate this dependency expression.
           readOnly: true
@@ -449,14 +449,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    DependencyType:
+    AttributeRegistry_v1_2_2_DependencyType:
       enum:
       - Map
       type: string
       x-enumDescriptions:
         Map: A simple mapping dependency. The attribute value or state is changed
           to the mapped value if the condition evaluates to true.
-    MapFrom:
+    AttributeRegistry_v1_2_2_MapFrom:
       additionalProperties: false
       description: A map-from condition for mapping dependency.
       properties:
@@ -469,14 +469,14 @@ components:
             of the attribute that is used in evaluating this dependency expression
             term.
         MapFromCondition:
-          $ref: '#/components/schemas/MapFromCondition'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_MapFromCondition'
           description: The condition that is used to evaluate this dependency expression.
           readOnly: true
           x-longDescription: The value of this property shall be the condition that
             is used to evaluate this dependency expression. For example, 'EQU' or
             'NEQ'.
         MapFromProperty:
-          $ref: '#/components/schemas/MapFromProperty'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_MapFromProperty'
           description: The meta-data property of the attribute specified in MapFromAttribute
             that is used to evaluate this dependency expression.
           readOnly: true
@@ -494,7 +494,7 @@ components:
             (in the attribute specified in MapFromAttribute) that is used to evaluate
             this dependency expression.
         MapTerms:
-          $ref: '#/components/schemas/MapTerms'
+          $ref: '#/components/schemas/AttributeRegistry_v1_2_2_MapTerms'
           description: The logical term used to combine two or more MapFrom conditions
             in this dependency expression.
           readOnly: true
@@ -507,7 +507,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    MapFromCondition:
+    AttributeRegistry_v1_2_2_MapFromCondition:
       enum:
       - EQU
       - NEQ
@@ -523,7 +523,7 @@ components:
         LEQ: The logical operation for 'Less than or Equal'.
         LSS: The logical operation for 'Less than'.
         NEQ: The logical operation for 'Not Equal'.
-    MapFromProperty:
+    AttributeRegistry_v1_2_2_MapFromProperty:
       enum:
       - CurrentValue
       - DefaultValue
@@ -549,7 +549,7 @@ components:
         ScalarIncrement: The dependency on an attribute's ScalarIncrement.
         UpperBound: The dependency on an attribute's UpperBound.
         WriteOnly: The dependency on an attribute's WriteOnly state.
-    MapTerms:
+    AttributeRegistry_v1_2_2_MapTerms:
       enum:
       - AND
       - OR
@@ -557,7 +557,7 @@ components:
       x-enumDescriptions:
         AND: The operation used for logical 'AND' of dependency terms.
         OR: The operation used for logical 'OR' of dependency terms.
-    MapToProperty:
+    AttributeRegistry_v1_2_2_MapToProperty:
       enum:
       - CurrentValue
       - DefaultValue
@@ -595,7 +595,7 @@ components:
         ValueExpression: The dependency that affects an attribute's ValueExpression.
         WarningText: The dependency that affects an attribute's WarningText.
         WriteOnly: The dependency that affects an attribute's WriteOnly state.
-    Menus:
+    AttributeRegistry_v1_2_2_Menus:
       additionalProperties: false
       description: A menu and its hierarchy.
       properties:
@@ -657,7 +657,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    AttributeRegistry_v1_2_2_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -667,14 +667,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    RegistryEntries:
+    AttributeRegistry_v1_2_2_RegistryEntries:
       additionalProperties: false
       description: List of all attributes and their metadata for this component.
       properties:
         Attributes:
           description: The array containing the attributes and their possible values.
           items:
-            $ref: '#/components/schemas/Attributes'
+            $ref: '#/components/schemas/AttributeRegistry_v1_2_2_Attributes'
           type: array
           x-longDescription: The value of this property shall be an array containing
             the attributes and their possible values and other metadata.
@@ -682,14 +682,14 @@ components:
           description: The array containing a list of dependencies of attributes on
             this component.
           items:
-            $ref: '#/components/schemas/Dependencies'
+            $ref: '#/components/schemas/AttributeRegistry_v1_2_2_Dependencies'
           type: array
           x-longDescription: The value of this property shall be an array containing
             a list of dependencies of attributes on this component.
         Menus:
           description: The array containing the attributes menus and their hierarchy.
           items:
-            $ref: '#/components/schemas/Menus'
+            $ref: '#/components/schemas/AttributeRegistry_v1_2_2_Menus'
           type: array
           x-longDescription: The value of this property shall be an array containing
             the attributes menus and their hierarchy.
@@ -699,7 +699,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    SupportedSystems:
+    AttributeRegistry_v1_2_2_SupportedSystems:
       additionalProperties: false
       description: A system supported by this attribute registry.
       properties:

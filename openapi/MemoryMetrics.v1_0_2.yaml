@@ -1,6 +1,6 @@
 components:
   schemas:
-    AlarmTrips:
+    MemoryMetrics_v1_0_2_AlarmTrips:
       additionalProperties: false
       description: Alarm trip information about the memory.
       properties:
@@ -47,7 +47,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ClearCurrentPeriod:
+    MemoryMetrics_v1_0_2_ClearCurrentPeriod:
       additionalProperties: false
       description: This sets the CurrentPeriod object values to zero.
       properties:
@@ -64,7 +64,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    CurrentPeriod:
+    MemoryMetrics_v1_0_2_CurrentPeriod:
       additionalProperties: false
       description: This object contains the Memory metrics since last reset or ClearCurrentPeriod
         action.
@@ -89,12 +89,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    HealthData:
+    MemoryMetrics_v1_0_2_HealthData:
       additionalProperties: false
       description: This type describes the health information of the memory.
       properties:
         AlarmTrips:
-          $ref: '#/components/schemas/AlarmTrips'
+          $ref: '#/components/schemas/MemoryMetrics_v1_0_2_AlarmTrips'
           description: Alarm trip information about the memory.
           x-longDescription: This object shall contain properties describe the types
             of alarms that have been raised by the memory.
@@ -132,7 +132,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    LifeTime:
+    MemoryMetrics_v1_0_2_LifeTime:
       additionalProperties: false
       description: This object contains the Memory metrics for the lifetime of the
         Memory.
@@ -157,23 +157,23 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    MemoryMetrics:
+    MemoryMetrics_v1_0_2_MemoryMetrics:
       additionalProperties: false
       description: MemoryMetrics contains usage and health statistics for a single
         Memory module or device instance.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Actions:
           additionalProperties: false
           description: The available actions for this resource.
           properties:
             '#MemoryMetrics.ClearCurrentPeriod':
-              $ref: '#/components/schemas/ClearCurrentPeriod'
+              $ref: '#/components/schemas/MemoryMetrics_v1_0_2_ClearCurrentPeriod'
             Oem:
               additionalProperties: true
               description: The available OEM specific actions for this resource.
@@ -200,34 +200,34 @@ components:
             bytes of all stucture elements.
           x-units: By
         CurrentPeriod:
-          $ref: '#/components/schemas/CurrentPeriod'
+          $ref: '#/components/schemas/MemoryMetrics_v1_0_2_CurrentPeriod'
           description: This object contains the Memory metrics since last reset or
             ClearCurrentPeriod action.
           x-longDescription: This object shall contain properties which describe the
             CurrentPeriod metrics for the current resource.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         HealthData:
-          $ref: '#/components/schemas/HealthData'
+          $ref: '#/components/schemas/MemoryMetrics_v1_0_2_HealthData'
           description: This object describes the health information of the memory.
           x-longDescription: This object shall contain properties which describe the
             HealthData metrics for the current resource.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         LifeTime:
-          $ref: '#/components/schemas/LifeTime'
+          $ref: '#/components/schemas/MemoryMetrics_v1_0_2_LifeTime'
           description: This object contains the Memory metrics for the lifetime of
             the Memory.
           x-longDescription: This object shall contain properties which describe the
             LifeTime metrics for the current resource.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the

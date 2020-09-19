@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    EventDestination_v1_2_5_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         '#EventDestination.ResumeSubscription':
-          $ref: '#/components/schemas/ResumeSubscription'
+          $ref: '#/components/schemas/EventDestination_v1_2_5_ResumeSubscription'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/EventDestination_v1_2_5_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -17,22 +17,22 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    EventDestination:
+    EventDestination_v1_2_5_EventDestination:
       additionalProperties: false
       description: The EventDestination schema defines the target of an event subscription,
         including the event types and context to provide to the target in the Event
         payload.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/EventDestination_v1_2_5_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
@@ -46,7 +46,7 @@ components:
           x-longDescription: This property shall contain a client-supplied context
             that remains with the connection through the connection's lifetime.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Destination:
@@ -59,7 +59,7 @@ components:
         EventTypes:
           description: The types of events that are sent to the destination.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array that contains the
@@ -72,14 +72,14 @@ components:
             information.  This array is null or an empty array in responses.  An empty
             array is the preferred return value on read operations.
           items:
-            $ref: '#/components/schemas/HttpHeaderProperty'
+            $ref: '#/components/schemas/EventDestination_v1_2_5_HttpHeaderProperty'
           type: array
           x-longDescription: This property shall contain an object consisting of the
             names and values of of HTTP header to be included with every event POST
             to the Event Destination.  This object shall be null or an empty array
             in responses.  An empty array is the preferred return value in responses.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         MessageIds:
           description: The list of MessageIds that the service sends.  If this property
@@ -98,10 +98,10 @@ components:
             to the subscriber.
           x-versionAdded: v1_1_0
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -111,7 +111,7 @@ components:
             events.  If this property is absent or the array is empty, the service
             sends the events that originate from any Resource to the subscriber.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall specify an array of Resources, Resource
@@ -124,9 +124,9 @@ components:
             any Resource, Resource Collection, or Referenceable Member to the subscriber.
           x-versionAdded: v1_1_0
         OriginResources@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Protocol:
-          $ref: '#/components/schemas/EventDestinationProtocol'
+          $ref: '#/components/schemas/EventDestination_v1_2_5_EventDestinationProtocol'
           description: The protocol type of the event connection.
           readOnly: true
           x-longDescription: This property shall contain the protocol type that the
@@ -149,13 +149,13 @@ components:
       x-requiredOnCreate:
       - Destination
       - Protocol
-    EventDestinationProtocol:
+    EventDestination_v1_2_5_EventDestinationProtocol:
       enum:
       - Redfish
       type: string
       x-enumDescriptions:
         Redfish: The destination follows the Redfish Specification for event notifications.
-    HttpHeaderProperty:
+    EventDestination_v1_2_5_HttpHeaderProperty:
       additionalProperties: false
       description: The HTTP header value is the property value.  The header name is
         the property name.
@@ -167,7 +167,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
         ^[^:\\s]+$: {}
-    OemActions:
+    EventDestination_v1_2_5_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -177,7 +177,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResumeSubscription:
+    EventDestination_v1_2_5_ResumeSubscription:
       additionalProperties: false
       description: This action resumes a suspended event subscription.
       properties:
@@ -194,7 +194,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResumeSubscriptionRequestBody:
+    EventDestination_v1_2_5_ResumeSubscriptionRequestBody:
       additionalProperties: false
       description: This action resumes a suspended event subscription.
       properties: {}

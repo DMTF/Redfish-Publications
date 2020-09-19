@@ -1,19 +1,19 @@
 components:
   schemas:
-    EventDestination:
+    EventDestination_v1_1_5_EventDestination:
       additionalProperties: false
       description: An Event Destination desribes the target of an event subscription,
         including the types of events subscribed and context to provide to the target
         in the Event payload.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Context:
           description: A client-supplied string that is stored with the event destination
             subscription.
@@ -23,7 +23,7 @@ components:
           x-longDescription: This property shall contain a client supplied context
             that will remain with the connection through the connections lifetime.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Destination:
@@ -37,7 +37,7 @@ components:
           description: This property contains the types of events that will be sent
             to the desination.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           readOnly: true
           type: array
           x-longDescription: This property shall be an array that contains the types
@@ -46,13 +46,13 @@ components:
           description: This is for setting HTTP headers, such as authorization information.  This
             object will be null on a GET.
           items:
-            $ref: '#/components/schemas/HttpHeaderProperty'
+            $ref: '#/components/schemas/EventDestination_v1_1_5_HttpHeaderProperty'
           type: array
           x-longDescription: This property shall contain an object consisting of the
             names and values of of HTTP header to be included with every event POST
             to the Event Destination.  This property shall be null on a GET.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         MessageIds:
           description: A list of MessageIds that the service will only send.  If this
@@ -70,10 +70,10 @@ components:
             property is absent or the array is empty, the service shall send Events
             with any MessageId to the subscriber.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -83,7 +83,7 @@ components:
             events.  If this property is absent or the array is empty, then Events
             originating from any resource will be sent to the subscriber.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall specify an array of
@@ -95,9 +95,9 @@ components:
             the service shall send Events originating from any Resource, Resource
             Collection, or Referenceable Member to the subscriber.
         OriginResources@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_count
         Protocol:
-          $ref: '#/components/schemas/EventDestinationProtocol'
+          $ref: '#/components/schemas/EventDestination_v1_1_5_EventDestinationProtocol'
           description: The protocol type of the event connection.
           readOnly: true
           x-longDescription: This property shall contain the protocol type that the
@@ -121,13 +121,13 @@ components:
       - Destination
       - EventTypes
       - Protocol
-    EventDestinationProtocol:
+    EventDestination_v1_1_5_EventDestinationProtocol:
       enum:
       - Redfish
       type: string
       x-enumDescriptions:
         Redfish: The destination follows the Redfish specification for event notifications.
-    EventFormatType:
+    EventDestination_v1_1_5_EventFormatType:
       enum:
       - Event
       - MetricReport
@@ -137,7 +137,7 @@ components:
           Type Event.
         MetricReport: The subscription destination will receive JSON Bodies of the
           Resource Type MetricReport.
-    HttpHeaderProperty:
+    EventDestination_v1_1_5_HttpHeaderProperty:
       additionalProperties: false
       description: The value of the HTTP header is the property value.  The header
         name is the property name.

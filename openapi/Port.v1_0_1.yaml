@@ -1,21 +1,21 @@
 components:
   schemas:
-    Port:
+    Port_v1_0_1_Port:
       additionalProperties: false
       description: Port contains properties describing a port of a switch.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Actions:
           additionalProperties: false
           description: The available actions for this resource.
           properties:
             '#Port.Reset':
-              $ref: '#/components/schemas/Reset'
+              $ref: '#/components/schemas/Port_v1_0_1_Reset'
             Oem:
               additionalProperties: true
               properties: {}
@@ -39,11 +39,11 @@ components:
             port currently negotiated and running.
           x-units: Gbit/s
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
           additionalProperties: false
@@ -54,14 +54,14 @@ components:
               description: An array of references to the endpoints that connect to
                 the switch through this port.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be a reference to
                 the resources that this port is associated with and shall reference
                 a resource of type Endpoint.
             AssociatedEndpoints@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             AssociatedEndpoints@odata.navigationLink:
               format: uri
               type: string
@@ -69,14 +69,14 @@ components:
               description: An array of references to the ports that connect to the
                 switch through this port.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be a reference to
                 the resources that this port is associated with and shall reference
                 a resource of type Port.
             ConnectedSwitchPorts@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             ConnectedSwitchPorts@odata.navigationLink:
               format: uri
               type: string
@@ -84,19 +84,19 @@ components:
               description: An array of references to the switches that connect to
                 the switch through this port.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be a reference to
                 the resources that this port is associated with and shall reference
                 a resource of type Switch.
             ConnectedSwitches@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             ConnectedSwitches@odata.navigationLink:
               format: uri
               type: string
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
@@ -118,10 +118,10 @@ components:
             the system shall attempt to negotiate at the maximum speed set.
           x-units: Gbit/s
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -134,21 +134,21 @@ components:
           x-longDescription: The value of this property shall be the name of the switch
             port as indicated on the outside of the switch.
         PortProtocol:
-          $ref: http://redfish.dmtf.org/schemas/v1/Storage.v1_0_0.yaml#/components/schemas/Protocol
+          $ref: http://redfish.dmtf.org/schemas/v1/Storage.v1_0_0.yaml#/components/schemas/Storage_v1_0_0_Protocol
           description: The protocol being sent over this port.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall contain the protocol
             being sent over this port.
         PortType:
-          $ref: '#/components/schemas/PortType'
+          $ref: '#/components/schemas/Port_v1_0_1_PortType'
           description: This is the type of this port.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall be the port type for
             this port.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         Width:
           description: The number of lanes, phys, or other physical transport links
             that this port contains.
@@ -166,7 +166,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PortType:
+    Port_v1_0_1_PortType:
       enum:
       - UpstreamPort
       - DownstreamPort
@@ -182,7 +182,7 @@ components:
         ManagementPort: This port connects to a switch manager.
         UnconfiguredPort: This port has not yet been configured.
         UpstreamPort: This port connects to a host device.
-    Reset:
+    Port_v1_0_1_Reset:
       additionalProperties: false
       description: This action is used to reset this switch.
       properties:

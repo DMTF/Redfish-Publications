@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    Task_v1_4_3_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Task_v1_4_3_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Task_v1_4_3_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -25,7 +25,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Payload:
+    Task_v1_4_3_Payload:
       additionalProperties: false
       description: The HTTP and JSON payload details for this Task.
       properties:
@@ -66,28 +66,28 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Task:
+    Task_v1_4_3_Task:
       additionalProperties: false
       description: The Task schema contains information about a task that the Redfish
         Task Service schedules or executes.  Tasks represent operations that take
         more time than a client typically wants to wait.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Task_v1_4_3_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
           x-versionAdded: v1_1_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EndTime:
@@ -115,26 +115,26 @@ components:
             shall be supported if the Payload property is supported.
           x-versionAdded: v1_3_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Messages:
           description: An array of messages associated with the task.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message
+            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message_Message
           type: array
           x-longDescription: This property shall contain an array of messages associated
             with the task.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         Payload:
-          $ref: '#/components/schemas/Payload'
+          $ref: '#/components/schemas/Task_v1_4_3_Payload'
           description: The HTTP and JSON payload details for this task, unless they
             are hidden from view by the service.
           x-longDescription: This object shall contain information detailing the HTTP
@@ -167,12 +167,12 @@ components:
             defined in the Redfish Specification.
           x-versionAdded: v1_2_0
         TaskState:
-          $ref: '#/components/schemas/TaskState'
+          $ref: '#/components/schemas/Task_v1_4_3_TaskState'
           description: The state of the task.
           readOnly: true
           x-longDescription: This property shall indicate the state of the task.
         TaskStatus:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Health
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
           description: The completion status of the task.
           readOnly: true
           x-longDescription: This property shall contain the completion status of
@@ -188,7 +188,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    TaskState:
+    Task_v1_4_3_TaskState:
       enum:
       - New
       - Starting

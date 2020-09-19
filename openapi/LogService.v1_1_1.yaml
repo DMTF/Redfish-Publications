@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    LogService_v1_1_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#LogService.ClearLog':
-          $ref: '#/components/schemas/ClearLog'
+          $ref: '#/components/schemas/LogService_v1_1_1_ClearLog'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/LogService_v1_1_1_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -17,7 +17,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ClearLog:
+    LogService_v1_1_1_ClearLog:
       additionalProperties: false
       description: This action is used to clear the log for this Log Service.
       properties:
@@ -34,14 +34,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ClearLogRequestBody:
+    LogService_v1_1_1_ClearLogRequestBody:
       additionalProperties: false
       description: This action is used to clear the log for this Log Service.
       properties: {}
       type: object
       x-longDescription: This action shall delete all entries found in the Entries
         collection for this Log Service.
-    LogEntryTypes:
+    LogService_v1_1_1_LogEntryTypes:
       enum:
       - Event
       - SEL
@@ -54,21 +54,21 @@ components:
           cannot be guaranteed by the Log Service.
         OEM: The log contains entries in an OEM-defined format.
         SEL: The log contains legacy IPMI System Event Log (SEL) entries.
-    LogService:
+    LogService_v1_1_1_LogService:
       additionalProperties: false
       description: This resource represents the log service for the resource or service
         to which it is associated.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/LogService_v1_1_1_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -92,20 +92,20 @@ components:
           x-longDescription: The value is property shall represent the offset from
             UTC time that the current value of DataTime property contains.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Entries:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: References to the log entry collection.
           readOnly: true
           x-longDescription: The value of this property shall reference a collection
             of resources of type LogEntry.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         LogEntryType:
-          $ref: '#/components/schemas/LogEntryTypes'
+          $ref: '#/components/schemas/LogService_v1_1_1_LogEntryTypes'
           description: The format of the Entries of this log.
           nullable: true
           readOnly: true
@@ -121,16 +121,16 @@ components:
           x-longDescription: The value of this property shall be the maximum numbers
             of LogEntry resources in the Entries collection for this service.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         OverWritePolicy:
-          $ref: '#/components/schemas/OverWritePolicy'
+          $ref: '#/components/schemas/LogService_v1_1_1_OverWritePolicy'
           description: The overwrite policy for this service that takes place when
             the log is full.
           readOnly: true
@@ -149,7 +149,7 @@ components:
           x-longDescription: The value of this property shall be a boolean indicating
             whether this service is enabled.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -165,7 +165,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    LogService_v1_1_1_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -175,7 +175,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OverWritePolicy:
+    LogService_v1_1_1_OverWritePolicy:
       enum:
       - Unknown
       - WrapsWhenFull

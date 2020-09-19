@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    MemoryChunks_v1_1_4_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/MemoryChunks_v1_1_4_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    AddressRangeType:
+    MemoryChunks_v1_1_4_AddressRangeType:
       enum:
       - Volatile
       - PMEM
@@ -25,12 +25,12 @@ components:
         Block: Block accessible memory.
         PMEM: Byte accessible persistent memory.
         Volatile: Volatile memory.
-    InterleaveSet:
+    MemoryChunks_v1_1_4_InterleaveSet:
       additionalProperties: false
       description: This an interleave set for a memory chunk.
       properties:
         Memory:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: Describes a memory device of the interleave set.
           readOnly: true
           x-longDescription: This property shall contain the memory device to which
@@ -71,41 +71,41 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MemoryChunks:
+    MemoryChunks_v1_1_4_MemoryChunks:
       additionalProperties: false
       description: The schema definition of a memory chunk and its configuration.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/MemoryChunks_v1_1_4_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
           x-versionAdded: v1_1_0
         AddressRangeType:
-          $ref: '#/components/schemas/AddressRangeType'
+          $ref: '#/components/schemas/MemoryChunks_v1_1_4_AddressRangeType'
           description: Memory type of this memory chunk.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the type of memory chunk.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         InterleaveSets:
           description: The interleave sets for the memory chunk.
           items:
-            $ref: '#/components/schemas/InterleaveSet'
+            $ref: '#/components/schemas/MemoryChunks_v1_1_4_InterleaveSet'
           type: array
           x-longDescription: These properties shall represent the interleave sets
             for the memory chunk.
@@ -134,10 +134,10 @@ components:
             in MiB.
           x-units: MiBy
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -153,7 +153,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    MemoryChunks_v1_1_4_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}

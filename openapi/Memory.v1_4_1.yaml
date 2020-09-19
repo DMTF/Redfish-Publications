@@ -1,25 +1,25 @@
 components:
   schemas:
-    Actions:
+    Memory_v1_4_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#Memory.DisablePassphrase':
-          $ref: '#/components/schemas/DisablePassphrase'
+          $ref: '#/components/schemas/Memory_v1_4_1_DisablePassphrase'
         '#Memory.SecureEraseUnit':
-          $ref: '#/components/schemas/SecureEraseUnit'
+          $ref: '#/components/schemas/Memory_v1_4_1_SecureEraseUnit'
         '#Memory.SetPassphrase':
-          $ref: '#/components/schemas/SetPassphrase'
+          $ref: '#/components/schemas/Memory_v1_4_1_SetPassphrase'
         '#Memory.UnlockUnit':
-          $ref: '#/components/schemas/UnlockUnit'
+          $ref: '#/components/schemas/Memory_v1_4_1_UnlockUnit'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Memory_v1_4_1_OemActions'
       type: object
       x-longDescription: This type shall contain the available actions for this resource.
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    BaseModuleType:
+    Memory_v1_4_1_BaseModuleType:
       enum:
       - RDIMM
       - UDIMM
@@ -43,7 +43,7 @@ components:
         SO_RDIMM_72b: SO_RDIMM_72b.
         SO_UDIMM_72b: SO_UDIMM_72b.
         UDIMM: UDIMM.
-    DisablePassphrase:
+    Memory_v1_4_1_DisablePassphrase:
       additionalProperties: false
       description: Disable passphrase for given regions.
       properties:
@@ -60,7 +60,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    DisablePassphraseRequestBody:
+    Memory_v1_4_1_DisablePassphraseRequestBody:
       additionalProperties: false
       description: Disable passphrase for given regions.
       properties:
@@ -80,7 +80,7 @@ components:
       type: object
       x-longDescription: This action shall disaple the need for passphrases on the
         supplied region provided the supplied passphrase matches that of the region.
-    ErrorCorrection:
+    Memory_v1_4_1_ErrorCorrection:
       enum:
       - NoECC
       - SingleBitECC
@@ -92,20 +92,20 @@ components:
         MultiBitECC: Multi-bit Data errors can be corrected by ECC.
         NoECC: No ECC available.
         SingleBitECC: Single bit Data error can be corrected by ECC.
-    Links:
+    Memory_v1_4_1_Links:
       additionalProperties: false
       description: Contains references to other resources that are related to this
         resource.
       properties:
         Chassis:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Chassis which contains this Memory.
           readOnly: true
           x-longDescription: The value of this property shall be a reference to a
             resource of type Chassis that represent the physical container associated
             with this Memory.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
@@ -117,21 +117,21 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Memory:
+    Memory_v1_4_1_Memory:
       additionalProperties: false
       description: This is the schema definition for definition of a Memory and its
         configuration.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/odata_v4_0_2_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/odata_v4_0_2_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/odata_v4_0_2_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_2.yaml#/components/schemas/odata_v4_0_2_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Memory_v1_4_1_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -160,13 +160,13 @@ components:
           x-longDescription: The value of this property shall be the speed supported
             by this Memory.
         Assembly:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Assembly resource associated with this memory.
           readOnly: true
           x-longDescription: The value of this property shall be a link to a resource
             of type Assembly.
         BaseModuleType:
-          $ref: '#/components/schemas/BaseModuleType'
+          $ref: '#/components/schemas/Memory_v1_4_1_BaseModuleType'
           description: The base module type of Memory.
           nullable: true
           readOnly: true
@@ -203,7 +203,7 @@ components:
           x-longDescription: The value of this property shall be the data width in
             bits.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         DeviceID:
@@ -223,7 +223,7 @@ components:
           x-longDescription: The value of this property shall be location of the Memory
             in the platform, typically marked in the silk screen.
         ErrorCorrection:
-          $ref: '#/components/schemas/ErrorCorrection'
+          $ref: '#/components/schemas/Memory_v1_4_1_ErrorCorrection'
           description: Error correction scheme supported for this memory.
           nullable: true
           readOnly: true
@@ -255,7 +255,7 @@ components:
           x-longDescription: The value of this property shall be the function classes
             by the Memory.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         IsRankSpareEnabled:
           description: Rank spare enabled status.
@@ -272,14 +272,14 @@ components:
           x-longDescription: The value of this property shall be true if a spare device
             is enabled for this Memory.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Memory_v1_4_1_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
             shall contain references to resources that are related to, but not contained
             by (subordinate to), this resource.
         Location:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Location
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
         LogicalSizeMiB:
           description: Total size of the logical memory in MiB.
           nullable: true
@@ -304,21 +304,21 @@ components:
           x-longDescription: The value of this property shall be the maximum power
             budgets supported by the Memory in milli Watts.
         MemoryDeviceType:
-          $ref: '#/components/schemas/MemoryDeviceType'
+          $ref: '#/components/schemas/Memory_v1_4_1_MemoryDeviceType'
           description: Type details of the Memory.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall be the Memory Device
             Type as defined by SMBIOS.
         MemoryLocation:
-          $ref: '#/components/schemas/MemoryLocation'
+          $ref: '#/components/schemas/Memory_v1_4_1_MemoryLocation'
           description: Memory connection information to sockets and memory controllers.
           x-longDescription: This object shall contain properties which describe the
             Memory connection information to sockets and memory controllers.
         MemoryMedia:
           description: Media of this Memory.
           items:
-            $ref: '#/components/schemas/MemoryMedia'
+            $ref: '#/components/schemas/Memory_v1_4_1_MemoryMedia'
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be the media types of
@@ -344,14 +344,14 @@ components:
             ID of the memory subsystem controller of this memory module as defined
             by the manufacturer.
         MemoryType:
-          $ref: '#/components/schemas/MemoryType'
+          $ref: '#/components/schemas/Memory_v1_4_1_MemoryType'
           description: The type of Memory.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall be the type of Memory
             represented by this resource.
         Metrics:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Metrics associated with this Memory.
           readOnly: true
           x-longDescription: A reference to the Metrics associated with this Memory.
@@ -372,7 +372,7 @@ components:
           x-longDescription: The value of this property shall be the two byte product
             ID of this memory module as defined by the manufacturer.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NonVolatileSizeMiB:
           description: Total size of the non-volatile portion memory in MiB.
@@ -383,7 +383,7 @@ components:
             the non-volatile portion memory in MiB.
           x-units: MiBy
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -391,7 +391,7 @@ components:
         OperatingMemoryModes:
           description: Memory modes supported by the Memory.
           items:
-            $ref: '#/components/schemas/OperatingMemoryModes'
+            $ref: '#/components/schemas/Memory_v1_4_1_OperatingMemoryModes'
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be the memory modes
@@ -438,7 +438,7 @@ components:
           x-longDescription: The value of this property shall be the maximum size
             of a single persistent regions in MiB.
         PowerManagementPolicy:
-          $ref: '#/components/schemas/PowerManagementPolicy'
+          $ref: '#/components/schemas/Memory_v1_4_1_PowerManagementPolicy'
           description: Power management policy information.
           x-longDescription: This object shall contain properties which describe the
             power management policy for the current resource.
@@ -452,12 +452,12 @@ components:
         Regions:
           description: Memory regions information within the Memory.
           items:
-            $ref: '#/components/schemas/RegionSet'
+            $ref: '#/components/schemas/Memory_v1_4_1_RegionSet'
           type: array
           x-longDescription: The value of this property shall be the memory region
             information within the Memory.
         SecurityCapabilities:
-          $ref: '#/components/schemas/SecurityCapabilities'
+          $ref: '#/components/schemas/Memory_v1_4_1_SecurityCapabilities'
           description: This object contains security capabilities of the Memory.
           x-longDescription: This object shall contain properties which describe the
             security capabilities of the Memory.
@@ -477,7 +477,7 @@ components:
             spare devices available in the Memory. If memory devices fails, the spare
             device could be used.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         SubsystemDeviceID:
           deprecated: true
           description: Subsystem Device ID.
@@ -543,7 +543,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    MemoryClassification:
+    Memory_v1_4_1_MemoryClassification:
       enum:
       - Volatile
       - ByteAccessiblePersistent
@@ -553,7 +553,7 @@ components:
         Block: Block accesible memory.
         ByteAccessiblePersistent: Byte accessible persistent memory.
         Volatile: Volatile memory.
-    MemoryDeviceType:
+    Memory_v1_4_1_MemoryDeviceType:
       enum:
       - DDR
       - DDR2
@@ -597,7 +597,7 @@ components:
         PipelinedNibble: Pipelined Nibble.
         ROM: ROM.
         SDRAM: SDRAM.
-    MemoryLocation:
+    Memory_v1_4_1_MemoryLocation:
       additionalProperties: false
       description: Memory connection information to sockets and memory controllers.
       properties:
@@ -631,7 +631,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    MemoryMedia:
+    Memory_v1_4_1_MemoryMedia:
       enum:
       - DRAM
       - NAND
@@ -641,7 +641,7 @@ components:
         DRAM: DRAM media.
         NAND: NAND media.
         Proprietary: Proprietary media.
-    MemoryType:
+    Memory_v1_4_1_MemoryType:
       enum:
       - DRAM
       - NVDIMM_N
@@ -660,7 +660,7 @@ components:
         NVDIMM_F: This memory type shall represent NVDIMM_F as defined by JEDEC.
         NVDIMM_N: This memory type shall represent NVDIMM_N as defined by JEDEC.
         NVDIMM_P: This memory type shall represent NVDIMM_P as defined by JEDEC.
-    OemActions:
+    Memory_v1_4_1_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -670,7 +670,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    OperatingMemoryModes:
+    Memory_v1_4_1_OperatingMemoryModes:
       enum:
       - Volatile
       - PMEM
@@ -680,7 +680,7 @@ components:
         Block: Block accessible system memory.
         PMEM: Persistent memory, byte accesible through system address space.
         Volatile: Volatile memory.
-    PowerManagementPolicy:
+    Memory_v1_4_1_PowerManagementPolicy:
       additionalProperties: false
       description: Power management policy information.
       properties:
@@ -717,12 +717,12 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    RegionSet:
+    Memory_v1_4_1_RegionSet:
       additionalProperties: false
       description: Memory region information within a Memory entity.
       properties:
         MemoryClassification:
-          $ref: '#/components/schemas/MemoryClassification'
+          $ref: '#/components/schemas/Memory_v1_4_1_MemoryClassification'
           description: Classification of memory occupied by the given memory region.
           nullable: true
           readOnly: true
@@ -766,7 +766,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    SecureEraseUnit:
+    Memory_v1_4_1_SecureEraseUnit:
       additionalProperties: false
       description: This defines the action for securely erasing given regions.
       properties:
@@ -783,7 +783,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    SecureEraseUnitRequestBody:
+    Memory_v1_4_1_SecureEraseUnitRequestBody:
       additionalProperties: false
       description: This defines the action for securely erasing given regions.
       properties:
@@ -803,7 +803,7 @@ components:
       type: object
       x-longDescription: This action shall securely erase the supplied region provided
         the supplied passphrase matches that of the given region.
-    SecurityCapabilities:
+    Memory_v1_4_1_SecurityCapabilities:
       additionalProperties: false
       description: This type contains security capabilities of a Memory entity.
       properties:
@@ -822,7 +822,7 @@ components:
         SecurityStates:
           description: Security states supported by the Memory.
           items:
-            $ref: '#/components/schemas/SecurityStates'
+            $ref: '#/components/schemas/Memory_v1_4_1_SecurityStates'
           readOnly: true
           type: array
           x-longDescription: Security states supported by the Memory.
@@ -832,7 +832,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    SecurityStates:
+    Memory_v1_4_1_SecurityStates:
       enum:
       - Enabled
       - Disabled
@@ -848,7 +848,7 @@ components:
         Locked: Secure mode is enabled and access to the data is locked.
         Passphraselimit: Number of attempts to unlock the Memory exceeded limit.
         Unlocked: Secure mode is enabled and access to the data is unlocked.
-    SetPassphrase:
+    Memory_v1_4_1_SetPassphrase:
       additionalProperties: false
       description: Set passphrase for the given regions.
       properties:
@@ -865,7 +865,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    SetPassphraseRequestBody:
+    Memory_v1_4_1_SetPassphraseRequestBody:
       additionalProperties: false
       description: Set passphrase for the given regions.
       properties:
@@ -885,7 +885,7 @@ components:
       type: object
       x-longDescription: This action shall apply the supplied passphrase to the supplied
         region.
-    UnlockUnit:
+    Memory_v1_4_1_UnlockUnit:
       additionalProperties: false
       description: This defines the action for unlocking given regions.
       properties:
@@ -902,7 +902,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    UnlockUnitRequestBody:
+    Memory_v1_4_1_UnlockUnitRequestBody:
       additionalProperties: false
       description: This defines the action for unlocking given regions.
       properties:

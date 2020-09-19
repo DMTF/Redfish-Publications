@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    EventService_v1_3_0_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         '#EventService.SubmitTestEvent':
-          $ref: '#/components/schemas/SubmitTestEvent'
+          $ref: '#/components/schemas/EventService_v1_3_0_SubmitTestEvent'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/EventService_v1_3_0_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -17,7 +17,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    EventFormatType:
+    EventService_v1_3_0_EventFormatType:
       enum:
       - Event
       - MetricReport
@@ -27,22 +27,22 @@ components:
           Type Event.
         MetricReport: The subscription destination will receive JSON Bodies of the
           Resource Type MetricReport.
-    EventService:
+    EventService_v1_3_0_EventService:
       additionalProperties: false
       description: The Event Service resource contains properties for managing event
         subcriptions and generates the events sent to subscribers.  The resource has
         links to the actual collection of subscriptions (called Event Destinations).
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/EventService_v1_3_0_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
@@ -70,14 +70,14 @@ components:
             between the retry attempts for any given event to the subscription destination.
           x-units: s
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EventFormatTypes:
           description: Indicates the content types of the message that this service
             can send to the event destination.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/EventDestination.yaml#/components/schemas/EventFormatType
+            $ref: http://redfish.dmtf.org/schemas/v1/EventDestination.yaml#/components/schemas/EventDestination_EventFormatType
             nullable: true
           readOnly: true
           type: array
@@ -90,7 +90,7 @@ components:
           deprecated: true
           description: This is the types of Events that can be subscribed to.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           readOnly: true
           type: array
           x-deprecatedReason: This property has been deprecated.  Starting Redfish
@@ -101,13 +101,13 @@ components:
             enumerations values are defined in the Redfish specification.
           x-versionDeprecated: v1_3_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -138,7 +138,7 @@ components:
             the valid @odata.type values that can be used for an Event Subscription.
           x-versionAdded: v1_2_0
         SSEFilterPropertiesSupported:
-          $ref: '#/components/schemas/SSEFilterPropertiesSupported'
+          $ref: '#/components/schemas/EventService_v1_3_0_SSEFilterPropertiesSupported'
           description: Contains a set of properties that indicate which properties
             are supported in the $filter query parameter for the ServerSentEventUri.
           x-longDescription: The value of this property shall contain a set of properties
@@ -162,7 +162,7 @@ components:
           x-longDescription: The value of this property shall be a boolean indicating
             whether this service is enabled.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -178,7 +178,7 @@ components:
             Events.
           x-versionAdded: v1_2_0
         Subscriptions:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: This is a reference to a collection of Event Destination resources.
           readOnly: true
           x-longDescription: The value of this property shall contain the link to
@@ -194,7 +194,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    EventService_v1_3_0_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -204,7 +204,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SSEFilterPropertiesSupported:
+    EventService_v1_3_0_SSEFilterPropertiesSupported:
       additionalProperties: false
       description: Contains a set of properties that indicate which properties are
         supported in the $filter query parameter for the ServerSentEventUri.
@@ -277,7 +277,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SubmitTestEvent:
+    EventService_v1_3_0_SubmitTestEvent:
       additionalProperties: false
       description: This action is used to generate a test event.
       properties:
@@ -295,7 +295,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SubmitTestEventRequestBody:
+    EventService_v1_3_0_SubmitTestEventRequestBody:
       additionalProperties: false
       description: This action is used to generate a test event.
       properties:
@@ -317,7 +317,7 @@ components:
           x-longDescription: This parameter shall have the same semantics as the EventTimestamp
             property in the Event schema for Redfish.
         EventType:
-          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           deprecated: true
           description: This is the type of event to be added.
           x-deprecatedReason: This parameter has been deprecated.  Starting Redfish

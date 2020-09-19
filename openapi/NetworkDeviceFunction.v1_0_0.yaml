@@ -1,6 +1,6 @@
 components:
   schemas:
-    AuthenticationMethod:
+    NetworkDeviceFunction_v1_0_0_AuthenticationMethod:
       enum:
       - None
       - CHAP
@@ -12,7 +12,7 @@ components:
         MutualCHAP: iSCSI Mutual Challenge Handshake Authentication Protocol (CHAP)
           authentication is used.
         None: No iSCSI authentication is used.
-    BootMode:
+    NetworkDeviceFunction_v1_0_0_BootMode:
       enum:
       - Disabled
       - PXE
@@ -32,7 +32,7 @@ components:
           the NetworkDeviceFunctionType is set to Ethernet.
         iSCSI: Boot this device using the embedded iSCSI boot support and configuration.  Only
           applicable if the NetworkDeviceFunctionType is set to iSCSI.
-    BootTargets:
+    NetworkDeviceFunction_v1_0_0_BootTargets:
       additionalProperties: true
       properties:
         BootPriority:
@@ -64,7 +64,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Ethernet:
+    NetworkDeviceFunction_v1_0_0_Ethernet:
       additionalProperties: true
       properties:
         MACAddress:
@@ -99,7 +99,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    FibreChannel:
+    NetworkDeviceFunction_v1_0_0_FibreChannel:
       additionalProperties: true
       properties:
         AllowFIPVLANDiscovery:
@@ -120,7 +120,7 @@ components:
           description: An array of Fibre Channel boot targets configured for this
             network device function.
           items:
-            $ref: '#/components/schemas/BootTargets'
+            $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_BootTargets'
             nullable: true
           type: array
           x-longDescription: The value of this property shall be an array of Fibre
@@ -176,7 +176,7 @@ components:
             function). If an assignable WWNN is not supported, this is a read only
             alias of the PermanentWWNN.
         WWNSource:
-          $ref: '#/components/schemas/WWNSource'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_WWNSource'
           description: The configuration source of the WWNs for this connection (WWPN
             and WWNN).
           nullable: true
@@ -197,7 +197,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    IPAddressType:
+    NetworkDeviceFunction_v1_0_0_IPAddressType:
       enum:
       - IPv4
       - IPv6
@@ -205,41 +205,41 @@ components:
       x-enumDescriptions:
         IPv4: IPv4 addressing is used for all IP-fields in this object.
         IPv6: IPv6 addressing is used for all IP-fields in this object.
-    Links:
+    NetworkDeviceFunction_v1_0_0_Links:
       additionalProperties: true
       properties:
         PCIeFunction:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: Contains the members of this collection.
           readOnly: true
       type: object
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    NetworkDeviceFunction:
+    NetworkDeviceFunction_v1_0_0_NetworkDeviceFunction:
       additionalProperties: false
       description: A Network Device Function represents a logical interface exposed
         by the network adapter.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         AssignablePhysicalPorts:
           description: Contains the members of this collection.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
         AssignablePhysicalPorts@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         AssignablePhysicalPorts@odata.navigationLink:
           format: uri
           type: string
         BootMode:
-          $ref: '#/components/schemas/BootMode'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_BootMode'
           description: The boot mode configured for this network device function.
           nullable: true
           readOnly: false
@@ -248,7 +248,7 @@ components:
             this network device function shall be configured for boot using the specified
             technology.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         DeviceEnabled:
@@ -260,22 +260,22 @@ components:
             whether the network device function is enabled.  Disabled network device
             functions shall not be enumerated or seen by the operating system.
         Ethernet:
-          $ref: '#/components/schemas/Ethernet'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_Ethernet'
           description: Ethernet.
           nullable: true
           x-longDescription: This object shall contain Ethernet capabilities, status,
             and configuration values for this network device function.
         FibreChannel:
-          $ref: '#/components/schemas/FibreChannel'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_FibreChannel'
           description: Fibre Channel.
           nullable: true
           x-longDescription: This object shall contain Fibre Channel capabilities,
             status, and configuration values for this network device function.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_Links'
           description: Links.
           x-longDescription: Links for this NetworkDeviceFunction.
         MaxVirtualFunctions:
@@ -287,36 +287,36 @@ components:
           x-longDescription: The value of this property shall be the number of virtual
             functions (VFs) that are available for this Network Device Function.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NetDevFuncCapabilities:
           description: Capabilities of this network device function.
           items:
-            $ref: '#/components/schemas/NetworkDeviceTechology'
+            $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_NetworkDeviceTechology'
             nullable: true
           readOnly: true
           type: array
           x-longDescription: This object shall contain an array of capabilities of
             this network device function.
         NetDevFuncType:
-          $ref: '#/components/schemas/NetworkDeviceTechology'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_NetworkDeviceTechology'
           description: The configured capability of this network device function.
           nullable: true
           readOnly: false
           x-longDescription: The value of this property shall be the configured capability
             of this network device function.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         PhysicalPortAssignment:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: Contains the members of this collection.
           readOnly: true
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           nullable: true
         VirtualFunctionsEnabled:
           description: Whether Single Root I/O Virtualization (SR-IOV) Virual Functions
@@ -328,7 +328,7 @@ components:
             whether Single Root I/O Virtualization (SR-IOV) Virual Functions (VFs)
             are enabled for this Network Device Function.
         iSCSIBoot:
-          $ref: '#/components/schemas/iSCSIBoot'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_iSCSIBoot'
           description: iSCSI Boot.
           nullable: true
           x-longDescription: This object shall contain iSCSI boot capabilities, status,
@@ -342,7 +342,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    NetworkDeviceTechology:
+    NetworkDeviceFunction_v1_0_0_NetworkDeviceTechology:
       enum:
       - Disabled
       - Ethernet
@@ -356,7 +356,7 @@ components:
         FibreChannel: Appears to the operating system as a Fibre Channel device.
         FibreChannelOverEthernet: Appears to the operating system as an FCoE device.
         iSCSI: Appears to the operating system as an iSCSI device.
-    WWNSource:
+    NetworkDeviceFunction_v1_0_0_WWNSource:
       enum:
       - ConfiguredLocally
       - ProvidedByFabric
@@ -366,11 +366,11 @@ components:
           API or UI.
         ProvidedByFabric: The set of FC/FCoE boot targets was applied by the Fibre
           Channel fabric.
-    iSCSIBoot:
+    NetworkDeviceFunction_v1_0_0_iSCSIBoot:
       additionalProperties: true
       properties:
         AuthenticationMethod:
-          $ref: '#/components/schemas/AuthenticationMethod'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_AuthenticationMethod'
           description: The iSCSI boot authentication method for this network device
             function.
           nullable: true
@@ -392,7 +392,7 @@ components:
           x-longDescription: The value of this property shall behe username for CHAP
             authentication.
         IPAddressType:
-          $ref: '#/components/schemas/IPAddressType'
+          $ref: '#/components/schemas/NetworkDeviceFunction_v1_0_0_IPAddressType'
           description: The type of IP address (IPv6 or IPv4) being populated in the
             iSCSIBoot IP address fields.
           nullable: true

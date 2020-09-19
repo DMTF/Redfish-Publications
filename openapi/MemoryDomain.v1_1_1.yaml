@@ -1,6 +1,6 @@
 components:
   schemas:
-    MemoryDomain:
+    MemoryDomain_v1_1_1_MemoryDomain:
       additionalProperties: false
       description: This is the schema definition of a Memory Domain and its configuration.
         Memory Domains are used to indicate to the client which Memory (DIMMs) can
@@ -8,11 +8,11 @@ components:
         grouped together.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         AllowsBlockProvisioning:
           description: Indicates if this Memory Domain supports the provisioning of
             blocks of memory.
@@ -46,22 +46,22 @@ components:
           x-longDescription: The value of this property shall indicate if this Memory
             Domain supports the creation of Memory Chunks with sparing enabled.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         InterleavableMemorySets:
           description: This is the interleave sets for the memory chunk.
           items:
-            $ref: '#/components/schemas/MemorySet'
+            $ref: '#/components/schemas/MemoryDomain_v1_1_1_MemorySet'
             nullable: true
           type: array
           x-longDescription: These properties shall represent the interleave sets
             for the memory chunk.
         MemoryChunks:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the collection of Memory Chunks associated with
             this Memory Domain.
           nullable: true
@@ -69,10 +69,10 @@ components:
           x-longDescription: The value of this property shall be a link to a collection
             of type MemoryChunkCollection.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -86,7 +86,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    MemorySet:
+    MemoryDomain_v1_1_1_MemorySet:
       additionalProperties: true
       description: This is the interleave sets for a memory chunk.
       properties:
@@ -94,13 +94,13 @@ components:
           description: This is the collection of memory for a particular interleave
             set.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The values in this collection shall be links to objects
             of type Memory.
         MemorySet@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
         MemorySet@odata.navigationLink:
           format: uri
           type: string

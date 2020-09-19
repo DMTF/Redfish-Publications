@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    Endpoint_v1_4_1_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -14,37 +14,37 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ConnectedEntity:
+    Endpoint_v1_4_1_ConnectedEntity:
       additionalProperties: false
       description: Represents a remote resource that is connected to the network accessible
         to this endpoint.
       properties:
         EntityLink:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Resource
           description: The link to the associated entity.
           readOnly: true
           x-longDescription: This property shall contain a link to an entity of the
             type specified by the description of the EntityType property value.
         EntityPciId:
-          $ref: '#/components/schemas/PciId'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_PciId'
           description: The PCI ID of the connected entity.
           x-longDescription: This property shall contain the PCI ID of the connected
             PCIe entity.
         EntityRole:
-          $ref: '#/components/schemas/EntityRole'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_EntityRole'
           description: The role of the connected entity.
           nullable: true
           readOnly: true
           x-longDescription: This property shall indicate if the specified entity
             is an initiator, target, or both.
         EntityType:
-          $ref: '#/components/schemas/EntityType'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_EntityType'
           description: The type of the connected entity.
           nullable: true
           readOnly: true
           x-longDescription: This property shall indicate if type of connected entity.
         GenZ:
-          $ref: '#/components/schemas/GenZ'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_GenZ'
           description: The Gen-Z related properties for the entity.
           nullable: true
           x-longDescription: This property shall contain the Gen-Z related properties
@@ -53,12 +53,12 @@ components:
         Identifiers:
           description: Identifiers for the remote entity.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Identifier
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Identifier
           type: array
           x-longDescription: Identifiers for the remote entity shall be unique in
             the context of other resources that can reached over the connected network.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -93,38 +93,38 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Endpoint:
+    Endpoint_v1_4_1_Endpoint:
       additionalProperties: false
       description: The Endpoint schema contains the properties of an endpoint resource
         that represents the properties of an entity that sends or receives protocol-defined
         messages over a transport.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
         ConnectedEntities:
           description: All the entities connected to this endpoint.
           items:
-            $ref: '#/components/schemas/ConnectedEntity'
+            $ref: '#/components/schemas/Endpoint_v1_4_1_ConnectedEntity'
           type: array
           x-longDescription: This property shall contain all entities to which this
             endpoint allows access.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EndpointProtocol:
-          $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol
+          $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol_Protocol
           description: The protocol supported by this endpoint.
           nullable: true
           readOnly: true
@@ -144,53 +144,53 @@ components:
             endpoint.  The array structure can model multiple IP addresses for this
             endpoint.
           items:
-            $ref: '#/components/schemas/IPTransportDetails'
+            $ref: '#/components/schemas/Endpoint_v1_4_1_IPTransportDetails'
           type: array
           x-longDescription: This array shall contain the details for each IP transport
             supported by this endpoint.
           x-versionAdded: v1_1_0
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Identifiers:
           description: Identifiers for this endpoint.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Identifier
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Identifier
           type: array
           x-longDescription: Identifiers for this endpoint shall be unique in the
             context of other endpoints that can reached over the connected network.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_Links'
           description: The links to other resources that are related to this resource.
           x-longDescription: This property shall contain links to resources that are
             related to but are not contained by, or subordinate to, this resource.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         PciId:
-          $ref: '#/components/schemas/PciId'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_PciId'
           description: The PCI ID of the endpoint.
           x-longDescription: This property shall contain the PCI ID of the endpoint.
         Redundancy:
           description: Redundancy information for the lower-level endpoints supporting
             this endpoint.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
           type: array
           x-autoExpand: true
           x-longDescription: The values of the properties in this array shall show
             how this endpoint is grouped with other endpoints for form redundancy
             sets.
         Redundancy@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the resource and its subordinate or
             dependent resources.
           x-longDescription: This property shall contain any status or health properties
@@ -205,7 +205,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    EntityRole:
+    Endpoint_v1_4_1_EntityRole:
       enum:
       - Initiator
       - Target
@@ -219,7 +219,7 @@ components:
           entities.
         Target: The entity receives commands, messages, or other types of requests
           from other entities on the fabric, but cannot send commands to other entities.
-    EntityType:
+    Endpoint_v1_4_1_EntityType:
       enum:
       - StorageInitiator
       - RootComplex
@@ -270,7 +270,7 @@ components:
         MemoryChunk: v1_4_0
         Switch: v1_4_0
         Volume: v1_1_0
-    GCID:
+    Endpoint_v1_4_1_GCID:
       additionalProperties: false
       description: The Global Component ID (GCID).
       properties:
@@ -298,7 +298,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    GenZ:
+    Endpoint_v1_4_1_GenZ:
       additionalProperties: false
       description: The Gen-Z related properties for an entity.
       properties:
@@ -312,7 +312,7 @@ components:
             6 bit Access Key for the entity.
           x-versionAdded: v1_4_0
         GCID:
-          $ref: '#/components/schemas/GCID'
+          $ref: '#/components/schemas/Endpoint_v1_4_1_GCID'
           description: The Global Component ID (GCID) for the entity.
           nullable: true
           x-longDescription: This property shall contain the Gen-Z Core Specification-defined
@@ -333,19 +333,19 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    IPTransportDetails:
+    Endpoint_v1_4_1_IPTransportDetails:
       additionalProperties: false
       description: This type specifies the details of the transport supported by the
         endpoint.  The properties that are present are dependent on the type of transport
         supported by the endpoint.
       properties:
         IPv4Address:
-          $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv4Address
+          $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPAddresses_IPv4Address
           description: The IPv4 addresses assigned to the endpoint.
           x-longDescription: This property shall contain the IPv4Address.
           x-versionAdded: v1_1_0
         IPv6Address:
-          $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPv6Address
+          $ref: http://redfish.dmtf.org/schemas/v1/IPAddresses.yaml#/components/schemas/IPAddresses_IPv6Address
           description: The IPv6 addresses assigned to the endpoint.
           x-longDescription: This property shall contain the IPv6Address.
           x-versionAdded: v1_1_0
@@ -359,7 +359,7 @@ components:
             number used for communication with the endpoint.
           x-versionAdded: v1_1_0
         TransportProtocol:
-          $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol
+          $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol_Protocol
           description: The protocol used by the connection entity.
           readOnly: true
           x-longDescription: This property shall contain the protocol used by the
@@ -371,7 +371,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Links:
+    Endpoint_v1_4_1_Links:
       additionalProperties: false
       description: The links to other resources that are related to this resource.
       properties:
@@ -379,51 +379,51 @@ components:
           description: An array of links to the address pools associated with this
             endpoint.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: false
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type AddressPool with which this endpoint is associated.
           x-versionAdded: v1_4_0
         AddressPools@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         ConnectedPorts:
           description: An array of links to the ports that connect to this endpoint.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type Port that represent ports associated with this endpoint.
           x-versionAdded: v1_4_0
         ConnectedPorts@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         MutuallyExclusiveEndpoints:
           description: An array of links to the endpoints that may not be used in
             zones if this endpoint is in a zone.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type Endpoint that cannot be used in a zone if this endpoint is in
             a zone.
         MutuallyExclusiveEndpoints@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         NetworkDeviceFunction:
           description: When NetworkDeviceFunction resources are present, this array
             contains links to the network device functions that connect to this endpoint.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type NetworkDeviceFunction with which this endpoint is associated.
           x-versionAdded: v1_1_0
         NetworkDeviceFunction@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
@@ -432,13 +432,13 @@ components:
           description: An array of links to the physical ports associated with this
             endpoint.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain an array of links to resources
             of type Port that are utilized by this endpoint.
         Ports@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
       type: object
       x-longDescription: This Redfish Specification-described type shall contain links
         to resources that are related to but are not contained by, or subordinate
@@ -446,7 +446,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    OemActions:
+    Endpoint_v1_4_1_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -456,7 +456,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PciId:
+    Endpoint_v1_4_1_PciId:
       additionalProperties: false
       description: A PCI ID.
       properties:

@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    MetricDefinition_v1_0_2_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/MetricDefinition_v1_0_2_OemActions'
           description: This property contains the available OEM specific actions for
             this resource.
           x-longDescription: This property shall contain any additional OEM actions
@@ -15,7 +15,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Calculable:
+    MetricDefinition_v1_0_2_Calculable:
       description: The types of calculations which can be applied to the metric reading.  This
         property provides information to the client on the suitability of calculatiion
         using the metric reading.
@@ -31,7 +31,7 @@ components:
         Summable: The sum of the metric reading across multiple instances is meaningful.
       x-longDescription: The value shall indicate the types of calculations which
         can applied to the metric reading.
-    CalculationAlgorithmEnum:
+    MetricDefinition_v1_0_2_CalculationAlgorithmEnum:
       enum:
       - Average
       - Maximum
@@ -54,7 +54,7 @@ components:
         Minimum: The metric shall be calculated as the minimum of a metric reading
           over a sliding time interval.  The time interval shall be the value of the
           CalculationTimeInterval property.
-    CalculationParamsType:
+    MetricDefinition_v1_0_2_CalculationParamsType:
       additionalProperties: false
       description: Specifies the usage of the parameter in the calculation.
       properties:
@@ -79,7 +79,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ImplementationType:
+    MetricDefinition_v1_0_2_ImplementationType:
       enum:
       - PhysicalSensor
       - Calculated
@@ -95,7 +95,7 @@ components:
         Synthesized: The metric is implemented by applying a calculation on one or
           more metric properties.  (The calculation is not specified.  For expressing
           generalized formula, see MathSON).
-    MetricDataType:
+    MetricDefinition_v1_0_2_MetricDataType:
       description: The data type of the related metric values.  The property provides
         information to the client on the nature of the metric reading.
       enum:
@@ -117,18 +117,18 @@ components:
         String: The data type follows the JSON String definition.
       x-longDescription: The value shall be the data type of the related metric values
         as defined by JSON data types.
-    MetricDefinition:
+    MetricDefinition_v1_0_2_MetricDefinition:
       additionalProperties: false
       description: The metadata information about a metric.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Accuracy:
           description: Estimated percent error of measured vs. actual values.
           nullable: true
@@ -138,19 +138,19 @@ components:
             +/- of the measured vs. actual values.  The property is not meaningful,
             when the MetricType property has the value 'Discrete'.
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/MetricDefinition_v1_0_2_Actions'
           description: The available actions for this resource.
           x-longDescription: The Actions property shall contain the available actions
             for this resource.
         Calculable:
-          $ref: '#/components/schemas/Calculable'
+          $ref: '#/components/schemas/MetricDefinition_v1_0_2_Calculable'
           description: Indicates whether the  metric can be used in a calculation.
           nullable: true
           readOnly: false
           x-longDescription: The value shall specify whether the metric can be used
             in a calculation.
         CalculationAlgorithm:
-          $ref: '#/components/schemas/CalculationAlgorithmEnum'
+          $ref: '#/components/schemas/MetricDefinition_v1_0_2_CalculationAlgorithmEnum'
           description: The calculation which is performed on a source metric to obtain
             the metric being defined.
           nullable: true
@@ -162,7 +162,7 @@ components:
             calculation.  This property is present when the MetricType property has
             the value 'Synthesized'.
           items:
-            $ref: '#/components/schemas/CalculationParamsType'
+            $ref: '#/components/schemas/MetricDefinition_v1_0_2_CalculationParamsType'
           type: array
           x-longDescription: Shall list the metric properties which are part of the
             synthesis calculation.  When MetricType=Synthesis, this property may be
@@ -186,7 +186,7 @@ components:
             Units.  The property is not meaningful, when the MetricType property has
             the value 'Discrete'.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         DiscreteValues:
@@ -201,10 +201,10 @@ components:
             values of the discrete metic.  This property shall have values when the
             MetricType property has the value 'Discrete'.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Implementation:
-          $ref: '#/components/schemas/ImplementationType'
+          $ref: '#/components/schemas/MetricDefinition_v1_0_2_ImplementationType'
           description: The implementation of the metric.
           nullable: true
           readOnly: true
@@ -228,7 +228,7 @@ components:
             property Units.  The property is not meaningful, when the MetricType property
             has the value 'Discrete'.
         MetricDataType:
-          $ref: '#/components/schemas/MetricDataType'
+          $ref: '#/components/schemas/MetricDefinition_v1_0_2_MetricDataType'
           description: The data type of the metric.
           nullable: true
           readOnly: false
@@ -252,7 +252,7 @@ components:
             for which the metric definition applies. The property identifiers portion
             of the URI shall follow JSON fragment notation rules defined by RFC6901.
         MetricType:
-          $ref: '#/components/schemas/MetricType'
+          $ref: '#/components/schemas/MetricDefinition_v1_0_2_MetricType'
           description: The type of metric.
           nullable: true
           readOnly: false
@@ -267,16 +267,16 @@ components:
             Units.  The property is not meaningful, when the MetricType property has
             the value 'Discrete'.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         PhysicalContext:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
           description: Specifies the physical context of the metric.
           nullable: true
           readOnly: true
@@ -321,7 +321,7 @@ components:
           description: A list of wildcards and their substitution values to be applied
             to the entries in the MetricProperties array property.
           items:
-            $ref: '#/components/schemas/Wildcard'
+            $ref: '#/components/schemas/MetricDefinition_v1_0_2_Wildcard'
           type: array
           x-longDescription: The property shall contain a list of wildcards and their
             replacement strings, which are applied to the MetricProperties array property.
@@ -336,7 +336,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    MetricType:
+    MetricDefinition_v1_0_2_MetricType:
       description: Specifies the type of metric provided.  The property provides information
         to the client on how the metric can be handled.
       enum:
@@ -362,7 +362,7 @@ components:
       x-enumLongDescriptions:
         Discrete: The metric values shall indicate discrete states.
       x-longDescription: The value of this property shall specify the type of metric.
-    OemActions:
+    MetricDefinition_v1_0_2_OemActions:
       additionalProperties: true
       description: The available OEM specific actions for this resource.
       properties: {}
@@ -372,7 +372,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Wildcard:
+    MetricDefinition_v1_0_2_Wildcard:
       additionalProperties: false
       description: Contains a wildcard and its substitution values.
       properties:

@@ -1,12 +1,12 @@
 components:
   schemas:
-    Redundancy:
+    Redundancy_v1_1_7_Redundancy:
       additionalProperties: false
       description: The common redundancy definition and structure used in other Redfish
         schemas.
       properties:
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         MaxNumSupported:
           description: The maximum number of members allowable for this particular
             redundancy group.
@@ -31,7 +31,7 @@ components:
             allowed in the redundancy group for the current redundancy mode to still
             be fault tolerant.
         Mode:
-          $ref: '#/components/schemas/RedundancyMode'
+          $ref: '#/components/schemas/Redundancy_v1_1_7_RedundancyMode'
           description: The redundancy mode of the group.
           nullable: true
           readOnly: false
@@ -46,7 +46,7 @@ components:
             requirements.  This string value shall be of the 'Name' reserved word
             format.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -62,15 +62,15 @@ components:
         RedundancySet:
           description: The links to components of this redundancy set.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall contain the links to components that
             are part of this redundancy set.
         RedundancySet@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: The status and health of the resource and its subordinate or
             dependent resources.
           x-longDescription: This property shall contain any status or health properties
@@ -88,7 +88,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    RedundancyMode:
+    Redundancy_v1_1_7_RedundancyMode:
       enum:
       - Failover
       - N+m

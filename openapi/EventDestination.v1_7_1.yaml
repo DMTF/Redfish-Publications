@@ -1,13 +1,13 @@
 components:
   schemas:
-    Actions:
+    EventDestination_v1_7_1_Actions:
       additionalProperties: false
       description: The available actions for this Resource.
       properties:
         '#EventDestination.ResumeSubscription':
-          $ref: '#/components/schemas/ResumeSubscription'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_ResumeSubscription'
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_OemActions'
           description: The available OEM-specific actions for this Resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this Resource.
@@ -17,7 +17,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    DeliveryRetryPolicy:
+    EventDestination_v1_7_1_DeliveryRetryPolicy:
       enum:
       - TerminateAfterRetries
       - SuspendRetries
@@ -31,22 +31,22 @@ components:
           retries is reached.
         TerminateAfterRetries: The subscription is terminated after the maximum number
           of retries is reached.
-    EventDestination:
+    EventDestination_v1_7_1_EventDestination:
       additionalProperties: false
       description: The EventDestination schema defines the target of an event subscription,
         including the event types and context to provide to the target in the Event
         payload.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_Actions'
           description: The available actions for this Resource.
           x-longDescription: This property shall contain the available actions for
             this Resource.
@@ -60,7 +60,7 @@ components:
           x-longDescription: This property shall contain a client-supplied context
             that remains with the connection through the connection's lifetime.
         DeliveryRetryPolicy:
-          $ref: '#/components/schemas/DeliveryRetryPolicy'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_DeliveryRetryPolicy'
           description: This property shall contain the subscription delivery retry
             policy for events, where the subscription type is RedfishEvent.
           nullable: true
@@ -70,7 +70,7 @@ components:
             this property is not present, the policy shall be assumed to be TerminateAfterRetries.
           x-versionAdded: v1_6_0
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Destination:
@@ -86,7 +86,7 @@ components:
             in the SNMPv3 traps.  For other URIs, such as HTTP or HTTPS, they shall
             be consistent with RFC3986.
         EventFormatType:
-          $ref: http://redfish.dmtf.org/schemas/v1/EventDestination.yaml#/components/schemas/EventFormatType
+          $ref: http://redfish.dmtf.org/schemas/v1/EventDestination.yaml#/components/schemas/EventDestination_EventFormatType
           description: The content types of the message that are sent to the EventDestination.
           nullable: true
           readOnly: true
@@ -98,7 +98,7 @@ components:
           deprecated: true
           description: The types of events that are sent to the destination.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/EventType
+            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
           readOnly: true
           type: array
           x-deprecatedReason: This property has been deprecated.  Starting with Redfish
@@ -118,14 +118,14 @@ components:
             information.  This array is null or an empty array in responses.  An empty
             array is the preferred return value on read operations.
           items:
-            $ref: '#/components/schemas/HttpHeaderProperty'
+            $ref: '#/components/schemas/EventDestination_v1_7_1_HttpHeaderProperty'
           type: array
           x-longDescription: This property shall contain an object consisting of the
             names and values of of HTTP header to be included with every event POST
             to the Event Destination.  This object shall be null or an empty array
             in responses.  An empty array is the preferred return value in responses.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         MessageIds:
           description: The list of MessageIds that the service sends.  If this property
@@ -149,7 +149,7 @@ components:
             is empty, metric reports that originate from any metric report definition
             are sent to the subscriber.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall specify an array of metric report
@@ -160,12 +160,12 @@ components:
             reports originating from any metric report definition to the subscriber.
           x-versionAdded: v1_6_0
         MetricReportDefinitions@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -175,7 +175,7 @@ components:
             events.  If this property is absent or the array is empty, the service
             sends the events that originate from any Resource to the subscriber.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: This property shall specify an array of Resources, Resource
@@ -188,9 +188,9 @@ components:
             any Resource, Resource Collection, or Referenceable Member to the subscriber.
           x-versionAdded: v1_1_0
         OriginResources@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         Protocol:
-          $ref: '#/components/schemas/EventDestinationProtocol'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_EventDestinationProtocol'
           description: The protocol type of the event connection.
           readOnly: true
           x-longDescription: This property shall contain the protocol type that the
@@ -232,13 +232,13 @@ components:
             to metric reports, the EventTypes property should include `MetricReport`.
           x-versionAdded: v1_4_0
         SNMP:
-          $ref: '#/components/schemas/SNMPSettings'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_SNMPSettings'
           description: Settings for an SNMP event destination.
           x-longDescription: This property shall contain the settings for an SNMP
             event destination.
           x-versionAdded: v1_7_0
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property shall contain the status of the subscription.
           x-longDescription: This property shall contain the status of the subscription.
           x-versionAdded: v1_6_0
@@ -265,7 +265,7 @@ components:
             relevance.
           x-versionAdded: v1_4_0
         SubscriptionType:
-          $ref: '#/components/schemas/SubscriptionType'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_SubscriptionType'
           description: The subscription type for events.
           nullable: true
           readOnly: true
@@ -290,7 +290,7 @@ components:
       x-requiredOnCreate:
       - Destination
       - Protocol
-    EventDestinationProtocol:
+    EventDestination_v1_7_1_EventDestinationProtocol:
       enum:
       - Redfish
       - SNMPv1
@@ -318,7 +318,7 @@ components:
         SNMPv1: v1_7_0
         SNMPv2c: v1_7_0
         SNMPv3: v1_7_0
-    HttpHeaderProperty:
+    EventDestination_v1_7_1_HttpHeaderProperty:
       additionalProperties: false
       description: The HTTP header value is the property value.  The header name is
         the property name.
@@ -330,7 +330,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
         ^[^:\\s]+$: {}
-    OemActions:
+    EventDestination_v1_7_1_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this Resource.
       properties: {}
@@ -340,7 +340,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResumeSubscription:
+    EventDestination_v1_7_1_ResumeSubscription:
       additionalProperties: false
       description: This action resumes a suspended event subscription.
       properties:
@@ -357,14 +357,14 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResumeSubscriptionRequestBody:
+    EventDestination_v1_7_1_ResumeSubscriptionRequestBody:
       additionalProperties: false
       description: This action resumes a suspended event subscription.
       properties: {}
       type: object
       x-longDescription: This action shall resume a suspended event subscription,
         which affects the subscription status.
-    SNMPAuthenticationProtocols:
+    EventDestination_v1_7_1_SNMPAuthenticationProtocols:
       enum:
       - None
       - CommunityString
@@ -384,7 +384,7 @@ components:
         HMAC_SHA96: This value shall indicate authentication conforms to the RFC3414-defined
           HMAC-SHA-96 authentication protocol.
         None: This value shall indicate authentication is not required.
-    SNMPEncryptionProtocols:
+    EventDestination_v1_7_1_SNMPEncryptionProtocols:
       enum:
       - None
       - CBC_DES
@@ -400,7 +400,7 @@ components:
         CFB128_AES128: This value shall indicate encryption conforms to the RFC3414-defined
           CFB128-AES-128 encryption protocol.
         None: This value shall indicate there is no encryption.
-    SNMPSettings:
+    EventDestination_v1_7_1_SNMPSettings:
       additionalProperties: false
       description: Settings for an SNMP event destination.
       properties:
@@ -414,7 +414,7 @@ components:
             value shall be `null` in responses.
           x-versionAdded: v1_7_0
         AuthenticationProtocol:
-          $ref: '#/components/schemas/SNMPAuthenticationProtocols'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_SNMPAuthenticationProtocols'
           description: The authentication protocol for SNMPv3.
           nullable: true
           readOnly: false
@@ -431,7 +431,7 @@ components:
             value shall be `null` in responses.
           x-versionAdded: v1_7_0
         EncryptionProtocol:
-          $ref: '#/components/schemas/SNMPEncryptionProtocols'
+          $ref: '#/components/schemas/EventDestination_v1_7_1_SNMPEncryptionProtocols'
           description: The encryption protocol for SNMPv3.
           nullable: true
           readOnly: false
@@ -450,7 +450,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    SubscriptionType:
+    EventDestination_v1_7_1_SubscriptionType:
       enum:
       - RedfishEvent
       - SSE

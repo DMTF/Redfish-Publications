@@ -53,7 +53,10 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_2.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_3.json#/definitions/Identifier"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_0.json#/definitions/Identifier"
                 }
             ],
             "description": "Any additional identifiers for a resource.",
@@ -150,7 +153,10 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_2.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_3.json#/definitions/Location"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_0.json#/definitions/Location"
                 }
             ],
             "description": "The location of a resource.",
@@ -248,8 +254,19 @@
                 "GracefulShutdown": "Shut down gracefully and power off.",
                 "Nmi": "Generate a diagnostic interrupt, which is usually an NMI on x86 systems, to stop normal operations, complete diagnostic actions, and, typically, halt the system.",
                 "On": "Turn on the unit.",
-                "PowerCycle": "Power cycle the unit.",
+                "PowerCycle": "Power cycle the unit.  Behaves like a full power removal, followed by a power restore to the resource.",
                 "PushPowerButton": "Simulate the pressing of the physical power button on this unit."
+            },
+            "enumLongDescriptions": {
+                "ForceOff": "This value shall indicate the resource will transition to a power off state.  The transition will start immediately.  Upon successful completion, the PowerState property, if supported, shall contain the value `Off`.",
+                "ForceOn": "This value shall indicate the resource will transition to a power on state.  The transition will start immediately.  Upon successful completion, the PowerState property shall contain the value `On`.",
+                "ForceRestart": "This value shall indicate the resource will transition to a power on state, after transiting through a restart.  The transion will start immediately.  Upon successful completion, the PowerState property, if supported, shall shall contain the value `On`.",
+                "GracefulRestart": "This value shall indicate the resource will transition to a power on state, after transiting through a restart.  The transion will start after first performing tasks to safely shutdown the resource.  For example, when shutting down a computer system, the hosted operating system is allowed to safely shutting down processes and close connections.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
+                "GracefulShutdown": "This value shall indicate the resource will transition to a power off state.  The transition will start after first performing tasks to safely shutdown the resource.  For example, when shutting down a computer system, the hosted operating system is allowed to safely shutdown processes and close connections.  Upon successful completion, the PowerState property, if supported, shall contain the value `Off`.",
+                "Nmi": "This value shall indicate the resource will generate a diagnostic interrupt.",
+                "On": "This value shall indicate the resource will transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
+                "PowerCycle": "This value shall indicate the resource will transition to a power off state, then transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
+                "PushPowerButton": "This value shall indicate the resource will behave as if the physical power button is pressed.  The behavior of pressing the physical power button might be dependent on the state of the unit and the behavior might be configurable."
             },
             "enumVersionAdded": {
                 "PowerCycle": "v1_4_0"

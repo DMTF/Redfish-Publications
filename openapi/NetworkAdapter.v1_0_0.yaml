@@ -1,16 +1,16 @@
 components:
   schemas:
-    ControllerCapabilities:
+    NetworkAdapter_v1_0_0_ControllerCapabilities:
       additionalProperties: true
       properties:
         DataCenterBridging:
-          $ref: '#/components/schemas/DataCenterBridging'
+          $ref: '#/components/schemas/NetworkAdapter_v1_0_0_DataCenterBridging'
           description: Data Center Bridging (DCB) for this controller.
           nullable: true
           x-longDescription: This object shall contain capability, status, and configuration
             values related to Data Center Bridging (DCB) for this controller.
         NPIV:
-          $ref: '#/components/schemas/NPIV'
+          $ref: '#/components/schemas/NetworkAdapter_v1_0_0_NPIV'
           description: N_Port ID Virtualization (NPIV) capabilties for this controller.
           nullable: true
           x-longDescription: This object shall contain N_Port ID Virtualization (NPIV)
@@ -31,7 +31,7 @@ components:
           x-longDescription: The value of this property shall be the number of physical
             ports on this controller.
         VirtualizationOffload:
-          $ref: '#/components/schemas/VirtualizationOffload'
+          $ref: '#/components/schemas/NetworkAdapter_v1_0_0_VirtualizationOffload'
           description: Virtualization offload for this controller.
           nullable: true
           x-longDescription: This object shall contain capability, status, and configuration
@@ -40,11 +40,11 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Controllers:
+    NetworkAdapter_v1_0_0_Controllers:
       additionalProperties: true
       properties:
         ControllerCapabilities:
-          $ref: '#/components/schemas/ControllerCapabilities'
+          $ref: '#/components/schemas/NetworkAdapter_v1_0_0_ControllerCapabilities'
           description: The capabilities of this controller.
           nullable: true
           x-longDescription: The value of this property shall contain the capabilities
@@ -63,27 +63,27 @@ components:
             NetworkDeviceFunctions:
               description: Contains the members of this collection.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
             NetworkDeviceFunctions@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             NetworkDeviceFunctions@odata.navigationLink:
               format: uri
               type: string
             NetworkPorts:
               description: Contains the members of this collection.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
             NetworkPorts@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             NetworkPorts@odata.navigationLink:
               format: uri
               type: string
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
@@ -91,11 +91,11 @@ components:
             PCIeDevices:
               description: Contains the members of this collection.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
             PCIeDevices@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             PCIeDevices@odata.navigationLink:
               format: uri
               type: string
@@ -108,7 +108,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    DataCenterBridging:
+    NetworkAdapter_v1_0_0_DataCenterBridging:
       additionalProperties: true
       properties:
         Capable:
@@ -123,7 +123,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    NPIV:
+    NetworkAdapter_v1_0_0_NPIV:
       additionalProperties: true
       properties:
         MaxDeviceLogins:
@@ -148,24 +148,24 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    NetworkAdapter:
+    NetworkAdapter_v1_0_0_NetworkAdapter:
       additionalProperties: false
       description: A NetworkAdapter represents the physical network adapter capable
         of connecting to a computer network.  Examples include but are not limited
         to Ethernet, Fibre Channel, and converged network adapters.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Actions:
           additionalProperties: false
           description: The available actions for this resource.
           properties:
             '#NetworkAdapter.ResetSettingsToDefault':
-              $ref: '#/components/schemas/ResetSettingsToDefault'
+              $ref: '#/components/schemas/NetworkAdapter_v1_0_0_ResetSettingsToDefault'
             Oem:
               additionalProperties: true
               properties: {}
@@ -183,17 +183,17 @@ components:
         Controllers:
           description: The set of network controllers ASICs that make up this NetworkAdapter.
           items:
-            $ref: '#/components/schemas/Controllers'
+            $ref: '#/components/schemas/NetworkAdapter_v1_0_0_Controllers'
             nullable: true
           type: array
           x-longDescription: The value of this property shall contain the set of network
             controllers ASICs that make up this NetworkAdapter.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Manufacturer:
           description: The manufacturer or OEM of this network adapter.
@@ -210,18 +210,18 @@ components:
           x-longDescription: The value of this property shall contain the information
             about how the manufacturer references this network adapter.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NetworkDeviceFunctions:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: Contains the members of this collection.
           readOnly: true
         NetworkPorts:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: Contains the members of this collection.
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -248,7 +248,7 @@ components:
           x-longDescription: The value of this property shall contain the serial number
             for the network adapter.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           nullable: true
       required:
       - Id
@@ -260,7 +260,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetSettingsToDefault:
+    NetworkAdapter_v1_0_0_ResetSettingsToDefault:
       additionalProperties: false
       description: This action is to clear the settings back to factory defaults.
       properties:
@@ -277,7 +277,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    SRIOV:
+    NetworkAdapter_v1_0_0_SRIOV:
       additionalProperties: true
       properties:
         SRIOVVEPACapable:
@@ -293,7 +293,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    VirtualFunction:
+    NetworkAdapter_v1_0_0_VirtualFunction:
       additionalProperties: true
       properties:
         DeviceMaxCount:
@@ -325,17 +325,17 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    VirtualizationOffload:
+    NetworkAdapter_v1_0_0_VirtualizationOffload:
       additionalProperties: true
       properties:
         SRIOV:
-          $ref: '#/components/schemas/SRIOV'
+          $ref: '#/components/schemas/NetworkAdapter_v1_0_0_SRIOV'
           description: Single-Root Input/Output Virtualization (SR-IOV) capabilities.
           nullable: true
           x-longDescription: This object shall contain Single-Root Input/Output Virtualization
             (SR-IOV) capabilities.
         VirtualFunction:
-          $ref: '#/components/schemas/VirtualFunction'
+          $ref: '#/components/schemas/NetworkAdapter_v1_0_0_VirtualFunction'
           nullable: true
       type: object
       x-patternProperties:

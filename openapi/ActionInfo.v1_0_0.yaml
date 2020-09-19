@@ -1,6 +1,6 @@
 components:
   schemas:
-    ActionInfo:
+    ActionInfo_v1_0_0_ActionInfo:
       additionalProperties: false
       description: ActionInfo describes the parameters and other information necessary
         to perform a Redfish Action to a particular Action target.  As parameter support
@@ -9,20 +9,20 @@ components:
         supported parameters.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -30,7 +30,7 @@ components:
         Parameters:
           description: The parameters associated with the specified Redfish Action
           items:
-            $ref: '#/components/schemas/Parameters'
+            $ref: '#/components/schemas/ActionInfo_v1_0_0_Parameters'
           readOnly: true
           type: array
           x-longDescription: This property shall contain a list of parameters associated
@@ -44,7 +44,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ParameterTypes:
+    ActionInfo_v1_0_0_ParameterTypes:
       enum:
       - Boolean
       - Number
@@ -62,7 +62,7 @@ components:
         ObjectArray: An array of JSON objects
         String: A string
         StringArray: An array of strings
-    Parameters:
+    ActionInfo_v1_0_0_Parameters:
       additionalProperties: false
       properties:
         AllowableValues:
@@ -76,7 +76,7 @@ components:
           x-longDescription: This property shall indicate the allowable values for
             this parameter as applied to this Action target.
         DataType:
-          $ref: '#/components/schemas/ParameterTypes'
+          $ref: '#/components/schemas/ActionInfo_v1_0_0_ParameterTypes'
           description: The JSON property type used for this parameter
           nullable: true
           readOnly: true

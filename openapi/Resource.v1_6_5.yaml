@@ -1,6 +1,6 @@
 components:
   schemas:
-    DurableNameFormat:
+    Resource_v1_6_5_DurableNameFormat:
       enum:
       - NAA
       - iQN
@@ -40,7 +40,7 @@ components:
       x-enumVersionAdded:
         NQN: v1_6_0
         NSID: v1_6_0
-    Identifier:
+    Resource_v1_6_5_Identifier:
       additionalProperties: false
       description: Any additional identifiers for a resource.
       properties:
@@ -54,7 +54,7 @@ components:
             property value format.
           x-versionAdded: v1_1_0
         DurableNameFormat:
-          $ref: '#/components/schemas/DurableNameFormat'
+          $ref: '#/components/schemas/Resource_v1_6_5_DurableNameFormat'
           description: The format of the durable name property.
           nullable: true
           readOnly: true
@@ -67,7 +67,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Location:
+    Resource_v1_6_5_Location:
       additionalProperties: false
       description: The location of a resource.
       properties:
@@ -121,26 +121,26 @@ components:
           x-units: deg
           x-versionAdded: v1_6_0
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish
             Specification-described requirements.
           x-versionAdded: v1_1_0
         PartLocation:
-          $ref: '#/components/schemas/PartLocation'
+          $ref: '#/components/schemas/Resource_v1_6_5_PartLocation'
           description: The part location within the placement.
           x-longDescription: The location within a resource.  This representation
             shall indicate the location within the Placement.
           x-versionAdded: v1_5_0
         Placement:
-          $ref: '#/components/schemas/Placement'
+          $ref: '#/components/schemas/Resource_v1_6_5_Placement'
           description: A place within the addressed location.
           x-longDescription: This property shall contain a place within the addressed
             location.
           x-versionAdded: v1_3_0
         PostalAddress:
-          $ref: '#/components/schemas/PostalAddress'
+          $ref: '#/components/schemas/Resource_v1_6_5_PostalAddress'
           description: The postal address of the addressed resource.
           x-longDescription: This property shall contain a postal address of the resource.
           x-versionAdded: v1_3_0
@@ -149,7 +149,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    LocationType:
+    Resource_v1_6_5_LocationType:
       description: The location types for PartLocation.
       enum:
       - Slot
@@ -169,7 +169,7 @@ components:
         Slot: Slot shall indicate the type of PartLocation is of the Slot type.
         Socket: Socket shall indicate the type of PartLocation of the Socket type.
       x-longDescription: Enumeration literals shall name the type of location in use.
-    Orientation:
+    Resource_v1_6_5_Orientation:
       description: The orientation for the ordering of the part location ordinal value.
       enum:
       - FrontToBack
@@ -201,7 +201,7 @@ components:
           is top to bottom.
       x-longDescription: These enumeration literals shall name the orientation for
         the location type ordering in determining the LocationOrdinalValue.
-    PartLocation:
+    Resource_v1_6_5_PartLocation:
       additionalProperties: false
       description: The part location within the placement.
       properties:
@@ -216,7 +216,7 @@ components:
             shall be measured based on the Orientation value starting with 0.
           x-versionAdded: v1_5_0
         LocationType:
-          $ref: '#/components/schemas/LocationType'
+          $ref: '#/components/schemas/Resource_v1_6_5_LocationType'
           description: The type of location of the part, such as slot, bay, socket
             and slot.
           nullable: true
@@ -225,7 +225,7 @@ components:
             part, such as slot, bay, socket and slot.
           x-versionAdded: v1_5_0
         Orientation:
-          $ref: '#/components/schemas/Orientation'
+          $ref: '#/components/schemas/Resource_v1_6_5_Orientation'
           description: The orientation for the ordering of the slot enumeration used
             by the LocationOrdinalValue property.
           nullable: true
@@ -234,7 +234,7 @@ components:
             used by the LocationOrdinalValue property.
           x-versionAdded: v1_5_0
         Reference:
-          $ref: '#/components/schemas/Reference'
+          $ref: '#/components/schemas/Resource_v1_6_5_Reference'
           description: The reference point for the part location.  Provides guidance
             about the general location of the part.
           nullable: true
@@ -257,7 +257,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Placement:
+    Resource_v1_6_5_Placement:
       additionalProperties: false
       description: The placement within the addressed location.
       properties:
@@ -278,7 +278,7 @@ components:
             offset units shall be measured from bottom to top, starting with 0.
           x-versionAdded: v1_3_0
         RackOffsetUnits:
-          $ref: '#/components/schemas/RackUnits'
+          $ref: '#/components/schemas/Resource_v1_6_5_RackUnits'
           description: The type of rack units in use.
           nullable: true
           readOnly: false
@@ -298,7 +298,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    PostalAddress:
+    Resource_v1_6_5_PostalAddress:
       additionalProperties: false
       description: The postal address for a resource.
       properties:
@@ -578,7 +578,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    RackUnits:
+    Resource_v1_6_5_RackUnits:
       description: The type of rack unit in use.
       enum:
       - OpenU
@@ -593,7 +593,7 @@ components:
           Specification.
       x-longDescription: Enumeration literals shall name the type of rack unit in
         use.
-    Reference:
+    Resource_v1_6_5_Reference:
       description: The reference area for the location of the part.
       enum:
       - Top
@@ -628,12 +628,12 @@ components:
         Top: This value shall be used to indicate the part is in the top of the unit.
       x-longDescription: The enumerated literals shall name the reference for the
         part location.
-    ReferenceableMember:
+    Resource_v1_6_5_ReferenceableMember:
       additionalProperties: false
       description: The base type for addressable members of an array.
       properties:
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         MemberId:
           description: The identifier for the member within the collection.
           readOnly: true
@@ -642,7 +642,7 @@ components:
             the collection.  For services supporting Redfish v1.6 or higher, this
             value shall contain the zero-based array index.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -657,30 +657,30 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Resource:
+    Resource_v1_6_5_Resource:
       additionalProperties: false
       description: The base type for resources and members that can be linked to.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
@@ -694,26 +694,26 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    ResourceCollection:
+    Resource_v1_6_5_ResourceCollection:
       additionalProperties: false
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties contained in this object shall conform to the Redfish

@@ -1,6 +1,6 @@
 components:
   schemas:
-    DurableNameFormat:
+    Resource_v1_4_3_DurableNameFormat:
       enum:
       - NAA
       - iQN
@@ -37,7 +37,7 @@ components:
           and system aspects - Naming, Addressing and Registration Specification.
         iQN: This durable name shall be in the iSCSI Qualified Name format as defined
           in RFC 3720 and RFC 3721.
-    Health:
+    Resource_v1_4_3_Health:
       enum:
       - OK
       - Warning
@@ -47,7 +47,7 @@ components:
         Critical: A critical condition exists that requires immediate attention.
         OK: Normal.
         Warning: A condition exists that requires attention.
-    Identifier:
+    Resource_v1_4_3_Identifier:
       additionalProperties: false
       description: This type describes any additional identifiers for a resource.
       properties:
@@ -60,7 +60,7 @@ components:
             for the resource. The string shall be in the format described by the value
             of the Identifier.DurableNameFormat property.
         DurableNameFormat:
-          $ref: '#/components/schemas/DurableNameFormat'
+          $ref: '#/components/schemas/Resource_v1_4_3_DurableNameFormat'
           description: This represents the format of the DurableName property.
           nullable: true
           readOnly: true
@@ -71,7 +71,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    IndicatorLED:
+    Resource_v1_4_3_IndicatorLED:
       deprecated: true
       enum:
       - Lit
@@ -95,7 +95,7 @@ components:
         'Off': This value shall represent the Indicator LED is in a solid off state.  If
           this value is not supported by the service, the service shall reject PATCH
           or PUT requests containing this value by returning HTTP 400 (Bad Request).
-    Location:
+    Resource_v1_4_3_Location:
       additionalProperties: false
       description: This type describes the location of a resource.
       properties:
@@ -119,18 +119,18 @@ components:
           x-longDescription: This property shall represent the format of the Info
             property.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
             as described in the Redfish specification.
         Placement:
-          $ref: '#/components/schemas/Placement'
+          $ref: '#/components/schemas/Resource_v1_4_3_Placement'
           description: A place within the addressed location.
           nullable: true
           x-longDescription: The value shall be a place within the addressed location.
         PostalAddress:
-          $ref: '#/components/schemas/PostalAddress'
+          $ref: '#/components/schemas/Resource_v1_4_3_PostalAddress'
           description: Postal address of the addressed resource.
           nullable: true
           x-longDescription: The value shall be a postal address of the resource.
@@ -139,7 +139,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    Placement:
+    Resource_v1_4_3_Placement:
       additionalProperties: false
       description: The placement within the addressed location.
       properties:
@@ -157,7 +157,7 @@ components:
           x-longDescription: Vertical location of the item in the rack. Rack offset
             units shall be measured from bottom to top starting with 0.
         RackOffsetUnits:
-          $ref: '#/components/schemas/RackUnits'
+          $ref: '#/components/schemas/Resource_v1_4_3_RackUnits'
           description: The type of Rack Units in use.
           nullable: true
           readOnly: false
@@ -175,7 +175,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PostalAddress:
+    Resource_v1_4_3_PostalAddress:
       additionalProperties: false
       description: The PostalAddress for a resource.
       properties:
@@ -430,7 +430,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    PowerState:
+    Resource_v1_4_3_PowerState:
       deprecated: true
       enum:
       - 'On'
@@ -445,7 +445,7 @@ components:
         'On': The state is powered On.
         PoweringOff: A temporary state between On and Off.
         PoweringOn: A temporary state between Off and On.
-    RackUnits:
+    Resource_v1_4_3_RackUnits:
       description: Defines a rack unit.
       enum:
       - OpenU
@@ -460,12 +460,12 @@ components:
           specification.
       x-longDescription: Enumeration literals shall name the type of rack units in
         use.
-    ReferenceableMember:
+    Resource_v1_4_3_ReferenceableMember:
       additionalProperties: false
       description: This is the base type for addressable members of an array.
       properties:
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         MemberId:
           description: This is the identifier for the member within the collection.
           readOnly: true
@@ -473,7 +473,7 @@ components:
           x-longDescription: The value of this string shall uniquely identify the
             member within the collection.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -488,7 +488,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ResetType:
+    Resource_v1_4_3_ResetType:
       enum:
       - 'On'
       - ForceOff
@@ -514,30 +514,30 @@ components:
         PowerCycle: Perform a power cycle of the unit.
         PushPowerButton: Simulate the pressing of the physical power button on this
           unit.
-    Resource:
+    Resource_v1_4_3_Resource:
       additionalProperties: false
       description: This is the base type for resources and referenceable members.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -551,26 +551,26 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    ResourceCollection:
+    Resource_v1_4_3_ResourceCollection:
       additionalProperties: false
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/odata_v4_0_3_type
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -583,7 +583,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    State:
+    Resource_v1_4_3_State:
       enum:
       - Enabled
       - Disabled

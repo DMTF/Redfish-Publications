@@ -1,17 +1,17 @@
 components:
   schemas:
-    AccountService:
+    AccountService_v1_0_2_AccountService:
       additionalProperties: false
       description: Account Service contains properties common to all user accounts,
         such as password requirements, and control features such as account lockout.  It
         also contains links to the collections of Manager Accounts and Roles.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         AccountLockoutCounterResetAfter:
           description: The interval of time in seconds since the last failed login
             attempt at which point the lockout threshold counter for the account is
@@ -51,7 +51,7 @@ components:
             login attempts at which point the user's account is locked.  If set to
             0, no lockout shall ever occur.
         Accounts:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: Link to a collection of Manager Accounts
           readOnly: true
           x-longDescription: This property shall contain the link to a collection
@@ -67,10 +67,10 @@ components:
             value, thus the failure shall be logged every nth occurrence where n represents
             the value of this property.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
         MaxPasswordLength:
           description: This is the maximum password length for this service.
           minimum: 0
@@ -86,15 +86,15 @@ components:
           x-longDescription: This property shall reference the minimum password length
             that the implementation will allow a password to be set to.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         Roles:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: Link to a collection of Roles
           readOnly: true
           x-longDescription: This property shall contain the link to a collection
@@ -106,7 +106,7 @@ components:
           x-longDescription: The value of this property shall be a boolean indicating
             whether this service is enabled.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
       required:
       - Id
       - Name

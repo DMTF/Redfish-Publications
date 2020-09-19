@@ -1,11 +1,11 @@
 components:
   schemas:
-    Actions:
+    Job_v1_0_4_Actions:
       additionalProperties: false
       description: The available actions for this resource.
       properties:
         Oem:
-          $ref: '#/components/schemas/OemActions'
+          $ref: '#/components/schemas/Job_v1_0_4_OemActions'
           description: The available OEM-specific actions for this resource.
           x-longDescription: This property shall contain the available OEM-specific
             actions for this resource.
@@ -14,22 +14,22 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Job:
+    Job_v1_0_4_Job:
       additionalProperties: false
       description: The Job schema contains information about a job that a Redfish
         job service schedules or executes.  Clients create jobs to describe a series
         of operations that occur at periodic intervals.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         Actions:
-          $ref: '#/components/schemas/Actions'
+          $ref: '#/components/schemas/Job_v1_0_4_Actions'
           description: The available actions for this resource.
           x-longDescription: This property shall contain the available actions for
             this resource.
@@ -40,7 +40,7 @@ components:
           x-longDescription: This property shall contain the user name, software program
             name, or other identifier indicating the creator of this job.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EndTime:
@@ -65,15 +65,15 @@ components:
             responses shall return the Payload property.  If this property is not
             present when the job is created, the default is `false`.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         JobState:
-          $ref: '#/components/schemas/JobState'
+          $ref: '#/components/schemas/Job_v1_0_4_JobState'
           description: The state of the job.
           readOnly: false
           x-longDescription: This property shall indicate the state of the job.
         JobStatus:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Health
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
           description: The status of the job.
           readOnly: true
           x-longDescription: This property shall indicate the health status of the
@@ -89,21 +89,21 @@ components:
         Messages:
           description: An array of messages associated with the job.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message
+            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message_Message
           type: array
           x-longDescription: This property shall contain an array of messages associated
             with the job.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: The OEM extension property.
           x-longDescription: This property shall contain the OEM extensions.  All
             values for properties that this object contains shall conform to the Redfish
             Specification-described requirements.
         Payload:
-          $ref: '#/components/schemas/Payload'
+          $ref: '#/components/schemas/Job_v1_0_4_Payload'
           description: The HTTP and JSON payload details for this job.
           x-longDescription: This property shall contain the HTTP and JSON payload
             information for executing this job.  This property shall not be included
@@ -118,7 +118,7 @@ components:
             started, the value shall be zero.
           x-units: '%'
         Schedule:
-          $ref: http://redfish.dmtf.org/schemas/v1/Schedule.yaml#/components/schemas/Schedule
+          $ref: http://redfish.dmtf.org/schemas/v1/Schedule.yaml#/components/schemas/Schedule_Schedule
           description: The schedule settings for this job.
           x-longDescription: This object shall contain the scheduling details for
             this job and the recurrence frequency for future instances of this job.
@@ -144,7 +144,7 @@ components:
             execution order is omitted and might occur in parallel or in series as
             determined by the service.
         Steps:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to a collection of steps for this job.
           readOnly: true
           x-longDescription: This property shall contain the link to a resource collection
@@ -159,7 +159,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    JobState:
+    Job_v1_0_4_JobState:
       enum:
       - New
       - Starting
@@ -213,7 +213,7 @@ components:
           but is expected to restart and is therefore not complete.
         UserIntervention: This value shall represent that the operation is waiting
           for a user to intervene and must be manually continued, stopped, or cancelled.
-    OemActions:
+    Job_v1_0_4_OemActions:
       additionalProperties: true
       description: The available OEM-specific actions for this resource.
       properties: {}
@@ -223,7 +223,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    Payload:
+    Job_v1_0_4_Payload:
       additionalProperties: false
       description: The HTTP and JSON payload details for this job.
       properties:

@@ -1,22 +1,22 @@
 components:
   schemas:
-    Drive:
+    Drive_v1_1_1_Drive:
       additionalProperties: false
       description: Drive contains properties describing a single physical disk drive
         for any system, along with links to associated Volumes.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_context
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_type
         Actions:
           additionalProperties: false
           description: The available actions for this resource.
           properties:
             '#Drive.SecureErase':
-              $ref: '#/components/schemas/SecureErase'
+              $ref: '#/components/schemas/Drive_v1_1_1_SecureErase'
             Oem:
               additionalProperties: true
               properties: {}
@@ -65,18 +65,18 @@ components:
             the associated drive.
           x-units: By
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         EncryptionAbility:
-          $ref: '#/components/schemas/EncryptionAbility'
+          $ref: '#/components/schemas/Drive_v1_1_1_EncryptionAbility'
           description: The encryption abilities of this drive.
           nullable: true
           readOnly: true
           x-longDescription: This property shall contain the encryption ability for
             the associated drive.
         EncryptionStatus:
-          $ref: '#/components/schemas/EncryptionStatus'
+          $ref: '#/components/schemas/Drive_v1_1_1_EncryptionStatus'
           description: The status of the encrytion of this drive.
           nullable: true
           readOnly: true
@@ -90,7 +90,7 @@ components:
           x-longDescription: This property shall contain failure information as defined
             by the manufacturer for the associated drive.
         HotspareType:
-          $ref: '#/components/schemas/HotspareType'
+          $ref: '#/components/schemas/Drive_v1_1_1_HotspareType'
           description: The type of hotspare this drive is currently serving as.
           nullable: true
           readOnly: true
@@ -99,17 +99,17 @@ components:
             Status.State field shall be 'StandbySpare' and 'Enabled' when it is being
             used as part of a Volume.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         Identifiers:
           description: The Durable names for the drive.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Identifier
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Resource_v1_1_0_Identifier
           type: array
           x-longDescription: This property shall contain a list of all known durable
             names for the associated drive.
         IndicatorLED:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/IndicatorLED
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Resource_v1_1_0_IndicatorLED
           description: The state of the indicator LED, used to identify the drive.
           nullable: true
           readOnly: false
@@ -124,19 +124,19 @@ components:
               description: An array of references to the endpoints that connect to
                 this drive.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be a reference to
                 the resources that this drive is associated with and shall reference
                 a resource of type Endpoint.
             Endpoints@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             Endpoints@odata.navigationLink:
               format: uri
               type: string
             Oem:
-              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+              $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
               description: Oem extension object.
               x-longDescription: This object represents the Oem property.  All values
                 for resources described by this schema shall comply to the requirements
@@ -146,7 +146,7 @@ components:
                 drive. This will reference Volumes that are either wholly or only
                 partly contained by this drive.
               items:
-                $ref: http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.yaml#/components/schemas/idRef
+                $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
               readOnly: true
               type: array
               x-longDescription: The value of this property shall be a reference to
@@ -155,7 +155,7 @@ components:
                 of which this Drive is a member and all Volumes for which this Drive
                 is acting as a spare if the HotspareType is Dedicated.
             Volumes@odata.count:
-              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/count
+              $ref: http://redfish.dmtf.org/schemas/v1/odata.4.0.0.yaml#/components/schemas/odata_4_0_0_count
             Volumes@odata.navigationLink:
               format: uri
               type: string
@@ -169,7 +169,7 @@ components:
         Location:
           description: The Location of the drive.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Location
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_0.yaml#/components/schemas/Resource_v1_1_0_Location
           type: array
           x-longDescription: This property shall contain location information of the
             associated drive.
@@ -182,7 +182,7 @@ components:
             responsible for producing the drive. This organization might be the entity
             from whom the drive is purchased, but this is not necessarily true.
         MediaType:
-          $ref: '#/components/schemas/MediaType'
+          $ref: '#/components/schemas/Drive_v1_1_1_MediaType'
           description: The type of media contained in this drive.
           nullable: true
           readOnly: true
@@ -196,7 +196,7 @@ components:
           x-longDescription: The value of this property shall be the name by which
             the manufacturer generally refers to the drive.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NegotiatedSpeedGbs:
           description: The speed which this drive is currently communicating to the
@@ -208,7 +208,7 @@ components:
             associated drive.
           x-units: Gbit/s
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
@@ -216,7 +216,7 @@ components:
         Operations:
           description: The operations currently running on the Drive.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/Volume.v1_0_0.yaml#/components/schemas/Operations
+            $ref: http://redfish.dmtf.org/schemas/v1/Volume.v1_0_0.yaml#/components/schemas/Volume_v1_0_0_Operations
           type: array
           x-longDescription: This property shall contain a list of all operations
             currently running on the Drive.
@@ -237,7 +237,7 @@ components:
           x-longDescription: This property shall contain an indicator of the percentage
             of life remaining in the Drive's media.
         Protocol:
-          $ref: http://redfish.dmtf.org/schemas/v1/Storage.v1_0_0.yaml#/components/schemas/Protocol
+          $ref: http://redfish.dmtf.org/schemas/v1/Storage.v1_0_0.yaml#/components/schemas/Storage_v1_0_0_Protocol
           description: The protocol this drive is using to communicate to the storage
             controller.
           nullable: true
@@ -276,9 +276,9 @@ components:
           x-longDescription: The value of this property shall be a manufacturer-allocated
             number used to identify the drive.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
         StatusIndicator:
-          $ref: '#/components/schemas/StatusIndicator'
+          $ref: '#/components/schemas/Drive_v1_1_1_StatusIndicator'
           description: The state of the status indicator, used to communicate status
             information about this drive.
           nullable: true
@@ -295,7 +295,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    EncryptionAbility:
+    Drive_v1_1_1_EncryptionAbility:
       enum:
       - None
       - SelfEncryptingDrive
@@ -306,7 +306,7 @@ components:
         Other: The drive is capable of self encryption through some other means.
         SelfEncryptingDrive: The drive is capable of self encryption per the Trusted
           Computing Group's Self Encrypting Drive Standard.
-    EncryptionStatus:
+    Drive_v1_1_1_EncryptionStatus:
       enum:
       - Unecrypted
       - Unlocked
@@ -323,7 +323,7 @@ components:
         Unencrypted: The drive is not currently encrypted.
         Unlocked: The drive is currently encrypted but the data is accessible to the
           user unencrypted.
-    HotspareType:
+    Drive_v1_1_1_HotspareType:
       enum:
       - None
       - Global
@@ -338,7 +338,7 @@ components:
         Global: The drive is currently serving as a hotspare for all other drives
           in the storage system.
         None: The drive is not currently a hotspare.
-    MediaType:
+    Drive_v1_1_1_MediaType:
       enum:
       - HDD
       - SSD
@@ -348,7 +348,7 @@ components:
         HDD: The drive media type is traditional magnetic platters.
         SMR: The drive media type is shingled magnetic recording.
         SSD: The drive media type is solid state or flash memory.
-    SecureErase:
+    Drive_v1_1_1_SecureErase:
       additionalProperties: false
       description: This action is used to securely erase the contents of the drive.
       properties:
@@ -365,7 +365,7 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message|Privileges)\.[a-zA-Z_][a-zA-Z0-9_.]+$:
           description: This property shall specify a valid odata or Redfish property.
-    StatusIndicator:
+    Drive_v1_1_1_StatusIndicator:
       enum:
       - OK
       - Fail

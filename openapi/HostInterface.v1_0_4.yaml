@@ -1,6 +1,6 @@
 components:
   schemas:
-    AuthenticationMode:
+    HostInterface_v1_0_4_AuthenticationMode:
       enum:
       - AuthNone
       - BasicAuth
@@ -12,28 +12,28 @@ components:
         BasicAuth: Requests using HTTP Basic Authentication are allowed.
         OemAuth: Requests using OEM authentication mechanisms are allowed.
         RedfishSessionAuth: Requests using Redfish Session Authentication are allowed.
-    HostInterface:
+    HostInterface_v1_0_4_HostInterface:
       additionalProperties: false
       description: This schema defines a single Host Interface resource.
       properties:
         '@odata.context':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/context
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
         '@odata.etag':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/etag
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
         '@odata.id':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/id
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
         '@odata.type':
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/type
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
         AuthenticationModes:
           description: Indicates the authentication modes available on this interface.
           items:
-            $ref: '#/components/schemas/AuthenticationMode'
+            $ref: '#/components/schemas/HostInterface_v1_0_4_AuthenticationMode'
           readOnly: false
           type: array
           x-longDescription: The value of this property shall be an array consisting
             of the authentication modes allowed on this interface.
         Description:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Description
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
           nullable: true
           readOnly: true
         ExternallyAccessible:
@@ -63,7 +63,7 @@ components:
           x-longDescription: The value of this property shall be the ID of the Role
             resource that is configured for firmware authentication on this interface.
         HostEthernetInterfaces:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The Redfish link to the collection of network interface controllers
             or cards (NICs) that a Computer System uses to communicate with this Host
             Interface.
@@ -72,14 +72,14 @@ components:
             of type EthernetInterfaceCollection that Computer Systems use as the Host
             Interface to this Manager.
         HostInterfaceType:
-          $ref: '#/components/schemas/HostInterfaceType'
+          $ref: '#/components/schemas/HostInterface_v1_0_4_HostInterfaceType'
           description: Indicates the Host Interface type for this interface.
           nullable: true
           readOnly: true
           x-longDescription: The value of this property shall be an enumeration describing
             type of the interface.
         Id:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Id
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
           readOnly: true
         InterfaceEnabled:
           description: Indicates whether this interface is enabled.
@@ -103,14 +103,14 @@ components:
           x-longDescription: The value of this property shall be the ID of the Role
             resource that is configured for kernel authentication on this interface.
         Links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/HostInterface_v1_0_4_Links'
           description: Contains references to other resources that are related to
             this resource.
           x-longDescription: The Links property, as described by the Redfish Specification,
             shall contain references to resources that are related to, but not contained
             by (subordinate to), this resource.
         ManagerEthernetInterface:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The Redfish link to a single network interface controllers
             or cards (NIC) that this Manager uses for network communication with this
             Host Interface.
@@ -119,10 +119,10 @@ components:
             of type EthernetInterface which represents the network interface used
             by this Manager as the HostInterface.
         Name:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Name
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
           readOnly: true
         NetworkProtocol:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The Redfish link to the network services and their settings
             that the Manager controls.  It is here that clients will find network
             configuration options as well as network services.
@@ -131,13 +131,13 @@ components:
             to a resource of type ManagerNetworkProtocol which represents the network
             services for this Manager.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: This is the manufacturer/provider specific extension moniker
             used to divide the Oem object into sections.
           x-longDescription: The value of this string shall be of the format for the
             reserved word *Oem*.
         Status:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Status
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
           description: This property describes the status and health of the resource
             and its children.
           x-longDescription: This property shall contain any status or health properties
@@ -153,13 +153,13 @@ components:
       x-patternProperties:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
-    HostInterfaceType:
+    HostInterface_v1_0_4_HostInterfaceType:
       enum:
       - NetworkHostInterface
       type: string
       x-enumDescriptions:
         NetworkHostInterface: This interface is a Network Host Interface.
-    Links:
+    HostInterface_v1_0_4_Links:
       additionalProperties: false
       description: References to other resources that are related to this resource.
       properties:
@@ -167,15 +167,15 @@ components:
           description: An array of references to the Computer Systems connected to
             this Host Interface.
           items:
-            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           readOnly: true
           type: array
           x-longDescription: The value of this property shall be an array of references
             to resources of type ComputerSystem that are connected to this HostInterface.
         ComputerSystems@odata.count:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/count
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
         FirmwareAuthRole:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Role that has firmware authentication privileges
             on this Host Interface.
           readOnly: true
@@ -183,7 +183,7 @@ components:
             object instance, and should reference the object identified by property
             FirmwareAuthRoleId.
         KernelAuthRole:
-          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/idRef
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A reference to the Role object defining Privileges for this
             Host Interface when using kernel authentication.
           readOnly: true
@@ -191,7 +191,7 @@ components:
             object instance, and should reference the object identified by property
             KernelAuthRoleId.
         Oem:
-          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Oem
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
           description: Oem extension object.
           x-longDescription: This object represents the Oem property.  All values
             for resources described by this schema shall comply to the requirements
