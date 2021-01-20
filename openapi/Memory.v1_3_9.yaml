@@ -1,0 +1,966 @@
+components:
+  schemas:
+    Memory_v1_3_9_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Memory.DisablePassphrase':
+          $ref: '#/components/schemas/Memory_v1_3_9_DisablePassphrase'
+        '#Memory.SecureEraseUnit':
+          $ref: '#/components/schemas/Memory_v1_3_9_SecureEraseUnit'
+        '#Memory.SetPassphrase':
+          $ref: '#/components/schemas/Memory_v1_3_9_SetPassphrase'
+        '#Memory.UnlockUnit':
+          $ref: '#/components/schemas/Memory_v1_3_9_UnlockUnit'
+        Oem:
+          $ref: '#/components/schemas/Memory_v1_3_9_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_BaseModuleType:
+      enum:
+      - RDIMM
+      - UDIMM
+      - SO_DIMM
+      - LRDIMM
+      - Mini_RDIMM
+      - Mini_UDIMM
+      - SO_RDIMM_72b
+      - SO_UDIMM_72b
+      - SO_DIMM_16b
+      - SO_DIMM_32b
+      type: string
+      x-enumDescriptions:
+        LRDIMM: Load Reduced.
+        Mini_RDIMM: Mini_RDIMM.
+        Mini_UDIMM: Mini_UDIMM.
+        RDIMM: Registered DIMM.
+        SO_DIMM: SO_DIMM.
+        SO_DIMM_16b: SO_DIMM_16b.
+        SO_DIMM_32b: SO_DIMM_32b.
+        SO_RDIMM_72b: SO_RDIMM_72b.
+        SO_UDIMM_72b: SO_UDIMM_72b.
+        UDIMM: UDIMM.
+    Memory_v1_3_9_DisablePassphrase:
+      additionalProperties: false
+      description: Disable passphrase for given regions.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall disable the need for passphrases on the
+        supplied region provided the supplied passphrase matches that of the region.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_DisablePassphraseRequestBody:
+      additionalProperties: false
+      description: Disable passphrase for given regions.
+      properties:
+        Passphrase:
+          description: Passphrase for doing the operation.
+          type: string
+          x-longDescription: This property shall contain the passphrase used in this
+            action.
+        RegionId:
+          description: The memory region ID to which to apply this action.
+          type: string
+          x-longDescription: This property shall contain the memory region ID to which
+            to apply this action.
+      required:
+      - Passphrase
+      - RegionId
+      type: object
+      x-longDescription: This action shall disable the need for passphrases on the
+        supplied region provided the supplied passphrase matches that of the region.
+    Memory_v1_3_9_ErrorCorrection:
+      enum:
+      - NoECC
+      - SingleBitECC
+      - MultiBitECC
+      - AddressParity
+      type: string
+      x-enumDescriptions:
+        AddressParity: Address parity errors can be corrected.
+        MultiBitECC: Multibit data errors can be corrected by ECC.
+        NoECC: No ECC available.
+        SingleBitECC: Single bit data errors can be corrected by ECC.
+    Memory_v1_3_9_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Chassis:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the chassis that contains this memory device.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Chassis that represents the physical container associated with this memory
+            device.
+          x-versionAdded: v1_2_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_Memory:
+      additionalProperties: false
+      description: The Memory schema represents a memory device, such as a DIMM, and
+        its configuration.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Memory_v1_3_9_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        AllocationAlignmentMiB:
+          description: The boundary that memory regions are allocated on, measured
+            in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the alignment boundary on
+            which memory regions are allocated, measured in MiB.
+          x-units: MiBy
+          x-versionAdded: v1_2_0
+        AllocationIncrementMiB:
+          description: The size of the smallest unit of allocation for a memory region
+            in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the allocation increment
+            for regions, measured in MiB.
+          x-units: MiBy
+          x-versionAdded: v1_2_0
+        AllowedSpeedsMHz:
+          description: Speeds supported by this memory device.
+          items:
+            format: int64
+            type: integer
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the speed supported by this
+            memory device.
+          x-units: MHz
+        BaseModuleType:
+          $ref: '#/components/schemas/Memory_v1_3_9_BaseModuleType'
+          description: The base module type of the memory device.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the base module type of the
+            memory device.
+        BusWidthBits:
+          description: The bus width, in bits.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the bus width, in bits.
+        CapacityMiB:
+          description: Memory capacity in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the memory capacity in MiB.
+          x-units: MiBy
+        DataWidthBits:
+          description: Data width in bits.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the data width in bits.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        DeviceID:
+          deprecated: true
+          description: Device ID.
+          nullable: true
+          readOnly: true
+          type: string
+          x-deprecatedReason: This property has been deprecated in favor of ModuleProductID.
+          x-longDescription: This property shall contain the device ID of the memory
+            device.
+          x-versionDeprecated: v1_3_0
+        DeviceLocator:
+          description: Location of the memory device in the platform.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain location of the memory device
+            in the platform, typically marked in the silk screen.
+        ErrorCorrection:
+          $ref: '#/components/schemas/Memory_v1_3_9_ErrorCorrection'
+          description: Error correction scheme supported for this memory device.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the error correction scheme
+            supported for this memory device.
+        FirmwareApiVersion:
+          description: Version of API supported by the firmware.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the version of API supported
+            by the firmware.
+        FirmwareRevision:
+          description: Revision of firmware on the memory controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the revision of firmware
+            on the memory controller.
+        FunctionClasses:
+          deprecated: true
+          description: Function classes by the memory device.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-deprecatedReason: This property has been deprecated in favor of OperatingMemoryModes
+            at the root of the resource, or MemoryClassification found within RegionSet.
+          x-longDescription: This property shall contain the function classes by the
+            memory device.
+          x-versionDeprecated: v1_3_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        IsRankSpareEnabled:
+          description: An indication of whether rank spare is enabled for this memory
+            device.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether rank spare is enabled
+            for this memory device.
+        IsSpareDeviceEnabled:
+          description: An indication of whether a spare device is enabled for this
+            memory device.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the spare device
+            is enabled.
+        Links:
+          $ref: '#/components/schemas/Memory_v1_3_9_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+          x-versionAdded: v1_2_0
+        Manufacturer:
+          description: The memory device manufacturer.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the manufacturer of the memory
+            device.
+        MaxTDPMilliWatts:
+          description: Set of maximum power budgets supported by the memory device
+            in milliwatts.
+          items:
+            format: int64
+            type: integer
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of maximum power
+            budgets supported by the memory device in milliwatts.
+          x-units: mW
+        MemoryDeviceType:
+          $ref: '#/components/schemas/Memory_v1_3_9_MemoryDeviceType'
+          description: Type details of the memory device.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the Memory Device Type as
+            defined by SMBIOS.
+        MemoryLocation:
+          $ref: '#/components/schemas/Memory_v1_3_9_MemoryLocation'
+          description: Memory connection information to sockets and memory controllers.
+          x-longDescription: This object shall contain properties that describe the
+            memory connection information to sockets and memory controllers.
+        MemoryMedia:
+          description: Media of this memory device.
+          items:
+            $ref: '#/components/schemas/Memory_v1_3_9_MemoryMedia'
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the media types of this memory
+            device.
+        MemorySubsystemControllerManufacturerID:
+          description: The manufacturer ID of the memory subsystem controller of this
+            memory device.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the two byte manufacturer
+            ID of the memory subsystem controller of this memory device as defined
+            by JEDEC in JEP-106.
+          x-versionAdded: v1_3_0
+        MemorySubsystemControllerProductID:
+          description: The product ID of the memory subsystem controller of this memory
+            device.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the two byte product ID of
+            the memory subsystem controller of this memory device as defined by the
+            manufacturer.
+          x-versionAdded: v1_3_0
+        MemoryType:
+          $ref: '#/components/schemas/Memory_v1_3_9_MemoryType'
+          description: The type of memory device.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of memory device
+            that this resource represents.
+        Metrics:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the metrics associated with this memory device.
+          readOnly: true
+          x-longDescription: The link to the metrics associated with this memory device.
+        ModuleManufacturerID:
+          description: The manufacturer ID of this memory device.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the two byte manufacturer
+            ID of this memory device as defined by JEDEC in JEP-106.
+          x-versionAdded: v1_3_0
+        ModuleProductID:
+          description: The product ID of this memory device.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){2}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the two byte product ID of
+            this memory device as defined by the manufacturer.
+          x-versionAdded: v1_3_0
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OperatingMemoryModes:
+          description: Memory modes supported by the memory device.
+          items:
+            $ref: '#/components/schemas/Memory_v1_3_9_OperatingMemoryModes'
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the memory modes supported
+            by the memory device.
+        OperatingSpeedMhz:
+          description: Operating speed of the memory device in MHz or MT/s as appropriate.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the operating speed of the
+            memory device in MHz or MT/s (mega-transfers per second) as reported by
+            the memory device.  Memory devices that operate at their bus speed shall
+            report the operating speed in MHz (bus speed), while memory devices that
+            transfer data faster than their bus speed, such as DDR memory, shall report
+            the operating speed in MT/s (mega-transfers/second).  The reported value
+            shall match the conventionally reported values for the technology used
+            by the memory device.
+          x-units: MHz
+        PartNumber:
+          description: The product part number of this device.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the part number as provided
+            by the manufacturer of this memory device.
+        PersistentRegionNumberLimit:
+          description: Total number of persistent regions this memory device can support.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of persistent
+            regions this memory device can support.
+          x-versionAdded: v1_2_0
+        PersistentRegionSizeLimitMiB:
+          description: Total size of persistent regions in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total size of persistent
+            regions in MiB.
+          x-units: MiBy
+        PersistentRegionSizeMaxMiB:
+          description: Maximum size of a single persistent region in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum size of a single
+            persistent regions in MiB.
+          x-units: MiBy
+          x-versionAdded: v1_2_0
+        PowerManagementPolicy:
+          $ref: '#/components/schemas/Memory_v1_3_9_PowerManagementPolicy'
+          description: Power management policy information.
+          x-longDescription: This object shall contain properties that describe the
+            power management policy for this resource.
+        RankCount:
+          description: Number of ranks available in the memory device.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of ranks available
+            in the memory device.  The ranks could be used for spare or interleave.
+        Regions:
+          description: Memory regions information within the memory device.
+          items:
+            $ref: '#/components/schemas/Memory_v1_3_9_RegionSet'
+          type: array
+          x-longDescription: This property shall contain the memory region information
+            within the memory device.
+        SecurityCapabilities:
+          $ref: '#/components/schemas/Memory_v1_3_9_SecurityCapabilities'
+          description: Security capabilities of the memory device.
+          x-longDescription: This property shall contain properties that describe
+            the security capabilities of the memory device.
+        SerialNumber:
+          description: The product serial number of this device.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the serial number as provided
+            by the manufacturer of this memory device.
+        SpareDeviceCount:
+          description: Number of unused spare devices available in the memory device.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of unused spare
+            devices available in the memory device.  If memory devices fails, the
+            spare device could be used.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+          x-versionAdded: v1_1_0
+        SubsystemDeviceID:
+          deprecated: true
+          description: Subsystem device ID.
+          nullable: true
+          readOnly: true
+          type: string
+          x-deprecatedReason: This property has been deprecated in favor of MemorySubsystemControllerProductID.
+          x-longDescription: This property shall contain the subsystem device ID of
+            the memory device.
+          x-versionDeprecated: v1_3_0
+        SubsystemVendorID:
+          deprecated: true
+          description: SubSystem vendor ID.
+          nullable: true
+          readOnly: true
+          type: string
+          x-deprecatedReason: This property has been deprecated in favor of MemorySubsystemControllerManufacturerID.
+          x-longDescription: This property shall contain the subsystem vendor ID of
+            the memory device.
+          x-versionDeprecated: v1_3_0
+        VendorID:
+          deprecated: true
+          description: Vendor ID.
+          nullable: true
+          readOnly: true
+          type: string
+          x-deprecatedReason: This property has been deprecated in favor of ModuleManufacturerID.
+          x-longDescription: This property shall contain the vendor ID of the memory
+            device.
+          x-versionDeprecated: v1_3_0
+        VolatileRegionNumberLimit:
+          description: Total number of volatile regions this memory device can support.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of volatile
+            regions this memory device can support.
+          x-versionAdded: v1_2_0
+        VolatileRegionSizeLimitMiB:
+          description: Total size of volatile regions in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total size of volatile
+            regions in MiB.
+          x-units: MiBy
+        VolatileRegionSizeMaxMiB:
+          description: Maximum size of a single volatile region in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum size of a single
+            volatile regions in MiB.
+          x-units: MiBy
+          x-versionAdded: v1_2_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a memory device in a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_MemoryClassification:
+      enum:
+      - Volatile
+      - ByteAccessiblePersistent
+      - Block
+      type: string
+      x-enumDescriptions:
+        Block: Block-accessible memory.
+        ByteAccessiblePersistent: Byte-accessible persistent memory.
+        Volatile: Volatile memory.
+    Memory_v1_3_9_MemoryDeviceType:
+      enum:
+      - DDR
+      - DDR2
+      - DDR3
+      - DDR4
+      - DDR4_SDRAM
+      - DDR4E_SDRAM
+      - LPDDR4_SDRAM
+      - DDR3_SDRAM
+      - LPDDR3_SDRAM
+      - DDR2_SDRAM
+      - DDR2_SDRAM_FB_DIMM
+      - DDR2_SDRAM_FB_DIMM_PROBE
+      - DDR_SGRAM
+      - DDR_SDRAM
+      - ROM
+      - SDRAM
+      - EDO
+      - FastPageMode
+      - PipelinedNibble
+      type: string
+      x-enumDescriptions:
+        DDR: DDR.
+        DDR2: DDR2.
+        DDR2_SDRAM: DDR2 SDRAM.
+        DDR2_SDRAM_FB_DIMM: DDR2 SDRAM FB_DIMM.
+        DDR2_SDRAM_FB_DIMM_PROBE: DDR2 SDRAM FB_DIMM PROBE.
+        DDR3: DDR3.
+        DDR3_SDRAM: DDR3 SDRAM.
+        DDR4: DDR4.
+        DDR4E_SDRAM: DDR4E SDRAM.
+        DDR4_SDRAM: DDR4 SDRAM.
+        DDR_SDRAM: DDR SDRAM.
+        DDR_SGRAM: DDR SGRAM.
+        EDO: EDO.
+        FastPageMode: Fast Page Mode.
+        LPDDR3_SDRAM: LPDDR3 SDRAM.
+        LPDDR4_SDRAM: LPDDR4 SDRAM.
+        PipelinedNibble: Pipelined Nibble.
+        ROM: ROM.
+        SDRAM: SDRAM.
+    Memory_v1_3_9_MemoryLocation:
+      additionalProperties: false
+      description: Memory connection information to sockets and memory controllers.
+      properties:
+        Channel:
+          description: The channel number to which the memory device is connected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the channel number to which
+            the memory device is connected.
+        MemoryController:
+          description: The memory controller number to which the memory device is
+            connected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the memory controller number
+            to which the memory device is connected.
+        Slot:
+          description: The slot number to which the memory device is connected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the slot number to which
+            the memory device is connected.
+        Socket:
+          description: The socket number to which the memory device is connected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the socket number to which
+            the memory device is connected.
+      type: object
+      x-longDescription: This type shall contain properties that describe the memory
+        connection information to sockets and memory controllers.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_MemoryMedia:
+      enum:
+      - DRAM
+      - NAND
+      - Proprietary
+      type: string
+      x-enumDescriptions:
+        DRAM: DRAM media.
+        NAND: NAND media.
+        Proprietary: Proprietary media.
+    Memory_v1_3_9_MemoryType:
+      enum:
+      - DRAM
+      - NVDIMM_N
+      - NVDIMM_F
+      - NVDIMM_P
+      type: string
+      x-enumDescriptions:
+        DRAM: The memory device is comprised of volatile memory.
+        NVDIMM_F: The memory device is comprised of non-volatile memory.
+        NVDIMM_N: The memory device is comprised of volatile memory backed by non-volatile
+          memory.
+        NVDIMM_P: The memory device is comprised of a combination of non-volatile
+          and volatile memory.
+      x-enumLongDescriptions:
+        DRAM: This value shall represent a volatile DRAM memory device.
+        NVDIMM_F: This value shall represent an NVDIMM_F memory device as defined
+          by JEDEC.
+        NVDIMM_N: This value shall represent an NVDIMM_N memory device as defined
+          by JEDEC.
+        NVDIMM_P: This value shall represent an NVDIMM_P memory device as defined
+          by JEDEC.
+    Memory_v1_3_9_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_OperatingMemoryModes:
+      enum:
+      - Volatile
+      - PMEM
+      - Block
+      type: string
+      x-enumDescriptions:
+        Block: Block-accessible system memory.
+        PMEM: Persistent memory, byte-accessible through system address space.
+        Volatile: Volatile memory.
+    Memory_v1_3_9_PowerManagementPolicy:
+      additionalProperties: false
+      description: Power management policy information.
+      properties:
+        AveragePowerBudgetMilliWatts:
+          description: Average power budget, in milliwatts.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the average power budget,
+            in milliwatts.
+          x-units: mW
+        MaxTDPMilliWatts:
+          description: Maximum TDP in milliwatts.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum TDP in milliwatts.
+          x-units: mW
+        PeakPowerBudgetMilliWatts:
+          description: Peak power budget, in milliwatts.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the peak power budget, in
+            milliwatts.
+          x-units: mW
+        PolicyEnabled:
+          description: An indication of whether the power management policy is enabled.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the power management
+            policy is enabled.
+      type: object
+      x-longDescription: This type shall contain properties that describe the power
+        management policy for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_RegionSet:
+      additionalProperties: false
+      description: Memory region information within a memory device.
+      properties:
+        MemoryClassification:
+          $ref: '#/components/schemas/Memory_v1_3_9_MemoryClassification'
+          description: The classification of memory that the memory region occupies.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the classification of memory
+            that the memory region occupies.
+        OffsetMiB:
+          description: Offset within the memory that corresponds to the start of this
+            memory region in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the offset within the memory
+            that corresponds to the start of this memory region in MiB.
+          x-units: MiBy
+        PassphraseState:
+          description: An indication of whether the state of the passphrase for this
+            region is enabled.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the state of the
+            passphrase for this region is enabled.
+        RegionId:
+          description: Unique region ID representing a specific region within the
+            memory device.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the unique region ID representing
+            a specific region within the memory device.
+        SizeMiB:
+          description: Size of this memory region in mebibytes (MiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the size of this memory region
+            in MiB.
+          x-units: MiBy
+      type: object
+      x-longDescription: This type shall describe the memory region information within
+        a memory device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_SecureEraseUnit:
+      additionalProperties: false
+      description: 'This contains the action for securely erasing given regions using
+        the NIST SP800-88 Purge: Cryptographic Erase.'
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: 'This action shall securely erase the supplied region provided
+        the supplied passphrase matches that of the given region using the NIST SP800-88
+        Purge: Cryptographic Erase.  Use the OverwriteUnit method to perform NIST
+        SP800-88 Purge: Overwrite.'
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_SecureEraseUnitRequestBody:
+      additionalProperties: false
+      description: 'This contains the action for securely erasing given regions using
+        the NIST SP800-88 Purge: Cryptographic Erase.'
+      properties:
+        Passphrase:
+          description: Passphrase for doing the operation.
+          type: string
+          x-longDescription: This property shall contain the passphrase used in this
+            action.
+        RegionId:
+          description: The memory region ID to which to apply this action.
+          type: string
+          x-longDescription: This property shall contain the memory region ID to which
+            to apply this action.
+      required:
+      - Passphrase
+      - RegionId
+      type: object
+      x-longDescription: 'This action shall securely erase the supplied region provided
+        the supplied passphrase matches that of the given region using the NIST SP800-88
+        Purge: Cryptographic Erase.  Use the OverwriteUnit method to perform NIST
+        SP800-88 Purge: Overwrite.'
+    Memory_v1_3_9_SecurityCapabilities:
+      additionalProperties: false
+      description: This type contains security capabilities of a memory device.
+      properties:
+        MaxPassphraseCount:
+          description: Maximum number of passphrases supported for this memory device.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum number of passphrases
+            supported for this memory device.
+        PassphraseCapable:
+          description: An indication of whether the memory device is passphrase capable.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the memory device
+            is passphrase capable.
+        SecurityStates:
+          description: Security states supported by the memory device.
+          items:
+            $ref: '#/components/schemas/Memory_v1_3_9_SecurityStates'
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the security states supported
+            by the memory device.
+      type: object
+      x-longDescription: This type shall contain properties that describe the security
+        capabilities of a memory device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_SecurityStates:
+      enum:
+      - Enabled
+      - Disabled
+      - Unlocked
+      - Locked
+      - Frozen
+      - Passphraselimit
+      type: string
+      x-enumDescriptions:
+        Disabled: Secure mode is disabled.
+        Enabled: Secure mode is enabled and access to the data is allowed.
+        Frozen: Secure state is frozen and cannot be modified until reset.
+        Locked: Secure mode is enabled and access to the data is locked.
+        Passphraselimit: Number of attempts to unlock the memory exceeded limit.
+        Unlocked: Secure mode is enabled and access to the data is unlocked.
+    Memory_v1_3_9_SetPassphrase:
+      additionalProperties: false
+      description: Set passphrase for the given regions.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall apply the supplied passphrase to the supplied
+        region.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_SetPassphraseRequestBody:
+      additionalProperties: false
+      description: Set passphrase for the given regions.
+      properties:
+        Passphrase:
+          description: Passphrase for doing the operation.
+          type: string
+          x-longDescription: This property shall contain the passphrase used in this
+            action.
+        RegionId:
+          description: The memory region ID to which to apply this action.
+          type: string
+          x-longDescription: This property shall contain the memory region ID to which
+            to apply this action.
+      required:
+      - Passphrase
+      - RegionId
+      type: object
+      x-longDescription: This action shall apply the supplied passphrase to the supplied
+        region.
+    Memory_v1_3_9_UnlockUnit:
+      additionalProperties: false
+      description: This contains the action for unlocking given regions.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall apply the supplied passphrase to the supplied
+        region for the purpose of unlocking the given regions.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Memory_v1_3_9_UnlockUnitRequestBody:
+      additionalProperties: false
+      description: This contains the action for unlocking given regions.
+      properties:
+        Passphrase:
+          description: The passphrase required to complete the operation.
+          type: string
+          x-longDescription: This property shall contain the passphrase required to
+            complete this action.
+        RegionId:
+          description: The memory region ID to which to apply this action.
+          type: string
+          x-longDescription: This property shall contain the memory region ID to which
+            to apply this action.
+      required:
+      - Passphrase
+      - RegionId
+      type: object
+      x-longDescription: This action shall apply the supplied passphrase to the supplied
+        region for the purpose of unlocking the given regions.
+title: '#Memory.v1_3_9.Memory'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2017.2'

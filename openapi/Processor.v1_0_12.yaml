@@ -1,0 +1,231 @@
+components:
+  schemas:
+    Processor_v1_0_12_InstructionSet:
+      enum:
+      - x86
+      - x86-64
+      - IA-64
+      - ARM-A32
+      - ARM-A64
+      - MIPS32
+      - MIPS64
+      - OEM
+      type: string
+      x-enumDescriptions:
+        ARM-A32: ARM 32-bit.
+        ARM-A64: ARM 64-bit.
+        IA-64: Intel IA-64.
+        MIPS32: MIPS 32-bit.
+        MIPS64: MIPS 64-bit.
+        OEM: OEM-defined.
+        x86: x86 32-bit.
+        x86-64: x86 64-bit.
+    Processor_v1_0_12_Processor:
+      additionalProperties: false
+      description: The Processor schema describes the information about a single processor
+        that a system contains.  A processor includes both performance characteristics,
+        clock speed, architecture, core count, and so on, and compatibility, such
+        as the CPU ID instruction results.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InstructionSet:
+          $ref: '#/components/schemas/Processor_v1_0_12_InstructionSet'
+          description: The instruction set of the processor.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the string that identifies
+            the instruction set of the processor contained in this socket.
+        Manufacturer:
+          description: The processor manufacturer.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a string that identifies
+            the manufacturer of the processor.
+        MaxSpeedMHz:
+          description: The maximum clock speed of the processor.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall indicate the maximum rated clock
+            speed of the processor in MHz.
+          x-units: MHz
+        Model:
+          description: The product model number of this device.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the model information as
+            provided by the manufacturer of this processor.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        ProcessorArchitecture:
+          $ref: '#/components/schemas/Processor_v1_0_12_ProcessorArchitecture'
+          description: The architecture of the processor.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the string that identifies
+            the architecture of the processor contained in this socket.
+        ProcessorId:
+          $ref: '#/components/schemas/Processor_v1_0_12_ProcessorId'
+          description: The identification information for this processor.
+          x-longDescription: This object shall contain identification information
+            for this processor.
+        ProcessorType:
+          $ref: '#/components/schemas/Processor_v1_0_12_ProcessorType'
+          description: The type of processor.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the string that identifies
+            the type of processor contained in this socket.
+        Socket:
+          description: The socket or location of the processor.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the string that identifies
+            the physical location or socket of the processor.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        TotalCores:
+          description: The total number of cores that this processor contains.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall indicate the total count of independent
+            processor cores contained within this processor.
+        TotalThreads:
+          description: The total number of execution threads that this processor supports.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall indicate the total count of independent
+            execution threads that this processor supports.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a single processor that a system
+        contains.  A processor includes both performance characteristics, clock speed,
+        architecture, core count, and so on, and compatibility, such as the CPU ID
+        instruction results.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Processor_v1_0_12_ProcessorArchitecture:
+      enum:
+      - x86
+      - IA-64
+      - ARM
+      - MIPS
+      - OEM
+      type: string
+      x-enumDescriptions:
+        ARM: ARM.
+        IA-64: Intel Itanium.
+        MIPS: MIPS.
+        OEM: OEM-defined.
+        x86: x86 or x86-64.
+    Processor_v1_0_12_ProcessorId:
+      additionalProperties: false
+      description: The identification information for a processor.
+      properties:
+        EffectiveFamily:
+          description: The effective family for this processor.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the effective Family information
+            as provided by the manufacturer of this processor.
+        EffectiveModel:
+          description: The effective model for this processor.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the effective Model information
+            as provided by the manufacturer of this processor.
+        IdentificationRegisters:
+          description: The raw manufacturer-provided processor identification registers
+            for this processor.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the raw manufacturer-provided
+            processor-specific identification registers of this processor's features.
+        MicrocodeInfo:
+          description: The microcode information for this processor.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the microcode information
+            as provided by the manufacturer of this processor.
+        Step:
+          description: The step value for this processor.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the Step or revision string
+            information as provided by the manufacturer of this processor.
+        VendorId:
+          description: The vendor identification for this processor.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the vendor Identification
+            string information as provided by the manufacturer of this processor.
+      type: object
+      x-longDescription: This type shall contain identification information for a
+        processor.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Processor_v1_0_12_ProcessorType:
+      enum:
+      - CPU
+      - GPU
+      - FPGA
+      - DSP
+      - Accelerator
+      - OEM
+      type: string
+      x-enumDescriptions:
+        Accelerator: An accelerator.
+        CPU: A CPU.
+        DSP: A DSP.
+        FPGA: An FPGA.
+        GPU: A GPU.
+        OEM: An OEM-defined processing unit.
+title: '#Processor.v1_0_12.Processor'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

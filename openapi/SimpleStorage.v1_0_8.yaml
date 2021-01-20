@@ -1,0 +1,112 @@
+components:
+  schemas:
+    SimpleStorage_v1_0_8_Device:
+      additionalProperties: false
+      description: A storage device, such as a disk drive or optical media device.
+      properties:
+        Manufacturer:
+          description: The name of the manufacturer of this device.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the name of the manufacturer
+            of this storage device.
+        Model:
+          description: The product model number of this device.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the model information as
+            provided by the manufacturer of this storage device.
+        Name:
+          description: The name of the Resource or array member.
+          readOnly: true
+          type: string
+          x-longDescription: This object represents the name of this Resource or array
+            member.  The Resource values shall comply with the Redfish Specification-described
+            requirements.  This string value shall be of the 'Name' reserved word
+            format.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the Resource and its subordinate or
+            dependent Resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the Resource.
+      required:
+      - Name
+      type: object
+      x-longDescription: This type shall describe a storage device visible to simple
+        storage.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SimpleStorage_v1_0_8_SimpleStorage:
+      additionalProperties: false
+      description: The SimpleStorage schema represents the properties of a storage
+        controller and its directly-attached devices.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Devices:
+          description: The storage devices.
+          items:
+            $ref: '#/components/schemas/SimpleStorage_v1_0_8_Device'
+          type: array
+          x-longDescription: This property shall contain a list of storage devices
+            related to this Resource.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the Resource and its subordinate or
+            dependent Resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the Resource.
+        UefiDevicePath:
+          description: The UEFI device path to access this storage controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the UEFI device path that
+            identifies and locates the specific storage controller.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource contains a storage controller and its directly-attached
+        devices.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#SimpleStorage.v1_0_8.SimpleStorage'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

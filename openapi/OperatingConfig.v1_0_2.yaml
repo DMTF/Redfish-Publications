@@ -1,0 +1,216 @@
+components:
+  schemas:
+    OperatingConfig_v1_0_2_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/OperatingConfig_v1_0_2_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OperatingConfig_v1_0_2_BaseSpeedPrioritySettings:
+      additionalProperties: false
+      description: The clock speed for a set of cores.
+      properties:
+        BaseSpeedMHz:
+          description: The clock speed to configure the set of cores in MHz.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the clock speed to configure
+            the set of cores in MHz.
+          x-units: MHz
+        CoreCount:
+          description: The number of cores to configure with a specified speed.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of cores to configure
+            with the speed specified by the BaseSpeedMHz property.  The sum of all
+            CoreCount properties shall equal the value of the TotalAvailableCoreCount
+            property.
+        CoreIDs:
+          description: The identifier of the cores to configure with the specified
+            speed.
+          items:
+            format: int64
+            nullable: true
+            type: integer
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array identifying the
+            cores to configure with the speed specified by the BaseSpeedMHz property.  The
+            length of the array shall equal the value of the CoreCount property.
+      type: object
+      x-longDescription: This type shall specify the clock speed for a set of cores.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OperatingConfig_v1_0_2_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OperatingConfig_v1_0_2_OperatingConfig:
+      additionalProperties: false
+      description: The OperatingConfig schema specifies a configuration that can be
+        used when the processor is operational.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/OperatingConfig_v1_0_2_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        BaseSpeedMHz:
+          description: The base (nominal) clock speed of the processor in MHz.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the base (nominal) clock
+            speed of the processor in MHz.
+          x-units: MHz
+        BaseSpeedPrioritySettings:
+          description: The clock speed for sets of cores when the configuration is
+            operational.
+          items:
+            $ref: '#/components/schemas/OperatingConfig_v1_0_2_BaseSpeedPrioritySettings'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain an array of objects that
+            specify the clock speed for sets of cores when the configuration is operational.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        MaxJunctionTemperatureCelsius:
+          description: The maximum temperature of the junction in degrees Celsius.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum temperature of
+            the junction in degrees Celsius.
+          x-units: Cel
+        MaxSpeedMHz:
+          description: The maximum clock speed to which the processor can be configured
+            in MHz.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum clock speed to
+            which the processor can be configured in MHz.
+          x-units: MHz
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        TDPWatts:
+          description: The thermal design point of the processor in watts.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the thermal design point
+            of the processor in watts.
+          x-units: W
+        TotalAvailableCoreCount:
+          description: The number of cores in the processor that can be configured.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of cores in the
+            processor that can be configured.
+        TurboProfile:
+          description: The turbo profiles for the processor.  A turbo profile is the
+            maximum turbo clock speed as a function of the number of active cores.
+          items:
+            $ref: '#/components/schemas/OperatingConfig_v1_0_2_TurboProfileDatapoint'
+            nullable: true
+          type: array
+          x-longDescription: The property shall contain an array of objects that specify
+            the turbo profile for a set of active cores.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent an operational configuration
+        for a processor in the Redfish Specification.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    OperatingConfig_v1_0_2_TurboProfileDatapoint:
+      additionalProperties: false
+      description: The turbo profile for a set of active cores.
+      properties:
+        ActiveCoreCount:
+          description: The number of active cores to be configured with the specified
+            maximum clock speed.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of cores to be
+            configured with the maximum turbo clock speed.  The value shall be less
+            than or equal the TotalAvailableCoreCount property.
+        MaxSpeedMHz:
+          description: The maximum turbo clock speed that correspond to the number
+            of active cores in MHz.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum turbo clock speed
+            that correspond to the number of active cores in MHz.
+          x-units: MHz
+      type: object
+      x-longDescription: This type shall specify the turbo profile for a set of active
+        cores.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#OperatingConfig.v1_0_2.OperatingConfig'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.2'

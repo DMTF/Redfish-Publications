@@ -1,0 +1,127 @@
+components:
+  schemas:
+    Role_v1_3_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Role_v1_3_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Role_v1_3_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Role_v1_3_0_Role:
+      additionalProperties: false
+      description: The Role schema contains a Redfish role to use in conjunction with
+        a manager account.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Role_v1_3_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+          x-versionAdded: v1_1_0
+        AlternateRoleId:
+          description: An equivalent role to use when this role is restricted.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a non-restricted `RoleId`
+            intended to be used in its place when the Restricted property contains
+            the value `true`.
+          x-versionAdded: v1_3_0
+        AssignedPrivileges:
+          description: The Redfish privileges for this role.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Privileges.yaml#/components/schemas/Privileges_PrivilegeType
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the Redfish privileges for
+            this role.  For predefined roles, this property shall be read-only.  For
+            custom roles, some implementations might prevent writing to this property.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        IsPredefined:
+          description: An indication of whether the role is predefined by Redfish
+            or an OEM rather than a client-defined role.
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the role is predefined
+            by Redfish or an OEM as contrasted with a client-defined role.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OemPrivileges:
+          description: The OEM privileges for this role.
+          items:
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the OEM privileges for this
+            role.  For predefined roles, this property shall be read-only.  For custom
+            roles, some implementations might prevent writing to this property.
+        Restricted:
+          description: An indication of whether use of the role is restricted.
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether use of the role
+            is restricted by a service as defined by the 'Restricted roles and restricted
+            privileges' clause of the Redfish Specification.  If this property is
+            not present, the value shall be assumed to be `false`.
+          x-versionAdded: v1_3_0
+        RoleId:
+          description: The name of the role.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the string name of the role.  This
+            property shall contain the same value as the Id property.
+          x-versionAdded: v1_2_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource represents the Redfish role for the user account.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - RoleId
+title: '#Role.v1_3_0.Role'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

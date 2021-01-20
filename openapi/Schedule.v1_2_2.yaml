@@ -1,0 +1,164 @@
+components:
+  schemas:
+    Schedule_v1_2_2_DayOfWeek:
+      description: Days of the week.
+      enum:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+      - Sunday
+      - Every
+      type: string
+      x-enumDescriptions:
+        Every: Every day of the week.
+        Friday: Friday.
+        Monday: Monday.
+        Saturday: Saturday.
+        Sunday: Sunday.
+        Thursday: Thursday.
+        Tuesday: Tuesday.
+        Wednesday: Wednesday.
+      x-enumLongDescriptions:
+        Every: This value indicates that every day of the week has been selected.  When
+          used in array properties, such as for enabling a function on certain days,
+          it shall be the only member in the array.
+      x-longDescription: Days of the week.
+    Schedule_v1_2_2_MonthOfYear:
+      description: Months of the year.
+      enum:
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+      - Every
+      type: string
+      x-enumDescriptions:
+        April: April.
+        August: August.
+        December: December.
+        Every: Every month of the year.
+        February: February.
+        January: January.
+        July: July.
+        June: June.
+        March: March.
+        May: May.
+        November: November.
+        October: October.
+        September: September.
+      x-enumLongDescriptions:
+        Every: This value indicates that every month of the year has been selected.  When
+          used in array properties, such as for enabling a function for certain months,
+          it shall be the only member in the array.
+      x-longDescription: Months of the year.
+    Schedule_v1_2_2_Schedule:
+      additionalProperties: false
+      description: Schedule a series of occurrences.
+      properties:
+        EnabledDaysOfMonth:
+          description: Days of the month when scheduled occurrences are enabled.  `0`
+            indicates that every day of the month is enabled.
+          items:
+            format: int64
+            nullable: true
+            type: integer
+          maximum: 31
+          minimum: 0
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the days of the month when
+            scheduled occurrences are enabled, for enabled days of week and months
+            of year.  If the array contains a single value of `0`, or if the property
+            is not present, all days of the month shall be enabled.
+        EnabledDaysOfWeek:
+          description: Days of the week when scheduled occurrences are enabled, for
+            enabled days of the month and months of the year.  If not present, all
+            days of the week are enabled.
+          items:
+            $ref: '#/components/schemas/Schedule_v1_2_2_DayOfWeek'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: Days of the week when scheduled occurrences are enabled.  If
+            not present, all days of the week shall be enabled.
+        EnabledIntervals:
+          description: Intervals when scheduled occurrences are enabled.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: Each value shall be an ISO 8601 conformant interval specifying
+            when occurrences are enabled.
+          x-versionAdded: v1_1_0
+        EnabledMonthsOfYear:
+          description: The months of the year when scheduled occurrences are enabled.  If
+            not present, all months of the year are enabled.
+          items:
+            $ref: '#/components/schemas/Schedule_v1_2_2_MonthOfYear'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the months of the year when
+            scheduled occurrences are enabled, for enabled days of week and days of
+            month.  If not present, all months of the year shall be enabled.
+        InitialStartTime:
+          description: The date and time when the initial occurrence is scheduled
+            to occur.
+          format: date-time
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the date and time when the
+            initial occurrence is scheduled to occur.
+        Lifetime:
+          description: The time after provisioning when the schedule as a whole expires.
+          nullable: true
+          pattern: -?P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a Redfish Duration that describes
+            the time after provisioning when the schedule expires.
+        MaxOccurrences:
+          description: The maximum number of scheduled occurrences.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the maximum number of scheduled
+            occurrences.
+        Name:
+          description: The schedule name.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: The name of the schedule, which is constructed as OrgID:ScheduleName.  Examples
+            include ACME:Daily, ACME:Weekly, and ACME:FirstTuesday.
+        RecurrenceInterval:
+          description: The amount of time until the next occurrence occurs.
+          nullable: true
+          pattern: -?P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a Redfish Duration that describes
+            the time until the next occurrence.
+      type: object
+      x-longDescription: The properties of this type shall schedule a series of occurrences.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Schedule.v1_2_2'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.2'

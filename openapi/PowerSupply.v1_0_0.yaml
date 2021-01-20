@@ -1,0 +1,385 @@
+components:
+  schemas:
+    PowerSupply_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#PowerSupply.Reset':
+          $ref: '#/components/schemas/PowerSupply_v1_0_0_Reset'
+        Oem:
+          $ref: '#/components/schemas/PowerSupply_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_EfficiencyRating:
+      additionalProperties: false
+      description: This type describes an efficiency rating for a power supply.
+      properties:
+        EfficiencyPercent:
+          description: The rated efficiency of this power supply at the specified
+            load.
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the rated efficiency, as
+            a percentage, of this power supply at the specified load.
+          x-units: '%'
+        LoadPercent:
+          description: The electrical load for this rating.
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the load, as a percentage,
+            of this power supply at which this efficiency rating is valid.
+          x-units: '%'
+      type: object
+      x-longDescription: This type shall describe an efficiency rating for a power
+        supply.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_InputRange:
+      additionalProperties: false
+      description: This type describes an input range for a power supply.
+      properties:
+        CapacityWatts:
+          description: The maximum capacity of this power supply when operating in
+            this input range.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the maximum amount of power,
+            in watts, that the associated power supply is rated to deliver while operating
+            in this input range.
+          x-units: W
+        NominalVoltageType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_NominalVoltageType
+          description: The input voltage range.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the input voltage type of
+            the associated range.
+      type: object
+      x-longDescription: This type shall describe an input range that the associated
+        power supply can utilize.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        Outlet:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the outlet connected to this power supply.
+          readOnly: false
+          x-longDescription: This property shall contain a link to a resource of type
+            Outlet that represents the outlet connected to this power supply.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_OutputRail:
+      additionalProperties: false
+      description: This type describes an output power rail for a power supply.
+      properties:
+        NominalVoltage:
+          description: The nominal voltage of this output power rail.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the nominal voltage of the
+            associated output power rail.
+        PhysicalContext:
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
+          description: The area or device to which this power rail applies.
+          readOnly: true
+          x-longDescription: This property shall contain a description of the device
+            or region within the chassis to which this power rail applies.
+      type: object
+      x-longDescription: This type shall describe an output power rail provided by
+        power supply.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_PowerSupply:
+      additionalProperties: false
+      description: The PowerSupply schema describes a power supply unit.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PowerSupply_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Assembly:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the assembly associated with this power supply.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Assembly.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        EfficiencyRatings:
+          description: The efficiency ratings of this power supply.
+          items:
+            $ref: '#/components/schemas/PowerSupply_v1_0_0_EfficiencyRating'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain an array of efficiency ratings
+            for this power supply.
+        FirmwareVersion:
+          description: The firmware version for this power supply.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the firmware version as defined
+            by the manufacturer for this power supply.
+        HotPluggable:
+          description: An indication of whether this device can be inserted or removed
+            while the equipment is in operation.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the device can be
+            inserted or removed while the underlying equipment otherwise remains in
+            its current operational state.  Devices indicated as hot-pluggable shall
+            allow the device to become operable without altering the operational state
+            of the underlying equipment.  Devices that cannot be inserted or removed
+            from equipment in operation, or devices that cannot become operable without
+            affecting the operational state of that equipment, shall be indicated
+            as not hot-pluggable.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InputNominalVoltageType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_NominalVoltageType
+          description: The nominal voltage type of the line input to this power supply.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the nominal voltage type
+            of the input line voltage in use by this power supply.  This value shall
+            be one of the values shown in the NominalVoltageType property in the InputRanges
+            array, if present.
+        InputRanges:
+          description: The input ranges that the power supply can use.
+          items:
+            $ref: '#/components/schemas/PowerSupply_v1_0_0_InputRange'
+          type: array
+          x-longDescription: This property shall contain a collection of ranges usable
+            by this power supply.
+        Links:
+          $ref: '#/components/schemas/PowerSupply_v1_0_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location of the power supply.
+          x-longDescription: This property shall contain location information of this
+            power supply.
+        LocationIndicatorActive:
+          description: An indicator allowing an operator to physically locate this
+            resource.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain the state of the indicator
+            used to physically identify or locate this resource.
+        Manufacturer:
+          description: The manufacturer of this power supply.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the organization
+            responsible for producing the power supply.  This organization might be
+            the entity from whom the power supply is purchased, but this is not necessarily
+            true.
+        Metrics:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the power supply metrics resource associated with
+            this power supply.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            PowerSupplyMetrics.
+        Model:
+          description: The model number for this power supply.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the model information as
+            defined by the manufacturer for this power supply.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OutputRails:
+          description: The output power rails provided by this power supply.
+          items:
+            $ref: '#/components/schemas/PowerSupply_v1_0_0_OutputRail'
+          type: array
+          x-longDescription: This property shall contain an array of output power
+            rails provided by this power supply.  The elements shall be ordered in
+            ascending nominal voltage order.  This ordering is necessary for consistency
+            with Sensor properties in an associated PowerSupplyMetrics resource.
+        PartNumber:
+          description: The part number for this power supply.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the part number as defined
+            by the manufacturer for this power supply.
+        PhaseWiringType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PhaseWiringType
+          description: The number of ungrounded current-carrying conductors (phases)
+            and the total number of conductors (wires) provided for the power supply
+            input connector.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the number of ungrounded
+            current-carrying conductors (phases) and the total number of conductors
+            (wires) included in the input connector for the power supply.
+        PlugType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PlugType
+          description: The type of plug according to NEMA, IEC, or regional standards.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of physical plug
+            used for the input to this power supply, as defined by IEC, NEMA, or regional
+            standard.
+        PowerCapacityWatts:
+          description: The maximum capacity of this power supply.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the maximum amount of power,
+            in watts, that this power supply is rated to deliver.
+          x-units: W
+        PowerSupplyType:
+          $ref: '#/components/schemas/PowerSupply_v1_0_0_PowerSupplyType'
+          description: The power supply type (AC or DC).
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the input power type (AC
+            or DC) of this power supply.
+        SerialNumber:
+          description: The serial number for this power supply.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the serial number as defined
+            by the manufacturer for this power supply.
+        SparePartNumber:
+          description: The spare part number for this power supply.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the spare or replacement
+            part number as defined by the manufacturer for this power supply.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a power supply for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_PowerSupplyType:
+      enum:
+      - AC
+      - DC
+      - ACorDC
+      type: string
+      x-enumDescriptions:
+        AC: Alternating Current (AC) power supply.
+        ACorDC: The power supply supports both DC or AC.
+        DC: Direct Current (DC) power supply.
+    PowerSupply_v1_0_0_Reset:
+      additionalProperties: false
+      description: This action resets the power supply.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset a power supply.  A `GracefulRestart`
+        ResetType shall reset the power supply but shall not affect the power output.  A
+        `ForceRestart` ResetType might affect the power supply output.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupply_v1_0_0_ResetRequestBody:
+      additionalProperties: false
+      description: This action resets the power supply.
+      properties:
+        ResetType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
+          description: The type of reset.
+          x-longDescription: This parameter shall contain the type of reset.  The
+            service can accept a request without the parameter and shall perform a
+            `GracefulRestart`.
+      type: object
+      x-longDescription: This action shall reset a power supply.  A `GracefulRestart`
+        ResetType shall reset the power supply but shall not affect the power output.  A
+        `ForceRestart` ResetType might affect the power supply output.
+title: '#PowerSupply.v1_0_0.PowerSupply'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

@@ -1,0 +1,120 @@
+components:
+  schemas:
+    CollectionCapabilities_v1_2_2_Capability:
+      additionalProperties: false
+      description: This type describes a capability of a collection for a specific
+        use case.
+      properties:
+        CapabilitiesObject:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the resource the client can issue a GET request
+            against to understand how to form a POST request for a collection.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource that
+            matches the type for a resource collection and shall contain annotations
+            that describe the properties allowed in the POST request.
+        Links:
+          $ref: '#/components/schemas/CollectionCapabilities_v1_2_2_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        UseCase:
+          $ref: '#/components/schemas/CollectionCapabilities_v1_2_2_UseCase'
+          description: The use case in which a client can issue a POST request to
+            the collection.
+          readOnly: true
+          x-longDescription: This property shall contain an enumerated value that
+            describes the use case for this capability instance.
+      required:
+      - CapabilitiesObject
+      - UseCase
+      - Links
+      type: object
+      x-longDescription: This type shall describe a capability of a resource collection
+        in terms of how a client can create resources within the collection for the
+        specified use case.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CollectionCapabilities_v1_2_2_CollectionCapabilities:
+      additionalProperties: false
+      description: This type describes the capabilities of a collection.
+      properties:
+        Capabilities:
+          description: The list of capabilities supported by this resource.
+          items:
+            $ref: '#/components/schemas/CollectionCapabilities_v1_2_2_Capability'
+          type: array
+          x-longDescription: This property shall contain an array of objects that
+            describe the capabilities of this resource collection.
+        MaxMembers:
+          description: The maximum number of members allowed in this collection.
+          format: int64
+          minimum: 1
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum number of members
+            allowed in this resource collection.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall describe any capabilities of a resource collection
+        in terms of how a client can create resources within the resource collection.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CollectionCapabilities_v1_2_2_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        RelatedItem:
+          description: An array of links to resources associated with this capability.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            that are related to this capability.
+        RelatedItem@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        TargetCollection:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResourceCollection
+          description: The link to the collection that this capabilities structure
+            is describing.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            that this structure describes.  A client can use this structure to understand
+            how to form the POST request for the collection.
+      required:
+      - TargetCollection
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CollectionCapabilities_v1_2_2_UseCase:
+      enum:
+      - ComputerSystemComposition
+      - ComputerSystemConstrainedComposition
+      - VolumeCreation
+      type: string
+      x-enumDescriptions:
+        ComputerSystemComposition: This capability describes a client creating a new
+          computer system resource from a set of disaggregated hardware.
+        ComputerSystemConstrainedComposition: This capability describes a client creating
+          a new computer system resource from a set of constraints.
+        VolumeCreation: This capability describes a client creating a new volume resource
+          as part of an existing storage subsystem.
+      x-enumVersionAdded:
+        ComputerSystemConstrainedComposition: v1_1_0
+title: '#CollectionCapabilities.v1_2_2'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.2'

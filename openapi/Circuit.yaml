@@ -13,8 +13,9 @@ components:
     Circuit_Circuit:
       anyOf:
       - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
-      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_0_1.yaml#/components/schemas/Circuit_v1_0_1_Circuit
-      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_1_0.yaml#/components/schemas/Circuit_v1_1_0_Circuit
+      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_0_2.yaml#/components/schemas/Circuit_v1_0_2_Circuit
+      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_1_1.yaml#/components/schemas/Circuit_v1_1_1_Circuit
+      - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.v1_2_0.yaml#/components/schemas/Circuit_v1_2_0_Circuit
       description: This is the schema definition for an electrical circuit.
       x-longDescription: This resource shall be used to represent an electrical circuit
         for a Redfish implementation.
@@ -33,6 +34,7 @@ components:
       - AC277AndDC380V
       - AC400V
       - AC480V
+      - DC48V
       - DC240V
       - DC380V
       - DCNeg48V
@@ -53,7 +55,10 @@ components:
         AC480V: AC 480V nominal.
         DC240V: DC 240V nominal.
         DC380V: High Voltage DC (380V).
+        DC48V: DC 48V nominal.
         DCNeg48V: -48V DC.
+      x-enumVersionAdded:
+        DC48V: v1_2_0
     Circuit_PhaseWiringType:
       enum:
       - OnePhase3Wire

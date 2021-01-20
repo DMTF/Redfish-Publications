@@ -1,5 +1,67 @@
 components:
   schemas:
+    Resource_Condition:
+      additionalProperties: false
+      description: A condition that requires attention.
+      properties:
+        LogEntry:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the log entry created for this condition.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            LogEntry that represents the log entry created for this condition.
+        Message:
+          description: The human-readable message for this condition.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a human-readable message
+            describing this condition.
+        MessageArgs:
+          description: An array of message arguments that are substituted for the
+            arguments in the message when looked up in the message registry.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of message arguments
+            that are substituted for the arguments in the message when looked up in
+            the message registry.  It has the same semantics as the MessageArgs property
+            in the Redfish MessageRegistry schema.
+        MessageId:
+          description: The identifier for the message.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a MessageId, as defined in
+            the 'MessageId format' clause of the Redfish Specification.
+        OriginOfCondition:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the resource or object that originated the condition.
+          readOnly: true
+          x-longDescription: This property shall contain a link to the resource or
+            object that originated the condition.  This property shall not be present
+            if the condition was caused by this resource.
+        Severity:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          description: The severity of the condition.
+          readOnly: true
+          x-longDescription: This property shall contain the severity of the condition.  Services
+            can replace the value defined in the message registry with a value more
+            applicable to the implementation.
+        Timestamp:
+          description: The time the condition occurred.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the time the condition occurred.
+      required:
+      - MessageId
+      type: object
+      x-longDescription: This type shall contain the description and details of a
+        condition that exists within this resource or a related resource that requires
+        attention.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Resource_Description:
       description: The description of this resource.  Used for commonality in the
         schema definitions.
@@ -24,16 +86,17 @@ components:
         resource values shall comply with the Redfish Specification-described requirements.
     Resource_Identifier:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_11.yaml#/components/schemas/Resource_v1_1_11_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_10.yaml#/components/schemas/Resource_v1_2_10_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_9.yaml#/components/schemas/Resource_v1_3_9_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_8.yaml#/components/schemas/Resource_v1_4_8_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_7.yaml#/components/schemas/Resource_v1_5_7_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_6.yaml#/components/schemas/Resource_v1_6_6_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_5.yaml#/components/schemas/Resource_v1_7_5_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.yaml#/components/schemas/Resource_v1_8_5_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_3.yaml#/components/schemas/Resource_v1_9_3_Identifier
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_10_0.yaml#/components/schemas/Resource_v1_10_0_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_12.yaml#/components/schemas/Resource_v1_1_12_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_11.yaml#/components/schemas/Resource_v1_2_11_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_10.yaml#/components/schemas/Resource_v1_3_10_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_9.yaml#/components/schemas/Resource_v1_4_9_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_8.yaml#/components/schemas/Resource_v1_5_8_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_7.yaml#/components/schemas/Resource_v1_6_7_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_6.yaml#/components/schemas/Resource_v1_7_6_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_6.yaml#/components/schemas/Resource_v1_8_6_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_4.yaml#/components/schemas/Resource_v1_9_4_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_10_1.yaml#/components/schemas/Resource_v1_10_1_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_11_0.yaml#/components/schemas/Resource_v1_11_0_Identifier
       description: Any additional identifiers for a resource.
       x-longDescription: This type shall contain any additional identifiers for a
         resource.
@@ -83,16 +146,17 @@ components:
           description: This property shall specify a valid odata or Redfish property.
     Resource_Location:
       anyOf:
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_11.yaml#/components/schemas/Resource_v1_1_11_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_10.yaml#/components/schemas/Resource_v1_2_10_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_9.yaml#/components/schemas/Resource_v1_3_9_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_8.yaml#/components/schemas/Resource_v1_4_8_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_7.yaml#/components/schemas/Resource_v1_5_7_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_6.yaml#/components/schemas/Resource_v1_6_6_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_5.yaml#/components/schemas/Resource_v1_7_5_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_5.yaml#/components/schemas/Resource_v1_8_5_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_3.yaml#/components/schemas/Resource_v1_9_3_Location
-      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_10_0.yaml#/components/schemas/Resource_v1_10_0_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_1_12.yaml#/components/schemas/Resource_v1_1_12_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_2_11.yaml#/components/schemas/Resource_v1_2_11_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_3_10.yaml#/components/schemas/Resource_v1_3_10_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_4_9.yaml#/components/schemas/Resource_v1_4_9_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_5_8.yaml#/components/schemas/Resource_v1_5_8_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_6_7.yaml#/components/schemas/Resource_v1_6_7_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_7_6.yaml#/components/schemas/Resource_v1_7_6_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_8_6.yaml#/components/schemas/Resource_v1_8_6_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_9_4.yaml#/components/schemas/Resource_v1_9_4_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_10_1.yaml#/components/schemas/Resource_v1_10_1_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_11_0.yaml#/components/schemas/Resource_v1_11_0_Location
       description: The location of a resource.
       x-longDescription: This type shall describe the location of a resource.
     Resource_Name:
@@ -172,11 +236,11 @@ components:
           on state.  The transition will start immediately.  Upon successful completion,
           the PowerState property shall contain the value `On`.
         ForceRestart: This value shall indicate the resource will transition to a
-          power on state, after transiting through a restart.  The transion will start
-          immediately.  Upon successful completion, the PowerState property, if supported,
-          shall shall contain the value `On`.
+          power on state, after transiting through a restart.  The transition will
+          start immediately.  Upon successful completion, the PowerState property,
+          if supported, shall shall contain the value `On`.
         GracefulRestart: This value shall indicate the resource will transition to
-          a power on state, after transiting through a restart.  The transion will
+          a power on state, after transiting through a restart.  The transition will
           start after first performing tasks to safely shutdown the resource.  For
           example, when shutting down a computer system, the hosted operating system
           is allowed to safely shutting down processes and close connections.  Upon
@@ -248,6 +312,15 @@ components:
       additionalProperties: false
       description: The status and health of a resource and its children.
       properties:
+        Conditions:
+          description: Conditions in this resource that require attention.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Condition
+            nullable: true
+          type: array
+          x-longDescription: This property shall represent the active conditions requiring
+            attention in this or a related resource that affects the Health or HealthRollup
+            of this resource.
         Health:
           $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
           description: The health state of this resource in the absence of its dependent

@@ -1,0 +1,247 @@
+components:
+  schemas:
+    Aggregate_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Aggregate.AddElements':
+          $ref: '#/components/schemas/Aggregate_v1_0_1_AddElements'
+        '#Aggregate.RemoveElements':
+          $ref: '#/components/schemas/Aggregate_v1_0_1_RemoveElements'
+        '#Aggregate.Reset':
+          $ref: '#/components/schemas/Aggregate_v1_0_1_Reset'
+        '#Aggregate.SetDefaultBootOrder':
+          $ref: '#/components/schemas/Aggregate_v1_0_1_SetDefaultBootOrder'
+        Oem:
+          $ref: '#/components/schemas/Aggregate_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Aggregate_v1_0_1_AddElements:
+      additionalProperties: false
+      description: This action is used to add one or more resources to the aggregate.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall add one or more resources to the aggregate,
+        resulting in that the resources are included in the Elements array of the
+        aggregate.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Aggregate_v1_0_1_AddElementsRequestBody:
+      additionalProperties: false
+      description: This action is used to add one or more resources to the aggregate.
+      properties:
+        Elements:
+          description: An array of resource links to add to the Elements array.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Resource
+          type: array
+          x-longDescription: This parameter shall contain an array of links to the
+            specified resources to add to the aggregate's Elements array.
+      required:
+      - Elements
+      type: object
+      x-longDescription: This action shall add one or more resources to the aggregate,
+        resulting in that the resources are included in the Elements array of the
+        aggregate.
+    Aggregate_v1_0_1_Aggregate:
+      additionalProperties: false
+      description: The Aggregate schema describes a grouping method for an aggregation
+        service.  Aggregates are formal groups of resources that are more persistent
+        than ad hoc groupings.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Aggregate_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Elements:
+          description: The elements of this aggregate.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Resource
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to the
+            elements of this aggregate.
+        Elements@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ElementsCount:
+          description: The number of entries in the Elements array.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of entries in
+            the Elements array.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - Elements
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent an aggregation service grouping
+        method for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - Elements
+    Aggregate_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Aggregate_v1_0_1_RemoveElements:
+      additionalProperties: false
+      description: This action is used to remove one or more resources from the aggregate.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall remove one or more resources from the aggregate,
+        resulting in that the resources are removed from the Elements array of the
+        aggregate.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Aggregate_v1_0_1_RemoveElementsRequestBody:
+      additionalProperties: false
+      description: This action is used to remove one or more resources from the aggregate.
+      properties:
+        Elements:
+          description: An array of resource links to remove from the Elements array.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Resource
+          type: array
+          x-longDescription: This parameter shall contain an array of links to the
+            specified resources to remove from the aggregate's Elements array.
+      required:
+      - Elements
+      type: object
+      x-longDescription: This action shall remove one or more resources from the aggregate,
+        resulting in that the resources are removed from the Elements array of the
+        aggregate.
+    Aggregate_v1_0_1_Reset:
+      additionalProperties: false
+      description: This action is used to reset a collection of resources.  For example,
+        this could be an aggregate or a list of computer systems.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall perform a reset of a collection of resources.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Aggregate_v1_0_1_ResetRequestBody:
+      additionalProperties: false
+      description: This action is used to reset a collection of resources.  For example,
+        this could be an aggregate or a list of computer systems.
+      properties:
+        BatchSize:
+          description: The number of elements in each batch being reset.
+          format: int64
+          minimum: 0
+          type: integer
+          x-longDescription: This parameter shall contain the number of elements in
+            each batch simultaneously being issued a reset.
+        DelayBetweenBatchesInSeconds:
+          description: The delay of the batches of elements being reset in seconds.
+          format: int64
+          minimum: 0
+          type: integer
+          x-longDescription: This parameter shall contain the delay of the batches
+            of elements being reset in seconds.
+          x-units: s
+        ResetType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
+          description: The type of reset.
+          x-longDescription: This parameter shall contain the type of reset.  The
+            service can accept a request without the parameter and perform an implementation-specific
+            default reset.
+      type: object
+      x-longDescription: This action shall perform a reset of a collection of resources.
+    Aggregate_v1_0_1_SetDefaultBootOrder:
+      additionalProperties: false
+      description: This action is used to restore the boot order to the default state
+        for the computer systems that are members of this aggregate.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall restore the boot order to the default state
+        for the computer systems that are members of this aggregate.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Aggregate_v1_0_1_SetDefaultBootOrderRequestBody:
+      additionalProperties: false
+      description: This action is used to restore the boot order to the default state
+        for the computer systems that are members of this aggregate.
+      properties: {}
+      type: object
+      x-longDescription: This action shall restore the boot order to the default state
+        for the computer systems that are members of this aggregate.
+title: '#Aggregate.v1_0_1.Aggregate'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.2'

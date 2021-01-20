@@ -2,7 +2,7 @@
     "$id": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json",
     "$ref": "#/definitions/Volume",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2016-2019 Storage Networking Industry Association (SNIA), USA. All rights reserved. For the full SNIA copyright policy, see http://www.snia.org/about/corporate_info/copyright",
+    "copyright": "Copyright 2016-2020 Storage Networking Industry Association (SNIA), USA. All rights reserved. For the full SNIA copyright policy, see http://www.snia.org/about/corporate_info/copyright",
     "definitions": {
         "EncryptionTypes": {
             "enum": [
@@ -121,7 +121,7 @@
         "Volume": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata.v4_0_3.json#/definitions/idRef"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_0_4.json#/definitions/Volume"
@@ -130,16 +130,19 @@
                     "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_1_5.json#/definitions/Volume"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_2_4.json#/definitions/Volume"
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_2_5.json#/definitions/Volume"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_3_3.json#/definitions/Volume"
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_3_4.json#/definitions/Volume"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_4_2.json#/definitions/Volume"
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_4_3.json#/definitions/Volume"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_5_0.json#/definitions/Volume"
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_5_1.json#/definitions/Volume"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_6_1.json#/definitions/Volume"
                 }
             ],
             "deletable": true,
@@ -264,14 +267,14 @@
             ],
             "enumDescriptions": {
                 "DistributedLog": "The policy that distributes additional log among the volume's capacity sources to address write hole issue.",
-                "Journaling": "The policy that uses separate block device for write-ahead logging to adddress write hole issue.",
+                "Journaling": "The policy that uses separate block device for write-ahead logging to address write hole issue.",
                 "Oem": "The policy that is Oem specific.",
                 "Off": "The volume is not using any policy to address the write hole issue."
             },
             "enumLongDescriptions": {
-                "DistributedLog": "The policy that distributes additional log (e.q. cheksum of the parity) among the volume's capacity sources to address write hole issue. Additional data is used to detect data corruption on the volume.",
-                "Journaling": "The policy that uses separate block device for write-ahead logging to adddress write hole issue. All write operations on the RAID volume are first logged on dedicated journaling device that is not part of the volume.",
-                "Oem": "The policy that is Oem specific. The mechanism details are unknown unless provided separatly by the Oem.",
+                "DistributedLog": "The policy that distributes additional log (e.q. checksum of the parity) among the volume's capacity sources to address write hole issue. Additional data is used to detect data corruption on the volume.",
+                "Journaling": "The policy that uses separate block device for write-ahead logging to address write hole issue. All write operations on the RAID volume are first logged on dedicated journaling device that is not part of the volume.",
+                "Oem": "The policy that is Oem specific. The mechanism details are unknown unless provided separately by the Oem.",
                 "Off": "The support for addressing the write hole issue is disabled. The volume is not performing any additional activities to close the RAID write hole."
             },
             "type": "string"

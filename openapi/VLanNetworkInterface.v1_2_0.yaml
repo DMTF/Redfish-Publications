@@ -1,0 +1,143 @@
+components:
+  schemas:
+    VLanNetworkInterface_v1_2_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/VLanNetworkInterface_v1_2_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    VLanNetworkInterface_v1_2_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    VLanNetworkInterface_v1_2_0_VLAN:
+      additionalProperties: false
+      description: The attributes of a VLAN.
+      properties:
+        VLANEnable:
+          description: An indication of whether this VLAN is enabled for this VLAN
+            network interface.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this VLAN is enabled
+            for this VLAN network interface.
+        VLANId:
+          $ref: '#/components/schemas/VLanNetworkInterface_v1_2_0_VLANId'
+          description: The ID for this VLAN.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the ID for this VLAN.
+        VLANPriority:
+          $ref: '#/components/schemas/VLanNetworkInterface_v1_2_0_VLANPriority'
+          description: The priority for this VLAN.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the priority for this VLAN.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall contain any attributes of a VLAN.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - VLANEnable
+      - VLANId
+    VLanNetworkInterface_v1_2_0_VLANId:
+      format: int64
+      maximum: 4094
+      minimum: 0
+      type: integer
+    VLanNetworkInterface_v1_2_0_VLANPriority:
+      format: int64
+      maximum: 7
+      minimum: 0
+      type: integer
+    VLanNetworkInterface_v1_2_0_VLanNetworkInterface:
+      additionalProperties: false
+      description: The VLanNetworkInterface schema describes a VLAN network instance
+        that is available on a manager, system, or other device.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/VLanNetworkInterface_v1_2_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+          x-versionAdded: v1_1_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        VLANEnable:
+          description: An indication of whether this VLAN is enabled for this interface.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this VLAN is enabled
+            for this interface.
+        VLANId:
+          $ref: '#/components/schemas/VLanNetworkInterface_v1_2_0_VLANId'
+          description: The ID for this VLAN.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the ID for this VLAN.
+        VLANPriority:
+          $ref: '#/components/schemas/VLanNetworkInterface_v1_2_0_VLANPriority'
+          description: The priority for this VLAN.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the priority for this VLAN.
+          x-versionAdded: v1_2_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains information for a VLAN network instance
+        that is available on a manager, system, or other device for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - VLANEnable
+      - VLANId
+title: '#VLanNetworkInterface.v1_2_0.VLanNetworkInterface'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

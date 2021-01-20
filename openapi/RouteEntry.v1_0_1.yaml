@@ -1,0 +1,97 @@
+components:
+  schemas:
+    RouteEntry_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this Resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/RouteEntry_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this Resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this Resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    RouteEntry_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this Resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this Resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    RouteEntry_v1_0_1_RouteEntry:
+      additionalProperties: false
+      description: The RouteEntry schema describes the content of route entry rows.  Each
+        route entry contains route sets that list the possible routes for the route
+        entry.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/RouteEntry_v1_0_1_Actions'
+          description: The available actions for this Resource.
+          x-longDescription: This property shall contain the available actions for
+            this Resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        MinimumHopCount:
+          description: The minimum number of hops.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall indicate the minimum hop count used
+            to calculate the computed hop count.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        RawEntryHex:
+          description: The raw data of route entry rows.
+          pattern: ^0[xX](([a-fA-F]|[0-9]){2}){8}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a binary data that represents
+            the content of route entry rows.
+        RouteSet:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of route set entries associated
+            with this route.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a Resource Collection
+            of type RouteSetEntryCollection.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This Resource shall represent the content of route entry
+        rows in the Redfish Specification.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#RouteEntry.v1_0_1.RouteEntry'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.4'

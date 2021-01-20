@@ -4,6 +4,51 @@
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
     "copyright": "Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
+        "AccountTypes": {
+            "enum": [
+                "Redfish",
+                "SNMP",
+                "OEM",
+                "HostConsole",
+                "ManagerConsole",
+                "IPMI",
+                "KVMIP",
+                "VirtualMedia",
+                "WebUI"
+            ],
+            "enumDescriptions": {
+                "HostConsole": "Allow access to the host's console, which could be connected through Telnet, SSH, or other protocol.",
+                "IPMI": "Allow access to the Intelligent Platform Management Interface service.",
+                "KVMIP": "Allow access to a Keyboard-Video-Mouse over IP session.",
+                "ManagerConsole": "Allow access to the manager's console, which could be connected through Telnet, SSH, SM CLP, or other protocol.",
+                "OEM": "OEM account type.  See the OEMAccountTypes property.",
+                "Redfish": "Allow access to the Redfish service.",
+                "SNMP": "Allow access to SNMP services.",
+                "VirtualMedia": "Allow access to control virtual media.",
+                "WebUI": "Allow access to a web user interface session, such as a graphical interface or another web-based protocol."
+            },
+            "enumLongDescriptions": {
+                "HostConsole": "This value shall indicate the account is allowed to access the host console.",
+                "IPMI": "This value shall indicate the account is allowed to access the Intelligent Platform Management Interface service.",
+                "KVMIP": "This value shall indicate the account is allowed to access the Keyboard-Video-Mouse over IP session service.",
+                "ManagerConsole": "This value shall indicate the account is allowed to access the manager console.",
+                "OEM": "This value shall indicate the account is allowed to access the services listed in the OemAccountTypes property.",
+                "Redfish": "This value shall indicate the account is allowed to access Redfish services.  If the version of the ManagerAccount resource is lower than the schema version when another enumeration value in this list was added, the implementation might include that functionality as part of the `Redfish` value.",
+                "SNMP": "This value shall indicate the account is allowed to access SNMP services.",
+                "VirtualMedia": "This value shall indicate the account is allowed to control virtual media.",
+                "WebUI": "This value shall indicate the account is allowed to access the web interface."
+            },
+            "enumVersionAdded": {
+                "HostConsole": "v1_7_0",
+                "IPMI": "v1_7_0",
+                "KVMIP": "v1_7_0",
+                "ManagerConsole": "v1_7_0",
+                "VirtualMedia": "v1_7_0",
+                "WebUI": "v1_7_0"
+            },
+            "type": "string",
+            "versionAdded": "v1_4_0"
+        },
         "ManagerAccount": {
             "anyOf": [
                 {
@@ -29,6 +74,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/ManagerAccount.v1_6_2.json#/definitions/ManagerAccount"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/ManagerAccount.v1_7_0.json#/definitions/ManagerAccount"
                 }
             ],
             "deletable": true,

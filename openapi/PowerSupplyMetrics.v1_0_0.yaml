@@ -1,0 +1,388 @@
+components:
+  schemas:
+    PowerSupplyMetrics_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#PowerSupplyMetrics.ResetMetrics':
+          $ref: '#/components/schemas/PowerSupplyMetrics_v1_0_0_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/PowerSupplyMetrics_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_0_CurrentSensors:
+      additionalProperties: false
+      description: The current sensors for this power supply.
+      properties:
+        Input:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The power supply input.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current sensor that measures
+            current at the input of the power supply.
+        InputSecondary:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The power supply secondary input.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current sensor that measures
+            current at the secondary input of the power supply.  This property shall
+            not be present if the power supply does not include a secondary input.
+        Output12Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The 12V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current sensor that measures
+            current on a 12 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 12V output.
+        Output3Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The 3V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current sensor that measures
+            current on a 3 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 3V output.
+        Output48Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The 48V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current sensor that measures
+            current on a 48 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 48V output.
+        Output5Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The 5V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current sensor that measures
+            current on a 5 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 5V output.
+        OutputAux:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The auxiliary (AUX) output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current sensor that measures
+            current on an auxiliary (AUX) output power rail.  This property shall
+            not be present if the power supply does not include an auxiliary output.
+      type: object
+      x-longDescription: This type shall contain properties that describe current
+        sensor readings for a power supply.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_0_PowerSensors:
+      additionalProperties: false
+      description: The power sensors for this power supply.
+      properties:
+        Input:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The input power reading for the power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, measured in Watts,
+            for this power supply unit, as measured at the input of the power supply.
+        InputSecondary:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The secondary input power reading for the power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, measured in Watts,
+            for this power supply unit, as measured at the secondary input of the
+            power supply.  This property shall not appear if the power supply does
+            not contain a secondary input.
+        Output:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The output power reading for the power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, measured in Watts,
+            for this power supply unit, as measured at the output of the power supply.
+      type: object
+      x-longDescription: This type shall contain properties that describe power sensor
+        readings for a power supply.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_0_PowerSupplyMetrics:
+      additionalProperties: false
+      description: The PowerSupplyMetrics schema contains definitions for the metrics
+        of a power supply.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PowerSupplyMetrics_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        EnergykWh:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          description: The energy consumption of this unit.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the total energy, measured
+            in kilowatt-hours (kWh), for this unit, that represents the `Total` ElectricalContext
+            sensor when multiple energy sensors exist.
+        FanSpeedPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorFanExcerpt
+          description: The fan speed reading for this power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorFanExcerpt
+          x-longDescription: This property shall contain the fan speed sensor for
+            this power supply.
+        FrequencyHz:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The frequency reading for this power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the frequency sensor for
+            this power supply.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InputCurrentAmps:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The input current reading for this power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the sensor measuring the
+            input current for this power supply.
+        InputPowerWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The input power reading for this power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the sensor measuring the
+            input power for this power supply.
+        InputVoltage:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The input voltage reading for this power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the sensor measuring the
+            input voltage for this power supply.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OutputPowerWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The total power output reading for this power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the sensor measuring the
+            total output power for this power supply.
+        RailCurrentAmps:
+          description: The current readings for this power supply.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          readOnly: true
+          type: array
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the output current sensors
+            for this power supply.  The sensors shall appear in the same array order
+            as the OutputRails property in the associated PowerSupply resource.
+        RailCurrentAmps@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        RailPowerWatts:
+          description: The power readings for this power supply.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          readOnly: true
+          type: array
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the output power sensors
+            for this power supply.  The sensors shall appear in the same array order
+            as the OutputRails property in the associated PowerSupply resource.
+        RailPowerWatts@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        RailVoltage:
+          description: The voltage readings for this power supply.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          readOnly: true
+          type: array
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the output voltage sensors
+            for this power supply.  The sensors shall appear in the same array order
+            as the OutputRails property in the associated PowerSupply resource.
+        RailVoltage@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        TemperatureCelsius:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The temperature reading for this power supply.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature sensor for
+            this power supply.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent the metrics of a
+        power supply unit for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_0_ResetMetrics:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_0_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+    PowerSupplyMetrics_v1_0_0_VoltageSensors:
+      additionalProperties: false
+      description: The voltage readings for a power supply.
+      properties:
+        Input:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The power supply input.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage sensor that measures
+            voltage at the input to the power supply.
+        InputSecondary:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The power supply secondary input.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage sensor that measures
+            voltage at a secondary input to the power supply.  This property shall
+            not be present if the power supply does not include a secondary input.
+        Output12Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The 12V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage sensor that measures
+            voltage on a 12 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 12V output.
+        Output3Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The 3V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage sensor that measures
+            voltage on a 3 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 3V output.
+        Output48Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The 48V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage sensor that measures
+            voltage on a 48 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 48V output.
+        Output5Volt:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The 5V nominal output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage sensor that measures
+            voltage on a 3 Volt nominal output power rail.  This property shall not
+            be present if the power supply does not include a 3V output.
+        OutputAux:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The auxiliary (AUX) output.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage sensor that measures
+            current on an auxiliary (AUX) output power rail.  This property shall
+            not be present if the power supply does not include an auxiliary output.
+      type: object
+      x-longDescription: This type shall contain properties that describe voltage
+        sensor readings for a power supply.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#PowerSupplyMetrics.v1_0_0.PowerSupplyMetrics'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

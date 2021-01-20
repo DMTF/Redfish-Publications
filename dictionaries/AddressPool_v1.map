@@ -17,9 +17,9 @@
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
 |     7 |           6 | Set      | Nullable=False,                     | Oem                                 |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|     8 |           7 | Set      | Nullable=False,                     | Status                              |             4 | 19       |
+|     8 |           7 | Set      | Nullable=False,                     | Status                              |             5 | 19       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|     9 |           8 | Set      | Nullable=False,                     | Ethernet                            |             6 | 23       |
+|     9 |           8 | Set      | Nullable=False,                     | Ethernet                            |             6 | 24       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
 |    10 |           0 | Set      | Nullable=False,                     | Oem                                 |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
@@ -33,273 +33,291 @@
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
 |    15 |           4 | Integer  | Nullable=True,Permission=ReadWrite  | MinSID                              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    16 |           0 | Array    | Nullable=True,Permission=ReadWrite  | Endpoints                           |             1 | 29       |
+|    16 |           0 | Array    | Nullable=True,Permission=ReadWrite  | Endpoints                           |             1 | 30       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
 |    17 |           1 | Set      | Nullable=False,                     | Oem                                 |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    18 |           2 | Array    | Nullable=True,Permission=ReadWrite  | Zones                               |             1 | 29       |
+|    18 |           2 | Array    | Nullable=True,Permission=ReadWrite  | Zones                               |             1 | 30       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    19 |           0 | Enum     | Nullable=True,Permission=Read       | Health                              |             3 | 30       |
+|    19 |           0 | Array    | Nullable=True,                      | Conditions                          |             1 | 31       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    20 |           1 | Enum     | Nullable=True,Permission=Read       | HealthRollup                        |             3 | 30       |
+|    20 |           1 | Enum     | Nullable=True,Permission=Read       | Health                              |             3 | 39       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    21 |           2 | Set      | Nullable=False,                     | Oem                                 |             0 |          |
+|    21 |           2 | Enum     | Nullable=True,Permission=Read       | HealthRollup                        |             3 | 39       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    22 |           3 | Enum     | Nullable=True,Permission=Read       | State                               |            12 | 33       |
+|    22 |           3 | Set      | Nullable=False,                     | Oem                                 |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    23 |           0 | Set      | Nullable=True,                      | BFDSingleHopOnly                    |             7 | 45       |
+|    23 |           4 | Enum     | Nullable=True,Permission=Read       | State                               |            12 | 42       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    24 |           1 | Set      | Nullable=True,                      | BGPEvpn                             |            14 | 52       |
+|    24 |           0 | Set      | Nullable=True,                      | BFDSingleHopOnly                    |             7 | 54       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    25 |           2 | Set      | Nullable=True,                      | EBGP                                |             8 | 66       |
+|    25 |           1 | Set      | Nullable=True,                      | BGPEvpn                             |            14 | 61       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    26 |           3 | Set      | Nullable=True,                      | IPv4                                |            18 | 74       |
+|    26 |           2 | Set      | Nullable=True,                      | EBGP                                |             8 | 75       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    27 |           4 | Set      | Nullable=True,                      | MultiProtocolEBGP                   |             8 | 66       |
+|    27 |           3 | Set      | Nullable=True,                      | IPv4                                |            18 | 83       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    28 |           5 | Set      | Nullable=True,                      | MultiProtocolIBGP                   |             6 | 92       |
+|    28 |           4 | Set      | Nullable=True,                      | MultiProtocolEBGP                   |             8 | 75       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    29 |           0 | Set      |                                     |                                     |             0 |          |
+|    29 |           5 | Set      | Nullable=True,                      | MultiProtocolIBGP                   |             6 | 101      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    30 |           0 | String   |                                     | Critical                            |             0 |          |
+|    30 |           0 | Set      |                                     |                                     |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    31 |           1 | String   |                                     | OK                                  |             0 |          |
+|    31 |           0 | Set      |                                     |                                     |             7 | 32       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    32 |           2 | String   |                                     | Warning                             |             0 |          |
+|    32 |           0 | Set      | Nullable=False,Permission=Read      | LogEntry                            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    33 |           0 | String   |                                     | Absent                              |             0 |          |
+|    33 |           1 | String   | Nullable=False,Permission=Read      | Message                             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    34 |           1 | String   |                                     | Disabled                            |             0 |          |
+|    34 |           2 | Array    | Nullable=False,Permission=Read      | MessageArgs                         |             1 | 107      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    35 |           2 | String   |                                     | Enabled                             |             0 |          |
+|    35 |           3 | String   | Nullable=False,Permission=Read      | MessageId                           |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    36 |           3 | String   |                                     | InTest                              |             0 |          |
+|    36 |           4 | Set      | Nullable=False,Permission=Read      | OriginOfCondition                   |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    37 |           4 | String   |                                     | StandbyOffline                      |             0 |          |
+|    37 |           5 | Enum     | Nullable=False,Permission=Read      | Severity                            |             3 | 39       |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    38 |           5 | String   |                                     | StandbySpare                        |             0 |          |
+|    38 |           6 | String   | Nullable=False,Permission=Read      | Timestamp                           |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    39 |           6 | String   |                                     | Starting                            |             0 |          |
+|    39 |           0 | String   |                                     | Critical                            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    40 |           7 | String   |                                     | UnavailableOffline                  |             0 |          |
+|    40 |           1 | String   |                                     | OK                                  |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    41 |           8 | String   |                                     | Deferring                           |             0 |          |
+|    41 |           2 | String   |                                     | Warning                             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    42 |           9 | String   |                                     | Quiesced                            |             0 |          |
+|    42 |           0 | String   |                                     | Absent                              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    43 |          10 | String   |                                     | Updating                            |             0 |          |
+|    43 |           1 | String   |                                     | Disabled                            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    44 |          11 | String   |                                     | Qualified                           |             0 |          |
+|    44 |           2 | String   |                                     | Enabled                             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    45 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | DemandModeEnabled                   |             0 |          |
+|    45 |           3 | String   |                                     | InTest                              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    46 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | DesiredMinTxIntervalMilliseconds    |             0 |          |
+|    46 |           4 | String   |                                     | StandbyOffline                      |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    47 |           2 | String   | Nullable=True,Permission=ReadWrite  | KeyChain                            |             0 |          |
+|    47 |           5 | String   |                                     | StandbySpare                        |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    48 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | LocalMultiplier                     |             0 |          |
+|    48 |           6 | String   |                                     | Starting                            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    49 |           4 | Boolean  | Nullable=True,Permission=ReadWrite  | MeticulousModeEnabled               |             0 |          |
+|    49 |           7 | String   |                                     | UnavailableOffline                  |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    50 |           5 | Integer  | Nullable=True,Permission=ReadWrite  | RequiredMinRxIntervalMilliseconds   |             0 |          |
+|    50 |           8 | String   |                                     | Deferring                           |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    51 |           6 | Integer  | Nullable=True,Permission=ReadWrite  | SourcePort                          |             0 |          |
+|    51 |           9 | String   |                                     | Quiesced                            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    52 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | ARPProxyEnabled                     |             0 |          |
+|    52 |          10 | String   |                                     | Updating                            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    53 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | ARPSupressionEnabled                |             0 |          |
+|    53 |          11 | String   |                                     | Qualified                           |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    54 |           2 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayIPAddress             |             0 |          |
+|    54 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | DemandModeEnabled                   |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    55 |           3 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayMACAddress            |             0 |          |
+|    55 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | DesiredMinTxIntervalMilliseconds    |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    56 |           4 | Set      | Nullable=True,                      | ESINumberRange                      |             2 | 98       |
+|    56 |           2 | String   | Nullable=True,Permission=ReadWrite  | KeyChain                            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    57 |           5 | Set      | Nullable=True,                      | EVINumberRange                      |             2 | 100      |
+|    57 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | LocalMultiplier                     |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    58 |           6 | String   | Nullable=True,Permission=ReadWrite  | GatewayIPAddress                    |             0 |          |
+|    58 |           4 | Boolean  | Nullable=True,Permission=ReadWrite  | MeticulousModeEnabled               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    59 |           7 | Boolean  | Nullable=True,Permission=ReadWrite  | NDPProxyEnabled                     |             0 |          |
+|    59 |           5 | Integer  | Nullable=True,Permission=ReadWrite  | RequiredMinRxIntervalMilliseconds   |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    60 |           8 | Boolean  | Nullable=True,Permission=ReadWrite  | NDPSupressionEnabled                |             0 |          |
+|    60 |           6 | Integer  | Nullable=True,Permission=ReadWrite  | SourcePort                          |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    61 |           9 | Set      | Nullable=True,                      | RouteDistinguisherRange             |             2 | 102      |
+|    61 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | ARPProxyEnabled                     |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    62 |          10 | Set      | Nullable=True,                      | RouteTargetRange                    |             2 | 104      |
+|    62 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | ARPSupressionEnabled                |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    63 |          11 | Boolean  | Nullable=True,Permission=ReadWrite  | UnderlayMulticastEnabled            |             0 |          |
+|    63 |           2 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayIPAddress             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    64 |          12 | Boolean  | Nullable=True,Permission=ReadWrite  | UnknownUnicastSuppressionEnabled    |             0 |          |
+|    64 |           3 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayMACAddress            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    65 |          13 | Set      | Nullable=True,                      | VLANIdentifierAddressRange          |             2 | 106      |
+|    65 |           4 | Set      | Nullable=True,                      | ESINumberRange                      |             2 | 108      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    66 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | AllowDuplicateASEnabled             |             0 |          |
+|    66 |           5 | Set      | Nullable=True,                      | EVINumberRange                      |             2 | 110      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    67 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | AllowOverrideASEnabled              |             0 |          |
+|    67 |           6 | String   | Nullable=True,Permission=ReadWrite  | GatewayIPAddress                    |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    68 |           2 | Boolean  | Nullable=True,Permission=ReadWrite  | AlwaysCompareMEDEnabled             |             0 |          |
+|    68 |           7 | Boolean  | Nullable=True,Permission=ReadWrite  | NDPProxyEnabled                     |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    69 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | BGPLocalPreference                  |             0 |          |
+|    69 |           8 | Boolean  | Nullable=True,Permission=ReadWrite  | NDPSupressionEnabled                |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    70 |           4 | Integer  | Nullable=True,Permission=ReadWrite  | BGPWeight                           |             0 |          |
+|    70 |           9 | Set      | Nullable=True,                      | RouteDistinguisherRange             |             2 | 112      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    71 |           5 | Integer  | Nullable=True,Permission=ReadWrite  | MED                                 |             0 |          |
+|    71 |          10 | Set      | Nullable=True,                      | RouteTargetRange                    |             2 | 114      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    72 |           6 | Boolean  | Nullable=True,Permission=ReadWrite  | MultihopEnabled                     |             0 |          |
+|    72 |          11 | Boolean  | Nullable=True,Permission=ReadWrite  | UnderlayMulticastEnabled            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    73 |           7 | Integer  | Nullable=True,Permission=ReadWrite  | MultihopTTL                         |             0 |          |
+|    73 |          12 | Boolean  | Nullable=True,Permission=ReadWrite  | UnknownUnicastSuppressionEnabled    |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    74 |           0 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayIPAddress             |             0 |          |
+|    74 |          13 | Set      | Nullable=True,                      | VLANIdentifierAddressRange          |             2 | 116      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    75 |           1 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayMACAddress            |             0 |          |
+|    75 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | AllowDuplicateASEnabled             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    76 |           2 | Set      | Nullable=True,                      | DHCP                                |             3 | 108      |
+|    76 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | AllowOverrideASEnabled              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    77 |           3 | String   | Nullable=True,Permission=ReadWrite  | DNSDomainName                       |             0 |          |
+|    77 |           2 | Boolean  | Nullable=True,Permission=ReadWrite  | AlwaysCompareMEDEnabled             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    78 |           4 | Array    | Nullable=True,Permission=ReadWrite  | DNSServer                           |             1 | 111      |
+|    78 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | BGPLocalPreference                  |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    79 |           5 | Boolean  | Nullable=True,Permission=ReadWrite  | DistributeIntoUnderlayEnabled       |             0 |          |
+|    79 |           4 | Integer  | Nullable=True,Permission=ReadWrite  | BGPWeight                           |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    80 |           6 | Set      | Nullable=True,                      | EBGPAddressRange                    |             2 | 112      |
+|    80 |           5 | Integer  | Nullable=True,Permission=ReadWrite  | MED                                 |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    81 |           7 | Set      | Nullable=True,                      | FabricLinkAddressRange              |             2 | 112      |
+|    81 |           6 | Boolean  | Nullable=True,Permission=ReadWrite  | MultihopEnabled                     |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    82 |           8 | String   | Nullable=True,Permission=ReadWrite  | GatewayIPAddress                    |             0 |          |
+|    82 |           7 | Integer  | Nullable=True,Permission=ReadWrite  | MultihopTTL                         |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    83 |           9 | Set      | Nullable=True,                      | HostAddressRange                    |             2 | 112      |
+|    83 |           0 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayIPAddress             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    84 |          10 | Set      | Nullable=True,                      | IBGPAddressRange                    |             2 | 112      |
+|    84 |           1 | String   | Nullable=True,Permission=ReadWrite  | AnycastGatewayMACAddress            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    85 |          11 | Set      | Nullable=True,                      | LoopbackAddressRange                |             2 | 112      |
+|    85 |           2 | Set      | Nullable=True,                      | DHCP                                |             3 | 118      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    86 |          12 | Set      | Nullable=True,                      | ManagementAddressRange              |             2 | 112      |
+|    86 |           3 | String   | Nullable=True,Permission=ReadWrite  | DNSDomainName                       |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    87 |          13 | Integer  | Nullable=True,Permission=ReadWrite  | NTPOffsetHoursMinutes               |             0 |          |
+|    87 |           4 | Array    | Nullable=True,Permission=ReadWrite  | DNSServer                           |             1 | 107      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    88 |          14 | Array    | Nullable=True,Permission=ReadWrite  | NTPServer                           |             1 | 111      |
+|    88 |           5 | Boolean  | Nullable=True,Permission=ReadWrite  | DistributeIntoUnderlayEnabled       |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    89 |          15 | String   | Nullable=True,Permission=ReadWrite  | NTPTimezone                         |             0 |          |
+|    89 |           6 | Set      | Nullable=True,                      | EBGPAddressRange                    |             2 | 121      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    90 |          16 | Integer  | Nullable=True,Permission=ReadWrite  | NativeVLAN                          |             0 |          |
+|    90 |           7 | Set      | Nullable=True,                      | FabricLinkAddressRange              |             2 | 121      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    91 |          17 | Set      | Nullable=True,                      | VLANIdentifierAddressRange          |             2 | 106      |
+|    91 |           8 | String   | Nullable=True,Permission=ReadWrite  | GatewayIPAddress                    |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    92 |           0 | Set      | Nullable=True,                      | ASNumberRange                       |             2 | 114      |
+|    92 |           9 | Set      | Nullable=True,                      | HostAddressRange                    |             2 | 121      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    93 |           1 | Set      | Nullable=True,                      | BGPNeighbor                         |            15 | 116      |
+|    93 |          10 | Set      | Nullable=True,                      | IBGPAddressRange                    |             2 | 121      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    94 |           2 | Set      | Nullable=True,                      | BGPRoute                            |             7 | 131      |
+|    94 |          11 | Set      | Nullable=True,                      | LoopbackAddressRange                |             2 | 121      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    95 |           3 | Set      | Nullable=True,                      | GracefulRestart                     |             4 | 138      |
+|    95 |          12 | Set      | Nullable=True,                      | ManagementAddressRange              |             2 | 121      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    96 |           4 | Set      | Nullable=True,                      | MultiplePaths                       |             2 | 142      |
+|    96 |          13 | Integer  | Nullable=True,Permission=ReadWrite  | NTPOffsetHoursMinutes               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    97 |           5 | Boolean  | Nullable=True,Permission=ReadWrite  | SendCommunityEnabled                |             0 |          |
+|    97 |          14 | Array    | Nullable=True,Permission=ReadWrite  | NTPServer                           |             1 | 107      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    98 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
+|    98 |          15 | String   | Nullable=True,Permission=ReadWrite  | NTPTimezone                         |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|    99 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
+|    99 |          16 | Integer  | Nullable=True,Permission=ReadWrite  | NativeVLAN                          |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   100 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
+|   100 |          17 | Set      | Nullable=True,                      | VLANIdentifierAddressRange          |             2 | 116      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   101 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
+|   101 |           0 | Set      | Nullable=True,                      | ASNumberRange                       |             2 | 123      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   102 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
+|   102 |           1 | Set      | Nullable=True,                      | BGPNeighbor                         |            15 | 125      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   103 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
+|   103 |           2 | Set      | Nullable=True,                      | BGPRoute                            |             7 | 140      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   104 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | Lower                               |             0 |          |
+|   104 |           3 | Set      | Nullable=True,                      | GracefulRestart                     |             4 | 147      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   105 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | Upper                               |             0 |          |
+|   105 |           4 | Set      | Nullable=True,                      | MultiplePaths                       |             2 | 151      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   106 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | Lower                               |             0 |          |
+|   106 |           5 | Boolean  | Nullable=True,Permission=ReadWrite  | SendCommunityEnabled                |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   107 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | Upper                               |             0 |          |
+|   107 |           0 | String   |                                     |                                     |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   108 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | DHCPInterfaceMTUBytes               |             0 |          |
+|   108 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   109 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | DHCPRelayEnabled                    |             0 |          |
+|   109 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   110 |           2 | Array    | Nullable=True,Permission=ReadWrite  | DHCPServer                          |             1 | 111      |
+|   110 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   111 |           0 | String   |                                     |                                     |             0 |          |
+|   111 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   112 |           0 | String   | Nullable=True,Permission=ReadWrite  | Lower                               |             0 |          |
+|   112 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   113 |           1 | String   | Nullable=True,Permission=ReadWrite  | Upper                               |             0 |          |
+|   113 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   114 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
+|   114 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | Lower                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   115 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
+|   115 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | Upper                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   116 |           0 | String   | Nullable=True,Permission=ReadWrite  | Address                             |             0 |          |
+|   116 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | Lower                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   117 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | AllowOwnASEnabled                   |             0 |          |
+|   117 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | Upper                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   118 |           2 | Integer  | Nullable=True,Permission=ReadWrite  | ConnectRetrySeconds                 |             0 |          |
+|   118 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | DHCPInterfaceMTUBytes               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   119 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | HoldTimeSeconds                     |             0 |          |
+|   119 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | DHCPRelayEnabled                    |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   120 |           4 | Integer  | Nullable=True,Permission=ReadWrite  | KeepaliveIntervalSeconds            |             0 |          |
+|   120 |           2 | Array    | Nullable=True,Permission=ReadWrite  | DHCPServer                          |             1 | 107      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   121 |           5 | Integer  | Nullable=True,Permission=ReadWrite  | LocalAS                             |             0 |          |
+|   121 |           0 | String   | Nullable=True,Permission=ReadWrite  | Lower                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   122 |           6 | Boolean  | Nullable=True,Permission=ReadWrite  | LogStateChangesEnabled              |             0 |          |
+|   122 |           1 | String   | Nullable=True,Permission=ReadWrite  | Upper                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   123 |           7 | Set      | Nullable=True,                      | MaxPrefix                           |             4 | 144      |
+|   123 |           0 | Integer  | Nullable=False,Permission=ReadWrite | Lower                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   124 |           8 | Integer  | Nullable=True,Permission=ReadWrite  | MinimumAdvertisementIntervalSeconds |             0 |          |
+|   124 |           1 | Integer  | Nullable=False,Permission=ReadWrite | Upper                               |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   125 |           9 | Boolean  | Nullable=True,Permission=ReadWrite  | PassiveModeEnabled                  |             0 |          |
+|   125 |           0 | String   | Nullable=True,Permission=ReadWrite  | Address                             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   126 |          10 | Boolean  | Nullable=True,Permission=ReadWrite  | PathMTUDiscoveryEnabled             |             0 |          |
+|   126 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | AllowOwnASEnabled                   |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   127 |          11 | Integer  | Nullable=True,Permission=ReadWrite  | PeerAS                              |             0 |          |
+|   127 |           2 | Integer  | Nullable=True,Permission=ReadWrite  | ConnectRetrySeconds                 |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   128 |          12 | Boolean  | Nullable=True,Permission=ReadWrite  | ReplacePeerASEnabled                |             0 |          |
+|   128 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | HoldTimeSeconds                     |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   129 |          13 | Integer  | Nullable=True,Permission=ReadWrite  | TCPMaxSegmentSizeBytes              |             0 |          |
+|   129 |           4 | Integer  | Nullable=True,Permission=ReadWrite  | KeepaliveIntervalSeconds            |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   130 |          14 | Boolean  | Nullable=True,Permission=ReadWrite  | TreatAsWithdrawEnabled              |             0 |          |
+|   130 |           5 | Integer  | Nullable=True,Permission=ReadWrite  | LocalAS                             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   131 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | AdvertiseInactiveRoutesEnabled      |             0 |          |
+|   131 |           6 | Boolean  | Nullable=True,Permission=ReadWrite  | LogStateChangesEnabled              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   132 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | DistanceExternal                    |             0 |          |
+|   132 |           7 | Set      | Nullable=True,                      | MaxPrefix                           |             4 | 153      |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   133 |           2 | Integer  | Nullable=True,Permission=ReadWrite  | DistanceInternal                    |             0 |          |
+|   133 |           8 | Integer  | Nullable=True,Permission=ReadWrite  | MinimumAdvertisementIntervalSeconds |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   134 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | DistanceLocal                       |             0 |          |
+|   134 |           9 | Boolean  | Nullable=True,Permission=ReadWrite  | PassiveModeEnabled                  |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   135 |           4 | Boolean  | Nullable=True,Permission=ReadWrite  | ExternalCompareRouterIdEnabled      |             0 |          |
+|   135 |          10 | Boolean  | Nullable=True,Permission=ReadWrite  | PathMTUDiscoveryEnabled             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   136 |           5 | Boolean  | Nullable=True,Permission=ReadWrite  | FlapDampingEnabled                  |             0 |          |
+|   136 |          11 | Integer  | Nullable=True,Permission=ReadWrite  | PeerAS                              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   137 |           6 | Boolean  | Nullable=True,Permission=ReadWrite  | SendDefaultRouteEnabled             |             0 |          |
+|   137 |          12 | Boolean  | Nullable=True,Permission=ReadWrite  | ReplacePeerASEnabled                |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   138 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | GracefulRestartEnabled              |             0 |          |
+|   138 |          13 | Integer  | Nullable=True,Permission=ReadWrite  | TCPMaxSegmentSizeBytes              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   139 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | HelperModeEnabled                   |             0 |          |
+|   139 |          14 | Boolean  | Nullable=True,Permission=ReadWrite  | TreatAsWithdrawEnabled              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   140 |           2 | Integer  | Nullable=True,Permission=ReadWrite  | StaleRoutesTimeSeconds              |             0 |          |
+|   140 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | AdvertiseInactiveRoutesEnabled      |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   141 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | TimeSeconds                         |             0 |          |
+|   141 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | DistanceExternal                    |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   142 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | MaximumPaths                        |             0 |          |
+|   142 |           2 | Integer  | Nullable=True,Permission=ReadWrite  | DistanceInternal                    |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   143 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | UseMultiplePathsEnabled             |             0 |          |
+|   143 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | DistanceLocal                       |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   144 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | MaxPrefixNumber                     |             0 |          |
+|   144 |           4 | Boolean  | Nullable=True,Permission=ReadWrite  | ExternalCompareRouterIdEnabled      |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   145 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | RestartTimerSeconds                 |             0 |          |
+|   145 |           5 | Boolean  | Nullable=True,Permission=ReadWrite  | FlapDampingEnabled                  |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   146 |           2 | Real     | Nullable=True,Permission=ReadWrite  | ShutdownThresholdPercentage         |             0 |          |
+|   146 |           6 | Boolean  | Nullable=True,Permission=ReadWrite  | SendDefaultRouteEnabled             |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-|   147 |           3 | Boolean  | Nullable=True,Permission=ReadWrite  | ThresholdWarningOnlyEnabled         |             0 |          |
+|   147 |           0 | Boolean  | Nullable=True,Permission=ReadWrite  | GracefulRestartEnabled              |             0 |          |
 +-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
-Total Entries: 148
-Fixed size consumed (bytes): 1492 (0x5d4)
-Field string size consumed (bytes): 1983 (0x7bf)
-Total size (bytes): 3475 (0xd93)
-Version: 0XF1F1F000
-Signature: 0x3b988437
+|   148 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | HelperModeEnabled                   |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   149 |           2 | Integer  | Nullable=True,Permission=ReadWrite  | StaleRoutesTimeSeconds              |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   150 |           3 | Integer  | Nullable=True,Permission=ReadWrite  | TimeSeconds                         |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   151 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | MaximumPaths                        |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   152 |           1 | Boolean  | Nullable=True,Permission=ReadWrite  | UseMultiplePathsEnabled             |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   153 |           0 | Integer  | Nullable=True,Permission=ReadWrite  | MaxPrefixNumber                     |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   154 |           1 | Integer  | Nullable=True,Permission=ReadWrite  | RestartTimerSeconds                 |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   155 |           2 | Real     | Nullable=True,Permission=ReadWrite  | ShutdownThresholdPercentage         |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+|   156 |           3 | Boolean  | Nullable=True,Permission=ReadWrite  | ThresholdWarningOnlyEnabled         |             0 |          |
++-------+-------------+----------+-------------------------------------+-------------------------------------+---------------+----------+
+Total Entries: 157
+Fixed size consumed (bytes): 1582 (0x62e)
+Field string size consumed (bytes): 2070 (0x816)
+Total size (bytes): 3652 (0xe44)
+Version: 0XF1F1F100
+Signature: 0xd79741be

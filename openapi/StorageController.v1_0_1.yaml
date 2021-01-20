@@ -1,0 +1,608 @@
+components:
+  schemas:
+    StorageController_v1_0_1_ANAAccessState:
+      enum:
+      - Optimized
+      - NonOptimized
+      - Inaccessible
+      - PersistentLoss
+      type: string
+      x-enumDescriptions:
+        Inacessible: Namespaces in this group are inaccessible.  Commands are not
+          able to access user data of namespaces in the ANA Group.
+        NonOptimized: Commands processed by a controller that reports this state for
+          an ANA Group provide non-optimized access characteristics, such as lower
+          performance or non-optimal use of subsystem resources, to any namespace
+          in the ANA Group.
+        Optimized: Commands processed by a controller provide optimized access to
+          any namespace in the ANA group.
+        PersistentLoss: The group is persistently inaccessible.  Commands are persistently
+          not able to access user data of namespaces in the ANA Group.
+    StorageController_v1_0_1_ANACharacteristics:
+      additionalProperties: false
+      description: The ANA characteristics and volume information for a storage controller.
+      properties:
+        AccessState:
+          $ref: '#/components/schemas/StorageController_v1_0_1_ANAAccessState'
+          description: Reported ANA access state.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the reported ANA access state.
+        Volume:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The specified volume.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Volume.
+      type: object
+      x-longDescription: This type shall contain the ANA characteristics and volume
+        information for a storage controller.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/StorageController_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_CacheSummary:
+      additionalProperties: false
+      description: This type describes the cache memory of the storage controller
+        in general detail.
+      properties:
+        PersistentCacheSizeMiB:
+          description: The portion of the cache memory that is persistent, measured
+            in MiB.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the amount of cache memory
+            that is persistent as measured in mebibytes.  This size shall be less
+            than or equal to the TotalCacheSizeMiB.
+          x-units: MiBy
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        TotalCacheSizeMiB:
+          description: The total configured cache memory, measured in MiB.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the amount of configured
+            cache memory as measured in mebibytes.
+          x-units: MiBy
+      required:
+      - TotalCacheSizeMiB
+      type: object
+      x-longDescription: This type shall contain properties that describe the cache
+        memory for a storage controller.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        AttachedVolumes:
+          description: An array of links to volumes that are attached to this controller
+            instance.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Volume that are attached to this instance of storage controller.
+        AttachedVolumes@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Endpoints:
+          description: An array of links to the endpoints that connect to this controller.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Endpoint with which this controller is associated.
+        Endpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PCIeFunctions:
+          description: An array of links to the PCIe functions that the storage controller
+            produces.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type PCIeFunction that represents the PCIe functions associated with
+            this resource.
+        PCIeFunctions@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_NVMeControllerAttributes:
+      additionalProperties: false
+      description: The NVMe controller attributes for a storage controller.
+      properties:
+        ReportsNamespaceGranularity:
+          description: Indicates whether or not the controller supports reporting
+            of Namespace Granularity.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports reporting of Namespace Granularity.
+        ReportsUUIDList:
+          description: Indicates whether or not the controller supports reporting
+            of a UUID list.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports reporting of a UUID list.
+        Supports128BitHostId:
+          description: Indicates whether or not the controller supports a 128-bit
+            Host Identifier.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports a 128-bit Host Identifier.
+        SupportsEnduranceGroups:
+          description: Indicates whether or not the controller supports Endurance
+            Groups.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports Endurance Groups.
+        SupportsExceedingPowerOfNonOperationalState:
+          description: Indicates whether or not the controller supports exceeding
+            Power of Non-Operational State in order to execute controller initiated
+            background operations in a non-operational power state.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports exceeding Power of Non-Operational State in order to execute
+            controller initiated background operations in a non-operational power
+            state.
+        SupportsNVMSets:
+          description: Indicates whether or not the controller supports NVM Sets.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports NVM Sets.
+        SupportsPredictableLatencyMode:
+          description: Indicates whether or not the controller supports Predictable
+            Latency Mode.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports Predictable Latency Mode.
+        SupportsReadRecoveryLevels:
+          description: Indicates whether or not the controller supports Read Recovery
+            Levels.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports Read Recovery Levels.
+        SupportsSQAssociations:
+          description: Indicates whether or not the controller supports SQ Associations.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports SQ Associations.
+        SupportsTrafficBasedKeepAlive:
+          description: Indicates whether or not the controller supports restarting
+            Keep Alive Timer if traffic is processed from an admin command or IO during
+            a Keep Alive Timeout interval.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the controller
+            supports restarting Keep Alive Timer if traffic is processed from an admin
+            command or IO during a Keep Alive Timeout interval.
+      type: object
+      x-longDescription: This type shall contain NVMe controller attributes  for a
+        storage controller.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_NVMeControllerProperties:
+      additionalProperties: false
+      description: NVMe related properties for a storage controller.
+      properties:
+        ANACharacteristics:
+          description: The ANA characteristics and volume information.
+          items:
+            $ref: '#/components/schemas/StorageController_v1_0_1_ANACharacteristics'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain the ANA characteristics and
+            volume information.
+        ControllerType:
+          $ref: '#/components/schemas/StorageController_v1_0_1_NVMeControllerType'
+          description: The type of NVMe controller.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of NVMe controller.
+        MaxQueueSize:
+          description: The maximum individual queue size that an NVMe IO controller
+            supports.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum individual queue
+            entry size supported per queue.  This is a zero-based value, where the
+            minimum value is one, indicating two entries.  For PCIe, this applies
+            to both submission and completion queues.  For NVMe-oF, this applies to
+            only submission queues.
+        NVMeControllerAttributes:
+          $ref: '#/components/schemas/StorageController_v1_0_1_NVMeControllerAttributes'
+          description: The NVMe controller attributes.
+          nullable: true
+          x-longDescription: This property shall contain NVMe controller attributes.
+        NVMeSMARTCriticalWarnings:
+          $ref: '#/components/schemas/StorageController_v1_0_1_NVMeSMARTCriticalWarnings'
+          description: The NVMe SMART Critical Warnings for this storage controller.  This
+            property contains possible triggers for the predictive drive failure warning
+            for the corresponding drive.
+          nullable: true
+          x-longDescription: This property shall contain the NVMe SMART Critical Warnings
+            for this storage controller.  This property can contain possible triggers
+            for the predictive drive failure warning for the corresponding drive.
+        NVMeVersion:
+          description: The version of the NVMe Base Specification supported.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the version of the NVMe Base
+            Specification supported.
+      type: object
+      x-longDescription: This type shall contain NVMe related properties for a storage
+        controller.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_NVMeControllerType:
+      enum:
+      - Admin
+      - Discovery
+      - IO
+      type: string
+      x-enumDescriptions:
+        Admin: The NVMe controller is an admin controller.
+        Discovery: The NVMe controller is a discovery controller.
+        IO: The NVMe controller is an IO controller.
+    StorageController_v1_0_1_NVMeSMARTCriticalWarnings:
+      additionalProperties: false
+      description: The NVMe SMART Critical Warnings for a storage controller.
+      properties:
+        MediaInReadOnly:
+          description: Indicates the media has been placed in read only mode.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate the media has been placed
+            in read only mode.  This is not set when the read-only condition on the
+            media is a result of a change in the write protection state of a namespace.
+        OverallSubsystemDegraded:
+          description: Indicates that the NVM subsystem reliability has been compromised.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the NVM subsystem reliability
+            has been compromised.
+        PMRUnreliable:
+          description: The Persistent Memory Region has become unreliable.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the Persistent Memory
+            Region has become unreliable.  PCIe memory reads might return invalid
+            data or generate poisoned PCIe TLP(s).  Persistent Memory Region memory
+            writes might not update memory or might update memory with undefined data.  The
+            Persistent Memory Region might also have become non-persistent.
+        PowerBackupFailed:
+          description: Indicates that the volatile memory backup device has failed.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the volatile memory
+            backup device has failed.
+        SpareCapacityWornOut:
+          description: Indicates that the available spare capacity has fallen below
+            the threshold.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the available spare
+            capacity has fallen below the threshold.
+      type: object
+      x-longDescription: This type shall contain the NVMe SMART Critical Warnings
+        for a storage controller.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_Rates:
+      additionalProperties: false
+      description: This type describes the various controller rates used for processes
+        such as volume rebuild or consistency checks.
+      properties:
+        ConsistencyCheckRatePercent:
+          description: The percentage of controller resources used for performing
+            a data consistency check on volumes.
+          format: int64
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the percentage of controller
+            resources used for checking data consistency on volumes.
+        RebuildRatePercent:
+          description: The percentage of controller resources used for rebuilding/repairing
+            volumes.
+          format: int64
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the percentage of controller
+            resources used for rebuilding volumes.
+        TransformationRatePercent:
+          description: The percentage of controller resources used for transforming
+            volumes from one configuration to another.
+          format: int64
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the percentage of controller
+            resources used for transforming volumes.
+      type: object
+      x-longDescription: This type shall contain all the rate settings available on
+        the controller.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageController_v1_0_1_StorageController:
+      additionalProperties: false
+      description: The StorageController schema describes a storage controller and
+        its properties.  A storage controller represents a physical or virtual storage
+        device that produces volumes.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/StorageController_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Assembly:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the assembly associated with this storage controller.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Assembly.
+        AssetTag:
+          description: The user-assigned asset tag for this storage controller.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall track the storage controller for
+            inventory purposes.
+        CacheSummary:
+          $ref: '#/components/schemas/StorageController_v1_0_1_CacheSummary'
+          description: The cache memory of the storage controller in general detail.
+          x-longDescription: This property shall contain properties that describe
+            the cache memory for this resource.
+        ControllerRates:
+          $ref: '#/components/schemas/StorageController_v1_0_1_Rates'
+          description: This property describes the various controller rates used for
+            processes such as volume rebuild or consistency checks.
+          x-longDescription: This object shall contain all the rate settings available
+            on the controller.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        FirmwareVersion:
+          description: The firmware version of this storage controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the firmware version as defined
+            by the manufacturer for the associated storage controller.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Identifiers:
+          description: The durable names for the storage controller.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Identifier
+          type: array
+          x-longDescription: This property shall contain a list of all known durable
+            names for the associated storage controller.
+        Links:
+          $ref: '#/components/schemas/StorageController_v1_0_1_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location of the storage controller.
+          x-longDescription: This property shall contain location information of the
+            associated storage controller.
+        Manufacturer:
+          description: The manufacturer of this storage controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the organization
+            responsible for producing the storage controller.  This organization might
+            be the entity from which the storage controller is purchased, but this
+            is not necessarily true.
+        Model:
+          description: The model number for the storage controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name by which the manufacturer
+            generally refers to the storage controller.
+        NVMeControllerProperties:
+          $ref: '#/components/schemas/StorageController_v1_0_1_NVMeControllerProperties'
+          description: The NVMe related properties for this storage controller.
+          x-longDescription: This property shall contain NVMe related properties for
+            this storage controller.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PCIeInterface:
+          $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.yaml#/components/schemas/PCIeDevice_PCIeInterface
+          description: The PCIe interface details for this controller.
+          x-longDescription: This property shall contain details on the PCIe interface
+            that connects this PCIe-based controller to its host.
+        PartNumber:
+          description: The part number for this storage controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a part number assigned by
+            the organization that is responsible for producing or manufacturing the
+            storage controller.
+        Ports:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of ports that exist on the storage
+            controller.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type PortCollection.
+        SKU:
+          description: The SKU for this storage controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the stock-keeping unit number
+            for this storage storage controller.
+        SerialNumber:
+          description: The serial number for this storage controller.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a manufacturer-allocated
+            number that identifies the storage controller.
+        SpeedGbps:
+          description: The maximum speed of the storage controller's device interface.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall represent the maximum supported speed
+            of the storage bus interface, in Gbit/s.  The specified interface connects
+            the controller to the storage devices, not the controller to a host.  For
+            example, SAS bus not PCIe host bus.
+          x-units: Gbit/s
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        SupportedControllerProtocols:
+          description: The supported set of protocols for communicating to this storage
+            controller.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol_Protocol
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the supported set of protocols
+            for communicating to this storage controller.
+        SupportedDeviceProtocols:
+          description: The protocols that the storage controller can use to communicate
+            with attached devices.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol_Protocol
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the set of protocols this
+            storage controller can use to communicate with attached devices.
+        SupportedRAIDTypes:
+          description: The set of RAID types supported by the storage controller.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_RAIDType
+            nullable: true
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of all the RAID
+            types supported by this controller.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a storage controller in the
+        Redfish Specification.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#StorageController.v1_0_1.StorageController'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.3'

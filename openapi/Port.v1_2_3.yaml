@@ -1,0 +1,397 @@
+components:
+  schemas:
+    Port_v1_2_3_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Port.Reset':
+          $ref: '#/components/schemas/Port_v1_2_3_Reset'
+        Oem:
+          $ref: '#/components/schemas/Port_v1_2_3_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Port_v1_2_3_GenZ:
+      additionalProperties: false
+      description: This type defines Gen-Z specific port properties.
+      properties:
+        LPRT:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The Linear Packet Relay Table for the port.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type RouteEntryCollection, and shall represent the Gen-Z Core Specification-defined
+            Linear Packet Relay Table for this port.
+          x-versionAdded: v1_2_0
+        MPRT:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: the Multi-subnet Packet Relay Table for the port.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type RouteEntryCollection, and shall represent the Gen-Z Core Specification-defined
+            Multi-subnet Packet Relay Table for this port.
+          x-versionAdded: v1_2_0
+        VCAT:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: the Virtual Channel Action Table for the port.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type VCATEntryCollection.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall contain Gen-Z specific port properties.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Port_v1_2_3_LinkNetworkTechnology:
+      enum:
+      - Ethernet
+      - InfiniBand
+      - FibreChannel
+      - GenZ
+      type: string
+      x-enumDescriptions:
+        Ethernet: The port is capable of connecting to an Ethernet network.
+        FibreChannel: The port is capable of connecting to a Fibre Channel network.
+        GenZ: The port is capable of connecting to a Gen-Z fabric.
+        InfiniBand: The port is capable of connecting to an InfiniBand network.
+    Port_v1_2_3_LinkState:
+      enum:
+      - Enabled
+      - Disabled
+      type: string
+      x-enumDescriptions:
+        Disabled: This link is disabled.
+        Enabled: This link is enabled.
+    Port_v1_2_3_LinkStatus:
+      enum:
+      - LinkUp
+      - Starting
+      - Training
+      - LinkDown
+      - NoLink
+      type: string
+      x-enumDescriptions:
+        LinkDown: The link on this interface is down.
+        LinkUp: This link on this interface is up.
+        NoLink: No physical link detected on this interface.
+        Starting: This link on this interface is starting.  A physical link has been
+          established, but the port is not able to transfer data.
+        Training: This physical link on this interface is training.
+    Port_v1_2_3_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        AssociatedEndpoints:
+          description: An array of links to the endpoints that connect through this
+            port.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Endpoint with which this port is associated.
+        AssociatedEndpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ConnectedPorts:
+          description: An array of links to the remote ports connected to this port.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Port that represent the physical connections associated with this
+            port.
+          x-versionAdded: v1_2_0
+        ConnectedPorts@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ConnectedSwitchPorts:
+          description: An array of links to the ports that connect to the switch through
+            this port.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Port with which this port is associated.
+        ConnectedSwitchPorts@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ConnectedSwitches:
+          description: An array of links to the switches that connect to the device
+            through this port.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Switch with which this port is associated.
+        ConnectedSwitches@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Port_v1_2_3_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Port_v1_2_3_Port:
+      additionalProperties: false
+      description: The Port schema contains properties that describe a port of a switch,
+        controller, chassis, or any other device that could be connected to another
+        entity.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Port_v1_2_3_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        ActiveWidth:
+          description: The number of active lanes for this interface.
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of active lanes
+            for this interface.
+          x-versionAdded: v1_2_0
+        CurrentSpeedGbps:
+          description: The current speed of this port.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the speed of this port currently
+            negotiated and running.
+          x-units: Gbit/s
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        GenZ:
+          $ref: '#/components/schemas/Port_v1_2_3_GenZ'
+          description: Gen-Z specific properties.
+          x-longDescription: This property shall contain Gen-Z specific properties
+            for this interface.
+          x-versionAdded: v1_2_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InterfaceEnabled:
+          description: An indication of whether the interface is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the interface is
+            enabled.
+          x-versionAdded: v1_2_0
+        LinkNetworkTechnology:
+          $ref: '#/components/schemas/Port_v1_2_3_LinkNetworkTechnology'
+          description: The link network technology capabilities of this port.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain a network technology capability
+            of this port.
+          x-versionAdded: v1_2_0
+        LinkState:
+          $ref: '#/components/schemas/Port_v1_2_3_LinkState'
+          description: The desired link state for this interface.
+          readOnly: false
+          x-longDescription: This property shall contain the desired link state for
+            this interface.
+          x-versionAdded: v1_2_0
+        LinkStatus:
+          $ref: '#/components/schemas/Port_v1_2_3_LinkStatus'
+          description: The desired link status for this interface.
+          readOnly: false
+          x-longDescription: This property shall contain the desired link status for
+            this interface.
+          x-versionAdded: v1_2_0
+        LinkTransitionIndicator:
+          description: The number of link state transitions for this interface.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the number of link state
+            transitions for this interface.
+          x-versionAdded: v1_2_0
+        Links:
+          $ref: '#/components/schemas/Port_v1_2_3_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location of the port.
+          x-longDescription: This property shall contain location information of the
+            associated port.
+          x-versionAdded: v1_1_0
+        MaxSpeedGbps:
+          description: The maximum speed of this port as currently configured.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the maximum speed of which
+            this port is capable of being configured.  If capable of autonegotiation,
+            the system shall attempt to negotiate at the maximum speed set.
+          x-units: Gbit/s
+        Metrics:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the metrics associated with this port.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain a link to the metrics associated
+            with this port.
+          x-versionAdded: v1_2_0
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PortId:
+          description: The label of this port on the physical package for this port.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the port as indicated
+            on the device containing the port.
+        PortMedium:
+          $ref: '#/components/schemas/Port_v1_2_3_PortMedium'
+          description: The physical connection medium for this port.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the physical connection medium
+            for this port.
+          x-versionAdded: v1_2_0
+        PortProtocol:
+          $ref: http://redfish.dmtf.org/schemas/v1/Protocol.yaml#/components/schemas/Protocol_Protocol
+          description: The protocol being sent over this port.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the protocol being sent over
+            this port.
+        PortType:
+          $ref: '#/components/schemas/Port_v1_2_3_PortType'
+          description: The type of this port.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the port type for this port.
+        SignalDetected:
+          description: An indication of whether a signal is detected on this interface.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether a signal that is
+            appropriate for this link technology is detected for this port.
+          x-versionAdded: v1_2_0
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        Width:
+          description: The number of lanes, phys, or other physical transport links
+            that this port contains.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of physical transport
+            links that this port contains.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains a simple port for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Port_v1_2_3_PortMedium:
+      enum:
+      - Electrical
+      - Optical
+      type: string
+      x-enumDescriptions:
+        Electrical: This port has an electrical cable connection.
+        Optical: This port has an optical cable connection.
+    Port_v1_2_3_PortType:
+      enum:
+      - UpstreamPort
+      - DownstreamPort
+      - InterswitchPort
+      - ManagementPort
+      - BidirectionalPort
+      - UnconfiguredPort
+      type: string
+      x-enumDescriptions:
+        BidirectionalPort: This port connects to any type of device.
+        DownstreamPort: This port connects to a target device.
+        InterswitchPort: This port connects to another switch.
+        ManagementPort: This port connects to a switch manager.
+        UnconfiguredPort: This port has not yet been configured.
+        UpstreamPort: This port connects to a host device.
+    Port_v1_2_3_Reset:
+      additionalProperties: false
+      description: This action resets this port.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset this port.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Port_v1_2_3_ResetRequestBody:
+      additionalProperties: false
+      description: This action resets this port.
+      properties:
+        ResetType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
+          description: The type of reset.
+          x-longDescription: This parameter shall contain the type of reset.  The
+            service can accept a request without the parameter and perform an implementation
+            specific default reset.
+      type: object
+      x-longDescription: This action shall reset this port.
+title: '#Port.v1_2_3.Port'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.4'

@@ -1,0 +1,101 @@
+components:
+  schemas:
+    ThermalSubsystem_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/ThermalSubsystem_v1_0_0_OemActions'
+          description: This property contains the available OEM specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ThermalSubsystem_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ThermalSubsystem_v1_0_0_ThermalSubsystem:
+      additionalProperties: false
+      description: This ThermalSubsystem schema contains the definition for the thermal
+        subsystem of a chassis.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/ThermalSubsystem_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        FanRedundancy:
+          description: The redundancy information for the groups of fans in this subsystem.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_RedundantGroup
+          type: array
+          x-longDescription: This property shall contain redundancy information for
+            the groups of fans in this subsystem.
+        Fans:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of fans within this subsystem.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type FanCollection.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        ThermalMetrics:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the summary of thermal metrics for this subsystem.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ThermalMetrics.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a thermal subsystem for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#ThermalSubsystem.v1_0_0.ThermalSubsystem'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

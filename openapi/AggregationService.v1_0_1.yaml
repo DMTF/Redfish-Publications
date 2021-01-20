@@ -1,0 +1,205 @@
+components:
+  schemas:
+    AggregationService_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#AggregationService.Reset':
+          $ref: '#/components/schemas/AggregationService_v1_0_1_Reset'
+        '#AggregationService.SetDefaultBootOrder':
+          $ref: '#/components/schemas/AggregationService_v1_0_1_SetDefaultBootOrder'
+        Oem:
+          $ref: '#/components/schemas/AggregationService_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AggregationService_v1_0_1_AggregationService:
+      additionalProperties: true
+      description: The AggregationService schema contains properties for managing
+        aggregation operations, either on ad hoc combinations of resources or on defined
+        sets of resources called aggregates.  Access points define the properties
+        needed to access the entity being aggregated and connection methods describe
+        the protocol or other semantics of the connection.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/AggregationService_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Aggregates:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of aggregates associated with this
+            service.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type AggregateCollection.
+        AggregationSources:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of aggregation sources associated
+            with this service.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type AggregationSourceCollection.
+        ConnectionMethods:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of connection methods associated
+            with this service.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ConnectionMethodCollection.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        ServiceEnabled:
+          description: An indication of whether the aggregation service is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the aggregation
+            service is enabled.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent an aggregation service for
+        a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AggregationService_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AggregationService_v1_0_1_Reset:
+      additionalProperties: false
+      description: This action is used to reset a set of resources. For example this
+        could be a list of computer systems.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall perform a reset of a set of resources.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AggregationService_v1_0_1_ResetRequestBody:
+      additionalProperties: false
+      description: This action is used to reset a set of resources. For example this
+        could be a list of computer systems.
+      properties:
+        BatchSize:
+          description: The number of elements in each batch being reset.
+          format: int64
+          minimum: 0
+          type: integer
+          x-longDescription: This parameter shall contain the number of elements in
+            each batch simultaneously being issued a reset.
+        DelayBetweenBatchesInSeconds:
+          description: The delay of the batches of elements being reset in seconds.
+          format: int64
+          minimum: 0
+          type: integer
+          x-longDescription: This parameter shall contain the delay of the batches
+            of elements being reset in seconds.
+          x-units: s
+        ResetType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
+          description: The type of reset.
+          x-longDescription: This parameter shall contain the type of reset.  The
+            service can accept a request without the parameter and perform an implementation-specific
+            default reset.
+        TargetURIs:
+          description: An array of links to the resources being reset.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Resource
+          type: array
+          x-longDescription: This parameter shall contain an array of links to the
+            resources being reset.
+      required:
+      - TargetURIs
+      type: object
+      x-longDescription: This action shall perform a reset of a set of resources.
+    AggregationService_v1_0_1_SetDefaultBootOrder:
+      additionalProperties: false
+      description: This action is used to restore the boot order to the default state
+        for the specified computer systems.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall restore the boot order to the default state
+        for the specified computer systems.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AggregationService_v1_0_1_SetDefaultBootOrderRequestBody:
+      additionalProperties: false
+      description: This action is used to restore the boot order to the default state
+        for the specified computer systems.
+      properties:
+        Systems:
+          description: The computer systems to restore.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          type: array
+          x-longDescription: This parameter shall contain an array of links to resources
+            of type ComputerSystem.
+      required:
+      - Systems
+      type: object
+      x-longDescription: This action shall restore the boot order to the default state
+        for the specified computer systems.
+title: '#AggregationService.v1_0_1.AggregationService'
+x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.2'
