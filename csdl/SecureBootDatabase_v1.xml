@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  SecureBootDatabase v1.0.0                                           -->
+<!--# Redfish Schema:  SecureBootDatabase v1.0.1                                           -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -81,7 +81,7 @@
         <Property Name="DatabaseId" Type="Edm.String" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="This property contains the name of the UEFI Secure Boot database."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the UEFI Secure Boot database.  This property shall contain the same value as the Id property.  The value shall be one of the UEFI-defined Secure Boot databases: `PK`, `KEK` `db`, `dbx`, `dbr`, `dbt`, `PKdefault`, `KEKDefault`, `dbDefault`, `dbxDefault`, `dbrDefault`, or `dbtDefault`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the UEFI Secure Boot database.  This property shall contain the same value as the Id property.  The value shall be one of the UEFI-defined Secure Boot databases: `PK`, `KEK` `db`, `dbx`, `dbr`, `dbt`, `PKDefault`, `KEKDefault`, `dbDefault`, `dbxDefault`, `dbrDefault`, or `dbtDefault`."/>
         </Property>
         <Property Name="Actions" Type="SecureBootDatabase.v1_0_0.Actions" Nullable="false">
           <Annotation Term="OData.Description" String="The available actions for this resource."/>
@@ -125,6 +125,12 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBootDatabase.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct the name of the `PKDefault` database in the description of the DatabaseId property."/>
+      <EntityType Name="SecureBootDatabase" BaseType="SecureBootDatabase.v1_0_0.SecureBootDatabase"/>
     </Schema>
 
   </edmx:DataServices>

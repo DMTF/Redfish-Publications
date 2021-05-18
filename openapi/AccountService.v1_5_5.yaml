@@ -1,0 +1,580 @@
+components:
+  schemas:
+    AccountService_v1_5_5_AccountProviderTypes:
+      enum:
+      - RedfishService
+      - ActiveDirectoryService
+      - LDAPService
+      - OEM
+      type: string
+      x-enumDescriptions:
+        ActiveDirectoryService: An external Active Directory service.
+        LDAPService: A generic external LDAP service.
+        OEM: An OEM-specific external authentication or directory service.
+        RedfishService: An external Redfish service.
+      x-enumLongDescriptions:
+        ActiveDirectoryService: The external account provider shall be a Microsoft
+          Active Directory Technical Specification-conformant service.  The ServiceAddresses
+          format shall contain a set of fully qualified domain names (FQDN) or NetBIOS
+          names that links to the set of domain servers for the Active Directory service.
+        LDAPService: The external account provider shall be an RFC4511-conformant
+          service.  The ServiceAddresses format shall contain a set of fully qualified
+          domain names (FQDN) that links to the set of LDAP servers for the service.
+        RedfishService: The external account provider shall be a DMTF Redfish Specification-conformant
+          service.  The ServiceAddresses format shall contain a set of URIs that correspond
+          to a Redfish account service.
+    AccountService_v1_5_5_AccountService:
+      additionalProperties: false
+      description: The AccountService schema defines an account service.  The properties
+        are common to, and enable management of, all user accounts.  The properties
+        include the password requirements and control features, such as account lockout.  The
+        schema also contains links to the manager accounts and roles.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        AccountLockoutCounterResetAfter:
+          description: The period of time, in seconds, between the last failed login
+            attempt and the reset of the lockout threshold counter.  This value must
+            be less than or equal to the AccountLockoutDuration value.  A reset sets
+            the counter to `0`.
+          format: int64
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the period of time, in seconds,
+            from the last failed login attempt when the AccountLockoutThreshold counter,
+            which counts the number of failed login attempts, is reset to `0`.  Then,
+            AccountLockoutThreshold failures are required before the account is locked.  This
+            value shall be less than or equal to the AccountLockoutDuration value.  The
+            threshold counter also resets to `0` after each successful login.  If
+            the AccountLockoutCounterResetEnabled value is `false`, this property
+            shall be ignored.
+          x-units: s
+        AccountLockoutCounterResetEnabled:
+          description: An indication of whether the threshold counter is reset after
+            AccountLockoutCounterResetAfter expires.  If `true`, it is reset.  If
+            `false`, only a successful login resets the threshold counter and if the
+            user reaches the AccountLockoutThreshold limit, the account will be locked
+            out indefinitely and only an administrator-issued reset clears the threshold
+            counter.  If this property is absent, the default is `true`.
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the threshold counter
+            is reset after the AccountLockoutCounterResetAfter expires.  If `true`,
+            it is reset.  If `false`, only a successful login resets the threshold
+            counter and if the user reaches the AccountLockoutThreshold limit, the
+            account shall be locked out indefinitely and only an administrator-issued
+            reset clears the threshold counter.  If this property is absent, the default
+            is `true`.
+          x-versionAdded: v1_5_0
+        AccountLockoutDuration:
+          description: The period of time, in seconds, that an account is locked after
+            the number of failed login attempts reaches the account lockout threshold,
+            within the period between the last failed login attempt and the reset
+            of the lockout threshold counter.  If this value is `0`, no lockout will
+            occur.  If the AccountLockoutCounterResetEnabled value is `false`, this
+            property is ignored.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the period of time, in seconds,
+            that an account is locked after the number of failed login attempts reaches
+            the AccountLockoutThreshold value, within the AccountLockoutCounterResetAfter
+            window of time.  The value shall be greater than or equal to the AccountLockoutCounterResetAfter
+            value.  If this value is `0`, no lockout shall occur.  If AccountLockoutCounterResetEnabled
+            value is `false`, this property shall be ignored.
+          x-units: s
+        AccountLockoutThreshold:
+          description: The number of allowed failed login attempts before a user account
+            is locked for a specified duration.  If `0`, the account is never locked.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the threshold of failed login
+            attempts before a user account is locked.  If `0`, the account shall never
+            be locked.
+        Accounts:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The collection of manager accounts.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ManagerAccountCollection.
+        Actions:
+          $ref: '#/components/schemas/AccountService_v1_5_5_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+          x-versionAdded: v1_2_0
+        ActiveDirectory:
+          $ref: '#/components/schemas/AccountService_v1_5_5_ExternalAccountProvider'
+          description: The first Active Directory external account provider that this
+            account service supports.
+          x-longDescription: This property shall contain the first Active Directory
+            external account provider that this account service supports.  If the
+            account service supports one or more Active Directory services as an external
+            account provider, this entity shall be populated by default.  This entity
+            shall not be present in the additional external account providers resource
+            collection.
+          x-versionAdded: v1_3_0
+        AdditionalExternalAccountProviders:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The additional external account providers that this account
+            service uses.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ExternalAccountProviderCollection that represents the additional
+            external account providers that this account service uses.
+          x-versionAdded: v1_3_0
+        AuthFailureLoggingThreshold:
+          description: The number of authorization failures per account that are allowed
+            before the failed attempt is logged to the manager log.
+          format: int64
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the threshold for when an
+            authorization failure is logged.  Logging shall occur after every `n`
+            occurrences of an authorization failure on the same account, where `n`
+            represents the value of this property.  If the value is `0`, logging of
+            authorization failures shall be disabled.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        LDAP:
+          $ref: '#/components/schemas/AccountService_v1_5_5_ExternalAccountProvider'
+          description: The first LDAP external account provider that this account
+            service supports.
+          x-longDescription: This property shall contain the first LDAP external account
+            provider that this account service supports.  If the account service supports
+            one or more LDAP services as an external account provider, this entity
+            shall be populated by default.  This entity shall not be present in the
+            additional external account providers resource collection.
+          x-versionAdded: v1_3_0
+        LocalAccountAuth:
+          $ref: '#/components/schemas/AccountService_v1_5_5_LocalAccountAuth'
+          description: An indication of how the service uses the accounts collection
+            within this account service as part of authentication.  The enumerated
+            values describe the details for each mode.
+          readOnly: false
+          x-longDescription: This property shall govern how the service uses the manager
+            accounts resource collection within this account service as part of authentication.  The
+            enumerated values describe the details for each mode.
+          x-versionAdded: v1_3_0
+        MaxPasswordLength:
+          description: The maximum password length for this account service.
+          format: int64
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the maximum password length
+            that the implementation allows for this account service.  This property
+            does not apply to accounts from external account providers.
+        MinPasswordLength:
+          description: The minimum password length for this account service.
+          format: int64
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the minimum password length
+            that the implementation allows for this account service.  This property
+            does not apply to accounts from external account providers.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PrivilegeMap:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the mapping of the privileges required to complete
+            a requested operation on a URI associated with this service.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            PrivilegeMapping that contains the privileges that are required for a
+            user context to complete a requested operation on a URI associated with
+            this service.
+          x-versionAdded: v1_1_0
+        Roles:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The collection of Redfish roles.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type RoleCollection.
+        ServiceEnabled:
+          description: An indication of whether the account service is enabled.  If
+            `true`, it is enabled.  If `false`, it is disabled and users cannot be
+            created, deleted, or modified, and new sessions cannot be started.  However,
+            established sessions might still continue to run.  Any service, such as
+            the session service, that attempts to access the disabled account service
+            fails.  However, this does not affect HTTP Basic Authentication connections.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the account service
+            is enabled.  If `true`, it is enabled.  If `false`, it is disabled and
+            users cannot be created, deleted, or modified, and new sessions cannot
+            be started.  However, established sessions may still continue to run.  Any
+            service, such as the session service, that attempts to access the disabled
+            account service fails.  However, this does not affect HTTP Basic Authentication
+            connections.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent an account service for a Redfish
+        implementation.  The properties are common to, and enable management of, all
+        user accounts.  The properties include the password requirements and control
+        features, such as account lockout.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AccountService_v1_5_5_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/AccountService_v1_5_5_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AccountService_v1_5_5_Authentication:
+      additionalProperties: false
+      description: The information required to authenticate to the external service.
+      properties:
+        AuthenticationType:
+          $ref: '#/components/schemas/AccountService_v1_5_5_AuthenticationTypes'
+          description: The type of authentication used to connect to the external
+            account provider.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the type of authentication
+            used to connect to the external account provider.
+          x-versionAdded: v1_3_0
+        KerberosKeytab:
+          description: The Base64-encoded version of the Kerberos keytab for this
+            service.  A PATCH or PUT operation writes the keytab.  This property is
+            `null` in responses.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a Base64-encoded version
+            of the Kerberos keytab for this service.  A PATCH or PUT operation writes
+            the keytab.  The value shall be `null` in responses.
+          x-versionAdded: v1_3_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+          x-versionAdded: v1_3_0
+        Password:
+          description: The password for this service.  A PATCH or PUT request writes
+            the password.  This property is `null` in responses.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the password for this service.  A
+            PATCH or PUT operation writes the password.  The value shall be `null`
+            in responses.
+          x-versionAdded: v1_3_0
+        Token:
+          description: The token for this service.  A PATCH or PUT operation writes
+            the token.  This property is `null` in responses.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the token for this service.  A
+            PATCH or PUT operation writes the token.  The value shall be `null` in
+            responses.
+          x-versionAdded: v1_3_0
+        Username:
+          description: The user name for the service.
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the user name for this service.
+          x-versionAdded: v1_3_0
+      type: object
+      x-longDescription: This type shall contain the information required to authenticate
+        to the external service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AccountService_v1_5_5_AuthenticationTypes:
+      enum:
+      - Token
+      - KerberosKeytab
+      - UsernameAndPassword
+      - OEM
+      type: string
+      x-enumDescriptions:
+        KerberosKeytab: A Kerberos keytab.
+        OEM: An OEM-specific authentication mechanism.
+        Token: An opaque authentication token.
+        UsernameAndPassword: A user name and password combination.
+    AccountService_v1_5_5_ExternalAccountProvider:
+      additionalProperties: false
+      description: The external account provider services that can provide accounts
+        for this manager to use for authentication.
+      properties:
+        AccountProviderType:
+          $ref: '#/components/schemas/AccountService_v1_5_5_AccountProviderTypes'
+          deprecated: true
+          description: The type of external account provider to which this service
+            connects.
+          nullable: true
+          readOnly: true
+          x-deprecatedReason: This property is deprecated because the account provider
+            type is known when used in the LDAP and ActiveDirectory objects.
+          x-longDescription: This property shall contain the type of external account
+            provider to which this service connects.
+          x-versionAdded: v1_3_0
+          x-versionDeprecated: v1_5_0
+        Authentication:
+          $ref: '#/components/schemas/AccountService_v1_5_5_Authentication'
+          description: The authentication information for the external account provider.
+          x-longDescription: This property shall contain the authentication information
+            for the external account provider.
+          x-versionAdded: v1_3_0
+        Certificates:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to a collection of certificates that the external
+            account provider uses.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type CertificateCollection that contains certificates the external
+            account provider uses.
+          x-versionAdded: v1_4_0
+        LDAPService:
+          $ref: '#/components/schemas/AccountService_v1_5_5_LDAPService'
+          description: The additional mapping information needed to parse a generic
+            LDAP service.
+          x-longDescription: This property shall contain any additional mapping information
+            needed to parse a generic LDAP service.  This property should only be
+            present inside the LDAP property.
+          x-versionAdded: v1_3_0
+        RemoteRoleMapping:
+          description: The mapping rules to convert the external account providers
+            account information to the local Redfish role.
+          items:
+            $ref: '#/components/schemas/AccountService_v1_5_5_RoleMapping'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain a set of the mapping rules
+            that are used to convert the external account providers account information
+            to the local Redfish role.
+          x-versionAdded: v1_3_0
+        ServiceAddresses:
+          description: The addresses of the user account providers to which this external
+            account provider links.  The format of this field depends on the type
+            of external account provider.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the addresses of the account
+            providers to which this external account provider links.  The format of
+            this field depends on the type of external account provider.  Each item
+            in the array shall contain a single address.  Services can define their
+            own behavior for managing multiple addresses.
+          x-versionAdded: v1_3_0
+        ServiceEnabled:
+          description: An indication of whether this service is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this service is
+            enabled.
+          x-versionAdded: v1_3_0
+      type: object
+      x-longDescription: This type shall contain properties that represent external
+        account provider services that can provide accounts for this manager to use
+        for authentication.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AccountService_v1_5_5_LDAPSearchSettings:
+      additionalProperties: false
+      description: The settings to search a generic LDAP service.
+      properties:
+        BaseDistinguishedNames:
+          description: The base distinguished names to use to search an external LDAP
+            service.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of base distinguished
+            names to use to search an external LDAP service.
+          x-versionAdded: v1_3_0
+        GroupNameAttribute:
+          description: The attribute name that contains the LDAP group name entry.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the attribute name that contains
+            the LDAP group name.
+          x-versionAdded: v1_3_0
+        GroupsAttribute:
+          description: The attribute name that contains the groups for a user on the
+            LDAP user entry.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the attribute name that contains
+            the groups for an LDAP user entry.
+          x-versionAdded: v1_3_0
+        UsernameAttribute:
+          description: The attribute name that contains the LDAP user name entry.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the attribute name that contains
+            the LDAP user name.
+          x-versionAdded: v1_3_0
+      type: object
+      x-longDescription: This type shall contain all required settings to search a
+        generic LDAP service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AccountService_v1_5_5_LDAPService:
+      additionalProperties: false
+      description: The settings required to parse a generic LDAP service.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+          x-versionAdded: v1_3_0
+        SearchSettings:
+          $ref: '#/components/schemas/AccountService_v1_5_5_LDAPSearchSettings'
+          description: The required settings to search an external LDAP service.
+          x-longDescription: This property shall contain the required settings to
+            search an external LDAP service.
+          x-versionAdded: v1_3_0
+      type: object
+      x-longDescription: This type shall contain all required settings to parse a
+        generic LDAP service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AccountService_v1_5_5_LocalAccountAuth:
+      enum:
+      - Enabled
+      - Disabled
+      - Fallback
+      type: string
+      x-enumDescriptions:
+        Disabled: The service never authenticates users based on the account service-defined
+          accounts collection.
+        Enabled: The service authenticates users based on the account service-defined
+          accounts collection.
+        Fallback: The service authenticates users based on the account service-defined
+          accounts collection only if any external account providers are currently
+          unreachable.
+      x-enumLongDescriptions:
+        Disabled: The service shall never authenticate users based on the account
+          service-defined manager accounts resource collection.
+        Enabled: The service shall authenticate users based on the account service-defined
+          manager accounts resource collection.
+        Fallback: The service shall authenticate users based on the account service-defined
+          manager accounts resource collection only if any external account providers
+          are currently unreachable.
+    AccountService_v1_5_5_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AccountService_v1_5_5_RoleMapping:
+      additionalProperties: false
+      description: The mapping rules that are used to convert the external account
+        providers account information to the local Redfish role.
+      properties:
+        LocalRole:
+          description: The name of the local Redfish role to which to map the remote
+            user or group.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the RoleId property value
+            within a role resource on this Redfish service to which to map the remote
+            user or group.
+          x-versionAdded: v1_3_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+          x-versionAdded: v1_3_0
+        RemoteGroup:
+          description: The name of the remote group, or the remote role in the case
+            of a Redfish service, that maps to the local Redfish role to which this
+            entity links.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the name of the remote group,
+            or the remote role in the case of a Redfish service, that maps to the
+            local Redfish role to which this entity links.
+          x-versionAdded: v1_3_0
+        RemoteUser:
+          description: The name of the remote user that maps to the local Redfish
+            role to which this entity links.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the name of the remote user
+            that maps to the local Redfish role to which this entity links.
+          x-versionAdded: v1_3_0
+      type: object
+      x-longDescription: This type shall contain mapping rules that are used to convert
+        the external account providers account information to the local Redfish role.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#AccountService.v1_5_5.AccountService'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.1'

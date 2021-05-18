@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MediaController v1.1.0                                              -->
+<!--# Redfish Schema:  MediaController v1.2.0                                              -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -42,6 +42,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/MemoryDomain_v1.xml">
     <edmx:Include Namespace="MemoryDomain"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/EnvironmentMetrics_v1.xml">
+    <edmx:Include Namespace="EnvironmentMetrics"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -193,6 +196,21 @@
            <Annotation Term="OData.Description" String="The UUID for this media controller."/>
            <Annotation Term="OData.LongDescription" String="This property shall contain a universal unique identifier number for the media controller."/>
         </Property>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MediaController.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.1"/>
+      <Annotation Term="OData.Description" String="This version was created to add a link for EnvironmentMetrics."/>
+
+      <EntityType Name="MediaController" BaseType="MediaController.v1_1_0.MediaController">
+        <NavigationProperty Name="EnvironmentMetrics" Type="EnvironmentMetrics.EnvironmentMetrics" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the environment metrics for this media controller."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type EnvironmentMetrics that specifies the environment metrics for this media controller."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
       </EntityType>
     </Schema>
 

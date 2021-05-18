@@ -1,7 +1,7 @@
 {
     "$id": "http://redfish.dmtf.org/schemas/v1/Resource.json",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "copyright": "Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
         "Condition": {
             "additionalProperties": false,
@@ -56,7 +56,7 @@
                     "readonly": true
                 },
                 "Severity": {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Health",
+                    "$ref": "#/definitions/Health",
                     "description": "The severity of the condition.",
                     "longDescription": "This property shall contain the severity of the condition.  Services can replace the value defined in the message registry with a value more applicable to the implementation.",
                     "readonly": true
@@ -100,37 +100,40 @@
         "Identifier": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_1_12.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_1_13.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_2_11.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_2_12.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_3_10.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_3_11.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_4_9.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_4_10.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_5_8.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_5_9.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_6_7.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_6_8.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_7_6.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_7_7.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_6.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_7.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_4.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_5.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_1.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_2.json#/definitions/Identifier"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_11_0.json#/definitions/Identifier"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_11_1.json#/definitions/Identifier"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_12_0.json#/definitions/Identifier"
                 }
             ],
             "description": "Any additional identifiers for a resource.",
@@ -157,10 +160,13 @@
         "Item": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/ReferenceableMember"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Resource"
+                    "$ref": "#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "#/definitions/Resource"
                 }
             ],
             "description": "The base type for resources and members that can be linked to."
@@ -168,10 +174,13 @@
         "ItemOrCollection": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Item"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/ResourceCollection"
+                    "$ref": "#/definitions/Item"
+                },
+                {
+                    "$ref": "#/definitions/ResourceCollection"
                 }
             ]
         },
@@ -193,7 +202,7 @@
             },
             "properties": {
                 "Oem": {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Oem",
+                    "$ref": "#/definitions/Oem",
                     "description": "The OEM extension property.",
                     "longDescription": "This property shall contain the OEM extensions.  All values for properties contained in this object shall conform to the Redfish Specification-described requirements."
                 }
@@ -203,37 +212,40 @@
         "Location": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_1_12.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_1_13.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_2_11.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_2_12.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_3_10.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_3_11.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_4_9.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_4_10.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_5_8.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_5_9.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_6_7.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_6_8.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_7_6.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_7_7.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_6.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_7.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_4.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_5.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_1.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_2.json#/definitions/Location"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_11_0.json#/definitions/Location"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_11_1.json#/definitions/Location"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_12_0.json#/definitions/Location"
                 }
             ],
             "description": "The location of a resource.",
@@ -262,7 +274,7 @@
                     ]
                 },
                 "^[A-Za-z0-9_]+$": {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/OemObject"
+                    "$ref": "#/definitions/OemObject"
                 }
             },
             "properties": {},
@@ -307,7 +319,46 @@
         "ReferenceableMember": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.json#/definitions/ReferenceableMember"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_0_12.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_1_13.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_2_12.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_3_11.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_4_10.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_5_9.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_6_8.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_7_7.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_7.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_5.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_2.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_11_1.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_12_0.json#/definitions/ReferenceableMember"
                 }
             ]
         },
@@ -343,7 +394,7 @@
                 "Nmi": "This value shall indicate the resource will generate a diagnostic interrupt.",
                 "On": "This value shall indicate the resource will transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
                 "PowerCycle": "This value shall indicate the resource will transition to a power off state, then transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
-                "PushPowerButton": "This value shall indicate the resource will behave as if the physical power button is pressed.  The behavior of pressing the physical power button might be dependent on the state of the unit and the behavior might be configurable."
+                "PushPowerButton": "This value shall indicate the resource will behave as if the physical power button is pressed.  The behavior of pressing the physical power button may be dependent on the state of the unit and the behavior may be configurable."
             },
             "enumVersionAdded": {
                 "PowerCycle": "v1_4_0"
@@ -353,14 +404,92 @@
         "Resource": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.json#/definitions/Resource"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_0_12.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_1_13.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_2_12.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_3_11.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_4_10.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_5_9.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_6_8.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_7_7.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_7.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_5.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_2.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_11_1.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_12_0.json#/definitions/Resource"
                 }
             ]
         },
         "ResourceCollection": {
             "anyOf": [
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_0_0.json#/definitions/ResourceCollection"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_0_12.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_1_13.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_2_12.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_3_11.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_4_10.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_5_9.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_6_8.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_7_7.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_8_7.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_9_5.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_10_2.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_11_1.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_12_0.json#/definitions/ResourceCollection"
                 }
             ]
         },
@@ -426,7 +555,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Condition"
+                                "$ref": "#/definitions/Condition"
                             },
                             {
                                 "type": "null"
@@ -434,12 +563,13 @@
                         ]
                     },
                     "longDescription": "This property shall represent the active conditions requiring attention in this or a related resource that affects the Health or HealthRollup of this resource.",
-                    "type": "array"
+                    "type": "array",
+                    "versionAdded": "v1_11_0"
                 },
                 "Health": {
                     "anyOf": [
                         {
-                            "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Health"
+                            "$ref": "#/definitions/Health"
                         },
                         {
                             "type": "null"
@@ -452,7 +582,7 @@
                 "HealthRollup": {
                     "anyOf": [
                         {
-                            "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Health"
+                            "$ref": "#/definitions/Health"
                         },
                         {
                             "type": "null"
@@ -463,14 +593,14 @@
                     "readonly": true
                 },
                 "Oem": {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Oem",
+                    "$ref": "#/definitions/Oem",
                     "description": "The OEM extension property.",
                     "longDescription": "This property shall contain the OEM extensions.  All values for properties contained in this object shall conform to the Redfish Specification-described requirements."
                 },
                 "State": {
                     "anyOf": [
                         {
-                            "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/State"
+                            "$ref": "#/definitions/State"
                         },
                         {
                             "type": "null"

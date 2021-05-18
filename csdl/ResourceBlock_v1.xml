@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ResourceBlock v1.3.4                                                -->
+<!--# Redfish Schema:  ResourceBlock v1.4.0                                                -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -77,7 +77,7 @@
         </Annotation>
         <Annotation Term="Capabilities.DeleteRestrictions">
           <Record>
-            <PropertyValue Property="Deletable" Bool="false"/>
+            <PropertyValue Property="Deletable" Bool="true"/>
           </Record>
         </Annotation>
         <Annotation Term="Redfish.Uris">
@@ -228,6 +228,17 @@
               <Record>
                 <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
                 <PropertyValue Property="Version" String="v1_2_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="IndependentResource">
+          <Annotation Term="OData.Description" String="This resource block is capable of being consumed as a standalone component.  This resource block can represent things such as a software platform on one or more computer systems or an appliance that provides composable resources and other services, and can be managed independently of the Redfish service."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_4_0"/>
               </Record>
             </Collection>
           </Annotation>
@@ -555,6 +566,52 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
       <EntityType Name="ResourceBlock" BaseType="ResourceBlock.v1_3_3.ResourceBlock"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ResourceBlock.v1_4_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2020.4"/>
+      <Annotation Term="OData.Description" String="This version was created to add the Pool and Client properties.  It was also created to add `IndependentResource` to the ResourceBlockType enumeration.  It was also created to add the ConsumingResourceBlocks and SupplyingResourceBlocks properties to Links."/>
+
+      <EntityType Name="ResourceBlock" BaseType="ResourceBlock.v1_3_4.ResourceBlock">
+        <Property Name="Pool" Type="ResourceBlock.v1_4_0.PoolType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The pool to which this resource block belongs."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the pool to which this resource block belongs.  If this resource block is not assigned to a client, this property shall contain the value `Unassigned`.  If this resource block is assigned to a client, this property shall not contain the value `Unassigned`."/>
+        </Property>
+        <Property Name="Client" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The client to which this resource block is assigned."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the client to which this resource block is assigned."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Links" BaseType="ResourceBlock.v1_0_0.Links">
+        <NavigationProperty Name="ConsumingResourceBlocks" Type="Collection(ResourceBlock.ResourceBlock)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of links to resource blocks that depend on this resource block."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type ResourceBlock that represent the resource blocks that depend on this resource block as a component."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="SupplyingResourceBlocks" Type="Collection(ResourceBlock.ResourceBlock)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of links to resource blocks that this resource block depends on."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type ResourceBlock that represent the resource blocks that this resource block depends on as components."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
+
+      <EnumType Name="PoolType">
+        <Member Name="Free">
+          <Annotation Term="OData.Description" String="This resource block is in the free pool and is not contributing to any composed resources."/>
+        </Member>
+        <Member Name="Active">
+          <Annotation Term="OData.Description" String="This resource block is in the active pool and is contributing to at least one composed resource as a result of a composition request."/>
+        </Member>
+        <Member Name="Unassigned">
+          <Annotation Term="OData.Description" String="This resource block is not assigned to any pools."/>
+        </Member>
+      </EnumType>
     </Schema>
 
   </edmx:DataServices>

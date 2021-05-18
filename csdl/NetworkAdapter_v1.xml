@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  NetworkAdapter v1.6.0                                               -->
+<!--# Redfish Schema:  NetworkAdapter v1.7.0                                               -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -36,6 +36,9 @@
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/NetworkDeviceFunction_v1.xml">
     <edmx:Include Namespace="NetworkDeviceFunction"/>
   </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/NetworkAdapterMetrics_v1.xml">
+    <edmx:Include Namespace="NetworkAdapterMetrics"/>
+  </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/PCIeDevice_v1.xml">
     <edmx:Include Namespace="PCIeDevice"/>
   </edmx:Reference>
@@ -53,6 +56,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/SoftwareInventory_v1.xml">
     <edmx:Include Namespace="SoftwareInventory"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/EnvironmentMetrics_v1.xml">
+    <edmx:Include Namespace="EnvironmentMetrics"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -586,6 +592,32 @@
         <Property Name="Measurements" Type="Collection(SoftwareInventory.MeasurementBlock)" Nullable="false">
           <Annotation Term="OData.Description" String="An array of DSP0274-defined measurement blocks."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain an array of DSP0274-defined measurement blocks."/>
+        </Property>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_7_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.1"/>
+      <Annotation Term="OData.Description" String="This version was created to add the Metrics, EnvironmentMetrics, and LLDPEnabled properties."/>
+
+      <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_6_0.NetworkAdapter">
+        <NavigationProperty Name="Metrics" Type="NetworkAdapterMetrics.NetworkAdapterMetrics">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the metrics associated with this adapter."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type NetworkAdapterMetrics that contains the metrics associated with this adapter."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="EnvironmentMetrics" Type="EnvironmentMetrics.EnvironmentMetrics" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the environment metrics for this network adapter."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type EnvironmentMetrics that specifies the environment metrics for this network adapter."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <Property Name="LLDPEnabled" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite" />
+          <Annotation Term="OData.Description" String="Enable or disable LLDP globally for an adapter." />
+          <Annotation Term="OData.LongDescription" String="This property shall contain the state indicating whether LLDP is globally enabled on a network adapter.  If set to `false`, the LLDPEnabled value for the ports associated with this adapter shall be disregarded."/>
         </Property>
       </EntityType>
     </Schema>

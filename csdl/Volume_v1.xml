@@ -328,7 +328,7 @@
         <Annotation Term="OData.Description" String="Request system change the RAID layout of the volume."/>
         <Annotation
           Term="OData.LongDescription"
-          String="This action shall request the system to change the RAID layout of the volume.  Depending on the combination of the submitted parameters, this could be changing the RAID type, changing the span count, changing the number of drives used by the volume, or another configuration change suppported by the system. Note that usage of this action while online may potentially cause data loss if the available capacity is reduced."/>
+          String="This action shall request the system to change the RAID layout of the volume.  Depending on the combination of the submitted parameters, this could be changing the RAID type, changing the span count, changing the number of drives used by the volume, or another configuration change supported by the system. Note that usage of this action while online may potentially cause data loss if the available capacity is reduced."/>
         <Annotation Term="Redfish.Revisions">
           <Collection>
             <Record>
@@ -1197,8 +1197,8 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
         </Property>
         <Property Name="SupportsAtomicTransactionSize" Type="Edm.Boolean">
-          <Annotation Term="OData.Description" String="Indicates that the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate whether or not the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
+          <Annotation Term="OData.Description" String="Indicates that the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether or not the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
         </Property>
         <Property Name="SupportsIOPerformanceHints" Type="Edm.Boolean">
@@ -1227,7 +1227,7 @@
           <Annotation Term="OData.Description" String="Indicates the Initialization Method used for this volume. If InitializeMethod is not specified, the InitializeMethod should be Foreground."/>
           <Annotation
             Term="OData.LongDescription"
-            String="This property shall indicate the initiatialization method used for this volume. If InitializeMethod is not specified, the InitializeMethod should be Foreground. This value reflects the most recently used Initialization Method, and may be changed using the Initialize Action."/>
+            String="This property shall indicate the initialization method used for this volume. If InitializeMethod is not specified, the InitializeMethod should be Foreground. This value reflects the most recently used Initialization Method, and may be changed using the Initialize Action."/>
         </Property>
       </EntityType>
       <ComplexType Name="Links" BaseType="Volume.v1_5_0.Links">
@@ -1246,6 +1246,12 @@
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_6_1">
+      <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
+      <Annotation Term="OData.Description" String="This version was added to fix typographical errors."/>
+      <EntityType Name="Volume" BaseType="Volume.v1_6_0.Volume"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_6_2">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
       <Annotation Term="OData.Description" String="This version was added to fix typographical errors."/>
       <EntityType Name="Volume" BaseType="Volume.v1_6_0.Volume"/>

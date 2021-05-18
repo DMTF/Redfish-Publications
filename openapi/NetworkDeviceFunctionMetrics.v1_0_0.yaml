@@ -1,0 +1,227 @@
+components:
+  schemas:
+    NetworkDeviceFunctionMetrics_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/NetworkDeviceFunctionMetrics_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    NetworkDeviceFunctionMetrics_v1_0_0_Ethernet:
+      additionalProperties: false
+      description: The network function metrics for an Ethernet interface.
+      properties:
+        NumOffloadedIPv4Conns:
+          description: The total number of offloaded TCP/IPv4 connections.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of offloaded
+            TCP/IPv4 connections.
+        NumOffloadedIPv6Conns:
+          description: The total number of offloaded TCP/IPv6 connections.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of offloaded
+            TCP/IPv6 connections.
+      type: object
+      x-longDescription: This type shall describe the Ethernet related network function
+        metrics.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    NetworkDeviceFunctionMetrics_v1_0_0_NetworkDeviceFunctionMetrics:
+      additionalProperties: false
+      description: The NetworkDeviceFunctionMetrics schema contains usage and health
+        statistics for a network function of a network adapter.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/NetworkDeviceFunctionMetrics_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Ethernet:
+          $ref: '#/components/schemas/NetworkDeviceFunctionMetrics_v1_0_0_Ethernet'
+          description: The network function metrics specific to Ethernet adapters.
+          x-longDescription: This property shall contain network function metrics
+            specific to Ethernet adapters.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        RXAvgQueueDepthPercent:
+          description: The average RX queue depth as the percentage.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the average RX queue depth
+            as the percentage.
+          x-units: '%'
+        RXBytes:
+          description: The total number of bytes received on a network function.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of bytes
+            received on a network function, inclusive of all protocol overhead.
+          x-units: By
+        RXFrames:
+          description: The total number of frames received on a network function.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of frames
+            received on a network function.
+        RXMulticastFrames:
+          description: The total number of good multicast frames received on a network
+            function since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of good
+            multicast frames received on a network function since reset, including
+            host and remote management passthrough traffic.
+        RXQueuesEmpty:
+          description: Whether nothing is in a network function's RX queues to DMA.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether nothing is in a
+            network function's RX queues to DMA.
+        RXQueuesFull:
+          description: The number of RX queues that are full.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of RX queues that
+            are full.
+        RXUnicastFrames:
+          description: The total number of good unicast frames received on a network
+            function since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of good
+            unicast frames received on a network function since reset.
+        TXAvgQueueDepthPercent:
+          description: The average TX queue depth as the percentage.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the average TX queue depth
+            as the percentage.
+          x-units: '%'
+        TXBytes:
+          description: The total number of bytes sent on a network function.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of bytes
+            sent on a network function, inclusive of all protocol overhead.
+          x-units: By
+        TXFrames:
+          description: The total number of frames sent on a network function.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of frames
+            sent on a network function.
+        TXMulticastFrames:
+          description: The total number of good multicast frames transmitted on a
+            network function since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of good
+            multicast frames transmitted on a network function since reset, including
+            host and remote management passthrough traffic.
+        TXQueuesEmpty:
+          description: Whether all TX queues for a network function are empty.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether all TX queues for
+            a network function are empty.
+        TXQueuesFull:
+          description: The number of TX queues that are full.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of TX queues that
+            are full.
+        TXUnicastFrames:
+          description: The total number of good unicast frames transmitted on a network
+            function since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of good
+            unicast frames transmitted on a network function since reset, including
+            host and remote management passthrough traffic.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the network metrics for a single
+        network function of a network adapter in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    NetworkDeviceFunctionMetrics_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#NetworkDeviceFunctionMetrics.v1_0_0.NetworkDeviceFunctionMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.1'

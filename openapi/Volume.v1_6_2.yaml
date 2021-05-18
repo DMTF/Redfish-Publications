@@ -1,0 +1,1206 @@
+components:
+  schemas:
+    Volume_v1_6_2_Actions:
+      additionalProperties: false
+      properties:
+        '#Volume.AssignReplicaTarget':
+          $ref: '#/components/schemas/Volume_v1_6_2_AssignReplicaTarget'
+        '#Volume.ChangeRAIDLayout':
+          $ref: '#/components/schemas/Volume_v1_6_2_ChangeRAIDLayout'
+        '#Volume.CheckConsistency':
+          $ref: '#/components/schemas/Volume_v1_6_2_CheckConsistency'
+        '#Volume.CreateReplicaTarget':
+          $ref: '#/components/schemas/Volume_v1_6_2_CreateReplicaTarget'
+        '#Volume.ForceEnable':
+          $ref: '#/components/schemas/Volume_v1_6_2_ForceEnable'
+        '#Volume.Initialize':
+          $ref: '#/components/schemas/Volume_v1_6_2_Initialize'
+        '#Volume.RemoveReplicaRelationship':
+          $ref: '#/components/schemas/Volume_v1_6_2_RemoveReplicaRelationship'
+        '#Volume.ResumeReplication':
+          $ref: '#/components/schemas/Volume_v1_6_2_ResumeReplication'
+        '#Volume.ReverseReplicationRelationship':
+          $ref: '#/components/schemas/Volume_v1_6_2_ReverseReplicationRelationship'
+        '#Volume.SplitReplication':
+          $ref: '#/components/schemas/Volume_v1_6_2_SplitReplication'
+        '#Volume.SuspendReplication':
+          $ref: '#/components/schemas/Volume_v1_6_2_SuspendReplication'
+        Oem:
+          $ref: '#/components/schemas/Volume_v1_6_2_OemActions'
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Volume_v1_6_2_AssignReplicaTarget:
+      additionalProperties: false
+      description: This action is used to establish a replication relationship by
+        assigning an existing volume to serve as a target replica for an existing
+        source volume.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall be used to establish a replication relationship
+        by assigning an existing volume to serve as a target replica for an existing
+        source volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_4_0
+    Volume_v1_6_2_AssignReplicaTargetRequestBody:
+      additionalProperties: false
+      description: This action is used to establish a replication relationship by
+        assigning an existing volume to serve as a target replica for an existing
+        source volume.
+      properties:
+        ReplicaType:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo.yaml#/components/schemas/StorageReplicaInfo_ReplicaType
+          description: The type of replica relationship to be created.
+          x-longDescription: This parameter shall contain the type of replica relationship
+            to be created (e.g., Clone, Mirror, Snap).
+        ReplicaUpdateMode:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo.yaml#/components/schemas/StorageReplicaInfo_ReplicaUpdateMode
+          description: The replica update mode (synchronous vs asynchronous).
+          x-longDescription: This parameter shall specify the replica update mode.
+        TargetVolume:
+          description: The Uri to the existing target volume.
+          type: string
+          x-longDescription: This parameter shall contain the Uri to the existing
+            target volume.
+      required:
+      - ReplicaType
+      - ReplicaUpdateMode
+      - TargetVolume
+      type: object
+      x-longDescription: This action shall be used to establish a replication relationship
+        by assigning an existing volume to serve as a target replica for an existing
+        source volume.
+    Volume_v1_6_2_ChangeRAIDLayout:
+      additionalProperties: false
+      description: Request system change the RAID layout of the volume.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall request the system to change the RAID layout
+        of the volume.  Depending on the combination of the submitted parameters,
+        this could be changing the RAID type, changing the span count, changing the
+        number of drives used by the volume, or another configuration change supported
+        by the system. Note that usage of this action while online may potentially
+        cause data loss if the available capacity is reduced.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_5_0
+    Volume_v1_6_2_ChangeRAIDLayoutRequestBody:
+      additionalProperties: false
+      description: Request system change the RAID layout of the volume.
+      properties:
+        Drives:
+          description: An array of the drives to be used by the volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          type: array
+          x-longDescription: This parameter shall contain an array of the drives to
+            be used by the volume.
+        MediaSpanCount:
+          description: The requested number of media elements used per span in the
+            secondary RAID for a hierarchical RAID type.
+          format: int64
+          type: integer
+          x-longDescription: This parameter shall contain the requested number of
+            media elements used per span in the secondary RAID for a hierarchical
+            RAID type.
+        RAIDType:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_RAIDType
+          description: The requested RAID type for the volume.
+          x-longDescription: This parameter shall contain the requested RAID type
+            for the volume.
+        StripSizeBytes:
+          description: The number of blocks (bytes) requested for new strip size.
+          format: int64
+          type: integer
+          x-longDescription: This parameter shall contain the number of blocks (bytes)
+            requested for the strip size.
+      type: object
+      x-longDescription: This action shall request the system to change the RAID layout
+        of the volume.  Depending on the combination of the submitted parameters,
+        this could be changing the RAID type, changing the span count, changing the
+        number of drives used by the volume, or another configuration change supported
+        by the system. Note that usage of this action while online may potentially
+        cause data loss if the available capacity is reduced.
+    Volume_v1_6_2_CheckConsistency:
+      additionalProperties: false
+      description: This action is used to force a check of the Volume's parity or
+        redundant data to ensure it matches calculated values.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This defines the name of the custom action supported on this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Volume_v1_6_2_CheckConsistencyRequestBody:
+      additionalProperties: false
+      description: This action is used to force a check of the Volume's parity or
+        redundant data to ensure it matches calculated values.
+      properties: {}
+      type: object
+      x-longDescription: This defines the name of the custom action supported on this
+        resource.
+    Volume_v1_6_2_CreateReplicaTarget:
+      additionalProperties: false
+      description: This action is used to create a new volume resource to provide
+        expanded data protection through a replica relationship with the specified
+        source volume.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall be used to create a new volume resource
+        to provide expanded data protection through a replica relationship with the
+        specified source volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_4_0
+    Volume_v1_6_2_CreateReplicaTargetRequestBody:
+      additionalProperties: false
+      description: This action is used to create a new volume resource to provide
+        expanded data protection through a replica relationship with the specified
+        source volume.
+      properties:
+        ReplicaType:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo.yaml#/components/schemas/StorageReplicaInfo_ReplicaType
+          description: The type of replica relationship to be created.
+          x-longDescription: This parameter shall contain the type of replica relationship
+            to be created (e.g., Clone, Mirror, Snap).
+        ReplicaUpdateMode:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo.yaml#/components/schemas/StorageReplicaInfo_ReplicaUpdateMode
+          description: The replica update mode (synchronous vs asynchronous).
+          x-longDescription: This parameter shall specify the replica update mode.
+        TargetStoragePool:
+          description: The Uri to the existing target Storage Pool.
+          type: string
+          x-longDescription: This parameter shall contain the Uri to the existing
+            StoragePool in which to create the target volume.
+        VolumeName:
+          description: The Name for the new target volume.
+          type: string
+          x-longDescription: This parameter shall contain the Name for the target
+            volume.
+      required:
+      - ReplicaType
+      - ReplicaUpdateMode
+      - TargetStoragePool
+      type: object
+      x-longDescription: This action shall be used to create a new volume resource
+        to provide expanded data protection through a replica relationship with the
+        specified source volume.
+    Volume_v1_6_2_ForceEnable:
+      additionalProperties: false
+      description: Request system force the volume to an enabled state regardless
+        of data loss.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall request the system to force the volume
+        to enabled state regardless of data loss scenarios.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_5_0
+    Volume_v1_6_2_ForceEnableRequestBody:
+      additionalProperties: false
+      description: Request system force the volume to an enabled state regardless
+        of data loss.
+      properties: {}
+      type: object
+      x-longDescription: This action shall request the system to force the volume
+        to enabled state regardless of data loss scenarios.
+    Volume_v1_6_2_Initialize:
+      additionalProperties: false
+      description: This action is used to prepare the contents of the volume for use
+        by the system. If InitializeMethod is not specified in the request body, but
+        the property InitializeMethod is specified, the property InitializeMethod
+        value should be used. If neither is specified, the InitializeMethod should
+        be Foreground.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This defines the name of the custom action supported on this
+        resource. If InitializeMethod is not specified in the request body, but the
+        property InitializeMethod is specified, the property InitializeMethod value
+        should be used. If neither is specified, the InitializeMethod should be Foreground.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_5_0
+    Volume_v1_6_2_InitializeRequestBody:
+      additionalProperties: false
+      description: This action is used to prepare the contents of the volume for use
+        by the system. If InitializeMethod is not specified in the request body, but
+        the property InitializeMethod is specified, the property InitializeMethod
+        value should be used. If neither is specified, the InitializeMethod should
+        be Foreground.
+      properties:
+        InitializeMethod:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_InitializeMethod
+          description: The type of initialization to be performed.
+          x-longDescription: This defines the property name for the action.
+        InitializeType:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_InitializeType
+          deprecated: true
+          description: The type of initialization to be performed.
+          x-deprecatedReason: Deprecated in favor of the InitializeMethod property.
+          x-longDescription: This defines the property name for the action.
+      type: object
+      x-longDescription: This defines the name of the custom action supported on this
+        resource. If InitializeMethod is not specified in the request body, but the
+        property InitializeMethod is specified, the property InitializeMethod value
+        should be used. If neither is specified, the InitializeMethod should be Foreground.
+    Volume_v1_6_2_Links:
+      additionalProperties: false
+      description: Add ability to manage spare capacity.
+      properties:
+        CacheDataVolumes:
+          description: A pointer to the data volumes this volume serves as a cache
+            volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This shall be a pointer to the cache data volumes this
+            volume serves as a cache volume.  The corresponding VolumeUsage property
+            shall be set to CacheOnly when this property is used.
+          x-versionAdded: v1_6_0
+        CacheDataVolumes@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        CacheVolumeSource:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A pointer to the cache volume source for this volume.
+          nullable: true
+          readOnly: true
+          x-longDescription: This shall be a pointer to the cache volume source for
+            this volume. The corresponding VolumeUsage property shall be set to Data
+            when this property is used.
+          x-versionAdded: v1_6_0
+        ClassOfService:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The ClassOfService that this storage volume conforms to.
+          readOnly: true
+          x-longDescription: This property shall contain a reference to the ClassOfService
+            that this storage volume conforms to.
+          x-versionAdded: v1_1_0
+        ClientEndpoints:
+          description: An array of references to the client Endpoints associated with
+            this volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be references to the
+            client Endpoints this volume is associated with.
+          x-versionAdded: v1_4_0
+        ClientEndpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ConsistencyGroups:
+          description: An array of references to the ConsistencyGroups associated
+            with this volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be references to the
+            ConsistencyGroups this volume is associated with.
+          x-versionAdded: v1_4_0
+        ConsistencyGroups@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        DedicatedSpareDrives:
+          description: An array of references to the drives which are dedicated spares
+            for this volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: The value of this property shall be a reference to the
+            resources that this volume is associated with and shall reference resources
+            of type Drive. This property shall only contain references to Drive entities
+            which are currently assigned as a dedicated spare and are able to support
+            this Volume.
+          x-versionAdded: v1_2_0
+        DedicatedSpareDrives@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Drives:
+          description: An array of references to the drives which contain this volume.
+            This will reference Drives that either wholly or only partly contain this
+            volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be a reference to the
+            resources that this volume is associated with and shall reference resources
+            of type Drive. This property shall only contain references to Drive entities
+            which are currently members of the Volume, not hot spare Drives which
+            are not currently a member of the volume.
+        Drives@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        JournalingMedia:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Resource
+          description: A pointer to the Resource that serves as a journaling media
+            for this volume.
+          nullable: true
+          readOnly: false
+          x-longDescription: This shall be a pointer to the journaling media used
+            for this Volume to address the write hole issue. Valid when WriteHoleProtectionPolicy
+            property is set to 'Journaling'.
+          x-versionAdded: v1_5_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        OwningStorageResource:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A pointer to the Storage resource that owns or contains this
+            volume.
+          readOnly: true
+          x-longDescription: This shall be a pointer to the Storage resource that
+            owns or contains this volume.
+          x-versionAdded: v1_5_0
+        OwningStorageService:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A pointer to the StorageService that owns or contains this
+            volume.
+          readOnly: true
+          x-longDescription: This shall be a pointer to the StorageService that owns
+            or contains this volume.
+          x-versionAdded: v1_4_0
+        ServerEndpoints:
+          description: An array of references to the server Endpoints associated with
+            this volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be references to the
+            server Endpoints this volume is associated with.
+          x-versionAdded: v1_4_0
+        ServerEndpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        SpareResourceSets:
+          description: An array of references to SpareResourceSets.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: Each referenced SpareResourceSet shall contain resources
+            that may be utilized to replace the capacity provided by a failed resource
+            having a compatible type.
+          x-versionAdded: v1_3_0
+        SpareResourceSets@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        StorageGroups:
+          description: An array of references to the StorageGroups associated with
+            this volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value of this property shall be references to the
+            StorageGroups this volume is associated with.
+          x-versionAdded: v1_4_0
+        StorageGroups@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Volume_v1_6_2_NVMeNamespaceProperties:
+      additionalProperties: false
+      description: This contains properties to use when Volume is used to describe
+        an NVMe Namespace.
+      properties:
+        FormattedLBASize:
+          description: The LBA data size and metadata size combination that the namespace
+            has been formatted with.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the LBA data size and metadata
+            size combination that the namespace has been formatted with. This is a
+            4-bit data structure.
+          x-versionAdded: v1_5_0
+        IsShareable:
+          description: Indicates the namespace is shareable.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the namespace is
+            shareable.
+          x-versionAdded: v1_5_0
+        MetadataTransferredAtEndOfDataLBA:
+          description: This property indicates whether or not the metadata is transferred
+            at the end of the LBA creating an extended data LBA.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the metadata
+            is transferred at the end of the LBA creating an extended data LBA.
+          x-versionAdded: v1_5_0
+        NVMeVersion:
+          description: The version of the NVMe Base Specification supported.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the version of the NVMe Base
+            Specification supported.
+          x-versionAdded: v1_5_0
+        NamespaceFeatures:
+          $ref: '#/components/schemas/Volume_v1_6_2_NamespaceFeatures'
+          description: This property contains a set of Namespace Features.
+          nullable: true
+          x-longDescription: This property shall contain a set of Namespace Features.
+          x-versionAdded: v1_5_0
+        NamespaceId:
+          description: The NVMe Namespace Identifier for this namespace.
+          nullable: true
+          pattern: ^0[xX](([a-fA-F]|[0-9])*)$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the NVMe Namespace Identifier
+            for this namespace. This property shall be a hex value. Namespace identifiers
+            are not durable and do not have meaning outside the scope of the NVMe
+            subsystem. NSID 0x0, 0xFFFFFFFF, 0xFFFFFFFE are special purpose values.
+          x-versionAdded: v1_5_0
+        NumberLBAFormats:
+          description: The number of LBA data size and metadata size combinations
+            supported by this namespace. The value of this property is between 0 and
+            16.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of LBA data size
+            and metadata size combinations supported by this namespace. The value
+            of this property is between 0 and 16. LBA formats with an index set beyond
+            this value will not be supported.
+          x-units: By
+          x-versionAdded: v1_5_0
+      type: object
+      x-longDescription: This contains properties to use when Volume is used to describe
+        an NVMe Namespace.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Volume_v1_6_2_NamespaceFeatures:
+      additionalProperties: false
+      properties:
+        SupportsAtomicTransactionSize:
+          description: Indicates that the NVM fields for Namespace preferred write
+            granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG),
+            deallocate alignment (NPDA) and optimal write size (NOWS)  are defined
+            for this namespace and should be used by the host for I/O optimization.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the NVM fields
+            for Namespace preferred write granularity (NPWG), write alignment (NPWA),
+            deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal
+            write size (NOWS)  are defined for this namespace and should be used by
+            the host for I/O optimization.
+          x-versionAdded: v1_5_0
+        SupportsDeallocatedOrUnwrittenLBError:
+          description: This property indicates that the controller supports deallocated
+            or unwritten logical block error for this namespace.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the controller supports
+            deallocated or unwritten logical block error for this namespace. .
+          x-versionAdded: v1_5_0
+        SupportsIOPerformanceHints:
+          description: Indicates that the Namespace Atomic Write Unit Normal (NAWUN),
+            Namespace Atomic Write Unit Power Fail (NAWUPF), and Namespace Atomic
+            Compare and Write Unit (NACWU) fields are defined for this namespace and
+            should be used by the host for this namespace instead of the controller-level
+            properties AWUN, AWUPF, and ACWU.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the Namespace Atomic
+            Write Unit Normal (NAWUN), Namespace Atomic Write Unit Power Fail (NAWUPF),
+            and Namespace Atomic Compare and Write Unit (NACWU) fields are defined
+            for this namespace and should be used by the host for this namespace instead
+            of the controller-level properties AWUN, AWUPF, and ACWU.
+          x-versionAdded: v1_5_0
+        SupportsNGUIDReuse:
+          description: This property indicates that the namespace supports the use
+            of an NGUID (namespace globally unique identifier) value.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the namespace supports
+            the use of an NGUID (namespace globally unique identifier) value.
+          x-versionAdded: v1_5_0
+        SupportsThinProvisioning:
+          description: This property indicates whether or not the NVMe Namespace supports
+            thin provisioning.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether or not the NVMe
+            Namespace supports thin provisioning. Specifically, the namespace capacity
+            reported may be less than the namespace size.
+          x-versionAdded: v1_5_0
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Volume_v1_6_2_OemActions:
+      additionalProperties: true
+      properties: {}
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Volume_v1_6_2_Operation:
+      additionalProperties: false
+      properties:
+        AssociatedFeaturesRegistry:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A reference to the task associated with the operation if any.
+          readOnly: true
+        OperationName:
+          description: The name of the operation.
+          nullable: true
+          readOnly: true
+          type: string
+        PercentageComplete:
+          description: The percentage of the operation that has been completed.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Volume_v1_6_2_RemoveReplicaRelationship:
+      additionalProperties: false
+      description: This action is used to disable data synchronization between a source
+        and target volume, remove the replication relationship, and optionally delete
+        the target volume.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall be used to disable data synchronization
+        between a source and target volume, remove the replication relationship, and
+        optionally delete the target volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_4_0
+    Volume_v1_6_2_RemoveReplicaRelationshipRequestBody:
+      additionalProperties: false
+      description: This action is used to disable data synchronization between a source
+        and target volume, remove the replication relationship, and optionally delete
+        the target volume.
+      properties:
+        DeleteTargetVolume:
+          description: Indicate whether or not to delete the target volume as part
+            of the operation.
+          type: boolean
+          x-longDescription: This parameter shall indicate whether or not to delete
+            the target volume as part of the operation. If not defined, the system
+            should use its default behavior.
+        TargetVolume:
+          description: The Uri to the existing target volume.
+          type: string
+          x-longDescription: This parameter shall contain the Uri to the existing
+            target volume.
+      required:
+      - TargetVolume
+      type: object
+      x-longDescription: This action shall be used to disable data synchronization
+        between a source and target volume, remove the replication relationship, and
+        optionally delete the target volume.
+    Volume_v1_6_2_ResumeReplication:
+      additionalProperties: false
+      description: This action is used to resume the active data synchronization between
+        a source and target volume, without otherwise altering the replication relationship.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall be used to resume the active data synchronization
+        between a source and target volume, without otherwise altering the replication
+        relationship.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_4_0
+    Volume_v1_6_2_ResumeReplicationRequestBody:
+      additionalProperties: false
+      description: This action is used to resume the active data synchronization between
+        a source and target volume, without otherwise altering the replication relationship.
+      properties:
+        TargetVolume:
+          description: The Uri to the existing target volume.
+          type: string
+          x-longDescription: This parameter shall contain the Uri to the existing
+            target volume.
+      required:
+      - TargetVolume
+      type: object
+      x-longDescription: This action shall be used to resume the active data synchronization
+        between a source and target volume, without otherwise altering the replication
+        relationship.
+    Volume_v1_6_2_ReverseReplicationRelationship:
+      additionalProperties: false
+      description: This action is used to reverse the replication relationship between
+        a source and target volume.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall be used to reverse the replication relationship
+        between a source and target volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_4_0
+    Volume_v1_6_2_ReverseReplicationRelationshipRequestBody:
+      additionalProperties: false
+      description: This action is used to reverse the replication relationship between
+        a source and target volume.
+      properties:
+        TargetVolume:
+          description: The Uri to the existing target volume.
+          type: string
+          x-longDescription: This parameter shall contain the Uri to the existing
+            target volume.
+      required:
+      - TargetVolume
+      type: object
+      x-longDescription: This action shall be used to reverse the replication relationship
+        between a source and target volume.
+    Volume_v1_6_2_SplitReplication:
+      additionalProperties: false
+      description: This action is used to split the replication relationship and suspend
+        data synchronization between a source and target volume.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall be used to split the replication relationship
+        and suspend data synchronization between a source and target volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_4_0
+    Volume_v1_6_2_SplitReplicationRequestBody:
+      additionalProperties: false
+      description: This action is used to split the replication relationship and suspend
+        data synchronization between a source and target volume.
+      properties:
+        TargetVolume:
+          description: The Uri to the existing target volume.
+          type: string
+          x-longDescription: This parameter shall contain the Uri to the existing
+            target volume.
+      required:
+      - TargetVolume
+      type: object
+      x-longDescription: This action shall be used to split the replication relationship
+        and suspend data synchronization between a source and target volume.
+    Volume_v1_6_2_SuspendReplication:
+      additionalProperties: false
+      description: This action is used to suspend active data synchronization between
+        a source and target volume, without otherwise altering the replication relationship.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall be used to suspend active data synchronization
+        between a source and target volume, without otherwise altering the replication
+        relationship.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_4_0
+    Volume_v1_6_2_SuspendReplicationRequestBody:
+      additionalProperties: false
+      description: This action is used to suspend active data synchronization between
+        a source and target volume, without otherwise altering the replication relationship.
+      properties:
+        TargetVolume:
+          description: The Uri to the existing target volume.
+          type: string
+          x-longDescription: This parameter shall contain the Uri to the existing
+            target volume.
+      required:
+      - TargetVolume
+      type: object
+      x-longDescription: This action shall be used to suspend active data synchronization
+        between a source and target volume, without otherwise altering the replication
+        relationship.
+    Volume_v1_6_2_Volume:
+      additionalProperties: false
+      description: Volume contains properties used to describe a volume, virtual disk,
+        LUN, or other logical storage entity for any system.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        AccessCapabilities:
+          description: Supported IO access capabilities.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/DataStorageLoSCapabilities.yaml#/components/schemas/DataStorageLoSCapabilities_StorageAccessCapability
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: Each entry shall specify a current storage access capability.
+          x-versionAdded: v1_1_0
+        Actions:
+          $ref: '#/components/schemas/Volume_v1_6_2_Actions'
+          description: The available actions for this resource.
+          x-longDescription: The Actions property shall contain the available actions
+            for this resource.
+        AllocatedPools:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: An array of references to StoragePools allocated from this
+            Volume.
+          readOnly: true
+          x-longDescription: The value of this property shall contain references to
+            all storage pools allocated from this volume.
+          x-versionAdded: v1_1_0
+        BlockSizeBytes:
+          description: The size of the smallest addressable unit (Block) of this volume
+            in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain size of the smallest addressable
+            unit of the associated volume.
+          x-units: By
+        Capacity:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.v1_0_0.yaml#/components/schemas/Capacity_v1_0_0_Capacity
+          description: Capacity utilization.
+          x-longDescription: Information about the utilization of capacity allocated
+            to this storage volume.
+          x-versionAdded: v1_1_0
+        CapacityBytes:
+          description: The size in bytes of this Volume.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the size in bytes of the
+            associated volume.
+          x-units: By
+        CapacitySources:
+          description: An array of space allocations to this volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.yaml#/components/schemas/Capacity_CapacitySource
+          readOnly: false
+          type: array
+          x-autoExpand: true
+          x-longDescription: Fully or partially consumed storage from a source resource.
+            Each entry provides capacity allocation information from a named source
+            resource.
+          x-versionAdded: v1_1_0
+        CapacitySources@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Compressed:
+          description: Indicator of whether or not the Volume has compression enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain a boolean indicator if the
+            Volume is currently utilizing compression or not.
+          x-versionAdded: v1_4_0
+        Deduplicated:
+          description: Indicator of whether or not the Volume has deduplication enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain a boolean indicator if the
+            Volume is currently utilizing deduplication or not.
+          x-versionAdded: v1_4_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        DisplayName:
+          description: A user-configurable string to name the volume.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a user-configurable string
+            to name the volume.
+          x-versionAdded: v1_4_0
+        Encrypted:
+          description: Is this Volume encrypted.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain a boolean indicator if the
+            Volume is currently utilizing encryption or not.
+        EncryptionTypes:
+          description: The types of encryption used by this Volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_EncryptionTypes
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the types of encryption used
+            by this Volume.
+        IOPerfModeEnabled:
+          description: Indicates the IO performance mode setting for the volume.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether IO performance mode
+            is enabled for the volume.
+          x-versionAdded: v1_5_0
+        IOStatistics:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/IOStatistics.yaml#/components/schemas/IOStatistics_IOStatistics
+          description: Statistics for this volume.
+          x-longDescription: The value shall represent IO statistics for this volume.
+          x-versionAdded: v1_2_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Identifiers:
+          description: The Durable names for the volume.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Identifier
+          type: array
+          x-longDescription: This property shall contain a list of all known durable
+            names for the associated volume.
+        InitializeMethod:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_InitializeMethod
+          description: Indicates the Initialization Method used for this volume. If
+            InitializeMethod is not specified, the InitializeMethod should be Foreground.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall indicate the initialization method
+            used for this volume. If InitializeMethod is not specified, the InitializeMethod
+            should be Foreground. This value reflects the most recently used Initialization
+            Method, and may be changed using the Initialize Action.
+          x-versionAdded: v1_6_0
+        Links:
+          $ref: '#/components/schemas/Volume_v1_6_2_Links'
+          description: Contains references to other resources that are related to
+            this resource.
+          x-longDescription: The Links property, as described by the Redfish Specification,
+            shall contain references to resources that are related to, but not contained
+            by (subordinate to), this resource.
+        LogicalUnitNumber:
+          description: Indicates the host-visible LogicalUnitNumber assigned to this
+            Volume.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain host-visible LogicalUnitNumber
+            assigned to this Volume. This property shall only be used when in a single
+            connect configuration and no StorageGroup configuration is used.
+          x-versionAdded: v1_4_0
+        LowSpaceWarningThresholdPercents:
+          description: Low space warning.
+          items:
+            format: int64
+            nullable: true
+            type: integer
+          readOnly: false
+          type: array
+          x-longDescription: 'Each time the following value is less than one of the
+            values in the array the LOW_SPACE_THRESHOLD_WARNING event shall be triggered:
+            Across all CapacitySources entries, percent = (SUM(AllocatedBytes) - SUM(ConsumedBytes))/SUM(AllocatedBytes).'
+          x-units: '%'
+          x-versionAdded: v1_1_0
+        Manufacturer:
+          description: The manufacturer or OEM of this storage volume.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a value that represents the
+            manufacturer or implementer of the storage volume.
+          x-versionAdded: v1_1_0
+        MaxBlockSizeBytes:
+          description: Max Block size in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain size of the largest addressable
+            unit of this storage volume.
+          x-units: By
+          x-versionAdded: v1_1_0
+        MediaSpanCount:
+          description: Indicates the number of media elements used per span in the
+            secondary RAID for a hierarchical RAID type.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall indicate the number of media elements
+            used per span in the secondary RAID for a hierarchical RAID type.
+          x-versionAdded: v1_4_0
+        Model:
+          description: The model number for this storage volume.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The value is assigned by the manufacturer and shall represents
+            a specific storage volume implementation.
+          x-versionAdded: v1_1_0
+        NVMeNamespaceProperties:
+          $ref: '#/components/schemas/Volume_v1_6_2_NVMeNamespaceProperties'
+          description: This property contains properties to use when Volume is used
+            to describe an NVMe Namespace.
+          nullable: true
+          x-longDescription: This property shall contain properties to use when Volume
+            is used to describe an NVMe Namespace.
+          x-versionAdded: v1_5_0
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Operations:
+          description: The operations currently running on the Volume.
+          items:
+            $ref: '#/components/schemas/Volume_v1_6_2_Operation'
+          type: array
+          x-longDescription: This property shall contain a list of all currently running
+            on the Volume.
+        OptimumIOSizeBytes:
+          description: The size in bytes of this Volume's optimum IO size.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the optimum IO size to use
+            when performing IO on this volume. For logical disks, this is the stripe
+            size. For physical disks, this describes the physical sector size.
+          x-units: By
+        ProvisioningPolicy:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/DataStorageLoSCapabilities.yaml#/components/schemas/DataStorageLoSCapabilities_ProvisioningPolicy
+          description: This property specifies the volume's storage allocation, or
+            provisioning policy.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall specify the volume's supported storage
+            allocation policy.
+          x-versionAdded: v1_4_0
+        RAIDType:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_RAIDType
+          description: The RAID type of this volume.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the RAID type of the associated
+            Volume.
+          x-versionAdded: v1_3_1
+        ReadCachePolicy:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_ReadCachePolicyType
+          description: Indicates the read cache policy setting for the Volume.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain a boolean indicator of the
+            read cache policy for the Volume.
+          x-versionAdded: v1_4_0
+        RecoverableCapacitySourceCount:
+          description: Current number of capacity source resources that are available
+            as replacements.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The value is the number of available capacity source
+            resources currently available in the event that an equivalent capacity
+            source resource fails.
+          x-versionAdded: v1_3_0
+        RemainingCapacityPercent:
+          description: The percentage of the capacity remaining in the Volume.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: If present, this value shall return  {[(SUM(AllocatedBytes)
+            - SUM(ConsumedBytes)]/SUM(AllocatedBytes)}*100 represented as an integer
+            value.
+          x-versionAdded: v1_2_0
+        ReplicaInfo:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo.v1_3_0.yaml#/components/schemas/StorageReplicaInfo_v1_3_0_ReplicaInfo
+          description: Describes this storage volume in its role as a target replica.
+          x-longDescription: This property shall describe the replica relationship
+            between this storage volume and a corresponding source volume.
+          x-versionAdded: v1_1_0
+        ReplicaTargets:
+          description: The resources that are target replicas of this source.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: The value shall reference the target replicas that are
+            sourced by this replica.
+          x-versionAdded: v1_3_0
+        ReplicaTargets@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The property contains the status of the Volume.
+          x-longDescription: The property shall contain the status of the Volume.
+        StorageGroups:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: An array of references to Storage Groups that includes this
+            volume.
+          readOnly: true
+          x-longDescription: The value of this property shall contain references to
+            all storage groups that include this volume.
+          x-versionAdded: v1_1_0
+        StripSizeBytes:
+          description: The number of blocks (bytes) in a strip in a disk array that
+            uses striped data mapping.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: The number of consecutively addressed virtual disk blocks
+            (bytes) mapped to consecutively addressed blocks on a single member extent
+            of a disk array. Synonym for stripe depth and chunk size.
+          x-units: By
+          x-versionAdded: v1_4_0
+        VolumeType:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_VolumeType
+          deprecated: true
+          description: The type of this volume.
+          nullable: true
+          readOnly: true
+          x-deprecatedReason: Deprecated in favor of explicit use of RAIDType.
+          x-longDescription: This property shall contain the type of the associated
+            Volume.
+        VolumeUsage:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_VolumeUsageType
+          description: Indicates the Volume usage type setting for the Volume.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the volume usage type for
+            the Volume.
+          x-versionAdded: v1_4_0
+        WriteCachePolicy:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_WriteCachePolicyType
+          description: Indicates the write cache policy setting for the Volume.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain a boolean indicator of the
+            write cache policy for the Volume.
+          x-versionAdded: v1_4_0
+        WriteCacheState:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_WriteCacheStateType
+          description: Indicates the WriteCacheState policy setting for the Volume.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the WriteCacheState policy
+            setting for the Volume.
+          x-versionAdded: v1_4_0
+        WriteHoleProtectionPolicy:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.yaml#/components/schemas/Volume_WriteHoleProtectionPolicyType
+          description: The policy that the RAID volume is using to address the write
+            hole issue.
+          readOnly: false
+          x-longDescription: This property specifies the policy that is enabled to
+            address the write hole issue on the RAID volume. If no policy is enabled
+            at the moment, this property shall be set to 'Off'.
+          x-versionAdded: v1_4_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent a volume, virtual
+        disk, logical disk, LUN, or other logical storage for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Volume.v1_6_2.Volume'
+x-copyright: Copyright 2016-2020 Storage Networking Industry Association (SNIA), USA.
+  All rights reserved. For the full SNIA copyright policy, see http://www.snia.org/about/corporate_info/copyright
+x-owningEntity: SNIA
+x-release: TP v1.2.1

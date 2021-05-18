@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Port v1.3.1                                                         -->
+<!--# Redfish Schema:  Port v1.4.0                                                         -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -23,6 +23,7 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/RedfishExtensions_v1.xml">
     <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
+    <edmx:Include Namespace="Validation.v1_0_0" Alias="Validation"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Endpoint_v1.xml">
     <edmx:Include Namespace="Endpoint"/>
@@ -45,6 +46,13 @@
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/VCATEntryCollection_v1.xml">
     <edmx:Include Namespace="VCATEntryCollection"/>
   </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/NetworkDeviceFunction_v1.xml">
+    <edmx:Include Namespace="NetworkDeviceFunction"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/EnvironmentMetrics_v1.xml">
+    <edmx:Include Namespace="EnvironmentMetrics"/>
+  </edmx:Reference>
+
   <edmx:DataServices>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port">
@@ -74,6 +82,8 @@
             <String>/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}</String>
             <String>/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}</String>
             <String>/redfish/v1/Systems/{ComputerSystemId}/FabricAdapters/{FabricAdapterId}/Ports/{PortId}</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/GraphicsControllers/{ControllerId}/Ports/{PortId}</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/USBControllers/{ControllerId}/Ports/{PortId}</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}</String>
@@ -86,6 +96,7 @@
             <String>/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/Ports/{PortId}</String>
             <String>/redfish/v1/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}</String>
             <String>/redfish/v1/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}</String>
+            <String>/redfish/v1/Managers/{ManagerId}/USBPorts/{PortId}</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -128,13 +139,13 @@
         <Property Name="CurrentSpeedGbps" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The current speed of this port."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the speed of this port currently negotiated and running."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the speed of this port currently negotiated and running.  This value includes overhead associated with the protocol."/>
           <Annotation Term="Measures.Unit" String="Gbit/s"/>
         </Property>
         <Property Name="MaxSpeedGbps" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The maximum speed of this port as currently configured."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum speed of which this port is capable of being configured.  If capable of autonegotiation, the system shall attempt to negotiate at the maximum speed set."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum speed of which this port is capable of being configured.  If capable of autonegotiation, the system shall attempt to negotiate at the maximum speed set.  This value includes overhead associated with the protocol."/>
           <Annotation Term="Measures.Unit" String="Gbit/s"/>
         </Property>
         <Property Name="Width" Type="Edm.Int64">
@@ -261,6 +272,12 @@
       <EntityType Name="Port" BaseType="Port.v1_0_7.Port"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_0_9">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="Clarified that speed properties include protocol overhead."/>
+      <EntityType Name="Port" BaseType="Port.v1_0_8.Port"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2017.3"/>
@@ -301,6 +318,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
       <EntityType Name="Port" BaseType="Port.v1_1_4.Port"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_1_6">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="Clarified that speed properties include protocol overhead."/>
+      <EntityType Name="Port" BaseType="Port.v1_1_5.Port"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_2_0">
@@ -463,6 +486,12 @@
       <EntityType Name="Port" BaseType="Port.v1_2_2.Port"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_2_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="Clarified that speed properties include protocol overhead."/>
+      <EntityType Name="Port" BaseType="Port.v1_2_3.Port"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.3"/>
@@ -561,25 +590,25 @@
 
       <EnumType Name="SupportedEthernetCapabilities">
         <Member Name="WakeOnLAN">
-          <Annotation Term="OData.Description" String="Wake on LAN (WoL) is supported on this port." />
+          <Annotation Term="OData.Description" String="Wake on LAN (WoL) is supported on this port."/>
         </Member>
         <Member Name="EEE">
-          <Annotation Term="OData.Description" String="IEEE 802.3az Energy-Efficient Ethernet (EEE) is supported on this port." />
+          <Annotation Term="OData.Description" String="IEEE 802.3az Energy-Efficient Ethernet (EEE) is supported on this port."/>
         </Member>
       </EnumType>
 
       <EnumType Name="FlowControl">
         <Member Name="None">
-          <Annotation Term="OData.Description" String="No IEEE 802.3x flow control is enabled on this port." />
+          <Annotation Term="OData.Description" String="No IEEE 802.3x flow control is enabled on this port."/>
         </Member>
         <Member Name="TX">
-          <Annotation Term="OData.Description" String="IEEE 802.3x flow control may be initiated by this station." />
+          <Annotation Term="OData.Description" String="IEEE 802.3x flow control may be initiated by this station."/>
         </Member>
         <Member Name="RX">
-          <Annotation Term="OData.Description" String="IEEE 802.3x flow control may be initiated by the link partner." />
+          <Annotation Term="OData.Description" String="IEEE 802.3x flow control may be initiated by the link partner."/>
         </Member>
         <Member Name="TX_RX">
-          <Annotation Term="OData.Description" String="IEEE 802.3x flow control may be initiated by this station or the link partner." />
+          <Annotation Term="OData.Description" String="IEEE 802.3x flow control may be initiated by this station or the link partner."/>
         </Member>
       </EnumType>
 
@@ -590,7 +619,8 @@
         <Property Name="CapableLinkSpeedGbps" Type="Collection(Edm.Decimal)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The set of link speed capabilities of this port."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain all of the possible network link speed capabilities of this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain all of the possible network link speed capabilities of this port.  This value includes overhead associated with the protocol."/>
+          <Annotation Term="Measures.Unit" String="Gbit/s"/>
         </Property>
         <Property Name="ConfiguredNetworkLinks" Type="Collection(Port.v1_3_0.ConfiguredNetworkLink)">
           <Annotation Term="OData.Description" String="The set of link speed and width pairs this port is configured to use for autonegotiation."/>
@@ -615,7 +645,8 @@
         <Property Name="ConfiguredLinkSpeedGbps" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The link speed per lane this port is configured to use for autonegotiation."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the network link speed per lane this port is configured to allow for autonegotiation purposes."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the network link speed per lane this port is configured to allow for autonegotiation purposes.  This value includes overhead associated with the protocol."/>
+          <Annotation Term="Measures.Unit" String="Gbit/s"/>
         </Property>
         <Property Name="ConfiguredWidth" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -629,6 +660,347 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
       <EntityType Name="Port" BaseType="Port.v1_3_0.Port"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_3_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="Clarified that speed properties include protocol overhead."/>
+      <EntityType Name="Port" BaseType="Port.v1_3_1.Port"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Port.v1_4_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.1"/>
+
+      <EntityType Name="Port" BaseType="Port.v1_3_2.Port">
+        <Property Name="FunctionMinBandwidth" Type="Collection(Port.v1_4_0.FunctionMinBandwidth)" Nullable="false">
+          <Annotation Term="OData.Description" String="An array of minimum bandwidth allocation percentages for the functions associated with this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of minimum bandwidth percentage allocations for each of the functions associated with this port."/>
+        </Property>
+        <Property Name="FunctionMaxBandwidth" Type="Collection(Port.v1_4_0.FunctionMaxBandwidth)" Nullable="false">
+          <Annotation Term="OData.Description" String="An array of maximum bandwidth allocation percentages for the functions associated with this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of maximum bandwidth allocation percentages for the functions associated with this port."/>
+        </Property>
+        <Property Name="SFP" Type="Port.v1_4_0.SFP">
+          <Annotation Term="OData.Description" String="The small form-factor pluggable (SFP) device associated with this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain data about the small form-factor pluggable (SFP) device currently occupying this port."/>
+        </Property>
+        <NavigationProperty Name="EnvironmentMetrics" Type="EnvironmentMetrics.EnvironmentMetrics" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the environment metrics for this port or any attached small form-factor pluggable (SFP) device."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type EnvironmentMetrics that represents the environment metrics for this port or any attached small form-factor pluggable (SFP) device."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <Property Name="CurrentProtocolVersion" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The protocol version being sent over this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the protocol version being sent over this port.  This property should only be used for protocols where the version and not the speed is of primary interest such as USB, DisplayPort, or HDMI."/>
+        </Property>
+        <Property Name="CapableProtocolVersions" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The protocol versions capable of being sent over this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the protocol versions capable of being sent over this port.  This property should only be used for protocols where the version and not the speed is of primary interest such as USB, DisplayPort, or HDMI."/>
+        </Property>
+        <Property Name="Enabled" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="An indication of whether this port is enabled."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall indicate if this port is enabled.  Disabling a port will disconnect any devices only connected to the system through this port."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="FunctionMinBandwidth">
+        <Annotation Term="OData.Description" String="A minimum bandwidth allocation percentage for a network device functions associated a port."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe a minimum bandwidth percentage allocation for a network device function associated with a port."/>
+        <NavigationProperty Name="NetworkDeviceFunction" Type="NetworkDeviceFunction.NetworkDeviceFunction" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the network device function associated with this bandwidth setting of this network port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type NetworkDeviceFunction that represents the network device function associated with this bandwidth setting of this network port."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <Property Name="AllocationPercent" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The minimum bandwidth allocation percentage allocated to the corresponding network device function instance."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the minimum bandwidth percentage allocation for the associated network device function.  The sum total of all minimum percentages shall not exceed 100."/>
+          <Annotation Term="Measures.Unit" String="%"/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="FunctionMaxBandwidth">
+        <Annotation Term="OData.Description" String="A maximum bandwidth allocation percentage for a network device functions associated a port."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe a maximum bandwidth percentage allocation for a network device function associated with a port."/>
+        <NavigationProperty Name="NetworkDeviceFunction" Type="NetworkDeviceFunction.NetworkDeviceFunction" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the network device function associated with this bandwidth setting of this network port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type NetworkDeviceFunction that represents the network device function associated with this bandwidth setting of this network port."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <Property Name="AllocationPercent" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The maximum bandwidth allocation percentage allocated to the corresponding network device function instance."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum bandwidth percentage allocation for the associated network device function."/>
+          <Annotation Term="Measures.Unit" String="%"/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="EthernetProperties" BaseType="Port.v1_3_0.EthernetProperties">
+        <Property Name="AssociatedMACAddresses" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="Validation.Pattern" String="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"/>
+          <Annotation Term="OData.Description" String="An array of configured MAC addresses that are associated with this network port, including the programmed address of the lowest numbered network device function, the configured but not active address, if applicable, the address for hardware port teaming, or other network addresses."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of configured MAC addresses that are associated with this network port, including the programmed address of the lowest numbered network device function, the configured but not active address if applicable, the address for hardware port teaming, or other network addresses."/>
+        </Property>
+        <Property Name="LLDPEnabled" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="Enable/disable LLDP for this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the state indicating whether to enable LLDP for a port.  If LLDP is disabled at the adapter level, this property shall be ignored."/>
+        </Property>
+        <Property Name="LLDPTransmit" Type="Port.v1_4_0.LLDPTransmit">
+          <Annotation Term="OData.Description" String="LLDP data being transmitted on this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the LLDP data being transmitted on this link."/>
+        </Property>
+        <Property Name="LLDPReceive" Type="Port.v1_4_0.LLDPReceive">
+          <Annotation Term="OData.Description" String="LLDP data being received on this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the LLDP data being received on this link."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="FibreChannelProperties" BaseType="Port.v1_3_0.FibreChannelProperties">
+        <Property Name="AssociatedWorldWideNames" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of configured World Wide Names (WWN) that are associated with this network port, including the programmed address of the lowest numbered network device function, the configured but not active address, if applicable, the address for hardware port teaming, or other network addresses."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of configured World Wide Names (WWN) that are associated with this network port, including the programmed address of the lowest numbered network device function, the configured but not active address if applicable, the address for hardware port teaming, or other network addresses."/>
+          <Annotation Term="Validation.Pattern" String="^([0-9A-Fa-f]{2}[:-]){7}([0-9A-Fa-f]{2})$"/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="LLDPTransmit">
+        <Annotation Term="OData.Description" String="Link Layer Data Protocol (LLDP) data being transmitted on this link."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the LLDP data to be transmitted from this endpoint."/>
+        <Property Name="ChassisId" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="Link Layer Data Protocol (LLDP) chassis ID."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the chassis ID to be transmitted from this endpoint.  If no such chassis ID is to be transmitted, this value shall be an empty string."/>
+        </Property>
+        <Property Name="ChassisIdSubtype" Type="Port.v1_4_0.IEEE802IdSubtype">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The type of identifier used for the chassis ID."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the IEEE 802.1AB-2009 chassis ID subtype to be transmitted from this endpoint.  If no such chassis ID subtype is to be transmitted, this value shall be `NotTransmitted`."/>
+        </Property>
+        <Property Name="ManagementVlanId" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="Validation.Minimum" Int="0"/>
+          <Annotation Term="Validation.Maximum" Int="4095"/>
+          <Annotation Term="OData.Description" String="The management VLAN ID to be transmitted from this endpoint."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the management VLAN ID to be transmitted from this endpoint.  If no such port ID is to be transmitted, this value shall be `4095`."/>
+        </Property>
+        <Property Name="ManagementAddressIPv4" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The IPv4 management address to be transmitted from this endpoint."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the IPv4 management address to be transmitted from this endpoint.  If no such management address is to be transmitted, this value shall be an empty string."/>
+          <Annotation Term="Validation.Pattern" String="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"/>
+        </Property>
+        <Property Name="ManagementAddressIPv6" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The IPv6 management address to be transmitted from this endpoint."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the IPv6 management address to be transmitted from this endpoint.  If no such management address is to be transmitted, this value shall be an empty string."/>
+        </Property>
+        <Property Name="ManagementAddressMAC" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="Validation.Pattern" String="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"/>
+          <Annotation Term="OData.Description" String="The management MAC address to be transmitted from this endpoint."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the management MAC address to be transmitted from this endpoint.  If no such management address is to be transmitted, this value shall be an empty string."/>
+        </Property>
+        <Property Name="PortId" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="Validation.Pattern" String="^([0-9A-F]{2})([:]([0-9A-F]){2}){0,63}$"/>
+          <Annotation Term="OData.Description" String="A colon delimited string of hexadecimal octets identifying a port to be transmitted from this endpoint."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a colon delimited string of hexadecimal octets identifying the port for an LLDP endpoint.  If no such port ID is to be transmitted, this value shall be an empty string."/>
+        </Property>
+        <Property Name="PortIdSubtype" Type="Port.v1_4_0.IEEE802IdSubtype">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The port ID subtype to be transmitted from this endpoint."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the port ID subtype from IEEE 802.1AB-2009 Table 8-3 to be transmitted from this endpoint.  If no such port ID subtype is to be transmitted, this value shall be `NotTransmitted`."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="LLDPReceive">
+        <Annotation Term="OData.Description" String="Link Layer Data Protocol (LLDP) data received from the remote partner across this link."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the LLDP data from the remote partner across this link."/>
+        <Property Name="ChassisId" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Link Layer Data Protocol (LLDP) chassis ID received from the remote partner across this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the chassis ID received from the remote partner across this link.  If no such chassis ID has been received, this value shall be an empty string."/>
+        </Property>
+        <Property Name="ChassisIdSubtype" Type="Port.v1_4_0.IEEE802IdSubtype">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The type of identifier used for the chassis ID received from the remote partner across this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the IEEE 802.1AB-2009 chassis ID subtype received from the remote partner across this link.  If no such chassis ID subtype has been received, this value shall be `NotTransmitted`."/>
+        </Property>
+        <Property Name="ManagementVlanId" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="Validation.Minimum" Int="0"/>
+          <Annotation Term="Validation.Maximum" Int="4095"/>
+          <Annotation Term="OData.Description" String="The management VLAN ID received from the remote partner across this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the management VLAN ID received from the remote partner across this link.  If no such management VLAN ID has been received, this value shall be `4095`."/>
+        </Property>
+        <Property Name="ManagementAddressIPv4" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The IPv4 management address received from the remote partner across this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the IPv4 management address received from the remote partner across this link.  If no such management address has been received, this value shall be an empty string."/>
+          <Annotation Term="Validation.Pattern" String="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"/>
+        </Property>
+        <Property Name="ManagementAddressIPv6" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The IPv6 management address received from the remote partner across this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the IPv6 management address received from the remote partner across this link.  If no such management address has been received, this value shall be an empty string."/>
+          <Annotation Term="Redfish.IPv6Format"/>
+        </Property>
+        <Property Name="ManagementAddressMAC" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="Validation.Pattern" String="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"/>
+          <Annotation Term="OData.Description" String="The management MAC address received from the remote partner across this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the management MAC address received from the remote partner across this link.  If no such management address has been received, this value shall be an empty string."/>
+        </Property>
+        <Property Name="PortId" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="Validation.Pattern" String="^([0-9A-F]{2})([:]([0-9A-F]){2}){0,63}$"/>
+          <Annotation Term="OData.Description" String="A colon delimited string of hexadecimal octets identifying a port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a colon delimited string of hexadecimal octets identifying the port received from the remote partner across this link.  If no such port ID has been received, this value shall be an empty string."/>
+        </Property>
+        <Property Name="PortIdSubtype" Type="Port.v1_4_0.IEEE802IdSubtype">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The port ID subtype received from the remote partner across this link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the port ID subtype from IEEE 802.1AB-2009 Table 8-3 received from the remote partner across this link.  If no such port ID subtype has been received, this value shall be `NotTransmitted`."/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="IEEE802IdSubtype">
+        <Member Name="ChassisComp">
+          <Annotation Term="OData.Description" String="Chassis component, based in the value of entPhysicalAlias in RFC4133."/>
+        </Member>
+        <Member Name="IfAlias">
+          <Annotation Term="OData.Description" String="Interface alias, based on the ifAlias MIB object."/>
+        </Member>
+        <Member Name="PortComp">
+          <Annotation Term="OData.Description" String="Port component, based in the value of entPhysicalAlias in RFC4133."/>
+        </Member>
+        <Member Name="MacAddr">
+          <Annotation Term="OData.Description" String="MAC address, based on an agent detected unicast source address as defined in IEEE Std. 802."/>
+        </Member>
+        <Member Name="NetworkAddr">
+          <Annotation Term="OData.Description" String="Network address, based on an agent detected network address."/>
+        </Member>
+        <Member Name="IfName">
+          <Annotation Term="OData.Description" String="Interface name, based on the ifName MIB object."/>
+        </Member>
+        <Member Name="AgentId">
+          <Annotation Term="OData.Description" String="Agent circuit ID, based on the agent-local identifier of the circuit as defined in RFC3046."/>
+        </Member>
+        <Member Name="LocalAssign">
+          <Annotation Term="OData.Description" String="Locally assigned, based on a alpha-numeric value locally assigned."/>
+        </Member>
+        <Member Name="NotTransmitted">
+          <Annotation Term="OData.Description" String="No data to be sent to/received from remote partner."/>
+        </Member>
+      </EnumType>
+
+      <ComplexType Name="SFP">
+        <Annotation Term="OData.Description" String="A small form-factor pluggable (SFP) device attached to a port."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe a small form-factor pluggable (SFP) device attached to a port."/>
+        <Property Name="Status" Type="Resource.Status" Nullable="false">
+          <Annotation Term="OData.Description" String="The status and health of the resource and its subordinate or dependent resources."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain any status or health properties of the resource."/>
+        </Property>
+        <Property Name="SupportedSFPTypes" Type="Collection(Port.v1_4_0.SFPType)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The types of SFP devices that can be attached to this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of SFP device types supported by this port."/>
+        </Property>
+        <Property Name="Type" Type="Port.v1_4_0.SFPType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The type of SFP device that is attached to this port."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the SFP device type currently attached to this port."/>
+        </Property>
+        <Property Name="Manufacturer" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The manufacturer of this SFP."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the organization responsible for producing the SFP.  This organization may be the entity from which the SFP is purchased, but this is not necessarily true."/>
+        </Property>
+        <Property Name="SerialNumber" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The serial number for this SFP."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a manufacturer-allocated number that identifies the SFP."/>
+        </Property>
+        <Property Name="PartNumber" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The part number for this SFP."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the manufacturer-provided part number for the SFP."/>
+        </Property>
+        <Property Name="MediumType" Type="Port.v1_4_0.MediumType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The medium type connected to this SFP."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the medium type used by the SFP."/>
+        </Property>
+        <Property Name="FiberConnectionType" Type="Port.v1_4_0.FiberConnectionType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The type of fiber connection currently used by this SFP."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the fiber connection type used by the SFP."/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="SFPType">
+        <Member Name="SFP">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for SFP."/>
+        </Member>
+        <Member Name="SFPPlus">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for SFP+."/>
+        </Member>
+        <Member Name="SFP28">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for SFP+ and IEEE 802.3by Specification."/>
+        </Member>
+        <Member Name="cSFP">
+          <Annotation Term="OData.Description" String="The SFP conforms to the CSFP MSA Specification."/>
+        </Member>
+        <Member Name="SFPDD">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFP-DD MSA Specification."/>
+        </Member>
+        <Member Name="QSFP">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for QSFP."/>
+        </Member>
+        <Member Name="QSFPPlus">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for QSFP+."/>
+        </Member>
+        <Member Name="QSFP14">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for QSFP14."/>
+        </Member>
+        <Member Name="QSFP28">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for QSFP28."/>
+        </Member>
+        <Member Name="QSFP56">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification for QSFP56."/>
+        </Member>
+        <Member Name="MiniSASHD">
+          <Annotation Term="OData.Description" String="The SFP conforms to the SFF Specification SFF-8644."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="MediumType">
+        <Member Name="Copper">
+          <Annotation Term="OData.Description" String="The medium connected is copper."/>
+        </Member>
+        <Member Name="FiberOptic">
+          <Annotation Term="OData.Description" String="The medium connected is fiber optic."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="FiberConnectionType">
+        <Member Name="SingleMode">
+          <Annotation Term="OData.Description" String="The connection is using single mode operation."/>
+        </Member>
+        <Member Name="MultiMode">
+          <Annotation Term="OData.Description" String="The connection is using multi mode operation."/>
+        </Member>
+      </EnumType>
     </Schema>
 
   </edmx:DataServices>

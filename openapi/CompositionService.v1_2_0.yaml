@@ -1,0 +1,290 @@
+components:
+  schemas:
+    CompositionService_v1_2_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#CompositionService.Compose':
+          $ref: '#/components/schemas/CompositionService_v1_2_0_Compose'
+        Oem:
+          $ref: '#/components/schemas/CompositionService_v1_2_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CompositionService_v1_2_0_Compose:
+      additionalProperties: false
+      description: This action performs a set of operations specified by a manifest.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall perform a set of operations specified by
+        a manifest.  Services shall not apply any part of the manifest unless all
+        operations specified by the manifest are successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_2_0
+    CompositionService_v1_2_0_ComposeRequestBody:
+      additionalProperties: false
+      description: This action performs a set of operations specified by a manifest.
+      properties:
+        Manifest:
+          $ref: http://redfish.dmtf.org/schemas/v1/Manifest.yaml#/components/schemas/Manifest_Manifest
+          description: The manifest containing the compose operation request.
+          x-longDescription: This parameter shall contain the manifest containing
+            the compose operation request.  This parameter shall be required if RequestFormat
+            contains the value `Manifest`.
+        RequestFormat:
+          $ref: '#/components/schemas/CompositionService_v1_2_0_ComposeRequestFormat'
+          description: The format of the request.
+          x-longDescription: This parameter shall contain the format of the request.
+        RequestType:
+          $ref: '#/components/schemas/CompositionService_v1_2_0_ComposeRequestType'
+          description: The type of request.
+          x-longDescription: This parameter shall contain the type of request.
+        ReservationId:
+          description: The identifier of the composition reservation if applying a
+            reservation.  The value for this parameter is obtained from the response
+            of a Compose action where the RequestType parameter contains the value
+            `PreviewReserve`.
+          type: string
+          x-longDescription: This parameter shall contain the value of the Id property
+            of the CompositionReservation resource for applying a reservation.
+      required:
+      - RequestFormat
+      - RequestType
+      type: object
+      x-longDescription: This action shall perform a set of operations specified by
+        a manifest.  Services shall not apply any part of the manifest unless all
+        operations specified by the manifest are successful.
+    CompositionService_v1_2_0_ComposeRequestFormat:
+      enum:
+      - Manifest
+      type: string
+      x-enumDescriptions:
+        Manifest: The request body contains a manifest.
+      x-enumLongDescriptions:
+        Manifest: This value shall indicate that the request contains a manifest as
+          defined by the Redfish Manifest schema.
+    CompositionService_v1_2_0_ComposeRequestType:
+      enum:
+      - Preview
+      - PreviewReserve
+      - Apply
+      type: string
+      x-enumDescriptions:
+        Apply: Perform the requested operations specified by the manifest and modify
+          resources as needed.
+        Preview: Preview the outcome of the operations specified by the manifest.
+        PreviewReserve: Preview the outcome of the operations specified by the manifest
+          and reserve resources.
+      x-enumLongDescriptions:
+        Apply: This value shall indicate that the request is to apply the requested
+          operations specified by the manifest and modify resources as needed.
+        Preview: This value shall indicate that the request is to preview the outcome
+          of the operations specified by the manifest to show what the service will
+          do based on the contents of the request, and not affect any resources within
+          the service.
+        PreviewReserve: This value shall indicate that the request is to preview the
+          outcome of the operations specified by the manifest to show what the service
+          will do based on the contents of the request.  Resources that would have
+          been affected by this request shall be marked as reserved, but otherwise
+          shall not be affected.
+    CompositionService_v1_2_0_ComposeResponse:
+      additionalProperties: false
+      description: The response body for the Compose action.
+      properties:
+        Manifest:
+          $ref: http://redfish.dmtf.org/schemas/v1/Manifest.yaml#/components/schemas/Manifest_Manifest
+          description: The manifest containing the compose operation response.
+          x-longDescription: This property shall contain the manifest containing the
+            compose operation response.  This property shall be required if RequestFormat
+            contains the value `Manifest`.
+          x-versionAdded: v1_2_0
+        RequestFormat:
+          $ref: '#/components/schemas/CompositionService_v1_2_0_ComposeRequestFormat'
+          description: The format of the request.
+          readOnly: true
+          x-longDescription: This property shall contain the format of the request.
+          x-versionAdded: v1_2_0
+        RequestType:
+          $ref: '#/components/schemas/CompositionService_v1_2_0_ComposeRequestType'
+          description: The type of request.
+          readOnly: true
+          x-longDescription: This property shall contain the type of request.
+          x-versionAdded: v1_2_0
+        ReservationId:
+          description: The identifier of the composition reservation that was created.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the value of the Id property
+            of the CompositionReservation resource that was created.  This property
+            shall be required if RequestType contains the value `PreviewReserve`.
+          x-versionAdded: v1_2_0
+      required:
+      - RequestFormat
+      - RequestType
+      type: object
+      x-longDescription: This type shall contain the properties found in the response
+        body for the Compose action.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CompositionService_v1_2_0_CompositionService:
+      additionalProperties: false
+      description: The CompositionService schema describes a composition service and
+        its properties and links to the resources available for composition.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/CompositionService_v1_2_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        ActivePool:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of resource blocks within the active
+            pool.  Resource blocks in the active pool are contributing to at least
+            one composed resource as a result of a composition request.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ResourceBlockCollection.  The members of this collection shall
+            represent the resource blocks in the active pool.  Services shall filter
+            members of this collection based on the requesting client.
+          x-versionAdded: v1_2_0
+        AllowOverprovisioning:
+          description: An indication of whether this service is allowed to overprovision
+            a composition relative to the composition request.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this service is
+            allowed to overprovision a composition relative to the composition request.
+          x-versionAdded: v1_1_0
+        AllowZoneAffinity:
+          description: An indication of whether a client can request that a specific
+            resource zone fulfill a composition request.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether a client can request
+            that a specific resource zone fulfill a composition request.
+          x-versionAdded: v1_1_0
+        CompositionReservations:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of reservations with the composition
+            reservation collection.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type CompositionReservationCollection.  The members of this collection
+            shall contain links to reserved resource blocks and the related document
+            that caused the reservations.  Services shall filter members of this collection
+            based on the requesting client.
+          x-versionAdded: v1_2_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        FreePool:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of resource blocks within the free
+            pool.  Resource blocks in the free pool are not contributing to any composed
+            resources.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ResourceBlockCollection.  The members of this collection shall
+            represent the resource blocks in the free pool.  Services shall filter
+            members of this collection based on the requesting client.
+          x-versionAdded: v1_2_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        ReservationDuration:
+          description: The length of time a composition reservation is held before
+            the service deletes the reservation marks any related resource blocks
+            as no longer reserved.
+          nullable: true
+          pattern: -?P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the length of time a composition
+            reservation is held before the service deletes the reservation marks any
+            related resource blocks as no longer reserved.
+          x-versionAdded: v1_2_0
+        ResourceBlocks:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The resource blocks available on the service.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ResourceBlockCollection.
+        ResourceZones:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The resource zones available on the service.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type ZoneCollection.
+        ServiceEnabled:
+          description: An indication of whether this service is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this service is
+            enabled.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the composition service and
+        its properties for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CompositionService_v1_2_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#CompositionService.v1_2_0.CompositionService'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.1'

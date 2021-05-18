@@ -8,9 +8,12 @@ components:
       - ConfigureSelf
       - ConfigureComponents
       - NoAuth
+      - ConfigureCompositionInfrastructure
       type: string
       x-enumDescriptions:
         ConfigureComponents: Can configure components that this service manages.
+        ConfigureCompositionInfrastructure: Can view and configure composition service
+          resources.
         ConfigureManager: Can configure managers.
         ConfigureSelf: Can change the password for the current user account and log
           out of their own sessions.
@@ -18,8 +21,14 @@ components:
         Login: Can log in to the service and read Resources.
         NoAuth: Authentication is not required.
       x-enumLongDescriptions:
+        ConfigureCompositionInfrastructure: This value shall be used to indicate the
+          user can view and configure composition service resources without matching
+          the Client property in the ResourceBlock or CompositionReservation resources.
         NoAuth: This value shall be used to indicate an operation does not require
           authentication.  This privilege shall not be used in Redfish Roles.
+      x-enumVersionAdded:
+        ConfigureCompositionInfrastructure: '2021.1'
+        NoAuth: '2019.3'
 title: '#Privileges'
-x-copyright: Copyright 2014-2020 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
 x-owningEntity: DMTF

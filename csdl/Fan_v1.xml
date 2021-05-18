@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Fan v1.0.0                                                          -->
+<!--# Redfish Schema:  Fan v1.1.0                                                          -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -95,7 +95,7 @@
         <Property Name="Manufacturer" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The manufacturer of this fan."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the organization responsible for producing the fan.  This organization might be the entity from whom the fan is purchased, but this is not necessarily true."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the organization responsible for producing the fan.  This organization may be the entity from whom the fan is purchased, but this is not necessarily true."/>
         </Property>
         <Property Name="Model" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -158,6 +158,26 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Fan.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology."/>
+      <EntityType Name="Fan" BaseType="Fan.v1_0_0.Fan"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Fan.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.1"/>
+
+      <EntityType Name="Fan" BaseType="Fan.v1_0_1.Fan">
+        <NavigationProperty Name="PowerWatts" Type="Sensor.Sensor">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="Redfish.ExcerptCopy" String="Power"/>
+          <Annotation Term="OData.Description" String="Power consumption (Watts)."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total power, measured in Watts, for this resource."/>
+        </NavigationProperty>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

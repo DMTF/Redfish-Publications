@@ -1,0 +1,185 @@
+components:
+  schemas:
+    Bios_v1_0_9_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Bios.ChangePassword':
+          $ref: '#/components/schemas/Bios_v1_0_9_ChangePassword'
+        '#Bios.ResetBios':
+          $ref: '#/components/schemas/Bios_v1_0_9_ResetBios'
+        Oem:
+          $ref: '#/components/schemas/Bios_v1_0_9_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Bios_v1_0_9_Attributes:
+      additionalProperties: false
+      description: The list of BIOS attributes and their values as determined by the
+        manufacturer or provider.
+      properties: {}
+      type: object
+      x-longDescription: This property shall contain the list of BIOS attributes and
+        their values as determined by the manufacturer or provider.  This object shall
+        describe BIOS attribute settings as additional properties.  If the object
+        specifies a BIOS attribute registry, attributes shall be looked up in that
+        attribute registry by their attribute name.  Attributes in this attribute
+        registry with the AttributeType of `Enumeration` shall use valid ValueName
+        values in this object, as listed in that attribute registry.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+        ^[A-Za-z][A-Za-z0-9_]+$: {}
+    Bios_v1_0_9_Bios:
+      additionalProperties: true
+      description: The Bios schema contains properties related to the BIOS attribute
+        registry.  The attribute registry describes the system-specific BIOS attributes
+        and actions for changing to BIOS settings.  Changes to the BIOS typically
+        require a system reset before they take effect.  It is likely that a client
+        finds the `@Redfish.Settings` term in this resource, and if it is found, the
+        client makes requests to change BIOS settings by modifying the resource identified
+        by the `@Redfish.Settings` term.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Bios_v1_0_9_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        AttributeRegistry:
+          description: The resource ID of the attribute registry that has the system-specific
+            information about a BIOS resource.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: The link to the attribute registry that lists the metadata
+            describing the BIOS attribute settings in this resource.
+        Attributes:
+          $ref: '#/components/schemas/Bios_v1_0_9_Attributes'
+          description: The list of BIOS attributes specific to the manufacturer or
+            provider.
+          x-longDescription: This property shall contain the list of BIOS attributes
+            specific to the manufacturer or provider.  BIOS attribute settings appear
+            as additional properties in this object, and can be looked up in the attribute
+            registry by their AttributeName.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent BIOS attributes for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Bios_v1_0_9_ChangePassword:
+      additionalProperties: false
+      description: This action changes a BIOS password.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall change the selected BIOS password.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Bios_v1_0_9_ChangePasswordRequestBody:
+      additionalProperties: false
+      description: This action changes a BIOS password.
+      properties:
+        NewPassword:
+          description: The new BIOS password.
+          type: string
+          x-longDescription: This parameter shall contain the new BIOS password.
+        OldPassword:
+          description: The existing BIOS password.
+          type: string
+          x-longDescription: This parameter shall contain the existing BIOS password
+            to change.
+        PasswordName:
+          description: The name of the BIOS password to change.
+          type: string
+          x-longDescription: This parameter shall contain the name of the BIOS password
+            to change.  For instance, AdminPassword or UserPassword.
+      required:
+      - NewPassword
+      - OldPassword
+      - PasswordName
+      type: object
+      x-longDescription: This action shall change the selected BIOS password.
+    Bios_v1_0_9_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Bios_v1_0_9_ResetBios:
+      additionalProperties: false
+      description: This action resets the BIOS attributes to default.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset the BIOS attributes to their default
+        values.  To apply the default values, a system reset may be required.  This
+        action can impact other resources.  This action may clear pending values in
+        the settings resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Bios_v1_0_9_ResetBiosRequestBody:
+      additionalProperties: false
+      description: This action resets the BIOS attributes to default.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset the BIOS attributes to their default
+        values.  To apply the default values, a system reset may be required.  This
+        action can impact other resources.  This action may clear pending values in
+        the settings resource.
+title: '#Bios.v1_0_9.Bios'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2016.1'

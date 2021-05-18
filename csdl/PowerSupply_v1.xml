@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerSupply v1.0.0                                                  -->
+<!--# Redfish Schema:  PowerSupply v1.1.0                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -80,7 +80,7 @@
 
       <Action Name="Reset" IsBound="true">
         <Annotation Term="OData.Description" String="This action resets the power supply."/>
-        <Annotation Term="OData.LongDescription" String="This action shall reset a power supply.  A `GracefulRestart` ResetType shall reset the power supply but shall not affect the power output.  A `ForceRestart` ResetType might affect the power supply output."/>
+        <Annotation Term="OData.LongDescription" String="This action shall reset a power supply.  A `GracefulRestart` ResetType shall reset the power supply but shall not affect the power output.  A `ForceRestart` ResetType can affect the power supply output."/>
         <Parameter Name="Power" Type="PowerSupply.v1_0_0.Actions"/>
         <Parameter Name="ResetType" Type="Resource.ResetType">
           <Annotation Term="OData.Description" String="The type of reset."/>
@@ -114,7 +114,7 @@
         <Property Name="Manufacturer" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The manufacturer of this power supply."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the organization responsible for producing the power supply.  This organization might be the entity from whom the power supply is purchased, but this is not necessarily true."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the organization responsible for producing the power supply.  This organization may be the entity from whom the power supply is purchased, but this is not necessarily true."/>
         </Property>
         <Property Name="Model" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -297,6 +297,32 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerSupply.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology."/>
+      <EntityType Name="PowerSupply" BaseType="PowerSupply.v1_0_0.PowerSupply"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerSupply.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.1"/>
+
+      <EntityType Name="PowerSupply" BaseType="PowerSupply.v1_0_0.PowerSupply">
+        <Property Name="Version" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The hardware version of this power supply."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the hardware version of this power supply as determined by the vendor or supplier."/>
+        </Property>
+        <Property Name="ProductionDate" Type="Edm.DateTimeOffset">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The production or manufacturing date of this power supply."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the date of production or manufacture for this power supply."/>
+        </Property>
+      </EntityType>
+
     </Schema>
 
   </edmx:DataServices>

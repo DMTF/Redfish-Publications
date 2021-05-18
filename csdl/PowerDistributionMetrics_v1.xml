@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerDistributionMetrics v1.0.0                                     -->
+<!--# Redfish Schema:  PowerDistributionMetrics v1.1.0                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2018-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -75,14 +75,14 @@
         <NavigationProperty Name="PowerWatts" Type="Sensor.Sensor">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy" String="Power"/>
-          <Annotation Term="OData.Description" String="The total power reading for this equipment."/>
+          <Annotation Term="OData.Description" String="Power consumption (Watts)."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the total power, measured in Watts, for this unit, that represents the `Total` ElectricalContext sensor when multiple power sensors exist."/>
         </NavigationProperty>
 
         <NavigationProperty Name="EnergykWh" Type="Sensor.Sensor">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy" String="EnergykWh"/>
-          <Annotation Term="OData.Description" String="The energy consumption of this unit."/>
+          <Annotation Term="OData.Description" String="Energy consumption (kWh)."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the total energy, measured in kilowatt-hours (kWh), for this unit, that represents the `Total` ElectricalContext sensor when multiple energy sensors exist."/>
         </NavigationProperty>
 
@@ -107,6 +107,32 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistributionMetrics.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the descriptions for Power and Energy sensors."/>
+      <EntityType Name="PowerDistributionMetrics" BaseType="PowerDistributionMetrics.v1_0_0.PowerDistributionMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistributionMetrics.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.1"/>
+
+      <EntityType Name="PowerDistributionMetrics" BaseType="PowerDistributionMetrics.v1_0_1.PowerDistributionMetrics">
+        <NavigationProperty Name="TemperatureCelsius" Type="Sensor.Sensor">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="Redfish.ExcerptCopy"/>
+          <Annotation Term="OData.Description" String="Temperature (Celsius)."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the temperature sensor reading for this resource."/>
+        </NavigationProperty>
+        <NavigationProperty Name="HumidityPercent" Type="Sensor.Sensor">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="Redfish.ExcerptCopy"/>
+          <Annotation Term="OData.Description" String="Humidity (percent)."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the humidity sensor reading for this resource."/>
+        </NavigationProperty>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Triggers v1.1.3                                                     -->
+<!--# Redfish Schema:  Triggers v1.1.4                                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -169,7 +169,7 @@
         </Property>
         <Property Name="UpperCritical" Type="Triggers.v1_0_0.Threshold" Nullable="false">
           <Annotation Term="OData.Description" String="The value at which the reading is above normal range and requires attention."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the value at which the MetricProperties property is above the normal range and might require attention.  The value of the property shall use the same units as the MetricProperties property."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the value at which the MetricProperties property is above the normal range and may require attention.  The value of the property shall use the same units as the MetricProperties property."/>
         </Property>
         <Property Name="LowerWarning" Type="Triggers.v1_0_0.Threshold" Nullable="false">
           <Annotation Term="OData.Description" String="The value at which the reading is below normal range."/>
@@ -177,7 +177,7 @@
         </Property>
         <Property Name="LowerCritical" Type="Triggers.v1_0_0.Threshold" Nullable="false">
           <Annotation Term="OData.Description" String="The value at which the reading is below normal range and requires attention."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the value at which the MetricProperties property is below the normal range and might require attention.  The value of the property shall use the same units as the MetricProperties property."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the value at which the MetricProperties property is below the normal range and may require attention.  The value of the property shall use the same units as the MetricProperties property."/>
         </Property>
       </ComplexType>
 
@@ -317,6 +317,12 @@
       <EntityType Name="Triggers" BaseType="Triggers.v1_0_4.Triggers"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Triggers.v1_0_6">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology."/>
+      <EntityType Name="Triggers" BaseType="Triggers.v1_0_5.Triggers"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Triggers.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2019.1"/>
@@ -325,7 +331,7 @@
         <Property Name="EventTriggers" Type="Collection(Edm.String)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The array of MessageIds that specify when a trigger condition is met based on an event."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of MessageIds that specify when a trigger condition is met based on an event.  When the service generates an event and if it contains a MessageId within this array, a trigger condition shall be met."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of MessageIds that specify when a trigger condition is met based on an event.  When the service generates an event and if it contains a MessageId within this array, a trigger condition shall be met.  The MetricType property should not be present if this resource is configured for event-based triggers."/>
           <Annotation Term="Validation.Pattern" String="^[A-Za-z0-9]+\.\d+\.\d+\.[A-Za-z0-9.]+$"/>
         </Property>
         <Property Name="Links" Type="Triggers.v1_1_0.Links" Nullable="false">
@@ -362,6 +368,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
       <EntityType Name="Triggers" BaseType="Triggers.v1_1_2.Triggers"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Triggers.v1_1_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology.  It was also created to clarify the usage of MetricType for event-based triggers."/>
+      <EntityType Name="Triggers" BaseType="Triggers.v1_1_3.Triggers"/>
     </Schema>
 
   </edmx:DataServices>

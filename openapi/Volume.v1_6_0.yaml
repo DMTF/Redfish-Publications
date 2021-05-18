@@ -95,7 +95,7 @@ components:
       x-longDescription: This action shall request the system to change the RAID layout
         of the volume.  Depending on the combination of the submitted parameters,
         this could be changing the RAID type, changing the span count, changing the
-        number of drives used by the volume, or another configuration change suppported
+        number of drives used by the volume, or another configuration change supported
         by the system. Note that usage of this action while online may potentially
         cause data loss if the available capacity is reduced.
       x-patternProperties:
@@ -116,6 +116,7 @@ components:
         MediaSpanCount:
           description: The requested number of media elements used per span in the
             secondary RAID for a hierarchical RAID type.
+          format: int64
           type: integer
           x-longDescription: This parameter shall contain the requested number of
             media elements used per span in the secondary RAID for a hierarchical
@@ -127,6 +128,7 @@ components:
             for the volume.
         StripSizeBytes:
           description: The number of blocks (bytes) requested for new strip size.
+          format: int64
           type: integer
           x-longDescription: This parameter shall contain the number of blocks (bytes)
             requested for the strip size.
@@ -134,7 +136,7 @@ components:
       x-longDescription: This action shall request the system to change the RAID layout
         of the volume.  Depending on the combination of the submitted parameters,
         this could be changing the RAID type, changing the span count, changing the
-        number of drives used by the volume, or another configuration change suppported
+        number of drives used by the volume, or another configuration change supported
         by the system. Note that usage of this action while online may potentially
         cause data loss if the available capacity is reduced.
     Volume_v1_6_0_CheckConsistency:
@@ -511,6 +513,7 @@ components:
           description: The number of LBA data size and metadata size combinations
             supported by this namespace. The value of this property is between 0 and
             16.
+          format: int64
           minimum: 0
           nullable: true
           readOnly: true
@@ -533,14 +536,14 @@ components:
         SupportsAtomicTransactionSize:
           description: Indicates that the NVM fields for Namespace preferred write
             granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG),
-            deallocate alignment (NPDA) and optimimal write size (NOWS)  are defined
+            deallocate alignment (NPDA) and optimal write size (NOWS)  are defined
             for this namespace and should be used by the host for I/O optimization.
           nullable: true
           readOnly: true
           type: boolean
           x-longDescription: This property shall indicate whether or not the NVM fields
             for Namespace preferred write granularity (NPWG), write alignment (NPWA),
-            deallocate granularity (NPDG), deallocate alignment (NPDA) and optimimal
+            deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal
             write size (NOWS)  are defined for this namespace and should be used by
             the host for I/O optimization.
           x-versionAdded: v1_5_0
@@ -612,6 +615,7 @@ components:
           type: string
         PercentageComplete:
           description: The percentage of the operation that has been completed.
+          format: int64
           nullable: true
           readOnly: true
           type: integer
@@ -842,6 +846,7 @@ components:
         BlockSizeBytes:
           description: The size of the smallest addressable unit (Block) of this volume
             in bytes.
+          format: int64
           nullable: true
           readOnly: true
           type: integer
@@ -856,6 +861,7 @@ components:
           x-versionAdded: v1_1_0
         CapacityBytes:
           description: The size in bytes of this Volume.
+          format: int64
           nullable: true
           readOnly: false
           type: integer
@@ -947,7 +953,7 @@ components:
             InitializeMethod is not specified, the InitializeMethod should be Foreground.
           nullable: true
           readOnly: true
-          x-longDescription: This property shall indicate the initiatialization method
+          x-longDescription: This property shall indicate the initialization method
             used for this volume. If InitializeMethod is not specified, the InitializeMethod
             should be Foreground. This value reflects the most recently used Initialization
             Method, and may be changed using the Initialize Action.
@@ -962,6 +968,7 @@ components:
         LogicalUnitNumber:
           description: Indicates the host-visible LogicalUnitNumber assigned to this
             Volume.
+          format: int64
           nullable: true
           readOnly: true
           type: integer
@@ -972,6 +979,7 @@ components:
         LowSpaceWarningThresholdPercents:
           description: Low space warning.
           items:
+            format: int64
             nullable: true
             type: integer
           readOnly: false
@@ -991,6 +999,7 @@ components:
           x-versionAdded: v1_1_0
         MaxBlockSizeBytes:
           description: Max Block size in bytes.
+          format: int64
           nullable: true
           readOnly: true
           type: integer
@@ -1001,6 +1010,7 @@ components:
         MediaSpanCount:
           description: Indicates the number of media elements used per span in the
             secondary RAID for a hierarchical RAID type.
+          format: int64
           nullable: true
           readOnly: true
           type: integer
@@ -1041,6 +1051,7 @@ components:
             on the Volume.
         OptimumIOSizeBytes:
           description: The size in bytes of this Volume's optimum IO size.
+          format: int64
           nullable: true
           readOnly: true
           type: integer
@@ -1076,6 +1087,7 @@ components:
         RecoverableCapacitySourceCount:
           description: Current number of capacity source resources that are available
             as replacements.
+          format: int64
           nullable: true
           readOnly: false
           type: integer
@@ -1085,6 +1097,7 @@ components:
           x-versionAdded: v1_3_0
         RemainingCapacityPercent:
           description: The percentage of the capacity remaining in the Volume.
+          format: int64
           nullable: true
           readOnly: true
           type: integer
@@ -1124,6 +1137,7 @@ components:
         StripSizeBytes:
           description: The number of blocks (bytes) in a strip in a disk array that
             uses striped data mapping.
+          format: int64
           nullable: true
           readOnly: false
           type: integer

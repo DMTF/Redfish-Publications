@@ -1,0 +1,389 @@
+components:
+  schemas:
+    Thermal_v1_0_12_Fan:
+      additionalProperties: false
+      properties:
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        FanName:
+          description: The name of the fan.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the fan.
+        LowerThresholdCritical:
+          description: The value at which the reading is below normal range but not
+            yet fatal.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the value at which the Reading
+            property is below the normal range but is not yet fatal.  The value of
+            the property shall use the same units as the Reading property.
+        LowerThresholdFatal:
+          description: The value at which the reading is below normal range and fatal.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the value at which the Reading
+            property is below the normal range and is fatal.  The value of the property
+            shall use the same units as the Reading property.
+        LowerThresholdNonCritical:
+          description: The value at which the reading is below normal range.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the value at which the Reading
+            property is below normal range.  The value of the property shall use the
+            same units as the Reading property.
+        MaxReadingRange:
+          description: Maximum value for this sensor.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall indicate the highest possible value
+            for the Reading property.  The value of the property shall use the same
+            units as the Reading property.
+        MemberId:
+          description: The identifier for the member within the collection.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall uniquely identify the member within
+            the collection.  For services supporting Redfish v1.6 or higher, this
+            value shall contain the zero-based array index.
+        MinReadingRange:
+          description: Minimum value for this sensor.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall indicate the lowest possible value
+            for the Reading property.  The value of the property shall use the same
+            units as the Reading property.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PhysicalContext:
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
+          description: The area or device associated with this fan.
+          readOnly: true
+          x-longDescription: This property shall contain a description of the affected
+            device or region within the chassis with which this fan is associated.
+        Reading:
+          description: The fan speed.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the fan sensor reading.
+        ReadingUnits:
+          $ref: '#/components/schemas/Thermal_v1_0_12_ReadingUnits'
+          description: The units in which the fan reading and thresholds are measured.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the units in which the fan
+            reading and thresholds are measured.
+          x-versionAdded: v1_0_1
+        Redundancy:
+          description: The set of redundancy groups for this fan.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
+          type: array
+          x-longDescription: This property shall contain an array of links to the
+            redundancy groups to which this fan belongs.
+        Redundancy@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        RelatedItem:
+          description: An array of links to resources or objects that this fan services.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            or objects that this fan services.
+        RelatedItem@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        UpperThresholdCritical:
+          description: The value at which the reading is above normal range but not
+            yet fatal.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the value at which the Reading
+            property is above the normal range but is not yet fatal.  The value of
+            the property shall use the same units as the Reading property.
+        UpperThresholdFatal:
+          description: The value at which the reading is above normal range and fatal.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the value at which the Reading
+            property is above the normal range and is fatal.  The value of the property
+            shall use the same units as the Reading property.
+        UpperThresholdNonCritical:
+          description: The value at which the reading is above normal range.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the value at which the Reading
+            property is above the normal range.  The value of the property shall use
+            the same units as the Reading property.
+      required:
+      - '@odata.id'
+      - MemberId
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Thermal_v1_0_12_ReadingUnits:
+      enum:
+      - RPM
+      - Percent
+      type: string
+      x-enumDescriptions:
+        Percent: The fan reading and thresholds are measured as a percentage.
+        RPM: The fan reading and thresholds are measured in revolutions per minute.
+    Thermal_v1_0_12_Temperature:
+      additionalProperties: false
+      properties:
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        LowerThresholdCritical:
+          description: The value at which the reading is below normal range but not
+            yet fatal.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the value at which the ReadingCelsius
+            property is below the normal range but is not yet fatal.  The value of
+            the property shall use the same units as the ReadingCelsius property.
+          x-units: Cel
+        LowerThresholdFatal:
+          description: The value at which the reading is below normal range and fatal.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the value at which the ReadingCelsius
+            property is below the normal range and is fatal.  The value of the property
+            shall use the same units as the ReadingCelsius property.
+          x-units: Cel
+        LowerThresholdNonCritical:
+          description: The value at which the reading is below normal range.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the value at which the ReadingCelsius
+            property is below normal range.  The value of the property shall use the
+            same units as the ReadingCelsius property.
+          x-units: Cel
+        MaxReadingRangeTemp:
+          description: Maximum value for this sensor.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall indicate the highest possible value
+            for the ReadingCelsius property.  The value of the property shall use
+            the same units as the ReadingCelsius property.
+          x-units: Cel
+        MemberId:
+          description: The identifier for the member within the collection.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall uniquely identify the member within
+            the collection.  For services supporting Redfish v1.6 or higher, this
+            value shall contain the zero-based array index.
+        MinReadingRangeTemp:
+          description: Minimum value for this sensor.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall indicate the lowest possible value
+            for the ReadingCelsius property.  The value of the property shall use
+            the same units as the ReadingCelsius property.
+          x-units: Cel
+        Name:
+          description: The temperature sensor name.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the temperature
+            sensor.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PhysicalContext:
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
+          description: The area or device to which this temperature measurement applies.
+          readOnly: true
+          x-longDescription: This property shall contain a description of the affected
+            device or region within the chassis to which this temperature applies.
+        ReadingCelsius:
+          description: The temperature in degrees Celsius.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the temperature in Celsius
+            degrees.
+          x-units: Cel
+        RelatedItem:
+          description: An array of links to resources or objects that represent areas
+            or devices to which this temperature applies.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            or objects that represent areas or devices to which this temperature applies.
+        RelatedItem@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        SensorNumber:
+          description: The numerical identifier of the temperature sensor.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain a numerical identifier for
+            this temperature sensor that is unique within this resource.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        UpperThresholdCritical:
+          description: The value at which the reading is above normal range but not
+            yet fatal.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the value at which the ReadingCelsius
+            property is above the normal range but is not yet fatal.  The value of
+            the property shall use the same units as the ReadingCelsius property.
+          x-units: Cel
+        UpperThresholdFatal:
+          description: The value at which the reading is above normal range and fatal.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the value at which the ReadingCelsius
+            property is above the normal range and is fatal.  The value of the property
+            shall use the same units as the ReadingCelsius property.
+          x-units: Cel
+        UpperThresholdNonCritical:
+          description: The value at which the reading is above normal range.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the value at which the ReadingCelsius
+            property is above the normal range.  The value of the property shall use
+            the same units as the ReadingCelsius property.
+          x-units: Cel
+      required:
+      - '@odata.id'
+      - MemberId
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Thermal_v1_0_12_Thermal:
+      additionalProperties: false
+      description: The Thermal schema describes temperature monitoring and thermal
+        management subsystems, such as cooling fans, for a computer system or similar
+        devices contained within a chassis.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Fans:
+          description: The set of fans for this chassis.
+          items:
+            $ref: '#/components/schemas/Thermal_v1_0_12_Fan'
+          readOnly: false
+          type: array
+          x-autoExpand: true
+          x-longDescription: This property shall contain the set of fans for this
+            chassis.
+        Fans@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Redundancy:
+          description: The redundancy information for the set of fans in this chassis.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_Redundancy
+          type: array
+          x-autoExpand: true
+          x-longDescription: This property shall contain redundancy information for
+            the fans in this chassis.
+        Redundancy@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        Temperatures:
+          description: The set of temperature sensors for this chassis.
+          items:
+            $ref: '#/components/schemas/Thermal_v1_0_12_Temperature'
+          readOnly: false
+          type: array
+          x-autoExpand: true
+          x-longDescription: This property shall contain the set of temperature sensors
+            for this chassis.
+        Temperatures@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall contain the thermal management properties
+        for temperature monitoring and management of cooling fans for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Thermal.v1_0_12.Thermal'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

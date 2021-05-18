@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  CollectionCapabilities v1.2.2                                       -->
+<!--# Redfish Schema:  CollectionCapabilities v1.3.0                                       -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2020 DMTF.                                                            -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -30,7 +30,7 @@
       <ComplexType Name="CollectionCapabilities" Abstract="true">
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="OData.Description" String="This type describes the capabilities of a collection."/>
-        <Annotation Term="OData.LongDescription" String="This type shall describe any capabilities of a resource collection in terms of how a client can create resources within the resource collection."/>      
+        <Annotation Term="OData.LongDescription" String="This type shall describe any capabilities of a resource collection in terms of how a client can create resources within the resource collection."/>
       </ComplexType>
     </Schema>
 
@@ -87,6 +87,28 @@
         <Member Name="VolumeCreation">
           <Annotation Term="OData.Description" String="This capability describes a client creating a new volume resource as part of an existing storage subsystem."/>
         </Member>
+        <Member Name="ResourceBlockComposition">
+          <Annotation Term="OData.Description" String="This capability describes a client creating a new resource block from a set of other resource blocks."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="ResourceBlockConstrainedComposition">
+          <Annotation Term="OData.Description" String="This capability describes a client creating a new resource block from a set of constraints."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
       </EnumType>
 
       <ComplexType Name="Links" BaseType="Resource.Links">
@@ -135,7 +157,8 @@
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CollectionCapabilities.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2018.2"/>
-      <Annotation Term="OData.Description" String="This version was created to add ComputerSystemConstrainedComposition to the UseCase enumeration."/>
+      <Annotation Term="OData.Description" String="This version was created to add `ComputerSystemConstrainedComposition` to the UseCase enumeration."/>
+
       <ComplexType Name="CollectionCapabilities" BaseType="CollectionCapabilities.v1_0_1.CollectionCapabilities"/>
     </Schema>
 
@@ -181,6 +204,14 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
       <ComplexType Name="CollectionCapabilities" BaseType="CollectionCapabilities.v1_2_1.CollectionCapabilities"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CollectionCapabilities.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2020.4"/>
+      <Annotation Term="OData.Description" String="This version was created to add `ResourceBlockComposition` and `ResourceBlockConstrainedComposition` to the UseCase enumeration."/>
+
+      <ComplexType Name="CollectionCapabilities" BaseType="CollectionCapabilities.v1_2_2.CollectionCapabilities"/>
     </Schema>
 
   </edmx:DataServices>
