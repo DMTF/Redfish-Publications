@@ -1,0 +1,293 @@
+components:
+  schemas:
+    KeyPolicy_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/KeyPolicy_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    KeyPolicy_v1_0_0_KeyPolicy:
+      additionalProperties: false
+      description: The KeyPolicy schema describes settings for how keys are allowed
+        to be used for accessing devices or services.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/KeyPolicy_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        IsDefault:
+          description: Indicates if this is the default key policy.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate if this key policy is the
+            policy applied when no other policies are specified.
+        KeyPolicyType:
+          $ref: '#/components/schemas/KeyPolicy_v1_0_0_KeyPolicyType'
+          description: The type of key policy.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of key policy.
+        NVMeoF:
+          $ref: '#/components/schemas/KeyPolicy_v1_0_0_NVMeoF'
+          description: NVMe-oF specific properties.
+          nullable: true
+          x-longDescription: This property shall contain NVMe-oF specific properties
+            for this key policy.  This property shall be present if KeyPolicyType
+            contains the value `NVMeoF`.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a key policy for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - KeyPolicyType
+    KeyPolicy_v1_0_0_KeyPolicyType:
+      enum:
+      - NVMeoF
+      type: string
+      x-enumDescriptions:
+        NVMeoF: An NVMe-oF key policy.
+      x-enumLongDescriptions:
+        NVMeoF: This value shall indicate the key policy is for an NVMe-oF key.
+    KeyPolicy_v1_0_0_NVMeoF:
+      additionalProperties: false
+      description: NVMe-oF specific properties.
+      properties:
+        CipherSuiteAllowList:
+          description: The cipher suites that this key policy allows.
+          items:
+            $ref: '#/components/schemas/KeyPolicy_v1_0_0_NVMeoFCipherSuiteType'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the cipher suites that this
+            key policy allows.  The absence of the property shall indicate any cipher
+            suite is allowed.  An empty list shall indicate no cipher suites are allowed.
+        DHGroupAllowList:
+          description: The Diffie-Hellman (DH) groups that this key policy allows.
+          items:
+            $ref: '#/components/schemas/KeyPolicy_v1_0_0_NVMeoFDHGroupType'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the Diffie-Hellman (DH) groups
+            that this key policy allows.  The absence of the property shall indicate
+            any DH group is allowed.  An empty list shall indicate no DH groups are
+            allowed.
+        OEMSecurityProtocolAllowList:
+          description: The OEM security protocols that this key policy allows.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the OEM-defined security
+            protocols that this key policy allows.  NVMe-oF channels are restricted
+            to OEM-defined security protocols in this list.  An empty list shall indicate
+            no security protocols are allowed.  This property shall be present if
+            SecurityProtocolAllowList contains `OEM`.
+        SecureHashAllowList:
+          description: The secure hash algorithms that this key policy allows.
+          items:
+            $ref: '#/components/schemas/KeyPolicy_v1_0_0_NVMeoFSecureHashType'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the secure hash algorithms
+            that this key policy allows.  The absence of the property shall indicate
+            any secure hash algorithm is allowed.  An empty list shall indicate no
+            secure hash algorithms are allowed.
+        SecurityProtocolAllowList:
+          description: The security protocols that this key policy allows.
+          items:
+            $ref: '#/components/schemas/KeyPolicy_v1_0_0_NVMeoFSecurityProtocolType'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the security protocols that
+            this key policy allows.  NVMe-oF channels are restricted to security protocols
+            in this list.  The absence of the property shall indicate any security
+            protocol is allowed.  An empty list shall indicate no security protocols
+            are allowed.
+        SecurityTransportAllowList:
+          description: The security transports that this key policy allows.
+          items:
+            $ref: '#/components/schemas/KeyPolicy_v1_0_0_NVMeoFSecurityTransportType'
+            nullable: true
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain the security transports that
+            this key policy allows.  The absence of the property shall indicate any
+            security transport is allowed.  An empty list shall indicate no security
+            transports are allowed.
+      type: object
+      x-longDescription: This type shall contain NVMe-oF specific properties for a
+        key policy.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    KeyPolicy_v1_0_0_NVMeoFCipherSuiteType:
+      description: The NVMe cipher suites that a key is allowed to use.
+      enum:
+      - TLS_AES_128_GCM_SHA256
+      - TLS_AES_256_GCM_SHA384
+      type: string
+      x-enumDescriptions:
+        TLS_AES_128_GCM_SHA256: TLS_AES_128_GCM_SHA256.
+        TLS_AES_256_GCM_SHA384: TLS_AES_256_GCM_SHA384.
+      x-enumLongDescriptions:
+        TLS_AES_128_GCM_SHA256: This value shall indicate TLS_AES_128_GCM_SHA256 as
+          defined by the 'Mandatory and Recommended Cipher Suites' clause in the NVMe
+          TCP Transport Specification.
+        TLS_AES_256_GCM_SHA384: This value shall indicate TLS_AES_256_GCM_SHA384 as
+          defined by the 'Mandatory and Recommended Cipher Suites' clause in the NVMe
+          TCP Transport Specification.
+      x-longDescription: This enumeration shall list the NVMe cipher suites that a
+        key is allowed to use.
+    KeyPolicy_v1_0_0_NVMeoFDHGroupType:
+      description: The NVMe Diffie-Hellman (DH) groups that a key is allowed to use.
+      enum:
+      - FFDHE2048
+      - FFDHE3072
+      - FFDHE4096
+      - FFDHE6144
+      - FFDHE8192
+      type: string
+      x-enumDescriptions:
+        FFDHE2048: 2048-bit Diffie-Hellman (DH) group.
+        FFDHE3072: 3072-bit Diffie-Hellman (DH) group.
+        FFDHE4096: 4096-bit Diffie-Hellman (DH) group.
+        FFDHE6144: 6144-bit Diffie-Hellman (DH) group.
+        FFDHE8192: 8192-bit Diffie-Hellman (DH) group.
+      x-enumLongDescriptions:
+        FFDHE2048: This value shall indicate the 2048-bit Diffie-Hellman (DH) group
+          as defined by the 'DH-HMAC-CHAP Diffie-Hellman group identifiers' figure
+          in the NVMe Base Specification.
+        FFDHE3072: This value shall indicate the 3072-bit Diffie-Hellman (DH) group
+          as defined by the 'DH-HMAC-CHAP Diffie-Hellman group identifiers' figure
+          in the NVMe Base Specification.
+        FFDHE4096: This value shall indicate the 4096-bit Diffie-Hellman (DH) group
+          as defined by the 'DH-HMAC-CHAP Diffie-Hellman group identifiers' figure
+          in the NVMe Base Specification.
+        FFDHE6144: This value shall indicate the 2048-bit Diffie-Hellman (DH) group
+          as defined by the 'DH-HMAC-CHAP Diffie-Hellman group identifiers' figure
+          in the NVMe Base Specification.
+        FFDHE8192: This value shall indicate the 8192-bit Diffie-Hellman (DH) group
+          as defined by the 'DH-HMAC-CHAP Diffie-Hellman group identifiers' figure
+          in the NVMe Base Specification.
+      x-longDescription: This enumeration shall list the Diffie-Hellman (DH) groups
+        that a key is allowed to use.
+    KeyPolicy_v1_0_0_NVMeoFSecureHashType:
+      description: The NVMe secure hash algorithms that a key is allowed to use.
+      enum:
+      - SHA256
+      - SHA384
+      - SHA512
+      type: string
+      x-enumDescriptions:
+        SHA256: SHA-256.
+        SHA384: SHA-384.
+        SHA512: SHA-512.
+      x-enumLongDescriptions:
+        SHA256: This value shall indicate the SHA-256 hash function as defined by
+          the 'DH-HMAC-CHAP hash function identifiers' figure in the NVMe Base Specification.
+        SHA384: This value shall indicate the SHA-384 hash function as defined by
+          the 'DH-HMAC-CHAP hash function identifiers' figure in the NVMe Base Specification.
+        SHA512: This value shall indicate the SHA-512 hash function as defined by
+          the 'DH-HMAC-CHAP hash function identifiers' figure in the NVMe Base Specification.
+      x-longDescription: This enumeration shall list the NVMe secure hash algorithms
+        that a key is allowed to use.
+    KeyPolicy_v1_0_0_NVMeoFSecurityProtocolType:
+      description: The NVMe security protocols that a key is allowed to use.
+      enum:
+      - DHHC
+      - TLS_PSK
+      - OEM
+      type: string
+      x-enumDescriptions:
+        DHHC: Diffie-Hellman Hashed Message Authentication Code Challenge Handshake
+          Authentication Protocol (DH-HMAC-CHAP).
+        OEM: OEM.
+        TLS_PSK: Transport Layer Security Pre-Shared Key (TLS PSK).
+      x-enumLongDescriptions:
+        DHHC: This value shall indicate the Diffie-Hellman Hashed Message Authentication
+          Code Challenge Handshake Authentication Protocol (DH-HMAC-CHAP) as defined
+          by the NVMe Base Specification.
+        OEM: This value shall indicate an OEM-defined security protocol.  The OEMSecurityProtocolAllowList
+          property shall contain the specific OEM protocol.
+        TLS_PSK: This value shall indicate Transport Layer Security Pre-Shared Key
+          (TLS PSK) as defined by the NVMe TCP Transport Specification.
+      x-longDescription: This enumeration shall list the NVMe security protocols that
+        a key is allowed to use.
+    KeyPolicy_v1_0_0_NVMeoFSecurityTransportType:
+      description: The NVMe security transports that a key is allowed to use.
+      enum:
+      - TLSv2
+      - TLSv3
+      type: string
+      x-enumDescriptions:
+        TLSv2: Transport Layer Security (TLS) v2.
+        TLSv3: Transport Layer Security (TLS) v3.
+      x-enumLongDescriptions:
+        TLSv2: This value shall indicate Transport Layer Security (TLS) v2 as defined
+          by the 'Transport Specific Address Subtype Definition for NVMe/TCP Transport'
+          figure in the NVMe TCP Transport Specification.
+        TLSv3: This value shall indicate Transport Layer Security (TLS) v3 as defined
+          by the 'Transport Specific Address Subtype Definition for NVMe/TCP Transport'
+          figure in the NVMe TCP Transport Specification.
+      x-longDescription: This enumeration shall list the NVMe security transports
+        that a key is allowed to use.
+    KeyPolicy_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#KeyPolicy.v1_0_0.KeyPolicy'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.2'

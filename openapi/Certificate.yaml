@@ -7,6 +7,8 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/Certificate.v1_1_3.yaml#/components/schemas/Certificate_v1_1_3_Certificate
       - $ref: http://redfish.dmtf.org/schemas/v1/Certificate.v1_2_3.yaml#/components/schemas/Certificate_v1_2_3_Certificate
       - $ref: http://redfish.dmtf.org/schemas/v1/Certificate.v1_3_0.yaml#/components/schemas/Certificate_v1_3_0_Certificate
+      - $ref: http://redfish.dmtf.org/schemas/v1/Certificate.v1_4_0.yaml#/components/schemas/Certificate_v1_4_0_Certificate
+      - $ref: http://redfish.dmtf.org/schemas/v1/Certificate.v1_5_0.yaml#/components/schemas/Certificate_v1_5_0_Certificate
       description: The Certificate schema describes a certificate that proves the
         identify of a component, account, or service.
       x-longDescription: This resource shall represent a certificate for a Redfish
@@ -14,17 +16,25 @@ components:
     Certificate_CertificateType:
       enum:
       - PEM
+      - PEMchain
       - PKCS7
       type: string
       x-enumDescriptions:
-        PEM: A Privacy Enhanced Mail (PEM)-encoded certificate.
+        PEM: A Privacy Enhanced Mail (PEM)-encoded single certificate.
+        PEMchain: A Privacy Enhanced Mail (PEM)-encoded certificate chain.
         PKCS7: A Privacy Enhanced Mail (PEM)-encoded PKCS7 certificate.
       x-enumLongDescriptions:
-        PEM: The format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded
-          string, containing RFC5280-defined structures.
+        PEM: This value shall indicate the format of the certificate shall contain
+          a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined
+          structures, representing a single certificate.
+        PEMchain: This value shall indicate the format of the certificate shall contain
+          a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined
+          structures, representing a certificate chain.
         PKCS7: The format of the certificate shall contain a Privacy Enhanced Mail
-          (PEM)-encoded string, containing RFC5280- and RFC2315-defined structures.  The
+          (PEM)-encoded string, containing RFC5280-defined and RFC2315-defined structures.  The
           service can discard additional certificates or other data in the structure.
+      x-enumVersionAdded:
+        PEMchain: v1_4_0
     Certificate_KeyUsage:
       description: The usages of a key contained within a certificate.
       enum:

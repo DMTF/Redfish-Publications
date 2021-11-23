@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ProcessorMetrics v1.2.1                                             -->
+<!--# Redfish Schema:  ProcessorMetrics v1.4.0                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -26,6 +26,12 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Resource_v1.xml">
     <edmx:Include Namespace="Resource.v1_0_0"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Sensor_v1.xml">
+    <edmx:Include Namespace="Sensor"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/PCIeDevice_v1.xml">
+    <edmx:Include Namespace="PCIeDevice"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -93,8 +99,8 @@
       <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.ProcessorMetrics">
         <Property Name="BandwidthPercent" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The CPU bandwidth as a percentage."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain CPU utilization of the processor as a percentage.  When this resource is subordinate to the ProcessorSummary object, this property shall be the CPU utilization over all processors as a percentage."/>
+          <Annotation Term="OData.Description" String="The bandwidth usage of this processor as a percentage."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the bandwidth usage of the processor as a percentage.  When this resource is subordinate to the ProcessorSummary object, this property shall be the CPU utilization over all processors as a percentage."/>
           <Annotation Term="Validation.Minimum" Int="0"/>
           <Annotation Term="Measures.Unit" String="%"/>
         </Property>
@@ -328,6 +334,12 @@
       <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_0_3.ProcessorMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_0_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the descriptions of BandwidthPercent that allows for various types of processors."/>
+      <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_0_4.ProcessorMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.1"/>
@@ -359,6 +371,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology."/>
       <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_1_2.ProcessorMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_1_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the descriptions of BandwidthPercent that allows for various types of processors."/>
+      <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_1_3.ProcessorMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_2_0">
@@ -424,6 +442,38 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology."/>
       <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_2_0.ProcessorMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_2_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the descriptions of BandwidthPercent that allows for various types of processors."/>
+      <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_2_1.ProcessorMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+
+      <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_2_2.ProcessorMetrics">
+        <NavigationProperty Name="CoreVoltage" Type="Sensor.Sensor">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The core voltage of this processor in Volts."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the sensor measuring the core voltage of this processor in Volts.  The core voltage of the processor may change more frequently than the manager is able to monitor."/>
+          <Annotation Term="Redfish.ExcerptCopy" String="Voltage"/>
+        </NavigationProperty>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_4_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.3"/>
+
+      <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_3_0.ProcessorMetrics">
+        <Property Name="PCIeErrors" Type="PCIeDevice.PCIeErrors" Nullable="false">
+          <Annotation Term="OData.Description" String="The PCIe errors associated with this processor."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the PCIe errors associated with this processor."/>
+        </Property>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

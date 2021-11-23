@@ -1,0 +1,221 @@
+components:
+  schemas:
+    EventService_v1_1_7_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#EventService.SubmitTestEvent':
+          $ref: '#/components/schemas/EventService_v1_1_7_SubmitTestEvent'
+        Oem:
+          $ref: '#/components/schemas/EventService_v1_1_7_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EventService_v1_1_7_EventService:
+      additionalProperties: false
+      description: The EventService schema contains properties for managing event
+        subscriptions and generates the events sent to subscribers.  The resource
+        has links to the actual collection of subscriptions, which are called event
+        destinations.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/EventService_v1_1_7_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        DeliveryRetryAttempts:
+          description: The number of times that the POST of an event is retried before
+            the subscription terminates.  This retry occurs at the service level,
+            which means that the HTTP POST to the event destination fails with an
+            HTTP `4XX` or `5XX` status code or an HTTP timeout occurs this many times
+            before the event destination subscription terminates.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the number of times that
+            the POST of an event is retried before the subscription terminates.  This
+            retry occurs at the service level, which means that the HTTP POST to the
+            event destination fails with an HTTP `4XX` or `5XX` status code or an
+            HTTP timeout occurs this many times before the event destination subscription
+            terminates.
+        DeliveryRetryIntervalSeconds:
+          description: The interval, in seconds, between retry attempts for sending
+            any event.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the interval, in seconds,
+            between the retry attempts for any event sent to the subscription destination.
+          x-units: s
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        EventTypesForSubscription:
+          description: The types of events to which a client can subscribe.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the types of events to which
+            a client can subscribe.  The semantics associated with the enumeration
+            values are defined in the Redfish Specification.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        ServerSentEventUri:
+          description: The link to a URI for receiving Server-Sent Event representations
+            for the events that this service generates.
+          format: uri-reference
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a URI that specifies an HTML5
+            Server-Sent Event-conformant endpoint.
+          x-versionAdded: v1_1_0
+        ServiceEnabled:
+          description: An indication of whether this service is enabled.  If `false`,
+            events are no longer published, new SSE connections cannot be established,
+            and existing SSE connections are terminated.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this service is
+            enabled.  If `false`, events are no longer published, new SSE connections
+            cannot be established, and existing SSE connections are terminated.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        Subscriptions:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to a collection of event destinations.
+          readOnly: true
+          x-longDescription: This property shall contain the link to a resource collection
+            of type EventDestinationCollection.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent an event service for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EventService_v1_1_7_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EventService_v1_1_7_SubmitTestEvent:
+      additionalProperties: false
+      description: This action generates a test event.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall add a test event to the event service with
+        the event data specified in the action parameters.  Then, this message should
+        be sent to any appropriate event destinations.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EventService_v1_1_7_SubmitTestEventRequestBody:
+      additionalProperties: false
+      description: This action generates a test event.
+      properties:
+        EventId:
+          description: The ID for the event to add.
+          type: string
+          x-longDescription: This parameter shall have the same semantics as the EventId
+            property in the Event schema for Redfish.  A service can ignore this value
+            and replace it with its own.
+        EventTimestamp:
+          description: The date and time for the event to add.
+          format: date-time
+          type: string
+          x-longDescription: This parameter shall contain the date and time for the
+            event to add and have the same semantics as the EventTimestamp property
+            in the Event schema for Redfish.
+        EventType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
+          description: The type for the event to add.
+          x-longDescription: This parameter shall contain the property name for which
+            the following allowable values apply.
+        Message:
+          description: The human-readable message for the event to add.
+          type: string
+          x-longDescription: This parameter shall have the same semantics as the Message
+            property in the Event schema for Redfish.
+        MessageArgs:
+          description: An array of message arguments for the event to add.
+          items:
+            type: string
+          type: array
+          x-longDescription: This parameter shall have the same semantics as the MessageArgs
+            property in the Event schema for Redfish.
+        MessageId:
+          description: The MessageId for the event to add.
+          type: string
+          x-longDescription: This parameter shall contain the MessageId for the event
+            to add and have the same semantics as the MessageId property in the Event
+            schema for Redfish.
+        OriginOfCondition:
+          description: The URL in the OriginOfCondition property of the event to add.  It
+            is not a reference object.
+          format: uri-reference
+          type: string
+          x-longDescription: This parameter shall be a string that represents the
+            URL contained by the OriginOfCondition property in the Event schema for
+            Redfish.
+        Severity:
+          description: The severity for the event to add.
+          type: string
+          x-longDescription: This parameter shall contain the severity for the event
+            to add and have the same semantics as the Severity property in the Event
+            schema for Redfish.
+      required:
+      - MessageId
+      type: object
+      x-longDescription: This action shall add a test event to the event service with
+        the event data specified in the action parameters.  Then, this message should
+        be sent to any appropriate event destinations.
+title: '#EventService.v1_1_7.EventService'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.1'

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  NetworkDeviceFunction v1.6.0                                        -->
+<!--# Redfish Schema:  NetworkDeviceFunction v1.7.0                                        -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -46,8 +46,20 @@
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/EthernetInterface_v1.xml">
     <edmx:Include Namespace="EthernetInterface"/>
   </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/EthernetInterfaceCollection_v1.xml">
+    <edmx:Include Namespace="EthernetInterfaceCollection"/>
+  </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Port_v1.xml">
     <edmx:Include Namespace="Port"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/ComputerSystem_v1.xml">
+    <edmx:Include Namespace="ComputerSystem"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Processor_v1.xml">
+    <edmx:Include Namespace="Processor"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/AllowDenyCollection_v1.xml">
+    <edmx:Include Namespace="AllowDenyCollection"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -732,6 +744,15 @@
           <Annotation Term="OData.Description" String="The link to a collection of VLANs.  This property is used only if the interface supports more than one VLAN."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type VLanNetworkInterfaceCollection.  If this property is used, the VLANEnabled and VLANId property shall not be used."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_7_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of representing multiple VLANs as EthernetInterface resources."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
       </ComplexType>
 
@@ -792,6 +813,15 @@
           <Annotation Term="OData.Description" String="The link to a virtual Ethernet interface that was created when one of the network device function VLANs is represented as a virtual NIC for the purpose of showing the IP address associated with that VLAN."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type EthernetInterface that represents a virtual interface that was created when one of the network device function VLANs is represented as a virtual NIC for the purpose of showing the IP address associated with that VLAN.  The EthernetInterfaceType property of that resource shall contain the value `Virtual`."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_7_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of EthernetInterfaces as each NetworkDeviceFunction could have more than one EthernetInterface."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
       </ComplexType>
     </Schema>
@@ -837,7 +867,7 @@
         </Property>
       </EntityType>
 
-      <ComplexType Name="Links" BaseType="NetworkDeviceFunction.v1_3_0.Links">
+      <ComplexType Name="Links" BaseType="NetworkDeviceFunction.v1_4_0.Links">
         <NavigationProperty Name="PhysicalNetworkPortAssignment" Type="Port.Port" Nullable="false">
           <Annotation Term="OData.Description" String="The physical port to which this network device function is currently assigned."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type Port to which this network device function is currently assigned.  This value shall be one of the AssignablePhysicalPorts array members."/>
@@ -931,6 +961,101 @@
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkDeviceFunction.v1_7_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+      <Annotation Term="OData.Description" String="This version was created to deprecate the EthernetInterface link and introduce the EthernetInterfaces array of links.  It was also created to add AllowDeny, Limits, and SAVI."/>
+
+      <EntityType Name="NetworkDeviceFunction" BaseType="NetworkDeviceFunction.v1_6_0.NetworkDeviceFunction">
+        <Property Name="SAVIEnabled" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="Indicates if Source Address Validation Improvement (SAVI) is enabled for this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate if the RFC7039-defined Source Address Validation Improvement (SAVI) is enabled for this network device function."/>
+        </Property>
+        <Property Name="Limits" Type="Collection(NetworkDeviceFunction.v1_7_0.Limit)">
+          <Annotation Term="OData.Description" String="The byte and packet limits for this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of byte and packet limits for this network device function."/>
+        </Property>
+        <NavigationProperty Name="AllowDeny" Type="AllowDenyCollection.AllowDenyCollection" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the collection of allow and deny permissions for packets leaving and arriving to this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type AllowDenyCollection that contains the permissions for packets leaving and arriving to this network device function."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </EntityType>
+
+      <ComplexType Name="Limit">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="This type describes the packet and byte limit of a network device function."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe a single array element of the packet and byte limits of a network device function."/>
+        <Property Name="Direction" Type="NetworkDeviceFunction.v1_7_0.DataDirection">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="Indicates the direction of the data to which this limit applies."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate the direction of the data to which this limit applies for this network device function."/>
+        </Property>
+        <Property Name="SustainedPacketsPerSecond" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The maximum number of sustained packets per second for this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum number of sustained packets per second allowed for this network device function."/>
+        </Property>
+        <Property Name="BurstPacketsPerSecond" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The maximum number of packets per second in a burst for this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum number of packets per second in a burst allowed for this network device function."/>
+        </Property>
+        <Property Name="SustainedBytesPerSecond" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The maximum number of sustained bytes per second for this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum number of sustained bytes per second allowed for this network device function."/>
+        </Property>
+        <Property Name="BurstBytesPerSecond" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The maximum number of bytes per second in a burst for this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the maximum number of bytes per second in a burst allowed for this network device function."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="Links" BaseType="NetworkDeviceFunction.v1_5_0.Links">
+        <NavigationProperty Name="EthernetInterfaces" Type="Collection(EthernetInterface.EthernetInterface)">
+          <Annotation Term="OData.Description" String="The links to Ethernet interfaces that were created when one of the network device function VLANs is represented as a virtual NIC for the purpose of showing the IP address associated with that VLAN."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type EthernetInterface that represent the virtual interfaces that were created when one of the network device function VLANs is represented as a virtual NIC for the purpose of showing the IP address associated with that VLAN."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="OffloadSystem" Type="ComputerSystem.ComputerSystem" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The system that performs offload computation for this network function, such as with a SmartNIC."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type ComputerSystem that represents the system that performs offload computation for this network function, such as with a SmartNIC.  The SystemType property contained in the referenced ComputerSystem resource should contain the value `DPU`.  This property shall not be present if OffloadProcessors is present."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="OffloadProcessors" Type="Collection(Processor.Processor)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The processors that perform offload computation for this network function, such as with a SmartNIC."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Processor that represent the processors that performs offload computation for this network function, such as with a SmartNIC.  This property shall not be present if OffloadSystem is present."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
+
+      <EnumType Name="DataDirection">
+        <Member Name="None">
+          <Annotation Term="OData.Description" String="Indicates that this limit not enforced."/>
+        </Member>
+        <Member Name="Ingress">
+          <Annotation Term="OData.Description" String="Indicates that this limit is enforced on packets and bytes received by the network device function."/>
+        </Member>
+        <Member Name="Egress">
+          <Annotation Term="OData.Description" String="Indicates that this limit is enforced on packets and bytes transmitted by the network device function."/>
+        </Member>
+      </EnumType>
+
+      <ComplexType Name="Ethernet" BaseType="NetworkDeviceFunction.v1_5_0.Ethernet">
+        <NavigationProperty Name="EthernetInterfaces" Type="EthernetInterfaceCollection.EthernetInterfaceCollection">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The Ethernet interface collection that represents all the Ethernet Interfaces on this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a collection of type EthernetInterfaceCollection that represent the Ethernet interfaces present on this network device function.  This property shall not be present if this network device function is not referenced by a NetworkInterface resource."/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

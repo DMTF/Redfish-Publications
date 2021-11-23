@@ -1,0 +1,607 @@
+components:
+  schemas:
+    Control_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Control_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Control_v1_0_0_Control:
+      additionalProperties: false
+      description: The Control schema describes a control point and its properties.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Accuracy:
+          description: The estimated percent error of measured versus actual values.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the percent error of the
+            measured versus actual values of the SetPoint property.
+          x-units: '%'
+        Actions:
+          $ref: '#/components/schemas/Control_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        AllowableMax:
+          description: The maximum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the maximum possible value
+            of the SetPoint or SettingMax properties for this control.  Services shall
+            not accept values for SetPoint or SettingMax above this value.
+        AllowableMin:
+          description: The minimum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the minimum possible value
+            of the SetPoint or SettingMin properties for this control.  Services shall
+            not accept values for SetPoint or SettingMin below this value.
+        AllowableNumericValues:
+          description: The supported values for the set point.
+          items:
+            nullable: true
+            type: number
+          readOnly: true
+          type: array
+          x-excerpt: ControlRange
+          x-longDescription: This property shall contain the supported values for
+            this control.  The units shall follow the value of SetPointUnits.  This
+            property should only be present when the set point or range has a limited
+            set of supported values that cannot be accurately described using the
+            Increment property.
+        AssociatedSensors:
+          description: An array of links to the sensors associated with this control.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Sensor that represent the sensors related to this control.
+        AssociatedSensors@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ControlDelaySeconds:
+          description: The time delay in seconds before the control will activate
+            once the value has deviated from the set point.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the time in seconds that
+            will elapse after the control value deviates above or below the value
+            of SetPoint before the control will activate.
+        ControlLoop:
+          $ref: '#/components/schemas/Control_v1_0_0_ControlLoop'
+          description: The control loop details.
+          nullable: true
+          x-longDescription: This property shall contain the details for the control
+            loop described by this resource.
+        ControlMode:
+          $ref: '#/components/schemas/Control_v1_0_0_ControlMode'
+          description: The current operating mode of the control.
+          nullable: true
+          readOnly: false
+          x-excerpt: Control
+          x-longDescription: This property shall contain the operating mode of the
+            control.
+        ControlType:
+          $ref: '#/components/schemas/Control_v1_0_0_ControlType'
+          description: The type of control.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of the control.
+        DeadBand:
+          description: The maximum deviation from the set point allowed before the
+            control will activate.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the maximum deviation value
+            allowed above or below the value of SetPoint before the control will activate.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Implementation:
+          $ref: '#/components/schemas/Control_v1_0_0_ImplementationType'
+          description: The implementation of the control.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the implementation of the
+            control.
+        Increment:
+          description: The smallest increment supported for the set point.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the smallest change allowed
+            to the value of the SetPoint, SettingMin, or SettingMax properties.  The
+            units shall follow the value of SetPointUnits.
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location information for this control.
+          x-longDescription: This property shall indicate the location information
+            for this control.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PhysicalContext:
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
+          description: The area or device to which this control applies.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain a description of the affected
+            component or region within the equipment to which this control applies.
+        PhysicalSubContext:
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalSubContext
+          description: The usage or location within a device to which this control
+            applies.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain a description of the usage
+            or sub-region within the equipment to which this control applies.  This
+            property generally differentiates multiple controls within the same PhysicalContext
+            instance.
+        RelatedItem:
+          description: An array of links to resources that this control services.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            that this control services.
+        RelatedItem@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Sensor:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The sensor reading associated with this control.
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the Sensor excerpt directly
+            associated with this control.  This property shall not be present if multiple
+            sensors are associated with a single control.
+        SetPoint:
+          description: The desired set point of the control.
+          nullable: true
+          readOnly: false
+          type: number
+          x-excerpt: ControlSingle
+          x-longDescription: This property shall contain the desired set point control
+            value.  The units shall follow the value of SetPointUnits.
+        SetPointType:
+          $ref: '#/components/schemas/Control_v1_0_0_SetPointType'
+          description: The set point type used to operate the control.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of set point definitions
+            used to describe this control.
+        SetPointUnits:
+          description: The units of the set point.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the units of the control's
+            set point.
+        SetPointUpdateTime:
+          description: The date and time that the set point was changed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time that the
+            value of SetPoint was last changed.
+        SettingMax:
+          description: The maximum set point in the allowed range.
+          nullable: true
+          readOnly: false
+          type: number
+          x-excerpt: ControlRange
+          x-longDescription: This property shall contain the maximum desired set point
+            within the acceptable range.  The service shall reject values greater
+            than the value of AllowableMax.  The units shall follow the value of SetPointUnits.
+        SettingMin:
+          description: The minimum set point in the allowed range.
+          nullable: true
+          readOnly: false
+          type: number
+          x-excerpt: ControlRange
+          x-longDescription: This property shall contain the minimum desired set point
+            within the acceptable range.  The service shall reject values less than
+            the value of AllowableMin.  The units shall follow the value of SetPointUnits.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a control point for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Control_v1_0_0_ControlExcerpt:
+      additionalProperties: false
+      description: The Control schema describes a control point and its properties.
+      properties:
+        AllowableMax:
+          description: The maximum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the maximum possible value
+            of the SetPoint or SettingMax properties for this control.  Services shall
+            not accept values for SetPoint or SettingMax above this value.
+        AllowableMin:
+          description: The minimum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the minimum possible value
+            of the SetPoint or SettingMin properties for this control.  Services shall
+            not accept values for SetPoint or SettingMin below this value.
+        ControlMode:
+          $ref: '#/components/schemas/Control_v1_0_0_ControlMode'
+          description: The current operating mode of the control.
+          nullable: true
+          readOnly: false
+          x-excerpt: Control
+          x-longDescription: This property shall contain the operating mode of the
+            control.
+        DataSourceUri:
+          description: The link to the resource that provides the data for this control.
+          format: uri-reference
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain a URI to the resource that
+            provides the source of the excerpt contained within this copy.  If no
+            source resource is implemented, meaning the excerpt represents the only
+            available data, this property shall not be present.
+        Reading:
+          description: The reading of the sensor associated with this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain the value of the Reading
+            property of the Sensor resource directly associated with this control.  This
+            property shall not be present if multiple sensors are associated with
+            a single control.
+        ReadingUnits:
+          description: The units of the sensor reading associated with this control.
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain the units of the sensor's
+            reading and thresholds.  This property shall not be present if multiple
+            sensors are associated with a single control.
+      type: object
+      x-excerpt: Control
+      x-longDescription: This resource shall represent a control point for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Control_v1_0_0_ControlLoop:
+      additionalProperties: false
+      description: The details and coefficients used to operate a control loop.
+      properties:
+        CoefficientUpdateTime:
+          description: The date and time that the control loop coefficients were changed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time that any
+            of the coefficients for the control loop were last changed.
+        Differential:
+          description: The differential coefficient.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the coefficient for the differential
+            factor in a control loop.
+        Integral:
+          description: The integral coefficient.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the coefficient for the integral
+            factor in a control loop.
+        Proportional:
+          description: The proportional coefficient.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the coefficient for the proportional
+            factor in a control loop.
+      type: object
+      x-longDescription: This type shall describe the details of a control loop.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Control_v1_0_0_ControlMode:
+      enum:
+      - Automatic
+      - Override
+      - Manual
+      - Disabled
+      type: string
+      x-enumDescriptions:
+        Automatic: Automatically adjust control to meet the set point.
+        Disabled: The control has been disabled.
+        Manual: No automatic adjustments are made to the control.
+        Override: User override of the automatic set point value.
+    Control_v1_0_0_ControlRangeExcerpt:
+      additionalProperties: false
+      description: The Control schema describes a control point and its properties.
+      properties:
+        AllowableMax:
+          description: The maximum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the maximum possible value
+            of the SetPoint or SettingMax properties for this control.  Services shall
+            not accept values for SetPoint or SettingMax above this value.
+        AllowableMin:
+          description: The minimum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the minimum possible value
+            of the SetPoint or SettingMin properties for this control.  Services shall
+            not accept values for SetPoint or SettingMin below this value.
+        AllowableNumericValues:
+          description: The supported values for the set point.
+          items:
+            nullable: true
+            type: number
+          readOnly: true
+          type: array
+          x-excerpt: ControlRange
+          x-longDescription: This property shall contain the supported values for
+            this control.  The units shall follow the value of SetPointUnits.  This
+            property should only be present when the set point or range has a limited
+            set of supported values that cannot be accurately described using the
+            Increment property.
+        ControlMode:
+          $ref: '#/components/schemas/Control_v1_0_0_ControlMode'
+          description: The current operating mode of the control.
+          nullable: true
+          readOnly: false
+          x-excerpt: Control
+          x-longDescription: This property shall contain the operating mode of the
+            control.
+        DataSourceUri:
+          description: The link to the resource that provides the data for this control.
+          format: uri-reference
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain a URI to the resource that
+            provides the source of the excerpt contained within this copy.  If no
+            source resource is implemented, meaning the excerpt represents the only
+            available data, this property shall not be present.
+        Reading:
+          description: The reading of the sensor associated with this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain the value of the Reading
+            property of the Sensor resource directly associated with this control.  This
+            property shall not be present if multiple sensors are associated with
+            a single control.
+        ReadingUnits:
+          description: The units of the sensor reading associated with this control.
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain the units of the sensor's
+            reading and thresholds.  This property shall not be present if multiple
+            sensors are associated with a single control.
+        SettingMax:
+          description: The maximum set point in the allowed range.
+          nullable: true
+          readOnly: false
+          type: number
+          x-excerpt: ControlRange
+          x-longDescription: This property shall contain the maximum desired set point
+            within the acceptable range.  The service shall reject values greater
+            than the value of AllowableMax.  The units shall follow the value of SetPointUnits.
+        SettingMin:
+          description: The minimum set point in the allowed range.
+          nullable: true
+          readOnly: false
+          type: number
+          x-excerpt: ControlRange
+          x-longDescription: This property shall contain the minimum desired set point
+            within the acceptable range.  The service shall reject values less than
+            the value of AllowableMin.  The units shall follow the value of SetPointUnits.
+      type: object
+      x-excerpt: ControlRange
+      x-longDescription: This resource shall represent a control point for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Control_v1_0_0_ControlSingleExcerpt:
+      additionalProperties: false
+      description: The Control schema describes a control point and its properties.
+      properties:
+        AllowableMax:
+          description: The maximum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the maximum possible value
+            of the SetPoint or SettingMax properties for this control.  Services shall
+            not accept values for SetPoint or SettingMax above this value.
+        AllowableMin:
+          description: The minimum possible setting for this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerpt: Control
+          x-longDescription: This property shall indicate the minimum possible value
+            of the SetPoint or SettingMin properties for this control.  Services shall
+            not accept values for SetPoint or SettingMin below this value.
+        ControlMode:
+          $ref: '#/components/schemas/Control_v1_0_0_ControlMode'
+          description: The current operating mode of the control.
+          nullable: true
+          readOnly: false
+          x-excerpt: Control
+          x-longDescription: This property shall contain the operating mode of the
+            control.
+        DataSourceUri:
+          description: The link to the resource that provides the data for this control.
+          format: uri-reference
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain a URI to the resource that
+            provides the source of the excerpt contained within this copy.  If no
+            source resource is implemented, meaning the excerpt represents the only
+            available data, this property shall not be present.
+        Reading:
+          description: The reading of the sensor associated with this control.
+          nullable: true
+          readOnly: true
+          type: number
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain the value of the Reading
+            property of the Sensor resource directly associated with this control.  This
+            property shall not be present if multiple sensors are associated with
+            a single control.
+        ReadingUnits:
+          description: The units of the sensor reading associated with this control.
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain the units of the sensor's
+            reading and thresholds.  This property shall not be present if multiple
+            sensors are associated with a single control.
+        SetPoint:
+          description: The desired set point of the control.
+          nullable: true
+          readOnly: false
+          type: number
+          x-excerpt: ControlSingle
+          x-longDescription: This property shall contain the desired set point control
+            value.  The units shall follow the value of SetPointUnits.
+      type: object
+      x-excerpt: ControlSingle
+      x-longDescription: This resource shall represent a control point for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Control_v1_0_0_ControlType:
+      enum:
+      - Temperature
+      - Power
+      - Frequency
+      type: string
+      x-enumDescriptions:
+        Frequency: Frequency control.
+        Power: Power control or power limit.
+        Temperature: Temperature control or thermostat.
+      x-enumLongDescriptions:
+        Frequency: This value shall indicate a control used to limit the operating
+          frequency, measured in Hertz units, of a device, either to a single set
+          point or within a range, and the SetPointUnits property shall contain `Hz`.
+        Power: This value shall indicate a control used to regulate or limit maximum
+          power consumption, in Watts units, either to a single set point or within
+          a range, and the SetPointUnits property shall contain `W`.
+        Temperature: This value shall indicate a control used to regulate temperature,
+          in units of degrees Celsius, either to a single set point or within a range,
+          and the SetPointUnits property shall contain `Cel`.
+    Control_v1_0_0_ImplementationType:
+      enum:
+      - Programmable
+      - Direct
+      - Monitored
+      type: string
+      x-enumDescriptions:
+        Direct: The set point directly affects the control value.
+        Monitored: A physical control that cannot be adjusted through this interface.
+        Programmable: The set point can be adjusted through this interface.
+    Control_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Control_v1_0_0_SetPointType:
+      enum:
+      - Single
+      - Range
+      type: string
+      x-enumDescriptions:
+        Range: Control uses a range of values.
+        Single: Control uses a single set point.
+      x-enumLongDescriptions:
+        Range: This value shall indicate the control utilizes a set point range for
+          its operation.  The SettingMin and SettingMax properties shall be present
+          for this control type.  The SetPoint property shall not be present for this
+          control type.
+        Single: This value shall indicate the control utilizes a single set point
+          for its operation.  The SetPoint property shall be present for this control
+          type.  The SettingMin and SettingMax properties shall not be present for
+          this control type.
+title: '#Control.v1_0_0.Control'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.2'

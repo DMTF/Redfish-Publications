@@ -14,6 +14,12 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_1_1.json#/definitions/Outlet"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_2_0.json#/definitions/Outlet"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_3_0.json#/definitions/Outlet"
                 }
             ],
             "deletable": false,
@@ -24,7 +30,9 @@
             "uris": [
                 "/redfish/v1/PowerEquipment/RackPDUs/{PowerDistributionId}/Outlets/{OutletId}",
                 "/redfish/v1/PowerEquipment/FloorPDUs/{PowerDistributionId}/Outlets/{OutletId}",
-                "/redfish/v1/PowerEquipment/TransferSwitches/{PowerDistributionId}/Outlets/{OutletId}"
+                "/redfish/v1/PowerEquipment/TransferSwitches/{PowerDistributionId}/Outlets/{OutletId}",
+                "/redfish/v1/PowerEquipment/PowerShelves/{PowerDistributionId}/Outlets/{OutletId}",
+                "/redfish/v1/PowerEquipment/ElectricalBuses/{PowerDistributionId}/Outlets/{OutletId}"
             ]
         },
         "PowerState": {
@@ -52,10 +60,12 @@
                 "CEE_7_Type_F",
                 "SEV_1011_TYPE_12",
                 "SEV_1011_TYPE_23",
-                "BS_1363_Type_G"
+                "BS_1363_Type_G",
+                "BusConnection"
             ],
             "enumDescriptions": {
                 "BS_1363_Type_G": "BS 1363 Type G (250V; 13A).",
+                "BusConnection": "Electrical bus connection.",
                 "CEE_7_Type_E": "CEE 7/7 Type E (250V; 16A).",
                 "CEE_7_Type_F": "CEE 7/7 Type F (250V; 16A).",
                 "IEC_60320_C13": "IEC C13 (250V; 10A or 15A).",
@@ -71,6 +81,7 @@
             },
             "enumLongDescriptions": {
                 "BS_1363_Type_G": "This value shall represent a receptacle that matches the British BS 1363 Type G receptacle (250V; 13A).",
+                "BusConnection": "This value shall represent a direct connection to an electrical bus.",
                 "CEE_7_Type_E": "This value shall represent a receptacle that matches the French specified CEE 7/7 Type E receptacle (250V; 16A).",
                 "CEE_7_Type_F": "This value shall represent a receptacle that matches the Schuko specified CEE 7/7 Type F receptacle (250V; 16A).",
                 "IEC_60320_C13": "This value shall represent a receptacle that matches the IEC 60320 Sheet F C13 specified receptacle (250V; 10A per IEC, 15A per UL).",
@@ -83,6 +94,9 @@
                 "NEMA_L6_30R": "This value shall represent a receptacle that matches the NEMA specified locking L6-30 receptacle (250V; 30A).  The current is commonly de-rated to 24A if it is protected by a 30A breaker.",
                 "SEV_1011_TYPE_12": "This value shall represent a receptacle that matches the SEV 1011 specified Type 12 receptacle (250V; 10A).",
                 "SEV_1011_TYPE_23": "This value shall represent a receptacle that matches the SEV 1011 specified Type 23 receptacle (250V; 16A)."
+            },
+            "enumVersionAdded": {
+                "BusConnection": "v1_3_0"
             },
             "type": "string"
         }

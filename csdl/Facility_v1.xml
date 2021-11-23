@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Facility v1.1.0                                                     -->
+<!--# Redfish Schema:  Facility v1.3.0                                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -217,6 +217,38 @@
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Facility.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+
+      <EntityType Name="Facility" BaseType="Facility.v1_1_0.Facility"/>
+
+      <ComplexType Name="Links" BaseType="Facility.v1_0_0.Links">
+        <NavigationProperty Name="PowerShelves" Type="Collection(PowerDistribution.PowerDistribution)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="An array of links to the power shelves in this facility."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be an array of links to resources of type PowerDistribution that represent the power shelves in this facility."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Facility.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.3"/>
+
+      <EntityType Name="Facility" BaseType="Facility.v1_2_0.Facility"/>
+
+      <ComplexType Name="Links" BaseType="Facility.v1_2_0.Links">
+        <NavigationProperty Name="ElectricalBuses" Type="Collection(PowerDistribution.PowerDistribution)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="An array of links to the electrical buses in this facility."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain an array of links to resources of type PowerDistribution that represent the electrical buses in this facility."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

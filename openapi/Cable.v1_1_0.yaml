@@ -1,0 +1,406 @@
+components:
+  schemas:
+    Cable_v1_1_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Cable_v1_1_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Cable_v1_1_0_Cable:
+      additionalProperties: true
+      description: The Cable schema contains properties that describe a cable connecting
+        endpoints of a chassis, port, or any other cable-compatible endpoint.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Cable_v1_1_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Assembly:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the assembly associated with this cable.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Assembly.
+        AssetTag:
+          description: The user-assigned asset tag for this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall track the cable for inventory purposes.
+        CableClass:
+          $ref: '#/components/schemas/Cable_v1_1_0_CableClass'
+          description: The identifier for the downstream resource.
+          nullable: true
+          readOnly: false
+          x-longDescription: The property shall contain the cable class for this cable.
+        CableStatus:
+          $ref: '#/components/schemas/Cable_v1_1_0_CableStatus'
+          description: The user-reported status of this resource.
+          readOnly: false
+          x-longDescription: This property shall contain the user-reported status
+            of this resource.
+        CableType:
+          description: The type of this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a user-defined type for this
+            cable.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        DownstreamConnectorTypes:
+          description: The connector types this cable supports.
+          items:
+            $ref: '#/components/schemas/Cable_v1_1_0_ConnectorType'
+          readOnly: false
+          type: array
+          x-longDescription: The property shall contain an array of connector types
+            this cable supports.
+        DownstreamName:
+          description: The identifier for the downstream resource.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain any identifier for a downstream
+            resource.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        LengthMeters:
+          description: The length of the cable in meters.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the length of the cable in
+            meters.
+        Links:
+          $ref: '#/components/schemas/Cable_v1_1_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location of the assembly.
+          x-longDescription: This property shall contain location information of the
+            associated assembly.
+        Manufacturer:
+          description: The manufacturer of this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the name of the organization
+            responsible for producing the cable.  This organization might be the entity
+            from whom the cable is purchased, but this is not necessarily true.
+        Model:
+          description: The model number of the cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the name by which the manufacturer
+            generally refers to the cable.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PartNumber:
+          description: The part number for this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the part number assigned
+            by the organization that is responsible for producing or manufacturing
+            the cable.
+        SKU:
+          description: The SKU for this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the stock-keeping unit (SKU)
+            number for this cable.
+        SerialNumber:
+          description: The serial number for this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the manufacturer-allocated
+            number that identifies the cable.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        UpstreamConnectorTypes:
+          description: The connector types this cable supports.
+          items:
+            $ref: '#/components/schemas/Cable_v1_1_0_ConnectorType'
+          readOnly: false
+          type: array
+          x-longDescription: The property shall contain an array of connector types
+            this cable supports.
+        UpstreamName:
+          description: The identifier for the downstream resource.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain any identifier for an upstream
+            resource.
+        UserDescription:
+          description: The description of this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a user-defined description
+            for this cable.
+        UserLabel:
+          description: A user-assigned label.
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a user-assigned label used
+            to identify this resource.  If a value has not been assigned by a user,
+            the value of this property shall be an empty string.
+          x-versionAdded: v1_1_0
+        Vendor:
+          description: The manufacturer of this cable.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the name of the company that
+            provides the final product that includes this cable.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains a simple cable for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Cable_v1_1_0_CableClass:
+      enum:
+      - Power
+      - Network
+      - Storage
+      - Fan
+      - PCIe
+      - USB
+      - Video
+      - Fabric
+      - Serial
+      - General
+      type: string
+      x-enumDescriptions:
+        Fabric: This cable is used for connecting to a fabric.
+        Fan: This cable is used for connecting to a fan system.
+        General: This cable is used for providing general connectivity.
+        Network: This cable is used for connecting to a networking system.
+        PCIe: This cable is used for connecting to a PCIe endpoint.
+        Power: This cable is used for connecting to a power system.
+        Serial: This cable is used for connecting to a serial endpoint.
+        Storage: This cable is used for connecting to a storage system.
+        USB: This cable is used for connecting to a USB endpoint.
+        Video: This cable is used for connecting to a video system.
+    Cable_v1_1_0_CableStatus:
+      enum:
+      - Normal
+      - Degraded
+      - Failed
+      - Testing
+      - Disabled
+      - SetByService
+      type: string
+      x-enumDescriptions:
+        Degraded: The cable is degraded.
+        Disabled: The cable is disabled.
+        Failed: The cable has failed.
+        Normal: The cable is operating normally.
+        SetByService: The cable status is set by the service.
+        Testing: The cable is under test.
+      x-enumLongDescriptions:
+        Degraded: This value shall indicate the cable is degraded.  The State property
+          in Status shall contain the value `Enabled` and The Health property in Status
+          shall contain the value `Warning`.
+        Disabled: This value shall indicate the cable is disabled.  The State property
+          in Status shall contain the value `Disabled`.
+        Failed: This value shall indicate the cable has failed.  The State property
+          in Status shall contain the value `Enabled` and The Health property in Status
+          shall contain the value `Critical`.
+        Normal: This value shall indicate the cable is operating normally.  The State
+          property in Status shall contain the value `Enabled` and The Health property
+          in Status shall contain the value `OK`.
+        SetByService: This value shall indicate the status for the cable is not defined
+          by the user.  If implemented, the service shall determine the value of the
+          State and Health properties in Status.
+        Testing: This value shall indicate the cable is under test.  The State property
+          in Status shall contain the value `InTest`.
+    Cable_v1_1_0_ConnectorType:
+      enum:
+      - ACPower
+      - DB9
+      - DCPower
+      - DisplayPort
+      - HDMI
+      - ICI
+      - IPASS
+      - PCIe
+      - Proprietary
+      - RJ45
+      - SATA
+      - SCSI
+      - SlimSAS
+      - SFP
+      - SFPPlus
+      - USBA
+      - USBC
+      - QSFP
+      type: string
+      x-enumDescriptions:
+        ACPower: This cable connects to a AC power connector.
+        DB9: This cable connects to a DB9 connector.
+        DCPower: This cable connects to a DC power connector.
+        DisplayPort: This cable connects to a DisplayPort power connector.
+        HDMI: This cable connects to an HDMI connector.
+        ICI: This cable connects to an ICI connector.
+        IPASS: This cable connects to an IPASS connector.
+        PCIe: This cable connects to a PCIe connector.
+        Proprietary: This cable connects to a proprietary connector.
+        QSFP: This cable connects to a QSFP connector.
+        RJ45: This cable connects to an RJ45 connector.
+        SATA: This cable connects to a SATA connector.
+        SCSI: This cable connects to a SCSI connector.
+        SFP: This cable connects to a SFP connector.
+        SFPPlus: This cable connects to a SFPPlus connector.
+        SlimSAS: This cable connects to a SlimSAS connector.
+        USBA: This cable connects to a USB-A connector.
+        USBC: This cable connects to a USB-C connector.
+    Cable_v1_1_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        DownstreamChassis:
+          description: An array of links to the downstream chassis connected to this
+            cable.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Chassis that represent the physical downstream containers connected
+            to this cable.
+        DownstreamChassis@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        DownstreamPorts:
+          description: An array of links to the downstream ports connected to this
+            cable.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Port that represent the physical downstream connections connected
+            to this cable.
+        DownstreamPorts@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        DownstreamResources:
+          description: An array of links to the downstream resources connected to
+            this cable.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            that represent the physical downstream connections connected to this cable.  Even
+            if the resource is already referenced in another property within Links,
+            such as DownstreamPorts or DownstreamChassis, it shall also be referenced
+            in this property.
+        DownstreamResources@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        UpstreamChassis:
+          description: An array of links to the upstream chassis connected to this
+            cable.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Chassis that represent the physical upstream containers connected
+            to this cable.
+        UpstreamChassis@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        UpstreamPorts:
+          description: An array of links to the upstream ports connected to this cable.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Port that represent the physical upstream connections connected
+            to this cable.
+        UpstreamPorts@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        UpstreamResources:
+          description: An array of links to the upstream resources connected to this
+            cable.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            that represent the physical upstream connections connected to this cable.  Even
+            if the resource is already referenced in another property within Links,
+            such as UpstreamPorts or UpstreamChassis, it shall also be referenced
+            in this property.
+        UpstreamResources@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Cable_v1_1_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Cable.v1_1_0.Cable'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.3'

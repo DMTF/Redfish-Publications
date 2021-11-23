@@ -1,0 +1,188 @@
+components:
+  schemas:
+    PortMetrics_v1_0_2_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/PortMetrics_v1_0_2_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PortMetrics_v1_0_2_GenZ:
+      additionalProperties: false
+      description: The port metrics for a Gen-Z interface.
+      properties:
+        AccessKeyViolations:
+          description: The total number of Access Key Violations detected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of Access
+            Key Violations detected for packets received or transmitted on this interface.
+        EndToEndCRCErrors:
+          description: The total number of ECRC transient errors detected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain total number of ECRC transient
+            errors detected in received link-local and end-to-end packets.
+        LLRRecovery:
+          description: The total number of times Link-Level Reliability (LLR) recovery
+            has been initiated.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of times
+            Link-level Reliability (LLR) recovery has been initiated by this interface.  This
+            is not to be confused with the number of packets retransmitted due to
+            initiating LLR recovery.
+        LinkNTE:
+          description: The total number of link-local non-transient errors detected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of link-local
+            non-transient errors detected on this interface.
+        MarkedECN:
+          description: The number of packets with the Congestion ECN bit set.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of packets that
+            the component set the Congestion ECN bit prior to transmission through
+            this interface.
+        NonCRCTransientErrors:
+          description: The total number transient errors detected that are unrelated
+            to CRC validation.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of transient
+            errors detected that are unrelated to CRC validation, which covers link-local
+            and end-to-end packets, such as malformed Link Idle packets or PLA signal
+            errors.
+        PacketCRCErrors:
+          description: The total number of PCRC transient errors detected.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of PCRC
+            transient errors detected in received link-local and end-to-end packets.
+        PacketDeadlineDiscards:
+          description: The number of packets discarded due to the Congestion Deadline
+            sub-field reaching zero.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of packets discarded
+            by this interface due to the Congestion Deadline sub-field reaching zero
+            prior to packet transmission.
+        RXStompedECRC:
+          description: The total number of packets received with a stomped ECRC field.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of packets
+            that this interface received with a stomped ECRC field.
+        ReceivedECN:
+          description: The number of packets received on this interface with the Congestion
+            ECN bit set.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of packets received
+            on this interface with the Congestion ECN bit set.
+        TXStompedECRC:
+          description: The total number of packets that this interface stomped the
+            ECRC field.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of packets
+            that this interfaced stomped the ECRC field.
+      type: object
+      x-longDescription: This type shall describe the Gen-Z related port metrics.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PortMetrics_v1_0_2_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PortMetrics_v1_0_2_PortMetrics:
+      additionalProperties: false
+      description: The PortMetrics schema contains usage and health statistics for
+        a switch device or component port summary.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PortMetrics_v1_0_2_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        GenZ:
+          $ref: '#/components/schemas/PortMetrics_v1_0_2_GenZ'
+          description: The port metrics specific to Gen-Z ports.
+          x-longDescription: This property shall contain the port metrics specific
+            to Gen-Z ports.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the port metrics for a switch
+        device or component port summary in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#PortMetrics.v1_0_2.PortMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.4'

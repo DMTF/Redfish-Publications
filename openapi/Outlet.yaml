@@ -5,6 +5,8 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
       - $ref: http://redfish.dmtf.org/schemas/v1/Outlet.v1_0_2.yaml#/components/schemas/Outlet_v1_0_2_Outlet
       - $ref: http://redfish.dmtf.org/schemas/v1/Outlet.v1_1_1.yaml#/components/schemas/Outlet_v1_1_1_Outlet
+      - $ref: http://redfish.dmtf.org/schemas/v1/Outlet.v1_2_0.yaml#/components/schemas/Outlet_v1_2_0_Outlet
+      - $ref: http://redfish.dmtf.org/schemas/v1/Outlet.v1_3_0.yaml#/components/schemas/Outlet_v1_3_0_Outlet
       description: The Outlet schema contains definition for an electrical outlet.
       x-longDescription: This resource shall be used to represent an electrical outlet
         for a Redfish implementation.
@@ -31,9 +33,11 @@ components:
       - SEV_1011_TYPE_12
       - SEV_1011_TYPE_23
       - BS_1363_Type_G
+      - BusConnection
       type: string
       x-enumDescriptions:
         BS_1363_Type_G: BS 1363 Type G (250V; 13A).
+        BusConnection: Electrical bus connection.
         CEE_7_Type_E: CEE 7/7 Type E (250V; 16A).
         CEE_7_Type_F: CEE 7/7 Type F (250V; 16A).
         IEC_60320_C13: IEC C13 (250V; 10A or 15A).
@@ -49,6 +53,8 @@ components:
       x-enumLongDescriptions:
         BS_1363_Type_G: This value shall represent a receptacle that matches the British
           BS 1363 Type G receptacle (250V; 13A).
+        BusConnection: This value shall represent a direct connection to an electrical
+          bus.
         CEE_7_Type_E: This value shall represent a receptacle that matches the French
           specified CEE 7/7 Type E receptacle (250V; 16A).
         CEE_7_Type_F: This value shall represent a receptacle that matches the Schuko
@@ -79,6 +85,8 @@ components:
           SEV 1011 specified Type 12 receptacle (250V; 10A).
         SEV_1011_TYPE_23: This value shall represent a receptacle that matches the
           SEV 1011 specified Type 23 receptacle (250V; 16A).
+      x-enumVersionAdded:
+        BusConnection: v1_3_0
 title: '#Outlet.Outlet'
 x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
 x-owningEntity: DMTF

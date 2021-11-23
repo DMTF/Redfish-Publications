@@ -20,13 +20,19 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_3_0.json#/definitions/Certificate"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_4_0.json#/definitions/Certificate"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_5_0.json#/definitions/Certificate"
                 }
             ],
             "deletable": true,
             "description": "The Certificate schema describes a certificate that proves the identify of a component, account, or service.",
             "insertable": false,
             "longDescription": "This resource shall represent a certificate for a Redfish implementation.",
-            "updatable": false,
+            "updatable": true,
             "uris": [
                 "/redfish/v1/AccountService/Accounts/{ManagerAccountId}/Certificates/{CertificateId}",
                 "/redfish/v1/AccountService/ActiveDirectory/Certificates/{CertificateId}",
@@ -44,6 +50,7 @@
                 "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/SecureBoot/SecureBootDatabases/{DatabaseId}/Certificates/{CertificateId}",
                 "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/SecureBoot/SecureBootDatabases/{DatabaseId}/Certificates/{CertificateId}",
                 "/redfish/v1/EventService/Subscriptions/{EventDestinationId}/Certificates/{CertificateId}",
+                "/redfish/v1/EventService/Subscriptions/{EventDestinationId}/ClientCertificates/{CertificateId}",
                 "/redfish/v1/Systems/{ComputerSystemId}/Certificates/{CertificateId}",
                 "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Certificates/{CertificateId}",
                 "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Certificates/{CertificateId}",
@@ -82,23 +89,37 @@
                 "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/Drives/{DriveId}/Certificates/{CertificateId}",
                 "/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/Certificates/{CertificateId}",
                 "/redfish/v1/Systems/{ComputerSystemId}/VirtualMedia/{VirtualMediaId}/Certificates/{CertificateId}",
+                "/redfish/v1/Systems/{ComputerSystemId}/VirtualMedia/{VirtualMediaId}/ClientCertificates/{CertificateId}",
                 "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/VirtualMedia/{VirtualMediaId}/Certificates/{CertificateId}",
+                "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/VirtualMedia/{VirtualMediaId}/ClientCertificates/{CertificateId}",
                 "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/VirtualMedia/{VirtualMediaId}/Certificates/{CertificateId}",
-                "/redfish/v1/UpdateService/RemoteServerCertificates/{CertificateId}"
+                "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/VirtualMedia/{VirtualMediaId}/ClientCertificates/{CertificateId}",
+                "/redfish/v1/UpdateService/RemoteServerCertificates/{CertificateId}",
+                "/redfish/v1/UpdateService/ClientCertificates/{CertificateId}",
+                "/redfish/v1/Managers/{ManagerId}/Certificates/{CertificateId}",
+                "/redfish/v1/Systems/{ComputerSystemId}/KeyManagement/KMIPCertificates",
+                "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/KeyManagement/KMIPCertificates",
+                "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/KeyManagement/KMIPCertificates"
             ]
         },
         "CertificateType": {
             "enum": [
                 "PEM",
+                "PEMchain",
                 "PKCS7"
             ],
             "enumDescriptions": {
-                "PEM": "A Privacy Enhanced Mail (PEM)-encoded certificate.",
+                "PEM": "A Privacy Enhanced Mail (PEM)-encoded single certificate.",
+                "PEMchain": "A Privacy Enhanced Mail (PEM)-encoded certificate chain.",
                 "PKCS7": "A Privacy Enhanced Mail (PEM)-encoded PKCS7 certificate."
             },
             "enumLongDescriptions": {
-                "PEM": "The format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined structures.",
-                "PKCS7": "The format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280- and RFC2315-defined structures.  The service can discard additional certificates or other data in the structure."
+                "PEM": "This value shall indicate the format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined structures, representing a single certificate.",
+                "PEMchain": "This value shall indicate the format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined structures, representing a certificate chain.",
+                "PKCS7": "The format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined and RFC2315-defined structures.  The service can discard additional certificates or other data in the structure."
+            },
+            "enumVersionAdded": {
+                "PEMchain": "v1_4_0"
             },
             "type": "string"
         },

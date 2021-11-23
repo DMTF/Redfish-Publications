@@ -1,0 +1,1417 @@
+components:
+  schemas:
+    AddressPool_v1_1_2_ASNumberRange:
+      additionalProperties: false
+      description: Autonomous System (AS) number range.
+      properties:
+        Lower:
+          description: Lower Autonomous System (AS) number.
+          format: int64
+          maximum: 65535
+          minimum: 1
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the lower Autonomous System
+            (AS) number to be used as part of a range of ASN values.
+          x-versionAdded: v1_1_0
+        Upper:
+          description: Upper Autonomous System (AS) number.
+          format: int64
+          maximum: 65535
+          minimum: 1
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the upper Autonomous System
+            (AS) number to be used as part of a range of ASN values.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the Autonomous System (AS) number
+        range.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_AddressPool:
+      additionalProperties: false
+      description: The schema definition of an address pool and its configuration.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Ethernet:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_Ethernet'
+          description: The Ethernet related properties for this address pool.
+          x-longDescription: This property shall contain the Ethernet related properties
+            to this address pool.
+          x-versionAdded: v1_1_0
+        GenZ:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_GenZ'
+          description: The Gen-Z related properties for this address pool.
+          x-longDescription: This property shall contain the Gen-Z related properties
+            to this address pool.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent an address pool in a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_BFDSingleHopOnly:
+      additionalProperties: false
+      description: Bidirectional Forwarding Detection (BFD) related properties for
+        an Ethernet fabric.
+      properties:
+        DemandModeEnabled:
+          description: Bidirectional Forwarding Detection (BFD) Demand Mode status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate if Bidirectional Forwarding
+            Detection (BFD) Demand Mode is enabled.  In Demand mode, no periodic BFD
+            Control packets will flow in either direction.
+          x-versionAdded: v1_1_0
+        DesiredMinTxIntervalMilliseconds:
+          description: Desired Bidirectional Forwarding Detection (BFD) minimal transmit
+            interval.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the minimum interval, in
+            milliseconds, that the local system would like to use when transmitting
+            Bidirectional Forwarding Detection (BFD) Control packets, less any jitter
+            applied.
+          x-versionAdded: v1_1_0
+        KeyChain:
+          description: Bidirectional Forwarding Detection (BFD) Key Chain name.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the name of the Bidirectional
+            Forwarding Detection (BFD) Key Chain.
+          x-versionAdded: v1_1_0
+        LocalMultiplier:
+          description: Bidirectional Forwarding Detection (BFD) multiplier value.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Bidirectional Forwarding
+            Detection (BFD) multiplier value.  A BFD multiplier consists of the number
+            of consecutive BFD packets that shall be missed from a BFD peer before
+            declaring that peer unavailable, and informing the higher-layer protocols
+            of the failure.
+          x-versionAdded: v1_1_0
+        MeticulousModeEnabled:
+          description: Meticulous MD5 authentication of the Bidirectional Forwarding
+            Detection (BFD) session.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the keyed MD5 sequence
+            number is updated with every packet.  If `true`, the keyed MD5 sequence
+            number is updated with every packet, if `false` it is updated periodically.
+          x-versionAdded: v1_1_0
+        RequiredMinRxIntervalMilliseconds:
+          description: Bidirectional Forwarding Detection (BFD) receive value.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Bidirectional Forwarding
+            Detection (BFD) receive value.  The BFD receive value determines how frequently
+            (in milliseconds) BFD packets will be expected to be received from BFD
+            peers.
+          x-versionAdded: v1_1_0
+        SourcePort:
+          description: Bidirectional Forwarding Detection (BFD) source port.
+          format: int64
+          maximum: 65535
+          minimum: 49152
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Bidirectional Forwarding
+            Detection (BFD) source port.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the BFD related properties for an
+        Ethernet fabric that uses Bidirectional Forwarding Detection (BFD) for link
+        fault detection.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_BGPEvpn:
+      additionalProperties: false
+      description: BGP Ethernet Virtual Private Network (BGP EVPN) related properties
+        for an Ethernet fabric.
+      properties:
+        ARPProxyEnabled:
+          description: Address Resolution Protocol (ARP) proxy status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether proxy Address Resolution
+            Protocol (ARP) is enabled.
+          x-versionAdded: v1_1_0
+        ARPSupressionEnabled:
+          description: Address Resolution Protocol (ARP) suppression status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether Address Resolution
+            Protocol (ARP) suppression is enabled.
+          x-versionAdded: v1_1_0
+        AnycastGatewayIPAddress:
+          description: The anycast gateway IPv4 address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the anycast gateway IPv4
+            address for a host subnet.
+          x-versionAdded: v1_1_0
+        AnycastGatewayMACAddress:
+          description: The anycast gateway MAC address.
+          nullable: true
+          pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the anycast gateway MAC address
+            for a host subnet.
+          x-versionAdded: v1_1_0
+        ESINumberRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_ESINumberRange'
+          description: The Ethernet Segment Identifier (ESI) number range for the
+            fabric.
+          nullable: true
+          x-longDescription: This property shall contain Ethernet Segment Identifier
+            (ESI) number ranges for allocation in supporting functions such as multihoming.
+          x-versionAdded: v1_1_0
+        EVINumberRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_EVINumberRange'
+          description: The Ethernet Virtual Private Network (EVPN) Instance number
+            (EVI) number range for the fabric.
+          nullable: true
+          x-longDescription: This property shall contain the Ethernet Virtual Private
+            Network (EVPN) Instance number (EVI) range for EVPN based fabrics.
+          x-versionAdded: v1_1_0
+        GatewayIPAddress:
+          description: The gateway IPv4 address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the Gateway IPv4 address
+            for a host subnet.
+          x-versionAdded: v1_1_0
+        NDPProxyEnabled:
+          description: Network Discovery Protocol (NDP) proxy status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether Network Discovery
+            Protocol (NDP) proxy is enabled.
+          x-versionAdded: v1_1_0
+        NDPSupressionEnabled:
+          description: Network Discovery Protocol (NDP) suppression status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether Network Discovery
+            Protocol (NDP) suppression is enabled.
+          x-versionAdded: v1_1_0
+        RouteDistinguisherRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_RouteDistinguisherRange'
+          description: The Route Distinguisher (RD) number range for the fabric.
+          nullable: true
+          x-longDescription: This property shall contain the Route Distinguisher (RD)
+            Instance number range for Ethernet Virtual Private Network (EVPN) based
+            fabrics.
+          x-versionAdded: v1_1_0
+        RouteTargetRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_RouteTargetRange'
+          description: The Route Target (RT) number range for the fabric.
+          nullable: true
+          x-longDescription: This property shall contain the Route Target (RT) Instance
+            number range for Ethernet Virtual Private Network (EVPN) based fabrics.
+          x-versionAdded: v1_1_0
+        UnderlayMulticastEnabled:
+          description: Underlay multicast status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether multicast is enabled
+            on the Ethernet fabric underlay.
+          x-versionAdded: v1_1_0
+        UnknownUnicastSuppressionEnabled:
+          description: Suppression of unknown unicast packets.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether unknown unicast
+            packets should be suppressed.
+          x-versionAdded: v1_1_0
+        VLANIdentifierAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_VLANIdentifierAddressRange'
+          description: Virtual LAN (VLAN) tag related address range applicable to
+            this Ethernet fabric or for end host subnets.
+          nullable: true
+          x-longDescription: This property shall contain Virtual LAN (VLAN) tag related
+            address range applicable to this Ethernet fabric or for endpoint host
+            subnets.  VLAN tags can be used for the purpose of identifying packets
+            belonging to different networks.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the EVPN related properties for an
+        Ethernet fabric that uses an IETF defined Ethernet Virtual Private Network
+        (EVPN) based control plane specification based on RFC7432.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_BGPNeighbor:
+      additionalProperties: false
+      description: Border Gateway Protocol (BGP) neighbor related properties.
+      properties:
+        Address:
+          description: Border Gateway Protocol (BGP) neighbor address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the IPv4 address assigned
+            to a Border Gateway Protocol (BGP) neighbor.
+          x-versionAdded: v1_1_0
+        AllowOwnASEnabled:
+          description: Allow own Autonomous System (AS) status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the Autonomous System
+            (AS) of the receiving router is permitted in a Border Gateway Protocol
+            (BGP) update.  If `true`, routes should be received and processed even
+            if the router detects its own ASN in the AS-Path.  If `false`, they should
+            be dropped.
+          x-versionAdded: v1_1_0
+        ConnectRetrySeconds:
+          description: Border Gateway Protocol (BGP) retry timer in seconds.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Border Gateway Protocol
+            (BGP) Retry Timer.  The BGP Retry Timer allows the administrator to set
+            the amount of time in seconds between retries to establish a connection
+            to configured peers which have gone down.
+          x-versionAdded: v1_1_0
+        HoldTimeSeconds:
+          description: Border Gateway Protocol (BGP) hold timer in seconds.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Border Gateway Protocol
+            (BGP) Hold Timer agreed upon between peers.
+          x-versionAdded: v1_1_0
+        KeepaliveIntervalSeconds:
+          description: Border Gateway Protocol (BGP) Keepalive timer in seconds.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Keepalive timer in seconds.  It
+            is used in conjunction with the Border Gateway Protocol (BGP) hold timer.
+          x-versionAdded: v1_1_0
+        LocalAS:
+          description: Local Autonomous System (AS) number.
+          format: int64
+          maximum: 65535
+          minimum: 1
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Autonomous System (AS)
+            number of the local Border Gateway Protocol (BGP) peer.
+          x-versionAdded: v1_1_0
+        LogStateChangesEnabled:
+          description: Border Gateway Protocol (BGP) neighbor log state change status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether Border Gateway Protocol
+            (BGP) neighbor state changes are logged.
+          x-versionAdded: v1_1_0
+        MaxPrefix:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_MaxPrefix'
+          description: Border Gateway Protocol (BGP) max prefix properties.
+          nullable: true
+          x-longDescription: These properties are applicable to configuring Border
+            Gateway Protocol (BGP) max prefix related properties.
+          x-versionAdded: v1_1_0
+        MinimumAdvertisementIntervalSeconds:
+          description: Minimum Border Gateway Protocol (BGP) advertisement interval
+            in seconds.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the minimum time between
+            Border Gateway Protocol (BGP) route advertisements in seconds.
+          x-versionAdded: v1_1_0
+        PassiveModeEnabled:
+          description: Border Gateway Protocol (BGP) passive mode status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether Border Gateway Protocol
+            (BGP) passive mode is enabled.
+          x-versionAdded: v1_1_0
+        PathMTUDiscoveryEnabled:
+          description: Path MTU discovery status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether MTU discovery is
+            permitted.
+          x-versionAdded: v1_1_0
+        PeerAS:
+          description: Peer Autonomous System (AS) number.
+          format: int64
+          maximum: 65535
+          minimum: 1
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Autonomous System (AS)
+            number of the external Border Gateway Protocol (BGP) peer.
+          x-versionAdded: v1_1_0
+        ReplacePeerASEnabled:
+          description: Replace Border Gateway Protocol (BGP) peer Autonomous System
+            (AS) status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether peer Autonomous
+            System (AS) numbers should be replaced.  If `true`, private ASNs are removed
+            and replaced with the peer AS.  If `false`, they remain unchanged.
+          x-versionAdded: v1_1_0
+        TCPMaxSegmentSizeBytes:
+          description: TCP max segment size in Bytes.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the TCP max segment size
+            in Bytes signifying the number of bytes that shall be transported in a
+            single packet.
+          x-versionAdded: v1_1_0
+        TreatAsWithdrawEnabled:
+          description: Border Gateway Protocol (BGP) treat as withdraw status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate Border Gateway Protocol
+            (BGP) withdraw status.  If `true`, the UPDATE message containing the path
+            attribute shall be treated as though all contained routes had been withdrawn.  If
+            `false`, they should remain.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain all Border Gateway Protocol (BGP)
+        neighbor related properties.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_BGPRoute:
+      additionalProperties: false
+      description: Border Gateway Protocol (BGP) route properties.
+      properties:
+        AdvertiseInactiveRoutesEnabled:
+          description: Advertise inactive route status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether inactive routes
+            should be advertised.  If `true`, advertise the best Border Gateway Protocol
+            (BGP) route that is inactive because of Interior Gateway Protocol (IGP)
+            preference.  If `false`, do not use as part of BGP best path selection.
+          x-versionAdded: v1_1_0
+        DistanceExternal:
+          description: Route distance for external routes.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall modify the administrative distance
+            for routes learned via External BGP (eBGP).
+          x-versionAdded: v1_1_0
+        DistanceInternal:
+          description: Route distance for internal routes.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall modify the administrative distance
+            for routes learned via Internal BGP (iBGP).
+          x-versionAdded: v1_1_0
+        DistanceLocal:
+          description: Route distance for local routes.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall modify the administrative distance
+            for routes configured on a local router.
+          x-versionAdded: v1_1_0
+        ExternalCompareRouterIdEnabled:
+          description: Compare router id status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether external router
+            ids should be compared.  If `true`, prefer the route that comes from the
+            Border Gateway Protocol (BGP) router with the lowest router ID.  If `false`,
+            do not use as part of BGP best path selection.
+          x-versionAdded: v1_1_0
+        FlapDampingEnabled:
+          description: Route flap dampening status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether route flap dampening
+            should be enabled.
+          x-versionAdded: v1_1_0
+        SendDefaultRouteEnabled:
+          description: Send default route status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the default route
+            should be advertised.  If `true`, the default route is advertised to all
+            Border Gateway Protocol (BGP) neighbors unless specifically denied.  If
+            `false`, the default route is not advertised.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain properties that are applicable to
+        configuring Border Gateway Protocol (BGP) route related properties.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_CommonBGPProperties:
+      additionalProperties: false
+      description: Common BGP properties.
+      properties:
+        ASNumberRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_ASNumberRange'
+          description: Autonomous System (AS) number range.
+          nullable: true
+          x-longDescription: This property shall contain the range of Autonomous System
+            (AS) numbers assigned to each Border Gateway Protocol (BGP) peer within
+            the fabric.
+          x-versionAdded: v1_1_0
+        BGPNeighbor:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_BGPNeighbor'
+          description: Border Gateway Protocol (BGP) neighbor related properties.
+          nullable: true
+          x-longDescription: This property shall contain all Border Gateway Protocol
+            (BGP) neighbor related properties.
+          x-versionAdded: v1_1_0
+        BGPRoute:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_BGPRoute'
+          description: Border Gateway Protocol (BGP) route related properties.
+          nullable: true
+          x-longDescription: This property shall contain Border Gateway Protocol (BGP)
+            route related properties.
+          x-versionAdded: v1_1_0
+        GracefulRestart:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_GracefulRestart'
+          description: Graceful restart related properties.
+          nullable: true
+          x-longDescription: This property shall contain all graceful restart related
+            properties.
+          x-versionAdded: v1_1_0
+        MultiplePaths:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_MultiplePaths'
+          description: Multiple path related properties.
+          nullable: true
+          x-longDescription: This property shall contain all multiple path related
+            properties.
+          x-versionAdded: v1_1_0
+        SendCommunityEnabled:
+          description: This property shall indicate whether community attributes are
+            sent.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether community attributes
+            are sent to BGP neighbors.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This property shall contain properties shared across both
+        External and Internal Border Gateway Protocol (BGP) related properties.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_DHCP:
+      additionalProperties: false
+      description: DHCP related properties for an Ethernet fabric.
+      properties:
+        DHCPInterfaceMTUBytes:
+          description: Dynamic Host Configuration Protocol (DHCP) interface Maximum
+            Transmission Unit (MTU).
+          format: int64
+          maximum: 9194
+          minimum: 68
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Maximum Transmission
+            Unit (MTU) to use on this interface in bytes.
+          x-versionAdded: v1_1_0
+        DHCPRelayEnabled:
+          description: Dynamic Host Configuration Protocol (DHCP) relay status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether Dynamic Host Configuration
+            Protocol (DHCP) Relay is enabled.
+          x-versionAdded: v1_1_0
+        DHCPServer:
+          description: The Dynamic Host Configuration Protocol (DHCP) IPv4 addresses
+            for this Ethernet fabric.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of addresses assigned
+            to the Dynamic Host Configuration Protocol (DHCP) server for this Ethernet
+            fabric.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain for assigning DHCP related properties
+        to the Ethernet fabric.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_EBGP:
+      additionalProperties: false
+      description: External BGP (eBGP) related properties for an Ethernet fabric.
+      properties:
+        ASNumberRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_ASNumberRange'
+          description: Autonomous System (AS) number range.
+          nullable: true
+          x-longDescription: This property shall contain the range of Autonomous System
+            (AS) numbers assigned to each Border Gateway Protocol (BGP) peer within
+            the fabric.
+          x-versionAdded: v1_1_0
+        AllowDuplicateASEnabled:
+          description: Allow duplicate Autonomous System (AS) path.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether duplicate Autonomous
+            System (AS) numbers are allowed.  If `true`, routes with the same AS number
+            as the receiving router should be allowed.  If `false`,routes should be
+            dropped if the router receives its own AS number in a Border Gateway Protocol
+            (BGP) update.
+          x-versionAdded: v1_1_0
+        AllowOverrideASEnabled:
+          description: Option to override an Autonomous System (AS) number with the
+            AS number of the sending peer .
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether Autonomous System
+            (AS) numbers should be overridden.  If `true`, AS number should be overridden
+            with the AS number of the sending peer.  If `false`, AS number override
+            is disabled.
+          x-versionAdded: v1_1_0
+        AlwaysCompareMEDEnabled:
+          description: Compare Multi Exit Discriminator (MED) status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether neighbor Multi Exit
+            Discriminator (MED) attributes should be compared.
+          x-versionAdded: v1_1_0
+        BGPLocalPreference:
+          description: Local preference value.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the local preference value.  Highest
+            local preference value is preferred for Border Gateway Protocol (BGP)
+            best path selection.
+          x-versionAdded: v1_1_0
+        BGPNeighbor:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_BGPNeighbor'
+          description: Border Gateway Protocol (BGP) neighbor related properties.
+          nullable: true
+          x-longDescription: This property shall contain all Border Gateway Protocol
+            (BGP) neighbor related properties.
+          x-versionAdded: v1_1_0
+        BGPRoute:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_BGPRoute'
+          description: Border Gateway Protocol (BGP) route related properties.
+          nullable: true
+          x-longDescription: This property shall contain Border Gateway Protocol (BGP)
+            route related properties.
+          x-versionAdded: v1_1_0
+        BGPWeight:
+          description: BGP weight attribute.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Border Gateway Protocol
+            (BGP) weight attribute value for external peers.  A higher BGP weight
+            value is preferred for BGP best path selection.
+          x-versionAdded: v1_1_0
+        GracefulRestart:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_GracefulRestart'
+          description: Graceful restart related properties.
+          nullable: true
+          x-longDescription: This property shall contain all graceful restart related
+            properties.
+          x-versionAdded: v1_1_0
+        MED:
+          description: BGP Multi Exit Discriminator (MED) value.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Border Gateway Protocol
+            (BGP) Multi Exit Discriminator (MED) value.  A lower MED value is preferred
+            for BGP best path selection.
+          x-versionAdded: v1_1_0
+        MultihopEnabled:
+          description: External BGP (eBGP) multihop status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether External BGP (eBGP)
+            multihop is enabled.
+          x-versionAdded: v1_1_0
+        MultihopTTL:
+          description: External BGP (eBGP) multihop Time to Live (TTL) value.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the External BGP (eBGP) multihop
+            Time to Live (TTL) value.
+          x-versionAdded: v1_1_0
+        MultiplePaths:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_MultiplePaths'
+          description: Multiple path related properties.
+          nullable: true
+          x-longDescription: This property shall contain all multiple path related
+            properties.
+          x-versionAdded: v1_1_0
+        SendCommunityEnabled:
+          description: This property shall indicate whether community attributes are
+            sent.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether community attributes
+            are sent to BGP neighbors.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the External BGP (eBGP) related properties
+        for an Ethernet fabric.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_ESINumberRange:
+      additionalProperties: false
+      description: The Ethernet Segment Identifier (ESI) number range for an Ethernet
+        fabric.
+      properties:
+        Lower:
+          description: Lower Ethernet Segment Identifier (ESI) number.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the lower Ethernet Segment
+            Identifier (ESI) number to be used as part of a range of ESI numbers.
+          x-versionAdded: v1_1_0
+        Upper:
+          description: Upper Ethernet Segment Identifier (ESI) number.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the upper Ethernet Segment
+            Identifier (ESI) number to be used as part of a range of ESI numbers.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain Ethernet Segment Identifier (ESI)
+        number ranges for allocation in supporting functions such as multihoming.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_EVINumberRange:
+      additionalProperties: false
+      description: The Ethernet Virtual Private Network (EVPN) Instance (EVI) number
+        range for an Ethernet fabric.
+      properties:
+        Lower:
+          description: Lower Ethernet Virtual Private Network (EVPN) Instance (EVI)
+            number.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the lower Ethernet Virtual
+            Private Network (EVPN) Instance (EVI) number to be used as part of a range
+            of EVI numbers.
+          x-versionAdded: v1_1_0
+        Upper:
+          description: Upper Ethernet Virtual Private Network (EVPN) Instance (EVI)
+            number.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the upper Ethernet Virtual
+            Private Network (EVPN) Instance (EVI) number to be used as part of a range
+            of EVI numbers.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the Ethernet Virtual Private Network
+        (EVPN) Instance (EVI) number range for EVPN based fabrics.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_Ethernet:
+      additionalProperties: false
+      description: Ethernet related properties for an address pool.
+      properties:
+        BFDSingleHopOnly:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_BFDSingleHopOnly'
+          description: Bidirectional Forwarding Detection (BFD) related properties
+            for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the Bidirectional Forwarding
+            Detection (BFD) related properties for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        BGPEvpn:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_BGPEvpn'
+          description: BGP Ethernet Virtual Private Network (EVPN) related properties
+            for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the BGP Ethernet Virtual
+            Private Network (EVPN) related properties for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        EBGP:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_EBGP'
+          description: External BGP (eBGP) related properties for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the External BGP (eBGP) related
+            properties for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        IPv4:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_IPv4'
+          description: IPv4 and Virtual LAN (VLAN) related addressing for this Ethernet
+            fabric.
+          nullable: true
+          x-longDescription: This property shall contain IPv4 and Virtual LAN (VLAN)
+            addressing related properties for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        MultiProtocolEBGP:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_EBGP'
+          description: Multi Protocol eBGP (MP eBGP) related properties for this Ethernet
+            fabric.
+          nullable: true
+          x-longDescription: This property shall contain the Multi Protocol eBGP (MP
+            eBGP) related properties for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        MultiProtocolIBGP:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_CommonBGPProperties'
+          description: Multi Protocol iBGP (MP iBGP) related properties for this Ethernet
+            fabric.
+          nullable: true
+          x-longDescription: This property shall contain the Multi Protocol iBGP (MP
+            iBGP) related properties for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the Ethernet related properties for
+        an address pool.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_GenZ:
+      additionalProperties: false
+      description: Gen-Z related properties for an address pool.
+      properties:
+        AccessKey:
+          description: The Access Key required for this address pool.
+          nullable: true
+          pattern: ^0[xX]([a-fA-F]|[0-9]){2}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the Gen-Z Core Specification-defined
+            Access Key required for this address pool.
+        MaxCID:
+          description: The maximum value for the Component Identifier (CID).
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the maximum value for the
+            Gen-Z Core Specification-defined Component Identifier (CID).
+        MaxSID:
+          description: The maximum value for the Subnet Identifier (SID).
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the maximum value for the
+            Gen-Z Core Specification-defined Subnet Identifier (SID).
+        MinCID:
+          description: The minimum value for the Component Identifier (CID).
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the minimum value for the
+            Gen-Z Core Specification-defined Component Identifier (CID).
+        MinSID:
+          description: The minimum value for the Subnet Identifier (SID).
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the minimum value for the
+            Gen-Z Core Specification-defined Subnet Identifier (SID).
+      type: object
+      x-longDescription: This type shall contain Gen-Z related properties for an address
+        pool.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_GracefulRestart:
+      additionalProperties: false
+      description: Border Gateway Protocol (BGP) graceful restart properties.
+      properties:
+        GracefulRestartEnabled:
+          description: Border Gateway Protocol (BGP) graceful restart status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether to enable Border
+            Gateway Protocol (BGP) graceful restart features.
+          x-versionAdded: v1_1_0
+        HelperModeEnabled:
+          description: Graceful restart helper mode status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate what to do with stale routes.  If
+            `true`, the router continues to be forward packets to stale routes, if
+            `false`, it does not forward packets to stale routes.
+          x-versionAdded: v1_1_0
+        StaleRoutesTimeSeconds:
+          description: Stale route timer in seconds.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the time in seconds to hold
+            stale routes for a restarting peer.
+          x-versionAdded: v1_1_0
+        TimeSeconds:
+          description: Graceful restart timer in seconds.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the time in seconds to wait
+            for a graceful restart capable neighbor to re-establish Border Gateway
+            Protocol (BGP) peering.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain properties that are applicable to
+        configuring Border Gateway Protocol (BGP) graceful restart related properties.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_IPv4:
+      additionalProperties: false
+      description: IPv4 and Virtual LAN (VLAN) related addressing for an Ethernet
+        fabric.
+      properties:
+        AnycastGatewayIPAddress:
+          description: The anycast gateway IPv4 address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the anycast gateway IPv4
+            address for a host subnet.
+          x-versionAdded: v1_1_0
+        AnycastGatewayMACAddress:
+          description: The anycast gateway MAC address.
+          nullable: true
+          pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the anycast gateway MAC address
+            for a host subnet.
+          x-versionAdded: v1_1_0
+        DHCP:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_DHCP'
+          description: The Dynamic Host Configuration Protocol (DHCP) related addressing
+            for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the primary and secondary
+            Dynamic Host Configuration Protocol (DHCP) server addressing for this
+            Ethernet fabric.
+          x-versionAdded: v1_1_0
+        DNSDomainName:
+          description: The Domain Name Service (DNS) domain name for this Ethernet
+            fabric.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the Domain Name Service (DNS)
+            domain name for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        DNSServer:
+          description: The Domain Name Service (DNS) servers for this Ethernet fabric.
+          items:
+            nullable: true
+            type: string
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of the Domain Name
+            Service (DNS) servers for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        DistributeIntoUnderlayEnabled:
+          description: Indicates if host subnets should be distributed into the fabric
+            underlay.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether host subnets are
+            distributed into the fabric underlay.
+          x-versionAdded: v1_1_0
+        EBGPAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_IPv4AddressRange'
+          description: External BGP (eBGP) related addressing for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the range of IPv4 addresses
+            assigned to External BGP (eBGP) neighbors belonging to different ASes
+            (Autonomous Systems).
+          x-versionAdded: v1_1_0
+        FabricLinkAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_IPv4AddressRange'
+          description: Link related IPv4 addressing for this Ethernet fabric typically
+            applied to connections between spine and leaf Ethernet switches.
+          nullable: true
+          x-longDescription: This property shall contain link related IPv4 addressing
+            for this Ethernet fabric typically applied to connections between spine
+            and leaf Ethernet switches.
+          x-versionAdded: v1_1_0
+        GatewayIPAddress:
+          description: The gateway IPv4 address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the gateway IPv4 address
+            for a host subnet.
+          x-versionAdded: v1_1_0
+        HostAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_IPv4AddressRange'
+          description: IPv4 related host subnet addressing for physical device endpoints
+            that connect to this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the IP subnet range for host
+            addressing for physical device endpoints that connect to this Ethernet
+            fabric.  An endpoint shall be allocated an IP address from this host address
+            range.  The Ethernet fabric should provide IP unicast or multicast connectivity
+            for host device endpoints belonging to this host address range.
+          x-versionAdded: v1_1_0
+        IBGPAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_IPv4AddressRange'
+          description: Internal BGP (iBGP) related addressing for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the range of IPv4 addresses
+            assigned to Internal BGP (iBGP) neighbors belonging to the same AS (Autonomous
+            System).
+          x-versionAdded: v1_1_0
+        LoopbackAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_IPv4AddressRange'
+          description: Loopback related IPv4 addressing for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the range of loopback related
+            IPv4 addresses assigned to this Ethernet fabric's Ethernet switches.  A
+            loopback interface provides a stable interface to which a IP address is
+            then assigned.  This address can be configured as the source address when
+            the networking device needs to send data for control plane protocols such
+            as BGP and OSPF.
+          x-versionAdded: v1_1_0
+        ManagementAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_IPv4AddressRange'
+          description: Management related addressing for this Ethernet fabric.
+          nullable: true
+          x-longDescription: This property shall contain the range of management IPv4
+            addresses assigned to manage this Ethernet fabric's Ethernet switches.
+          x-versionAdded: v1_1_0
+        NTPOffsetHoursMinutes:
+          description: The Network Time Protocol (NTP) offset configuration.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Network Time Protocol
+            (NTP) offset.  The NTP offset property is used to calculate the time from
+            UTC (Universal Time Coordinated) time in hours and minutes.
+          x-versionAdded: v1_1_0
+        NTPServer:
+          description: The Network Time Protocol (NTP) servers for this Ethernet fabric.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of the Network Time
+            Protocol (NTP) servers for this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        NTPTimezone:
+          description: The Network Time Protocol (NTP) timezone for this Ethernet
+            fabric.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the Network Time Protocol
+            (NTP) timezone name assigned to this Ethernet fabric.
+          x-versionAdded: v1_1_0
+        NativeVLAN:
+          description: The native Virtual LAN (VLAN) tag value.
+          format: int64
+          maximum: 4094
+          minimum: 1
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain native Virtual LAN (VLAN)
+            tag value for untagged traffic.
+          x-versionAdded: v1_1_0
+        VLANIdentifierAddressRange:
+          $ref: '#/components/schemas/AddressPool_v1_1_2_VLANIdentifierAddressRange'
+          description: Virtual LAN (VLAN) tag related addressing for this Ethernet
+            fabric or for end host networks.
+          nullable: true
+          x-longDescription: This property shall contain Virtual LAN (VLAN) tags for
+            the entire fabric as well as to end hosts.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain IPv4 and Virtual LAN (VLAN) addressing
+        related properties for an Ethernet fabric.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_IPv4AddressRange:
+      additionalProperties: false
+      description: IPv4 related address range for an Ethernet fabric.
+      properties:
+        Lower:
+          description: Lower IPv4 network address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the lower IPv4 network address
+            to be used as part of a subnet.
+          x-versionAdded: v1_1_0
+        Upper:
+          description: Upper IPv4 network address.
+          nullable: true
+          pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the upper IPv4 network address
+            to be used as part of a host subnet.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain an IPv4 related address range for
+        an Ethernet fabric.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Endpoints:
+          description: An array of links to the endpoints that this address pool contains.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Endpoint that this address pool contains.
+        Endpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        Zones:
+          description: An array of links to the zones that this address pool contains.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Zone that this address pool contains.
+        Zones@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_MaxPrefix:
+      additionalProperties: false
+      description: Border Gateway Protocol (BGP) max prefix properties.
+      properties:
+        MaxPrefixNumber:
+          description: Maximum prefix number.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the maximum number of prefixes
+            allowed from the neighbor.
+          x-versionAdded: v1_1_0
+        RestartTimerSeconds:
+          description: Border Gateway Protocol (BGP) restart timer in seconds.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property determines how long peer routers will wait
+            to delete stale routes before a Border Gateway Protocol (BGP) open message
+            is received.  This timer should be less than the BGP HoldTimeSeconds property.
+          x-versionAdded: v1_1_0
+        ShutdownThresholdPercentage:
+          description: Shutdown threshold status.
+          maximum: 100
+          minimum: 1
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the percentage of the maximum
+            prefix received value at which the router starts to generate a warning
+            message.
+          x-units: '%'
+          x-versionAdded: v1_1_0
+        ThresholdWarningOnlyEnabled:
+          description: Threshold warning only status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate what action to take if the
+            Border Gateway Protocol (BGP) route threshold is reached.  If `true`,
+            when the Maximum-Prefix limit is exceeded, a log message is generated.  If
+            `false`, when the Maximum-Prefix limit is exceeded, the peer session is
+            terminated.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain properties that are applicable to
+        configuring Border Gateway Protocol (BGP) max prefix related properties.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_MultiplePaths:
+      additionalProperties: false
+      description: Border Gateway Protocol (BGP) multiple path properties.
+      properties:
+        MaximumPaths:
+          description: Maximum paths number.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the maximum number of paths
+            for multi path operation.
+          x-versionAdded: v1_1_0
+        UseMultiplePathsEnabled:
+          description: Border Gateway Protocol (BGP) multiple paths status.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether multiple paths should
+            be advertised.  If `true`, Border Gateway Protocol (BGP) advertises multiple
+            paths for the same prefix for path diversity.  If `false`, it advertises
+            based on best path selection.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain properties that are applicable to
+        configuring Border Gateway Protocol (BGP) multiple path related properties.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_RouteDistinguisherRange:
+      additionalProperties: false
+      description: The Route Distinguisher (RD) number range for an Ethernet fabric.
+      properties:
+        Lower:
+          description: Lower Route Distinguisher (RD) number.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the lower Route Distinguisher
+            (RD) number to be used as part of a range of Route Distinguisher values.
+          x-versionAdded: v1_1_0
+        Upper:
+          description: Upper Route Distinguisher (RD) number.
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the upper Route Distinguisher
+            (RD) number to be used as part of a range of Route Distinguisher values.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the Route Distinguisher (RD) Instance
+        number range for Ethernet Virtual Private Network (EVPN) based fabrics.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_RouteTargetRange:
+      additionalProperties: false
+      description: The Route Target (RT) number range for the fabric.
+      properties:
+        Lower:
+          description: Lower Route Target (RT) number.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the lower Route Target (RT)
+            number to be used as part of a range of Route Target values.
+          x-versionAdded: v1_1_0
+        Upper:
+          description: Upper Route Target (RT) number.
+          format: int64
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the upper Route Target (RT)
+            number to be used as part of a range of Route Target values.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain the Route Target (RT) Instance number
+        range for Ethernet Virtual Private Network (EVPN) based fabrics.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AddressPool_v1_1_2_VLANIdentifierAddressRange:
+      additionalProperties: false
+      description: VLAN tag related addressing for an Ethernet fabric or for end host
+        networks.
+      properties:
+        Lower:
+          description: Virtual LAN (VLAN) tag lower value.
+          format: int64
+          maximum: 4094
+          minimum: 1
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Virtual LAN (VLAN) tag
+            lower value.
+          x-versionAdded: v1_1_0
+        Upper:
+          description: Virtual LAN (VLAN) tag upper value.
+          format: int64
+          maximum: 4094
+          minimum: 1
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the Virtual LAN (VLAN) tag
+            upper value.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain for assigning Virtual LAN (VLAN)
+        tags for the entire fabric as well as for end hosts.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#AddressPool.v1_1_2.AddressPool'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.3'

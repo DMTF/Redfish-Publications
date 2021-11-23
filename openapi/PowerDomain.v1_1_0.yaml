@@ -1,0 +1,171 @@
+components:
+  schemas:
+    PowerDomain_v1_1_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/PowerDomain_v1_1_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerDomain_v1_1_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        FloorPDUs:
+          description: An array of links to the floor power distribution units in
+            this power domain.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type PowerDistribution that represents the floor power distribution
+            units in this power domain.
+        FloorPDUs@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ManagedBy:
+          description: An array of links to the managers responsible for managing
+            this power domain.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Manager that represent the managers that manage this power domain.
+        ManagedBy@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PowerShelves:
+          description: An array of links to the power shelves in this power domain.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type PowerDistribution that represents the power shelves in this power
+            domain.
+          x-versionAdded: v1_1_0
+        PowerShelves@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        RackPDUs:
+          description: An array of links to the rack-level power distribution units
+            in this power domain.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type PowerDistribution that represents the rack-level power distribution
+            units in this power domain.
+        RackPDUs@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Switchgear:
+          description: An array of links to the switchgear in this power domain.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type PowerDistribution that represents the switchgear in this power
+            domain.
+        Switchgear@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        TransferSwitches:
+          description: An array of links to the transfer switches in this power domain.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type PowerDistribution that represents the transfer switches in this
+            power domain.
+        TransferSwitches@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerDomain_v1_1_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerDomain_v1_1_0_PowerDomain:
+      additionalProperties: false
+      description: The PowerDomain schema contains definition for the DCIM power domain.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PowerDomain_v1_1_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/PowerDomain_v1_1_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent a DCIM power domain
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#PowerDomain.v1_1_0.PowerDomain'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.2'

@@ -10,19 +10,22 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/LogService.v1_0_8.json#/definitions/LogService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/LogService.v1_0_9.json#/definitions/LogService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/LogService.v1_1_3.json#/definitions/LogService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/LogService.v1_1_4.json#/definitions/LogService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/LogService.v1_2_0.json#/definitions/LogService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/LogService.v1_2_1.json#/definitions/LogService"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/LogService.v1_3_0.json#/definitions/LogService"
                 }
             ],
             "deletable": false,
-            "description": "The LogService schema contains properties for monitoring and configuring a Log Service.",
+            "description": "The LogService schema contains properties for monitoring and configuring a log service.  When the Id property contains `DeviceLog`, the log contains device-resident log entries that follow the physical device when moved from system-to-system, and not a replication or subset of a system event log.",
             "insertable": false,
-            "longDescription": "This Resource shall represent a Log Service for a Redfish implementation.",
+            "longDescription": "This resource shall represent a log service for a Redfish implementation.  When the Id property contains `DeviceLog`, the log shall contain log entries that migrate with the device.",
             "updatable": true,
             "uris": [
                 "/redfish/v1/Managers/{ManagerId}/LogServices/{LogServiceId}",
@@ -31,7 +34,8 @@
                 "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/LogServices/{LogServiceId}",
                 "/redfish/v1/Chassis/{ChassisId}/LogServices/{LogServiceId}",
                 "/redfish/v1/JobService/Log",
-                "/redfish/v1/TelemetryService/LogService"
+                "/redfish/v1/TelemetryService/LogService",
+                "/redfish/v1/Systems/{ComputerSystemId}/Memory/{MemoryId}/DeviceLog"
             ]
         }
     },

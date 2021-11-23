@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PortMetrics v1.1.0                                                  -->
+<!--# Redfish Schema:  PortMetrics v1.2.0                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -54,15 +54,26 @@
         </Annotation>
         <Annotation Term="Redfish.Uris">
           <Collection>
-            <String>/redfish/v1/Systems/{ComputerSystemId}/FabricAdapters/{FabricAdapterId}/Ports/{PortId}/Metrics</String>
-            <String>/redfish/v1/Chassis/{ChassisId}/MediaControllers/{MediaControllerId}/Ports/{PortId}/Metrics</String>
-            <String>/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/Ports/{PortId}/Metrics</String>
             <String>/redfish/v1/Fabrics/{FabricId}/Switches/{SwitchId}/Ports/{PortId}/Metrics</String>
             <String>/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/FabricAdapters/{FabricAdapterId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/GraphicsControllers/{ControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/USBControllers/{ControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/Processors/{ProcessorId}/Ports/{PortId}/Metrics</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Chassis/{ChassisId}/MediaControllers/{MediaControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/Metrics</String>
+            <String>/redfish/v1/Managers/{ManagerId}/USBPorts/{PortId}/Metrics</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -78,8 +89,8 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the port metrics specific to Gen-Z ports."/>
         </Property>
         <Property Name="Actions" Type="PortMetrics.v1_0_0.Actions" Nullable="false">
-          <Annotation Term="OData.Description" String="The available actions for this Resource."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the available actions for this Resource."/>
+          <Annotation Term="OData.Description" String="The available actions for this resource."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the available actions for this resource."/>
         </Property>
       </EntityType>
 
@@ -146,18 +157,18 @@
 
       <ComplexType Name="Actions">
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
-        <Annotation Term="OData.Description" String="The available actions for this Resource."/>
-        <Annotation Term="OData.LongDescription" String="This type shall contain the available actions for this Resource."/>
+        <Annotation Term="OData.Description" String="The available actions for this resource."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the available actions for this resource."/>
         <Property Name="Oem" Type="PortMetrics.v1_0_0.OemActions" Nullable="false">
-          <Annotation Term="OData.Description" String="The available OEM-specific actions for this Resource."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the available OEM-specific actions for this Resource."/>
+          <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the available OEM-specific actions for this resource."/>
         </Property>
       </ComplexType>
 
       <ComplexType Name="OemActions">
         <Annotation Term="OData.AdditionalProperties" Bool="true"/>
-        <Annotation Term="OData.Description" String="The available OEM-specific actions for this Resource."/>
-        <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this Resource."/>
+        <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
     </Schema>
 
@@ -165,6 +176,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
       <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_0_0.PortMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_0_1.PortMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_1_0">
@@ -220,18 +237,18 @@
         </Property>
         <Property Name="RXUnicastFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of good unicast frames received on a port since reset."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of good unicast frames received on a port since reset."/>
+          <Annotation Term="OData.Description" String="The total number of valid unicast frames received on a port since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of valid unicast frames received on a port since reset."/>
         </Property>
         <Property Name="RXMulticastFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of good multicast frames received on a port since reset."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of good multicast frames received on a port since reset, including host and remote management passthrough traffic."/>
+          <Annotation Term="OData.Description" String="The total number of valid multicast frames received on a port since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of valid multicast frames received on a port since reset, including host and remote management passthrough traffic."/>
         </Property>
         <Property Name="RXBroadcastFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of good broadcast frames received on a port since reset."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of good broadcast frames received on a port since reset, including host and remote management passthrough traffic."/>
+          <Annotation Term="OData.Description" String="The total number of valid broadcast frames received on a port since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of valid broadcast frames received on a port since reset, including host and remote management passthrough traffic."/>
         </Property>
         <Property Name="TXFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -265,8 +282,8 @@
         </Property>
         <Property Name="RXFCSErrors" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of frames received with FCS errors on a port since reset."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of frames received with FCS errors on a port since reset."/>
+          <Annotation Term="OData.Description" String="The total number of frames received with frame check sequence (FCS) errors on a port since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of frames received with frame check sequence (FCS) errors on a port since reset."/>
         </Property>
         <Property Name="RXFalseCarrierErrors" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -275,13 +292,13 @@
         </Property>
         <Property Name="RXOversizeFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of frames that are too long."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of frames that are too long."/>
+          <Annotation Term="OData.Description" String="The total number of frames that exceed the maximum frame size."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of frames that exceed the maximum frame size."/>
         </Property>
         <Property Name="RXUndersizeFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of frames that are too short.  Short frames are less than 64 bytes."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of frames that are too short.  Short frames are less than 64 bytes."/>
+          <Annotation Term="OData.Description" String="The total number of frames that are smaller than the minimum frame size of 64 bytes."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of frames that are smaller than the minimum frame size of 64 bytes."/>
         </Property>
         <Property Name="TXDiscards" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -290,8 +307,8 @@
         </Property>
         <Property Name="TXExcessiveCollisions" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The times a single transmitted frame encountered more than 15 collisions."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the times a single transmitted frame encountered more than 15 collisions."/>
+          <Annotation Term="OData.Description" String="The number of times a single transmitted frame encountered more than 15 collisions."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of times a single transmitted frame encountered more than 15 collisions."/>
         </Property>
         <Property Name="TXLateCollisions" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -310,13 +327,13 @@
         </Property>
         <Property Name="RXPFCFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of PFC frames received on a port since reset."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of PFC frames received on a port since reset."/>
+          <Annotation Term="OData.Description" String="The total number of priority flow control (PFC) frames received on a port since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of priority flow control (PFC) frames received on a port since reset."/>
         </Property>
         <Property Name="TXPFCFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The total number of PFC frames sent on a port since reset."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of PFC frames sent on a port since reset."/>
+          <Annotation Term="OData.Description" String="The total number of priority flow control (PFC) frames sent on a port since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of priority flow control (PFC) frames sent on a port since reset."/>
         </Property>
         <Property Name="RXPauseXOFFFrames" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -436,6 +453,107 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The number of times the phy has restarted the link reset sequence because it lost dword synchronization."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of times the phy has restarted the link reset sequence because it lost dword synchronization."/>
+        </Property>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_1_0.PortMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+      <Annotation Term="OData.Description" String="This version was created to add Fibre Channel port metrics."/>
+
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_1_1.PortMetrics">
+        <Property Name="FibreChannel" Type="PortMetrics.v1_2_0.FibreChannel" Nullable="false">
+          <Annotation Term="OData.Description" String="The Fibre Channel-specific port metrics for network ports."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain Fibre Channel-specific port metrics for network ports."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="FibreChannel">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="The Fibre Channel-specific port metrics for network ports."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe Fibre Channel-specific metrics for network ports."/>
+        <Property Name="InvalidCRCs" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of invalid cyclic redundancy checks (CRCs)."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of invalid cyclic redundancy checks (CRCs) observed on this port."/>
+        </Property>
+        <Property Name="LinkFailures" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of link failures."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of link failures observed on this port."/>
+        </Property>
+        <Property Name="LossesOfSignal" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of losses of signal."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of times this port has lost signal."/>
+        </Property>
+        <Property Name="LossesOfSync" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of losses of sync."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of times this port has lost sync."/>
+        </Property>
+        <Property Name="InvalidTXWords" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of invalid transmission words."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of times this port has received invalid transmission words."/>
+        </Property>
+        <Property Name="CorrectableFECErrors" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of correctable forward error correction (FEC) errors."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of times this port has received traffic with correctable forward error correction (FEC) errors."/>
+        </Property>
+        <Property Name="UncorrectableFECErrors" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of uncorrectable forward error correction (FEC) errors."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of times this port has received traffic with uncorrectable forward error correction (FEC) errors."/>
+        </Property>
+        <Property Name="RXSequences" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of Fibre Channel sequences received."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of Fibre Channel sequences received."/>
+        </Property>
+        <Property Name="TXSequences" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of Fibre Channel sequences transmitted."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of Fibre Channel sequences transmitted."/>
+        </Property>
+        <Property Name="TXExchanges" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of Fibre Channel exchanges transmitted."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of Fibre Channel exchanges transmitted."/>
+        </Property>
+        <Property Name="RXExchanges" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total number of Fibre Channel exchanges received."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of Fibre Channel exchanges received."/>
+        </Property>
+        <Property Name="RXBBCreditZero" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of times the receive buffer-to-buffer credit count transitioned to zero."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of times the receive buffer-to-buffer credit count transitioned to zero since last counter reset."/>
+        </Property>
+        <Property Name="TXBBCreditZero" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of times the transmit buffer-to-buffer credit count transitioned to zero."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of times the transmit buffer-to-buffer credit count transitioned to zero since last counter reset."/>
+        </Property>
+        <Property Name="TXBBCreditZeroDurationMilliseconds" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The total amount of time the port has been blocked from transmitting due to lack of buffer credits."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total amount of time in milliseconds the port has been blocked from transmitting due to lack of buffer credits since the last counter reset."/>
+          <Annotation Term="Measures.Unit" String="ms"/>
+        </Property>
+        <Property Name="TXBBCredits" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of transmit buffer-to-buffer credits the port is configured to use."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of transmit buffer-to-buffer credits the port is configured to use."/>
         </Property>
       </ComplexType>
     </Schema>

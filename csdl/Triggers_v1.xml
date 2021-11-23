@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Triggers v1.1.4                                                     -->
+<!--# Redfish Schema:  Triggers v1.2.0                                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -374,6 +374,19 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology.  It was also created to clarify the usage of MetricType for event-based triggers."/>
       <EntityType Name="Triggers" BaseType="Triggers.v1_1_3.Triggers"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Triggers.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+
+      <EntityType Name="Triggers" BaseType="Triggers.v1_1_4.Triggers">
+        <Property Name="MetricIds" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The label for the metric definitions that contain the property identifiers for this trigger.  It matches the Id property of the corresponding metric definition."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the labels for the metric definitions that contain the property identifiers for this trigger.  This property shall match the value of the Id property of the corresponding metric definitions."/>
+        </Property>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerDomain v1.0.1                                                  -->
+<!--# Redfish Schema:  PowerDomain v1.2.0                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -139,6 +139,36 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
       <EntityType Name="PowerDomain" BaseType="PowerDomain.v1_0_0.PowerDomain"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDomain.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+      <EntityType Name="PowerDomain" BaseType="PowerDomain.v1_0_1.PowerDomain"/>
+
+      <ComplexType Name="Links" BaseType="PowerDomain.v1_0_0.Links">
+        <NavigationProperty Name="PowerShelves" Type="Collection(PowerDistribution.PowerDistribution)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="An array of links to the power shelves in this power domain."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type PowerDistribution that represents the power shelves in this power domain."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDomain.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.3"/>
+      <EntityType Name="PowerDomain" BaseType="PowerDomain.v1_1_0.PowerDomain"/>
+
+      <ComplexType Name="Links" BaseType="PowerDomain.v1_1_0.Links">
+        <NavigationProperty Name="ElectricalBuses" Type="Collection(PowerDistribution.PowerDistribution)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="An array of links to the electrical buses in this power domain."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type PowerDistribution that represent the electrical buses in this power domain."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

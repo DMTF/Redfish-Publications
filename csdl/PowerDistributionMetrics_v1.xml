@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerDistributionMetrics v1.1.0                                     -->
+<!--# Redfish Schema:  PowerDistributionMetrics v1.2.0                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -56,6 +56,9 @@
             <String>/redfish/v1/PowerEquipment/RackPDUs/{PowerDistributionId}/Metrics</String>
             <String>/redfish/v1/PowerEquipment/FloorPDUs/{PowerDistributionId}/Metrics</String>
             <String>/redfish/v1/PowerEquipment/TransferSwitches/{PowerDistributionId}/Metrics</String>
+            <String>/redfish/v1/PowerEquipment/PowerShelves/{PowerDistributionId}/Metrics</String>
+            <String>/redfish/v1/PowerEquipment/Switchgear/{PowerDistributionId}/Metrics</String>
+            <String>/redfish/v1/PowerEquipment/ElectricalBuses/{PowerDistributionId}/Metrics</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -73,14 +76,12 @@
 
       <EntityType Name="PowerDistributionMetrics" BaseType="PowerDistributionMetrics.PowerDistributionMetrics">
         <NavigationProperty Name="PowerWatts" Type="Sensor.Sensor">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy" String="Power"/>
           <Annotation Term="OData.Description" String="Power consumption (Watts)."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the total power, measured in Watts, for this unit, that represents the `Total` ElectricalContext sensor when multiple power sensors exist."/>
         </NavigationProperty>
 
         <NavigationProperty Name="EnergykWh" Type="Sensor.Sensor">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy" String="EnergykWh"/>
           <Annotation Term="OData.Description" String="Energy consumption (kWh)."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the total energy, measured in kilowatt-hours (kWh), for this unit, that represents the `Total` ElectricalContext sensor when multiple energy sensors exist."/>
@@ -121,16 +122,28 @@
 
       <EntityType Name="PowerDistributionMetrics" BaseType="PowerDistributionMetrics.v1_0_1.PowerDistributionMetrics">
         <NavigationProperty Name="TemperatureCelsius" Type="Sensor.Sensor">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy"/>
           <Annotation Term="OData.Description" String="Temperature (Celsius)."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the temperature sensor reading for this resource."/>
         </NavigationProperty>
         <NavigationProperty Name="HumidityPercent" Type="Sensor.Sensor">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy"/>
           <Annotation Term="OData.Description" String="Humidity (percent)."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the humidity sensor reading for this resource."/>
+        </NavigationProperty>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistributionMetrics.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+      <Annotation Term="OData.Description" String="This version was created to add PowerLoadPercent."/>
+
+      <EntityType Name="PowerDistributionMetrics" BaseType="PowerDistributionMetrics.v1_1_0.PowerDistributionMetrics">
+        <NavigationProperty Name="PowerLoadPercent" Type="Sensor.Sensor">
+          <Annotation Term="Redfish.ExcerptCopy"/>
+          <Annotation Term="OData.Description" String="The power load (%) for this equipment."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the power load, measured in percent, for this equipment, that represents the `Total` ElectricalContext for this equipment."/>
         </NavigationProperty>
       </EntityType>
     </Schema>

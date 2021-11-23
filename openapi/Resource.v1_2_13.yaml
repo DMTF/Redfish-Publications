@@ -1,0 +1,196 @@
+components:
+  schemas:
+    Resource_v1_2_13_DurableNameFormat:
+      enum:
+      - NAA
+      - iQN
+      - FC_WWN
+      - UUID
+      - EUI
+      type: string
+      x-enumDescriptions:
+        EUI: The IEEE-defined 64-bit Extended Unique Identifier (EUI).
+        FC_WWN: The Fibre Channel (FC) World Wide Name (WWN).
+        NAA: The Name Address Authority (NAA) format.
+        UUID: The Universally Unique Identifier (UUID).
+        iQN: The iSCSI Qualified Name (iQN).
+      x-enumLongDescriptions:
+        EUI: This durable name shall contain the hexadecimal representation of the
+          IEEE-defined 64-bit Extended Unique Identifier (EUI), as defined in the
+          IEEE's Guidelines for 64-bit Global Identifier (EUI-64) Specification.  The
+          DurableName property shall follow the pattern '^([0-9A-Fa-f]{2}[:-]){7}([0-9A-Fa-f]{2})$',
+          where the most significant octet is first.
+        FC_WWN: This durable name shall contain a hexadecimal representation of the
+          World-Wide Name (WWN) format, as defined in the T11 Fibre Channel Physical
+          and Signaling Interface Specification.  The DurableName property shall follow
+          the pattern '^([0-9A-Fa-f]{2}[:-]){7}([0-9A-Fa-f]{2})$', where the most
+          significant octet is first.
+        NAA: This durable name shall contain a hexadecimal representation of the Name
+          Address Authority structure, as defined in the T11 Fibre Channel - Framing
+          and Signaling - 3 (FC-FS-3) specification.  The DurableName property shall
+          follow the pattern '^(([0-9A-Fa-f]{2}){8}){1,2}$', where the most significant
+          octet is first.
+        UUID: This durable name shall contain the hexadecimal representation of the
+          UUID, as defined by RFC4122.  The DurableName property shall follow the
+          pattern '([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})'.
+        iQN: This durable name shall be in the iSCSI Qualified Name (iQN) format,
+          as defined in RFC3720 and RFC3721.
+    Resource_v1_2_13_Identifier:
+      additionalProperties: false
+      description: Any additional identifiers for a resource.
+      properties:
+        DurableName:
+          description: The world-wide, persistent name of the resource.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the world-wide unique identifier
+            for the resource.  The string shall be in the Identifier.DurableNameFormat
+            property value format.
+          x-versionAdded: v1_1_0
+        DurableNameFormat:
+          $ref: '#/components/schemas/Resource_v1_2_13_DurableNameFormat'
+          description: The format of the durable name property.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall represent the format of the DurableName
+            property.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall contain any additional identifiers for a
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Resource_v1_2_13_Location:
+      additionalProperties: false
+      description: The location of a resource.
+      properties:
+        Info:
+          description: The location of the resource.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall represent the location of the resource.
+          x-versionAdded: v1_1_0
+        InfoFormat:
+          description: The format of the Info property.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall represent the Info property format.
+          x-versionAdded: v1_1_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall describe the location of a resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Resource_v1_2_13_ReferenceableMember:
+      additionalProperties: false
+      description: The base type for addressable members of an array.
+      properties:
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        MemberId:
+          description: The unique identifier for the member within an array.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the unique identifier for
+            this member within an array.  For services supporting Redfish v1.6 or
+            higher, this value shall contain the zero-based array index.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - MemberId
+      - '@odata.id'
+      type: object
+      x-longDescription: References array members by using the value returned in the
+        @odata.id property, which can be a dereferenceable URL.  The @odata.id of
+        this entity shall contain the location of this element within an item.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Resource_v1_2_13_Resource:
+      additionalProperties: false
+      description: The base type for resources and members that can be linked to.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - Id
+      - Name
+      - '@odata.id'
+      - '@odata.type'
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Resource_v1_2_13_ResourceCollection:
+      additionalProperties: false
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - Name
+      - '@odata.id'
+      - '@odata.type'
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Resource.v1_2_13'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2016.2'

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ExternalAccountProvider v1.2.0                                      -->
+<!--# Redfish Schema:  ExternalAccountProvider v1.3.0                                      -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -122,6 +122,30 @@
         </Member>
         <Member Name="OEM">
           <Annotation Term="OData.Description" String="An OEM-specific external authentication or directory service."/>
+        </Member>
+        <Member Name="TACACSplus">
+          <Annotation Term="OData.Description" String="An external TACACS+ service."/>
+          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC8907-conformant service.  The ServiceAddresses format shall contain a set of host:port that correspond to a TACACS+ service and where the format for host and port are defined in RFC3986."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="OAuth2">
+          <Annotation Term="OData.Description" String="An external OAuth 2.0 service."/>
+          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC6749-conformant service.  The ServiceAddresses format shall contain a set of URIs that correspond to the RFC8414-defined metadata for the OAuth 2.0 service."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
         </Member>
       </EnumType>
 
@@ -393,6 +417,55 @@
         <Member Name="MSCHAPv2">
           <Annotation Term="OData.Description" String="The MS-CHAP v2 Login method."/>
           <Annotation Term="OData.LongDescription" String="This value shall indicate the MS-CHAP v2 Login flow as described under section 5.4.2 of RFC8907."/>
+        </Member>
+      </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_2_0.ExternalAccountProvider">
+        <Property Name="OAuth2Service" Type="ExternalAccountProvider.v1_3_0.OAuth2Service">
+          <Annotation Term="OData.Description" String="The additional information needed to parse an OAuth 2.0 service."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain additional information needed to parse an OAuth 2.0 service.  This property should only be present inside an OAuth2 property."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="OAuth2Service">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="Various settings to parse an OAuth 2.0 service."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain settings for parsing an OAuth 2.0 service."/>
+        <Property Name="Mode" Type="ExternalAccountProvider.v1_3_0.OAuth2Mode" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The mode of operation for token validation."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the mode of operation for token validation."/>
+        </Property>
+        <Property Name="Issuer" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The issuer string of the OAuth 2.0 service."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the RFC8414-defined issuer string of the OAuth 2.0 service.  If the Mode property contains the value `Discovery`, this property shall contain the value of the `issuer` string from the OAuth 2.0 service's metadata and this property shall be read-only."/>
+        </Property>
+        <Property Name="Audience" Type="Collection(Edm.String)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The allowable audience strings of the Redfish service."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of allowable RFC7519-defined audience strings of the Redfish service.  The values shall uniquely identify the Redfish service.  For example, a MAC address or UUID for the manager can uniquely identify the service."/>
+        </Property>
+        <Property Name="OAuthServiceSigningKeys" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The Base64-encoded signing keys of the issuer of the OAuth 2.0 service."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a Base64-encoded string of the RFC7517-defined signing keys of the issuer of the OAuth 2.0 service.  If the Mode property contains the value `Discovery`, this property shall contain the keys found at the URI specified by the `jwks_uri` string from the OAuth 2.0 service's metadata and this property shall be read-only."/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="OAuth2Mode">
+        <Member Name="Discovery">
+          <Annotation Term="OData.Description" String="OAuth 2.0 service information for token validation is downloaded by the service."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the service performs token validation from information found at the URIs specified by the ServiceAddresses property.  Services shall implement a caching method of this information so it's not necessary to retrieve metadata and key information for every request containing a token."/>
+        </Member>
+        <Member Name="Offline">
+          <Annotation Term="OData.Description" String="OAuth 2.0 service information for token validation is configured by a client."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the service performs token validation from properties configured by a client."/>
         </Member>
       </EnumType>
     </Schema>

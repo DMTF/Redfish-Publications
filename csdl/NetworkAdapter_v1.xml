@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  NetworkAdapter v1.7.0                                               -->
+<!--# Redfish Schema:  NetworkAdapter v1.8.0                                               -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -59,6 +59,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/EnvironmentMetrics_v1.xml">
     <edmx:Include Namespace="EnvironmentMetrics"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/ProcessorCollection_v1.xml">
+    <edmx:Include Namespace="ProcessorCollection"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -619,6 +622,20 @@
           <Annotation Term="OData.Description" String="Enable or disable LLDP globally for an adapter." />
           <Annotation Term="OData.LongDescription" String="This property shall contain the state indicating whether LLDP is globally enabled on a network adapter.  If set to `false`, the LLDPEnabled value for the ports associated with this adapter shall be disregarded."/>
         </Property>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkAdapter.v1_8_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.2"/>
+
+      <EntityType Name="NetworkAdapter" BaseType="NetworkAdapter.v1_7_0.NetworkAdapter">
+        <NavigationProperty Name="Processors" Type="ProcessorCollection.ProcessorCollection" ContainsTarget="true" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the collection of offload processors contained in this network adapter."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type ProcessorCollection that represent the offload processors contained in this network adapter."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
       </EntityType>
     </Schema>
 

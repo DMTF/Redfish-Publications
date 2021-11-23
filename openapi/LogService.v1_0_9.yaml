@@ -1,0 +1,167 @@
+components:
+  schemas:
+    LogService_v1_0_9_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#LogService.ClearLog':
+          $ref: '#/components/schemas/LogService_v1_0_9_ClearLog'
+        Oem:
+          $ref: '#/components/schemas/LogService_v1_0_9_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LogService_v1_0_9_ClearLog:
+      additionalProperties: false
+      description: The action to clear the log for this log service.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall delete all entries found in the LogEntryCollection
+        resource for this log service.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LogService_v1_0_9_ClearLogRequestBody:
+      additionalProperties: false
+      description: The action to clear the log for this log service.
+      properties: {}
+      type: object
+      x-longDescription: This action shall delete all entries found in the LogEntryCollection
+        resource for this log service.
+    LogService_v1_0_9_LogService:
+      additionalProperties: false
+      description: The LogService schema contains properties for monitoring and configuring
+        a log service.  When the Id property contains `DeviceLog`, the log contains
+        device-resident log entries that follow the physical device when moved from
+        system-to-system, and not a replication or subset of a system event log.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/LogService_v1_0_9_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        DateTime:
+          description: The current date and time with UTC offset of the log service.
+          format: date-time
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the current date and time
+            with UTC offset of the log service.
+        DateTimeLocalOffset:
+          description: The time offset from UTC that the DateTime property is in `+HH:MM`
+            format.
+          nullable: true
+          pattern: ^([-+][0-1][0-9]:[0-5][0-9])$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the offset from UTC time
+            that the DateTime property contains.  If both DateTime and DateTimeLocalOffset
+            are provided in modification requests, services shall apply DateTimeLocalOffset
+            after DateTime is applied.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Entries:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the log entry collection.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type LogEntryCollection.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        MaxNumberOfRecords:
+          description: The maximum number of log entries that this service can have.
+          format: int64
+          minimum: 0
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the maximum number of LogEntry
+            resources in the LogEntryCollection resource for this service.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OverWritePolicy:
+          $ref: '#/components/schemas/LogService_v1_0_9_OverWritePolicy'
+          description: The overwrite policy for this service that takes place when
+            the log is full.
+          readOnly: true
+          x-longDescription: This property shall indicate the policy of the log service
+            when the MaxNumberOfRecords has been reached.
+        ServiceEnabled:
+          description: An indication of whether this service is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this service is
+            enabled.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a log service for a Redfish
+        implementation.  When the Id property contains `DeviceLog`, the log shall
+        contain log entries that migrate with the device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LogService_v1_0_9_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LogService_v1_0_9_OverWritePolicy:
+      enum:
+      - Unknown
+      - WrapsWhenFull
+      - NeverOverWrites
+      type: string
+      x-enumDescriptions:
+        NeverOverWrites: When full, new entries to the log are discarded.
+        Unknown: The overwrite policy is not known or is undefined.
+        WrapsWhenFull: When full, new entries to the log overwrite earlier entries.
+title: '#LogService.v1_0_9.LogService'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '1.0'

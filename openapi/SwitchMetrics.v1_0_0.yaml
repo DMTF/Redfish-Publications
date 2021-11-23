@@ -1,0 +1,186 @@
+components:
+  schemas:
+    SwitchMetrics_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#SwitchMetrics.ClearCurrentPeriod':
+          $ref: '#/components/schemas/SwitchMetrics_v1_0_0_ClearCurrentPeriod'
+        Oem:
+          $ref: '#/components/schemas/SwitchMetrics_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SwitchMetrics_v1_0_0_ClearCurrentPeriod:
+      additionalProperties: false
+      description: This action sets the CurrentPeriod property's values to 0.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod property's values
+        to 0.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SwitchMetrics_v1_0_0_ClearCurrentPeriodRequestBody:
+      additionalProperties: false
+      description: This action sets the CurrentPeriod property's values to 0.
+      properties: {}
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod property's values
+        to 0.
+    SwitchMetrics_v1_0_0_CurrentPeriod:
+      additionalProperties: false
+      description: The memory metrics since the last switch reset or ClearCurrentPeriod
+        action for a switch.
+      properties:
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors of memory since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            errors of memory since reset.
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors of memory since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            errors of memory since reset.
+      type: object
+      x-longDescription: This type shall describe the memory metrics since last reset
+        or ClearCurrentPeriod action for a switch.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SwitchMetrics_v1_0_0_InternalMemoryMetrics:
+      additionalProperties: false
+      description: The memory metrics for a switch.
+      properties:
+        CurrentPeriod:
+          $ref: '#/components/schemas/SwitchMetrics_v1_0_0_CurrentPeriod'
+          description: The memory metrics since the last reset for this switch.
+          x-longDescription: This property shall contain properties that describe
+            the metrics for the current period of memory for this switch.
+        LifeTime:
+          $ref: '#/components/schemas/SwitchMetrics_v1_0_0_LifeTime'
+          description: The memory metrics for the lifetime of this switch.
+          x-longDescription: This property shall contain properties that describe
+            the metrics for the lifetime of memory for this switch.
+      type: object
+      x-longDescription: This property shall contain properties that describe the
+        memory metrics for a switch.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SwitchMetrics_v1_0_0_LifeTime:
+      additionalProperties: false
+      description: The memory metrics for the lifetime for a switch.
+      properties:
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors for the lifetime of the
+            memory.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the correctable
+            errors for the lifetime of memory.
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors for the lifetime of
+            the memory.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the uncorrectable
+            errors for the lifetime of memory.
+      type: object
+      x-longDescription: This type shall describe the memory metrics since manufacturing
+        for a switch.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SwitchMetrics_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SwitchMetrics_v1_0_0_SwitchMetrics:
+      additionalProperties: false
+      description: The SwitchMetrics schema contains usage and health statistics for
+        a switch device.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/SwitchMetrics_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InternalMemoryMetrics:
+          $ref: '#/components/schemas/SwitchMetrics_v1_0_0_InternalMemoryMetrics'
+          description: The memory metrics for a switch.
+          x-longDescription: This property shall contain properties that describe
+            the memory metrics for a switch.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PCIeErrors:
+          $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.yaml#/components/schemas/PCIeDevice_PCIeErrors
+          description: The PCIe errors associated with this switch.
+          x-longDescription: This property shall contain the PCIe errors associated
+            with this switch.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the metrics for a switch device
+        in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#SwitchMetrics.v1_0_0.SwitchMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.3'
