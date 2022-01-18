@@ -1,0 +1,227 @@
+components:
+  schemas:
+    Settings_v1_2_6_ApplyTime:
+      enum:
+      - Immediate
+      - OnReset
+      - AtMaintenanceWindowStart
+      - InMaintenanceWindowOnReset
+      type: string
+      x-enumDescriptions:
+        AtMaintenanceWindowStart: Apply during a maintenance window as specified by
+          an administrator.
+        Immediate: Apply immediately.
+        InMaintenanceWindowOnReset: Apply after a reset but within maintenance window
+          as specified by an administrator.
+        OnReset: Apply on a reset.
+      x-enumLongDescriptions:
+        AtMaintenanceWindowStart: This value shall indicate the values within the
+          settings resource are applied during the maintenance window specified by
+          the MaintenanceWindowStartTime and MaintenanceWindowDurationInSeconds properties.  A
+          service can perform resets during this maintenance window.
+        Immediate: This value shall indicate the values within the settings resource
+          are applied immediately.
+        InMaintenanceWindowOnReset: This value shall indicate the values within the
+          settings resource are applied during the maintenance window specified by
+          the MaintenanceWindowStartTime and MaintenanceWindowDurationInSeconds properties,
+          and if a reset occurs within the maintenance window.
+        OnReset: This value shall indicate the values within settings resource are
+          applied when the system or service is reset.
+    Settings_v1_2_6_MaintenanceWindow:
+      additionalProperties: false
+      description: The maintenance window assignment for applying settings or operations
+        to a resource.
+      properties:
+        MaintenanceWindowDurationInSeconds:
+          description: The expiry time of maintenance window in seconds.
+          format: int64
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall indicate the end of the maintenance
+            window as the number of seconds after the time specified by the MaintenanceWindowStartTime
+            property.
+          x-units: s
+          x-versionAdded: v1_2_0
+        MaintenanceWindowStartTime:
+          description: The start time of a maintenance window.
+          format: date-time
+          readOnly: false
+          type: string
+          x-longDescription: This property shall indicate the date and time when the
+            service can start to apply the requested settings or operation as part
+            of a maintenance window.  Services shall provide a default value if not
+            configured by a user.
+          x-versionAdded: v1_2_0
+      required:
+      - MaintenanceWindowStartTime
+      - MaintenanceWindowDurationInSeconds
+      type: object
+      x-longDescription: This type shall indicate that a resource has a maintenance
+        window assignment for applying settings or operations.  Other resources can
+        link to this object to convey a common control surface for the configuration
+        of the maintenance window.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Settings_v1_2_6_OperationApplyTimeSupport:
+      additionalProperties: false
+      description: The client can request a specific apply time of a create, delete,
+        or action operation of a resource.
+      properties:
+        MaintenanceWindowDurationInSeconds:
+          description: The expiry time of maintenance window in seconds.
+          format: int64
+          minimum: 0
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the same as the MaintenanceWindowDurationInSeconds
+            property found in the MaintenanceWindow structure on the MaintenanceWindowResource.  This
+            property shall be required if the SupportedValues property contains `AtMaintenanceWindowStart`
+            or `InMaintenanceWindowOnReset`.
+          x-units: s
+          x-versionAdded: v1_2_0
+        MaintenanceWindowResource:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The location of the maintenance window settings.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource that
+            contains the @Redfish.MaintenanceWindow property that governs this resource.  This
+            property shall be required if the SupportedValues property contains `AtMaintenanceWindowStart`
+            or `InMaintenanceWindowOnReset`.
+          x-versionAdded: v1_2_0
+        MaintenanceWindowStartTime:
+          description: The start time of a maintenance window.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the same as the MaintenanceWindowStartTime
+            property found in the MaintenanceWindow structure on the MaintenanceWindowResource.  Services
+            shall provide a default value if not configured by a user.  This property
+            shall be required if the SupportedValues property contains `AtMaintenanceWindowStart`
+            or `InMaintenanceWindowOnReset`.
+          x-versionAdded: v1_2_0
+        SupportedValues:
+          description: The types of apply times that the client can request when performing
+            a create, delete, or action operation.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Settings.yaml#/components/schemas/Settings_OperationApplyTime
+          readOnly: true
+          type: array
+          x-longDescription: This property shall indicate the types of apply times
+            the client can request when performing a create, delete, or action operation.
+          x-versionAdded: v1_2_0
+      required:
+      - SupportedValues
+      type: object
+      x-longDescription: This type shall indicate that a client can request a specific
+        apply time of a create, delete, or action operation of a resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Settings_v1_2_6_PreferredApplyTime:
+      additionalProperties: false
+      description: The preferred time to apply configuration settings.
+      properties:
+        ApplyTime:
+          $ref: '#/components/schemas/Settings_v1_2_6_ApplyTime'
+          description: The time when to apply the settings.
+          readOnly: false
+          x-longDescription: This property shall indicate when to apply the values
+            in this settings resource.
+          x-versionAdded: v1_1_0
+        MaintenanceWindowDurationInSeconds:
+          description: The expiry time of maintenance window in seconds.
+          format: int64
+          minimum: 0
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall indicate the end of the maintenance
+            window as the number of seconds after the time specified by the MaintenanceWindowStartTime
+            property.  This property shall be required if the ApplyTime property is
+            `AtMaintenanceWindowStart` or `InMaintenanceWindowOnReset`.
+          x-units: s
+          x-versionAdded: v1_1_0
+        MaintenanceWindowStartTime:
+          description: The start time of a maintenance window.
+          format: date-time
+          readOnly: false
+          type: string
+          x-longDescription: This property shall indicate the date and time when the
+            service can start to apply the future configuration as part of a maintenance
+            window.  Services shall provide a default value if not configured by a
+            user.  This property shall be required if the ApplyTime property is `AtMaintenanceWindowStart`
+            or `InMaintenanceWindowOnReset`.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This type shall be specified by client to indicate the preferred
+        time to apply the configuration settings.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Settings_v1_2_6_Settings:
+      additionalProperties: false
+      description: The resource settings.
+      properties:
+        ETag:
+          description: The entity tag (ETag) of the resource to which the settings
+            were applied, after the application.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the entity tag (ETag) of
+            the resource to which the settings were applied, after the application.  The
+            client can check this value against the ETag of this resource to determine
+            whether the resource had other changes.
+        MaintenanceWindowResource:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The location of the maintenance window settings.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource that
+            contains the @Redfish.MaintenanceWindow property that governs this resource.  This
+            property should be supported if the SupportedApplyTimes property contains
+            `AtMaintenanceWindowStart` or `InMaintenanceWindowOnReset`.
+          x-versionAdded: v1_2_0
+        Messages:
+          description: An array of messages associated with the settings.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message_Message
+          type: array
+          x-longDescription: This property shall contain an array of messages associated
+            with the settings.
+        SettingsObject:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the resource that the client can PUT or PATCH to
+            modify the resource.
+          readOnly: true
+          x-longDescription: This property shall contain the URI of the resource that
+            the client can PUT or PATCH to modify the resource.
+        SupportedApplyTimes:
+          description: The time when the settings can be applied.
+          items:
+            $ref: '#/components/schemas/Settings_v1_2_6_ApplyTime'
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the supported apply time
+            values a client is allowed to request when configuring the settings apply
+            time.  Services that do not support clients configuring the apply time
+            can support this property with a single array member in order to inform
+            the client when the settings will be applied.
+          x-versionAdded: v1_1_0
+        Time:
+          description: The time when the settings were applied.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the time when the settings
+            were applied to the resource.
+      type: object
+      x-longDescription: This type shall describe any settings of a resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Settings.v1_2_6'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.1'

@@ -10,16 +10,19 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_0_2.json#/definitions/Outlet"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_0_3.json#/definitions/Outlet"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_1_1.json#/definitions/Outlet"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_1_2.json#/definitions/Outlet"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_2_0.json#/definitions/Outlet"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_2_1.json#/definitions/Outlet"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_3_0.json#/definitions/Outlet"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_3_1.json#/definitions/Outlet"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Outlet.v1_4_0.json#/definitions/Outlet"
                 }
             ],
             "deletable": false,
@@ -38,11 +41,19 @@
         "PowerState": {
             "enum": [
                 "On",
-                "Off"
+                "Off",
+                "PowerCycle"
             ],
             "enumDescriptions": {
-                "Off": "The outlet is powered off.",
-                "On": "The outlet is powered on."
+                "Off": "Power off.",
+                "On": "Power on.",
+                "PowerCycle": "Power cycle."
+            },
+            "enumLongDescriptions": {
+                "PowerCycle": "This value shall indicate the resource will transition to a power off state, then transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`."
+            },
+            "enumVersionAdded": {
+                "PowerCycle": "v1_4_0"
             },
             "type": "string"
         },

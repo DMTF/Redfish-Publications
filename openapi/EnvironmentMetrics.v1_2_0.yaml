@@ -1,0 +1,203 @@
+components:
+  schemas:
+    EnvironmentMetrics_v1_2_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#EnvironmentMetrics.ResetMetrics':
+          $ref: '#/components/schemas/EnvironmentMetrics_v1_2_0_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/EnvironmentMetrics_v1_2_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EnvironmentMetrics_v1_2_0_EnvironmentMetrics:
+      additionalProperties: false
+      description: The EnvironmentMetrics schema represents the environmental metrics
+        of a device.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        AbsoluteHumidity:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: Absolute humidity (g/cu m).
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the absolute (volumetric)
+            humidity sensor reading, in grams/cubic meter units, for this resource.  The
+            value of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `AbsoluteHumidity`.
+          x-versionAdded: v1_2_0
+        Actions:
+          $ref: '#/components/schemas/EnvironmentMetrics_v1_2_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        DewPointCelsius:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The dew point temperature (C).
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the dew point, in degrees
+            Celsius, based on the temperature and humidity values for this resource.  The
+            value of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `Temperature`.
+          x-versionAdded: v1_1_0
+        EnergyJoules:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: Energy consumption (J).
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the total energy, in joules,
+            for this resource.  The value of the DataSourceUri property, if present,
+            shall reference a resource of type Sensor with the ReadingType property
+            containing the value `EnergyJoules`.  This property is used for reporting
+            device-level energy consumption measurements, while EnergykWh is used
+            for large-scale consumption measurements.
+          x-versionAdded: v1_2_0
+        EnergykWh:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          description: Energy consumption (kWh).
+          nullable: true
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the total energy, in kilowatt-hours,
+            for this resource.  The value of the DataSourceUri property, if present,
+            shall reference a resource of type Sensor with the ReadingType property
+            containing the value `EnergykWh`.
+        FanSpeedsPercent:
+          description: Fan speeds (percent).
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorFanArrayExcerpt
+          type: array
+          x-excerptCopy: SensorFanArrayExcerpt
+          x-longDescription: This property shall contain the fan speeds, in percent
+            units, for this resource.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Percent`.
+        FanSpeedsPercent@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        HumidityPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: Humidity (percent).
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the humidity, in percent
+            units, for this resource.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Humidity`.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PowerLimitWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Control.yaml#/components/schemas/Control_ControlSingleExcerpt
+          description: Power limit (W).
+          nullable: true
+          readOnly: false
+          x-excerptCopy: ControlSingleExcerpt
+          x-longDescription: This property shall contain the power limit control,
+            in watt units, for this resource.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Control with the ControlType
+            property containing the value of `Power`.
+          x-versionAdded: v1_1_0
+        PowerLoadPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The power load (percent) for this device.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the power load, in percent
+            units, for this device, that represents the `Total` ElectricalContext
+            for this device.  The value of the DataSourceUri property, if present,
+            shall reference a resource of type Sensor with the ReadingType property
+            containing the value `Percent`.
+          x-versionAdded: v1_1_0
+        PowerWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: Power consumption (W).
+          nullable: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the total power, in watt
+            units, for this resource.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Power`.
+        TemperatureCelsius:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: Temperature (Celsius).
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for this resource.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Temperature`.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the environmental metrics for
+        a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EnvironmentMetrics_v1_2_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EnvironmentMetrics_v1_2_0_ResetMetrics:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    EnvironmentMetrics_v1_2_0_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+title: '#EnvironmentMetrics.v1_2_0.EnvironmentMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.4'

@@ -1,0 +1,175 @@
+components:
+  schemas:
+    BatteryMetrics_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/BatteryMetrics_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    BatteryMetrics_v1_0_1_BatteryMetrics:
+      additionalProperties: false
+      description: The BatteryMetrics schema contains definitions for the metrics
+        of a battery unit.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/BatteryMetrics_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        CellVoltages:
+          description: The cell voltages (V) for this battery.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          type: array
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the cell voltages, in volt
+            units, for this battery.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.
+        CellVoltages@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ChargePercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The amount of charge available (percent) in this battery.
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the amount of charge available,
+            in percent units, in this battery.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Percent`.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        DischargeCycles:
+          description: The number of discharges this battery sustained.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of discharges
+            this battery sustained.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InputCurrentAmps:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The input current (A) for this battery.
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the input current, in ampere
+            units, for this battery.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Current`.
+        InputVoltage:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The input voltage (V) for this battery.
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the input voltage, in volt
+            units, for this battery.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OutputCurrentAmps:
+          description: The output currents (A) for this battery.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          type: array
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the output currents, in ampere
+            units, for this battery.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Current`.  The sensors shall appear in
+            the same array order as the OutputVoltages property.
+        OutputCurrentAmps@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        OutputVoltages:
+          description: The output voltages (V) for this battery.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          type: array
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the output voltages, in volt
+            units, for this battery.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.  The sensors shall appear in
+            the same array order as the OutputCurrentAmps property.
+        OutputVoltages@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        StoredChargeAmpHours:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The charge (Ah) stored in this battery.
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the stored charge, in ampere-hours
+            units, for this battery.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `ChargeAh`.
+        StoredEnergyWattHours:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The energy (Wh) stored in this battery.
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the stored energy, in watt-hour
+            units, for this battery.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `EnergyWh`.
+        TemperatureCelsius:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The temperature (C) for this battery.
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for this battery.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Temperature`.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent the metrics of a
+        battery unit for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    BatteryMetrics_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#BatteryMetrics.v1_0_1.BatteryMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.2'

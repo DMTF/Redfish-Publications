@@ -1,0 +1,472 @@
+components:
+  schemas:
+    Outlet_v1_0_3_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Outlet.PowerControl':
+          $ref: '#/components/schemas/Outlet_v1_0_3_PowerControl'
+        '#Outlet.ResetMetrics':
+          $ref: '#/components/schemas/Outlet_v1_0_3_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/Outlet_v1_0_3_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_CurrentSensors:
+      additionalProperties: false
+      description: The current sensors for this outlet.
+      properties:
+        Line1:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: Line 1 current (A).
+          nullable: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for L1.  The value of the DataSourceUri property, if present, shall
+            reference a resource of type Sensor with the ReadingType property containing
+            the value `Current`.  This property shall not be present if the equipment
+            does not include an L1 measurement.
+        Line2:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: Line 2 current (A).
+          nullable: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for L2.  The value of the DataSourceUri property, if present, shall
+            reference a resource of type Sensor with the ReadingType property containing
+            the value `Current`.  This property shall not be present if the equipment
+            does not include an L2 measurement.
+        Line3:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: Line 3 current (A).
+          nullable: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for L3.  The value of the DataSourceUri property, if present, shall
+            reference a resource of type Sensor with the ReadingType property containing
+            the value `Current`.  This property shall not be present if the equipment
+            does not include an L3 measurement.
+        Neutral:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: Neutral line current (A).
+          nullable: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for the Neutral line.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Current`.  This property shall not be present
+            if the equipment does not include a Neutral line measurement.
+      type: object
+      x-longDescription: This type shall contain properties that describe current
+        sensor readings for an outlet.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        BranchCircuit:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A reference to the branch circuit related to this outlet.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Circuit that represent the branch circuit associated with this outlet.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_Outlet:
+      additionalProperties: false
+      description: The Outlet schema contains definition for an electrical outlet.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Outlet_v1_0_3_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        CurrentAmps:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The current (A) for this single phase outlet.
+          nullable: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current, in ampere units,
+            for this single phase outlet.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Current`.  This property shall not appear
+            in resource instances representing poly-phase outlets.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        ElectricalContext:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_ElectricalContext
+          description: The combination of current-carrying conductors.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the combination of current-carrying
+            conductors that distribute power.
+        EnergykWh:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          description: The energy (kWh) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the total energy, in kilowatt-hour
+            units, for this outlet, that represents the `Total` ElectricalContext
+            sensor when multiple energy sensors exist for this outlet.  The value
+            of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `EnergykWh`.
+        FrequencyHz:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The frequency (Hz) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the frequency, in hertz units,
+            for this outlet.  The value of the DataSourceUri property, if present,
+            shall reference a resource of type Sensor with the ReadingType property
+            containing the value `Frequency`.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        IndicatorLED:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_IndicatorLED
+          description: The state of the indicator LED, which identifies the outlet.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the indicator light state
+            for the indicator light associated with this outlet.
+        Links:
+          $ref: '#/components/schemas/Outlet_v1_0_3_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        NominalVoltage:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_NominalVoltageType
+          description: The nominal voltage for this outlet.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the nominal voltage for this
+            outlet, in Volts.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OutletType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Outlet.yaml#/components/schemas/Outlet_ReceptacleType
+          description: The type of receptacle according to NEMA, IEC, or regional
+            standards.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of physical receptacle
+            used for this outlet, as defined by IEC, NEMA, or regional standard.
+        PhaseWiringType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PhaseWiringType
+          description: The number of ungrounded current-carrying conductors (phases)
+            and the total number of conductors (wires).
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the number of ungrounded
+            current-carrying conductors (phases) and the total number of conductors
+            (wires).
+        PolyPhaseCurrentAmps:
+          $ref: '#/components/schemas/Outlet_v1_0_3_CurrentSensors'
+          description: The current readings for this outlet.
+          nullable: true
+          x-longDescription: This property shall contain the current readings for
+            this outlet.  For single phase outlets this property shall contain a duplicate
+            copy of the current sensor referenced in the CurrentAmps property, if
+            present.  For poly-phase outlets this property should contain multiple
+            current sensor readings used to fully describe the outlet.
+        PolyPhaseVoltage:
+          $ref: '#/components/schemas/Outlet_v1_0_3_VoltageSensors'
+          description: The voltage readings for this outlet.
+          nullable: true
+          x-longDescription: This property shall contain the voltage readings for
+            this outlet.  For single phase outlets this property shall contain a duplicate
+            copy of the voltage sensor referenced in the Voltage property, if present.  For
+            poly-phase outlets this property should contain multiple voltage sensor
+            readings used to fully describe the outlet.
+        PowerCycleDelaySeconds:
+          description: The number of seconds to delay power on after a PowerControl
+            action to cycle power.  Zero seconds indicates no delay.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power on after a PowerControl action to cycle power.  The value
+            `0` shall indicate no delay to power on.
+        PowerEnabled:
+          description: Indicates if the outlet can be powered.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate the power enable state of
+            the outlet.  The value `true` shall indicate that the outlet can be powered
+            on, and `false` shall indicate that the outlet cannot be powered.
+        PowerOffDelaySeconds:
+          description: The number of seconds to delay power off after a PowerControl
+            action.  Zero seconds indicates no delay to power off.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power off after a PowerControl action.  The value `0` shall indicate
+            no delay to power off.
+        PowerOnDelaySeconds:
+          description: The number of seconds to delay power up after a power cycle
+            or a PowerControl action.  Zero seconds indicates no delay to power up.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power up after a power cycle or a PowerControl action.  The value
+            `0` shall indicate no delay to power up.
+        PowerRestoreDelaySeconds:
+          description: The number of seconds to delay power on after power has been
+            restored.  Zero seconds indicates no delay.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power on after a power fault.  The value `0` shall indicate no delay
+            to power on.
+        PowerRestorePolicy:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PowerRestorePolicyTypes
+          description: The desired power state of the outlet when power is restored
+            after a power loss.
+          readOnly: false
+          x-longDescription: This property shall contain the desired PowerState of
+            the outlet when power is applied.  The value `LastState` shall return
+            the outlet to the PowerState it was in when power was lost.
+        PowerState:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_PowerState
+          description: The power state of the outlet.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the power state of the outlet.
+        PowerWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The power (W) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the total power, in watt
+            units, for this outlet, that represents the `Total` ElectricalContext
+            sensor when multiple power sensors exist for this outlet.  The value of
+            the DataSourceUri property, if present, shall reference a resource of
+            type Sensor with the ReadingType property containing the value `Power`.
+        RatedCurrentAmps:
+          description: The rated maximum current allowed for this outlet.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the rated maximum current
+            for this outlet, in ampere units, after any required de-rating, due to
+            safety agency or other regulatory requirements, has been applied.
+          x-units: A
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        Voltage:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The voltage (V) for this single phase outlet.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage, in volt units,
+            for this single phase outlet.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.  This property shall not appear
+            in resource instances representing poly-phase outlets.
+        VoltageType:
+          $ref: '#/components/schemas/Outlet_v1_0_3_VoltageType'
+          description: The type of voltage applied to the outlet.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of voltage applied
+            to the outlet.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent an electrical outlet
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_PowerControl:
+      additionalProperties: false
+      description: This action turns the outlet on or off.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall control the power state of the outlet.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_PowerControlRequestBody:
+      additionalProperties: false
+      description: This action turns the outlet on or off.
+      properties:
+        PowerState:
+          $ref: http://redfish.dmtf.org/schemas/v1/Outlet.yaml#/components/schemas/Outlet_PowerState
+          description: The desired power state of the outlet.
+          x-longDescription: This parameter shall contain the desired power state
+            of the outlet.
+      type: object
+      x-longDescription: This action shall control the power state of the outlet.
+    Outlet_v1_0_3_ResetMetrics:
+      additionalProperties: false
+      description: This action resets metrics related to this outlet.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this outlet.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: This action resets metrics related to this outlet.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this outlet.
+    Outlet_v1_0_3_VoltageSensors:
+      additionalProperties: false
+      description: The voltage readings for this outlet.
+      properties:
+        Line1ToLine2:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The Line 1 to Line 2 voltage (V) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L1 and L2.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.  This property shall not be present
+            if the equipment does not include an L1-L2 measurement.
+        Line1ToNeutral:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The Line 1 to Neutral voltage (V) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L1 and Neutral.  The value of the DataSourceUri
+            property, if present, shall reference a resource of type Sensor with the
+            ReadingType property containing the value `Voltage`.  This property shall
+            not be present if the equipment does not include an L1-Neutral measurement.
+        Line2ToLine3:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The Line 2 to Line 3 voltage (V) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L2 and L3.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.  This property shall not be present
+            if the equipment does not include an L2-L3 measurement.
+        Line2ToNeutral:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The Line 2 to Neutral voltage (V) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L2 and Neutral.  The value of the DataSourceUri
+            property, if present, shall reference a resource of type Sensor with the
+            ReadingType property containing the value `Voltage`.  This property shall
+            not be present if the equipment does not include an L2-Neutral measurement.
+        Line3ToLine1:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The Line 3 to Line 1 voltage (V) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L3 and L1.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.  This property shall not be present
+            if the equipment does not include an L3-L1 measurement.
+        Line3ToNeutral:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The Line 3 to Neutral voltage (V) for this outlet.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L3 and Neutral.  The value of the DataSourceUri
+            property, if present, shall reference a resource of type Sensor with the
+            ReadingType property containing the value `Voltage`.  This property shall
+            not be present if the equipment does not include an L3-Neutral measurement.
+      type: object
+      x-longDescription: This type shall contain properties that describe voltage
+        sensor readings for an outlet.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Outlet_v1_0_3_VoltageType:
+      enum:
+      - AC
+      - DC
+      type: string
+      x-enumDescriptions:
+        AC: Alternating Current (AC) outlet.
+        DC: Direct Current (DC) outlet.
+title: '#Outlet.v1_0_3.Outlet'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2019.4'

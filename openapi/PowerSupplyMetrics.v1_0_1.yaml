@@ -1,0 +1,220 @@
+components:
+  schemas:
+    PowerSupplyMetrics_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#PowerSupplyMetrics.ResetMetrics':
+          $ref: '#/components/schemas/PowerSupplyMetrics_v1_0_1_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/PowerSupplyMetrics_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_1_PowerSupplyMetrics:
+      additionalProperties: false
+      description: The PowerSupplyMetrics schema contains definitions for the metrics
+        of a power supply.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PowerSupplyMetrics_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        EnergykWh:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          description: The energy consumption (kWh) of this unit.
+          nullable: true
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the total energy, in kilowatt-hours
+            units, for this unit, that represents the `Total` ElectricalContext sensor
+            when multiple energy sensors exist.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `EnergykWh`.
+        FanSpeedPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorFanExcerpt
+          description: The fan speed (percent) for this power supply.
+          nullable: true
+          x-excerptCopy: SensorFanExcerpt
+          x-longDescription: This property shall contain the fan speed, in percent
+            units, for this resource.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Percent`.
+        FrequencyHz:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The frequency (Hz) for this power supply.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the frequency, in hertz units,
+            for this power supply.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        InputCurrentAmps:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          description: The input current (A) for this power supply.
+          nullable: true
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the input current, in ampere
+            units, for this power supply.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Current`.
+        InputPowerWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The input power (W) for this power supply.
+          nullable: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the input power, in watt
+            units, for this power supply.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Power`.
+        InputVoltage:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The input voltage (V) for this power supply.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the input voltage, in volt
+            units, for this power supply.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OutputPowerWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: The total power output (W) for this power supply.
+          nullable: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the total output power, in
+            watt units, for this power supply.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Power`.
+        RailCurrentAmps:
+          description: The output currents (A) for this power supply.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          type: array
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the output currents, in ampere
+            units, for this power supply.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Current`.  The sensors shall appear in
+            the same array order as the OutputRails property in the associated PowerSupply
+            resource.
+        RailCurrentAmps@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        RailPowerWatts:
+          description: The output power readings (W) for this power supply.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          type: array
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the output power readings,
+            in watt units, for this power supply.  The value of the DataSourceUri
+            property, if present, shall reference a resource of type Sensor with the
+            ReadingType property containing the value `Power`.  The sensors shall
+            appear in the same array order as the OutputRails property in the associated
+            PowerSupply resource.
+        RailPowerWatts@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        RailVoltage:
+          description: The output voltages (V) for this power supply.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          type: array
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the output voltages, in volt
+            units, for this power supply.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Voltage`.  The sensors shall appear in
+            the same array order as the OutputRails property in the associated PowerSupply
+            resource.
+        RailVoltage@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        TemperatureCelsius:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The temperature (C) for this power supply.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for this resource.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Temperature`.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent the metrics of a
+        power supply unit for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_1_ResetMetrics:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSupplyMetrics_v1_0_1_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+title: '#PowerSupplyMetrics.v1_0_1.PowerSupplyMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

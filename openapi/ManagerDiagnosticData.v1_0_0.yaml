@@ -1,0 +1,399 @@
+components:
+  schemas:
+    ManagerDiagnosticData_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#ManagerDiagnosticData.ResetMetrics':
+          $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_BootTimeStatistics:
+      additionalProperties: false
+      description: The boot time statistics of a manager.
+      properties:
+        FirmwareTimeSeconds:
+          description: The number of seconds the manager spent in the firmware stage.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of seconds the
+            manager spent in the firmware stage.
+        InitrdTimeSeconds:
+          description: The number of seconds the manager spent in the initrd boot
+            stage.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of seconds the
+            manager spent in the initrd boot stage.
+        KernelTimeSeconds:
+          description: The number of seconds the manager spent in the kernel stage.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of seconds the
+            manager spent in the kernel stage.
+        LoaderTimeSeconds:
+          description: The number of seconds the manager spent in the loader stage.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of seconds the
+            manager spent in the loader stage.
+        UserSpaceTimeSeconds:
+          description: The number of seconds the manager spent in the user space boot
+            stage.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of seconds the
+            manager spent in the user space boot stage.
+      type: object
+      x-longDescription: This object shall contain the boot time statistics of a manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_I2CBusStatistics:
+      additionalProperties: false
+      description: The statistics of an I2C bus.
+      properties:
+        BusErrorCount:
+          description: The number of bus errors on this I2C bus.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of bus errors
+            on this I2C bus.  Bus errors include, but are not limited to, an SDA rising
+            or falling edge while SCL is high or a stuck bus signal.
+        I2CBusName:
+          description: The name of the I2C bus.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the I2C bus.
+        NACKCount:
+          description: The number of NACKs on this I2C bus.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of NACKs on this
+            I2C bus.
+        TotalTransactionCount:
+          description: The total number of transactions on this I2C bus.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of transactions
+            on this I2C bus.  The count shall include the number of I2C transactions
+            initiated by the manager and the number of I2C transactions where the
+            manager is the target device.
+      type: object
+      x-longDescription: This object shall contain statistics of an I2C bus.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_ManagerDiagnosticData:
+      additionalProperties: false
+      description: The ManagerDiagnosticData schema defines internal diagnostic data
+        for a manager.  It contains information that might be used by vendors to collect
+        debug information about the manager.  Clients should not make decisions for
+        raising alerts, creating service events, or other actions based on information
+        in this resource.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: The actions property shall contain the available actions
+            for this resource.
+        BootTimeStatistics:
+          $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_BootTimeStatistics'
+          description: The boot time statistics of the manager.
+          x-longDescription: This property shall contain the boot time statistics
+            of the manager.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        FreeStorageSpaceKiB:
+          description: The available storage space on this manager in kibibytes (KiB).
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the available storage space
+            on this manager in kibibytes (KiB).
+          x-units: KiBy
+        I2CBuses:
+          description: The statistics of the I2C buses.
+          items:
+            $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_I2CBusStatistics'
+          type: array
+          x-longDescription: This property shall contain the statistics of the I2C
+            buses.  Services may subdivide a physical bus into multiple entries in
+            this property based on how the manager tracks bus segments, virtual buses
+            from a controller, and other segmentation capabilities.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        MemoryECCStatistics:
+          $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_MemoryECCStatistics'
+          description: The memory ECC statistics of the manager.
+          x-longDescription: This property shall contain the memory ECC statistics
+            of the manager.
+        MemoryStatistics:
+          $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_MemoryStatistics'
+          description: The memory statistics of the manager.
+          x-longDescription: This property shall contain the memory statistics of
+            the manager.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        ProcessorStatistics:
+          $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_ProcessorStatistics'
+          description: The processor statistics of the manager.
+          x-longDescription: This property shall contain the processor statistics
+            of the manager.
+        TopProcesses:
+          description: The statistics of the top processes of this manager.
+          items:
+            $ref: '#/components/schemas/ManagerDiagnosticData_v1_0_0_ProcessStatistics'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain the statistics of the top
+            processes of this manager.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent internal diagnostic data for
+        a manager for a Redfish implementation.  Clients should not make decisions
+        for raising alerts, creating service events, or other actions based on information
+        in this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_MemoryECCStatistics:
+      additionalProperties: false
+      description: The memory ECC statistics of a manager.
+      properties:
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            errors since reset.
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors since reset.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            errors since reset.
+      type: object
+      x-longDescription: This object shall contain the memory ECC statistics of a
+        manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_MemoryStatistics:
+      additionalProperties: false
+      description: The memory statistics of a manager.
+      properties:
+        AvailableBytes:
+          description: The amount of memory available in bytes for starting new processes
+            without swapping.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the amount of memory available
+            in bytes for starting new processes without swapping.  This includes free
+            memory and reclaimable cache and buffers.
+          x-units: By
+        BuffersAndCacheBytes:
+          description: The amount of memory used in bytes by kernel buffers, page
+            caches, and slabs.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the amount of memory used
+            in bytes by kernel buffers, page caches, and slabs.
+          x-units: By
+        FreeBytes:
+          description: The amount of free memory in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the amount of free memory
+            in bytes.
+          x-units: By
+        SharedBytes:
+          description: The amount of shared memory in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the amount of shared memory
+            in bytes.  This includes things such as memory consumed by temporary filesystems.
+          x-units: By
+        TotalBytes:
+          description: The total amount of memory in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total amount of memory
+            in bytes.
+          x-units: By
+        UsedBytes:
+          description: The amount of used memory in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the amount of used memory
+            in bytes.  This value is calculated as TotalBytes minus FreeBytes minus
+            BuffersAndCacheBytes.
+          x-units: By
+      type: object
+      x-longDescription: This object shall contain the memory statistics of a manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_ProcessStatistics:
+      additionalProperties: false
+      description: The statistics of a process running on a manager.
+      properties:
+        CommandLine:
+          description: The command line of this process.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the command line with parameters
+            of this process.
+        KernelTimeSeconds:
+          description: The number of seconds this process executed in kernel space.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of seconds this
+            process executed in kernel space.
+        ResidentSetSizeBytes:
+          description: The resident set size of this process in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the resident set size of
+            this process in bytes, which is the amount of memory allocated to the
+            process and is in RAM.
+          x-units: By
+        UserTimeSeconds:
+          description: The number of seconds this process executed in user space.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of seconds this
+            process executed in user space.
+      type: object
+      x-longDescription: This object shall contain the statistics of a process running
+        on a manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_ProcessorStatistics:
+      additionalProperties: false
+      description: The processor statistics of a manager.
+      properties:
+        KernelPercent:
+          description: The percentage of CPU time spent in kernel mode.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the percentage of CPU time
+            spent in kernel mode.
+          x-units: '%'
+        UserPercent:
+          description: The percentage of CPU time spent in user mode.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the percentage of CPU time
+            spent in user mode.
+          x-units: '%'
+      type: object
+      x-longDescription: This object shall contain the processor statistics of a manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_ResetMetrics:
+      additionalProperties: false
+      description: Resets time intervals or counted values of the diagnostic data
+        for this manager.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        of the diagnostic data for this manager.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ManagerDiagnosticData_v1_0_0_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: Resets time intervals or counted values of the diagnostic data
+        for this manager.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        of the diagnostic data for this manager.
+title: '#ManagerDiagnosticData.v1_0_0.ManagerDiagnosticData'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.4'

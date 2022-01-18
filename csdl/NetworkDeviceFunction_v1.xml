@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  NetworkDeviceFunction v1.7.0                                        -->
+<!--# Redfish Schema:  NetworkDeviceFunction v1.8.0                                        -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -860,6 +860,15 @@
           <Annotation Term="OData.Description" String="The physical port to which this network device function is currently assigned."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type Port that is the physical port to which this network device function is currently assigned.  This value shall be one of the AssignablePhysicalNetworkPorts array members."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_8_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of PhysicalNetworkPortAssignment within Links to avoid loops on expand."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
         <Property Name="InfiniBand" Type="NetworkDeviceFunction.v1_5_0.InfiniBand" Nullable="false">
           <Annotation Term="OData.Description" String="The InfiniBand capabilities, status, and configuration values for this network device function."/>
@@ -1056,6 +1065,14 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to a collection of type EthernetInterfaceCollection that represent the Ethernet interfaces present on this network device function.  This property shall not be present if this network device function is not referenced by a NetworkInterface resource."/>
         </NavigationProperty>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkDeviceFunction.v1_8_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.4"/>
+      <Annotation Term="OData.Description" String="This version was created to deprecate PhysicalNetworkPortAssignment at the root of the resource in favor of PhysicalNetworkPortAssignment within Links."/>
+
+      <EntityType Name="NetworkDeviceFunction" BaseType="NetworkDeviceFunction.v1_7_0.NetworkDeviceFunction"/>
     </Schema>
 
   </edmx:DataServices>

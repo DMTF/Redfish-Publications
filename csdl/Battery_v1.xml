@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Battery v1.0.0                                                      -->
+<!--# Redfish Schema:  Battery v1.0.1                                                      -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -209,8 +209,8 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the charge state of this battery."/>
         </Property>
         <NavigationProperty Name="StateOfHealthPercent" Type="Sensor.Sensor" Nullable="false">
-          <Annotation Term="OData.Description" String="The state of health of this battery."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the state of health of this battery as a percentage."/>
+          <Annotation Term="OData.Description" String="The state of health (percent) of this battery."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the state of health, in percent units, of this battery.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Percent`."/>
           <Annotation Term="Redfish.ExcerptCopy"/>
         </NavigationProperty>
         <NavigationProperty Name="Assembly" Type="Assembly.Assembly" ContainsTarget="true" Nullable="false">
@@ -261,6 +261,12 @@
           <Annotation Term="OData.LongDescription" String="This value shall indicate the battery is discharging and energy is leaving the battery."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Battery.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control."/>
+      <EntityType Name="Battery" BaseType="Battery.v1_0_0.Battery"/>
     </Schema>
 
   </edmx:DataServices>

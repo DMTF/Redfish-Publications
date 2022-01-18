@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerSupply v1.2.0                                                  -->
+<!--# Redfish Schema:  PowerSupply v1.3.0                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -352,6 +352,31 @@
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerSupply.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2021.4"/>
+
+      <EntityType Name="PowerSupply" BaseType="PowerSupply.v1_2_0.PowerSupply">
+        <Property Name="LineInputStatus" Type="PowerSupply.v1_3_0.LineStatus">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The status of the line input."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the status of the power line input for this power supply."/>
+        </Property>
+      </EntityType>
+
+      <EnumType Name="LineStatus">
+        <Member Name="Normal">
+          <Annotation Term="OData.Description" String="Line input is within normal operating range."/>
+        </Member>
+        <Member Name="LossOfInput">
+          <Annotation Term="OData.Description" String="No power detected at line input."/>
+        </Member>
+        <Member Name="OutOfRange">
+          <Annotation Term="OData.Description" String="Line input voltage or current is outside of normal operating range."/>
+        </Member>
+      </EnumType>
     </Schema>
 
   </edmx:DataServices>

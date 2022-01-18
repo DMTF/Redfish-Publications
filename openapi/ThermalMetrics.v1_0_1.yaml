@@ -1,0 +1,165 @@
+components:
+  schemas:
+    ThermalMetrics_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#ThermalMetrics.ResetMetrics':
+          $ref: '#/components/schemas/ThermalMetrics_v1_0_1_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/ThermalMetrics_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ThermalMetrics_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ThermalMetrics_v1_0_1_ResetMetrics:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ThermalMetrics_v1_0_1_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+    ThermalMetrics_v1_0_1_TemperatureSummary:
+      additionalProperties: false
+      description: The temperature readings for a subsystem.
+      properties:
+        Ambient:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The ambient temperature (Celsius) of this subsystem.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for the ambient temperature of this subsystem.  The value
+            of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `Temperature`.
+        Exhaust:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The exhaust temperature (Celsius) of this subsystem.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for the exhaust temperature of this subsystem.  The value
+            of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `Temperature`.
+        Intake:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The intake temperature (Celsius) of this subsystem.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for the intake temperature of this subsystem.  The value
+            of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `Temperature`.
+        Internal:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The internal temperature (Celsius) of this subsystem.
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for the internal temperature of this subsystem.  The value
+            of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `Temperature`.
+      type: object
+      x-longDescription: This type shall contain properties that describe temperature
+        sensor for a subsystem.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ThermalMetrics_v1_0_1_ThermalMetrics:
+      additionalProperties: false
+      description: The ThermalMetrics schema represents the thermal metrics of a chassis.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/ThermalMetrics_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        TemperatureReadingsCelsius:
+          description: The temperatures (Celsius) from all related sensors for this
+            device.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorArrayExcerpt
+          type: array
+          x-excerptCopy: SensorArrayExcerpt
+          x-longDescription: This property shall contain the temperatures, in degrees
+            Celsius units, for this subsystem.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Temperature`.
+        TemperatureReadingsCelsius@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        TemperatureSummaryCelsius:
+          $ref: '#/components/schemas/ThermalMetrics_v1_0_1_TemperatureSummary'
+          description: The summary temperature readings for this chassis.
+          nullable: true
+          x-longDescription: This property shall contain the temperature sensor readings
+            for this subsystem.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the thermal metrics of a chassis
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#ThermalMetrics.v1_0_1.ThermalMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

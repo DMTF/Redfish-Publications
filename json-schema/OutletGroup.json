@@ -10,7 +10,10 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/idRef"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/OutletGroup.v1_0_1.json#/definitions/OutletGroup"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/OutletGroup.v1_0_2.json#/definitions/OutletGroup"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/OutletGroup.v1_1_0.json#/definitions/OutletGroup"
                 }
             ],
             "deletable": true,
@@ -28,11 +31,19 @@
         "PowerState": {
             "enum": [
                 "On",
-                "Off"
+                "Off",
+                "PowerCycle"
             ],
             "enumDescriptions": {
-                "Off": "The outlet group is powered off.",
-                "On": "The outlet group is powered on."
+                "Off": "Power off.",
+                "On": "Power on.",
+                "PowerCycle": "Power cycle."
+            },
+            "enumLongDescriptions": {
+                "PowerCycle": "This value shall indicate the resource will transition to a power off state, then transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`."
+            },
+            "enumVersionAdded": {
+                "PowerCycle": "v1_1_0"
             },
             "type": "string"
         }

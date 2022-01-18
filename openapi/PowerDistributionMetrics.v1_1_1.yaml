@@ -1,0 +1,141 @@
+components:
+  schemas:
+    PowerDistributionMetrics_v1_1_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#PowerDistributionMetrics.ResetMetrics':
+          $ref: '#/components/schemas/PowerDistributionMetrics_v1_1_1_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/PowerDistributionMetrics_v1_1_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerDistributionMetrics_v1_1_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerDistributionMetrics_v1_1_1_PowerDistributionMetrics:
+      additionalProperties: false
+      description: This is the schema definition for the metrics of a power distribution
+        component or unit, such as a floor power distribution unit (PDU) or switchgear.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PowerDistributionMetrics_v1_1_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        EnergykWh:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          description: Energy consumption (kWh).
+          nullable: true
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the total energy, in kilowatt-hours,
+            for this resource, that represents the `Total` ElectricalContext sensor
+            when multiple energy sensors exist.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `EnergykWh`.
+        HumidityPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: Humidity (percent).
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the humidity, in percent
+            units, for this resource.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Humidity`.
+          x-versionAdded: v1_1_0
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PowerWatts:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          description: Power consumption (W).
+          nullable: true
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the total power, in watt
+            units, for this resource, that represents the `Total` ElectricalContext
+            sensor when multiple power sensors exist.  The value of the DataSourceUri
+            property, if present, shall reference a resource of type Sensor with the
+            ReadingType property containing the value `Power`.
+        TemperatureCelsius:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: Temperature (Celsius).
+          nullable: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the temperature, in degrees
+            Celsius units, for this resource.  The value of the DataSourceUri property,
+            if present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Temperature`.
+          x-versionAdded: v1_1_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent the metrics of a
+        power distribution component or unit for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerDistributionMetrics_v1_1_1_ResetMetrics:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerDistributionMetrics_v1_1_1_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: This action resets the summary metrics related to this equipment.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this equipment.
+title: '#PowerDistributionMetrics.v1_1_1.PowerDistributionMetrics'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.1'

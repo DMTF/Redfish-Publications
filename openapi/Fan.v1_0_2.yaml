@@ -1,0 +1,164 @@
+components:
+  schemas:
+    Fan_v1_0_2_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Fan_v1_0_2_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Fan_v1_0_2_Fan:
+      additionalProperties: false
+      description: The Fan schema describes a cooling fan unit for a computer system
+        or similar devices contained within a chassis.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Fan_v1_0_2_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Assembly:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the assembly associated with this fan.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Assembly.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        HotPluggable:
+          description: An indication of whether this device can be inserted or removed
+            while the equipment is in operation.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the device can be
+            inserted or removed while the underlying equipment otherwise remains in
+            its current operational state.  Hot-pluggable devices can become operable
+            without altering the operational state of the underlying equipment.  Devices
+            that cannot be inserted or removed from equipment in operation, or devices
+            that cannot become operable without affecting the operational state of
+            that equipment, shall be not hot-pluggable.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location of the fan.
+          x-longDescription: This property shall contain location information of this
+            fan.
+        LocationIndicatorActive:
+          description: An indicator allowing an operator to physically locate this
+            resource.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain the state of the indicator
+            used to physically identify or locate this resource.
+        Manufacturer:
+          description: The manufacturer of this fan.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the organization
+            responsible for producing the fan.  This organization may be the entity
+            from whom the fan is purchased, but this is not necessarily true.
+        Model:
+          description: The model number for this fan.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the model information as
+            defined by the manufacturer for this fan.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PartNumber:
+          description: The part number for this fan.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the part number as defined
+            by the manufacturer for this fan.
+        PhysicalContext:
+          $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
+          description: The area or device associated with this fan.
+          readOnly: true
+          x-longDescription: This property shall contain a description of the affected
+            device or region within the chassis with which this fan is associated.
+        SerialNumber:
+          description: The serial number for this fan.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the serial number as defined
+            by the manufacturer for this fan.
+        SparePartNumber:
+          description: The spare part number for this fan.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the spare or replacement
+            part number as defined by the manufacturer for this fan.
+        SpeedPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorFanExcerpt
+          description: The fan speed (percent).
+          nullable: true
+          x-excerptCopy: SensorFanExcerpt
+          x-longDescription: This property shall contain the fan speed, in percent
+            units, for this resource.  The value of the DataSourceUri property, if
+            present, shall reference a resource of type Sensor with the ReadingType
+            property containing the value `Percent`.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the management properties for
+        monitoring and management of cooling fans for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Fan_v1_0_2_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Fan.v1_0_2.Fan'
+x-copyright: Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.4'

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Fan v1.1.0                                                          -->
+<!--# Redfish Schema:  Fan v1.1.1                                                          -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -87,10 +87,9 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain any status or health properties of the resource."/>
         </Property>
         <NavigationProperty Name="SpeedPercent" Type="Sensor.Sensor">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy" String="Fan"/>
-          <Annotation Term="OData.Description" String="The fan speed reading."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the fan speed sensor."/>
+          <Annotation Term="OData.Description" String="The fan speed (percent)."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the fan speed, in percent units, for this resource.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Percent`."/>
         </NavigationProperty>
         <Property Name="Manufacturer" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -166,18 +165,29 @@
       <EntityType Name="Fan" BaseType="Fan.v1_0_0.Fan"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Fan.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control."/>
+      <EntityType Name="Fan" BaseType="Fan.v1_0_1.Fan"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Fan.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.1"/>
 
       <EntityType Name="Fan" BaseType="Fan.v1_0_1.Fan">
         <NavigationProperty Name="PowerWatts" Type="Sensor.Sensor">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy" String="Power"/>
-          <Annotation Term="OData.Description" String="Power consumption (Watts)."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total power, measured in Watts, for this resource."/>
+          <Annotation Term="OData.Description" String="Power consumption (W)."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total power, in watt units, for this resource.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Power`."/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Fan.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control."/>
+      <EntityType Name="Fan" BaseType="Fan.v1_1_0.Fan"/>
     </Schema>
 
   </edmx:DataServices>

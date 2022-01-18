@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ProcessorMetrics v1.4.0                                             -->
+<!--# Redfish Schema:  ProcessorMetrics v1.4.1                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -456,12 +456,17 @@
 
       <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_2_2.ProcessorMetrics">
         <NavigationProperty Name="CoreVoltage" Type="Sensor.Sensor">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The core voltage of this processor in Volts."/>
-          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the sensor measuring the core voltage of this processor in Volts.  The core voltage of the processor may change more frequently than the manager is able to monitor."/>
+          <Annotation Term="OData.Description" String="The core voltage (V) of this processor."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the core voltage, in volt units, of this processor.  The core voltage of the processor may change more frequently than the manager is able to monitor.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Voltage`."/>
           <Annotation Term="Redfish.ExcerptCopy" String="Voltage"/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_3_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control."/>
+      <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_3_0.ProcessorMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_4_0">
@@ -474,6 +479,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the PCIe errors associated with this processor."/>
         </Property>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ProcessorMetrics.v1_4_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control."/>
+      <EntityType Name="ProcessorMetrics" BaseType="ProcessorMetrics.v1_4_0.ProcessorMetrics"/>
     </Schema>
 
   </edmx:DataServices>
