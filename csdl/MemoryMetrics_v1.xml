@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryMetrics v1.4.1                                                -->
+<!--# Redfish Schema:  MemoryMetrics v1.5.0                                                -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2021 DMTF.                                                            -->
+<!--# Copyright 2014-2022 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -418,6 +418,39 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to fix typos in descriptions and long descriptions."/>
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_4_0.MemoryMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_5_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.1"/>
+
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_4_1.MemoryMetrics"/>
+
+      <ComplexType Name="CurrentPeriod" BaseType="MemoryMetrics.v1_4_0.CurrentPeriod">
+        <Property Name="IndeterminateCorrectableErrorCount" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of indeterminate correctable errors since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate correctable errors since reset.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate correctable errors across all memory without duplication, which may not be the sum of all IndeterminateCorrectableErrorCount properties over all memory."/>
+        </Property>
+        <Property Name="IndeterminateUncorrectableErrorCount" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of indeterminate uncorrectable errors since reset."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate uncorrectable errors since reset.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate uncorrectable errors across all memory without duplication, which may not be the sum of all IndeterminateUncorrectableErrorCount properties over all memory."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="LifeTime" BaseType="MemoryMetrics.v1_4_0.LifeTime">
+        <Property Name="IndeterminateCorrectableErrorCount" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of indeterminate correctable errors for the lifetime of the memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate correctable errors for the lifetime of the memory.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate correctable errors across all memory without duplication, which may not bey the sum of all IndeterminateCorrectableErrorCount properties over all memory."/>
+        </Property>
+        <Property Name="IndeterminateUncorrectableErrorCount" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of indeterminate uncorrectable errors for the lifetime of the memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate uncorrectable errors for the lifetime of the memory.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate uncorrectable errors across all memory without duplication, which may not be the sum of all IndeterminateUncorrectableErrorCount properties over all memory."/>
+        </Property>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

@@ -1,0 +1,410 @@
+components:
+  schemas:
+    Battery_v1_1_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Battery.Calibrate':
+          $ref: '#/components/schemas/Battery_v1_1_0_Calibrate'
+        '#Battery.Reset':
+          $ref: '#/components/schemas/Battery_v1_1_0_Reset'
+        '#Battery.SelfTest':
+          $ref: '#/components/schemas/Battery_v1_1_0_SelfTest'
+        Oem:
+          $ref: '#/components/schemas/Battery_v1_1_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Battery_v1_1_0_Battery:
+      additionalProperties: false
+      description: The Battery schema describes a battery unit, such as those used
+        to provide systems with power during a power loss event.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Battery_v1_1_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Assembly:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the assembly associated with this battery.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Assembly.
+        CapacityActualAmpHours:
+          description: The actual maximum capacity of this battery in amp-hours.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the actual maximum capacity
+            of this battery in amp-hours.
+          x-units: A.h
+        CapacityActualWattHours:
+          description: The actual maximum capacity of this battery in watt-hours.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the actual maximum capacity
+            of this battery in watt-hours.
+          x-units: W.h
+        CapacityRatedAmpHours:
+          description: The rated maximum capacity of this battery in amp-hours.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the rated maximum capacity
+            of this battery in amp-hours.
+          x-units: A.h
+        CapacityRatedWattHours:
+          description: The rated maximum capacity of this battery in watt-hours.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the rated maximum capacity
+            of this battery in watt-hours.
+          x-units: W.h
+        ChargeState:
+          $ref: '#/components/schemas/Battery_v1_1_0_ChargeState'
+          description: The charge state of this battery.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the charge state of this
+            battery.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        FirmwareVersion:
+          description: The firmware version for this battery.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the firmware version as defined
+            by the manufacturer for this battery.
+        HotPluggable:
+          description: An indication of whether this device can be inserted or removed
+            while the equipment is in operation.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the device can be
+            inserted or removed while the underlying equipment otherwise remains in
+            its current operational state.  Devices indicated as hot-pluggable shall
+            allow the device to become operable without altering the operational state
+            of the underlying equipment.  Devices that cannot be inserted or removed
+            from equipment in operation, or devices that cannot become operable without
+            affecting the operational state of that equipment, shall be indicated
+            as not hot-pluggable.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/Battery_v1_1_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+          x-versionAdded: v1_1_0
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location of the battery.
+          x-longDescription: This property shall contain location information of this
+            battery.
+        LocationIndicatorActive:
+          description: An indicator allowing an operator to physically locate this
+            resource.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain the state of the indicator
+            used to physically identify or locate this resource.
+        Manufacturer:
+          description: The manufacturer of this battery.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the organization
+            responsible for producing the battery.  This organization may be the entity
+            from whom the battery is purchased, but this is not necessarily true.
+        MaxChargeRateAmps:
+          description: The maximum charge rate of this battery in amps.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the maximum charge rate of
+            this battery in amps.
+          x-units: A
+        MaxChargeVoltage:
+          description: The maximum charge voltage of this battery.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the maximum charge voltage
+            of this battery.
+          x-units: V
+        MaxDischargeRateAmps:
+          description: The maximum discharge rate of this battery in amps.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the maximum discharge rate
+            of this battery in amps.
+          x-units: A
+        Metrics:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the battery metrics resource associated with this
+            battery.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            BatteryMetrics.
+        Model:
+          description: The model number for this battery.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the model information as
+            defined by the manufacturer for this battery.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PartNumber:
+          description: The part number for this battery.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the part number as defined
+            by the manufacturer for this battery.
+        ProductionDate:
+          description: The production or manufacturing date of this battery.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date of production or
+            manufacture for this battery.
+        SerialNumber:
+          description: The serial number for this battery.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the serial number as defined
+            by the manufacturer for this battery.
+        SparePartNumber:
+          description: The spare part number for this battery.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the spare or replacement
+            part number as defined by the manufacturer for this battery.
+        StateOfHealthPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The state of health (percent) of this battery.
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the state of health, in percent
+            units, of this battery.  The value of the DataSourceUri property, if present,
+            shall reference a resource of type Sensor with the ReadingType property
+            containing the value `Percent`.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        Version:
+          description: The hardware version of this battery.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the hardware version of this
+            battery as determined by the vendor or supplier.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a battery for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Battery_v1_1_0_Calibrate:
+      additionalProperties: false
+      description: This action performs a self-calibration, or learn cycle, of the
+        battery.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall perform a self-calibration, or learn cycle,
+        of the battery.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Battery_v1_1_0_CalibrateRequestBody:
+      additionalProperties: false
+      description: This action performs a self-calibration, or learn cycle, of the
+        battery.
+      properties: {}
+      type: object
+      x-longDescription: This action shall perform a self-calibration, or learn cycle,
+        of the battery.
+    Battery_v1_1_0_ChargeState:
+      enum:
+      - Idle
+      - Charging
+      - Discharging
+      type: string
+      x-enumDescriptions:
+        Charging: The battery is charging.
+        Discharging: The battery is discharging.
+        Idle: The battery is idle.
+      x-enumLongDescriptions:
+        Charging: This value shall indicate the battery is charging and energy is
+          entering the battery.
+        Discharging: This value shall indicate the battery is discharging and energy
+          is leaving the battery.
+        Idle: This value shall indicate the battery is idle and energy is not entering
+          or leaving the battery.  Small amounts of energy may enter or leave the
+          battery while in this state if the battery is regulating itself.
+    Battery_v1_1_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Memory:
+          description: An array of links to the memory devices to which this battery
+            provides power during a power loss event.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Memory that represent the memory devices to which this battery
+            provides power during a power loss event, such as battery-backed NVDIMMs.  This
+            property shall not be present if the battery powers the containing chassis
+            as a whole rather than individual components in a chassis.
+          x-versionAdded: v1_1_0
+        Memory@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        StorageControllers:
+          description: An array of links to the storage controllers to which this
+            battery provides power during a power loss event.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type StorageController that represent the storage controllers to which
+            this battery provides power during a power loss event, such as battery-backed
+            RAID controllers.  This property shall not be present if the battery powers
+            the containing chassis as a whole rather than individual components in
+            a chassis.
+          x-versionAdded: v1_1_0
+        StorageControllers@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Battery_v1_1_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Battery_v1_1_0_Reset:
+      additionalProperties: false
+      description: This action resets the battery.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset the battery.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Battery_v1_1_0_ResetRequestBody:
+      additionalProperties: false
+      description: This action resets the battery.
+      properties:
+        ResetType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_ResetType
+          description: The type of reset.
+          x-longDescription: This parameter shall contain the type of reset.  The
+            service can accept a request without the parameter and shall perform a
+            `GracefulRestart`.
+      type: object
+      x-longDescription: This action shall reset the battery.
+    Battery_v1_1_0_SelfTest:
+      additionalProperties: false
+      description: This action performs a self-test of the battery.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall perform a self-test of the battery.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Battery_v1_1_0_SelfTestRequestBody:
+      additionalProperties: false
+      description: This action performs a self-test of the battery.
+      properties: {}
+      type: object
+      x-longDescription: This action shall perform a self-test of the battery.
+title: '#Battery.v1_1_0.Battery'
+x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2021.2'

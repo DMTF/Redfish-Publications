@@ -1,0 +1,895 @@
+components:
+  schemas:
+    ComponentIntegrity_v1_1_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#ComponentIntegrity.SPDMGetSignedMeasurements':
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMGetSignedMeasurements'
+        Oem:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_CommonAuthInfo:
+      additionalProperties: false
+      description: Common Authentication information.
+      properties:
+        ComponentCertificate:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the certificate that represents the identify of the
+            component.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Certificate that represents the identify of the component referenced by
+            the TargetComponentURI property.
+        VerificationStatus:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_VerificationStatus'
+          description: The status of the verification of the identity of the component.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the status of the verification
+            of the identity of the component referenced by the TargetComponentURI
+            property..
+      type: object
+      x-longDescription: This object shall contain common identity-related authentication
+        information.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_CommunicationInfo:
+      additionalProperties: false
+      description: Information about communication between two components.
+      properties:
+        Sessions:
+          description: The active sessions or communication channels between two components.
+          items:
+            $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SingleSessionInfo'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain an array of the active sessions
+            or communication channels between two components  The active sessions
+            or communication channels do not reflect how future sessions or communication
+            channels are established.
+      type: object
+      x-longDescription: This object shall contain information about communication
+        between two components.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_ComponentIntegrity:
+      additionalProperties: false
+      description: The ComponentIntegrity resource provides critical and pertinent
+        security information about a specific device, system, software element, or
+        other managed entity.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        ComponentIntegrityEnabled:
+          description: An indication of whether security protocols are enabled for
+            the component.
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether security protocols
+            are enabled for the component.  If ComponentIntegrityType contains `SPDM`,
+            a value of `false` shall prohibit the SPDM Requester from using SPDM to
+            communicate with the component identified by the TargetComponentURI property.  If
+            ComponentIntegrityType contains `TPM`, a value of `false` shall disable
+            the TPM component identified by the TargetComponentURI property entirely.  If
+            `false`, services shall not provide the TPM and SPDM properties in response
+            payloads for this resource.  If `false`, services shall reject action
+            requests to this resource.  If `true`, services shall allow security protocols
+            with the component identified by the TargetComponentURI property.
+        ComponentIntegrityType:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_ComponentIntegrityType'
+          description: The type of security technology for the component.
+          readOnly: true
+          x-longDescription: This value of this property shall contain the underlying
+            security technology providing integrity information for the component.
+        ComponentIntegrityTypeVersion:
+          description: The version of the security technology.
+          readOnly: true
+          type: string
+          x-longDescription: This value of this property shall contain the version
+            of the security technology indicated by the ComponentIntegrityType property.  If
+            ComponentIntegrityType contains `SPDM`, this property shall contain the
+            negotiated or selected SPDM protocol.  If ComponentIntegrityType contains
+            `TPM`, this property shall contain the version of the TPM.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        LastUpdated:
+          description: The date and time when information for the component was last
+            updated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time when information
+            for the component was last updated.
+        Links:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        SPDM:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMinfo'
+          description: Integrity information about the SPDM Responder as reported
+            by an SPDM Requester.
+          x-longDescription: This property shall contain integrity information about
+            the SPDM Responder identified by the TargetComponentURI property as reported
+            by an SPDM Requester.  This property shall be present if ComponentIntegrityType
+            contains `SPDM` and `ComponentIntegrityEnabled` contains `true`.  For
+            other cases, this property shall be absent.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        TPM:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_TPMinfo'
+          description: Integrity information about the Trusted Platform Module (TPM).
+          x-longDescription: This property shall contain integrity information about
+            the Trusted Platform Module (TPM) identified by the TargetComponentURI
+            property,  This property shall be present if ComponentIntegrityType contains
+            `TPM` and `ComponentIntegrityEnabled` contains `true`.  For other cases,
+            this property shall be absent.
+        TargetComponentURI:
+          description: The link to the the component whose integrity that this resource
+            reports.
+          readOnly: true
+          type: string
+          x-longDescription: This value of this property shall contain a link to the
+            resource whose integrity information is reported in this resource.  If
+            ComponentIntegrityType contains `SPDM`, this property shall contain a
+            URI to the resource that represents the SPDM Responder.  If ComponentIntegrityType
+            contains `TPM`, this property shall contain a URI with RFC6901-defined
+            JSON fragment notation to a member of the TrustedModules array in a ComputerSystem
+            resource that represents the TPM.
+      required:
+      - ComponentIntegrityType
+      - ComponentIntegrityTypeVersion
+      - TargetComponentURI
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent critical and pertinent security
+        information about a specific device, system, software element, or other managed
+        entity.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_ComponentIntegrityType:
+      enum:
+      - SPDM
+      - TPM
+      - OEM
+      type: string
+      x-enumDescriptions:
+        OEM: OEM-specific.
+        SPDM: Security Protocol and Data Model (SPDM) protocol.
+        TPM: Trusted Platform Module (TPM).
+      x-enumLongDescriptions:
+        OEM: This value shall indicate the integrity information is OEM-specific and
+          the OEM section may include additional information.
+        SPDM: This value shall indicate the integrity information is obtained through
+          the Security Protocol and Data Model (SPDM) protocol as defined in DMTF
+          DSP0274.
+        TPM: This value shall indicate the integrity information is related to a Trusted
+          Platform Module (TPM) as defined by the Trusted Computing Group (TCG).
+    ComponentIntegrity_v1_1_0_DMTFmeasurementTypes:
+      enum:
+      - ImmutableROM
+      - MutableFirmware
+      - HardwareConfiguration
+      - FirmwareConfiguration
+      - MutableFirmwareVersion
+      - MutableFirmwareSecurityVersionNumber
+      - MeasurementManifest
+      type: string
+      x-enumDescriptions:
+        FirmwareConfiguration: Firmware configuration, such as configurable firmware
+          policy.
+        HardwareConfiguration: Hardware configuration, such as straps.
+        ImmutableROM: Immutable ROM.
+        MeasurementManifest: Measurement Manifest.
+        MutableFirmware: Mutable firmware or any mutable code.
+        MutableFirmwareSecurityVersionNumber: Mutable firmware security version number.
+        MutableFirmwareVersion: Mutable firmware version.
+    ComponentIntegrity_v1_1_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        ComponentsProtected:
+          description: An array of links to resources that the target component protects.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            that the component identified by the TargetComponentURI property provides
+            integrity protection.  This property shall not contain the value of the
+            TargetComponentURI property.
+        ComponentsProtected@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_MeasurementSpecification:
+      enum:
+      - DMTF
+      type: string
+      x-enumDescriptions:
+        DMTF: DMTF.
+      x-enumLongDescriptions:
+        DMTF: This value shall indicate the measurement specification is defined by
+          DMTF in DSP0274.
+    ComponentIntegrity_v1_1_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMGetSignedMeasurements:
+      additionalProperties: false
+      description: This action generates an SPDM cryptographic signed statement over
+        the given nonce and measurements of the SPDM Responder.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall generate a cryptographic signed statement
+        over the given nonce and measurements corresponding to the SPDM Responder.  This
+        action shall not be present if the ComponentIntegrityType property does not
+        contain the value `SPDM`.  The SPDM Requester shall issue one or more SPDM
+        'GET_MEASUREMENTS' requests for each of the requested measurement indices
+        to the SPDM Responder.  When the SPDM 'GET_MEASUREMENTS' requests are made
+        for version 1.2, the parameter 'RawBitStreamRequested' shall contain `0`.  The
+        SPDM Requester shall provide the nonce for the action to the SPDM Responder
+        in the last SPDM 'GET_MEASUREMENTS' request.  The SPDM Requester shall request
+        a signature in the last SPDM 'GET_MEASUREMENTS' request.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMGetSignedMeasurementsRequestBody:
+      additionalProperties: false
+      description: This action generates an SPDM cryptographic signed statement over
+        the given nonce and measurements of the SPDM Responder.
+      properties:
+        MeasurementIndices:
+          description: An array of indices that identify the measurement blocks to
+            sign.
+          items:
+            format: int64
+            type: integer
+          type: array
+          x-longDescription: This parameter shall contain an array of indices that
+            identify the measurement blocks to sign.  This array shall contain one
+            or more unique values between `0` to `254`, inclusive, or contain a single
+            value of `255`.  If not provided by the client, the value shall be assumed
+            to be an array containing a single value of `255`.
+        Nonce:
+          description: A 32-byte hex-encoded string that is signed with the measurements.  The
+            value should be unique.
+          pattern: ^[0-9a-fA-F]{64}$
+          type: string
+          x-longDescription: This parameter shall contain a 32-byte hex-encoded string
+            that is signed with the measurements.  If not provided by the client,
+            the SPDM Requester shall generate the nonce.  The value should be unique
+            and generated using a random or a pseudo-random generator.
+        SlotId:
+          description: The slot identifier for the certificate containing the private
+            key to generate the signature over the measurements.
+          format: int64
+          type: integer
+          x-longDescription: This parameter shall contain the SPDM slot identifier
+            for the certificate containing the private key to generate the signature
+            over the measurements.  If not provided by the client, the value shall
+            be assumed to be `0`.  The SPDM Requester shall send this value to the
+            SPDM Responder in the SPDM 'GET_MEASUREMENTS' request.
+      type: object
+      x-longDescription: This action shall generate a cryptographic signed statement
+        over the given nonce and measurements corresponding to the SPDM Responder.  This
+        action shall not be present if the ComponentIntegrityType property does not
+        contain the value `SPDM`.  The SPDM Requester shall issue one or more SPDM
+        'GET_MEASUREMENTS' requests for each of the requested measurement indices
+        to the SPDM Responder.  When the SPDM 'GET_MEASUREMENTS' requests are made
+        for version 1.2, the parameter 'RawBitStreamRequested' shall contain `0`.  The
+        SPDM Requester shall provide the nonce for the action to the SPDM Responder
+        in the last SPDM 'GET_MEASUREMENTS' request.  The SPDM Requester shall request
+        a signature in the last SPDM 'GET_MEASUREMENTS' request.
+    ComponentIntegrity_v1_1_0_SPDMGetSignedMeasurementsResponse:
+      additionalProperties: false
+      description: The SPDM signed measurement from an SPDM Responder.
+      properties:
+        Certificate:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the certificate corresponding to the SPDM slot identifier
+            that can be used to validate the signature.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Certificate that represents the certificate corresponding to the SPDM
+            slot identifier that can be used to validate the signature.  This property
+            shall not be present if the SlotId parameter contains the value `15`.
+        HashingAlgorithm:
+          description: The hashing algorithm used for generating the cryptographic
+            signed statement.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the hashing algorithm negotiated
+            between the SPDM Requester and the SPDM Responder.  The allowable values
+            for this property shall be the hash algorithm names found in the 'BaseHashAlgo'
+            field of the 'NEGOTIATE_ALGORITHMS' request message in DSP0274.  If the
+            algorithm is an extended algorithm, this property shall contain the value
+            `OEM`.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PublicKey:
+          description: A Privacy Enhanced Mail (PEM)-encoded public key that can be
+            used to validate the signature.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a Privacy Enhanced Mail (PEM)-encoded
+            public key, as defined in section 13 of RFC7468, that can be used to validate
+            the signature.  This property shall only be present when the SPDM Requester
+            was pre-provisioned with the SPDM Responder's public key and the SlotId
+            parameter contains the value `15`.
+        SignedMeasurements:
+          description: Base64 encoded cryptographic signed statement generated by
+            the signer.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the cryptographic signed
+            statement over the given nonce and measurement blocks corresponding to
+            the requested measurement indices.  If the SPDM version is 1.2, this value
+            shall be a concatenation of SPDM 'VCA' and 'GET_MEASUREMENTS' requests
+            and responses exchanged between the SPDM Requester and the SPDM Responder.  If
+            SPDM version is 1.0 or 1.1, this value shall be a concatenation of SPDM
+            'GET_MEASUREMENTS' requests and responses exchanged between the SPDM Requester
+            and the SPDM Responder.  The last 'MEASUREMENTS' response shall contain
+            a signature generated over the 'L2' string by the SPDM Responder.
+        SigningAlgorithm:
+          description: The asymmetric signing algorithm used for generating the cryptographic
+            signed statement.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the asymmetric signing algorithm
+            negotiated between the SPDM Requester and the SPDM Responder.  The allowable
+            values for this property shall be the asymmetric key signature algorithm
+            names found in the 'BaseAsymAlgo' field of the 'NEGOTIATE_ALGORITHMS'
+            request message in DSP0274.  If the algorithm is an extended algorithm,
+            this property shall contain the value `OEM`.
+        Version:
+          description: The SPDM version used by the SPDM Responder to generate the
+            cryptographic signed statement.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the SPDM version negotiated
+            between the SPDM Requester and the SPDM Responder to generate the cryptographic
+            signed statement.  For example, `1.0`, `1.1`, or `1.2`.
+      required:
+      - SignedMeasurements
+      - Version
+      - HashingAlgorithm
+      - SigningAlgorithm
+      type: object
+      x-longDescription: This object shall contain the SPDM signed measurements from
+        an SPDM Responder.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMcommunication:
+      additionalProperties: false
+      description: Information about communication between two components.
+      properties:
+        Sessions:
+          description: The active sessions or communication channels between two components.
+          items:
+            $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SingleSessionInfo'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain an array of the active sessions
+            or communication channels between two components  The active sessions
+            or communication channels do not reflect how future sessions or communication
+            channels are established.
+      type: object
+      x-longDescription: This object shall contain information about communication
+        between two components.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMidentity:
+      additionalProperties: false
+      description: Identity authentication information about the SPDM Requester and
+        SPDM Responder.
+      properties:
+        RequesterAuthentication:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMrequesterAuth'
+          description: Authentication information of the identity of the SPDM Requester.
+          nullable: true
+          x-longDescription: This property shall contain authentication information
+            of the identity of the SPDM Requester.
+        ResponderAuthentication:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMresponderAuth'
+          description: Authentication information of the identity of the SPDM Responder.
+          nullable: true
+          x-longDescription: This property shall contain authentication information
+            of the identity of the SPDM Responder.
+      type: object
+      x-longDescription: This object shall contain identity authentication information
+        about the SPDM Requester and SPDM Responder.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMinfo:
+      additionalProperties: false
+      description: Integrity information about an SPDM Responder as reported by an
+        SPDM Requester.
+      properties:
+        ComponentCommunication:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMcommunication'
+          description: Information about communication between the SPDM Requester
+            and SPDM Responder.
+          nullable: true
+          x-longDescription: This property shall contain information about communication
+            between the SPDM Requester and SPDM Responder.
+        IdentityAuthentication:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMidentity'
+          description: Identity authentication information about the SPDM Requester
+            and SPDM Responder.
+          nullable: true
+          x-longDescription: This property shall contain identity authentication information
+            about the SPDM Requester and SPDM Responder.
+        MeasurementSet:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMmeasurementSet'
+          description: Measurement information about the SPDM Responder.
+          nullable: true
+          x-longDescription: This property shall contain measurement information for
+            the SPDM Responder.
+        Requester:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the the component that is reporting the integrity
+            information of the target component.
+          readOnly: true
+          x-longDescription: This property shall contain a link to the resource representing
+            the SPDM Responder that is reporting the integrity of the SPDM Responder
+            identified by the TargetComponentURI property.
+      required:
+      - Requester
+      type: object
+      x-longDescription: This object shall contain integrity information about an
+        SPDM Responder as reported by an SPDM Requester.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMmeasurementSet:
+      additionalProperties: false
+      description: SPDM Responder measurement information.
+      properties:
+        MeasurementSpecification:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_MeasurementSpecification'
+          description: The measurement specification negotiated between the SPDM Requester
+            and SPDM Responder.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the measurement specification
+            negotiated between the SPDM Requester and SPDM Responder.
+        MeasurementSummary:
+          description: The measurement summary data.
+          nullable: true
+          pattern: ^[A-Za-z0-9+/]+={0,2}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the Base64-encoded measurement
+            summary using the hash algorithm indicated by the MeasurementSummaryHashAlgorithm
+            property.
+        MeasurementSummaryHashAlgorithm:
+          description: The hash algorithm used to compute the measurement summary.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the hash algorithm used to
+            compute the measurement summary.  The allowable values for this property
+            shall be the hash algorithm names found in the 'BaseHashAlgo' field of
+            the 'NEGOTIATE_ALGORITHMS' request message in DSP0274.  If the algorithm
+            is an extended algorithm, this property shall contain the value `OEM`.
+        MeasurementSummaryType:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMmeasurementSummaryType'
+          description: The type of measurement summary.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of measurement summary.
+        Measurements:
+          description: Measurements from an SPDM Responder.
+          items:
+            $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SPDMsingleMeasurement'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain measurements from an SPDM
+            Responder.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This object shall contain SPDM Responder measurement information.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMmeasurementSummaryType:
+      enum:
+      - TCB
+      - All
+      type: string
+      x-enumDescriptions:
+        All: The measurement summary covers all measurements in SPDM.
+        TCB: The measurement summary covers the TCB.
+    ComponentIntegrity_v1_1_0_SPDMrequesterAuth:
+      additionalProperties: false
+      description: Authentication information of the identity of the SPDM Requester.
+      properties:
+        ProvidedCertificate:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the certificate that represents the identify of the
+            SPDM Requester provided in mutual authentication.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Certificate that represents the identify of the SPDM Requester provided
+            in mutual authentication.
+      type: object
+      x-longDescription: This object shall contain authentication information of the
+        identity of the SPDM Requester.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMresponderAuth:
+      additionalProperties: false
+      description: Common Authentication information.
+      properties:
+        ComponentCertificate:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the certificate that represents the identify of the
+            component.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Certificate that represents the identify of the component referenced by
+            the TargetComponentURI property.
+        VerificationStatus:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_VerificationStatus'
+          description: The status of the verification of the identity of the component.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the status of the verification
+            of the identity of the component referenced by the TargetComponentURI
+            property..
+      type: object
+      x-longDescription: This object shall contain common identity-related authentication
+        information.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SPDMsingleMeasurement:
+      additionalProperties: false
+      description: A single SPDM measurement for an SPDM Responder.
+      properties:
+        LastUpdated:
+          description: The date and time when information for the measurement was
+            last updated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time when information
+            for the measurement was last updated.
+        Measurement:
+          description: The measurement data.
+          nullable: true
+          pattern: ^[A-Za-z0-9+/]+={0,2}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the Base64-encoded measurement
+            using the hash algorithm indicated by the MeasurementHashAlgorithm property.  This
+            property shall not contain a raw bit stream as a measurement.  If the
+            SPDM Responder provides a raw bit stream, the SPDM Requester may apply
+            a hash algorithm to the raw bit stream in order to report the measurement.
+        MeasurementHashAlgorithm:
+          description: The hash algorithm used to compute the measurement.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the hash algorithm used to
+            compute the measurement.  The allowable values for this property shall
+            be the hash algorithm names found in the 'BaseHashAlgo' field of the 'NEGOTIATE_ALGORITHMS'
+            request message in DSP0274.  If the algorithm is an extended algorithm,
+            this property shall contain the value `OEM`.  This property shall not
+            be present if MeasurementSpecification does not contain `DMTF`.
+        MeasurementIndex:
+          description: The index of the measurement.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the index of the measurement.
+        MeasurementType:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_DMTFmeasurementTypes'
+          description: The type or characteristics of the data that this measurement
+            represents.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type or characteristics
+            of the data that this measurement represents.  This property shall not
+            be present if MeasurementSpecification does not contain `DMTF`.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PartofSummaryHash:
+          description: Indicates whether this measurement is part of the measurement
+            summary.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate if this measurement is part
+            of the measurement summary in the MeasurementSummary property.  If this
+            property is not present, it shall be assumed to be `false`.
+        SecurityVersionNumber:
+          description: The security version number the measurement represents.
+          nullable: true
+          pattern: ^[A-Za-z0-9]{16}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain an 8-byte hex-encoded string
+            of the security version number the measurement represents.  This property
+            shall only be present if MeasurementType contains the value `MutableFirmwareSecurityVersionNumber`.
+          x-versionAdded: v1_1_0
+      type: object
+      x-longDescription: This object shall contain a single SPDM measurement for an
+        SPDM Responder.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_SecureSessionType:
+      enum:
+      - Plain
+      - EncryptedAuthenticated
+      - AuthenticatedOnly
+      type: string
+      x-enumDescriptions:
+        AuthenticatedOnly: An established session where only authentication is protecting
+          the communication.
+        EncryptedAuthenticated: An established session where both encryption and authentication
+          are protecting the communication.
+        Plain: A plain text session without any protection.
+    ComponentIntegrity_v1_1_0_SingleSessionInfo:
+      additionalProperties: false
+      description: Information about a single communication channel or session between
+        two components.
+      properties:
+        SessionId:
+          description: The identifier for an active session or communication channel
+            between two components.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the unique identifier for
+            the active session or communication channel between two components.
+        SessionType:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SecureSessionType'
+          description: The type of session or communication channel between two components.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the type of session or communication
+            channel between two components.
+      type: object
+      x-longDescription: This object shall contain information about a single communication
+        channel or session between two components.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_TPMauth:
+      additionalProperties: false
+      description: Common Authentication information.
+      properties:
+        ComponentCertificate:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the certificate that represents the identify of the
+            component.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Certificate that represents the identify of the component referenced by
+            the TargetComponentURI property.
+        VerificationStatus:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_VerificationStatus'
+          description: The status of the verification of the identity of the component.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the status of the verification
+            of the identity of the component referenced by the TargetComponentURI
+            property..
+      type: object
+      x-longDescription: This object shall contain common identity-related authentication
+        information.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_TPMcommunication:
+      additionalProperties: false
+      description: Information about communication between two components.
+      properties:
+        Sessions:
+          description: The active sessions or communication channels between two components.
+          items:
+            $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_SingleSessionInfo'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain an array of the active sessions
+            or communication channels between two components  The active sessions
+            or communication channels do not reflect how future sessions or communication
+            channels are established.
+      type: object
+      x-longDescription: This object shall contain information about communication
+        between two components.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_TPMinfo:
+      additionalProperties: false
+      description: Integrity information about a Trusted Platform Module (TPM).
+      properties:
+        ComponentCommunication:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_TPMcommunication'
+          description: Information about communication with the TPM.
+          nullable: true
+          x-longDescription: This property shall contain information about communication
+            with the TPM.
+        IdentityAuthentication:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_TPMauth'
+          description: Identity authentication information about the TPM.
+          nullable: true
+          x-longDescription: This property shall contain identity authentication information
+            about the TPM.
+        MeasurementSet:
+          $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_TPMmeasurementSet'
+          description: Measurement information from the TPM.
+          nullable: true
+          x-longDescription: This property shall contain measurement information from
+            the TPM.
+      type: object
+      x-longDescription: This object shall contain integrity information about a Trusted
+        Platform Module (TPM).
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_TPMmeasurementSet:
+      additionalProperties: false
+      description: Trusted Computing Group TPM measurement information.
+      properties:
+        Measurements:
+          description: Measurements from a TPM.
+          items:
+            $ref: '#/components/schemas/ComponentIntegrity_v1_1_0_TPMsingleMeasurement'
+            nullable: true
+          type: array
+          x-longDescription: This property shall contain measurements from a TPM.
+      type: object
+      x-longDescription: This object shall contain Trusted Computing Group TPM measurement
+        information.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_TPMsingleMeasurement:
+      additionalProperties: false
+      description: A single Trusted Computing Group TPM measurement.
+      properties:
+        LastUpdated:
+          description: The date and time when information for the measurement was
+            last updated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time when information
+            for the measurement was last updated.
+        Measurement:
+          description: The measurement data.
+          nullable: true
+          pattern: ^[A-Za-z0-9+/]+={0,2}$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the Base64-encoded PCR digest
+            using the hashing algorithm indicated by MeasurementHashAlgorithm property.
+        MeasurementHashAlgorithm:
+          description: The hash algorithm used to compute the measurement.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the hash algorithm used to
+            compute the measurement.  The allowable values for this property shall
+            be the strings in the 'Algorithm Name' field of the 'TPM_ALG_ID Constants'
+            table within the 'Trusted Computing Group Algorithm Registry'.
+        PCR:
+          description: The Platform Configuration Register (PCR) bank of the measurement.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the Platform Configuration
+            Register (PCR) bank of the measurement.
+      type: object
+      x-longDescription: This object shall contain a single Trusted Computing Group
+        TPM measurement.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ComponentIntegrity_v1_1_0_VerificationStatus:
+      enum:
+      - Success
+      - Failed
+      type: string
+      x-enumDescriptions:
+        Failed: Unsuccessful verification.
+        Success: Successful verification.
+title: '#ComponentIntegrity.v1_1_0.ComponentIntegrity'
+x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2022.1'

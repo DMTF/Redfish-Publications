@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  FabricAdapter v1.2.0                                                -->
+<!--# Redfish Schema:  FabricAdapter v1.3.0                                                -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2021 DMTF.                                                            -->
+<!--# Copyright 2014-2022 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -24,6 +24,9 @@
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/RedfishExtensions_v1.xml">
     <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
   </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Protocol_v1.xml">
+    <edmx:Include Namespace="Protocol"/>
+  </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Port_v1.xml">
     <edmx:Include Namespace="Port"/>
   </edmx:Reference>
@@ -41,6 +44,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Endpoint_v1.xml">
     <edmx:Include Namespace="Endpoint"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/MemoryDomain_v1.xml">
+    <edmx:Include Namespace="MemoryDomain"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -69,6 +75,7 @@
         <Annotation Term="Redfish.Uris">
           <Collection>
             <String>/redfish/v1/Systems/{SystemId}/FabricAdapters/{FabricAdapterId}</String>
+            <String>/redfish/v1/Chassis/{ChassisId}/FabricAdapters/{FabricAdapterId}</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -254,6 +261,33 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="An array of links to the PCIe devices associated with this fabric adapter."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type PCIeDevice that represent the PCIe devices associated with this fabric adapter."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="FabricAdapter.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.1"/>
+
+      <EntityType Name="FabricAdapter" BaseType="FabricAdapter.v1_2_0.FabricAdapter">
+        <Property Name="FabricType" Type="Protocol.Protocol" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The configured fabric type of this fabric adapter."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the configured fabric type of this fabric adapter."/>
+        </Property>
+        <Property Name="FabricTypeCapabilities" Type="Collection(Protocol.Protocol)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of fabric types supported by this fabric adapter."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of fabric types supported by this fabric adapter."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Links" BaseType="FabricAdapter.v1_2_0.Links">
+        <NavigationProperty Name="MemoryDomains" Type="Collection(MemoryDomain.MemoryDomain)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="An array of links to the memory domains associated with this fabric adapter."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type MemoryDomain that represent the memory domains associated with this fabric adapter."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </ComplexType>

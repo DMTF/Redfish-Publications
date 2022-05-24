@@ -1,0 +1,594 @@
+components:
+  schemas:
+    ProcessorMetrics_v1_5_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#ProcessorMetrics.ClearCurrentPeriod':
+          $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_ClearCurrentPeriod'
+        Oem:
+          $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_CStateResidency:
+      additionalProperties: false
+      description: The C-state residency of the processor.
+      properties:
+        Level:
+          description: The C-state level, such as C0, C1, or C2.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the C-state level, such as
+            C0, C1, or C2.  When this resource is subordinate to the ProcessorSummary
+            object, this property is not applicable.
+        ResidencyPercent:
+          description: The percentage of time that the processor or core has spent
+            in this particular level of C-state.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the percentage of time that
+            the processor or core has spent in this particular level of C-state.  When
+            this resource is subordinate to the ProcessorSummary object, this property
+            is not applicable.
+          x-units: '%'
+      type: object
+      x-longDescription: This type shall contain properties that describe the C-state
+        residency of the processor or core.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_CacheMetrics:
+      additionalProperties: false
+      description: The processor core metrics.
+      properties:
+        CacheMiss:
+          description: The number of cache line misses in millions.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of cache line
+            misses of the processor or core in millions.
+        CacheMissesPerInstruction:
+          description: The number of cache misses per instruction.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of cache misses
+            per instruction of the processor or core.
+        HitRatio:
+          description: The cache line hit ratio.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the cache hit ratio of the
+            processor or core.
+        Level:
+          description: The cache level.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the level of the cache in
+            the processor or core.
+        OccupancyBytes:
+          description: The total cache level occupancy in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total cache occupancy
+            of the processor or core in bytes.
+          x-units: By
+        OccupancyPercent:
+          description: The total cache occupancy percentage.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the total cache occupancy
+            percentage of the processor or core.
+          x-units: '%'
+      type: object
+      x-longDescription: This type shall contain properties that describe cache metrics
+        of a processor or core.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_CacheMetricsTotal:
+      additionalProperties: false
+      description: The total cache metrics for a processor.
+      properties:
+        CurrentPeriod:
+          $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_CurrentPeriod'
+          description: The cache metrics since the last reset or ClearCurrentPeriod
+            action for this processor.
+          x-longDescription: This property shall contain properties that describe
+            the metrics for the current period of cache memory for this processor.
+          x-versionAdded: v1_2_0
+        LifeTime:
+          $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_LifeTime'
+          description: The cache metrics for the lifetime of this processor.
+          x-longDescription: This property shall contain properties that describe
+            the metrics for the lifetime of cache memory for this processor.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This property shall contain properties that describe the
+        metrics for all of the cache memory for a processor.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_ClearCurrentPeriod:
+      additionalProperties: false
+      description: This action sets the CurrentPeriod property's values to 0.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod property's values
+        to 0.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_2_0
+    ProcessorMetrics_v1_5_0_ClearCurrentPeriodRequestBody:
+      additionalProperties: false
+      description: This action sets the CurrentPeriod property's values to 0.
+      properties: {}
+      type: object
+      x-longDescription: This action shall set the CurrentPeriod property's values
+        to 0.
+    ProcessorMetrics_v1_5_0_CoreMetrics:
+      additionalProperties: false
+      description: The processor core metrics.
+      properties:
+        CStateResidency:
+          description: The C-state residency of this core in the processor.
+          items:
+            $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_CStateResidency'
+          type: array
+          x-longDescription: This property shall contain properties that describe
+            the C-state residency of this core in the processor.
+        CoreCache:
+          description: The cache metrics of this core in the processor.
+          items:
+            $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_CacheMetrics'
+          type: array
+          x-longDescription: This property shall contain properties that describe
+            the cache metrics of this core in the processor.
+        CoreId:
+          description: The processor core identifier.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the identifier of the core
+            within the processor.
+        CorrectableCoreErrorCount:
+          description: The number of the correctable core errors.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            core errors, such as TLB or cache errors.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the sum of CorrectableCoreErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        CorrectableOtherErrorCount:
+          description: The number of the correctable errors of all other components.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the correctable
+            errors of all other components.  When this resource is subordinate to
+            the ProcessorSummary object, this property shall be the sum of CorrectableOtherErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        IOStallCount:
+          description: The number of stalled cycles due to I/O operations.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of stalled cycles
+            due to I/O operations of this core in the processor.
+        InstructionsPerCycle:
+          description: The number of instructions per clock cycle of this core.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of instructions
+            per clock cycle of this core in the processor.
+        MemoryStallCount:
+          description: The number of stalled cycles due to memory operations.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of stalled cycles
+            due to memory operations of this core in the processor.
+        UncorrectableCoreErrorCount:
+          description: The number of the uncorrectable core errors.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            core errors, such as TLB or cache errors.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the sum of UncorrectableCoreErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        UncorrectableOtherErrorCount:
+          description: The number of the uncorrectable errors of all other components.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the uncorrectable
+            errors of all other components.  When this resource is subordinate to
+            the ProcessorSummary object, this property shall be the sum of UncorrectableOtherErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        UnhaltedCycles:
+          description: The unhalted cycles count of this core.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of unhalted cycles
+            of this core in the processor.
+      type: object
+      x-longDescription: This type shall contain properties that describe the cores
+        of a processor.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_CurrentPeriod:
+      additionalProperties: false
+      description: The cache memory metrics since the last system reset or ClearCurrentPeriod
+        action for a processor.
+      properties:
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors of cache memory since
+            reset or ClearCurrentPeriod action for this processor.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            errors of cache memory since reset or ClearCurrentPeriod action for this
+            processor.  When this resource is subordinate to the ProcessorSummary
+            object, this property shall be the sum of CorrectableECCErrorCount over
+            all processors.
+          x-versionAdded: v1_2_0
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors of cache memory since
+            reset or ClearCurrentPeriod action for this processor.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            errors of cache memory since reset or ClearCurrentPeriod action for this
+            processor.  When this resource is subordinate to the ProcessorSummary
+            object, this property shall be the sum of UncorrectableECCErrorCount over
+            all processors.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall describe the cache memory metrics since last
+        system reset or ClearCurrentPeriod action for a processor.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_LifeTime:
+      additionalProperties: false
+      description: The cache memory metrics for the lifetime for a processor.
+      properties:
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors for the lifetime of the
+            cache memory.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the correctable
+            errors for the lifetime of cache memory.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the sum of CorrectableECCErrorCount
+            over all processors.
+          x-versionAdded: v1_2_0
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors for the lifetime of
+            the cache memory.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the uncorrectable
+            errors for the lifetime of cache memory.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the sum of UncorrectableECCErrorCount
+            over all processors.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall describe the cache memory metrics since manufacturing
+        for a processor.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ProcessorMetrics_v1_5_0_ProcessorMetrics:
+      additionalProperties: false
+      description: The ProcessorMetrics schema contains usage and health statistics
+        for a processor.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        AverageFrequencyMHz:
+          deprecated: true
+          description: The average frequency of the processor.
+          nullable: true
+          readOnly: true
+          type: number
+          x-deprecatedReason: This property has been deprecated in favor of OperatingSpeedMHz
+            property.
+          x-longDescription: This property shall contain average frequency in MHz,
+            across all enabled cores in the processor.  When this resource is subordinate
+            to the ProcessorSummary object, this property is not applicable.
+          x-units: MHz
+          x-versionDeprecated: v1_1_0
+        BandwidthPercent:
+          description: The bandwidth usage of this processor as a percentage.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the bandwidth usage of the
+            processor as a percentage.  When this resource is subordinate to the ProcessorSummary
+            object, this property shall be the CPU utilization over all processors
+            as a percentage.
+          x-units: '%'
+        Cache:
+          description: The processor cache metrics.
+          items:
+            $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_CacheMetrics'
+          type: array
+          x-longDescription: This property shall contain properties that describe
+            this processor's cache.  When this resource is subordinate to the ProcessorSummary
+            object, this property is not applicable.
+        CacheMetricsTotal:
+          $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_CacheMetricsTotal'
+          description: The total cache metrics for this processor.
+          x-longDescription: This property shall contain properties that describe
+            the metrics for all of the cache memory of this processor.
+          x-versionAdded: v1_2_0
+        ConsumedPowerWatt:
+          deprecated: true
+          description: The power, in watts, that the processor has consumed.
+          nullable: true
+          readOnly: true
+          type: number
+          x-deprecatedReason: This property has been deprecated in favor of the properties
+            in EnvironmentMetrics.
+          x-longDescription: This property shall contain the power, in watts, that
+            the processor has consumed.  When this resource is subordinate to the
+            ProcessorSummary object, this property shall be the sum of power, in watts,
+            that all processors have consumed.
+          x-units: W
+          x-versionDeprecated: v1_2_0
+        CoreMetrics:
+          description: The processor core metrics.
+          items:
+            $ref: '#/components/schemas/ProcessorMetrics_v1_5_0_CoreMetrics'
+          type: array
+          x-longDescription: This property shall contain properties that describe
+            the cores of this processor.  When this resource is subordinate to the
+            ProcessorSummary object, this property is not applicable.
+        CoreVoltage:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          description: The core voltage (V) of this processor.
+          nullable: true
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: The value of this property shall contain the core voltage,
+            in volt units, of this processor.  The core voltage of the processor may
+            change more frequently than the manager is able to monitor.  The value
+            of the DataSourceUri property, if present, shall reference a resource
+            of type Sensor with the ReadingType property containing the value `Voltage`.
+          x-versionAdded: v1_3_0
+        CorrectableCoreErrorCount:
+          description: The number of the correctable core errors.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            core errors, such as TLB or cache errors.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the sum of CorrectableCoreErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        CorrectableOtherErrorCount:
+          description: The number of the correctable errors of all other components.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the correctable
+            errors of all other components.  When this resource is subordinate to
+            the ProcessorSummary object, this property shall be the sum of CorrectableOtherErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        FrequencyRatio:
+          description: The frequency relative to the nominal processor frequency ratio.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the frequency relative to
+            the nominal processor frequency ratio of this processor.  When this resource
+            is subordinate to the ProcessorSummary object, this property shall be
+            the average FrequencyRatio over all processors.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        KernelPercent:
+          description: The percentage of time spent in kernel mode.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain total percentage of time
+            the processor has spent in kernel mode.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the average KernelPercent
+            over all processors.
+          x-units: '%'
+        LocalMemoryBandwidthBytes:
+          description: The local memory bandwidth usage in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the local memory bandwidth
+            usage of this processor in bytes.  When this resource is subordinate to
+            the ProcessorSummary object, this property shall be the sum of LocalMemoryBandwidthBytes
+            over all processors.
+          x-units: By
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OperatingSpeedMHz:
+          description: Operating speed of the processor in MHz.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the operating speed of the
+            processor in MHz.  The operating speed of the processor may change more
+            frequently than the manager is able to monitor.
+          x-units: MHz
+          x-versionAdded: v1_1_0
+        PCIeErrors:
+          $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.yaml#/components/schemas/PCIeDevice_PCIeErrors
+          description: The PCIe errors associated with this processor.
+          x-longDescription: This property shall contain the PCIe errors associated
+            with this processor.
+          x-versionAdded: v1_4_0
+        RemoteMemoryBandwidthBytes:
+          description: The remote memory bandwidth usage in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the remote memory bandwidth
+            usage of this processor in bytes.  When this resource is subordinate to
+            the ProcessorSummary object, this property shall be the sum of RemoteMemoryBandwidthBytes
+            over all processors.
+          x-units: By
+        TemperatureCelsius:
+          deprecated: true
+          description: The temperature of the processor.
+          nullable: true
+          readOnly: true
+          type: number
+          x-deprecatedReason: This property has been deprecated in favor of the properties
+            in EnvironmentMetrics.
+          x-longDescription: This property shall contain the temperature, in Celsius,
+            of the processor.  When this resource is subordinate to the ProcessorSummary
+            object, this property shall be the average temperature, in Celsius, over
+            all processors.
+          x-units: Cel
+          x-versionDeprecated: v1_2_0
+        ThrottlingCelsius:
+          description: The CPU margin to throttle (temperature offset in degree Celsius).
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the CPU margin to throttle
+            based on an offset between the maximum temperature in which the processor
+            can operate, and the processor's current temperature.  When this resource
+            is subordinate to the ProcessorSummary object, this property is not applicable.
+          x-units: Cel
+        UncorrectableCoreErrorCount:
+          description: The number of the uncorrectable core errors.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            core errors, such as TLB or cache errors.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the sum of UncorrectableCoreErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        UncorrectableOtherErrorCount:
+          description: The number of the uncorrectable errors of all other components.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the uncorrectable
+            errors of all other components.  When this resource is subordinate to
+            the ProcessorSummary object, this property shall be the sum of UncorrectableOtherErrorCount
+            over all processors.
+          x-versionAdded: v1_5_0
+        UserPercent:
+          description: The percentage of time spent in user mode.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain total percentage of time
+            the processor has spent in user mode.  When this resource is subordinate
+            to the ProcessorSummary object, this property shall be the average UserPercent
+            over all processors.
+          x-units: '%'
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains the processor metrics for a single
+        processor in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#ProcessorMetrics.v1_5_0.ProcessorMetrics'
+x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2022.1'

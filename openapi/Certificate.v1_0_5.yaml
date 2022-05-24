@@ -1,0 +1,189 @@
+components:
+  schemas:
+    Certificate_v1_0_5_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Certificate_v1_0_5_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Certificate_v1_0_5_Certificate:
+      additionalProperties: false
+      description: The Certificate schema describes a certificate that proves the
+        identify of a component, account, or service.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Certificate_v1_0_5_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        CertificateString:
+          description: The string for the certificate.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the certificate, and the
+            format shall follow the requirements specified by the CertificateType
+            property value.  If the certificate contains any private keys, they shall
+            be removed from the string in responses.  If the service does not know
+            the private key for the certificate and is needed to use the certificate,
+            the client shall provide the private key as part of the string in the
+            POST request.
+        CertificateType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/Certificate_CertificateType
+          description: The format of the certificate.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the format type for the certificate.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Issuer:
+          $ref: '#/components/schemas/Certificate_v1_0_5_Identifier'
+          description: The issuer of the certificate.
+          x-longDescription: This property shall contain an object containing information
+            about the issuer of the certificate.
+        KeyUsage:
+          description: The key usage extension, which defines the purpose of the public
+            keys in this certificate.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/Certificate_KeyUsage
+            nullable: true
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the key usage extension,
+            which defines the purpose of the public keys in this certificate.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Subject:
+          $ref: '#/components/schemas/Certificate_v1_0_5_Identifier'
+          description: The subject of the certificate.
+          x-longDescription: This property shall contain an object containing information
+            about the subject of the certificate.
+        ValidNotAfter:
+          description: The date when the certificate is no longer valid.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date when the certificate
+            validity period ends.
+        ValidNotBefore:
+          description: The date when the certificate becomes valid.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date when the certificate
+            validity period begins.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a certificate for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-requiredOnCreate:
+      - CertificateString
+      - CertificateType
+    Certificate_v1_0_5_Identifier:
+      additionalProperties: false
+      description: The identifier information about a certificate.
+      properties:
+        City:
+          description: The city or locality of the organization of the entity.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the city or locality of the
+            organization of the entity, as defined by the RFC5280 'localityName' attribute.
+        CommonName:
+          description: The common name of the entity.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the common name of the entity,
+            as defined by the RFC5280 'commonName' attribute.
+        Country:
+          description: The country of the organization of the entity.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the two-letter ISO code for
+            the country of the organization of the entity, as defined by the RFC5280
+            'countryName' attribute.
+        Email:
+          description: The email address of the contact within the organization of
+            the entity.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the email address of the
+            contact within the organization of the entity, as defined by the RFC2985
+            'emailAddress' attribute.
+        Organization:
+          description: The name of the organization of the entity.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the organization
+            of the entity, as defined by the RFC5280 'organizationName' attribute.
+        OrganizationalUnit:
+          description: The name of the unit or division of the organization of the
+            entity.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the unit or division
+            of the organization of the entity, as defined by the RFC5280 'organizationalUnitName'
+            attribute.
+        State:
+          description: The state, province, or region of the organization of the entity.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the state, province, or region
+            of the organization of the entity, as defined by the RFC5280 'stateOrProvinceName'
+            attribute.
+      type: object
+      x-longDescription: This type shall contain the properties that identifies the
+        issuer or subject of a certificate.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Certificate_v1_0_5_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Certificate.v1_0_5.Certificate'
+x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2018.3'

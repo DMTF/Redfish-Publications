@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerSupply v1.3.0                                                  -->
+<!--# Redfish Schema:  PowerSupply v1.4.0                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2021 DMTF.                                                            -->
+<!--# Copyright 2014-2022 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -45,6 +45,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/PowerSupplyMetrics_v1.xml">
     <edmx:Include Namespace="PowerSupplyMetrics"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Chassis_v1.xml">
+    <edmx:Include Namespace="Chassis"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -212,6 +215,15 @@
           <Annotation Term="OData.Description" String="A link to the outlet connected to this power supply."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type Outlet that represents the outlet connected to this power supply."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_4_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of the PowerOutlets property to allow for consistent modeling of power supplies with multiple outlet support."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
       </ComplexType>
 
@@ -377,6 +389,23 @@
           <Annotation Term="OData.Description" String="Line input voltage or current is outside of normal operating range."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerSupply.v1_4_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.1"/>
+      <Annotation Term="OData.Description" String="This version was created to deprecate Outlet in favor of PowerOutlets."/>
+
+      <EntityType Name="PowerSupply" BaseType="PowerSupply.v1_3_0.PowerSupply"/>
+
+      <ComplexType Name="Links" BaseType="PowerSupply.v1_2_0.Links">
+        <NavigationProperty Name="PoweringChassis" Type="Collection(Chassis.Chassis)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of links to the chassis that are directly powered by this power supply."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Chassis that represent the chassis directly powered by this power supply.  This property shall not be present if the power supply is only providing power to its containing parent chassis."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

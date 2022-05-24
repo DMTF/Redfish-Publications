@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Manifest v1.0.0                                                     -->
+<!--# Redfish Schema:  Manifest v1.1.0                                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2021 DMTF.                                                            -->
+<!--# Copyright 2014-2022 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -121,6 +121,18 @@
           <Annotation Term="OData.Description" String="A stanza that describes an OEM-specific request."/>
           <Annotation Term="OData.LongDescription" String="This value shall indicate a stanza that describes an OEM-specific request.  The OEMStanzaType property shall contain the specific OEM stanza type."/>
         </Member>
+        <Member Name="RegisterResourceBlock">
+          <Annotation Term="OData.Description" String="A stanza that references a resource, such as a computer system, in order to create a resource block that references the resource and add it to the free pool."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a stanza that references a resource to create a resource block that references the resource and add it to the free pool.  The Request property of the stanza shall contain a resource of type ResourceBlock that represents the registration request.  The Response property of the stanza shall contain a resource of type ResourceBlock that represents the composed system or a Redfish Specification-defined error response."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_1_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
       </EnumType>
 
       <ComplexType Name="Request">
@@ -134,6 +146,14 @@
         <Annotation Term="OData.Description" String="The content of the response for the stanza."/>
         <Annotation Term="OData.LongDescription" String="This type shall describe the response details of a stanza within a manifest.  Its contents vary depending on the value of the StanzaType property of the stanza."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Manifest.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.1"/>
+      <Annotation Term="OData.Description" String="This version was created to add `RegisterResourceBlock` to the StanzaType enumeration."/>
+
+      <ComplexType Name="Manifest" BaseType="Manifest.v1_0_0.Manifest"/>
     </Schema>
 
   </edmx:DataServices>

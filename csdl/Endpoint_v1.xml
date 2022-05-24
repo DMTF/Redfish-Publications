@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Endpoint v1.6.1                                                     -->
+<!--# Redfish Schema:  Endpoint v1.7.0                                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2021 DMTF.                                                            -->
+<!--# Copyright 2014-2022 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -152,6 +152,15 @@
           <Annotation Term="OData.Description" String="An array of links to the physical ports associated with this endpoint."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Port that are utilized by this endpoint."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_7_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of the ConnectedPorts and LocalPorts properties to clarify the semantics of each port referenced."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
       </ComplexType>
 
@@ -773,8 +782,8 @@
       <ComplexType Name="Links" BaseType="Endpoint.v1_1_0.Links">
         <NavigationProperty Name="ConnectedPorts" Type="Collection(Port.Port)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="An array of links to the ports that connect to this endpoint."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Port that represent ports associated with this endpoint."/>
+          <Annotation Term="OData.Description" String="An array of links to the switch ports or remote device ports at the other end of the link."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Port that represent the switch ports or remote device ports to which this endpoint is connected."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
         <NavigationProperty Name="AddressPools" Type="Collection(AddressPool.AddressPool)">
@@ -816,6 +825,12 @@
       <EntityType Name="Endpoint" BaseType="Endpoint.v1_4_4.Endpoint"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Endpoint.v1_4_6">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the usage of the ConnectedPorts property inside of Links."/>
+      <EntityType Name="Endpoint" BaseType="Endpoint.v1_4_5.Endpoint"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Endpoint.v1_5_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.3"/>
@@ -850,6 +865,12 @@
       <EntityType Name="Endpoint" BaseType="Endpoint.v1_5_2.Endpoint"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Endpoint.v1_5_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the usage of the ConnectedPorts property inside of Links."/>
+      <EntityType Name="Endpoint" BaseType="Endpoint.v1_5_3.Endpoint"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Endpoint.v1_6_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.1"/>
@@ -870,6 +891,28 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct a typographical error in the SubsystemId long description."/>
       <EntityType Name="Endpoint" BaseType="Endpoint.v1_6_0.Endpoint"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Endpoint.v1_6_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the usage of the ConnectedPorts property inside of Links."/>
+      <EntityType Name="Endpoint" BaseType="Endpoint.v1_6_1.Endpoint"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Endpoint.v1_7_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.1"/>
+
+      <EntityType Name="Endpoint" BaseType="Endpoint.v1_6_2.Endpoint"/>
+
+      <ComplexType Name="Links" BaseType="Endpoint.v1_6_0.Links">
+        <NavigationProperty Name="LocalPorts" Type="Collection(Port.Port)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of links to the device ports that this endpoint represents."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Port that represent the device ports that this endpoint represents."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

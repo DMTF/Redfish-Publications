@@ -2,7 +2,7 @@
     "$id": "http://redfish.dmtf.org/schemas/v1/Key.json",
     "$ref": "#/definitions/Key",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "copyright": "Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
         "Key": {
             "anyOf": [
@@ -11,6 +11,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Key.v1_0_0.json#/definitions/Key"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Key.v1_1_0.json#/definitions/Key"
                 }
             ],
             "deletable": true,
@@ -19,7 +22,9 @@
             "longDescription": "This resource shall represent a key for a Redfish implementation.",
             "updatable": true,
             "uris": [
-                "/redfish/v1/KeyService/NVMeoFSecrets/{KeyId}"
+                "/redfish/v1/KeyService/NVMeoFSecrets/{KeyId}",
+                "/redfish/v1/AccountService/Accounts/{ManagerAccountId}/Keys/{KeyId}",
+                "/redfish/v1/Managers/{ManagerId}/RemoteAccountService/Accounts/{ManagerAccountId}/Keys/{KeyId}"
             ]
         }
     },

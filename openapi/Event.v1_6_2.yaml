@@ -1,0 +1,269 @@
+components:
+  schemas:
+    Event_v1_6_2_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Event_v1_6_2_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Event_v1_6_2_Event:
+      additionalProperties: false
+      description: The Event schema describes the JSON payload received by an event
+        destination, which has subscribed to event notification, when events occur.  This
+        resource contains data about events, including descriptions, severity, and
+        a message identifier to a message registry that can be accessed for further
+        information.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Event_v1_6_2_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+          x-versionAdded: v1_2_0
+        Context:
+          description: A context can be supplied at subscription time.  This property
+            is the context value supplied by the subscriber.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a client supplied context
+            for the event destination to which this event is being sent.
+          x-versionAdded: v1_1_0
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Events:
+          description: Each event in this array has a set of properties that describe
+            the event.  Because this is an array, more than one event can be sent
+            simultaneously.
+          items:
+            $ref: '#/components/schemas/Event_v1_6_2_EventRecord'
+          type: array
+          x-autoExpand: true
+          x-longDescription: This property shall contain an array of objects that
+            represent the occurrence of one or more events.
+        Events@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+      required:
+      - Events
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains an event for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Event_v1_6_2_EventRecord:
+      additionalProperties: false
+      properties:
+        Actions:
+          $ref: '#/components/schemas/Event_v1_6_2_EventRecordActions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+          x-versionAdded: v1_2_0
+        Context:
+          deprecated: true
+          description: A context can be supplied at subscription time.  This property
+            is the context value supplied by the subscriber.
+          readOnly: true
+          type: string
+          x-deprecatedReason: Events are triggered independently from subscriptions
+            to those events.  This property has been deprecated in favor of the Context
+            property found at the root level of the object.
+          x-longDescription: This property shall contain a client supplied context
+            for the event destination to which this event is being sent.
+          x-versionDeprecated: v1_1_0
+        EventGroupId:
+          description: The identifier that correlates events with the same root cause.  If
+            `0`, no other event is related to this event.
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall indicate that events are related
+            and shall have the same value when multiple event messages are produced
+            by the same root cause.  Implementations shall use separate values for
+            events with a separate root cause.  This property value shall not imply
+            an ordering of events.  The `0` value shall indicate that this event is
+            not grouped with any other event.
+          x-versionAdded: v1_3_0
+        EventId:
+          description: The unique instance identifier of an event.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a service-defined unique
+            identifier for the event.
+        EventTimestamp:
+          description: The time the event occurred.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall indicate the time the event occurred
+            where the value shall be consistent with the Redfish service time that
+            is also used for the values of the Modified property.
+        EventType:
+          $ref: http://redfish.dmtf.org/schemas/v1/Event.yaml#/components/schemas/Event_EventType
+          deprecated: true
+          description: The type of event.
+          readOnly: true
+          x-deprecatedReason: This property has been deprecated.  Starting with Redfish
+            Specification v1.6 (Event v1.3), subscriptions are based on the RegistryPrefix
+            and ResourceType properties and not on the EventType property.
+          x-longDescription: This property shall indicate the type of event.
+          x-versionDeprecated: v1_3_0
+        MemberId:
+          description: The unique identifier for the member within an array.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the unique identifier for
+            this member within an array.  For services supporting Redfish v1.6 or
+            higher, this value shall contain the zero-based array index.
+        Message:
+          description: The human-readable event message.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a human-readable event message.
+        MessageArgs:
+          description: An array of message arguments that are substituted for the
+            arguments in the message when looked up in the message registry.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of message arguments
+            that are substituted for the arguments in the message when looked up in
+            the message registry.  It has the same semantics as the MessageArgs property
+            in the Redfish MessageRegistry schema.
+        MessageId:
+          description: The identifier for the message.
+          pattern: ^[A-Za-z0-9]+\.\d+\.\d+\.[A-Za-z0-9.]+$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a MessageId, as defined in
+            the 'MessageId format' clause of the Redfish Specification.
+        MessageSeverity:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          description: The severity of the message in this event.
+          readOnly: true
+          x-longDescription: This property shall contain the severity of the message
+            in this event.  Services can replace the value defined in the message
+            registry with a value more applicable to the implementation.
+          x-versionAdded: v1_5_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OriginOfCondition:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the resource or object that originated the condition
+            that caused the event to be generated.
+          readOnly: true
+          x-longDescription: This property shall contain a link to the resource or
+            object that originated the condition that caused the event to be generated.  If
+            the event subscription has the IncludeOriginOfCondition property set to
+            `true`, it shall include the entire resource or object referenced by the
+            link.  For events that represent the creation or deletion of a resource,
+            this property should reference the created or deleted resource and not
+            the collection that contains the resource.
+        Severity:
+          deprecated: true
+          description: The severity of the event.
+          readOnly: true
+          type: string
+          x-deprecatedReason: This property has been deprecated in favor of MessageSeverity,
+            which ties the values to the enumerations defined for the Health property
+            within Status.
+          x-longDescription: This property shall contain the severity of the event,
+            as defined in the 'Status' clause of the Redfish Specification.  Services
+            can replace the value defined in the message registry with a value more
+            applicable to the implementation.
+          x-versionDeprecated: v1_5_0
+        SpecificEventExistsInGroup:
+          description: Indicates this event is equivalent to a more specific event
+            in this Event Group.
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate that the event is equivalent
+            to another event, with a more specific definition, within the same EventGroupId.  For
+            example, the `DriveFailed` message from the Storage Device Message Registry
+            is more specific than the `ResourceStatusChangedCritical` message from
+            the Resource Event Message Registry, when both occur with the same EventGroupId.  This
+            property shall contain `true` if a more specific event is available, and
+            shall contain `false` if no equivalent event exists in the same EventGroupId.  If
+            this property is absent, the value shall be assumed to be `false`.
+          x-versionAdded: v1_6_0
+      required:
+      - EventType
+      - MessageId
+      - MemberId
+      type: object
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Event_v1_6_2_EventRecordActions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/Event_v1_6_2_EventRecordOemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Event_v1_6_2_EventRecordOemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Event_v1_6_2_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Event.v1_6_2.Event'
+x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.3'
