@@ -37,6 +37,46 @@ components:
           beginning and end of the space so that partitioning can be performed.
         Slow: The volume is prepared for use slowly, typically by completely erasing
           the volume.
+    Volume_LBAFormatType:
+      description: LBAFormatType is defined in the NVMe specification set. This field
+        indicates the LBA data size supported; implementations may report up to 16
+        values. For more details refer to the appropriate NVMe specification.
+      enum:
+      - LBAFormat0
+      - LBAFormat1
+      - LBAFormat2
+      - LBAFormat3
+      - LBAFormat4
+      - LBAFormat5
+      - LBAFormat6
+      - LBAFormat7
+      - LBAFormat8
+      - LBAFormat9
+      - LBAFormat10
+      - LBAFormat11
+      - LBAFormat12
+      - LBAFormat13
+      - LBAFormat14
+      - LBAFormat15
+      type: string
+      x-enumDescriptions:
+        LBAFormat0: LBAFormat0 is a required type. Indicates the LBA data size supported.
+        LBAFormat1: Indicates the LBA data size if supported.
+        LBAFormat10: Indicates the LBA data size supported if supported.
+        LBAFormat11: Indicates the LBA data size supported if supported.
+        LBAFormat12: Indicates the LBA data size supported if supported.
+        LBAFormat13: Indicates the LBA data size supported if supported.
+        LBAFormat14: Indicates the LBA data size supported if supported.
+        LBAFormat15: Indicates the LBA data size supported if supported.
+        LBAFormat2: Indicates the LBA data size supported if supported.
+        LBAFormat3: Indicates the LBA data size supported if supported.
+        LBAFormat4: Indicates the LBA data size supported if supported.
+        LBAFormat5: Indicates the LBA data size supported if supported.
+        LBAFormat6: Indicates the LBA data size supported if supported.
+        LBAFormat7: Indicates the LBA data size supported if supported.
+        LBAFormat8: Indicates the LBA data size supported if supported.
+        LBAFormat9: Indicates the LBA data size supported if supported.
+      x-versionAdded: v1_7_0
     Volume_RAIDType:
       enum:
       - RAID0
@@ -205,6 +245,8 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_4_3.yaml#/components/schemas/Volume_v1_4_3_Volume
       - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_5_1.yaml#/components/schemas/Volume_v1_5_1_Volume
       - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_6_2.yaml#/components/schemas/Volume_v1_6_2_Volume
+      - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_7_0.yaml#/components/schemas/Volume_v1_7_0_Volume
+      - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_8_0.yaml#/components/schemas/Volume_v1_8_0_Volume
       description: Volume contains properties used to describe a volume, virtual disk,
         LUN, or other logical storage entity for any system.
       x-longDescription: This resource shall be used to represent a volume, virtual
@@ -333,6 +375,6 @@ components:
         'Off': The support for addressing the write hole issue is disabled. The volume
           is not performing any additional activities to close the RAID write hole.
 title: '#Volume.Volume'
-x-copyright: Copyright 2016-2020 Storage Networking Industry Association (SNIA), USA.
-  All rights reserved. For the full SNIA copyright policy, see http://www.snia.org/about/corporate_info/copyright
+x-copyright: Copyright 2015-2022 Storage Networking Industry Association (SNIA), USA.
+  All rights reserved.
 x-owningEntity: SNIA

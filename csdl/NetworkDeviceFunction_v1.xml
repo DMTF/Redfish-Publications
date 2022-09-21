@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  NetworkDeviceFunction v1.8.0                                        -->
+<!--# Redfish Schema:  NetworkDeviceFunction v1.9.0                                        -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -512,6 +512,17 @@
         </Member>
         <Member Name="FibreChannelOverEthernet">
           <Annotation Term="OData.Description" String="Boot this device by using the embedded Fibre Channel over Ethernet (FCoE) boot support and configuration.  Only applicable if the NetDevFuncType is `FibreChannelOverEthernet`."/>
+        </Member>
+        <Member Name="HTTP">
+          <Annotation Term="OData.Description" String="Boot this device by using the embedded HTTP/HTTPS support. Only applicable if the NetDevFuncType is `Ethernet`."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_9_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
         </Member>
       </EnumType>
     </Schema>
@@ -1073,6 +1084,31 @@
       <Annotation Term="OData.Description" String="This version was created to deprecate PhysicalNetworkPortAssignment at the root of the resource in favor of PhysicalNetworkPortAssignment within Links."/>
 
       <EntityType Name="NetworkDeviceFunction" BaseType="NetworkDeviceFunction.v1_7_0.NetworkDeviceFunction"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="NetworkDeviceFunction.v1_9_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.2"/>
+      <Annotation Term="OData.Description" String="This version was created to add support for HTTP(s) boot."/>
+
+      <EntityType Name="NetworkDeviceFunction" BaseType="NetworkDeviceFunction.v1_8_0.NetworkDeviceFunction">
+        <Property Name="HTTPBoot" Type="NetworkDeviceFunction.v1_9_0.HTTPBoot" Nullable="false">
+          <Annotation Term="OData.Description" String="The HTTP and HTTPS boot capabilities, status, and configuration values for this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain HTTP and HTTPS boot capabilities, status, and configuration values for this network device function."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="HTTPBoot">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="The HTTP and HTTPS boot capabilities, status, and configuration for a network device function."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe the HTTP and HTTPS boot capabilities, status, and configuration values for a network device function."/>
+        <Property Name="BootMediaURI" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The URI of the boot media loaded with this network device function."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the URI of the boot media loaded with this network device function.  An empty string shall indicate no boot media is configured.  All other values shall begin with `http://` or `https://`."/>
+          <Annotation Term="OData.IsURL"/>
+        </Property>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

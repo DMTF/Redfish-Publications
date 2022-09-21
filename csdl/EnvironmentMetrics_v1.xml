@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  EnvironmentMetrics v1.2.0                                           -->
+<!--# Redfish Schema:  EnvironmentMetrics v1.3.0                                           -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -95,18 +95,34 @@
             <String>/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/Systems/{ComputerSystemId}/FabricAdapters/{FabricAdapterId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/GraphicsControllers/{ControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/USBControllers/{ControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Systems/{ComputerSystemId}/Processors/{ProcessorId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Chassis/{ChassisId}/MediaControllers/{MediaControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Chassis/{ChassisId}/FabricAdapters/{FabricAdapterId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Processors/{ProcessorId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/FabricAdapters/{FabricAdapterId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/GraphicsControllers/{ControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/USBControllers/{ControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Processors/{ProcessorId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Processors/{ProcessorId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
-            <String>/redfish/v1/Chassis/{ChassisId}/MediaControllers/{MediaControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
-            <String>/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/FabricAdapters/{FabricAdapterId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/GraphicsControllers/{ControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/USBControllers/{ControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Processors/{ProcessorId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/Storage/{StorageId}/StorageControllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
             <String>/redfish/v1/Storage/{StorageId}/Controllers/{StorageControllerId}/Ports/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Managers/{ManagerId}/USBPorts/{PortId}/EnvironmentMetrics</String>
+            <String>/redfish/v1/Managers/{ManagerId}/DedicatedNetworkPorts/{PortId}/EnvironmentMetrics</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -115,6 +131,20 @@
         <Parameter Name="EnvironmentMetrics" Type="EnvironmentMetrics.v1_0_0.Actions"/>
         <Annotation Term="OData.Description" String="This action resets the summary metrics related to this equipment."/>
         <Annotation Term="OData.LongDescription" String="This action shall reset any time intervals or counted values for this equipment."/>
+      </Action>
+
+      <Action Name="ResetToDefaults" IsBound="true">
+        <Annotation Term="OData.Description" String="The action resets the values of writable properties to factory defaults."/>
+        <Annotation Term="OData.LongDescription" String="This action shall reset the values of writable properties in this resource to their default values as specified by the manufacturer."/>
+        <Parameter Name="EnvironmentMetrics" Type="EnvironmentMetrics.v1_0_0.Actions"/>
+        <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_3_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
       </Action>
     </Schema>
 
@@ -224,6 +254,14 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the total energy, in joules, for this resource.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `EnergyJoules`.  This property is used for reporting device-level energy consumption measurements, while EnergykWh is used for large-scale consumption measurements."/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EnvironmentMetrics.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.2"/>
+      <Annotation Term="OData.Description" String="This version was created to add the ResetToDefaults action."/>
+
+      <EntityType Name="EnvironmentMetrics" BaseType="EnvironmentMetrics.v1_2_0.EnvironmentMetrics"/>
     </Schema>
 
   </edmx:DataServices>

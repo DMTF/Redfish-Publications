@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryChunks v1.4.1                                                 -->
+<!--# Redfish Schema:  MemoryChunks v1.4.2                                                 -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -83,6 +83,7 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="Memory type of this memory chunk."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the type of memory chunk."/>
+          <Annotation Term="Redfish.Required"/>
         </Property>
         <Property Name="IsMirrorEnabled" Type="Edm.Boolean" DefaultValue="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -96,7 +97,7 @@
         </Property>
         <Property Name="InterleaveSets" Type="Collection(MemoryChunks.v1_0_0.InterleaveSet)" Nullable="false">
           <Annotation Term="OData.Description" String="The interleave sets for the memory chunk."/>
-          <Annotation Term="OData.LongDescription" String="These properties shall represent the interleave sets for the memory chunk."/>
+          <Annotation Term="OData.LongDescription" String="These properties shall represent the interleave sets for the memory chunk.  If not specified by the client during a create operation, the memory chunk shall be created across all available memory within the memory domain."/>
         </Property>
       </EntityType>
 
@@ -190,6 +191,12 @@
       <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_0_6.MemoryChunks"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_0_8">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the behavior of InterleaveSets if not provided by a client.  It was also created to make AddressRangeType a required property."/>
+      <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_0_7.MemoryChunks"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2017.1"/>
@@ -247,6 +254,12 @@
       <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_1_4.MemoryChunks"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_1_6">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the behavior of InterleaveSets if not provided by a client.  It was also created to make AddressRangeType a required property."/>
+      <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_1_5.MemoryChunks"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2017.3"/>
@@ -294,6 +307,12 @@
       <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_2_5.MemoryChunks"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_2_7">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the behavior of InterleaveSets if not provided by a client.  It was also created to make AddressRangeType a required property."/>
+      <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_2_6.MemoryChunks"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2019.4"/>
@@ -335,6 +354,12 @@
       <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_3_1.MemoryChunks"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_3_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the behavior of InterleaveSets if not provided by a client.  It was also created to make AddressRangeType a required property."/>
+      <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_3_2.MemoryChunks"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_4_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.3"/>
@@ -352,6 +377,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
       <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_4_0.MemoryChunks"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_4_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the behavior of InterleaveSets if not provided by a client.  It was also created to make AddressRangeType a required property."/>
+      <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_4_1.MemoryChunks"/>
     </Schema>
 
   </edmx:DataServices>

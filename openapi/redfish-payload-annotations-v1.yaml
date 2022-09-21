@@ -1,0 +1,170 @@
+properties:
+  '@Redfish.ActionInfo':
+    description: The term can be applied to an action to specify a URI to an ActionInfo
+      resource that describes the parameters supported by this instance of the action.
+    format: uri-reference
+    readOnly: true
+    type: string
+  '@Redfish.AllowOverprovisioning':
+    description: The term specifies that a client allows the service to provide more
+      resources than requested, which includes, but is not limited to, a larger quantity
+      of items, larger capacity, and faster devices.
+    type: boolean
+    x-longDescription: The term shall specify that a client allows the service to
+      provide more resources than requested, which includes, but is not limited to,
+      a larger quantity of items, larger capacity, and faster devices.  If not specified
+      by the client, the service shall treat this as `false`.
+  '@Redfish.CollectionCapabilities':
+    $ref: http://redfish.dmtf.org/schemas/v1/CollectionCapabilities.yaml#/components/schemas/CollectionCapabilities_CollectionCapabilities
+    description: The link to the resource that represents the POST capabilities of
+      a collection.
+  '@Redfish.MaintenanceWindow':
+    $ref: http://redfish.dmtf.org/schemas/v1/Settings.yaml#/components/schemas/Settings_MaintenanceWindow
+    description: The maintenance window configuration for a resource for when to apply
+      settings or operations.
+  '@Redfish.OperationApplyTime':
+    $ref: http://redfish.dmtf.org/schemas/v1/Settings.yaml#/components/schemas/Settings_OperationApplyTime
+    description: The requested apply time from a client when performing a create,
+      delete, or action operation.
+  '@Redfish.OperationApplyTimeSupport':
+    $ref: http://redfish.dmtf.org/schemas/v1/Settings.yaml#/components/schemas/Settings_OperationApplyTimeSupport
+    description: An indication of whether a client can request an apply time for a
+      create, delete, or action operation of a resource through the OperationApplyTime
+      term.
+  '@Redfish.RequestedCount':
+    description: The term is used by a client to specify a request for a quantity
+      of items.
+    format: int64
+    type: integer
+  '@Redfish.RequestedCountRequired':
+    description: The term specifies that a client is required to provide the @Redfish.RequestedCount
+      term as part of the payload to specify a quantity of items.
+    readOnly: true
+    type: boolean
+  '@Redfish.ResourceBlockLimits':
+    $ref: http://redfish.dmtf.org/schemas/v1/ResourceBlock.yaml#/components/schemas/ResourceBlock_ResourceBlockLimits
+    description: The term specifies the allowable quantities of types of resource
+      blocks for a composition request.
+  '@Redfish.Settings':
+    $ref: http://redfish.dmtf.org/schemas/v1/Settings.yaml#/components/schemas/Settings_Settings
+    description: The link to the settings resource that represents the settings to
+      apply to this resource.
+  '@Redfish.SettingsApplyTime':
+    $ref: http://redfish.dmtf.org/schemas/v1/Settings.yaml#/components/schemas/Settings_PreferredApplyTime
+    description: The configuration settings for when the values in the settings object
+      are applied to a resource.
+  '@Redfish.SupportedCertificates':
+    description: The term specifies the supported certificate formats for a given
+      certificate collection.
+    items:
+      $ref: http://redfish.dmtf.org/schemas/v1/Certificate.yaml#/components/schemas/Certificate_CertificateType
+    readOnly: true
+    type: array
+  '@Redfish.WriteableProperties':
+    description: The term specifies the properties supported as read-write.  The values
+      contained shall be the names of the writeable properties as defined in the Redfish
+      schema that are available as read-write given the implementation, current configuration,
+      and state of the resource.  This term may appear at the root level of a resource,
+      or within an object.  For arrays of objects, the term may only appear in the
+      first element of the array to indicate identical capabilities for every element
+      in the array.
+    items:
+      type: string
+    readOnly: true
+    type: array
+  '@Redfish.ZoneAffinity':
+    description: The term specifies that a client requests that the service fulfills
+      a request with resources available within a specific zone resource.  The term
+      value is the Id property of the zone resource.
+    type: string
+    x-longDescription: The term shall specify that a client requests that the service
+      fulfills a request with resources available in a specific zone resource.  The
+      term value shall contain the Id property of the zone resource.  This term shall
+      only be at the root level of the request payload.
+  '@odata.context':
+    description: The OData description of a payload.
+    format: uri-reference
+    readOnly: true
+    type: string
+    x-longDescription: The value of this property shall be the context URL that describes
+      the resource according to OData-Protocol and shall be of the form defined in
+      the Redfish Specification.
+  '@odata.etag':
+    description: The current ETag of the resource.
+    readOnly: true
+    type: string
+    x-longDescription: The value of this property shall be a string that is defined
+      by the ETag HTTP header definition in RFC7232.
+  '@odata.id':
+    description: The unique identifier for a resource.
+    format: uri-reference
+    readOnly: true
+    type: string
+    x-longDescription: The value of this property shall be the unique identifier for
+      the resource and it shall be of the form defined in the Redfish Specification.
+  '@odata.type':
+    description: The type of a resource.
+    readOnly: true
+    type: string
+    x-longDescription: The value of this property shall be a URI fragment that specifies
+      the type of the resource and it shall be of the form defined in the Redfish
+      Specification.
+x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-patternProperties:
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Message.ExtendedInfo$:
+    description: The ExtendedInfo annotation can be applied to any object or property
+      to provide additional information about the item.
+    items:
+      $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message_Message
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.AllowableNumbers$:
+    description: The term specifies the numeric values or duration values, inclusive
+      ranges of values, and incremental step values for a read-write property that
+      are supported by the service, as defined in the 'Allowable values for numbers
+      and durations' clause of the Redfish Specification.
+    items:
+      type: string
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.AllowablePattern$:
+    description: The term specifies a regular expression that describes the allowable
+      values for a read-write property as supported by the service.
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.AllowableValues$:
+    description: The set of allowable values for an action parameter or property.
+    items:
+      type: string
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.Deprecated$:
+    description: The term shall be applied to a property or value to specify that
+      the property or value is deprecated.  The string value should explain the deprecation,
+      including new property or properties or value to use.  The property or value
+      can be supported in new and existing implementations, but usage in new implementations
+      is discouraged.  Deprecated properties and values are likely to be removed in
+      a future major version of the schema.
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.OptionalOnCreate$:
+    description: The term specifies that a property can be set when a client creates
+      an instance of a resource through POST.
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.RequiredOnCreate$:
+    description: The term specifies that a property is required to be specified in
+      the body of a POST request to create the resource.
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.SetOnlyOnCreate$:
+    description: The term specifies that a property can only be set when a client
+      creates an instance of a resource through POST.
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@Redfish.UpdatableAfterCreate$:
+    description: The term specifies that a property can be set by a client that uses
+      PATCH after it creates an instance of a resource through POST.
+    readOnly: true
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@odata.count$:
+    description: The number of items in a collection.
+    readOnly: true
+    x-longDescription: The value of this property shall be an integer representing
+      the number of items in a collection.
+  ^([a-zA-Z_][a-zA-Z0-9_]*)?@odata.nextLink$:
+    description: The URI to the resource containing the next set of partial members.
+    format: uri-reference
+    readOnly: true
+    x-longDescription: The value of this property shall be a URI to a resource, with
+      the same @odata.type, containing the next set of partial members.

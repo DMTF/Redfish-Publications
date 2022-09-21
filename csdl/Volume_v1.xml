@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
-<!-- Copyright 2015-2019 Storage Networking Industry Association (SNIA), USA, in cooperation with the DMTF. All rights reserved.-->
-<!---->
+<!-- Copyright 2015-2022 Storage Networking Industry Association (SNIA), USA. All rights reserved.-->
 
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
 
@@ -151,7 +150,7 @@
 
       </Action>
 
-      <Action Name="CheckConsistency">
+      <Action Name="CheckConsistency" IsBound="true">
         <Parameter Name="Volume" Type="Volume.v1_0_0.Actions"/>
         <Annotation Term="OData.Description" String="This action is used to force a check of the Volume's parity or redundant data to ensure it matches calculated values."/>
         <Annotation Term="OData.LongDescription" String="This defines the name of the custom action supported on this resource."/>
@@ -628,6 +627,66 @@
         <Member Name="Degraded">
           <Annotation Term="OData.Description" String="Indicates an issue with the cache state in which the cache space is diminished or disabled due to a failure or an outside influence such as a discharged battery."/>
           <Annotation Term="OData.LongDescription" String="Indicates an issue with the cache state in which the cache space is diminished or disabled due to a failure or an outside influence such as a discharged battery."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="LBAFormatType">
+        <Annotation Term="OData.Description" String="LBAFormatType is defined in the NVMe specification set. This field indicates the LBA data size supported; implementations may report up to 16 values. For more details refer to the appropriate NVMe specification."/>
+        <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_7_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Member Name="LBAFormat0">
+          <Annotation Term="OData.Description" String="LBAFormat0 is a required type. Indicates the LBA data size supported."/>
+        </Member>
+        <Member Name="LBAFormat1">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size if supported."/>
+        </Member>
+        <Member Name="LBAFormat2">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat3">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat4">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat5">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat6">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat7">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat8">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat9">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat10">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat11">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat12">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat13">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat14">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
+        </Member>
+        <Member Name="LBAFormat15">
+          <Annotation Term="OData.Description" String="Indicates the LBA data size supported if supported."/>
         </Member>
       </EnumType>
 
@@ -1109,7 +1168,7 @@
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_5_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
       <Annotation Term="Redfish.Release" String="WIP v1.2.0"/>
-     <Annotation
+      <Annotation
         Term="OData.Description"
         String="This version was created to add the ChangeRAIDLayout and ForceEnable Actions, and moves the replication Actions to the unversioned namespace. It adds InitializeMethod and deprecate InitializeType. It also adds support for NVMe. It also adds the IOPerfModeEnabled property, and references to Journaling Media and OwningStorageResource to Links."/>
       <EntityType Name="Volume" BaseType="Volume.v1_4_2.Volume">
@@ -1144,7 +1203,9 @@
         <Property Name="NamespaceId" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The NVMe Namespace Identifier for this namespace."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the NVMe Namespace Identifier for this namespace. This property shall be a hex value. Namespace identifiers are not durable and do not have meaning outside the scope of the NVMe subsystem. NSID 0x0, 0xFFFFFFFF, 0xFFFFFFFE are special purpose values."/>
+          <Annotation
+            Term="OData.LongDescription"
+            String="This property shall contain the NVMe Namespace Identifier for this namespace. This property shall be a hex value. Namespace identifiers are not durable and do not have meaning outside the scope of the NVMe subsystem. NSID 0x0, 0xFFFFFFFF, 0xFFFFFFFE are special purpose values."/>
           <Annotation Term="Validation.Pattern" String="^0[xX](([a-fA-F]|[0-9])*)$"/>
         </Property>
         <Property Name="IsShareable" Type="Edm.Boolean">
@@ -1158,7 +1219,9 @@
         </Property>
         <Property Name="NumberLBAFormats" Type="Edm.Int64">
           <Annotation Term="OData.Description" String="The number of LBA data size and metadata size combinations supported by this namespace. The value of this property is between 0 and 16."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of LBA data size and metadata size combinations supported by this namespace. The value of this property is between 0 and 16. LBA formats with an index set beyond this value will not be supported."/>
+          <Annotation
+            Term="OData.LongDescription"
+            String="This property shall contain the number of LBA data size and metadata size combinations supported by this namespace. The value of this property is between 0 and 16. LBA formats with an index set beyond this value will not be supported."/>
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Measures.Unit" String="By"/>
           <Annotation Term="Validation.Minimum" Int="0"/>
@@ -1188,7 +1251,7 @@
         </Property>
         <Property Name="SupportsDeallocatedOrUnwrittenLBError" Type="Edm.Boolean">
           <Annotation Term="OData.Description" String="This property indicates that the controller supports deallocated or unwritten logical block error for this namespace."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate that the controller supports deallocated or unwritten logical block error for this namespace. ."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate that the controller supports deallocated or unwritten logical block error for this namespace."/>
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
         </Property>
         <Property Name="SupportsNGUIDReuse" Type="Edm.Boolean">
@@ -1197,13 +1260,21 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
         </Property>
         <Property Name="SupportsAtomicTransactionSize" Type="Edm.Boolean">
-          <Annotation Term="OData.Description" String="Indicates that the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate whether or not the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
+          <Annotation
+            Term="OData.Description"
+            String="Indicates that the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
+          <Annotation
+            Term="OData.LongDescription"
+            String="This property shall indicate whether or not the NVM fields for Namespace preferred write granularity (NPWG), write alignment (NPWA), deallocate granularity (NPDG), deallocate alignment (NPDA) and optimal write size (NOWS)  are defined for this namespace and should be used by the host for I/O optimization."/>
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
         </Property>
         <Property Name="SupportsIOPerformanceHints" Type="Edm.Boolean">
-          <Annotation Term="OData.Description" String="Indicates that the Namespace Atomic Write Unit Normal (NAWUN), Namespace Atomic Write Unit Power Fail (NAWUPF), and Namespace Atomic Compare and Write Unit (NACWU) fields are defined for this namespace and should be used by the host for this namespace instead of the controller-level properties AWUN, AWUPF, and ACWU."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate that the Namespace Atomic Write Unit Normal (NAWUN), Namespace Atomic Write Unit Power Fail (NAWUPF), and Namespace Atomic Compare and Write Unit (NACWU) fields are defined for this namespace and should be used by the host for this namespace instead of the controller-level properties AWUN, AWUPF, and ACWU."/>
+          <Annotation
+            Term="OData.Description"
+            String="Indicates that the Namespace Atomic Write Unit Normal (NAWUN), Namespace Atomic Write Unit Power Fail (NAWUPF), and Namespace Atomic Compare and Write Unit (NACWU) fields are defined for this namespace and should be used by the host for this namespace instead of the controller-level properties AWUN, AWUPF, and ACWU."/>
+          <Annotation
+            Term="OData.LongDescription"
+            String="This property shall indicate that the Namespace Atomic Write Unit Normal (NAWUN), Namespace Atomic Write Unit Power Fail (NAWUPF), and Namespace Atomic Compare and Write Unit (NACWU) fields are defined for this namespace and should be used by the host for this namespace instead of the controller-level properties AWUN, AWUPF, and ACWU."/>
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
         </Property>
       </ComplexType>
@@ -1255,6 +1326,37 @@
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
       <Annotation Term="OData.Description" String="This version was added to fix typographical errors."/>
       <EntityType Name="Volume" BaseType="Volume.v1_6_0.Volume"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_7_0">
+      <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
+      <Annotation Term="OData.Description" String="This version was created to add the IsBootCapable property."/>
+      <Annotation Term="Redfish.Release" String="WIP v1.2.3"/>
+      <EntityType Name="Volume" BaseType="Volume.v1_6_2.Volume">
+        <Property Name="IsBootCapable" Type="Edm.Boolean">
+          <Annotation Term="OData.Description" String="This property indicates whether or not the Volume contains a boot image and is capable of booting."/>
+          <Annotation
+            Term="OData.LongDescription"
+            String="This property shall indicate whether or not the Volume contains a boot image and is capable of booting.  This property may be settable by an admin or client with visibility into the contents of the volume. This property should only be set to true when VolumeUsage is either not specified, or when VolumeUsage is set to Data or SystemData."/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+        </Property>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_8_0">
+      <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
+      <Annotation Term="OData.Description" String="This version was created to add the LBAFormatsSupported property to NVMeNamespaceProperties. It also adds IsBound=true to Actions where missing."/>
+      <Annotation Term="Redfish.Release" String="WIP v1.2.4"/>
+      <EntityType Name="Volume" BaseType="Volume.v1_7_0.Volume"></EntityType>
+
+      <ComplexType Name="NVMeNamespaceProperties" BaseType="Volume.v1_5_0.NVMeNamespaceProperties">
+        <Annotation Term="OData.Description" String="Add the LBAFormatsSupported property."/>
+        <Property Name="LBAFormatsSupported" Type="Collection(Volume.LBAFormatType)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="A list of the LBA format types supported for the namespace, or potential namespaces."/>
+          <Annotation Term="OData.LongDescription" String="This shall be a list of the LBA formats supported for the namespace, or potential namespaces."/>
+        </Property>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>
