@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryMetrics v1.5.0                                                -->
+<!--# Redfish Schema:  MemoryMetrics v1.6.0                                                -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -67,6 +67,7 @@
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Memory/{MemoryId}/MemoryMetrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/MemorySummary/MemoryMetrics</String>
             <String>/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Processors/{ProcessorId}/MemorySummary/MemoryMetrics</String>
+            <String>/redfish/v1/Chassis/{ChassisId}/Memory/{MemoryId}/MemoryMetrics</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -449,6 +450,69 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The number of indeterminate uncorrectable errors for the lifetime of the memory."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate uncorrectable errors for the lifetime of the memory.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate uncorrectable errors across all memory without duplication, which may not be the sum of all IndeterminateUncorrectableErrorCount properties over all memory."/>
+        </Property>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_6_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_5_0.MemoryMetrics">
+        <Property Name="CorrectedVolatileErrorCount" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of corrected errors in volatile memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of corrected errors in volatile memory."/>
+        </Property>
+        <Property Name="CorrectedPersistentErrorCount" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of corrected errors in persistent memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of corrected errors in persistent memory."/>
+        </Property>
+        <Property Name="DirtyShutdownCount" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of shutdowns while outstanding writes have not completed to persistent memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain number of shutdowns while outstanding writes have not completed to persistent memory."/>
+        </Property>
+        <Property Name="CXL" Type="MemoryMetrics.v1_6_0.CXL">
+          <Annotation Term="OData.Description" String="The memory metrics specific to CXL devices."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the memory metrics specific to CXL devices."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="CXL">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="The memory metrics specific to CXL devices."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the memory metrics specific to CXL devices."/>
+        <Property Name="AlertCapabilities" Type="MemoryMetrics.v1_6_0.AlertCapabilities">
+          <Annotation Term="OData.Description" String="The conditions that would generate an alert to the CXL Fabric Manager or host."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the conditions that would generate an alert to the CXL Fabric Manager or host."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="AlertCapabilities">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="The conditions that would generate an alert to the CXL Fabric Manager or host."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the conditions that would generate an alert to the CXL Fabric Manager or host."/>
+        <Property Name="Temperature" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Indicates whether temperature conditions generate an alert to the CXL Fabric Manager or host."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether temperature conditions generate an alert to the CXL Fabric Manager or host."/>
+        </Property>
+        <Property Name="SpareBlock" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Indicates whether spare block conditions generate an alert to the CXL Fabric Manager or host."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether spare block conditions generate an alert to the CXL Fabric Manager or host."/>
+        </Property>
+        <Property Name="UncorrectableECCError" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Indicates whether uncorrectable ECC errors generate an alert to the CXL Fabric Manager or host."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether uncorrectable ECC errors generate an alert to the CXL Fabric Manager or host."/>
+        </Property>
+        <Property Name="CorrectableECCError" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Indicates whether correctable ECC errors generate an alert to the CXL Fabric Manager or host."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether correctable ECC errors generate an alert to the CXL Fabric Manager or host."/>
         </Property>
       </ComplexType>
     </Schema>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryChunks v1.4.2                                                 -->
+<!--# Redfish Schema:  MemoryChunks v1.5.0                                                 -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -29,6 +29,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Endpoint_v1.xml">
     <edmx:Include Namespace="Endpoint"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/CXLLogicalDevice_v1.xml">
+    <edmx:Include Namespace="CXLLogicalDevice"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -383,6 +386,54 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the behavior of InterleaveSets if not provided by a client.  It was also created to make AddressRangeType a required property."/>
       <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_4_1.MemoryChunks"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_5_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+
+      <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_4_2.MemoryChunks">
+        <Property Name="MediaLocation" Type="MemoryChunks.v1_5_0.MediaLocation">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The location of the memory media for this memory chunk."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the location of the memory media for this memory chunk."/>
+        </Property>
+        <Property Name="RequestedOperationalState" Type="MemoryChunks.v1_5_0.OperationalState">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The requested operational state of this memory chunk."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the requested operational state of this memory chunk."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Links" BaseType="MemoryChunks.v1_3_0.Links">
+        <NavigationProperty Name="CXLLogicalDevices" Type="Collection(CXLLogicalDevice.CXLLogicalDevice)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of links to the CXL logical devices associated with this memory chunk."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type CXLLogicalDevice that represent the CXL logical devices associated with this memory chunk."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
+
+      <EnumType Name="MediaLocation">
+        <Member Name="Local">
+          <Annotation Term="OData.Description" String="The memory chunk was created using local media."/>
+        </Member>
+        <Member Name="Remote">
+          <Annotation Term="OData.Description" String="The memory chunk was created using remote media accessible through a fabric."/>
+        </Member>
+        <Member Name="Mixed">
+          <Annotation Term="OData.Description" String="The memory chunk was created using both local media and remote media accessible through a fabric."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="OperationalState">
+        <Member Name="Online">
+          <Annotation Term="OData.Description" String="Memory chunk can be used."/>
+        </Member>
+        <Member Name="Offline">
+          <Annotation Term="OData.Description" String="Memory chunk cannot be used.  Consumers of this memory chunk should perform cleanup operations as needed to prepare for the removal of this memory chunk."/>
+        </Member>
+      </EnumType>
     </Schema>
 
   </edmx:DataServices>

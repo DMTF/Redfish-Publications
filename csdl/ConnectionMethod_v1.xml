@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ConnectionMethod v1.0.0                                             -->
+<!--# Redfish Schema:  ConnectionMethod v1.1.0                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -136,6 +136,30 @@
         <Member Name="OEM">
           <Annotation Term="OData.Description" String="OEM connection method."/>
           <Annotation Term="OData.LongDescription" String="This value shall indicate the connection method is OEM.  The ConnectionMethodVariant property shall contain further identification information."/>
+        </Member>
+      </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ConnectionMethod.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+
+      <EntityType Name="ConnectionMethod" BaseType="ConnectionMethod.v1_0_0.ConnectionMethod">
+        <Property Name="TunnelingProtocol" Type="ConnectionMethod.v1_1_0.TunnelingProtocolType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The tunneling protocol used for this connection method."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the tunneling protocol used for this connection method."/>
+        </Property>
+      </EntityType>
+
+      <EnumType Name="TunnelingProtocolType">
+        <Member Name="SSH">
+          <Annotation Term="OData.Description" String="SSH tunneling."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate that the tunneling protocol is SSH."/>
+        </Member>
+        <Member Name="OEM">
+          <Annotation Term="OData.Description" String="OEM tunneling."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate that the tunneling protocol is OEM-specific."/>
         </Member>
       </EnumType>
     </Schema>

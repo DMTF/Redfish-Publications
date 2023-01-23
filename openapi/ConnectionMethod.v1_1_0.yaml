@@ -1,0 +1,167 @@
+components:
+  schemas:
+    ConnectionMethod_v1_1_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/ConnectionMethod_v1_1_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ConnectionMethod_v1_1_0_ConnectionMethod:
+      additionalProperties: false
+      description: The ConnectionMethod schema describes the protocol, provider, or
+        other method used to communicate to a given access point for a Redfish aggregation
+        service.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/ConnectionMethod_v1_1_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        ConnectionMethodType:
+          $ref: '#/components/schemas/ConnectionMethod_v1_1_0_ConnectionMethodType'
+          description: The type of connection method.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain an identifier of the connection
+            method.
+        ConnectionMethodVariant:
+          description: The variant of connection method.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain an additional identifier
+            of the connection method.  This property shall be present if ConnectionMethodType
+            is `OEM`.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/ConnectionMethod_v1_1_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        TunnelingProtocol:
+          $ref: '#/components/schemas/ConnectionMethod_v1_1_0_TunnelingProtocolType'
+          description: The tunneling protocol used for this connection method.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the tunneling protocol used
+            for this connection method.
+          x-versionAdded: v1_1_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a connection method for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ConnectionMethod_v1_1_0_ConnectionMethodType:
+      enum:
+      - Redfish
+      - SNMP
+      - IPMI15
+      - IPMI20
+      - NETCONF
+      - OEM
+      type: string
+      x-enumDescriptions:
+        IPMI15: IPMI 1.5 connection method.
+        IPMI20: IPMI 2.0 connection method.
+        NETCONF: NETCONF connection method.
+        OEM: OEM connection method.
+        Redfish: Redfish connection method.
+        SNMP: SNMP connection method.
+      x-enumLongDescriptions:
+        IPMI15: This value shall indicate the connection method is IPMI 1.5.
+        IPMI20: This value shall indicate the connection method is IPMI 2.0.
+        NETCONF: This value shall indicate the connection method is NETCONF.
+        OEM: This value shall indicate the connection method is OEM.  The ConnectionMethodVariant
+          property shall contain further identification information.
+        Redfish: This value shall indicate the connection method is Redfish.
+        SNMP: This value shall indicate the connection method is SNMP.
+    ConnectionMethod_v1_1_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        AggregationSources:
+          description: An array of links to the access points using this connection
+            method.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type AggregationSource that are using this connection method.
+        AggregationSources@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ConnectionMethod_v1_1_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    ConnectionMethod_v1_1_0_TunnelingProtocolType:
+      enum:
+      - SSH
+      - OEM
+      type: string
+      x-enumDescriptions:
+        OEM: OEM tunneling.
+        SSH: SSH tunneling.
+      x-enumLongDescriptions:
+        OEM: This value shall indicate that the tunneling protocol is OEM-specific.
+        SSH: This value shall indicate that the tunneling protocol is SSH.
+title: '#ConnectionMethod.v1_1_0.ConnectionMethod'
+x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2022.3'

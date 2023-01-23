@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Key v1.1.0                                                          -->
+<!--# Redfish Schema:  Key v1.2.0                                                          -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -53,6 +53,9 @@
             <String>/redfish/v1/KeyService/NVMeoFSecrets/{KeyId}</String>
             <String>/redfish/v1/AccountService/Accounts/{ManagerAccountId}/Keys/{KeyId}</String>
             <String>/redfish/v1/Managers/{ManagerId}/RemoteAccountService/Accounts/{ManagerAccountId}/Keys/{KeyId}</String>
+            <String>/redfish/v1/AggregationService/AggregationSources/{AggregationSourceId}/TrustedPublicHostKeys/{KeyId}</String>
+            <String>/redfish/v1/AggregationService/AggregationSources/{AggregationSourceId}/PresentedPublicHostKey</String>
+            <String>/redfish/v1/AggregationService/AggregationSources/{AggregationSourceId}/PublicIdentityKey</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -199,6 +202,30 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain a user-provided string that describes the key."/>
         </Property>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Key.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+
+      <EntityType Name="Key" BaseType="Key.v1_1_0.Key">
+        <Property Name="SSH" Type="Key.v1_2_0.SSHType">
+          <Annotation Term="OData.Description" String="SSH specific properties."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain SSH specific properties for this key.  This property shall be present if KeyType contains the value `SSH`."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="SSHType">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="SSH specific properties."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain SSH specific properties for a key."/>
+        <Property Name="Fingerprint" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="A fingerprint of the key."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the fingerprint of the key."/>
+          <Annotation Term="Validation.Pattern" String="(^MD5(:[0-9a-f]{2})+$)|(^SHA256:[A-Za-z0-9+/=]+$)"/>
+        </Property>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

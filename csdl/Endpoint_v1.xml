@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Endpoint v1.7.0                                                     -->
+<!--# Redfish Schema:  Endpoint v1.8.0                                                     -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -368,6 +368,30 @@
               <Record>
                 <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
                 <PropertyValue Property="Version" String="v1_6_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="Memory">
+          <Annotation Term="OData.Description" String="The entity is a memory device."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the entity this endpoint represents is a memory device.  The EntityLink property, if present, should be of type Memory."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_8_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="CXLDevice">
+          <Annotation Term="OData.Description" String="The entity is a CXL logical device."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the entity this endpoint represents is a CXL logical device.  The EntityLink property, if present, should be of type CXLLogicalDevice."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_8_0"/>
               </Record>
             </Collection>
           </Annotation>
@@ -913,6 +937,14 @@
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Endpoint.v1_8_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+      <Annotation Term="OData.Description" String="This version was created to add `CXLDevice` and `Memory` to EntityType."/>
+
+      <EntityType Name="Endpoint" BaseType="Endpoint.v1_7_0.Endpoint"/>
     </Schema>
 
   </edmx:DataServices>

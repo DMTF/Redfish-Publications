@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  AggregationSource v1.2.0                                            -->
+<!--# Redfish Schema:  AggregationSource v1.3.1                                            -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -27,6 +27,12 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/ConnectionMethod_v1.xml">
     <edmx:Include Namespace="ConnectionMethod"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/KeyCollection_v1.xml">
+    <edmx:Include Namespace="KeyCollection"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Key_v1.xml">
+    <edmx:Include Namespace="Key"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -58,6 +64,46 @@
           </Collection>
         </Annotation>
       </EntityType>
+
+      <Action Name="GenerateSSHIdentityKeyPair" IsBound="true">
+        <Annotation Term="OData.Description" String="This action generates a new SSH identity key-pair to be used with this aggregation source.  The generated public key is stored in the Key resource referenced by the PublicIdentityKey property in SSHSettings.  Any existing key-pair is deleted and replace by the new key-pair."/>
+        <Annotation Term="OData.LongDescription" String="This action shall generate a new SSH identity key-pair to be used with this aggregation source.  The service shall store the generated public key in the Key resource referenced by the PublicIdentityKey property in SSHSettings.  If the aggregation source already has an associated SSH identity key-pair, the service shall delete the key-pair and replace it with the new key-pair."/>
+        <Parameter Name="AggregationSource" Type="AggregationSource.v1_0_0.Actions"/>
+        <Parameter Name="KeyType" Type="AggregationSource.v1_3_0.SSHKeyType" Nullable="false">
+          <Annotation Term="OData.Description" String="The type of SSH key."/>
+          <Annotation Term="OData.LongDescription" String="This parameter shall contain the type of SSH key."/>
+        </Parameter>
+        <Parameter Name="KeyLength" Type="Edm.Int64">
+          <Annotation Term="OData.Description" String="The length of the SSH key, in bits, if the KeyType parameter contains `RSA`."/>
+          <Annotation Term="OData.LongDescription" String="This parameter shall contain the length of the SSH key, in bits.  This parameter shall be required if the KeyType parameter contains `RSA` and rejected for other values."/>
+        </Parameter>
+        <Parameter Name="Curve" Type="AggregationSource.v1_3_0.ECDSACurveType">
+          <Annotation Term="OData.Description" String="The curve to use with the SSH key if the KeyType parameter contains `ECDSA`."/>
+          <Annotation Term="OData.LongDescription" String="This parameter shall contain the curve to use with the SSH key.  This parameter shall be required if the KeyType parameter contains `ECDSA` and rejected for other values."/>
+        </Parameter>
+        <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_3_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Action>
+
+      <Action Name="RemoveSSHIdentityKeyPair" IsBound="true">
+        <Annotation Term="OData.Description" String="This action removes the SSH identity key-pair used with this aggregation source."/>
+        <Annotation Term="OData.LongDescription" String="This action shall remove the private SSH identity key-pair used with this aggregation source."/>
+        <Parameter Name="AggregationSource" Type="AggregationSource.v1_0_0.Actions"/>
+        <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_3_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Action>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_0_0">
@@ -77,7 +123,7 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the user name for accessing the aggregation source."/>
         </Property>
         <Property Name="Password" Type="Edm.String">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Write"/>
           <Annotation Term="OData.Description" String="The password for accessing the aggregation source.  The value is `null` in responses."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a password for accessing the aggregation source.  The value shall be `null` in responses."/>
         </Property>
@@ -125,6 +171,12 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to mark properties with values containing sensitive data as write-only."/>
+      <EntityType Name="AggregationSource" BaseType="AggregationSource.v1_0_0.AggregationSource"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.4"/>
@@ -142,7 +194,7 @@
         <Annotation Term="OData.Description" String="Settings for an SNMP aggregation source."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the settings for an SNMP aggregation source."/>
         <Property Name="AuthenticationKey" Type="Edm.String">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Write"/>
           <Annotation Term="OData.Description" String="The secret authentication key for SNMPv3."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the key for SNMPv3 authentication.  The value shall be `null` in responses.  This property accepts a passphrase or a hex-encoded key.  If the string starts with `Passphrase:`, the remainder of the string shall be the passphrase and shall be converted to the key as described in the 'Password to Key Algorithm' section of RFC3414.  If the string starts with `Hex:`, then the remainder of the string shall be the key encoded in hexadecimal notation.  If the string starts with neither, the full string shall be a passphrase and shall be converted to the key as described in the 'Password to Key Algorithm' section of RFC3414.  The passphrase can contain any printable characters except for the double quotation mark."/>
           <Annotation Term="Validation.Pattern" String="(^[ !#-~]+$)|(^Passphrase:[ ^[ !#-~]+$)|(^Hex:[0-9A-Fa-f]{24,96})|(^\*+$)"/>
@@ -153,7 +205,7 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the SNMPv3 authentication protocol."/>
         </Property>
         <Property Name="EncryptionKey" Type="Edm.String">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Write"/>
           <Annotation Term="OData.Description" String="The secret authentication key for SNMPv3."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the key for SNMPv3 encryption.  The value shall be `null` in responses.  This property accepts a passphrase or a hex-encoded key.  If the string starts with `Passphrase:`, the remainder of the string shall be the passphrase and shall be converted to the key as described in the 'Password to Key Algorithm' section of RFC3414.  If the string starts with `Hex:`, then the remainder of the string shall be the key encoded in hexadecimal notation.  If the string starts with neither, the full string shall be a passphrase and shall be converted to the key as described in the 'Password to Key Algorithm' section of RFC3414.  The passphrase can contain any printable characters except for the double quotation mark."/>
           <Annotation Term="Validation.Pattern" String="(^[A-Za-z0-9]+$)|(^\*+$)"/>
@@ -226,6 +278,12 @@
       </EnumType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to mark properties with values containing sensitive data as write-only."/>
+      <EntityType Name="AggregationSource" BaseType="AggregationSource.v1_1_0.AggregationSource"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.3"/>
@@ -234,7 +292,7 @@
         <Property Name="AggregationType" Type="AggregationSource.v1_2_0.AggregationType" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The type of aggregation used towards the aggregation source."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the type of aggregation used for the connection method towards the aggregation source.  If this property is not present, the value shall be assumed to be `Complete`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the type of aggregation used for the connection method towards the aggregation source.  If this property is not present, the value shall be assumed to be `Full`."/>
         </Property>
       </EntityType>
 
@@ -251,11 +309,151 @@
 
       <ComplexType Name="SNMPSettings" BaseType="AggregationSource.v1_1_0.SNMPSettings">
         <Property Name="TrapCommunity" Type="Edm.String">
-          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Write"/>
           <Annotation Term="OData.Description" String="The SNMP trap community string."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the SNMP trap community string.  The value shall be `null` in responses.  Services may provide a common trap community if not specified by the client when creating the aggregation source."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_2_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to mark properties with values containing sensitive data as write-only."/>
+      <EntityType Name="AggregationSource" BaseType="AggregationSource.v1_2_0.AggregationSource"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+
+      <EntityType Name="AggregationSource" BaseType="AggregationSource.v1_2_0.AggregationSource">
+        <Property Name="SSHSettings" Type="AggregationSource.v1_3_0.SSHSettingsType">
+          <Annotation Term="OData.Description" String="Settings for an aggregation source using SSH as part of the associated connection method."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the settings for an aggregation source using SSH as part of the associated connection method."/>
+        </Property>
+        <Property Name="Status" Type="Resource.Status" Nullable="false">
+          <Annotation Term="OData.Description" String="The status and health of the resource and its subordinate or dependent resources."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain any status or health properties of the resource."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="SSHSettingsType">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="Settings for an aggregation source using SSH as part of the associated connection method."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the settings for an aggregation source using SSH as part of the associated connection method."/>
+        <Property Name="UserAuthenticationMethod" Type="AggregationSource.v1_3_0.UserAuthenticationMethod">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The client user authentication method."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the client user authentication method."/>
+        </Property>
+        <Property Name="PresentedPublicHostKeyTimestamp" Type="Edm.DateTimeOffset">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The date and time when the key referenced by the PresentedPublicHostKey property was last updated."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the date and time when the key referenced by the PresentedPublicHostKey property was last updated."/>
+        </Property>
+        <NavigationProperty Name="TrustedPublicHostKeys" Type="KeyCollection.KeyCollection" ContainsTarget="true" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="A link to the trusted public host keys of the remote service corresponding to the aggregation source.  These trusted public host keys are used for authentication of the remote service with SSH.  An SSH public host key of the remote service can be added to this collection to allow for public key-based SSH authentication."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type KeyCollection that represents the trusted public host keys of the remote service corresponding to the aggregation source.  If the associated connection method specifies SSH tunneling, the service shall compare the public host key presented by the remote service with members of this collection to determine if the remote service can be trusted.  If the remote service cannot be trusted, the State property within Status shall contain `Disabled` and the service shall not connect to the remote service."/>
+        </NavigationProperty>
+        <NavigationProperty Name="PresentedPublicHostKey" Type="Key.Key" ContainsTarget="true" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="A link to the last public host key presented by the remote service corresponding to the aggregation source.  A client that trusts this public host key can add the public host key to the TrustedPublicHostKeys collection to allow SSH communication with the aggregation source."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type Key that represents the last public host key presented by the remote service corresponding to the aggregation source.  This property shall not be present if a public host key has not yet been presented by the remote service."/>
+        </NavigationProperty>
+        <NavigationProperty Name="PublicIdentityKey" Type="Key.Key" ContainsTarget="true" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="A link to the public key that is used with the aggregation source when the authentication method is configured to use a public key.  The GenerateSSHIdentityKeyPair and RemoveSSHIdentityKeyPair are used to update the key for this aggregation source."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type Key that represents the public key that is used with the aggregation source when UserAuthenticationMethod contains `PublicKey`.  This property shall not be present if a key-pair is not available.  The State property within Status shall contain `Disabled` if a key-pair is not available and UserAuthenticationMethod contains `PublicKey`."/>
+        </NavigationProperty>
+      </ComplexType>
+
+      <EnumType Name="UserAuthenticationMethod">
+        <Member Name="PublicKey">
+          <Annotation Term="OData.Description" String="SSH user authentication with a public key."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate SSH user authentication with a public key specified by the PublicIdentityKey property in SSHSettings."/>
+        </Member>
+        <Member Name="Password">
+          <Annotation Term="OData.Description" String="SSH user authentication with a password."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate SSH user authentication with a password specified by the Password property."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="SSHKeyType">
+        <Member Name="RSA">
+          <Annotation Term="OData.Description" String="RSA."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC4253-defined 'ssh-rsa' key type."/>
+        </Member>
+        <Member Name="DSA">
+          <Annotation Term="OData.Description" String="DSA."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC4253-defined 'ssh-dss' key type."/>
+        </Member>
+        <Member Name="ECDSA">
+          <Annotation Term="OData.Description" String="ECDSA."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC5656-defined ECDSA key type."/>
+        </Member>
+        <Member Name="Ed25519">
+          <Annotation Term="OData.Description" String="Ed25519."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC8709-defined 'ssh-ed25519' key type."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="ECDSACurveType">
+        <Member Name="NISTP256">
+          <Annotation Term="OData.Description" String="NIST P-256."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp256' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP384">
+          <Annotation Term="OData.Description" String="NIST P-384."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp384' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP521">
+          <Annotation Term="OData.Description" String="NIST P-521."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp521' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK163">
+          <Annotation Term="OData.Description" String="NIST K-163."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk163' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP192">
+          <Annotation Term="OData.Description" String="NIST P-192."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp192' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP224">
+          <Annotation Term="OData.Description" String="NIST P-224."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp224' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK233">
+          <Annotation Term="OData.Description" String="NIST K-233."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk233' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTB233">
+          <Annotation Term="OData.Description" String="NIST B-233."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistb233' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK283">
+          <Annotation Term="OData.Description" String="NIST K-283."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk283' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK409">
+          <Annotation Term="OData.Description" String="NIST K-409."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk409' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTB409">
+          <Annotation Term="OData.Description" String="NIST B-409."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistb409' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTT571">
+          <Annotation Term="OData.Description" String="NIST T-571."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistt571' curve in RFC5656."/>
+        </Member>
+      </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AggregationSource.v1_3_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to mark properties with values containing sensitive data as write-only."/>
+      <EntityType Name="AggregationSource" BaseType="AggregationSource.v1_3_0.AggregationSource"/>
     </Schema>
 
   </edmx:DataServices>

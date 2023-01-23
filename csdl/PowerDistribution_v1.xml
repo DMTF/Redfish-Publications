@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerDistribution v1.2.2                                            -->
+<!--# Redfish Schema:  PowerDistribution v1.3.0                                            -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -177,6 +177,15 @@
           <Annotation Term="OData.Description" String="A link to the collection of sensors located in the equipment and sub-components."/>
           <Annotation Term="OData.LongDescription" String="This property shall be a link to a resource collection of type SensorCollection that contains the sensors located in the equipment and sub-components."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of the Sensors link in the Chassis resource."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
 
         <Property Name="Status" Type="Resource.Status" Nullable="false">
@@ -301,6 +310,17 @@
               <Record>
                 <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
                 <PropertyValue Property="Version" String="v1_2_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="BatteryShelf">
+          <Annotation Term="OData.Description" String="A battery shelf or battery-backed unit (BBU)."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
               </Record>
             </Collection>
           </Annotation>
@@ -463,10 +483,28 @@
           <Annotation Term="OData.Description" String="The link to the collection of power supplies for this equipment."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type PowerSupplyCollection."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of the PowerSupplies link in the Chassis resource."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
         <Property Name="PowerSupplyRedundancy" Type="Collection(Redundancy.RedundantGroup)" Nullable="false">
           <Annotation Term="OData.Description" String="The redundancy information for the set of power supplies for this equipment."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain redundancy information for the set of power supplies for this equipment.  The values of the RedundancyGroup array shall reference resources of type PowerSupply."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of the PowerSupplyRedundancy property in the Chassis resource."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </Property>
         <Property Name="MainsRedundancy" Type="Redundancy.RedundantGroup" Nullable="false">
           <Annotation Term="OData.Description" String="The redundancy information for the mains (input) circuits for this equipment."/>
@@ -505,6 +543,19 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to remove Chassis link guidance that is no longer recommended."/>
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_1.PowerDistribution"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+      <Annotation Term="OData.Description" String="This version was created to deprecate the PowerSupplyRedundancy property and the PowerSupplies link, in favor of the equivalent properties in the Chassis schema.  It was also created to add BatteryShelf to PowerDistributionType."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_2.PowerDistribution">
+        <Property Name="UserLabel" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="A user-assigned label."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a user-assigned label used to identify this resource.  If a value has not been assigned by a user, the value of this property shall be an empty string."/>
+        </Property>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

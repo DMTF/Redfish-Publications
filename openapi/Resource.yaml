@@ -108,6 +108,7 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_12_3.yaml#/components/schemas/Resource_v1_12_3_Identifier
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_13_2.yaml#/components/schemas/Resource_v1_13_2_Identifier
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.yaml#/components/schemas/Resource_v1_14_1_Identifier
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.yaml#/components/schemas/Resource_v1_15_0_Identifier
       description: Any additional identifiers for a resource.
       x-longDescription: This type shall contain any additional identifiers for a
         resource.
@@ -173,6 +174,7 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_12_3.yaml#/components/schemas/Resource_v1_12_3_Location
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_13_2.yaml#/components/schemas/Resource_v1_13_2_Location
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.yaml#/components/schemas/Resource_v1_14_1_Location
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.yaml#/components/schemas/Resource_v1_15_0_Location
       description: The location of a resource.
       x-longDescription: This type shall describe the location of a resource.
     Resource_Name:
@@ -212,11 +214,14 @@ components:
       - Paused
       type: string
       x-enumDescriptions:
-        'Off': The state is powered off.
-        'On': The state is powered on.
-        Paused: The state is paused.
-        PoweringOff: A temporary state between on and off.
-        PoweringOn: A temporary state between off and on.
+        'Off': The resource is powered off.  The components within the resource might
+          continue to have AUX power.
+        'On': The resource is powered on.
+        Paused: The resource is paused.
+        PoweringOff: A temporary state between on and off.  The components within
+          the resource can take time to process the power off action.
+        PoweringOn: A temporary state between off and on.  The components within the
+          resource can take time to process the power on action.
       x-enumVersionAdded:
         Paused: v1_13_0
     Resource_ReferenceableMember:
@@ -237,6 +242,7 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_12_3.yaml#/components/schemas/Resource_v1_12_3_ReferenceableMember
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_13_2.yaml#/components/schemas/Resource_v1_13_2_ReferenceableMember
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.yaml#/components/schemas/Resource_v1_14_1_ReferenceableMember
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.yaml#/components/schemas/Resource_v1_15_0_ReferenceableMember
     Resource_ResetType:
       enum:
       - 'On'
@@ -303,9 +309,12 @@ components:
         Pause: This value shall indicate the resource will transition to a paused
           state.  Upon successful completion, the PowerState property, if supported,
           shall contain the value `Paused`.
-        PowerCycle: This value shall indicate the resource will transition to a power
-          off state, then transition to a power on state.  Upon successful completion,
-          the PowerState property, if supported, shall contain the value `On`.
+        PowerCycle: This value shall indicate the resource will perform a power cycle.  If
+          currently in the power on state, the resource will transition to a power
+          off state, then transition to a power on state.  If currently in the power
+          off state, the resource will transition to a power on state.  Upon successful
+          completion, the PowerState property, if supported, shall contain the value
+          `On`.
         PushPowerButton: This value shall indicate the resource will behave as if
           the physical power button is pressed.  The behavior of pressing the physical
           power button may be dependent on the state of the unit and the behavior
@@ -340,6 +349,7 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_12_3.yaml#/components/schemas/Resource_v1_12_3_Resource
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_13_2.yaml#/components/schemas/Resource_v1_13_2_Resource
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.yaml#/components/schemas/Resource_v1_14_1_Resource
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.yaml#/components/schemas/Resource_v1_15_0_Resource
     Resource_ResourceCollection:
       anyOf:
       - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
@@ -358,6 +368,7 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_12_3.yaml#/components/schemas/Resource_v1_12_3_ResourceCollection
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_13_2.yaml#/components/schemas/Resource_v1_13_2_ResourceCollection
       - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.yaml#/components/schemas/Resource_v1_14_1_ResourceCollection
+      - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.yaml#/components/schemas/Resource_v1_15_0_ResourceCollection
     Resource_State:
       enum:
       - Enabled

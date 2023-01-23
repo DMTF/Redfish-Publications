@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Job v1.1.1                                                          -->
+<!--# Redfish Schema:  Job v1.2.0                                                          -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -123,8 +123,8 @@
           <Annotation Term="OData.LongDescription" String="This property shall indicate whether the contents of the payload should be hidden from view after the job has been created.  If `true`, responses shall not return the Payload property.  If `false`, responses shall return the Payload property.  If this property is not present when the job is created, the default is `false`."/>
         </Property>
         <Property Name="Payload" Type="Job.v1_0_0.Payload" Nullable="false">
-          <Annotation Term="OData.Description" String="The HTTP and JSON payload details for this job."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the HTTP and JSON payload information for executing this job.  This property shall not be included in the response if the HidePayload property is `true`."/>
+          <Annotation Term="OData.Description" String="The HTTP and JSON request payload details for this job."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the HTTP and JSON request payload information for executing this job.  This property shall not be included in the response if the HidePayload property is `true`."/>
         </Property>
         <NavigationProperty Name="Steps" Type="JobCollection.JobCollection" ContainsTarget="true" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -294,6 +294,12 @@
       <EntityType Name="Job" BaseType="Job.v1_0_7.Job"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_0_9">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the usage of the Payload property."/>
+      <EntityType Name="Job" BaseType="Job.v1_0_8.Job"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.1"/>
@@ -311,6 +317,35 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the mapping of JobStatus."/>
       <EntityType Name="Job" BaseType="Job.v1_1_0.Job"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_1_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the usage of the Payload property."/>
+      <EntityType Name="Job" BaseType="Job.v1_1_1.Job"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+
+      <EntityType Name="Job" BaseType="Job.v1_1_2.Job">
+        <Property Name="Links" Type="Job.v1_2_0.Links" Nullable="false">
+          <Annotation Term="OData.Description" String="Contains references to other resources that are related to this resource."/>
+          <Annotation Term="OData.LongDescription" String="The Links property, as described by the Redfish Specification, shall contain references to resources that are related to, but not contained by (subordinate to), this resource."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Links" BaseType="Resource.Links">
+        <Annotation Term="OData.Description" String="The links to other resources that are related to this resource."/>
+        <Annotation Term="OData.LongDescription" String="This Redfish Specification-described type shall contain links to resources that are related to but are not contained by, or subordinate to, this resource."/>
+        <NavigationProperty Name="CreatedResources" Type="Collection(Resource.Item)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of URIs referencing the resources created as the result of this job."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources indicating the resources created as the result of this job.  Services shall set this property prior to the job entering its final state."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

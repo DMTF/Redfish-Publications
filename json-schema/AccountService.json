@@ -19,31 +19,34 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_2_10.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_3_9.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_3_10.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_4_7.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_4_8.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_5_6.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_5_7.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_6_5.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_6_6.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_7_5.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_7_6.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_8_2.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_8_3.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_9_1.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_9_2.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_10_1.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_10_3.json#/definitions/AccountService"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_11_1.json#/definitions/AccountService"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_11_3.json#/definitions/AccountService"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_12_0.json#/definitions/AccountService"
                 }
             ],
             "deletable": false,
@@ -55,6 +58,43 @@
                 "/redfish/v1/AccountService",
                 "/redfish/v1/Managers/{ManagerId}/RemoteAccountService"
             ]
+        },
+        "MFABypass": {
+            "anyOf": [
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/AccountService.v1_12_0.json#/definitions/MFABypass"
+                }
+            ],
+            "description": "Multi-factor authentication bypass settings.",
+            "longDescription": "This type shall contain multi-factor authentication bypass settings."
+        },
+        "MFABypassType": {
+            "enum": [
+                "All",
+                "SecurID",
+                "GoogleAuthenticator",
+                "MicrosoftAuthenticator",
+                "ClientCertificate",
+                "OEM"
+            ],
+            "enumDescriptions": {
+                "All": "Bypass all multi-factor authentication types.",
+                "ClientCertificate": "Bypass client certificate authentication.",
+                "GoogleAuthenticator": "Bypass Google Authenticator.",
+                "MicrosoftAuthenticator": "Bypass Microsoft Authenticator.",
+                "OEM": "Bypass OEM-defined multi-factor authentication.",
+                "SecurID": "Bypass RSA SecurID."
+            },
+            "enumLongDescriptions": {
+                "All": "This value shall indicate an account or role mapping can bypass all multi-factor authentication types including OEM-defined types.",
+                "ClientCertificate": "This value shall indicate an account or role mapping can bypass client certificate authentication.",
+                "GoogleAuthenticator": "This value shall indicate an account or role mapping can bypass Google Authenticator.",
+                "MicrosoftAuthenticator": "This value shall indicate an account or role mapping can bypass Microsoft Authenticator.",
+                "OEM": "This value shall indicate an account or role mapping can bypass OEM-defined multi-factor authentication.",
+                "SecurID": "This value shall indicate an account or role mapping can bypass RSA SecurID."
+            },
+            "type": "string",
+            "versionAdded": "v1_12_0"
         }
     },
     "owningEntity": "DMTF",

@@ -147,6 +147,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.json#/definitions/Identifier"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/Identifier"
                 }
             ],
             "description": "Any additional identifiers for a resource.",
@@ -265,6 +268,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.json#/definitions/Location"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/Location"
                 }
             ],
             "description": "The location of a resource.",
@@ -329,11 +335,11 @@
                 "Paused"
             ],
             "enumDescriptions": {
-                "Off": "The state is powered off.",
-                "On": "The state is powered on.",
-                "Paused": "The state is paused.",
-                "PoweringOff": "A temporary state between on and off.",
-                "PoweringOn": "A temporary state between off and on."
+                "Off": "The resource is powered off.  The components within the resource might continue to have AUX power.",
+                "On": "The resource is powered on.",
+                "Paused": "The resource is paused.",
+                "PoweringOff": "A temporary state between on and off.  The components within the resource can take time to process the power off action.",
+                "PoweringOn": "A temporary state between off and on.  The components within the resource can take time to process the power on action."
             },
             "enumVersionAdded": {
                 "Paused": "v1_13_0"
@@ -389,6 +395,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/ReferenceableMember"
                 }
             ]
         },
@@ -430,7 +439,7 @@
                 "Nmi": "This value shall indicate the resource will generate a diagnostic interrupt.",
                 "On": "This value shall indicate the resource will transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
                 "Pause": "This value shall indicate the resource will transition to a paused state.  Upon successful completion, the PowerState property, if supported, shall contain the value `Paused`.",
-                "PowerCycle": "This value shall indicate the resource will transition to a power off state, then transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
+                "PowerCycle": "This value shall indicate the resource will perform a power cycle.  If currently in the power on state, the resource will transition to a power off state, then transition to a power on state.  If currently in the power off state, the resource will transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
                 "PushPowerButton": "This value shall indicate the resource will behave as if the physical power button is pressed.  The behavior of pressing the physical power button may be dependent on the state of the unit and the behavior may be configurable.",
                 "Resume": "This value shall indicate the resource will transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`.",
                 "Suspend": "This value shall indicate the resource will have any state information written to persistent memory and then transition to a power off state.  Upon successful completion, the PowerState property, if supported, shall contain the value `Off`."
@@ -492,6 +501,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/Resource"
                 }
             ]
         },
@@ -544,6 +556,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_14_1.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/ResourceCollection"
                 }
             ]
         },

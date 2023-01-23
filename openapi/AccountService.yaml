@@ -6,15 +6,16 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_0_13.yaml#/components/schemas/AccountService_v1_0_13_AccountService
       - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_1_10.yaml#/components/schemas/AccountService_v1_1_10_AccountService
       - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_2_10.yaml#/components/schemas/AccountService_v1_2_10_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_3_9.yaml#/components/schemas/AccountService_v1_3_9_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_4_7.yaml#/components/schemas/AccountService_v1_4_7_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_5_6.yaml#/components/schemas/AccountService_v1_5_6_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_6_5.yaml#/components/schemas/AccountService_v1_6_5_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_7_5.yaml#/components/schemas/AccountService_v1_7_5_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_8_2.yaml#/components/schemas/AccountService_v1_8_2_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_9_1.yaml#/components/schemas/AccountService_v1_9_1_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_10_1.yaml#/components/schemas/AccountService_v1_10_1_AccountService
-      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_11_1.yaml#/components/schemas/AccountService_v1_11_1_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_3_10.yaml#/components/schemas/AccountService_v1_3_10_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_4_8.yaml#/components/schemas/AccountService_v1_4_8_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_5_7.yaml#/components/schemas/AccountService_v1_5_7_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_6_6.yaml#/components/schemas/AccountService_v1_6_6_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_7_6.yaml#/components/schemas/AccountService_v1_7_6_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_8_3.yaml#/components/schemas/AccountService_v1_8_3_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_9_2.yaml#/components/schemas/AccountService_v1_9_2_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_10_3.yaml#/components/schemas/AccountService_v1_10_3_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_11_3.yaml#/components/schemas/AccountService_v1_11_3_AccountService
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_12_0.yaml#/components/schemas/AccountService_v1_12_0_AccountService
       description: The AccountService schema defines an account service.  The properties
         are common to, and enable management of, all user accounts.  The properties
         include the password requirements and control features, such as account lockout.  Properties
@@ -29,6 +30,42 @@ components:
         specify general behavior that should be followed for typical accounts, however
         implementations may override these behaviors for special accounts or situations
         to avoid denial of service or other deadlock situations.
+    AccountService_MFABypass:
+      anyOf:
+      - $ref: http://redfish.dmtf.org/schemas/v1/AccountService.v1_12_0.yaml#/components/schemas/AccountService_v1_12_0_MFABypass
+      description: Multi-factor authentication bypass settings.
+      x-longDescription: This type shall contain multi-factor authentication bypass
+        settings.
+    AccountService_MFABypassType:
+      enum:
+      - All
+      - SecurID
+      - GoogleAuthenticator
+      - MicrosoftAuthenticator
+      - ClientCertificate
+      - OEM
+      type: string
+      x-enumDescriptions:
+        All: Bypass all multi-factor authentication types.
+        ClientCertificate: Bypass client certificate authentication.
+        GoogleAuthenticator: Bypass Google Authenticator.
+        MicrosoftAuthenticator: Bypass Microsoft Authenticator.
+        OEM: Bypass OEM-defined multi-factor authentication.
+        SecurID: Bypass RSA SecurID.
+      x-enumLongDescriptions:
+        All: This value shall indicate an account or role mapping can bypass all multi-factor
+          authentication types including OEM-defined types.
+        ClientCertificate: This value shall indicate an account or role mapping can
+          bypass client certificate authentication.
+        GoogleAuthenticator: This value shall indicate an account or role mapping
+          can bypass Google Authenticator.
+        MicrosoftAuthenticator: This value shall indicate an account or role mapping
+          can bypass Microsoft Authenticator.
+        OEM: This value shall indicate an account or role mapping can bypass OEM-defined
+          multi-factor authentication.
+        SecurID: This value shall indicate an account or role mapping can bypass RSA
+          SecurID.
+      x-versionAdded: v1_12_0
 title: '#AccountService.AccountService'
 x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
 x-owningEntity: DMTF

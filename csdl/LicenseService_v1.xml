@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  LicenseService v1.0.0                                               -->
+<!--# Redfish Schema:  LicenseService v1.1.0                                               -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -21,10 +21,14 @@
     <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Resource_v1.xml">
+    <edmx:Include Namespace="Resource"/>
     <edmx:Include Namespace="Resource.v1_0_0"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/LicenseCollection_v1.xml">
     <edmx:Include Namespace="LicenseCollection"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Manager_v1.xml">
+    <edmx:Include Namespace="Manager"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -76,6 +80,30 @@
         <Parameter Name="Password" Type="Edm.String">
           <Annotation Term="OData.Description" String="The password to access the URI specified by the LicenseFileURI parameter."/>
           <Annotation Term="OData.LongDescription" String="This parameter shall represent the password to access the URI specified by the LicenseFileURI parameter."/>
+        </Parameter>
+        <Parameter Name="AuthorizedDevices" Type="Collection(Resource.Item)">
+          <Annotation Term="OData.Description" String="An array of links to the devices to be authorized by the license."/>
+          <Annotation Term="OData.LongDescription" String="This parameter shall contain an array of links to the devices to be authorized by the license.  Clients can provide this parameter when installing a license to apply the license to specific devices.  If not provided when installing a license, the service may determine the devices to which the license applies.  This parameter shall not be present if the AuthorizationScope property contains the value `Service`."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_1_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Parameter>
+        <Parameter Name="TargetServices" Type="Collection(Manager.Manager)">
+          <Annotation Term="OData.Description" String="An array of links to the managers where the license will be installed."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Manager that represent the services where the license will be installed, such as remote Redfish services.  This parameter shall only be present in aggregators when the AuthorizationScope property contains `Service` or `Capacity`."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_1_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
         </Parameter>
       </Action>
     </Schema>
@@ -152,6 +180,14 @@
           <Annotation Term="OData.Description" String="Network File System (NFS)."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="LicenseService.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+      <Annotation Term="OData.Description" String="This version was created to add the AuthorizedDevices and TargetServices parameters to the Install action."/>
+
+      <EntityType Name="LicenseService" BaseType="LicenseService.v1_0_0.LicenseService"/>
     </Schema>
 
   </edmx:DataServices>

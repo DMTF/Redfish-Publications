@@ -1,21 +1,21 @@
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
 |   Row |   Sequence# | Format   | Flags                          | Field String                         |   Child Count | Offset   |
 +=======+=============+==========+================================+======================================+===============+==========+
-|     0 |           0 | Set      |                                | MemoryMetrics                        |            11 | 1        |
+|     0 |           0 | Set      |                                | MemoryMetrics                        |            15 | 1        |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|     1 |           0 | Set      | Nullable=False,                | Actions                              |             2 | 12       |
+|     1 |           0 | Set      | Nullable=False,                | Actions                              |             2 | 16       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
 |     2 |           1 | Integer  | Nullable=True,Permission=Read  | BlockSizeBytes                       |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|     3 |           2 | Set      | Nullable=False,                | CurrentPeriod                        |             6 | 14       |
+|     3 |           2 | Set      | Nullable=False,                | CurrentPeriod                        |             6 | 18       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
 |     4 |           3 | String   | Nullable=True,Permission=Read  | Description                          |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|     5 |           4 | Set      | Nullable=False,                | HealthData                           |             6 | 20       |
+|     5 |           4 | Set      | Nullable=False,                | HealthData                           |             6 | 24       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
 |     6 |           5 | String   | Nullable=False,Permission=Read | Id                                   |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|     7 |           6 | Set      | Nullable=False,                | LifeTime                             |             6 | 26       |
+|     7 |           6 | Set      | Nullable=False,                | LifeTime                             |             6 | 30       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
 |     8 |           7 | String   | Nullable=False,Permission=Read | Name                                 |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
@@ -25,63 +25,81 @@
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
 |    11 |          10 | Integer  | Nullable=True,Permission=Read  | OperatingSpeedMHz                    |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    12 |           0 | Set      | Nullable=False,                | Oem                                  |             0 |          |
+|    12 |          11 | Set      | Nullable=True,                 | CXL                                  |             1 | 36       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    13 |           1 | Set      |                                | #MemoryMetrics.ClearCurrentPeriod    |             2 | 32       |
+|    13 |          12 | Integer  | Nullable=True,Permission=Read  | CorrectedPersistentErrorCount        |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    14 |           0 | Integer  | Nullable=True,Permission=Read  | BlocksRead                           |             0 |          |
+|    14 |          13 | Integer  | Nullable=True,Permission=Read  | CorrectedVolatileErrorCount          |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    15 |           1 | Integer  | Nullable=True,Permission=Read  | BlocksWritten                        |             0 |          |
+|    15 |          14 | Integer  | Nullable=True,Permission=Read  | DirtyShutdownCount                   |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    16 |           2 | Integer  | Nullable=True,Permission=Read  | CorrectableECCErrorCount             |             0 |          |
+|    16 |           0 | Set      | Nullable=False,                | Oem                                  |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    17 |           3 | Integer  | Nullable=True,Permission=Read  | UncorrectableECCErrorCount           |             0 |          |
+|    17 |           1 | Set      |                                | #MemoryMetrics.ClearCurrentPeriod    |             2 | 37       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    18 |           4 | Integer  | Nullable=True,Permission=Read  | IndeterminateCorrectableErrorCount   |             0 |          |
+|    18 |           0 | Integer  | Nullable=True,Permission=Read  | BlocksRead                           |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    19 |           5 | Integer  | Nullable=True,Permission=Read  | IndeterminateUncorrectableErrorCount |             0 |          |
+|    19 |           1 | Integer  | Nullable=True,Permission=Read  | BlocksWritten                        |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    20 |           0 | Set      | Nullable=False,                | AlarmTrips                           |             5 | 34       |
+|    20 |           2 | Integer  | Nullable=True,Permission=Read  | CorrectableECCErrorCount             |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    21 |           1 | Boolean  | Nullable=True,Permission=Read  | DataLossDetected                     |             0 |          |
+|    21 |           3 | Integer  | Nullable=True,Permission=Read  | UncorrectableECCErrorCount           |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    22 |           2 | Boolean  | Nullable=True,Permission=Read  | LastShutdownSuccess                  |             0 |          |
+|    22 |           4 | Integer  | Nullable=True,Permission=Read  | IndeterminateCorrectableErrorCount   |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    23 |           3 | Boolean  | Nullable=True,Permission=Read  | PerformanceDegraded                  |             0 |          |
+|    23 |           5 | Integer  | Nullable=True,Permission=Read  | IndeterminateUncorrectableErrorCount |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    24 |           4 | Real     | Nullable=True,Permission=Read  | RemainingSpareBlockPercentage        |             0 |          |
+|    24 |           0 | Set      | Nullable=False,                | AlarmTrips                           |             5 | 39       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    25 |           5 | Real     | Nullable=True,Permission=Read  | PredictedMediaLifeLeftPercent        |             0 |          |
+|    25 |           1 | Boolean  | Nullable=True,Permission=Read  | DataLossDetected                     |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    26 |           0 | Integer  | Nullable=True,Permission=Read  | BlocksRead                           |             0 |          |
+|    26 |           2 | Boolean  | Nullable=True,Permission=Read  | LastShutdownSuccess                  |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    27 |           1 | Integer  | Nullable=True,Permission=Read  | BlocksWritten                        |             0 |          |
+|    27 |           3 | Boolean  | Nullable=True,Permission=Read  | PerformanceDegraded                  |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    28 |           2 | Integer  | Nullable=True,Permission=Read  | CorrectableECCErrorCount             |             0 |          |
+|    28 |           4 | Real     | Nullable=True,Permission=Read  | RemainingSpareBlockPercentage        |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    29 |           3 | Integer  | Nullable=True,Permission=Read  | UncorrectableECCErrorCount           |             0 |          |
+|    29 |           5 | Real     | Nullable=True,Permission=Read  | PredictedMediaLifeLeftPercent        |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    30 |           4 | Integer  | Nullable=True,Permission=Read  | IndeterminateCorrectableErrorCount   |             0 |          |
+|    30 |           0 | Integer  | Nullable=True,Permission=Read  | BlocksRead                           |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    31 |           5 | Integer  | Nullable=True,Permission=Read  | IndeterminateUncorrectableErrorCount |             0 |          |
+|    31 |           1 | Integer  | Nullable=True,Permission=Read  | BlocksWritten                        |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    32 |           0 | String   | Nullable=False,Permission=Read | target                               |             0 |          |
+|    32 |           2 | Integer  | Nullable=True,Permission=Read  | CorrectableECCErrorCount             |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    33 |           1 | String   | Nullable=False,Permission=Read | title                                |             0 |          |
+|    33 |           3 | Integer  | Nullable=True,Permission=Read  | UncorrectableECCErrorCount           |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    34 |           0 | Boolean  | Nullable=True,Permission=Read  | AddressParityError                   |             0 |          |
+|    34 |           4 | Integer  | Nullable=True,Permission=Read  | IndeterminateCorrectableErrorCount   |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    35 |           1 | Boolean  | Nullable=True,Permission=Read  | CorrectableECCError                  |             0 |          |
+|    35 |           5 | Integer  | Nullable=True,Permission=Read  | IndeterminateUncorrectableErrorCount |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    36 |           2 | Boolean  | Nullable=True,Permission=Read  | SpareBlock                           |             0 |          |
+|    36 |           0 | Set      | Nullable=True,                 | AlertCapabilities                    |             4 | 44       |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    37 |           3 | Boolean  | Nullable=True,Permission=Read  | Temperature                          |             0 |          |
+|    37 |           0 | String   | Nullable=False,Permission=Read | target                               |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-|    38 |           4 | Boolean  | Nullable=True,Permission=Read  | UncorrectableECCError                |             0 |          |
+|    38 |           1 | String   | Nullable=False,Permission=Read | title                                |             0 |          |
 +-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
-Total Entries: 39
-Fixed size consumed (bytes): 402 (0x192)
-Field string size consumed (bytes): 564 (0x234)
-Total size (bytes): 966 (0x3c6)
-Version: 0XF1F5F000
-Signature: 0x4ba3d869
+|    39 |           0 | Boolean  | Nullable=True,Permission=Read  | AddressParityError                   |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    40 |           1 | Boolean  | Nullable=True,Permission=Read  | CorrectableECCError                  |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    41 |           2 | Boolean  | Nullable=True,Permission=Read  | SpareBlock                           |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    42 |           3 | Boolean  | Nullable=True,Permission=Read  | Temperature                          |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    43 |           4 | Boolean  | Nullable=True,Permission=Read  | UncorrectableECCError                |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    44 |           0 | Boolean  | Nullable=True,Permission=Read  | CorrectableECCError                  |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    45 |           1 | Boolean  | Nullable=True,Permission=Read  | SpareBlock                           |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    46 |           2 | Boolean  | Nullable=True,Permission=Read  | Temperature                          |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+|    47 |           3 | Boolean  | Nullable=True,Permission=Read  | UncorrectableECCError                |             0 |          |
++-------+-------------+----------+--------------------------------+--------------------------------------+---------------+----------+
+Total Entries: 48
+Fixed size consumed (bytes): 492 (0x1ec)
+Field string size consumed (bytes): 663 (0x297)
+Total size (bytes): 1155 (0x483)
+Version: 0XF1F6F000
+Signature: 0x7d0fda77

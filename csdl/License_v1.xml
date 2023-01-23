@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  License v1.0.0                                                      -->
+<!--# Redfish Schema:  License v1.1.0                                                      -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -23,6 +23,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/RedfishExtensions_v1.xml">
     <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Manager_v1.xml">
+    <edmx:Include Namespace="Manager"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -177,8 +180,8 @@
         <Annotation Term="OData.LongDescription" String="This Redfish Specification-described type shall contain links to resources that are related to but are not contained by, or subordinate to, this resource."/>
         <NavigationProperty Name="AuthorizedDevices" Type="Collection(Resource.Item)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="An array of links to devices authorized by the license."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to devices that are authorized by the license.  Clients can provide this property when installing a license to apply the license to specific devices.  If not provided when installing a license, the service may determine the devices to which the license applies.  This property shall not be present if the AuthorizationScope property contains the value `Service`."/>
+          <Annotation Term="OData.Description" String="An array of links to the devices authorized by the license."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to the devices that are authorized by the license.  Clients can provide this property when installing a license to apply the license to specific devices.  If not provided when installing a license, the service may determine the devices to which the license applies.  This property shall not be present if the AuthorizationScope property contains the value `Service`."/>
         </NavigationProperty>
       </ComplexType>
 
@@ -242,11 +245,11 @@
         </Member>
         <Member Name="Capacity">
           <Annotation Term="OData.Description" String="The license authorizes functionality to a number of devices, but not restricted to specific device instances."/>
-          <Annotation Term="OData.LongDescription" String="This value shall indicate the license authorizes functionality for one or more device instances limited to a maximum number of devices specified by the value of the MaxAuthorizedDevices property."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the license authorizes functionality for one or more device instances limited to a maximum number of devices specified by the value of the MaxAuthorizedDevices property.  In an aggregator, the aggregating service shall represent the applicable services in the TargetServices property in the Links property."/>
         </Member>
         <Member Name="Service">
-          <Annotation Term="OData.Description" String="The license authorizes functionality to this Redfish service."/>
-          <Annotation Term="OData.LongDescription" String="This value shall indicate the license authorizes product-level or service-level functionality for the Redfish service.  This may include hardware or software features not tied to a specific device or subsystem.  License resources using this value shall not include the AuthorizedDevices nor the MaxAuthorizedDevices properties."/>
+          <Annotation Term="OData.Description" String="The license authorizes functionality to a service."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the license authorizes product-level or service-level functionality for a service.  This may include hardware or software features not tied to a specific device or subsystem.  License resources using this value shall not include the AuthorizedDevices nor the MaxAuthorizedDevices properties.  In an aggregator, the aggregating service shall represent the applicable services in the TargetServices property in the Links property."/>
         </Member>
       </EnumType>
 
@@ -258,6 +261,27 @@
           <Annotation Term="OData.Description" String="A license installed by user."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="License.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the descriptions of the `Service` and `Capacity` values in AuthorizationScope to describe the usage with aggregators."/>
+      <EntityType Name="License" BaseType="License.v1_0_0.License"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="License.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2022.3"/>
+
+      <EntityType Name="License" BaseType="License.v1_0_1.License"/>
+
+      <ComplexType Name="Links" BaseType="License.v1_0_0.Links">
+        <NavigationProperty Name="TargetServices" Type="Collection(Manager.Manager)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of links to the managers where the license is installed."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Manager that represent the services where the license is installed, such as remote Redfish services.  This property shall only be present in aggregators when the AuthorizationScope property contains `Service` or `Capacity`."/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>
