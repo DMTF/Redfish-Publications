@@ -77,6 +77,63 @@ components:
         LBAFormat8: Indicates the LBA data size supported if supported.
         LBAFormat9: Indicates the LBA data size supported if supported.
       x-versionAdded: v1_7_0
+    Volume_LBARelativePerformanceType:
+      description: Indicate the relative performance of the LBA format relative to
+        other LBA formats supported by the controller.
+      enum:
+      - Best
+      - Better
+      - Good
+      - Degraded
+      type: string
+      x-enumDescriptions:
+        Best: Best performance.
+        Better: Better performance.
+        Degraded: Degraded performance.
+        Good: Good performance.
+    Volume_NamespaceType:
+      enum:
+      - Block
+      - KeyValue
+      - ZNS
+      - Computational
+      type: string
+      x-enumDescriptions:
+        Block: The namespace is configured for use with a block storage interface.
+        Computational: The namespace is configured for use with a computational storage
+          interface.
+        KeyValue: The namespace is configured for use with a KeyValue interface.
+        ZNS: The namespace is configured for use with a zoned storage interface.
+    Volume_OperationType:
+      enum:
+      - Deduplicate
+      - CheckConsistency
+      - Initialize
+      - Replicate
+      - Delete
+      - ChangeRAIDType
+      - Rebuild
+      - Encrypt
+      - Decrypt
+      - Resize
+      - Compress
+      - Sanitize
+      - Format
+      type: string
+      x-enumDescriptions:
+        ChangeRAIDType: A ChangeRAIDType operation is being performed.
+        CheckConsistency: A CheckConsistency operation is being performed.
+        Compress: A Compress operation is being performed.
+        Decrypt: A Decrypt operation is being performed.
+        Deduplicate: A Deduplicate operation is being performed.
+        Delete: A Delete operation is being performed.
+        Encrypt: An Encrypt operation is being performed.
+        Format: A Format operation is being performed.
+        Initialize: An Initialize operation is being performed.
+        Rebuild: A Rebuild operation is being performed.
+        Replicate: A Replicate operation is being performed.
+        Resize: A Resize operation is being performed.
+        Sanitize: A Sanitize operation is being performed.
     Volume_RAIDType:
       enum:
       - RAID0
@@ -247,6 +304,7 @@ components:
       - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_6_2.yaml#/components/schemas/Volume_v1_6_2_Volume
       - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_7_0.yaml#/components/schemas/Volume_v1_7_0_Volume
       - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_8_0.yaml#/components/schemas/Volume_v1_8_0_Volume
+      - $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_9_0.yaml#/components/schemas/Volume_v1_9_0_Volume
       description: Volume contains properties used to describe a volume, virtual disk,
         LUN, or other logical storage entity for any system.
       x-longDescription: This resource shall be used to represent a volume, virtual
@@ -375,6 +433,6 @@ components:
         'Off': The support for addressing the write hole issue is disabled. The volume
           is not performing any additional activities to close the RAID write hole.
 title: '#Volume.Volume'
-x-copyright: Copyright 2015-2022 Storage Networking Industry Association (SNIA), USA.
+x-copyright: Copyright 2015-2023 Storage Networking Industry Association (SNIA), USA.
   All rights reserved.
 x-owningEntity: SNIA

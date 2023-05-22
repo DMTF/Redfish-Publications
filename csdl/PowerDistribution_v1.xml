@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerDistribution v1.3.0                                            -->
+<!--# Redfish Schema:  PowerDistribution v1.3.1                                            -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2022 DMTF.                                                            -->
+<!--# Copyright 2014-2023 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -152,7 +152,7 @@
         <Property Name="AssetTag" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The user-assigned asset tag for this equipment."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the user-assigned asset tag, which is an identifying string that tracks the equipment for inventory purposes."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the user-assigned asset tag, which is an identifying string that tracks the equipment for inventory purposes.  Modifying this property may modify the AssetTag in the containing Chassis resource."/>
         </Property>
         <Property Name="UUID" Type="Resource.UUID">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -472,6 +472,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_4.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_0_6">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the description for AssetTag to show there might be a tie to the AssetTag of the containing Chassis resource."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_5.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.2"/>
@@ -525,6 +531,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_1_1.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_1_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the description for AssetTag to show there might be a tie to the AssetTag of the containing Chassis resource."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_1_2.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.3"/>
@@ -545,6 +557,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_1.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_2_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the description for AssetTag to show there might be a tie to the AssetTag of the containing Chassis resource."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_2.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.3"/>
@@ -556,6 +574,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain a user-assigned label used to identify this resource.  If a value has not been assigned by a user, the value of this property shall be an empty string."/>
         </Property>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_3_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to update the description for AssetTag to show there might be a tie to the AssetTag of the containing Chassis resource."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_3_0.PowerDistribution"/>
     </Schema>
 
   </edmx:DataServices>

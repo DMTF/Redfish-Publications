@@ -1,0 +1,803 @@
+{
+    "@Redfish.Copyright": "Copyright 2023 DMTF. All rights reserved.",
+    "@Redfish.License": "Creative Commons Attribution 4.0 License.  For full text see link: https://creativecommons.org/licenses/by/4.0/",
+    "@odata.type": "#MessageRegistry.v1_6_0.MessageRegistry",
+    "Id": "Environmental.1.0.0",
+    "Name": "Environmental Message Registry",
+    "Language": "en",
+    "Description": "This registry defines messages related to environmental sensors, heating and cooling equipment, or other environmental conditions.",
+    "RegistryPrefix": "Environmental",
+    "RegistryVersion": "1.0.0",
+    "OwningEntity": "DMTF",
+    "Messages": {
+        "TemperatureAboveUpperCautionThreshold": {
+            "Description": "Indicates that a temperature reading is above the upper caution threshold.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates an upper caution threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is above the value of the `Reading` property within the `UpperCaution` or `UpperCautionUser` properties.  Otherwise, the message shall indicate that the reading violates an internal level or threshold.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is above the %3 upper caution threshold.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "If the reading originated from a `Sensor` resource, this argument shall contain the value of the `Reading` property within the `UpperCaution` or `UpperCautionUser` properties of the `Sensor` resource.  Otherwise, this argument shall contain an internal level or threshold value."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveUpperCautionThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureAboveUpperCriticalThreshold": {
+            "Description": "Indicates that a temperature reading is above the upper critical threshold.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates an upper critical threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is above the value of the `Reading` property within the `UpperCritical` or `UpperCriticalUser` properties.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is above the %3 upper critical threshold.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `UpperCritical` or `UpperCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveUpperCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureAboveUpperFatalThreshold": {
+            "Description": "Indicates that a temperature reading is above the upper fatal threshold.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates an upper fatal threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is above the value of the `Reading` property within the `UpperFatal` property.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is above the %3 upper fatal threshold.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `UpperFatal` property of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveUpperFatalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureBelowLowerCautionThreshold": {
+            "Description": "Indicates that a temperature reading is below the lower caution threshold.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates a lower caution threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is below the value of the `Reading` property within the `LowerCaution` or `LowerCautionUser` properties.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is below the %3 lower caution threshold.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `LowerCaution` or `LowerCautionUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowLowerCautionThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureBelowLowerCriticalThreshold": {
+            "Description": "Indicates that a temperature reading is below the lower critical threshold.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates a lower critical threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is below the value of the `Reading` property within the `LowerCritical` or `LowerCriticalUser` properties.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is below the %3 lower critical threshold.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `LowerCritical` or `LowerCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowLowerCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureBelowLowerFatalThreshold": {
+            "Description": "Indicates that a temperature reading is below the lower fatal threshold.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates a lower fatal threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is below the value of the `Reading` property within the `LowerFatal` property.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is below the %3 lower fatal threshold.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `LowerFatal` property of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowLowerFatalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureBelowUpperFatalThreshold": {
+            "Description": "Indicates that a temperature reading is no longer above the upper fatal threshold, but is still outside of normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading, previously above the upper fatal threshold, no longer violates the upper fatal threshold.  However, the temperature violates at least one upper threshold and is not within the normal operating range.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is now below the %3 upper fatal threshold but remains outside of normal range.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `UpperFatal` property of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowUpperFatalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "TemperatureAboveUpperFatalThreshold"
+                ]
+            }
+        },
+        "TemperatureBelowUpperCriticalThreshold": {
+            "Description": "Indicates that a temperature reading is no longer above the upper critical threshold, but is still outside of normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading, previously above the upper critical threshold, no longer violates the upper critical threshold.  However, the temperature violates at least one upper threshold and is not within the normal operating range.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is now below the %3 upper critical threshold but remains outside of normal range.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `UpperCritical` or `UpperCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowUpperCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "TemperatureAboveUpperCriticalThreshold"
+                ]
+            }
+        },
+        "TemperatureAboveLowerFatalThreshold": {
+            "Description": "Indicates that a temperature reading is no longer below the lower fatal threshold, but is still outside of normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading, previously below the lower fatal threshold, no longer violates the lower fatal threshold.  However, the temperature violates at least one lower threshold and is not within the normal operating range.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is now above the %3 lower fatal threshold but remains outside of normal range.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `LowerFatal` property of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveLowerFatalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "TemperatureBelowLowerFatalThreshold"
+                ]
+            }
+        },
+        "TemperatureAboveLowerCriticalThreshold": {
+            "Description": "Indicates that a temperature reading is no longer below the lower critical threshold, but is still outside of normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading, previously below the lower critical threshold, no longer violates the lower critical threshold.  However, the temperature violates at least one lower threshold and is not within the normal operating range.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is now above the %3 lower critical threshold but remains outside of normal range.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius.",
+                "This argument shall contain the value of the `Reading` property within the `LowerCritical` or `LowerCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveLowerCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "TemperatureBelowLowerCriticalThreshold"
+                ]
+            }
+        },
+        "TemperatureWarning": {
+            "Description": "Indicates that a temperature reading exceeds an internal warning level.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates an internal warning level.  This message shall be used for temperature properties or `Sensor` resources that implement boolean trip points for a caution limit, such as from hardware mechanisms with no threshold value.  The temperature properties or `Sensor` resources may contain readable thresholds that coexist with this unspecified trip point.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) exceeds the warning level.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingWarning"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureCritical": {
+            "Description": "Indicates that a temperature reading exceeds an internal critical level.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading violates an internal critical level.  This message shall be used for temperature properties or `Sensor` resources that implement boolean trip points for a critical limit, such as from hardware mechanisms with no threshold value.  The temperature properties or `Sensor` resources may contain readable thresholds that coexist with this unspecified trip point.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) exceeds the critical level.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingCritical"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "TemperatureNoLongerCritical": {
+            "Description": "Indicates that a temperature reading no longer exceeds an internal critical level, but exceeds an internal warning level.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading no longer violates an internal critical level, but still violates an internal warning level.  This message shall be used for temperature properties or `Sensor` resources that implement boolean trip points for a critical limit, such as from hardware mechanisms with no threshold value.  The temperature properties or `Sensor` resources may contain readable thresholds that coexist with this unspecified trip point.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) no longer exceeds the critical level.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingNoLongerCritical"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "TemperatureCritical"
+                ]
+            }
+        },
+        "TemperatureNormal": {
+            "Description": "Indicates that a temperature reading is now within normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a temperature reading has returned to its normal operating range.",
+            "Message": "Temperature '%1' reading of %2 degrees (C) is within normal operating range.",
+            "MessageSeverity": "OK",
+            "Severity": "OK",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the temperature reading.",
+                "The temperature in degrees Celsius."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the temperature in degrees Celsius."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.SensorReadingNormalRange"
+            ],
+            "Resolution": "None.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "TemperatureAboveUpperCautionThreshold",
+                    "TemperatureAboveUpperCriticalThreshold",
+                    "TemperatureAboveUpperFatalThreshold",
+                    "TemperatureBelowUpperFatalThreshold",
+                    "TemperatureBelowUpperCriticalThreshold",
+                    "TemperatureBelowLowerCautionThreshold",
+                    "TemperatureBelowLowerCriticalThreshold",
+                    "TemperatureBelowLowerFatalThreshold",
+                    "TemperatureAboveLowerFatalThreshold",
+                    "TemperatureAboveLowerCriticalThreshold",
+                    "TemperatureWarning",
+                    "TemperatureCritical",
+                    "TemperatureNoLongerCritical"
+                ]
+            }
+        },
+        "HumidityAboveUpperCautionThreshold": {
+            "Description": "Indicates that a humidity reading is above the upper caution threshold.",
+            "LongDescription": "This message shall be used to indicate that a humidity reading violates  an upper caution threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is above the value of the `Reading` property within the `UpperCaution` or `UpperCautionUser` properties.",
+            "Message": "Humidity '%1' reading of %2 percent is above the %3 upper caution threshold.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the humidity reading.",
+                "The humidity in percent units.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the humidity reading.",
+                "This argument shall contain the humidity as a percentage.",
+                "This argument shall contain the value of the `Reading` property within the `UpperCaution` or `UpperCautionUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveUpperCautionThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "HumidityAboveUpperCriticalThreshold": {
+            "Description": "Indicates that a humidity reading is above the upper critical threshold.",
+            "LongDescription": "This message shall be used to indicate that a humidity reading violates an upper caution threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is above the value of the `Reading` property within the `UpperCritical` or `UpperCriticalUser` properties.",
+            "Message": "Humidity '%1' reading of %2 percent is above the %3 upper critical threshold.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the humidity reading.",
+                "The humidity in percent units.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the humidity reading.",
+                "This argument shall contain the humidity as a percentage.",
+                "This argument shall contain the value of the `Reading` property within the `UpperCritical` or `UpperCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveUpperCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "HumidityBelowLowerCautionThreshold": {
+            "Description": "Indicates that a humidity reading is below the lower caution threshold.",
+            "LongDescription": "This message shall be used to indicate that a humidity reading violates an lower caution threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is below the value of the `Reading` property within the `LowerCaution` or `LowerCautionUser` properties.",
+            "Message": "Humidity '%1' reading of %2 percent is below the %3 lower caution threshold.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the humidity reading.",
+                "The humidity in percent units.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the humidity reading.",
+                "This argument shall contain the humidity as a percentage.",
+                "This argument shall contain the value of the `Reading` property within the `LowerCaution` or `LowerCautionUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowLowerCautionThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "HumidityBelowLowerCriticalThreshold": {
+            "Description": "Indicates that a humidity reading is below the lower critical threshold.",
+            "LongDescription": "This message shall be used to indicate that a humidity reading violates a lower critical threshold.  If the reading originates from a `Sensor` resource, the message shall indicate that the value of the `Reading` property is below the value of the `Reading` property within the `LowerCritical` or `LowerCriticalUser` properties.",
+            "Message": "Humidity '%1' reading of %2 percent is below the %3 lower critical threshold.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the humidity reading.",
+                "The humidity in percent units.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the humidity reading.",
+                "This argument shall contain the humidity as a percentage.",
+                "This argument shall contain the value of the `Reading` property within the `UpperCritical` or `UpperCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowLowerCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition."
+        },
+        "HumidityBelowUpperCriticalThreshold": {
+            "Description": "Indicates that a humidity reading is no longer above the upper critical threshold, but is still outside of normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a humidity reading, previously above the critical threshold, no longer violates the critical threshold.  However, the humidity violates at least one upper threshold and is not within the normal operating range.",
+            "Message": "Humidity '%1' reading of %2 percent is now below the %3 upper critical threshold but remains outside of normal range.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the humidity reading.",
+                "The percent humidity.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the temperature reading.",
+                "This argument shall contain the humidity as a percentage.",
+                "This argument shall contain the value of the `Reading` property within the `UpperCritical` or `UpperCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingBelowUpperCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "HumidityAboveUpperCriticalThreshold"
+                ]
+            }
+        },
+        "HumidityAboveLowerCriticalThreshold": {
+            "Description": "Indicates that a humidity reading is no longer below the lower critical threshold, but is still outside of normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a humidity reading, previously below the lower critical threshold, no longer violates the lower critical threshold.  However, the humidity violates at least one lower threshold and is not within the normal operating range.",
+            "Message": "Humidity '%1' reading of %2 percent is now above the %3 lower critical threshold but remains outside of normal range.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the humidity reading.",
+                "The percent humidity.",
+                "The threshold value."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the humidity reading.",
+                "This argument shall contain the humidity as a percentage.",
+                "This argument shall contain the value of the `Reading` property within the `LowerCritical` or `LowerCriticalUser` properties of the `Sensor` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.ReadingAboveLowerCriticalThreshold"
+            ],
+            "Resolution": "Check the condition of the resource listed in OriginOfCondition.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "HumidityBelowLowerCriticalThreshold"
+                ]
+            }
+        },
+        "HumidityNormal": {
+            "Description": "Indicates that a humidity reading is now within normal operating range.",
+            "LongDescription": "This message shall be used to indicate that a humidity reading has returned to its normal operating range.",
+            "Message": "Humidity '%1' reading of %2 percent is within normal operating range.",
+            "MessageSeverity": "OK",
+            "Severity": "OK",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the humidity reading.",
+                "The percent humidity."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the location or physical context of the humidity reading.",
+                "This argument shall contain the humidity as a percentage."
+            ],
+            "MapsToGeneralMessages": [
+                "SensorEvent.SensorReadingNormalRange"
+            ],
+            "Resolution": "None.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "HumidityAboveUpperCautionThreshold",
+                    "HumidityAboveUpperCriticalThreshold",
+                    "HumidityBelowUpperCriticalThreshold",
+                    "HumidityBelowLowerCautionThreshold",
+                    "HumidityBelowLowerCriticalThreshold",
+                    "HumidityAboveLowerCriticalThreshold"
+                ]
+            }
+        },
+        "FanFailed": {
+            "Description": "Indicates that a fan has failed.",
+            "LongDescription": "This message shall be used to indicate that a fan has failed.",
+            "Message": "Fan '%1' has failed.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the fan."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Fan` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ],
+            "Resolution": "Check the fan hardware and replace any faulty component."
+        },
+        "FanRestored": {
+            "Description": "Indicates that a fan was repaired or restored to normal operation.",
+            "LongDescription": "This message shall be used to indicate that a fan was repaired, replaced, or otherwise returned to normal operation.",
+            "Message": "Fan '%1' was restored.",
+            "MessageSeverity": "OK",
+            "Severity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the fan."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Fan` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ],
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "FanFailed"
+                ]
+            },
+            "Resolution": "None."
+        },
+        "FanRemoved": {
+            "Description": "Indicates that a fan was removed.",
+            "LongDescription": "This message shall be used to indicate that a fan was removed.",
+            "Message": "Fan '%1' was removed.",
+            "MessageSeverity": "OK",
+            "Severity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the fan."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Fan` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStateChanged"
+            ],
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "FanFailed"
+                ]
+            },
+            "Resolution": "None."
+        },
+        "FanInserted": {
+            "Description": "Indicates that a fan was inserted or installed.",
+            "LongDescription": "This message shall be used to indicate that a fan was inserted or installed",
+            "Message": "Fan '%1' was inserted.",
+            "MessageSeverity": "OK",
+            "Severity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the fan."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Fan` resource."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStateChanged"
+            ],
+            "Resolution": "None."
+        },
+        "FanGroupCritical": {
+            "Description": "Indicates that a fan group has a critical status.",
+            "LongDescription": "This message shall be used to indicate that a fan group is operating in a critical state due to a fault or a change in configuration.",
+            "Message": "Fan group '%1' is in a critical state.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the fan group."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the group of `Fan` resources."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedCritical"
+            ],
+            "Resolution": "None."
+        },
+        "FanGroupWarning": {
+            "Description": "Indicates that a fan group has a warning status.",
+            "LongDescription": "This message shall be used to indicate that a fan group is operating with a warning status or in a non-redundant state due to a fault or a change in configuration.",
+            "Message": "Fan group '%1' is in a warning state.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the fan group."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the group of `Fan` resources."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ],
+            "Resolution": "None."
+        },
+        "FanGroupNormal": {
+            "Description": "Indicates that a fan group has returned to normal operations.",
+            "LongDescription": "This message shall be used to indicate that a fan group has returned to a normal operating state.",
+            "Message": "Fan group '%1' is operating normally.",
+            "MessageSeverity": "OK",
+            "Severity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the fan group."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the group of `Fan` resources."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ],
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "FanGroupCritical",
+                    "FanGroupDegraded"
+                ]
+            },
+            "Resolution": "None."
+        }
+    }
+}

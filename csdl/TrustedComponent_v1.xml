@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  TrustedComponent v1.0.0                                             -->
+<!--# Redfish Schema:  TrustedComponent v1.1.0                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2022 DMTF.                                                            -->
+<!--# Copyright 2014-2023 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -193,6 +193,35 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resource of type SoftwareInventory that represent the firmware images that apply to this trusted component."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.1"/>
+
+      <EntityType Name="TrustedComponent" BaseType="TrustedComponent.v1_0_0.TrustedComponent">
+        <Property Name="TPM" Type="TrustedComponent.v1_1_0.TPM" Nullable="false">
+          <Annotation Term="OData.Description" String="TPM-specific information for this trusted component."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain TPM-specific information for this trusted component.  This property shall only be present for TCG-defined TPM trusted components."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="TPM">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="TPM-specific information for a trusted component."/>
+        <Annotation Term="OData.LongDescription" String="This property shall contain TPM-specific information for a trusted component."/>
+        <Property Name="HardwareInterfaceVendorID" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The hardware interface vendor ID for this trusted component."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the TCG-defined 'TPM Hardware Interface Vendor ID' for this trusted component with the most significant byte shown first."/>
+          <Annotation Term="Validation.Pattern" String="^0[xX]([0-9A-Fa-f]{2}){2}$"/>
+        </Property>
+        <Property Name="CapabilitiesVendorID" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The capabilities vendor ID for this trusted component."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an ASCII string of the 4-byte TCG-defined 'TPM Capabilities Vendor ID' for this trusted component."/>
+        </Property>
       </ComplexType>
     </Schema>
 

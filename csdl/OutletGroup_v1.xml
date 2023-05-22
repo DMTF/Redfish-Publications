@@ -5,7 +5,7 @@
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2022 DMTF.                                                            -->
+<!--# Copyright 2014-2023 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -84,6 +84,27 @@
         <Annotation Term="OData.Description" String="This action resets metrics related to this outlet group."/>
         <Annotation Term="OData.LongDescription" String="This action shall reset any time intervals or counted values for this outlet group."/>
       </Action>
+
+      <EnumType Name="PowerState">
+        <Member Name="On">
+          <Annotation Term="OData.Description" String="Power on."/>
+        </Member>
+        <Member Name="Off">
+          <Annotation Term="OData.Description" String="Power off."/>
+        </Member>
+        <Member Name="PowerCycle">
+          <Annotation Term="OData.Description" String="Power cycle."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the resource will transition to a power off state, then transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_1_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+      </EnumType>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="OutletGroup.v1_0_0">
@@ -193,7 +214,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="OutletGroup.v1_0_2">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
-      <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control. It was also created to correct various typographical errors."/>
+      <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control.  It was also created to correct various typographical errors."/>
       <EntityType Name="OutletGroup" BaseType="OutletGroup.v1_0_1.OutletGroup"/>
     </Schema>
 

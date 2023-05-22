@@ -9,6 +9,22 @@ components:
         group.
       x-longDescription: This resource shall be used to represent an electrical outlet
         group for a Redfish implementation.
+    OutletGroup_PowerState:
+      enum:
+      - 'On'
+      - 'Off'
+      - PowerCycle
+      type: string
+      x-enumDescriptions:
+        'Off': Power off.
+        'On': Power on.
+        PowerCycle: Power cycle.
+      x-enumLongDescriptions:
+        PowerCycle: This value shall indicate the resource will transition to a power
+          off state, then transition to a power on state.  Upon successful completion,
+          the PowerState property, if supported, shall contain the value `On`.
+      x-enumVersionAdded:
+        PowerCycle: v1_1_0
 title: '#OutletGroup.OutletGroup'
-x-copyright: Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-copyright: Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
 x-owningEntity: DMTF

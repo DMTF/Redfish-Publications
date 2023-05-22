@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  AddressPool v1.2.1                                                  -->
+<!--# Redfish Schema:  AddressPool v1.2.2                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2022 DMTF.                                                            -->
+<!--# Copyright 2014-2023 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -261,8 +261,8 @@
         </Property>
         <Property Name="NativeVLAN" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
-          <Annotation Term="OData.Description" String="The native Virtual LAN (VLAN) tag value."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain native Virtual LAN (VLAN) tag value for untagged traffic."/>
+          <Annotation Term="OData.Description" String="The untagged Virtual LAN (VLAN) ID value."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain Virtual LAN (VLAN) ID value for untagged traffic."/>
           <Annotation Term="Validation.Minimum" Int="1"/>
           <Annotation Term="Validation.Maximum" Int="4094"/>
         </Property>
@@ -854,6 +854,12 @@
       <EntityType Name="AddressPool" BaseType="AddressPool.v1_1_1.AddressPool"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AddressPool.v1_1_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to remove non-inclusive language."/>
+      <EntityType Name="AddressPool" BaseType="AddressPool.v1_1_2.AddressPool"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AddressPool.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.2"/>
@@ -939,6 +945,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify descriptions and long descriptions for several address range properties in Ethernet fabrics."/>
       <EntityType Name="AddressPool" BaseType="AddressPool.v1_2_0.AddressPool"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AddressPool.v1_2_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to remove non-inclusive language."/>
+      <EntityType Name="AddressPool" BaseType="AddressPool.v1_2_1.AddressPool"/>
     </Schema>
 
   </edmx:DataServices>

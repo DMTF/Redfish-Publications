@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Control v1.2.0                                                      -->
+<!--# Redfish Schema:  Control v1.3.0                                                      -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2022 DMTF.                                                            -->
+<!--# Copyright 2014-2023 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -62,11 +62,6 @@
         <Annotation Term="Redfish.Uris">
           <Collection>
             <String>/redfish/v1/Chassis/{ChassisId}/Controls/{ControlId}</String>
-            <String>/redfish/v1/PowerEquipment/RackPDUs/{PowerDistributionId}/Controls/{ControlId}</String>
-            <String>/redfish/v1/PowerEquipment/FloorPDUs/{PowerDistributionId}/Controls/{ControlId}</String>
-            <String>/redfish/v1/PowerEquipment/Switchgear/{PowerDistributionId}/Controls/{ControlId}</String>
-            <String>/redfish/v1/PowerEquipment/TransferSwitches/{PowerDistributionId}/Controls/{ControlId}</String>
-            <String>/redfish/v1/PowerEquipment/PowerShelves/{PowerDistributionId}/Controls/{ControlId}</String>
           </Collection>
         </Annotation>
       </EntityType>
@@ -278,19 +273,19 @@
       <EnumType Name="ControlType">
         <Member Name="Temperature">
           <Annotation Term="OData.Description" String="Temperature (C) control or thermostat."/>
-          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to regulate temperature, in units of degrees Celsius, either to a single set point or within a range, and the SetPointUnits property shall contain `Cel`."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to regulate temperature, in units of degrees Celsius, either to a single set point or within a range.  The SetPointUnits property shall contain `Cel`."/>
         </Member>
         <Member Name="Power">
           <Annotation Term="OData.Description" String="Power (W) control or power limit."/>
-          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to regulate or limit maximum power consumption, in watt units, either to a single set point or within a range, and the SetPointUnits property shall contain `W`."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to regulate or limit maximum power consumption, in watt units, either to a single set point or within a range.  The SetPointUnits property shall contain `W`."/>
         </Member>
         <Member Name="Frequency">
           <Annotation Term="OData.Description" String="Frequency (Hz) control."/>
-          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to limit the operating frequency, in hertz units, of a device, either to a single set point or within a range, and the SetPointUnits property shall contain `Hz`."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to limit the operating frequency, in hertz units, of a device, either to a single set point or within a range.  The SetPointUnits property shall contain `Hz`."/>
         </Member>
         <Member Name="FrequencyMHz">
           <Annotation Term="OData.Description" String="Frequency (MHz) control."/>
-          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to limit the operating frequency, in megahertz units, of a device, either to a single set point or within a range, and the SetPointUnits property shall contain `MHz`."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to limit the operating frequency, in megahertz units, of a device, either to a single set point or within a range.  The SetPointUnits property shall contain `MHz`."/>
           <Annotation Term="Redfish.Revisions">
             <Collection>
               <Record>
@@ -302,12 +297,41 @@
         </Member>
         <Member Name="Pressure">
           <Annotation Term="OData.Description" String="Pressure (kPa) control."/>
-          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to adjust pressure in a system, in kilopascal units, and the SetPointUnits property shall contain `kPa`."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to adjust pressure in a system, in kilopascal units.  The SetPointUnits property shall contain `kPa`."/>
           <Annotation Term="Redfish.Revisions">
             <Collection>
               <Record>
                 <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
                 <PropertyValue Property="Version" String="v1_1_0"/>
+              </Record>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+                <PropertyValue Property="Description" String="This value has been deprecated in favor of `PressurekPa` for units consistency with the equivalent Sensor resource ReadingType value."/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="PressurekPa">
+          <Annotation Term="OData.Description" String="Pressure (kPa) control."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to adjust pressure in a system, in kilopascal units.  The SetPointUnits property shall contain `kPa`."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Member>
+        <Member Name="Valve">
+          <Annotation Term="OData.Description" String="Valve (% open) control."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate a control used to adjust a valve in a system, in percent units.  The SetPointUnits property shall contain `%`.  A value of `100` shall indicate the valve is completely open, and a value of `0` shall indicate the valve is completely closed."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_3_0"/>
               </Record>
             </Collection>
           </Annotation>
@@ -389,6 +413,21 @@
       <Annotation Term="OData.Description" String="This version was created to add the ResetToDefaults action."/>
 
       <EntityType Name="Control" BaseType="Control.v1_1_0.Control"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Control.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.1"/>
+      <Annotation Term="OData.Description" String="This version was created to add `Valve` and `PressurekPa` to ControlType, and to deprecate `Pressure` which was defined with units inconsistent with the definition for an equivalent Sensor's ReadingType."/>
+
+      <EntityType Name="Control" BaseType="Control.v1_2_0.Control">
+        <Property Name="DefaultSetPoint" Type="Edm.Decimal">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The default set point of the control."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the default set point control value.  The units shall follow the value of SetPointUnits.  Services apply this value to the SetPoint property under certain conditions, such as a reset of the manager or a ResetToDefaults action."/>
+          <Annotation Term="Redfish.Excerpt" String="Single"/>
+        </Property>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

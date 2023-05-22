@@ -1,7 +1,7 @@
 {
     "$id": "http://redfish.dmtf.org/schemas/v1/Resource.json",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
         "Condition": {
             "additionalProperties": false,
@@ -150,6 +150,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/Identifier"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_16_0.json#/definitions/Identifier"
                 }
             ],
             "description": "Any additional identifiers for a resource.",
@@ -271,6 +274,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/Location"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_16_0.json#/definitions/Location"
                 }
             ],
             "description": "The location of a resource.",
@@ -398,6 +404,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/ReferenceableMember"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_16_0.json#/definitions/ReferenceableMember"
                 }
             ]
         },
@@ -504,6 +513,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/Resource"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_16_0.json#/definitions/Resource"
                 }
             ]
         },
@@ -559,6 +571,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_15_0.json#/definitions/ResourceCollection"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.v1_16_0.json#/definitions/ResourceCollection"
                 }
             ]
         },
@@ -578,7 +593,7 @@
                 "Qualified"
             ],
             "enumDescriptions": {
-                "Absent": "This function or resource is either not present or detected.",
+                "Absent": "This function or device is not currently present or detected.  This resource represents a capability or an available location where a device can be installed.",
                 "Deferring": "The element does not process any commands but queues new requests.",
                 "Disabled": "This function or resource is disabled.",
                 "Enabled": "This function or resource is enabled.",
@@ -683,7 +698,7 @@
             "type": "object"
         },
         "UUID": {
-            "pattern": "([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string"
         }
     },

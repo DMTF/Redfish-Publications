@@ -2,7 +2,7 @@
     "$id": "http://redfish.dmtf.org/schemas/v1/OutletGroup.json",
     "$ref": "#/definitions/OutletGroup",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2014-2022 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
         "OutletGroup": {
             "anyOf": [
@@ -27,6 +27,25 @@
                 "/redfish/v1/PowerEquipment/PowerShelves/{PowerDistributionId}/OutletGroups/{OutletGroupId}",
                 "/redfish/v1/PowerEquipment/ElectricalBuses/{PowerDistributionId}/OutletGroups/{OutletGroupId}"
             ]
+        },
+        "PowerState": {
+            "enum": [
+                "On",
+                "Off",
+                "PowerCycle"
+            ],
+            "enumDescriptions": {
+                "Off": "Power off.",
+                "On": "Power on.",
+                "PowerCycle": "Power cycle."
+            },
+            "enumLongDescriptions": {
+                "PowerCycle": "This value shall indicate the resource will transition to a power off state, then transition to a power on state.  Upon successful completion, the PowerState property, if supported, shall contain the value `On`."
+            },
+            "enumVersionAdded": {
+                "PowerCycle": "v1_1_0"
+            },
+            "type": "string"
         }
     },
     "owningEntity": "DMTF",

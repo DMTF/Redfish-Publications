@@ -2,7 +2,7 @@
     "$id": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json",
     "$ref": "#/definitions/Volume",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2015-2022 Storage Networking Industry Association (SNIA), USA. All rights reserved.",
+    "copyright": "Copyright 2015-2023 Storage Networking Industry Association (SNIA), USA. All rights reserved.",
     "definitions": {
         "EncryptionTypes": {
             "enum": [
@@ -82,6 +82,70 @@
             },
             "type": "string",
             "versionAdded": "v1_7_0"
+        },
+        "LBARelativePerformanceType": {
+            "description": "Indicate the relative performance of the LBA format relative to other LBA formats supported by the controller.",
+            "enum": [
+                "Best",
+                "Better",
+                "Good",
+                "Degraded"
+            ],
+            "enumDescriptions": {
+                "Best": "Best performance.",
+                "Better": "Better performance.",
+                "Degraded": "Degraded performance.",
+                "Good": "Good performance."
+            },
+            "type": "string"
+        },
+        "NamespaceType": {
+            "enum": [
+                "Block",
+                "KeyValue",
+                "ZNS",
+                "Computational"
+            ],
+            "enumDescriptions": {
+                "Block": "The namespace is configured for use with a block storage interface.",
+                "Computational": "The namespace is configured for use with a computational storage interface.",
+                "KeyValue": "The namespace is configured for use with a KeyValue interface.",
+                "ZNS": "The namespace is configured for use with a zoned storage interface."
+            },
+            "type": "string"
+        },
+        "OperationType": {
+            "enum": [
+                "Deduplicate",
+                "CheckConsistency",
+                "Initialize",
+                "Replicate",
+                "Delete",
+                "ChangeRAIDType",
+                "Rebuild",
+                "Encrypt",
+                "Decrypt",
+                "Resize",
+                "Compress",
+                "Sanitize",
+                "Format"
+            ],
+            "enumDescriptions": {
+                "ChangeRAIDType": "A ChangeRAIDType operation is being performed.",
+                "CheckConsistency": "A CheckConsistency operation is being performed.",
+                "Compress": "A Compress operation is being performed.",
+                "Decrypt": "A Decrypt operation is being performed.",
+                "Deduplicate": "A Deduplicate operation is being performed.",
+                "Delete": "A Delete operation is being performed.",
+                "Encrypt": "An Encrypt operation is being performed.",
+                "Format": "A Format operation is being performed.",
+                "Initialize": "An Initialize operation is being performed.",
+                "Rebuild": "A Rebuild operation is being performed.",
+                "Replicate": "A Replicate operation is being performed.",
+                "Resize": "A Resize operation is being performed.",
+                "Sanitize": "A Sanitize operation is being performed."
+            },
+            "type": "string"
         },
         "RAIDType": {
             "enum": [
@@ -190,6 +254,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_8_0.json#/definitions/Volume"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_9_0.json#/definitions/Volume"
                 }
             ],
             "deletable": true,

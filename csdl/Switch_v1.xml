@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Switch v1.9.0                                                       -->
+<!--# Redfish Schema:  Switch v1.9.1                                                       -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
-<!--# Copyright 2014-2022 DMTF.                                                            -->
+<!--# Copyright 2014-2023 DMTF.                                                            -->
 <!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
 <!--################################################################################       -->
 <!---->
@@ -540,8 +540,15 @@
           <Annotation Term="OData.Description" String="The link to the metrics associated with this switch."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a link to the metrics associated with this switch."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.URISegment" String="SwitchMetrics"/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Switch.v1_7_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to add the URI segment annotation to Metrics."/>
+      <EntityType Name="Switch" BaseType="Switch.v1_7_0.Switch"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Switch.v1_8_0">
@@ -550,6 +557,12 @@
       <Annotation Term="OData.Description" String="This version was created to deprecate Measurements in favor of measurement reporting in the ComponentIntegrity resource."/>
 
       <EntityType Name="Switch" BaseType="Switch.v1_7_0.Switch"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Switch.v1_8_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to add the URI segment annotation to Metrics."/>
+      <EntityType Name="Switch" BaseType="Switch.v1_8_0.Switch"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Switch.v1_9_0">
@@ -580,7 +593,7 @@
           <Annotation Term="OData.Description" String="Virtual CXL Switch (VCS) properties for this switch."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain Virtual CXL Switch (VCS) properties for this switch."/>
         </Property>
-      </ComplexType> 
+      </ComplexType>
 
       <ComplexType Name="VCSSwitch">
         <Annotation Term="OData.Description" String="Virtual CXL Switch (VCS) properties for a switch."/>
@@ -591,6 +604,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of Host Device Memory (HDM) Decoders supported by this switch."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Switch.v1_9_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to add the URI segment annotation to Metrics."/>
+      <EntityType Name="Switch" BaseType="Switch.v1_9_0.Switch"/>
     </Schema>
 
   </edmx:DataServices>

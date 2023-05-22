@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
-<!-- Copyright 2015-2022 Storage Networking Industry Association (SNIA), USA. All rights reserved.-->
+<!-- Copyright 2015-2023 Storage Networking Industry Association (SNIA), USA. All rights reserved.-->
 
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
 
@@ -60,16 +60,26 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/swordfish/v1/StorageReplicaInfo_v1.xml">
     <edmx:Include Namespace="StorageReplicaInfo"/>
-    <edmx:Include Namespace="StorageReplicaInfo.v1_3_0"/>
+    <edmx:Include Namespace="StorageReplicaInfo.v1_4_0"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/swordfish/v1/IOStatistics_v1.xml">
     <edmx:Include Namespace="IOStatistics"/>
+    <edmx:Include Namespace="IOStatistics.v1_0_1"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/swordfish/v1/SpareResourceSet_v1.xml">
     <edmx:Include Namespace="SpareResourceSet"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/swordfish/v1/StorageService_v1.xml">
     <edmx:Include Namespace="StorageService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/StorageController_v1.xml">
+    <edmx:Include Namespace="StorageController"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/swordfish/v1/VolumeMetrics_v1.xml">
+    <edmx:Include Namespace="VolumeMetrics"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Connection_v1.xml">
+    <edmx:Include Namespace="Connection"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -631,7 +641,9 @@
       </EnumType>
 
       <EnumType Name="LBAFormatType">
-        <Annotation Term="OData.Description" String="LBAFormatType is defined in the NVMe specification set. This field indicates the LBA data size supported; implementations may report up to 16 values. For more details refer to the appropriate NVMe specification."/>
+        <Annotation
+          Term="OData.Description"
+          String="LBAFormatType is defined in the NVMe specification set. This field indicates the LBA data size supported; implementations may report up to 16 values. For more details refer to the appropriate NVMe specification."/>
         <Annotation Term="Redfish.Revisions">
           <Collection>
             <Record>
@@ -690,6 +702,78 @@
         </Member>
       </EnumType>
 
+      <EnumType Name="NamespaceType">
+        <Member Name="Block">
+          <Annotation Term="OData.Description" String="The namespace is configured for use with a block storage interface."/>
+        </Member>
+        <Member Name="KeyValue">
+          <Annotation Term="OData.Description" String="The namespace is configured for use with a KeyValue interface."/>
+        </Member>
+        <Member Name="ZNS">
+          <Annotation Term="OData.Description" String="The namespace is configured for use with a zoned storage interface."/>
+        </Member>
+        <Member Name="Computational">
+          <Annotation Term="OData.Description" String="The namespace is configured for use with a computational storage interface."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="OperationType">
+        <Member Name="Deduplicate">
+          <Annotation Term="OData.Description" String="A Deduplicate operation is being performed."/>
+        </Member>
+        <Member Name="CheckConsistency">
+          <Annotation Term="OData.Description" String="A CheckConsistency operation is being performed."/>
+        </Member>
+        <Member Name="Initialize">
+          <Annotation Term="OData.Description" String="An Initialize operation is being performed."/>
+        </Member>
+        <Member Name="Replicate">
+          <Annotation Term="OData.Description" String="A Replicate operation is being performed."/>
+        </Member>
+        <Member Name="Delete">
+          <Annotation Term="OData.Description" String="A Delete operation is being performed."/>
+        </Member>
+        <Member Name="ChangeRAIDType">
+          <Annotation Term="OData.Description" String="A ChangeRAIDType operation is being performed."/>
+        </Member>
+        <Member Name="Rebuild">
+          <Annotation Term="OData.Description" String="A Rebuild operation is being performed."/>
+        </Member>
+        <Member Name="Encrypt">
+          <Annotation Term="OData.Description" String="An Encrypt operation is being performed."/>
+        </Member>
+        <Member Name="Decrypt">
+          <Annotation Term="OData.Description" String="A Decrypt operation is being performed."/>
+        </Member>
+        <Member Name="Resize">
+          <Annotation Term="OData.Description" String="A Resize operation is being performed."/>
+        </Member>
+        <Member Name="Compress">
+          <Annotation Term="OData.Description" String="A Compress operation is being performed."/>
+        </Member>
+        <Member Name="Sanitize">
+          <Annotation Term="OData.Description" String="A Sanitize operation is being performed."/>
+        </Member>
+        <Member Name="Format">
+          <Annotation Term="OData.Description" String="A Format operation is being performed."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="LBARelativePerformanceType">
+          <Annotation Term="OData.Description" String="Indicate the relative performance of the LBA format relative to other LBA formats supported by the controller."/>
+        <Member Name="Best">
+          <Annotation Term="OData.Description" String="Best performance."/>
+        </Member>
+        <Member Name="Better">
+          <Annotation Term="OData.Description" String="Better performance."/>
+        </Member>
+        <Member Name="Good">
+          <Annotation Term="OData.Description" String="Good performance."/>
+        </Member>
+        <Member Name="Degraded">
+          <Annotation Term="OData.Description" String="Degraded performance."/>
+        </Member>
+      </EnumType>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_0_0">
@@ -731,7 +815,7 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain size of the smallest addressable unit of the associated volume."/>
           <Annotation Term="Measures.Unit" String="By"/>
         </Property>
-        <Property Name="Operations" Type="Collection(Volume.v1_0_0.Operation)" Nullable="false">
+        <Property Name="Operations" Type="Collection(Volume.v1_9_0.Operation)" Nullable="false">
           <Annotation Term="OData.Description" String="The operations currently running on the Volume."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain a list of all currently running on the Volume."/>
         </Property>
@@ -775,6 +859,15 @@
         <Property Name="OperationName" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The name of the operation."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_9_0"/>
+                <PropertyValue Property="Description" String="This property is deprecated in favor of the Operation property using the Operation enum."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </Property>
         <Property Name="PercentageComplete" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -854,7 +947,7 @@
           <Annotation Term="OData.Description" String="The model number for this storage volume."/>
           <Annotation Term="OData.LongDescription" String="The value is assigned by the manufacturer and shall represents a specific storage volume implementation."/>
         </Property>
-        <Property Name="ReplicaInfo" Type="StorageReplicaInfo.v1_3_0.ReplicaInfo" Nullable="false">
+        <Property Name="ReplicaInfo" Type="StorageReplicaInfo.v1_4_0.ReplicaInfo" Nullable="false">
           <Annotation Term="OData.Description" String="Describes this storage volume in its role as a target replica."/>
           <Annotation Term="OData.LongDescription" String="This property shall describe the replica relationship between this storage volume and a corresponding source volume."/>
         </Property>
@@ -863,6 +956,15 @@
           <Annotation Term="OData.Description" String="An array of references to Storage Groups that includes this volume."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall contain references to all storage groups that include this volume."/>
           <Annotation Term="OData.AutoExpandReferences"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_9_0"/>
+                <PropertyValue Property="Description" String="This property is deprecated in favor of the Connections property."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </NavigationProperty>
         <NavigationProperty Name="AllocatedPools" Type="StoragePoolCollection.StoragePoolCollection" Nullable="false" ContainsTarget="true">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -916,12 +1018,12 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
-      <Annotation Term="Redfish.Release" String="WIP v1.0.5"/>
+      <Annotation Term="Redfish.Release" String="1.0.5"/>
       <Annotation Term="OData.Description" String="This version was created to add IO Statistics, and adds the RemainingCapacityPercent property."/>
       <EntityType Name="Volume" BaseType="Volume.v1_1_1.Volume">
         <Annotation Term="OData.Description" String="Add volume statistics."/>
 
-        <Property Name="IOStatistics" Type="IOStatistics.IOStatistics" Nullable="false">
+        <Property Name="IOStatistics" Type="IOStatistics.v1_0_1.IOStatistics" Nullable="false">
           <Annotation Term="OData.Description" String="Statistics for this volume."/>
           <Annotation Term="OData.LongDescription" String="The value shall represent IO statistics for this volume."/>
         </Property>
@@ -978,7 +1080,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
-      <Annotation Term="Redfish.Release" String="TP v1.0.6a"/>
+      <Annotation Term="Redfish.Release" String="1.0.6a"/>
       <Annotation
         Term="OData.Description"
         String="This version was created to add RecoverableCapacitySourceCount and SpareResourceSets. This also replaces collection StorageReplicaInfos with scalar StorageReplicaInfo, and adds a ReplicaTargets collection. It also adds the RAIDType enum, which replaces the use of VolumeType for direct Volume characterization."/>
@@ -1043,7 +1145,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_4_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
-      <Annotation Term="Redfish.Release" String="WIP v1.1.0"/>
+      <Annotation Term="Redfish.Release" String="1.1.0"/>
       <Annotation
         Term="OData.Description"
         String="This version was created to add collection of references to Endpoints, StorageGroups and ConsistencyGroups associated with this Volume, and adds a LongDescription to RAID6TP. It also adds AutoExpand to CapacitySources and changes the MaxBlockSizeBytes to 64 bytes. Additionally the following properties have been added: ProvisioningPolicy, OwningStorageService, StripSizeBytes, ReadAheadPolicy, VolumeUsage, WritePolicy, CacheState, LogicalUnitNumber, MediaSpanCount, Deduplicated, Compressed, WriteHoleProtectionPolicy, and DisplayName. This version also adds the following Actions: AssignReplicaTarget, CreateReplicaTarget, RemoveReplicaRelationship, ResumeReplication, ReverseReplicationRelationship, SplitReplication, and SuspendReplication. This version also adds both Redfish Uris and Capability Annotations and fixes CSDL errors."/>
@@ -1167,7 +1269,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_5_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
-      <Annotation Term="Redfish.Release" String="WIP v1.2.0"/>
+      <Annotation Term="Redfish.Release" String="1.2.0"/>
       <Annotation
         Term="OData.Description"
         String="This version was created to add the ChangeRAIDLayout and ForceEnable Actions, and moves the replication Actions to the unversioned namespace. It adds InitializeMethod and deprecate InitializeType. It also adds support for NVMe. It also adds the IOPerfModeEnabled property, and references to Journaling Media and OwningStorageResource to Links."/>
@@ -1289,7 +1391,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_6_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
-      <Annotation Term="Redfish.Release" String="TP v1.2.1"/>
+      <Annotation Term="Redfish.Release" String="1.2.1"/>
 
       <Annotation Term="OData.Description" String="This version was created to add the InitializeMethod property. It also changes the DedicatedSpareDrives property in Links to Read/Write."/>
       <EntityType Name="Volume" BaseType="Volume.v1_5_0.Volume">
@@ -1331,7 +1433,7 @@
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_7_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
       <Annotation Term="OData.Description" String="This version was created to add the IsBootCapable property."/>
-      <Annotation Term="Redfish.Release" String="WIP v1.2.3"/>
+      <Annotation Term="Redfish.Release" String="1.2.3"/>
       <EntityType Name="Volume" BaseType="Volume.v1_6_2.Volume">
         <Property Name="IsBootCapable" Type="Edm.Boolean">
           <Annotation Term="OData.Description" String="This property indicates whether or not the Volume contains a boot image and is capable of booting."/>
@@ -1345,9 +1447,15 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_8_0">
       <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
-      <Annotation Term="OData.Description" String="This version was created to add the LBAFormatsSupported property to NVMeNamespaceProperties. It also adds IsBound=true to Actions where missing."/>
-      <Annotation Term="Redfish.Release" String="WIP v1.2.4"/>
-      <EntityType Name="Volume" BaseType="Volume.v1_7_0.Volume"></EntityType>
+      <Annotation Term="OData.Description" String="This version was created to add the LBAFormatsSupported and Type properties to NVMeNamespaceProperties. It also adds IsBound=true to Actions where missing."/>
+      <Annotation Term="Redfish.Release" String="1.2.4"/>
+      <EntityType Name="Volume" BaseType="Volume.v1_7_0.Volume">
+        <Property Name="RemoteReplicaTargets" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="URIs to the resources that are remote target replicas of this source."/>
+          <Annotation Term="OData.LongDescription" String="The value shall reference the URIs to the remote target replicas that are sourced by this replica. Remote indicates that the replica is managed by a separate Swordfish service instance."/>
+        </Property>
+      </EntityType>
 
       <ComplexType Name="NVMeNamespaceProperties" BaseType="Volume.v1_5_0.NVMeNamespaceProperties">
         <Annotation Term="OData.Description" String="Add the LBAFormatsSupported property."/>
@@ -1356,8 +1464,106 @@
           <Annotation Term="OData.Description" String="A list of the LBA format types supported for the namespace, or potential namespaces."/>
           <Annotation Term="OData.LongDescription" String="This shall be a list of the LBA formats supported for the namespace, or potential namespaces."/>
         </Property>
+        <Property Name="Type" Type="Volume.NamespaceType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Identifies the type of namespace."/>
+          <Annotation Term="OData.LongDescription" String="This shall identify the type of namespace."/>
+        </Property>
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_9_0">
+      <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
+      <Annotation Term="OData.Description" String="This version add support for NamespaceTypes and Volume Metrics. It also adds a Link to Controllers (StorageControllers), and adds Operation type to Volume, deprecating OperationName, and removes the erroneous AutoExpandReferences from the RemoteReplicaTargets property. It adds Connections, and deprecates StorageGroups. It also adds ReplicationEnabled."/>
+      <Annotation Term="Redfish.Release" String="1.2.5"/>
+      <EntityType Name="Volume" BaseType="Volume.v1_8_0.Volume">
+        <NavigationProperty Name="Metrics" Type="VolumeMetrics.VolumeMetrics" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the metrics for this volume."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource of type VolumeMetrics that specifies the metrics for this volume. IO metrics are reported in the IOStatistics property."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="Connections" Type="Collection(Connection.Connection)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of references to Connections that includes this volume."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain references to all Connections that include this volume."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+        <Property Name="ReplicationEnabled" Type="Edm.Boolean">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="Indicates whether or not replication is enabled on the volume."/>
+          <Annotation Term="OData.LongDescription" String="The property shall indicate whether or not replication is enabled on the volume. This property shall be consistent with the state reflected at the storage pool level."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="NVMeNamespaceProperties" BaseType="Volume.v1_8_0.NVMeNamespaceProperties">
+        <Annotation Term="OData.Description" String="Add the LBAFormatsSupported property and the LBAFormat property."/>
+        <Property Name="NamespaceType" Type="Volume.NamespaceType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Identifies the type of namespace."/>
+          <Annotation Term="OData.LongDescription" String="This shall identify the type of namespace."/>
+        </Property>
+
+        <Property Name="LBAFormats" Type="Collection(Volume.v1_9_0.LBAFormat)">
+          <Annotation Term="OData.Description" String="Describes the LBA format IDs and detailed properties."/>
+          <Annotation Term="OData.LongDescription" String="This property shall describe the LBA format IDs and corresponding detailed properties, such as the LBA data size and metadata size. This property is intended for use in a collection capabilities annotation. Use the LBAFormat property on an instance of a namespace."/>
+        </Property>
+
+        <Property Name="LBAFormat" Type="Volume.v1_9_0.LBAFormat">
+          <Annotation Term="OData.Description" String="Describes the current LBA format ID and detailed properties."/>
+          <Annotation Term="OData.LongDescription" String="This property shall describe the current LBA format ID and corresponding detailed properties, such as the LBA data size and metadata size. Use the LBAFormats property to describe namespace capabilities in a collection capabilities annotation."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="Links" BaseType="Volume.v1_6_0.Links">
+        <Annotation Term="OData.Description" String="Add the Controllers property."/>
+        <NavigationProperty Name="Controllers" Type="Collection(StorageController.StorageController)">
+          <Annotation Term="OData.Description" String="An array of the Controllers associated with this volume."/>
+          <Annotation
+            Term="OData.LongDescription"
+            String="This parameter shall contain an array of the controllers (of type StorageController) associated with this volume. When the volume is of type NVMe, these may be both the physical and logical controller representations."/>
+        </NavigationProperty>
+      </ComplexType>
+
+      <ComplexType Name="Operation" BaseType="Volume.v1_0_0.Operation">
+        <Property Name="Operation" Type="Volume.OperationType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The type of the operation."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the type of the operation."/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+                <PropertyValue Property="Version" String="v1_9_0"/>
+                <PropertyValue Property="Description" String="This property replaces OperationName."/>
+              </Record>
+            </Collection>
+          </Annotation>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="LBAFormat">
+        <Property Name="LBAFormatType" Type="Volume.LBAFormatType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The LBA format type."/>
+          <Annotation Term="OData.LongDescription" String="This shall be the LBA format type. This property is intended for capabilities instrumentation."/>
+        </Property>
+        <Property Name="RelativePerformance" Type="Volume.LBARelativePerformanceType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The LBA Relative Performance type."/>
+          <Annotation Term="OData.LongDescription" String="This shall be the LBA Relative Performance type. This field indicates the relative performance of the LBA format indicated relative to other LBA formats supported by the controller. This property is intended for capabilities instrumentation."/>
+        </Property>
+        <Property Name="LBADataSizeBytes" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The LBA data size in bytes."/>
+          <Annotation Term="OData.LongDescription" String="This shall be the LBA data size reported in bytes."/>
+        </Property>
+        <Property Name="LBAMetadataSizeBytes" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The LBA metadata size in bytes."/>
+          <Annotation Term="OData.LongDescription" String="This shall be the LBA metadata size reported in bytes."/>
+        </Property>
+      </ComplexType>
+    </Schema>
   </edmx:DataServices>
 </edmx:Edmx>
