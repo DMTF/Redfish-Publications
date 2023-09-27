@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  AllowDeny v1.0.0                                                  -->
+<!--# Redfish Schema:  AllowDeny v1.0.1                                                    -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -159,10 +159,10 @@
 
       <EnumType Name="AllowType">
         <Member Name="Allow">
-          <Annotation Term="OData.Description" String="Indicates that traffic that matches the criteria in this resource shall be permitted."/>
+          <Annotation Term="OData.Description" String="Indicates that traffic that matches the criteria in this resource is permitted."/>
         </Member>
         <Member Name="Deny">
-          <Annotation Term="OData.Description" String="Indicates that traffic that matches the criteria in this resource shall not be permitted."/>
+          <Annotation Term="OData.Description" String="Indicates that traffic that matches the criteria in this resource is not permitted."/>
         </Member>
       </EnumType>
 
@@ -174,6 +174,12 @@
           <Annotation Term="OData.Description" String="Indicates that this limit is enforced on packets and bytes transmitted by the network device function."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AllowDeny.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to remove normative language from non-normative descriptions."/>
+      <EntityType Name="AllowDeny" BaseType="AllowDeny.v1_0_0.AllowDeny"/>
     </Schema>
 
   </edmx:DataServices>

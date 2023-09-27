@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerDistribution v1.3.1                                            -->
+<!--# Redfish Schema:  PowerDistribution v1.3.2                                            -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -392,12 +392,14 @@
           <Annotation Term="OData.Description" String="The positive percentage of voltage RMS over the nominal value that satisfies a criterion for transfer."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the positive percentage of voltage RMS over the nominal value that satisfies a criterion for transfer."/>
           <Annotation Term="Measures.Unit" String="%"/>
+          <Annotation Term="Validation.Minimum" Int="0"/>
         </Property>
         <Property Name="UnderVoltageRMSPercentage" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The negative percentage of voltage RMS under the nominal value that satisfies a criterion for transfer."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the negative percentage of voltage RMS under the nominal value that satisfies a criterion for transfer."/>
           <Annotation Term="Measures.Unit" String="%"/>
+          <Annotation Term="Validation.Maximum" Int="0"/>
         </Property>
         <Property Name="OverNominalFrequencyHz" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -478,6 +480,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_5.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_0_7">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_6.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.2"/>
@@ -537,6 +545,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_1_2.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_1_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_1_3.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.3"/>
@@ -563,6 +577,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_2.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_2_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_3.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.3"/>
@@ -580,6 +600,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to update the description for AssetTag to show there might be a tie to the AssetTag of the containing Chassis resource."/>
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_3_0.PowerDistribution"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_3_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_3_1.PowerDistribution"/>
     </Schema>
 
   </edmx:DataServices>

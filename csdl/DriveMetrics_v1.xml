@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################               -->
-<!--# Redfish Schema:  DriveMetrics v1.0.0                                                         -->
+<!--# Redfish Schema:  DriveMetrics v1.1.0                                                         -->
 <!--#                                                                                              -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,              -->
 <!--# available at http://www.dmtf.org/standards/redfish                                           -->
@@ -125,6 +125,19 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="DriveMetrics.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.2"/>
+
+      <EntityType Name="DriveMetrics" BaseType="DriveMetrics.v1_0_0.DriveMetrics">
+        <Property Name="NativeCommandQueueDepth" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The current depth of the Native Command Queue."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the current depth of the Native Command Queue as defined by the SATA Specification."/>
+        </Property>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

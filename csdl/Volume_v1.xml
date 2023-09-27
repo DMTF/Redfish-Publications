@@ -757,6 +757,17 @@
         <Member Name="Format">
           <Annotation Term="OData.Description" String="A Format operation is being performed."/>
         </Member>
+        <Member Name="ChangeStripSize">
+          <Annotation Term="OData.Description" String="A ChangeStripSize operation is being performed."/>
+          <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_10_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        </Member>
       </EnumType>
 
       <EnumType Name="LBARelativePerformanceType">
@@ -1564,6 +1575,14 @@
           <Annotation Term="OData.LongDescription" String="This shall be the LBA metadata size reported in bytes."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Volume.v1_10_0">
+      <Annotation Term="Redfish.OwningEntity" String="SNIA"/>
+      <Annotation Term="OData.Description" String="This version was created to add ChangeStripSize to the OperationType enum."/>
+      <Annotation Term="Redfish.Release" String="1.2.6"/>
+      <EntityType Name="Volume" BaseType="Volume.v1_9_0.Volume">
+      </EntityType>
     </Schema>
   </edmx:DataServices>
 </edmx:Edmx>

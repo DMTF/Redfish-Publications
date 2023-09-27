@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ExternalAccountProvider v1.6.0                                      -->
+<!--# Redfish Schema:  ExternalAccountProvider v1.7.0                                      -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -112,22 +112,22 @@
       <EnumType Name="AccountProviderTypes">
         <Member Name="RedfishService">
           <Annotation Term="OData.Description" String="An external Redfish service."/>
-          <Annotation Term="OData.LongDescription" String="The external account provider shall be a DMTF Redfish Specification-conformant service.  The ServiceAddresses format shall contain a set of URIs that correspond to a Redfish account service."/>
+          <Annotation Term="OData.LongDescription" String="The external account provider shall be a DMTF Redfish Specification-conformant service.  The ServiceAddresses property shall contain URIs to AccountService resources that correspond to Redfish services.  For example, `https://192.168.1.50/redfish/v1/AccountService`."/>
         </Member>
         <Member Name="ActiveDirectoryService">
           <Annotation Term="OData.Description" String="An external Active Directory service."/>
-          <Annotation Term="OData.LongDescription" String="The external account provider shall be a Microsoft Active Directory Technical Specification-conformant service.  The ServiceAddresses format shall contain a set of fully qualified domain names (FQDN) or NetBIOS names that links to the set of domain servers for the Active Directory service."/>
+          <Annotation Term="OData.LongDescription" String="The external account provider shall be a Microsoft Active Directory Technical Specification-conformant service.  The ServiceAddresses property shall contain fully qualified domain names (FQDN) or NetBIOS names that link to the domain servers for the Active Directory service."/>
         </Member>
         <Member Name="LDAPService">
           <Annotation Term="OData.Description" String="A generic external LDAP service."/>
-          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC4511-conformant service.  The ServiceAddresses format shall contain a set of fully qualified domain names (FQDN) that links to the set of LDAP servers for the service."/>
+          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC4511-conformant service.  The ServiceAddresses property shall contain RFC3986-defined URIs in the format `scheme://host:port`, where `scheme://` and `:port` are optional, that link to the LDAP servers for the service.  If the scheme is not specified, services shall assume it is `ldaps://`.  If the port is not specified, services shall assume it is `636`.  For example, `ldaps://contoso.com:636` or `contoso.com`."/>
         </Member>
         <Member Name="OEM">
           <Annotation Term="OData.Description" String="An OEM-specific external authentication or directory service."/>
         </Member>
         <Member Name="TACACSplus">
           <Annotation Term="OData.Description" String="An external TACACS+ service."/>
-          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC8907-conformant service.  The ServiceAddresses format shall contain a set of host:port that correspond to a TACACS+ service and where the format for host and port are defined in RFC3986."/>
+          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC8907-conformant service.  The ServiceAddresses property shall contain RFC3986-defined URIs in the format `host:port` that correspond to the TACACS+ services."/>
           <Annotation Term="Redfish.Revisions">
             <Collection>
               <Record>
@@ -139,7 +139,7 @@
         </Member>
         <Member Name="OAuth2">
           <Annotation Term="OData.Description" String="An external OAuth 2.0 service."/>
-          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC6749-conformant service.  The ServiceAddresses format shall contain a set of URIs that correspond to the RFC8414-defined metadata for the OAuth 2.0 service."/>
+          <Annotation Term="OData.LongDescription" String="The external account provider shall be an RFC6749-conformant service.  The ServiceAddresses property shall contain RFC3986-defined URIs that correspond to the RFC8414-defined metadata for the OAuth 2.0 service.  For example, `https://contoso.org/.well-known/oauth-authorization-server`."/>
           <Annotation Term="Redfish.Revisions">
             <Collection>
               <Record>
@@ -320,9 +320,16 @@
       <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_0_5.ExternalAccountProvider"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_0_7">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the descriptions for the values of AccountProviderType.  It was also created to expand the `LDAPService` value for AccountProviderType to allow for a scheme and port to be specified."/>
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_0_6.ExternalAccountProvider"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2018.3"/>
+
       <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_0_1.ExternalAccountProvider">
         <NavigationProperty Name="Certificates" Type="CertificateCollection.CertificateCollection" ContainsTarget="true" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -361,6 +368,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to mark properties with values containing sensitive data as write-only."/>
       <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_1_4.ExternalAccountProvider"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_1_6">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the descriptions for the values of AccountProviderType.  It was also created to expand the `LDAPService` value for AccountProviderType to allow for a scheme and port to be specified."/>
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_1_5.ExternalAccountProvider"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_2_0">
@@ -441,6 +454,12 @@
       <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_2_0.ExternalAccountProvider"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_2_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the descriptions for the values of AccountProviderType.  It was also created to expand the `LDAPService` value for AccountProviderType to allow for a scheme and port to be specified."/>
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_2_1.ExternalAccountProvider"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.2"/>
@@ -508,6 +527,12 @@
       <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_3_2.ExternalAccountProvider"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_3_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the descriptions for the values of AccountProviderType.  It was also created to expand the `LDAPService` value for AccountProviderType to allow for a scheme and port to be specified."/>
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_3_3.ExternalAccountProvider"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_4_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.1"/>
@@ -541,6 +566,12 @@
       <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_4_2.ExternalAccountProvider"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_4_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the descriptions for the values of AccountProviderType.  It was also created to expand the `LDAPService` value for AccountProviderType to allow for a scheme and port to be specified."/>
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_4_3.ExternalAccountProvider"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_5_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.3"/>
@@ -553,6 +584,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the multi-factor authentication bypass settings."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_5_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the descriptions for the values of AccountProviderType.  It was also created to expand the `LDAPService` value for AccountProviderType to allow for a scheme and port to be specified."/>
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_5_0.ExternalAccountProvider"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_6_0">
@@ -588,6 +625,27 @@
         <Property Name="Oem" Type="Resource.Oem" Nullable="false">
           <Annotation Term="OData.Description" String="The OEM extension property."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the OEM extensions.  All values for properties contained in this object shall conform to the Redfish Specification-described requirements."/>
+        </Property>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_6_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the descriptions for the values of AccountProviderType.  It was also created to expand the `LDAPService` value for AccountProviderType to allow for a scheme and port to be specified."/>
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_6_0.ExternalAccountProvider"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ExternalAccountProvider.v1_7_0">
+      <Annotation Term="Redfish.Release" String="2023.2"/>
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+
+      <EntityType Name="ExternalAccountProvider" BaseType="ExternalAccountProvider.v1_6_1.ExternalAccountProvider"/>
+
+      <ComplexType Name="LDAPSearchSettings" BaseType="ExternalAccountProvider.v1_4_0.LDAPSearchSettings">
+        <Property Name="EmailAttribute" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The attribute name that contains the LDAP user's email address."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the attribute name that contains the LDAP user's email address.  If this value is not set by the user, or the property is not present, the value shall be `mail`."/>
         </Property>
       </ComplexType>
     </Schema>

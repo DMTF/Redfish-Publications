@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryMetrics v1.7.0                                                -->
+<!--# Redfish Schema:  MemoryMetrics v1.7.1                                                -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -148,7 +148,7 @@
         <Property Name="RemainingSpareBlockPercentage" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The remaining spare blocks, as a percentage."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the remaining spare blocks as a percentage.  When this resource is subordinate to the MemorySummary object, this property shall be the RemainingSpareBlockPercentage over all memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the remaining spare blocks as a percentage, `0` to `100`.  When this resource is subordinate to the MemorySummary object, this property shall be the RemainingSpareBlockPercentage over all memory."/>
           <Annotation Term="Measures.Unit" String="%"/>
         </Property>
         <Property Name="LastShutdownSuccess" Type="Edm.Boolean">
@@ -269,6 +269,12 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_0_7.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_0_9">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_0_8.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2016.2"/>
@@ -278,8 +284,10 @@
         <Property Name="PredictedMediaLifeLeftPercent" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The percentage of reads and writes that are predicted to still be available for the media."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an indicator of the percentage of life remaining in the media."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an indicator of the percentage, `0` to `100`, of life remaining in the media."/>
           <Annotation Term="Measures.Unit" String="%"/>
+          <Annotation Term="Validation.Minimum" Int="0"/>
+          <Annotation Term="Validation.Maximum" Int="100"/>
         </Property>
       </ComplexType>
     </Schema>
@@ -332,6 +340,12 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_1_7.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_1_9">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_1_8.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2019.2"/>
@@ -341,7 +355,7 @@
         <Property Name="BandwidthPercent" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The memory bandwidth utilization as a percentage."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain memory bandwidth utilization as a percentage.  When this resource is subordinate to the MemorySummary object, this property shall be the memory bandwidth utilization over all memory as a percentage."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain memory bandwidth utilization as a percentage.  When this resource is subordinate to the MemorySummary object, this property shall be the memory bandwidth utilization over all memory as a percentage, typically `0` to `100`."/>
           <Annotation Term="Validation.Minimum" Int="0"/>
           <Annotation Term="Measures.Unit" String="%"/>
         </Property>
@@ -358,6 +372,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to fix typos in descriptions and long descriptions."/>
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_2_1.MemoryMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_2_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_2_2.MemoryMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_3_0">
@@ -379,6 +399,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to fix typos in descriptions and long descriptions."/>
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_3_0.MemoryMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_3_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_3_1.MemoryMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_4_0">
@@ -421,6 +447,12 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_4_0.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_4_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_4_1.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_5_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.1"/>
@@ -452,6 +484,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate uncorrectable errors for the lifetime of the memory.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate uncorrectable errors across all memory without duplication, which may not be the sum of all IndeterminateUncorrectableErrorCount properties over all memory."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_5_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_5_0.MemoryMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_6_0">
@@ -517,6 +555,12 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_6_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_6_0.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_7_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.1"/>
@@ -525,11 +569,17 @@
         <Property Name="CapacityUtilizationPercent" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The memory capacity utilization as a percentage."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the memory capacity utilization as a percentage.  When this resource is subordinate to the MemorySummary object, this property shall be the memory capacity utilization over all memory as a percentage."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the memory capacity utilization as a percentage, typically `0` to `100`.  When this resource is subordinate to the MemorySummary object, this property shall be the memory capacity utilization over all memory as a percentage."/>
           <Annotation Term="Validation.Minimum" Int="0"/>
           <Annotation Term="Measures.Unit" String="%"/>
         </Property>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_7_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_7_0.MemoryMetrics"/>
     </Schema>
 
   </edmx:DataServices>

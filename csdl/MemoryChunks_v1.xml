@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryChunks v1.5.0                                                 -->
+<!--# Redfish Schema:  MemoryChunks v1.6.0                                                 -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -32,6 +32,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/CXLLogicalDevice_v1.xml">
     <edmx:Include Namespace="CXLLogicalDevice"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/MemoryRegion_v1.xml">
+    <edmx:Include Namespace="MemoryRegion"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -434,6 +437,22 @@
           <Annotation Term="OData.Description" String="Memory chunk cannot be used.  Consumers of this memory chunk should perform cleanup operations as needed to prepare for the removal of this memory chunk."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryChunks.v1_6_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.2"/>
+
+      <EntityType Name="MemoryChunks" BaseType="MemoryChunks.v1_5_0.MemoryChunks"/>
+
+      <ComplexType Name="Links" BaseType="MemoryChunks.v1_5_0.Links">
+        <NavigationProperty Name="MemoryRegions" Type="Collection(MemoryRegion.MemoryRegion)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="An array of links to the memory regions for which this memory chunk provides capacity."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type MemoryRegion that represent the memory regions for which this memory chunk provides capacity."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
     </Schema>
 
   </edmx:DataServices>

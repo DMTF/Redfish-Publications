@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Control v1.3.0                                                      -->
+<!--# Redfish Schema:  Control v1.4.0                                                      -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -176,6 +176,15 @@
           <Annotation Term="OData.Description" String="The estimated percent error of measured versus actual values."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the percent error of the measured versus actual values of the SetPoint property."/>
           <Annotation Term="Measures.Unit" String="%"/>
+          <Annotation Term="Redfish.Revisions">
+            <Collection>
+              <Record>
+                <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Deprecated"/>
+                <PropertyValue Property="Version" String="v1_4_0"/>
+                <PropertyValue Property="Description" String="This property has been deprecated in favor of SetPointAccuracy to provide a range instead of a percentage."/>
+              </Record>
+            </Collection>
+          </Annotation>
         </Property>
         <Property Name="PhysicalContext" Type="PhysicalContext.PhysicalContext">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -426,6 +435,20 @@
           <Annotation Term="OData.Description" String="The default set point of the control."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the default set point control value.  The units shall follow the value of SetPointUnits.  Services apply this value to the SetPoint property under certain conditions, such as a reset of the manager or a ResetToDefaults action."/>
           <Annotation Term="Redfish.Excerpt" String="Single"/>
+        </Property>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Control.v1_4_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.2"/>
+      <Annotation Term="OData.Description" String="This version was created to deprecate the Accuracy property in favor of SetPointAccuracy."/>
+
+      <EntityType Name="Control" BaseType="Control.v1_3_0.Control">
+        <Property Name="SetPointAccuracy" Type="Edm.Decimal">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Accuracy (+/-) of the set point."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the accuracy of the value of the SetPoint for this control.  The value shall be the absolute value of the maximum deviation of the SetPoint from its actual value.  The value shall be in units that follow the SetPointUnits for this control."/>
         </Property>
       </EntityType>
     </Schema>

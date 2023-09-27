@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  AddressPool v1.2.2                                                  -->
+<!--# Redfish Schema:  AddressPool v1.2.3                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -451,7 +451,7 @@
         </Property>
         <Property Name="SendCommunityEnabled" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
-          <Annotation Term="OData.Description" String="This property shall indicate whether community attributes are sent."/>
+          <Annotation Term="OData.Description" String="Indicates whether community attributes are sent."/>
           <Annotation Term="OData.LongDescription" String="This property shall indicate whether community attributes are sent to BGP neighbors."/>
         </Property>
       </ComplexType>
@@ -746,7 +746,7 @@
         <Property Name="ShutdownThresholdPercentage" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="Shutdown threshold status."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the percentage of the maximum prefix received value at which the router starts to generate a warning message."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the percentage of the maximum prefix received value, `1` to `100`, at which the router starts to generate a warning message."/>
           <Annotation Term="Validation.Minimum" Int="1"/>
           <Annotation Term="Validation.Maximum" Int="100"/>
           <Annotation Term="Measures.Unit" String="%"/>
@@ -860,6 +860,12 @@
       <EntityType Name="AddressPool" BaseType="AddressPool.v1_1_2.AddressPool"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AddressPool.v1_1_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to remove normative language from non-normative descriptions.  It was also created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="AddressPool" BaseType="AddressPool.v1_1_3.AddressPool"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AddressPool.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.2"/>
@@ -951,6 +957,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to remove non-inclusive language."/>
       <EntityType Name="AddressPool" BaseType="AddressPool.v1_2_1.AddressPool"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AddressPool.v1_2_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to remove normative language from non-normative descriptions.  It was also created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="AddressPool" BaseType="AddressPool.v1_2_2.AddressPool"/>
     </Schema>
 
   </edmx:DataServices>

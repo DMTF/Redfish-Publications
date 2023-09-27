@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  BatteryMetrics v1.0.1                                               -->
+<!--# Redfish Schema:  BatteryMetrics v1.0.2                                               -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -113,7 +113,7 @@
         </NavigationProperty>
         <NavigationProperty Name="ChargePercent" Type="Sensor.Sensor" Nullable="false">
           <Annotation Term="OData.Description" String="The amount of charge available (percent) in this battery."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the amount of charge available, in percent units, in this battery.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Percent`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the amount of charge available, in percent units, typically `0` to `100`, in this battery.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Percent`."/>
           <Annotation Term="Redfish.ExcerptCopy"/>
         </NavigationProperty>
         <NavigationProperty Name="CellVoltages" Type="Collection(Sensor.Sensor)">
@@ -148,6 +148,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to update descriptions to tie excerpt property definitions to a specific type of Sensor or Control."/>
       <EntityType Name="BatteryMetrics" BaseType="BatteryMetrics.v1_0_0.BatteryMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="BatteryMetrics.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="BatteryMetrics" BaseType="BatteryMetrics.v1_0_1.BatteryMetrics"/>
     </Schema>
 
   </edmx:DataServices>

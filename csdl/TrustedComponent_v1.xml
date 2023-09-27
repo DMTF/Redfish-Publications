@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  TrustedComponent v1.1.0                                             -->
+<!--# Redfish Schema:  TrustedComponent v1.2.0                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -222,6 +222,21 @@
           <Annotation Term="OData.Description" String="The capabilities vendor ID for this trusted component."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain an ASCII string of the 4-byte TCG-defined 'TPM Capabilities Vendor ID' for this trusted component."/>
         </Property>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.2"/>
+
+      <EntityType Name="TrustedComponent" BaseType="TrustedComponent.v1_1_0.TrustedComponent"/>
+
+      <ComplexType Name="Links" BaseType="TrustedComponent.v1_0_0.Links">
+        <NavigationProperty Name="Owner" Type="Resource.Item">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="A link to the resource that owns this trusted component."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to the resource that owns this trusted component.  In the case of TPMs, particularly in multiple chassis implementations, this is the resource used to establish a new PCR."/>
+        </NavigationProperty>
       </ComplexType>
     </Schema>
 

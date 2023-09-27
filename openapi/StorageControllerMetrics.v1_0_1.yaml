@@ -1,0 +1,421 @@
+components:
+  schemas:
+    StorageControllerMetrics_v1_0_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/StorageControllerMetrics_v1_0_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageControllerMetrics_v1_0_1_EGCriticalWarningSummary:
+      additionalProperties: false
+      description: The Endurance Group critical warnings summary.
+      properties:
+        NamespacesInReadOnlyMode:
+          description: An indication of whether namespaces in one or more Endurance
+            Groups are in read-only mode not as a result of a change in the write
+            protection state of a namespace.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicates whether namespaces in one
+            or more Endurance Groups are in read-only mode not as a result of a change
+            in the write protection state of a namespace.
+        ReliabilityDegraded:
+          description: An indication of whether the reliability of one or more Endurance
+            Groups is degraded due to significant media related errors or any internal
+            error that degrades the NVM subsystem reliability.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the reliability
+            of one or more Endurance Groups is degraded due to significant media related
+            errors or any internal error that degrades the NVM subsystem reliability.
+        SpareCapacityUnderThreshold:
+          description: An indication of whether the available spare capacity of one
+            or more Endurance Groups is below the threshold.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the available spare
+            capacity of one or more Endurance Groups is below the threshold.
+      type: object
+      x-longDescription: The object shall contain the NVMe-defined 'Endurance Group
+        Critical Warning Summary'.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageControllerMetrics_v1_0_1_NVMeSMARTMetrics:
+      additionalProperties: false
+      description: The NVMe SMART metrics.
+      properties:
+        AvailableSparePercent:
+          description: The normalized percentage of the remaining spare capacity available.
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the NVMe-defined 'Available
+            Spare', which represents the normalized percentage, `0` to `100`, of the
+            remaining spare capacity available.
+          x-units: '%'
+        AvailableSpareThresholdPercent:
+          description: The available spare threshold as a normalized percentage.
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the NVMe-defined 'Available
+            Spare Threshold' as a percentage, `0` to `100`.  When the available spare
+            falls below this value, an asynchronous event completion may occur.
+          x-units: '%'
+        CompositeTemperatureCelsius:
+          description: The composite temperature in degrees Celsius for this storage
+            controller.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the composite temperature
+            in degrees Celsius for this storage controller.  Services shall derive
+            this value from the NVMe-defined 'Composite Temperature', which represents
+            a composite temperature in degrees Kelvin of the controller and namespaces
+            associated with that controller.
+          x-units: Cel
+        ControllerBusyTimeMinutes:
+          description: The total time the controller is busy with I/O commands in
+            minutes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Controller
+            Busy Time', which represents the total time the controller is busy with
+            I/O commands in minutes.
+        CriticalCompositeTempTimeMinutes:
+          description: The amount of time in minutes that the controller is operational
+            and the composite temperature is greater than or equal to the critical
+            composite temperature threshold.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Critical
+            Composite Temperature Time', which represents the amount of time in minutes
+            that the controller is operational and the composite temperature is greater
+            than or equal to the critical composite temperature threshold.
+        CriticalWarnings:
+          $ref: http://redfish.dmtf.org/schemas/v1/StorageController.yaml#/components/schemas/StorageController_NVMeSMARTCriticalWarnings
+          description: The NVMe SMART critical warnings.
+          x-longDescription: The property shall contain the NVMe-defined 'Critical
+            Warning'.
+        DataUnitsRead:
+          description: The number of 512 byte data units the host has read from the
+            controller as part of processing a SMART Data Units Read Command in units
+            of one thousand.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Data Units
+            Read', which represents the number of 512 byte data units the host has
+            read from the controller as part of processing a SMART Data Units Read
+            Command in units of one thousand.
+        DataUnitsWritten:
+          description: The number of 512 byte data units the host has written to the
+            controller as part of processing a User Data Out Command in units of one
+            thousand.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Data Units
+            Written', which represents the number of 512 byte data units the host
+            has written to the controller as part of processing a User Data Out Command
+            in units of one thousand.
+        EGCriticalWarningSummary:
+          $ref: '#/components/schemas/StorageControllerMetrics_v1_0_1_EGCriticalWarningSummary'
+          description: The Endurance Group critical warnings summary.
+          x-longDescription: The property shall contain the NVMe-defined 'Endurance
+            Group Critical Warning Summary'.
+        HostReadCommands:
+          description: The number of SMART Host Read Commands completed by the controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Host Read
+            Commands', which represents the number of SMART Host Read Commands completed
+            by the controller.
+        HostWriteCommands:
+          description: The number of User Data Out Commands completed by the controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Host Write
+            Commands', which represents the number of User Data Out Commands completed
+            by the controller.
+        MediaAndDataIntegrityErrors:
+          description: The number of occurrences where the controller detected an
+            unrecovered data integrity error.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Media and
+            Data Integrity Errors', which represents the number of occurrences where
+            the controller detected an unrecovered data integrity error.
+        NumberOfErrorInformationLogEntries:
+          description: The number of error information log entries over the life of
+            the controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Number
+            of Error Information Log Entries', which represents the number of error
+            information log entries over the life of the controller.
+        PercentageUsed:
+          description: The percentage of the NVM subsystem life used.
+          maximum: 255
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the NVMe-defined 'Percentage
+            Used', which represents a vendor specific estimate of the percentage of
+            the NVM subsystem life used based on the actual usage and the manufacturer's
+            prediction of NVM life.  A value of `100` indicates that the estimated
+            endurance of the NVM in the NVM subsystem has been consumed, but may not
+            indicate an NVM subsystem failure.  The value is allowed to exceed `100`.  Percentages
+            greater than `254` shall be represented as `255`.
+          x-units: '%'
+        PowerCycles:
+          description: The number of power cycles.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Power Cycles',
+            which represents the number of power cycles.
+        PowerOnHours:
+          description: The number of power-on hours.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the NVMe-defined 'Power On
+            Hours', which represents the number of power-on hours.
+        TemperatureSensorsCelsius:
+          description: The temperature sensor readings in degrees Celsius for this
+            storage controller.
+          items:
+            nullable: true
+            type: number
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of temperature sensor
+            readings in degrees Celsius for this storage controller.  Services shall
+            derive each array member from the NVMe-defined 'Temperature Sensor' values,
+            which represent a temperature sensor reading in degrees Kelvin.
+          x-units: Cel
+        ThermalMgmtTemp1TotalTimeSeconds:
+          description: The number of seconds the controller transitioned to lower
+            power states or performed vendor-specific thermal management actions while
+            minimizing the impact on performance in order to attempt to reduce the
+            composite temperature.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Total Time
+            For Thermal Management Temperature 1', which represents the number of
+            seconds the controller transitioned to lower power states or performed
+            vendor-specific thermal management actions while minimizing the impact
+            on performance in order to attempt to reduce the composite temperature.
+        ThermalMgmtTemp1TransitionCount:
+          description: The number of times the controller transitioned to lower power
+            states or performed vendor-specific thermal management actions while minimizing
+            the impact on performance in order to attempt to reduce the composite
+            temperature.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Thermal
+            Management Temperature 1 Transition Count', which represents the number
+            of times the controller transitioned to lower power states or performed
+            vendor-specific thermal management actions while minimizing the impact
+            on performance in order to attempt to reduce the composite temperature.
+        ThermalMgmtTemp2TotalTimeSeconds:
+          description: The number of seconds the controller transitioned to lower
+            power states or performed vendor-specific thermal management actions regardless
+            of the impact on performance in order to attempt to reduce the composite
+            temperature.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Total Time
+            For Thermal Management Temperature 2', which represents the number of
+            seconds the controller transitioned to lower power states or performed
+            vendor-specific thermal management actions regardless of the impact on
+            performance in order to attempt to reduce the composite temperature.
+        ThermalMgmtTemp2TransitionCount:
+          description: The number of times the controller transitioned to lower power
+            states or performed vendor-specific thermal management actions regardless
+            of the impact on performance in order to attempt to reduce the composite
+            temperature.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Thermal
+            Management Temperature 2 Transition Count', which represents the number
+            of times the controller transitioned to lower power states or performed
+            vendor-specific thermal management actions regardless of the impact on
+            performance in order to attempt to reduce the composite temperature.
+        UnsafeShutdowns:
+          description: The number of unsafe shutdowns.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Unsafe
+            Shutdowns', which represents the number of times when the controller does
+            not report it is safe to power down prior to loss of main power.
+        WarningCompositeTempTimeMinutes:
+          description: The amount of time in minutes that the controller is operational
+            and the composite temperature is greater than or equal to the warning
+            composite temperature threshold.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the NVMe-defined 'Warning
+            Composite Temperature Time', which represents the amount of time in minutes
+            that the controller is operational and the composite temperature is greater
+            than or equal to the warning composite temperature threshold.
+      type: object
+      x-longDescription: This object shall contain the NVMe SMART metrics as defined
+        by the NVMe SMART/Health Information log page.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageControllerMetrics_v1_0_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageControllerMetrics_v1_0_1_StorageControllerMetrics:
+      additionalProperties: false
+      description: The usage and health statistics for a storage controller.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/StorageControllerMetrics_v1_0_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        CorrectableECCErrorCount:
+          description: The number of the correctable errors for the lifetime of the
+            memory of the storage controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the correctable
+            errors for the lifetime of memory of the storage controller.
+        CorrectableParityErrorCount:
+          description: The number of the correctable parity errors for the lifetime
+            of the memory of the storage controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the correctable
+            errors for the lifetime of memory of the storage controller.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        NVMeSMART:
+          $ref: http://redfish.dmtf.org/schemas/v1/StorageControllerMetrics.yaml#/components/schemas/StorageControllerMetrics_NVMeSMARTMetrics
+          description: The NVMe SMART metrics for this storage controller.
+          x-longDescription: This property shall contain the NVMe SMART metrics for
+            this storage controller as defined by the NVMe SMART/Health Information
+            log page.  This property shall only be present for NVMe storage controllers.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        StateChangeCount:
+          description: The number of state changes for this storage controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of times the State
+            property within the Status property of the parent StorageController resource
+            changed.
+        UncorrectableECCErrorCount:
+          description: The number of the uncorrectable errors for the lifetime of
+            the memory of the storage controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the uncorrectable
+            errors for the lifetime of memory of the storage controller.
+        UncorrectableParityErrorCount:
+          description: The number of the uncorrectable parity errors for the lifetime
+            of the memory of the storage controller.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of the uncorrectable
+            errors for the lifetime of memory of the storage controller.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: The StorageControllerMetrics schema shall contain the usage
+        and health statistics for a storage controller in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#StorageControllerMetrics.v1_0_1.StorageControllerMetrics'
+x-copyright: Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2023.1'

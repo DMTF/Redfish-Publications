@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  CXLLogicalDevice v1.0.0                                             -->
+<!--# Redfish Schema:  CXLLogicalDevice v1.1.0                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -42,6 +42,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/LogService_v1.xml">
     <edmx:Include Namespace="LogService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/MemoryRegionCollection_v1.xml">
+    <edmx:Include Namespace="MemoryRegionCollection"/>
   </edmx:Reference>
 
   <edmx:DataServices>
@@ -152,8 +155,10 @@
         <Property Name="LimitPercent" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The bandwidth limit to this CXL logical device as a percentage."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the bandwidth limit for this CXL logical device as a percentage."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the bandwidth limit, `0` to `100`, for this CXL logical device as a percentage."/>
           <Annotation Term="Measures.Unit" String="%"/>
+          <Annotation Term="Validation.Minimum" Int="0"/>
+          <Annotation Term="Validation.Maximum" Int="100"/>
         </Property>
       </ComplexType>
 
@@ -216,6 +221,26 @@
           <Annotation Term="OData.LongDescription" String="This value shall indicate the device conforms with the CXL Specification-defined 'CXL.mem' semantic."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CXLLogicalDevice.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
+      <EntityType Name="CXLLogicalDevice" BaseType="CXLLogicalDevice.v1_0_0.CXLLogicalDevice"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CXLLogicalDevice.v1_1_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.2"/>
+
+      <EntityType Name="CXLLogicalDevice" BaseType="CXLLogicalDevice.v1_0_1.CXLLogicalDevice">
+        <NavigationProperty Name="MemoryRegions" Type="MemoryRegionCollection.MemoryRegionCollection" ContainsTarget="true" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The link to the collection of memory regions associated with this CXL logical device."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type MemoryRegionCollection that represents the memory regions associated with this CXL logical device."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </EntityType>
     </Schema>
 
   </edmx:DataServices>

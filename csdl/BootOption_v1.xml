@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  BootOption v1.0.4                                                   -->
+<!--# Redfish Schema:  BootOption v1.0.5                                                   -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -83,7 +83,7 @@
         </Property>
         <Property Name="BootOptionEnabled" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
-          <Annotation Term="OData.Description" String="An indication of whether the boot option is enabled.  If `true`, it is enabled.  If `false`, the boot option that the boot order array on the computer system contains is skipped.  In the UEFI context, this property shall influence the load option active flag for the boot option."/>
+          <Annotation Term="OData.Description" String="An indication of whether the boot option is enabled.  If `true`, it is enabled.  If `false`, the boot option that the boot order array on the computer system contains is skipped.  In the UEFI context, this property influences the load option active flag for the boot option."/>
           <Annotation Term="OData.LongDescription" String="This property shall indicate whether the boot option is enabled.  If `true`, it is enabled.  If `false`, the boot option that the boot order array on the computer system contains shall be skipped.  In the UEFI context, this property shall influence the load option active flag for the boot option."/>
         </Property>
         <Property Name="UefiDevicePath" Type="Edm.String">
@@ -147,6 +147,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
       <EntityType Name="BootOption" BaseType="BootOption.v1_0_3.BootOption"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="BootOption.v1_0_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to remove normative language from non-normative descriptions."/>
+      <EntityType Name="BootOption" BaseType="BootOption.v1_0_4.BootOption"/>
     </Schema>
 
   </edmx:DataServices>
