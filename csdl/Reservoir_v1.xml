@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Reservoir v1.0.0                                                    -->
+<!--# Redfish Schema:  Reservoir v1.0.1                                                    -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -112,7 +112,7 @@
         </Property>
         <Property Name="CapacityLiters" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The capacity of the reservoir (l)."/>
+          <Annotation Term="OData.Description" String="The capacity of the reservoir (L)."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the capacity of the reservoir in liter units."/>
         </Property>
         <Property Name="Manufacturer" Type="Edm.String">
@@ -142,7 +142,7 @@
         </Property>
         <Property Name="Location" Type="Resource.Location" Nullable="false">
           <Annotation Term="OData.Description" String="The location of the reservoir."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain location information of this reservoir."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the location information of this reservoir."/>
         </Property>
         <Property Name="LocationIndicatorActive" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -218,6 +218,12 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Reservoir.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="Reservoir" BaseType="Reservoir.v1_0_0.Reservoir"/>
     </Schema>
 
   </edmx:DataServices>

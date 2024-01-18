@@ -1,0 +1,323 @@
+components:
+  schemas:
+    CoolingLoop_v1_0_2_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/CoolingLoop_v1_0_2_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CoolingLoop_v1_0_2_Coolant:
+      additionalProperties: false
+      description: This type describes coolant.
+      properties:
+        AdditiveName:
+          description: The name of the additive.
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the name of the additive
+            contained in the coolant.
+        AdditivePercent:
+          description: The percent additives contained in the coolant.
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the percent of additives,
+            `0` to `100`, by volume, contained in the coolant mixture.
+          x-units: '%'
+        CoolantType:
+          $ref: '#/components/schemas/CoolingLoop_v1_0_2_CoolantType'
+          description: The type of coolant.
+          nullable: true
+          readOnly: false
+          x-longDescription: This property shall contain the type of coolant used
+            by this resource.
+        DensityKgPerCubicMeter:
+          description: The density (kg/m^3) of the coolant.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the density of the coolant,
+            in kilograms per cubic meter units, as measured at room temperature (20-25
+            degrees C) and atmospheric pressure.
+          x-units: kg/m3
+        RatedServiceHours:
+          description: The rated hours of service life for this coolant.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of hours of service
+            that the coolant is rated to provide before servicing or replacement is
+            necessary.
+        ServiceHours:
+          description: The hours of service this coolant has provided.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of hours of service
+            that the coolant has provided.
+        ServicedDate:
+          description: The date the coolant was last serviced.
+          format: date-time
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the date the coolant was
+            last serviced or tested for quality.
+        SpecificHeatkJoulesPerKgK:
+          description: The specific heat capacity (kJ/(kg*K)) of the coolant.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the specific heat capacity
+            of the coolant, in kilojoules per kilogram per degree kelvin units, as
+            measured at room temperature (20-25 degrees C) and atmospheric pressure.
+          x-units: kJ/kg/K
+      type: object
+      x-longDescription: This type shall describe the coolant used with a device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CoolingLoop_v1_0_2_CoolantType:
+      enum:
+      - Water
+      - Hydrocarbon
+      - Fluorocarbon
+      - Dielectric
+      type: string
+      x-enumDescriptions:
+        Dielectric: Dielectric fluid.
+        Fluorocarbon: Fluorocarbon-based.
+        Hydrocarbon: Hydrocarbon-based.
+        Water: Water or glycol mixture, including additives.
+    CoolingLoop_v1_0_2_CoolingLoop:
+      additionalProperties: false
+      description: This schema describes a cooling loop.  A cooling loop might be
+        any coolant-carrying vessel, such as facility-level pipework, an immersion
+        cooling tank, or a manifold.  A loop might describe its connectors and instrumentation
+        but does not generally include active cooling components or subsystems.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/CoolingLoop_v1_0_2_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        ConsumingEquipmentNames:
+          description: An array of names of downstream devices that receive coolant
+            from this cooling loop.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of user-assigned
+            identifying strings that describe downstream devices that receive coolant
+            from this cooling loop.
+        Coolant:
+          $ref: '#/components/schemas/CoolingLoop_v1_0_2_Coolant'
+          description: The coolant details for this cooling loop.
+          x-longDescription: This property shall contain the details about the coolant
+            contained in this cooling loop.
+        CoolantLevelPercent:
+          $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          description: The coolant capacity filled (percent).
+          nullable: true
+          readOnly: true
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the amount of coolant capacity,
+            in percent units, filled in this cooling loop.  The value of the DataSourceUri
+            property, if present, shall reference a resource of type Sensor with the
+            ReadingType property containing the value `Percent`.  Services that support
+            this property shall also return the CoolantLevelStatus property.
+        CoolantLevelStatus:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          description: The status of the coolant level in this cooling loop.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall indicate the status of the coolant
+            level in this cooling loop.
+        CoolantQuality:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          description: The quality of the coolant.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall indicate the quality of the coolant
+            contained in this cooling loop.
+        CoolingManagerURI:
+          description: The link to the application that manages the cooling loop.
+          format: uri-reference
+          nullable: true
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a URI to the application
+            or device that provides administration or management of the cooling loop
+            associated with this interface.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/CoolingLoop_v1_0_2_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        LocationIndicatorActive:
+          description: An indicator allowing an operator to physically locate this
+            resource.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain the state of the indicator
+            used to physically identify or locate this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PrimaryCoolantConnectors:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the primary coolant connectors for this equipment.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type CoolantConnectorCollection that contains the primary coolant connectors
+            for this equipment.
+        RatedFlowLitersPerMinute:
+          description: The rated liquid flow (L/min) for this cooling loop.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the rated liquid flow, in
+            liters per minute units, for this cooling loop.
+          x-units: L/min
+        RatedPressurekPa:
+          description: The rated pressure (kPa) for this cooling loop.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the rated maximum pressure,
+            in kilopascal units, for this cooling loop.
+          x-units: kPa
+        SecondaryCoolantConnectors:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the secondary coolant connectors for this equipment.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type CoolantConnectorCollection that contains the secondary coolant
+            connectors for this equipment.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        SupplyEquipmentNames:
+          description: An array of names of upstream devices that supply coolant to
+            this cooling loop.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of user-assigned
+            identifying strings that describe upstream devices that supply coolant
+            to this cooling loop.
+        UserLabel:
+          description: A user-assigned label.
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a user-assigned label used
+            to identify this resource.  If a value has not been assigned by a user,
+            the value of this property shall be an empty string.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a cooling loop for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CoolingLoop_v1_0_2_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Chassis:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the chassis that contains this equipment.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain a link to resources of type
+            Chassis that represent the physical container that contains this resource.
+        Facility:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the facility that contains this equipment.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            Facility that represents the facility that contains this equipment.
+        ManagedBy:
+          description: An array of links to the managers responsible for managing
+            this equipment.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type Manager that represent the managers that manage this equipment.
+        ManagedBy@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CoolingLoop_v1_0_2_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#CoolingLoop.v1_0_2.CoolingLoop'
+x-copyright: Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2023.1'

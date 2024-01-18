@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  CoolingUnit v1.1.0                                                  -->
+<!--# Redfish Schema:  CoolingUnit v1.1.1                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -71,8 +71,8 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="CoolingUnit" BaseType="Resource.v1_0_0.Resource" Abstract="true">
-        <Annotation Term="OData.Description" String="This is the schema definition for a cooling distribution component or unit, such as a cooling distribution unit (CDU) or a heat exchanger."/>
-        <Annotation Term="OData.LongDescription" String="This resource shall represent a cooling distribution component or unit for a Redfish implementation."/>
+        <Annotation Term="OData.Description" String="This is the schema definition for a cooling system component or unit, such as a coolant distribution unit (CDU) or a heat exchanger."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall represent a cooling system component or unit for a Redfish implementation."/>
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
@@ -163,7 +163,7 @@
         </Property>
         <Property Name="Location" Type="Resource.Location" Nullable="false">
           <Annotation Term="OData.Description" String="The location of the equipment."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain location information of the associated equipment."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the location information of the associated equipment."/>
         </Property>
         <Property Name="PumpRedundancy" Type="Collection(Redundancy.RedundantGroup)" Nullable="false">
           <Annotation Term="OData.Description" String="The redundancy information for the groups of pumps in this unit."/>
@@ -245,7 +245,7 @@
         <NavigationProperty Name="Chassis" Type="Collection(Chassis.Chassis)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="An array of links to the chassis that contain this equipment."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Chassis that represents the physical containers that contain this equipment."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Chassis that represent the physical containers that contain this equipment."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
         <NavigationProperty Name="Facility" Type="Facility.Facility" Nullable="false">
@@ -264,7 +264,7 @@
 
       <EnumType Name="CoolingEquipmentType">
         <Member Name="CDU">
-          <Annotation Term="OData.Description" String="A cooling distribution unit."/>
+          <Annotation Term="OData.Description" String="A coolant distribution unit (CDU)."/>
         </Member>
         <Member Name="HeatExchanger">
           <Annotation Term="OData.Description" String="A heat exchanger."/>
@@ -291,6 +291,12 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CoolingUnit.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct terminology and improve description text.  It was also created to correct various typographical errors."/>
+      <EntityType Name="CoolingUnit" BaseType="CoolingUnit.v1_0_0.CoolingUnit"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CoolingUnit.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.2"/>
@@ -301,6 +307,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain redundancy information for the set of coolant connectors attached to this equipment.  The values of the RedundancyGroup array shall reference resources of type CoolantConnector."/>
         </Property>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CoolingUnit.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct terminology and improve description text.  It was also created to correct various typographical errors."/>
+      <EntityType Name="CoolingUnit" BaseType="CoolingUnit.v1_1_0.CoolingUnit"/>
     </Schema>
 
   </edmx:DataServices>

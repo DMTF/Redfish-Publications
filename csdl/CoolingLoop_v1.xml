@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  CoolingLoop v1.0.1                                                  -->
+<!--# Redfish Schema:  CoolingLoop v1.0.2                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -53,7 +53,7 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="CoolingLoop" BaseType="Resource.v1_0_0.Resource" Abstract="true">
-        <Annotation Term="OData.Description" String="This schema describes a cooling loop.  A cooling loop might be any coolant-carrying vessel, such as facility-level pipe work, an immersion cooling tank, or a manifold.  A loop might describe its connectors and instrumentation, but does not generally include active cooling components or subsystems."/>
+        <Annotation Term="OData.Description" String="This schema describes a cooling loop.  A cooling loop might be any coolant-carrying vessel, such as facility-level pipework, an immersion cooling tank, or a manifold.  A loop might describe its connectors and instrumentation but does not generally include active cooling components or subsystems."/>
         <Annotation Term="OData.LongDescription" String="This resource shall represent a cooling loop for a Redfish implementation."/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
@@ -198,13 +198,13 @@
         <Property Name="SpecificHeatkJoulesPerKgK" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The specific heat capacity (kJ/(kg*K)) of the coolant."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the specific heat capacity of the coolant, in kilojoule per kilogram per degree kelvin units, as measured at room temperature (20-25 degrees C) and atmospheric pressure."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the specific heat capacity of the coolant, in kilojoules per kilogram per degree kelvin units, as measured at room temperature (20-25 degrees C) and atmospheric pressure."/>
           <Annotation Term="Measures.Unit" String="kJ/kg/K"/>
         </Property>
         <Property Name="DensityKgPerCubicMeter" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The density (kg/m^3) of the coolant."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the density of the coolant, in kilogram per cubic meter units, as measured at room temperature (20-25 degrees C) and atmospheric pressure."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the density of the coolant, in kilograms per cubic meter units, as measured at room temperature (20-25 degrees C) and atmospheric pressure."/>
           <Annotation Term="Measures.Unit" String="kg/m3"/>
         </Property>
         <Property Name="ServicedDate" Type="Edm.DateTimeOffset">
@@ -283,6 +283,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="CoolingLoop" BaseType="CoolingLoop.v1_0_0.CoolingLoop"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CoolingLoop.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="CoolingLoop" BaseType="CoolingLoop.v1_0_1.CoolingLoop"/>
     </Schema>
 
   </edmx:DataServices>

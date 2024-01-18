@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Aggregate v1.0.1                                                    -->
+<!--# Redfish Schema:  Aggregate v1.0.2                                                    -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -89,7 +89,7 @@
 
       <Action Name="AddElements" IsBound="true">
         <Annotation Term="OData.Description" String="This action is used to add one or more resources to the aggregate."/>
-        <Annotation Term="OData.LongDescription" String="This action shall add one or more resources to the aggregate, resulting in that the resources are included in the Elements array of the aggregate."/>
+        <Annotation Term="OData.LongDescription" String="This action shall add one or more resources to the aggregate, with the result that the resources are included in the Elements array of the aggregate."/>
         <Parameter Name="Aggregate" Type="Aggregate.v1_0_0.Actions"/>
         <Parameter Name="Elements" Type="Collection(Resource.Resource)" Nullable="false">
           <Annotation Term="OData.Description" String="An array of resource links to add to the Elements array."/>
@@ -99,7 +99,7 @@
 
       <Action Name="RemoveElements" IsBound="true">
         <Annotation Term="OData.Description" String="This action is used to remove one or more resources from the aggregate."/>
-        <Annotation Term="OData.LongDescription" String="This action shall remove one or more resources from the aggregate, resulting in that the resources are removed from the Elements array of the aggregate."/>
+        <Annotation Term="OData.LongDescription" String="This action shall remove one or more resources from the aggregate, with the result that the resources are removed from the Elements array of the aggregate."/>
         <Parameter Name="Aggregate" Type="Aggregate.v1_0_0.Actions"/>
         <Parameter Name="Elements" Type="Collection(Resource.Resource)" Nullable="false">
           <Annotation Term="OData.Description" String="An array of resource links to remove from the Elements array."/>
@@ -152,8 +152,14 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Aggregate.v1_0_1">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
-      <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
+      <Annotation Term="OData.Description" String="This version was created to specify 64-bit integers in OpenAPI."/>
       <EntityType Name="Aggregate" BaseType="Aggregate.v1_0_0.Aggregate"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Aggregate.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="Aggregate" BaseType="Aggregate.v1_0_1.Aggregate"/>
     </Schema>
 
   </edmx:DataServices>

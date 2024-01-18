@@ -1,0 +1,161 @@
+components:
+  schemas:
+    DriveMetrics_v1_2_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/DriveMetrics_v1_2_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    DriveMetrics_v1_2_0_DriveMetrics:
+      additionalProperties: false
+      description: The usage and health statistics for a drive.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/DriveMetrics_v1_2_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        BadBlockCount:
+          description: The total number of bad blocks reported by the drive.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of bad blocks
+            reported by the drive.
+        CorrectableIOReadErrorCount:
+          description: The number of correctable read errors for the lifetime of the
+            drive.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            read errors for the lifetime of the drive.
+        CorrectableIOWriteErrorCount:
+          description: The number of correctable write errors for the lifetime of
+            the drive.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of correctable
+            write errors for the lifetime of the drive.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        NVMeSMART:
+          $ref: http://redfish.dmtf.org/schemas/v1/StorageControllerMetrics.yaml#/components/schemas/StorageControllerMetrics_NVMeSMARTMetrics
+          description: The NVMe SMART metrics for the drive.
+          x-longDescription: This property shall contain the NVMe SMART metrics for
+            the drive as defined by the NVMe SMART/Health Information log page.  This
+            property shall not be present if the service represents NVMe controllers
+            in the drive as StorageController resources.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        NativeCommandQueueDepth:
+          description: The current depth of the Native Command Queue.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the current depth of the
+            Native Command Queue as defined by the SATA Specification.
+          x-versionAdded: v1_1_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PowerOnHours:
+          description: The number of power-on hours for the lifetime of the drive.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of power-on hours
+            for the lifetime of the drive.
+        ReadIOKiBytes:
+          description: The number of kibibytes read.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of kibibytes
+            read from the time of last reset or wrap.
+          x-units: KiBy
+          x-versionAdded: v1_2_0
+        UncorrectableIOReadErrorCount:
+          description: The number of uncorrectable read errors for the lifetime of
+            the drive.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            read errors for the lifetime of the drive.
+        UncorrectableIOWriteErrorCount:
+          description: The number of uncorrectable write errors for the lifetime of
+            the drive.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of uncorrectable
+            write errors for the lifetime of the drive.
+        WriteIOKiBytes:
+          description: The number of kibibytes written.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total number of kibibytes
+            written from the time of last reset or wrap.
+          x-units: KiBy
+          x-versionAdded: v1_2_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: The DriveMetrics schema shall contain the usage and health
+        statistics for a drive in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    DriveMetrics_v1_2_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#DriveMetrics.v1_2_0.DriveMetrics'
+x-copyright: Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2023.3'

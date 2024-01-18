@@ -1,9 +1,9 @@
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |   Row |   Sequence# | Format   | Flags                          | Field String                       |   Child Count | Offset   |
 +=======+=============+==========+================================+====================================+===============+==========+
-|     0 |           0 | Set      |                                | DriveMetrics                       |            13 | 1        |
+|     0 |           0 | Set      |                                | DriveMetrics                       |            15 | 1        |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|     1 |           0 | Set      | Nullable=False,                | Actions                            |             1 | 14       |
+|     1 |           0 | Set      | Nullable=False,                | Actions                            |             1 | 16       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     2 |           1 | Integer  | Nullable=True,Permission=Read  | BadBlockCount                      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
@@ -15,7 +15,7 @@
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     6 |           5 | String   | Nullable=False,Permission=Read | Id                                 |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|     7 |           6 | Set      | Nullable=False,                | NVMeSMART                          |            23 | 15       |
+|     7 |           6 | Set      | Nullable=False,                | NVMeSMART                          |            23 | 17       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     8 |           7 | String   | Nullable=False,Permission=Read | Name                               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
@@ -29,75 +29,79 @@
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |    13 |          12 | Integer  | Nullable=True,Permission=Read  | NativeCommandQueueDepth            |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    14 |           0 | Set      | Nullable=False,                | Oem                                |             0 |          |
+|    14 |          13 | Integer  | Nullable=True,Permission=Read  | ReadIOKiBytes                      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    15 |           0 | Real     | Nullable=True,Permission=Read  | AvailableSparePercent              |             0 |          |
+|    15 |          14 | Integer  | Nullable=True,Permission=Read  | WriteIOKiBytes                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    16 |           1 | Real     | Nullable=True,Permission=Read  | AvailableSpareThresholdPercent     |             0 |          |
+|    16 |           0 | Set      | Nullable=False,                | Oem                                |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    17 |           2 | Real     | Nullable=True,Permission=Read  | CompositeTemperatureCelsius        |             0 |          |
+|    17 |           0 | Real     | Nullable=True,Permission=Read  | AvailableSparePercent              |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    18 |           3 | Integer  | Nullable=True,Permission=Read  | ControllerBusyTimeMinutes          |             0 |          |
+|    18 |           1 | Real     | Nullable=True,Permission=Read  | AvailableSpareThresholdPercent     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    19 |           4 | Integer  | Nullable=True,Permission=Read  | CriticalCompositeTempTimeMinutes   |             0 |          |
+|    19 |           2 | Real     | Nullable=True,Permission=Read  | CompositeTemperatureCelsius        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    20 |           5 | Set      | Nullable=False,                | CriticalWarnings                   |             5 | 38       |
+|    20 |           3 | Integer  | Nullable=True,Permission=Read  | ControllerBusyTimeMinutes          |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    21 |           6 | Integer  | Nullable=True,Permission=Read  | DataUnitsRead                      |             0 |          |
+|    21 |           4 | Integer  | Nullable=True,Permission=Read  | CriticalCompositeTempTimeMinutes   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    22 |           7 | Integer  | Nullable=True,Permission=Read  | DataUnitsWritten                   |             0 |          |
+|    22 |           5 | Set      | Nullable=False,                | CriticalWarnings                   |             5 | 40       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    23 |           8 | Set      | Nullable=False,                | EGCriticalWarningSummary           |             3 | 43       |
+|    23 |           6 | Integer  | Nullable=True,Permission=Read  | DataUnitsRead                      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    24 |           9 | Integer  | Nullable=True,Permission=Read  | HostReadCommands                   |             0 |          |
+|    24 |           7 | Integer  | Nullable=True,Permission=Read  | DataUnitsWritten                   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    25 |          10 | Integer  | Nullable=True,Permission=Read  | HostWriteCommands                  |             0 |          |
+|    25 |           8 | Set      | Nullable=False,                | EGCriticalWarningSummary           |             3 | 45       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    26 |          11 | Integer  | Nullable=True,Permission=Read  | MediaAndDataIntegrityErrors        |             0 |          |
+|    26 |           9 | Integer  | Nullable=True,Permission=Read  | HostReadCommands                   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    27 |          12 | Integer  | Nullable=True,Permission=Read  | NumberOfErrorInformationLogEntries |             0 |          |
+|    27 |          10 | Integer  | Nullable=True,Permission=Read  | HostWriteCommands                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    28 |          13 | Real     | Nullable=True,Permission=Read  | PercentageUsed                     |             0 |          |
+|    28 |          11 | Integer  | Nullable=True,Permission=Read  | MediaAndDataIntegrityErrors        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    29 |          14 | Integer  | Nullable=True,Permission=Read  | PowerCycles                        |             0 |          |
+|    29 |          12 | Integer  | Nullable=True,Permission=Read  | NumberOfErrorInformationLogEntries |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    30 |          15 | Real     | Nullable=True,Permission=Read  | PowerOnHours                       |             0 |          |
+|    30 |          13 | Real     | Nullable=True,Permission=Read  | PercentageUsed                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    31 |          16 | Array    | Nullable=True,Permission=Read  | TemperatureSensorsCelsius          |             1 | 46       |
+|    31 |          14 | Integer  | Nullable=True,Permission=Read  | PowerCycles                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    32 |          17 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp1TotalTimeSeconds   |             0 |          |
+|    32 |          15 | Real     | Nullable=True,Permission=Read  | PowerOnHours                       |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    33 |          18 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp1TransitionCount    |             0 |          |
+|    33 |          16 | Array    | Nullable=True,Permission=Read  | TemperatureSensorsCelsius          |             1 | 48       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    34 |          19 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp2TotalTimeSeconds   |             0 |          |
+|    34 |          17 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp1TotalTimeSeconds   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    35 |          20 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp2TransitionCount    |             0 |          |
+|    35 |          18 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp1TransitionCount    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    36 |          21 | Integer  | Nullable=True,Permission=Read  | UnsafeShutdowns                    |             0 |          |
+|    36 |          19 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp2TotalTimeSeconds   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    37 |          22 | Integer  | Nullable=True,Permission=Read  | WarningCompositeTempTimeMinutes    |             0 |          |
+|    37 |          20 | Integer  | Nullable=True,Permission=Read  | ThermalMgmtTemp2TransitionCount    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    38 |           0 | Boolean  | Nullable=True,Permission=Read  | MediaInReadOnly                    |             0 |          |
+|    38 |          21 | Integer  | Nullable=True,Permission=Read  | UnsafeShutdowns                    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    39 |           1 | Boolean  | Nullable=True,Permission=Read  | OverallSubsystemDegraded           |             0 |          |
+|    39 |          22 | Integer  | Nullable=True,Permission=Read  | WarningCompositeTempTimeMinutes    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    40 |           2 | Boolean  | Nullable=True,Permission=Read  | PMRUnreliable                      |             0 |          |
+|    40 |           0 | Boolean  | Nullable=True,Permission=Read  | MediaInReadOnly                    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    41 |           3 | Boolean  | Nullable=True,Permission=Read  | PowerBackupFailed                  |             0 |          |
+|    41 |           1 | Boolean  | Nullable=True,Permission=Read  | OverallSubsystemDegraded           |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    42 |           4 | Boolean  | Nullable=True,Permission=Read  | SpareCapacityWornOut               |             0 |          |
+|    42 |           2 | Boolean  | Nullable=True,Permission=Read  | PMRUnreliable                      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    43 |           0 | Boolean  | Nullable=True,Permission=Read  | NamespacesInReadOnlyMode           |             0 |          |
+|    43 |           3 | Boolean  | Nullable=True,Permission=Read  | PowerBackupFailed                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    44 |           1 | Boolean  | Nullable=True,Permission=Read  | ReliabilityDegraded                |             0 |          |
+|    44 |           4 | Boolean  | Nullable=True,Permission=Read  | SpareCapacityWornOut               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    45 |           2 | Boolean  | Nullable=True,Permission=Read  | SpareCapacityUnderThreshold        |             0 |          |
+|    45 |           0 | Boolean  | Nullable=True,Permission=Read  | NamespacesInReadOnlyMode           |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    46 |           0 | Real     |                                |                                    |             0 |          |
+|    46 |           1 | Boolean  | Nullable=True,Permission=Read  | ReliabilityDegraded                |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-Total Entries: 47
-Fixed size consumed (bytes): 482 (0x1e2)
-Field string size consumed (bytes): 959 (0x3bf)
-Total size (bytes): 1441 (0x5a1)
-Version: 0XF1F1F000
-Signature: 0x1f44d0c7
+|    47 |           2 | Boolean  | Nullable=True,Permission=Read  | SpareCapacityUnderThreshold        |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|    48 |           0 | Real     |                                |                                    |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+Total Entries: 49
+Fixed size consumed (bytes): 502 (0x1f6)
+Field string size consumed (bytes): 988 (0x3dc)
+Total size (bytes): 1490 (0x5d2)
+Version: 0XF1F2F000
+Signature: 0x5a520e31

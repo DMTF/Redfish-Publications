@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PowerDistribution v1.3.2                                            -->
+<!--# Redfish Schema:  PowerDistribution v1.3.3                                            -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -161,7 +161,7 @@
         </Property>
         <Property Name="Location" Type="Resource.Location" Nullable="false">
           <Annotation Term="OData.Description" String="The location of the equipment."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain location information of the associated equipment."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the location information of the associated equipment."/>
         </Property>
         <Property Name="TransferConfiguration" Type="PowerDistribution.v1_0_0.TransferConfiguration">
           <Annotation Term="OData.Description" String="The configuration settings for an automatic transfer switch."/>
@@ -259,7 +259,7 @@
         <NavigationProperty Name="Chassis" Type="Collection(Chassis.Chassis)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="An array of links to the chassis that contain this equipment."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Chassis that represents the physical container associated with this resource."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type Chassis that represent the physical containers associated with this resource."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
         <NavigationProperty Name="Facility" Type="Facility.Facility" Nullable="false">
@@ -403,14 +403,14 @@
         </Property>
         <Property Name="OverNominalFrequencyHz" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
-          <Annotation Term="OData.Description" String="The frequency in hertz over the nominal value that satisfies a criterion for transfer."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the frequency in hertz over the nominal value that satisfies a criterion for transfer."/>
+          <Annotation Term="OData.Description" String="The frequency in hertz units over the nominal value that satisfies a criterion for transfer."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the frequency in hertz units over the nominal value that satisfies a criterion for transfer."/>
           <Annotation Term="Measures.Unit" String="Hz"/>
         </Property>
         <Property Name="UnderNominalFrequencyHz" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
-          <Annotation Term="OData.Description" String="The frequency in hertz under the nominal value that satisfies a criterion for transfer."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the frequency in hertz under the nominal value that satisfies a criterion for transfer."/>
+          <Annotation Term="OData.Description" String="The frequency in hertz units under the nominal value that satisfies a criterion for transfer."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the frequency in hertz units under the nominal value that satisfies a criterion for transfer."/>
           <Annotation Term="Measures.Unit" String="Hz"/>
         </Property>
       </ComplexType>
@@ -452,13 +452,13 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_0_2">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
-      <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
+      <Annotation Term="OData.Description" String="This version was created to specify 64-bit integers in OpenAPI."/>
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_1.PowerDistribution"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_0_3">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
-      <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology."/>
+      <Annotation Term="OData.Description" String="This version was created to correct various descriptions to use proper normative terminology."/>
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_2.PowerDistribution"/>
     </Schema>
 
@@ -484,6 +484,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_6.PowerDistribution"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_0_8">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_0_7.PowerDistribution"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_1_0">
@@ -551,6 +557,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_1_3.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_1_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_1_4.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.3"/>
@@ -583,6 +595,12 @@
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_3.PowerDistribution"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_2_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_2_4.PowerDistribution"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.3"/>
@@ -606,6 +624,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_3_1.PowerDistribution"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PowerDistribution.v1_3_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PowerDistribution" BaseType="PowerDistribution.v1_3_2.PowerDistribution"/>
     </Schema>
 
   </edmx:DataServices>

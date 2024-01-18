@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  CoolantConnector v1.0.0                                             -->
+<!--# Redfish Schema:  CoolantConnector v1.0.1                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -51,7 +51,7 @@
 
       <EntityType Name="CoolantConnector" BaseType="Resource.v1_0_0.Resource" Abstract="true">
         <Annotation Term="OData.Description" String="This schema describes a liquid coolant connector, including any associated instrumentation."/>
-        <Annotation Term="OData.LongDescription" String="This resource shall represent an coolant connector for a Redfish implementation."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall represent a coolant connector for a Redfish implementation."/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
             <PropertyValue Property="Insertable" Bool="false"/>
@@ -112,7 +112,7 @@
         <Property Name="RatedFlowPressurekPa" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The pressure (kPa) at which the rated liquid flow is valid."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the pressure, in kilopascal units, that the rated liquid flow, is valid for this connector."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the pressure, in kilopascal units, that the rated liquid flow is valid for this connector."/>
           <Annotation Term="Measures.Unit" String="kPa"/>
           <Annotation Term="Validation.Minimum" Int="0"/>
         </Property>
@@ -155,19 +155,19 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy"/>
           <Annotation Term="OData.Description" String="The supply temperature (C)."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the temperature, in degrees Celsius, for the intake or supply connection to the cooling loop.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Temperature`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the temperature, in degree Celsius units, for the intake or supply connection to the cooling loop.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Temperature`."/>
         </NavigationProperty>
         <NavigationProperty Name="ReturnTemperatureCelsius" Type="Sensor.Sensor">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy"/>
           <Annotation Term="OData.Description" String="The return temperature (C)."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the temperature, in degrees Celsius, for the outflow or return connection to the cooling loop.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Temperature`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the temperature, in degree Celsius units, for the outflow or return connection to the cooling loop.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Temperature`."/>
         </NavigationProperty>
         <NavigationProperty Name="DeltaTemperatureCelsius" Type="Sensor.Sensor">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="Redfish.ExcerptCopy"/>
           <Annotation Term="OData.Description" String="The differential temperature (C)."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the change in temperature, in degrees Celsius, between the supply connection and the outflow or return connection to the cooling loop.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Temperature`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the change in temperature, in degree Celsius units, between the supply connection and the outflow or return connection to the cooling loop.  The value of the DataSourceUri property, if present, shall reference a resource of type Sensor with the ReadingType property containing the value `Temperature`."/>
         </NavigationProperty>
         <NavigationProperty Name="SupplyPressurekPa" Type="Sensor.Sensor">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -253,6 +253,12 @@
           <Annotation Term="OData.Description" String="A closed or self-contained loop."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CoolantConnector.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="CoolantConnector" BaseType="CoolantConnector.v1_0_0.CoolantConnector"/>
     </Schema>
 
   </edmx:DataServices>

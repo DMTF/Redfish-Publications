@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  AccelerationFunction v1.0.3                                         -->
+<!--# Redfish Schema:  AccelerationFunction v1.0.4                                         -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -82,7 +82,7 @@
         <Property Name="UUID" Type="Resource.UUID">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The UUID for this acceleration function."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain a UUID for the acceleration function.  RFC4122 describes methods that can create the value.  The value should be considered to be opaque.  Client software should only treat the overall value as a UUID and should not interpret any sub-fields within the UUID."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a UUID for the acceleration function.  RFC4122 describes methods that can create the value.  The value should be considered to be opaque.  Client software should only treat the overall value as a UUID and should not interpret any subfields within the UUID."/>
         </Property>
         <Property Name="FpgaReconfigurationSlots" Type="Collection(Edm.String)" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -106,8 +106,8 @@
         </Property>
         <Property Name="PowerWatts" Type="Edm.Int64" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The acceleration function power consumption, in watts."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the total acceleration function power consumption, in watts."/>
+          <Annotation Term="OData.Description" String="The acceleration function power consumption, in watt units."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total acceleration function power consumption, in watt units."/>
           <Annotation Term="Measures.Unit" String="W"/>
         </Property>
         <Property Name="Links" Type="AccelerationFunction.v1_0_0.Links" Nullable="false">
@@ -195,8 +195,14 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AccelerationFunction.v1_0_3">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
-      <Annotation Term="OData.Description" String="This version was created specify 64-bit integers in OpenAPI."/>
+      <Annotation Term="OData.Description" String="This version was created to specify 64-bit integers in OpenAPI."/>
       <EntityType Name="AccelerationFunction" BaseType="AccelerationFunction.v1_0_2.AccelerationFunction"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AccelerationFunction.v1_0_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="AccelerationFunction" BaseType="AccelerationFunction.v1_0_3.AccelerationFunction"/>
     </Schema>
 
   </edmx:DataServices>

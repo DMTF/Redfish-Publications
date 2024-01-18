@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Job v1.2.2                                                          -->
+<!--# Redfish Schema:  Job v1.2.3                                                          -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -81,7 +81,7 @@
         <Property Name="JobStatus" Type="Resource.Health" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The status of the job."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate the health status of the job.  This property should contain `Critical` if one or more messages in the Messages array contains the severity `Critical`.  This property should contain `Warning` if one or more messages in the Messages array contains the severity `Warning` and no messages contain the severity `Critical`.  This property should contain `OK` if all messages in the Messages array contain the severity `OK` or the array is empty."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate the health status of the job.  This property should contain `Critical` if one or more messages in the Messages array contains the severity `Critical`.  This property should contain `Warning` if one or more messages in the Messages array contains the severity `Warning` and if no messages contain the severity `Critical`.  This property should contain `OK` if all messages in the Messages array contain the severity `OK` or if the array is empty."/>
         </Property>
         <Property Name="JobState" Type="Job.v1_0_0.JobState" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -263,7 +263,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_0_3">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
-      <Annotation Term="OData.Description" String="This version was created to update the description of the HidePayload property.  It was also created to make the EndTime property not nullable.  It was also created to update descriptions that this schema defines."/>
+      <Annotation Term="OData.Description" String="This version was created to update the description of the HidePayload property.  It was also created to disallow the EndTime property from being `null`.  It was also created to update descriptions that this schema defines."/>
       <EntityType Name="Job" BaseType="Job.v1_0_2.Job"/>
     </Schema>
 
@@ -287,7 +287,7 @@
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_0_7">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
-      <Annotation Term="OData.Description" String="This version was created to correct various description to use proper normative terminology."/>
+      <Annotation Term="OData.Description" String="This version was created to correct various descriptions to use proper normative terminology."/>
       <EntityType Name="Job" BaseType="Job.v1_0_6.Job"/>
     </Schema>
 
@@ -307,6 +307,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="Job" BaseType="Job.v1_0_9.Job"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_0_11">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="Job" BaseType="Job.v1_0_10.Job"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_1_0">
@@ -346,6 +352,12 @@
       <EntityType Name="Job" BaseType="Job.v1_1_3.Job"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_1_5">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="Job" BaseType="Job.v1_1_4.Job"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.3"/>
@@ -353,7 +365,7 @@
       <EntityType Name="Job" BaseType="Job.v1_1_2.Job">
         <Property Name="Links" Type="Job.v1_2_0.Links" Nullable="false">
           <Annotation Term="OData.Description" String="Contains references to other resources that are related to this resource."/>
-          <Annotation Term="OData.LongDescription" String="The Links property, as described by the Redfish Specification, shall contain references to resources that are related to, but not contained by (subordinate to), this resource."/>
+          <Annotation Term="OData.LongDescription" String="The Links property, as described by the Redfish Specification, shall contain references to resources that are related to but are not contained by, or subordinate to, this resource."/>
         </Property>
       </EntityType>
 
@@ -379,6 +391,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="Job" BaseType="Job.v1_2_1.Job"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Job.v1_2_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="Job" BaseType="Job.v1_2_2.Job"/>
     </Schema>
 
   </edmx:DataServices>

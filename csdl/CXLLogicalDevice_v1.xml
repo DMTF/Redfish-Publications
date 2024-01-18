@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  CXLLogicalDevice v1.1.0                                             -->
+<!--# Redfish Schema:  CXLLogicalDevice v1.1.1                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -53,8 +53,8 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="CXLLogicalDevice" BaseType="Resource.v1_0_0.Resource" Abstract="true">
-        <Annotation Term="OData.Description" String="The schema definition for the CXLLogicalDevice resource.  It represents the properties of a CXL logical device within PCIe device."/>
-        <Annotation Term="OData.LongDescription" String="This resource shall represent a CXL logical device that is a part of PCIe device."/>
+        <Annotation Term="OData.Description" String="The schema definition for the CXLLogicalDevice resource.  It represents the properties of a CXL logical device within a PCIe device."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall represent a CXL logical device that is a part of a PCIe device."/>
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
@@ -168,7 +168,7 @@
         <NavigationProperty Name="PCIeFunctions" Type="Collection(PCIeFunction.PCIeFunction)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="An array of links to the PCIe functions assigned to this CXL logical device."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type PCIeFunction that represent the PCIe function assigned to this CXL logical device."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type PCIeFunction that represent the PCIe functions assigned to this CXL logical device."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
         <NavigationProperty Name="MemoryDomains" Type="Collection(MemoryDomain.MemoryDomain)">
@@ -180,7 +180,7 @@
         <NavigationProperty Name="MemoryChunks" Type="Collection(MemoryChunks.MemoryChunks)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="An array of links to the memory chunks owned by this CXL logical device."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type MmeoryChunks that represent the memory chunks owned by this CXL logical device."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type MemoryChunks that represent the memory chunks owned by this CXL logical device."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
         <NavigationProperty Name="Endpoints" Type="Collection(Endpoint.Endpoint)">
@@ -229,6 +229,12 @@
       <EntityType Name="CXLLogicalDevice" BaseType="CXLLogicalDevice.v1_0_0.CXLLogicalDevice"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CXLLogicalDevice.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="CXLLogicalDevice" BaseType="CXLLogicalDevice.v1_0_1.CXLLogicalDevice"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CXLLogicalDevice.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.2"/>
@@ -241,6 +247,12 @@
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CXLLogicalDevice.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="CXLLogicalDevice" BaseType="CXLLogicalDevice.v1_1_0.CXLLogicalDevice"/>
     </Schema>
 
   </edmx:DataServices>

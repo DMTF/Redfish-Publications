@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryMetrics v1.7.1                                                -->
+<!--# Redfish Schema:  MemoryMetrics v1.7.2                                                -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -179,7 +179,7 @@
         <Property Name="Temperature" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="An indication of whether a temperature threshold alarm trip was detected."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicates whether a temperature threshold alarm trip was detected."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether a temperature threshold alarm trip was detected."/>
         </Property>
         <Property Name="SpareBlock" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -275,6 +275,12 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_0_8.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_0_10">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_0_9.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2016.2"/>
@@ -346,6 +352,12 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_1_8.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_1_10">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_1_9.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2019.2"/>
@@ -380,10 +392,16 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_2_2.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_2_4">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_2_3.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.1"/>
-      <Annotation Term="OData.Description" String="This version was created to add OperatingSpeedMHz property."/>
+      <Annotation Term="OData.Description" String="This version was created to add the OperatingSpeedMHz property."/>
 
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_2_1.MemoryMetrics">
         <Property Name="OperatingSpeedMHz" Type="Edm.Int64">
@@ -407,6 +425,12 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_3_1.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_3_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_3_2.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_4_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.3"/>
@@ -417,12 +441,12 @@
       <ComplexType Name="CurrentPeriod" BaseType="MemoryMetrics.v1_0_0.CurrentPeriod">
         <Property Name="CorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the correctable errors since reset."/>
+          <Annotation Term="OData.Description" String="The number of correctable errors since reset."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of correctable errors since reset.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of CorrectableECCErrorCount over all memory."/>
         </Property>
         <Property Name="UncorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the uncorrectable errors since reset."/>
+          <Annotation Term="OData.Description" String="The number of uncorrectable errors since reset."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of uncorrectable errors since reset.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of UncorrectableECCErrorCount over all memory."/>
         </Property>
       </ComplexType>
@@ -430,13 +454,13 @@
       <ComplexType Name="LifeTime" BaseType="MemoryMetrics.v1_0_0.LifeTime">
         <Property Name="CorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the correctable errors for the lifetime of the memory."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the correctable errors for the lifetime of the memory.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of CorrectableECCErrorCount over all memory."/>
+          <Annotation Term="OData.Description" String="The number of correctable errors for the lifetime of the memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of correctable errors for the lifetime of the memory.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of CorrectableECCErrorCount over all memory."/>
         </Property>
         <Property Name="UncorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the uncorrectable errors for the lifetime of the memory."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the uncorrectable errors for the lifetime of the memory.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of UncorrectableECCErrorCount over all memory."/>
+          <Annotation Term="OData.Description" String="The number of uncorrectable errors for the lifetime of the memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of uncorrectable errors for the lifetime of the memory.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of UncorrectableECCErrorCount over all memory."/>
         </Property>
       </ComplexType>
     </Schema>
@@ -451,6 +475,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_4_1.MemoryMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_4_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_4_2.MemoryMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_5_0">
@@ -476,7 +506,7 @@
         <Property Name="IndeterminateCorrectableErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The number of indeterminate correctable errors for the lifetime of the memory."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate correctable errors for the lifetime of the memory.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate correctable errors across all memory without duplication, which may not bey the sum of all IndeterminateCorrectableErrorCount properties over all memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of indeterminate correctable errors for the lifetime of the memory.  Since the error origin is indeterminate, the same error can be duplicated across multiple MemoryMetrics resources.  When this resource is subordinate to the MemorySummary object, this property shall be the sum of indeterminate correctable errors across all memory without duplication, which may not be the sum of all IndeterminateCorrectableErrorCount properties over all memory."/>
         </Property>
         <Property Name="IndeterminateUncorrectableErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -490,6 +520,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_5_0.MemoryMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_5_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_5_1.MemoryMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_6_0">
@@ -510,7 +546,7 @@
         <Property Name="DirtyShutdownCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The number of shutdowns while outstanding writes have not completed to persistent memory."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain number of shutdowns while outstanding writes have not completed to persistent memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of shutdowns while outstanding writes have not completed to persistent memory."/>
         </Property>
         <Property Name="CXL" Type="MemoryMetrics.v1_6_0.CXL">
           <Annotation Term="OData.Description" String="The memory metrics specific to CXL devices."/>
@@ -561,6 +597,12 @@
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_6_0.MemoryMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_6_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_6_1.MemoryMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_7_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.1"/>
@@ -580,6 +622,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to clarify the range of possible values for properties with percent units."/>
       <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_7_0.MemoryMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryMetrics.v1_7_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="MemoryMetrics" BaseType="MemoryMetrics.v1_7_1.MemoryMetrics"/>
     </Schema>
 
   </edmx:DataServices>

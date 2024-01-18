@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  MemoryRegion v1.0.0                                                 -->
+<!--# Redfish Schema:  MemoryRegion v1.0.1                                                 -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -82,7 +82,7 @@
         <Property Name="BlockSizeMiB" Type="Edm.Int64" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The memory region block size in mebibytes (MiB)."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the memory region block size  in mebibytes (MiB). The region size, base offset, all extent sizes, and all extent base offsets shall be aligned to this block size."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the memory region block size in mebibytes (MiB).  The region size, base offset, all extent sizes, and all extent base offsets shall be aligned to this block size."/>
           <Annotation Term="Measures.Unit" String="MiBy"/>
         </Property>
         <Property Name="RegionSizeMiB" Type="Edm.Int64" Nullable="false">
@@ -91,7 +91,7 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the size of the memory region in mebibytes (MiB)."/>
           <Annotation Term="Measures.Unit" String="MiBy"/>
         </Property>
-        <Property Name="RegionBaseOffetMiB" Type="Edm.Int64" Nullable="false">
+        <Property Name="RegionBaseOffsetMiB" Type="Edm.Int64" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The offset of the memory region in the device address range in mebibytes (MiB)."/>
           <Annotation Term="OData.LongDescription" String="The value of this property shall contain the offset of the memory region in the device address range in mebibytes (MiB)."/>
@@ -99,18 +99,18 @@
         </Property>
         <Property Name="ShareableRegion" Type="Edm.Boolean" DefaultValue="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="An indication of whether memory region can be shared across multiple hosts."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate whether this memory region can be shared across multiple hosts as defined in the 'Flags' field of 'Device Scoped Memory Affinity Structure' defined in Coherent Device Attribute Table (CDAT) Specification."/>
+          <Annotation Term="OData.Description" String="An indication of whether this memory region can be shared across multiple hosts."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether this memory region can be shared across multiple hosts as defined in the 'Flags' field of 'Device Scoped Memory Affinity Structure' defined in the Coherent Device Attribute Table (CDAT) Specification."/>
         </Property>
         <Property Name="NonVolatileRegion" Type="Edm.Boolean" DefaultValue="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="An indication of whether memory region represents non-volatile memory."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate whether this memory region represents non-volatile memory as defined in the 'Flags' field of 'Device Scoped Memory Affinity Structure' defined in Coherent Device Attribute Table (CDAT) Specification."/>
+          <Annotation Term="OData.Description" String="An indication of whether this memory region represents non-volatile memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether this memory region represents non-volatile memory as defined in the 'Flags' field of 'Device Scoped Memory Affinity Structure' defined in the Coherent Device Attribute Table (CDAT) Specification."/>
         </Property>
         <Property Name="HardwareManagedCoherencyRegion" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="An indication of whether the device manages the cache coherency across hosts for this memory region."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate whether the device manages the cache coherency across hosts and thereby ensures that each host has a consistent view of this memory region content as defined in the 'Flags' field of 'Device Scoped Memory Affinity Structure' defined in Coherent Device Attribute Table (CDAT) Specification."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate whether the device manages the cache coherency across hosts and thereby ensures that each host has a consistent view of this memory region content as defined in the 'Flags' field of 'Device Scoped Memory Affinity Structure' defined in the Coherent Device Attribute Table (CDAT) Specification."/>
         </Property>
         <Property Name="SanitizeOnRelease" Type="Edm.Boolean" DefaultValue="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -142,8 +142,8 @@
 
       <ComplexType Name="MemoryExtent">
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
-        <Annotation Term="OData.Description" String="Definition of memory extent identifying available address range in the memory region."/>
-        <Annotation Term="OData.LongDescription" String="This type shall contain definition of memory extent identifying available address range in the dynamic capacity memory region."/>
+        <Annotation Term="OData.Description" String="Definition of memory extent identifying an available address range in the memory region."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the definition of a memory extent identifying an available address range in the dynamic capacity memory region."/>
         <Property Name="ExtentOffsetMiB" Type="Edm.Int64" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="Offset of the memory extent within the memory region in mebibytes (MiB)."/>
@@ -171,7 +171,7 @@
       <ComplexType Name="MemoryChunk">
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="OData.Description" String="Definition of memory chunk providing capacity for memory region."/>
-        <Annotation Term="OData.LongDescription" String="This type shall contain definition of memory chunk providing capacity for memory region."/>
+        <Annotation Term="OData.LongDescription" String="This type shall contain the definition of a memory chunk providing capacity for memory region."/>
         <Property Name="ChunkOffsetMiB" Type="Edm.Int64" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="Offset of the memory chunk within the memory region in mebibytes (MiB)."/>
@@ -206,9 +206,15 @@
           <Annotation Term="OData.Description" String="Static memory region.  The whole address range is always covered by memory."/>
         </Member>
         <Member Name="Dynamic">
-          <Annotation Term="OData.Description" String="Dynamic memory region.  The address range coverage may be changes in the runtime."/>
+          <Annotation Term="OData.Description" String="Dynamic memory region.  The address range coverage may be changed in the runtime."/>
         </Member>
       </EnumType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MemoryRegion.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct the spelling of the RegionBaseOffsetMiB property.  It was also created to correct various typographical errors."/>
+      <EntityType Name="MemoryRegion" BaseType="MemoryRegion.v1_0_0.MemoryRegion"/>
     </Schema>
 
   </edmx:DataServices>

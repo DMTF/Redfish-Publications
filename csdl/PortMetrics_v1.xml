@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  PortMetrics v1.5.0                                                  -->
+<!--# Redfish Schema:  PortMetrics v1.5.1                                                  -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -150,8 +150,8 @@
         </Property>
         <Property Name="PacketDeadlineDiscards" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of packets discarded due to the Congestion Deadline sub-field reaching zero."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of packets discarded by this interface due to the Congestion Deadline sub-field reaching zero prior to packet transmission."/>
+          <Annotation Term="OData.Description" String="The number of packets discarded due to the Congestion Deadline subfield reaching zero."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of packets discarded by this interface due to the Congestion Deadline subfield reaching zero prior to packet transmission."/>
         </Property>
         <Property Name="AccessKeyViolations" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -199,6 +199,12 @@
       <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_0_1.PortMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_0_3">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_0_2.PortMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2021.1"/>
@@ -233,11 +239,11 @@
         </Property>
         <Property Name="Transceivers" Type="Collection(PortMetrics.v1_1_0.Transceiver)" Nullable="false">
           <Annotation Term="OData.Description" String="The metrics for the transceivers in this port.  Each member represents a single transceiver."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of transceiver related metrics for this port.  Each member in the array shall represent a single transceiver."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of transceiver-related metrics for this port.  Each member in the array shall represent a single transceiver."/>
         </Property>
         <Property Name="SAS" Type="Collection(PortMetrics.v1_1_0.SAS)" Nullable="false">
           <Annotation Term="OData.Description" String="The physical (phy) metrics for Serial Attached SCSI (SAS).  Each member represents a single phy."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of physical related metrics for Serial Attached SCSI (SAS).  Each member in the array shall represent a single phy."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of physical-related metrics for Serial Attached SCSI (SAS).  Each member in the array shall represent a single phy."/>
         </Property>
       </EntityType>
 
@@ -420,7 +426,7 @@
       <ComplexType Name="Transceiver">
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="OData.Description" String="The transceiver metrics."/>
-        <Annotation Term="OData.LongDescription" String="This type shall describe the transceiver related metrics."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe the transceiver-related metrics."/>
         <Property Name="RXInputPowerMilliWatts" Type="Edm.Decimal">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The RX input power value of a small form-factor pluggable (SFP) transceiver."/>
@@ -476,6 +482,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
       <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_1_0.PortMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_1_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_1_1.PortMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_2_0">
@@ -573,6 +585,12 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_2_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_2_0.PortMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_3_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.1"/>
@@ -583,6 +601,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the PCIe errors associated with this port."/>
         </Property>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_3_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_3_0.PortMetrics"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_4_0">
@@ -615,6 +639,12 @@
       <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_4_0.PortMetrics"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_4_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_4_1.PortMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_5_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.2"/>
@@ -628,6 +658,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of times a phy reset problem has occurred."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="PortMetrics.v1_5_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="PortMetrics" BaseType="PortMetrics.v1_5_0.PortMetrics"/>
     </Schema>
 
   </edmx:DataServices>

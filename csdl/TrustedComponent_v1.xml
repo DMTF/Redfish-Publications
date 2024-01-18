@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  TrustedComponent v1.2.0                                             -->
+<!--# Redfish Schema:  TrustedComponent v1.3.0                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -65,6 +65,20 @@
         </Annotation>
       </EntityType>
 
+      <Action Name="TPMGetEventLog" IsBound="true">
+        <Annotation Term="OData.Description" String="This action retrieves the event log for TPM 2.0 devices."/>
+        <Annotation Term="OData.LongDescription" String="This action shall return the event log for TPM 2.0 devices."/>
+        <Parameter Name="TrustedComponent" Type="TrustedComponent.v1_0_0.Actions"/>
+        <ReturnType Type="TrustedComponent.v1_3_0.TPMGetEventLogResponse" Nullable="false"/>
+        <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_3_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Action>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_0_0">
@@ -79,7 +93,7 @@
         <Property Name="UUID" Type="Resource.UUID">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The UUID for this trusted component."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain a universal unique identifier number for the trusted component."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a universally unique identifier number for the trusted component."/>
         </Property>
         <Property Name="Status" Type="Resource.Status" Nullable="false">
           <Annotation Term="OData.Description" String="The status and health of the resource and its subordinate or dependent resources."/>
@@ -190,10 +204,16 @@
         <NavigationProperty Name="SoftwareImages" Type="Collection(SoftwareInventory.SoftwareInventory)">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The images that are associated with this trusted component."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resource of type SoftwareInventory that represent the firmware images that apply to this trusted component."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain an array of links to resources of type SoftwareInventory that represent the firmware images that apply to this trusted component."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="TrustedComponent" BaseType="TrustedComponent.v1_0_0.TrustedComponent"/>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_1_0">
@@ -225,6 +245,12 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="TrustedComponent" BaseType="TrustedComponent.v1_1_0.TrustedComponent"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_2_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.2"/>
@@ -240,6 +266,35 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_2_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="TrustedComponent" BaseType="TrustedComponent.v1_2_0.TrustedComponent"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="TrustedComponent.v1_3_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.3"/>
+      <Annotation Term="OData.Description" String="This version was created to add the TPMGetEventLog action to allow retrieval of a TPM event log."/>
+
+      <EntityType Name="TrustedComponent" BaseType="TrustedComponent.v1_2_1.TrustedComponent"/>
+
+      <ComplexType Name="TPMGetEventLogResponse">
+        <Annotation Term="OData.AdditionalProperties" Bool="false"/>
+        <Annotation Term="OData.Description" String="The TPM event log."/>
+        <Annotation Term="OData.LongDescription" String="This object shall contain the TPM event log."/>
+        <Property Name="EventLog" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The Base64-encoded event log for the TPM."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a Base64-encoded string of the entire event log defined in the 'Event Logging' section of the 'TCG PC Client Platform Firmware Profile Specification'."/>
+          <Annotation Term="Redfish.Required"/>
+        </Property>
+        <Property Name="Oem" Type="Resource.Oem" Nullable="false">
+          <Annotation Term="OData.Description" String="The OEM extension property."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the OEM extensions.  All values for properties contained in this object shall conform to the Redfish Specification-described requirements."/>
+        </Property>
+      </ComplexType>
+    </Schema>
+
   </edmx:DataServices>
 </edmx:Edmx>
-

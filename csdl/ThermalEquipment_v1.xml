@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  ThermalEquipment v1.1.0                                             -->
+<!--# Redfish Schema:  ThermalEquipment v1.1.1                                             -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -82,8 +82,8 @@
         </NavigationProperty>
         <NavigationProperty Name="CDUs" Type="CoolingUnitCollection.CoolingUnitCollection" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="A link to a collection of cooling distribution units."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type CoolingUnitCollection that contains a set of cooling distribution units."/>
+          <Annotation Term="OData.Description" String="A link to a collection of coolant distribution units."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain a link to a resource collection of type CoolingUnitCollection that contains a set of coolant distribution units."/>
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
         <NavigationProperty Name="ImmersionUnits" Type="CoolingUnitCollection.CoolingUnitCollection" Nullable="false">
@@ -122,6 +122,12 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ThermalEquipment.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct terminology and improve description text."/>
+      <EntityType Name="ThermalEquipment" BaseType="ThermalEquipment.v1_0_0.ThermalEquipment"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ThermalEquipment.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.2"/>
@@ -132,6 +138,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain redundancy information for the set of cooling loops attached to this equipment.  The values of the RedundancyGroup array shall reference resources of type CoolingLoop."/>
         </Property>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ThermalEquipment.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct terminology and improve description text."/>
+      <EntityType Name="ThermalEquipment" BaseType="ThermalEquipment.v1_1_0.ThermalEquipment"/>
     </Schema>
 
   </edmx:DataServices>

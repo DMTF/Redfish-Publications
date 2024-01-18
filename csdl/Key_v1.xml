@@ -52,6 +52,7 @@
           <Collection>
             <String>/redfish/v1/KeyService/NVMeoFSecrets/{KeyId}</String>
             <String>/redfish/v1/UpdateService/RemoteServerSSHKeys/{KeyId}</String>
+            <String>/redfish/v1/UpdateService/PublicIdentitySSHKey/{KeyId}</String>
             <String>/redfish/v1/AccountService/Accounts/{ManagerAccountId}/Keys/{KeyId}</String>
             <String>/redfish/v1/Managers/{ManagerId}/RemoteAccountService/Accounts/{ManagerAccountId}/Keys/{KeyId}</String>
             <String>/redfish/v1/AggregationService/AggregationSources/{AggregationSourceId}/TrustedPublicHostKeys/{KeyId}</String>
@@ -60,6 +61,92 @@
           </Collection>
         </Annotation>
       </EntityType>
+
+      <EnumType Name="SSHKeyType">
+        <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_4_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Member Name="RSA">
+          <Annotation Term="OData.Description" String="RSA."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC4253-defined 'ssh-rsa' key type."/>
+        </Member>
+        <Member Name="DSA">
+          <Annotation Term="OData.Description" String="DSA."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC4253-defined 'ssh-dss' key type."/>
+        </Member>
+        <Member Name="ECDSA">
+          <Annotation Term="OData.Description" String="ECDSA."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC5656-defined ECDSA key type."/>
+        </Member>
+        <Member Name="Ed25519">
+          <Annotation Term="OData.Description" String="Ed25519."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate an RFC8709-defined 'ssh-ed25519' key type."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="ECDSACurveType">
+        <Annotation Term="Redfish.Revisions">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Kind" EnumMember="Redfish.RevisionKind/Added"/>
+              <PropertyValue Property="Version" String="v1_4_0"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Member Name="NISTP256">
+          <Annotation Term="OData.Description" String="NIST P-256."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp256' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP384">
+          <Annotation Term="OData.Description" String="NIST P-384."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp384' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP521">
+          <Annotation Term="OData.Description" String="NIST P-521."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp521' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK163">
+          <Annotation Term="OData.Description" String="NIST K-163."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk163' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP192">
+          <Annotation Term="OData.Description" String="NIST P-192."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp192' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTP224">
+          <Annotation Term="OData.Description" String="NIST P-224."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistp224' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK233">
+          <Annotation Term="OData.Description" String="NIST K-233."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk233' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTB233">
+          <Annotation Term="OData.Description" String="NIST B-233."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistb233' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK283">
+          <Annotation Term="OData.Description" String="NIST K-283."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk283' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTK409">
+          <Annotation Term="OData.Description" String="NIST K-409."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistk409' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTB409">
+          <Annotation Term="OData.Description" String="NIST B-409."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistb409' curve in RFC5656."/>
+        </Member>
+        <Member Name="NISTT571">
+          <Annotation Term="OData.Description" String="NIST T-571."/>
+          <Annotation Term="OData.LongDescription" String="This value shall indicate the 'nistt571' curve in RFC5656."/>
+        </Member>
+      </EnumType>
     </Schema>
 
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Key.v1_0_0">
@@ -240,6 +327,21 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The host name of the remote server associated with this key."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the host name of the remote server associated with this key."/>
+        </Property>
+      </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Key.v1_4_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.3"/>
+
+      <EntityType Name="Key" BaseType="Key.v1_3_0.Key"/>
+
+      <ComplexType Name="SSHType" BaseType="Key.v1_3_0.SSHType">
+        <Property Name="Comment" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The user-specified comment associated with this key, which typically contains the client's username and host name."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the user-specified comment associated with this key, which typically contains the client's username and host name."/>
         </Property>
       </ComplexType>
     </Schema>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  LicenseService v1.1.0                                               -->
+<!--# Redfish Schema:  LicenseService v1.1.1                                               -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -38,7 +38,7 @@
 
       <EntityType Name="LicenseService" BaseType="Resource.v1_0_0.Resource" Abstract="true">
         <Annotation Term="OData.Description" String="The LicenseService schema describes the license service and the properties for the service itself with a link to the collection of licenses.  The license service also provides methods for installing licenses in a Redfish service."/>
-        <Annotation Term="OData.LongDescription" String="This resource shall represent an license service and the properties that affect the service itself for a Redfish implementation."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall represent a license service and the properties that affect the service itself for a Redfish implementation."/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
             <PropertyValue Property="Insertable" Bool="false"/>
@@ -67,11 +67,12 @@
         <Parameter Name="LicenseService" Type="LicenseService.v1_0_0.Actions"/>
         <Parameter Name="LicenseFileURI" Type="Edm.String" Nullable="false">
           <Annotation Term="OData.Description" String="The URI of the license file to install."/>
-          <Annotation Term="OData.LongDescription" String="This parameter shall contain an RFC3986-defined URI that links to a file that the license service retrieves to install license in that file.  This URI should contain a scheme that describes the transfer protocol.  If the TransferProtocol parameter is absent or not supported, and a transfer protocol is not specified by a scheme contained within this URI, the service shall use HTTP to get the file."/>
+          <Annotation Term="OData.LongDescription" String="This parameter shall contain an RFC3986-defined URI that links to a file that the license service retrieves to install the license in that file.  This URI should contain a scheme that describes the transfer protocol.  If the TransferProtocol parameter is absent or not supported, and a transfer protocol is not specified by a scheme contained within this URI, the service shall use HTTP to get the file."/>
+          <Annotation Term="OData.IsURL"/>
         </Parameter>
         <Parameter Name="TransferProtocol" Type="LicenseService.v1_0_0.TransferProtocolType">
           <Annotation Term="OData.Description" String="The network protocol that the license service uses to retrieve the license file located at the URI provided in LicenseFileURI.  This parameter is ignored if the URI provided in LicenseFileURI contains a scheme."/>
-          <Annotation Term="OData.LongDescription" String="This parameter shall contain the network protocol that the license service shall use to retrieve the license file located at the LicenseFileURI.  Services should ignore this parameter if the URI provided in LicenseFileURI contains a scheme.  If this parameter is not provided or supported, and a transfer protocol is not specified by a scheme contained within this URI, the service shall use HTTP to retrieve the file."/>
+          <Annotation Term="OData.LongDescription" String="This parameter shall contain the network protocol that the license service shall use to retrieve the license file located at the LicenseFileURI.  Services should ignore this parameter if the URI provided in LicenseFileURI contains a scheme.  If this parameter is not provided or supported, and if a transfer protocol is not specified by a scheme contained within this URI, the service shall use HTTP to retrieve the file."/>
         </Parameter>
         <Parameter Name="Username" Type="Edm.String">
           <Annotation Term="OData.Description" String="The user name to access the URI specified by the LicenseFileURI parameter."/>
@@ -182,12 +183,24 @@
       </EnumType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="LicenseService.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="LicenseService" BaseType="LicenseService.v1_0_0.LicenseService"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="LicenseService.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2022.3"/>
       <Annotation Term="OData.Description" String="This version was created to add the AuthorizedDevices and TargetServices parameters to the Install action."/>
 
       <EntityType Name="LicenseService" BaseType="LicenseService.v1_0_0.LicenseService"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="LicenseService.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="LicenseService" BaseType="LicenseService.v1_1_0.LicenseService"/>
     </Schema>
 
   </edmx:DataServices>

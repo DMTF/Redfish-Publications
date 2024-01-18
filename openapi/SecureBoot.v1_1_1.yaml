@@ -1,0 +1,178 @@
+components:
+  schemas:
+    SecureBoot_v1_1_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#SecureBoot.ResetKeys':
+          $ref: '#/components/schemas/SecureBoot_v1_1_1_ResetKeys'
+        Oem:
+          $ref: '#/components/schemas/SecureBoot_v1_1_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecureBoot_v1_1_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecureBoot_v1_1_1_ResetKeys:
+      additionalProperties: false
+      description: This action resets the UEFI Secure Boot keys.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset the UEFI Secure Boot key databases.  The
+        `ResetAllKeysToDefault` value shall reset all UEFI Secure Boot key databases
+        to their default values.  The `DeleteAllKeys` value shall delete the contents
+        of all UEFI Secure Boot key databases.  The `DeletePK` value shall delete
+        the contents of the PK Secure Boot key database.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecureBoot_v1_1_1_ResetKeysRequestBody:
+      additionalProperties: false
+      description: This action resets the UEFI Secure Boot keys.
+      properties:
+        ResetKeysType:
+          $ref: '#/components/schemas/SecureBoot_v1_1_1_ResetKeysType'
+          description: The type of reset or delete to perform on the UEFI Secure Boot
+            databases.
+          x-longDescription: This parameter shall specify the type of reset or delete
+            to perform on the UEFI Secure Boot databases.
+      required:
+      - ResetKeysType
+      type: object
+      x-longDescription: This action shall reset the UEFI Secure Boot key databases.  The
+        `ResetAllKeysToDefault` value shall reset all UEFI Secure Boot key databases
+        to their default values.  The `DeleteAllKeys` value shall delete the contents
+        of all UEFI Secure Boot key databases.  The `DeletePK` value shall delete
+        the contents of the PK Secure Boot key database.
+    SecureBoot_v1_1_1_ResetKeysType:
+      enum:
+      - ResetAllKeysToDefault
+      - DeleteAllKeys
+      - DeletePK
+      type: string
+      x-enumDescriptions:
+        DeleteAllKeys: Delete the contents of all UEFI Secure Boot key databases,
+          including the PK key database.  This puts the system in Setup Mode.
+        DeletePK: Delete the contents of the PK UEFI Secure Boot database.  This puts
+          the system in Setup Mode.
+        ResetAllKeysToDefault: Reset the contents of all UEFI Secure Boot key databases,
+          including the PK key database, to the default values.
+    SecureBoot_v1_1_1_SecureBoot:
+      additionalProperties: false
+      description: The SecureBoot schema contains UEFI Secure Boot information and
+        represents properties for managing the UEFI Secure Boot functionality of a
+        system.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/SecureBoot_v1_1_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          nullable: true
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        SecureBootCurrentBoot:
+          $ref: '#/components/schemas/SecureBoot_v1_1_1_SecureBootCurrentBootType'
+          description: The UEFI Secure Boot state during the current boot cycle.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall indicate the UEFI Secure Boot state
+            during the current boot cycle.
+        SecureBootDatabases:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the collection of UEFI Secure Boot databases.
+          readOnly: true
+          x-longDescription: The value of this property shall be a link to a resource
+            collection of type SecureBootDatabaseCollection.
+          x-versionAdded: v1_1_0
+        SecureBootEnable:
+          description: An indication of whether UEFI Secure Boot is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the UEFI Secure
+            Boot takes effect on next boot.  This property can be enabled in UEFI
+            boot mode only.
+        SecureBootMode:
+          $ref: '#/components/schemas/SecureBoot_v1_1_1_SecureBootModeType'
+          description: The current UEFI Secure Boot Mode.
+          nullable: true
+          readOnly: true
+          x-longDescription: This property shall contain the current UEFI Secure Boot
+            mode, as defined in the UEFI Specification.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains UEFI Secure Boot information for a
+        Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecureBoot_v1_1_1_SecureBootCurrentBootType:
+      enum:
+      - Enabled
+      - Disabled
+      type: string
+      x-enumDescriptions:
+        Disabled: UEFI Secure Boot is currently disabled.
+        Enabled: UEFI Secure Boot is currently enabled.
+    SecureBoot_v1_1_1_SecureBootModeType:
+      enum:
+      - SetupMode
+      - UserMode
+      - AuditMode
+      - DeployedMode
+      type: string
+      x-enumDescriptions:
+        AuditMode: UEFI Secure Boot is currently in Audit Mode.
+        DeployedMode: UEFI Secure Boot is currently in Deployed Mode.
+        SetupMode: UEFI Secure Boot is currently in Setup Mode.
+        UserMode: UEFI Secure Boot is currently in User Mode.
+title: '#SecureBoot.v1_1_1.SecureBoot'
+x-copyright: Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2020.1'

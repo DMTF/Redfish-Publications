@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  SecureBootDatabase v1.0.1                                           -->
+<!--# Redfish Schema:  SecureBootDatabase v1.0.2                                           -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -64,7 +64,7 @@
 
       <Action Name="ResetKeys" IsBound="true">
         <Annotation Term="OData.Description" String="This action is used to reset the UEFI Secure Boot keys of this database."/>
-        <Annotation Term="OData.LongDescription" String="This action shall perform a reset of this UEFI Secure Boot key database.  The `ResetAllKeysToDefault` value shall reset this UEFI Secure Boot key database to the default values.  The `DeleteAllKeys` value shall delete the content of this UEFI Secure Boot key database."/>
+        <Annotation Term="OData.LongDescription" String="This action shall perform a reset of this UEFI Secure Boot key database.  The `ResetAllKeysToDefault` value shall reset this UEFI Secure Boot key database to the default values.  The `DeleteAllKeys` value shall delete the contents of this UEFI Secure Boot key database."/>
         <Parameter Name="SecureBootDatabase" Type="SecureBootDatabase.v1_0_0.Actions"/>
         <Parameter Name="ResetKeysType" Type="SecureBootDatabase.v1_0_0.ResetKeysType" Nullable="false">
           <Annotation Term="OData.Description" String="The type of reset or delete to perform on this UEFI Secure Boot database."/>
@@ -103,10 +103,10 @@
 
       <EnumType Name="ResetKeysType">
         <Member Name="ResetAllKeysToDefault">
-          <Annotation Term="OData.Description" String="Reset the content of this UEFI Secure Boot key database to the default values."/>
+          <Annotation Term="OData.Description" String="Reset the contents of this UEFI Secure Boot key database to the default values."/>
         </Member>
         <Member Name="DeleteAllKeys">
-          <Annotation Term="OData.Description" String="Delete the content of this UEFI Secure Boot key database."/>
+          <Annotation Term="OData.Description" String="Delete the contents of this UEFI Secure Boot key database."/>
         </Member>
       </EnumType>
 
@@ -131,6 +131,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct the name of the `PKDefault` database in the description of the DatabaseId property."/>
       <EntityType Name="SecureBootDatabase" BaseType="SecureBootDatabase.v1_0_0.SecureBootDatabase"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBootDatabase.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="SecureBootDatabase" BaseType="SecureBootDatabase.v1_0_1.SecureBootDatabase"/>
     </Schema>
 
   </edmx:DataServices>

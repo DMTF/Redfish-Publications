@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  SecureBoot v1.1.0                                                   -->
+<!--# Redfish Schema:  SecureBoot v1.1.1                                                   -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -62,7 +62,7 @@
 
       <Action Name="ResetKeys" IsBound="true">
         <Annotation Term="OData.Description" String="This action resets the UEFI Secure Boot keys."/>
-        <Annotation Term="OData.LongDescription" String="This action shall reset the UEFI Secure Boot key databases.  The `ResetAllKeysToDefault` value shall reset all UEFI Secure Boot key databases to their default values.  The `DeleteAllKeys` value shall delete the content of all UEFI Secure Boot key databases.  The `DeletePK` value shall delete the content of the PK Secure Boot key database."/>
+        <Annotation Term="OData.LongDescription" String="This action shall reset the UEFI Secure Boot key databases.  The `ResetAllKeysToDefault` value shall reset all UEFI Secure Boot key databases to their default values.  The `DeleteAllKeys` value shall delete the contents of all UEFI Secure Boot key databases.  The `DeletePK` value shall delete the contents of the PK Secure Boot key database."/>
         <Parameter Name="SecureBoot" Type="SecureBoot.v1_0_0.Actions"/>
         <Parameter Name="ResetKeysType" Type="SecureBoot.v1_0_0.ResetKeysType" Nullable="false">
           <Annotation Term="OData.Description" String="The type of reset or delete to perform on the UEFI Secure Boot databases."/>
@@ -192,6 +192,12 @@
       <EntityType Name="SecureBoot" BaseType="SecureBoot.v1_0_6.SecureBoot"/>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot.v1_0_8">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="SecureBoot" BaseType="SecureBoot.v1_0_7.SecureBoot"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2020.1"/>
@@ -204,6 +210,12 @@
           <Annotation Term="OData.AutoExpandReferences"/>
         </NavigationProperty>
       </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecureBoot.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="SecureBoot" BaseType="SecureBoot.v1_1_0.SecureBoot"/>
     </Schema>
 
   </edmx:DataServices>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  VCATEntry v1.0.1                                                    -->
+<!--# Redfish Schema:  VCATEntry v1.0.2                                                    -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -33,7 +33,7 @@
 
       <EntityType Name="VCATEntry" BaseType="Resource.v1_0_0.Resource" Abstract="true">
         <Annotation Term="OData.Description" String="The VCATEntry schema defines an entry in a Virtual Channel Action Table.  A Virtual Channel is a mechanism used to create multiple, logical communication streams across a physical link."/>
-        <Annotation Term="OData.LongDescription" String="This resource shall represent and entry of Virtual Channel Action Table in a Redfish implementation."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall represent an entry of Virtual Channel Action Table in a Redfish implementation."/>
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
@@ -108,7 +108,7 @@
         <Property Name="RawEntryHex" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
           <Annotation Term="OData.Description" String="The hexadecimal value of the Virtual Channel Action Table entries."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the hexadecimal value of the Virtual Channel Action Table entries.  The length of hexadecimal value depends on the number of Virtual Channel Action entries supported by the component."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the hexadecimal value of the Virtual Channel Action Table entries.  The length of the hexadecimal value depends on the number of Virtual Channel Action entries supported by the component."/>
           <Annotation Term="Validation.Pattern" String="^0[xX](([a-fA-F]|[0-9])*)$"/>
         </Property>
         <Property Name="VCEntries" Type="Collection(VCATEntry.v1_0_0.VCATableEntry)" Nullable="false">
@@ -159,6 +159,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to correct the permissions for several properties to be writable."/>
       <EntityType Name="VCATEntry" BaseType="VCATEntry.v1_0_0.VCATEntry"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="VCATEntry.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="VCATEntry" BaseType="VCATEntry.v1_0_1.VCATEntry"/>
     </Schema>
 
   </edmx:DataServices>

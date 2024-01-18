@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  OperatingSystem v1.0.0                                              -->
+<!--# Redfish Schema:  OperatingSystem v1.0.1                                              -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -162,7 +162,7 @@
           <Annotation Term="OData.Description" String="IBM i."/>
         </Member>
         <Member Name="Hypervisor">
-          <Annotation Term="OData.Description" String="A bare metal hypervisor."/>
+          <Annotation Term="OData.Description" String="A bare-metal hypervisor."/>
         </Member>
       </EnumType>
 
@@ -173,12 +173,12 @@
         <Property Name="Name" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The name of the kernel."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the kernel.  For strict POSIX operating systems, the value shall contain the output of `uname -s`.  For Microsoft Windows, the value shall contain the string name from the output of `ver`, prior to the first square brace (`[`), which is typically `Microsoft Windows`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the name of the kernel.  For strict POSIX operating systems, the value shall contain the output of `uname -s`.  For Microsoft Windows, the value shall contain the string name from the output of `ver`, from Command Prompt, prior to the first square brace (`[`), which is typically `Microsoft Windows`."/>
         </Property>
         <Property Name="Release" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The release of the kernel."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the release of the kernel.  For strict POSIX operating systems, the value shall contain the output of `uname -r`.  For Microsoft Windows, the value shall contain the decimal-delimited version from the output of `ver` within the square braces (`[` and `]`), following the regular expression `^\d+\.\d+\.\d+\.\d+$`."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the release of the kernel.  For strict POSIX operating systems, the value shall contain the output of `uname -r`.  For Microsoft Windows, the value shall contain the decimal-delimited version from the output of `ver`, from Command Prompt, within the square braces (`[` and `]`), following the regular expression `^\d+\.\d+\.\d+\.\d+$`."/>
         </Property>
         <Property Name="Version" Type="Edm.String">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -322,7 +322,7 @@
           <Annotation Term="OData.LongDescription" String="This value shall indicate the container engine is containerd."/>
         </Member>
         <Member Name="CRIO">
-          <Annotation Term="OData.Description" String="CRI-O ."/>
+          <Annotation Term="OData.Description" String="CRI-O."/>
           <Annotation Term="OData.LongDescription" String="This value shall indicate the container engine is CRI-O."/>
         </Member>
       </EnumType>
@@ -353,6 +353,12 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="OperatingSystem.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="OperatingSystem" BaseType="OperatingSystem.v1_0_0.OperatingSystem"/>
     </Schema>
 
   </edmx:DataServices>

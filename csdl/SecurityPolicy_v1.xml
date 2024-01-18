@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  Security Policies v1.0.0                                           -->
+<!--# Redfish Schema:  SecurityPolicy v1.0.1                                               -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -36,7 +36,7 @@
 
       <EntityType Name="SecurityPolicy" BaseType="Resource.v1_0_0.Resource" Abstract="true">
         <Annotation Term="OData.Description" String="The SecurityPolicy resource provides a central point to configure the security policy of a manager."/>
-        <Annotation Term="OData.LongDescription" String="This resource shall represent configurable security related policies managed by a manager.  All security parameters in other resources that are controlled by the manager shall follow to the related settings in this security policy.  For example, an outbound TLS connection established per an EventDestination resource will follow the values of the properties in the TLS property."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall represent configurable security-related policies managed by a manager.  All security parameters in other resources that are controlled by the manager shall follow the related settings in this security policy.  For example, an outbound TLS connection established per an EventDestination resource will follow the values of the properties in the TLS property."/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
             <PropertyValue Property="Insertable" Bool="false"/>
@@ -218,11 +218,11 @@
         </NavigationProperty>
         <Property Name="Allowed" Type="SecurityPolicy.v1_0_0.TLSParameterSet">
           <Annotation Term="OData.Description" String="The TLS policy settings that are allowed, such as the allowable TLS versions and algorithms."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the TLS policy settings that are allowed, such as the allowable TLS versions and algorithms.  If a value is missing for the same property in 'Allowed' and 'Denied' object, the missing value shall be behave as if the value is present in the same property under the 'Denied' object.  If a value conflicts for the same property between the 'Allowed' and 'Denied' object, the value of the same property in the 'Denied' object shall take precedence.  A Redfish service can resolve or prevent conflicts at time of request as well."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the TLS policy settings that are allowed, such as the allowable TLS versions and algorithms.  If a value is missing for the same property in the 'Allowed' and 'Denied' object, the missing value shall behave as if the value is present in the same property under the 'Denied' object.  If a value conflicts for the same property between the 'Allowed' and 'Denied' object, the value of the same property in the 'Denied' object shall take precedence.  A Redfish service can resolve or prevent conflicts at time of request as well."/>
         </Property>
         <Property Name="Denied" Type="SecurityPolicy.v1_0_0.TLSParameterSet">
           <Annotation Term="OData.Description" String="The TLS policy settings that are prohibited, such as the prohibited TLS versions and algorithms."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the TLS policy settings that are prohibited, such as the prohibited TLS versions and algorithms.  If a value is missing for the same property in 'Allowed' and 'Denied' object, the missing value shall be behave as if the value is present in the same property under the 'Denied' object.  If a value conflicts for the same property between the 'Allowed' and 'Denied' object, the value of the same property in the 'Denied' object shall take precedence.  A Redfish service can resolve or prevent conflicts at time of request as well."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the TLS policy settings that are prohibited, such as the prohibited TLS versions and algorithms.  If a value is missing for the same property in the 'Allowed' and 'Denied' object, the missing value shall behave as if the value is present in the same property under the 'Denied' object.  If a value conflicts for the same property between the 'Allowed' and 'Denied' object, the value of the same property in the 'Denied' object shall take precedence.  A Redfish service can resolve or prevent conflicts at time of request as well."/>
         </Property>
       </ComplexType>
 
@@ -257,6 +257,12 @@
           <Annotation Term="OData.LongDescription" String="This property shall contain an array of TLS signature algorithms.  The allowable values for this property shall be the TLS signature algorithms listed in 'SignatureScheme' or the concatenation of 'SignatureAlgorithm', '_', and 'HashAlgorithm' defined in, but not limited to, RFC4346, RFC5246, or RFC8446, `ALL`, and `NONE`.  An array containing one element with the value of `ALL` or an empty array shall indicate all TLS signature algorithms.  An array containing one element with a value of `NONE` shall indicate no TLS signature algorithms."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SecurityPolicy.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="SecurityPolicy" BaseType="SecurityPolicy.v1_0_0.SecurityPolicy"/>
     </Schema>
 
   </edmx:DataServices>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  SwitchMetrics v1.0.0                                                -->
+<!--# Redfish Schema:  SwitchMetrics v1.0.1                                                -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -122,15 +122,15 @@
       <ComplexType Name="CurrentPeriod">
         <Annotation Term="OData.AdditionalProperties" Bool="false"/>
         <Annotation Term="OData.Description" String="The memory metrics since the last switch reset or ClearCurrentPeriod action for a switch."/>
-        <Annotation Term="OData.LongDescription" String="This type shall describe the memory metrics since last reset or ClearCurrentPeriod action for a switch."/>
+        <Annotation Term="OData.LongDescription" String="This type shall describe the memory metrics since the last reset or ClearCurrentPeriod action for a switch."/>
         <Property Name="CorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the correctable errors of memory since reset."/>
+          <Annotation Term="OData.Description" String="The number of correctable errors of memory since reset."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of correctable errors of memory since reset."/>
         </Property>
         <Property Name="UncorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the uncorrectable errors of memory since reset."/>
+          <Annotation Term="OData.Description" String="The number of uncorrectable errors of memory since reset."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the number of uncorrectable errors of memory since reset."/>
         </Property>
       </ComplexType>
@@ -141,15 +141,21 @@
         <Annotation Term="OData.LongDescription" String="This type shall describe the memory metrics since manufacturing for a switch."/>
         <Property Name="CorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the correctable errors for the lifetime of the memory."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the correctable errors for the lifetime of memory."/>
+          <Annotation Term="OData.Description" String="The number of correctable errors for the lifetime of the memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of correctable errors for the lifetime of memory."/>
         </Property>
         <Property Name="UncorrectableECCErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the uncorrectable errors for the lifetime of the memory."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the uncorrectable errors for the lifetime of memory."/>
+          <Annotation Term="OData.Description" String="The number of uncorrectable errors for the lifetime of the memory."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of uncorrectable errors for the lifetime of memory."/>
         </Property>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="SwitchMetrics.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="SwitchMetrics" BaseType="SwitchMetrics.v1_0_0.SwitchMetrics"/>
     </Schema>
 
   </edmx:DataServices>

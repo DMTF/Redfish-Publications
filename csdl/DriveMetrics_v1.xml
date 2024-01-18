@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################               -->
-<!--# Redfish Schema:  DriveMetrics v1.1.0                                                         -->
+<!--# Redfish Schema:  DriveMetrics v1.2.0                                                         -->
 <!--#                                                                                              -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,              -->
 <!--# available at http://www.dmtf.org/standards/redfish                                           -->
@@ -16,6 +16,9 @@
   </edmx:Reference>
   <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/csd01/complete/vocabularies/Org.OData.Capabilities.V1.xml">
     <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/csd01/complete/vocabularies/Org.OData.Measures.V1.xml">
+    <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
   </edmx:Reference>
   <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Resource_v1.xml">
     <edmx:Include Namespace="Resource.v1_0_0"/>
@@ -72,23 +75,23 @@
       <EntityType Name="DriveMetrics" BaseType="DriveMetrics.DriveMetrics">
         <Property Name="CorrectableIOReadErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the correctable read errors for the lifetime of the drive."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the correctable read errors for the lifetime of the drive."/>
+          <Annotation Term="OData.Description" String="The number of correctable read errors for the lifetime of the drive."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of correctable read errors for the lifetime of the drive."/>
         </Property>
         <Property Name="CorrectableIOWriteErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the correctable write errors for the lifetime of the drive."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the correctable write errors for the lifetime of the drive."/>
+          <Annotation Term="OData.Description" String="The number of correctable write errors for the lifetime of the drive."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of correctable write errors for the lifetime of the drive."/>
         </Property>
         <Property Name="UncorrectableIOReadErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the uncorrectable read errors for the lifetime of the drive."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the uncorrectable read errors for the lifetime of the drive."/>
+          <Annotation Term="OData.Description" String="The number of uncorrectable read errors for the lifetime of the drive."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of uncorrectable read errors for the lifetime of the drive."/>
         </Property>
         <Property Name="UncorrectableIOWriteErrorCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The number of the uncorrectable write errors for the lifetime of the drive."/>
-          <Annotation Term="OData.LongDescription" String="This property shall contain the number of the uncorrectable write errors for the lifetime of the drive."/>
+          <Annotation Term="OData.Description" String="The number of uncorrectable write errors for the lifetime of the drive."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of uncorrectable write errors for the lifetime of the drive."/>
         </Property>
         <Property Name="BadBlockCount" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
@@ -127,6 +130,12 @@
       </ComplexType>
     </Schema>
 
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="DriveMetrics.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="DriveMetrics" BaseType="DriveMetrics.v1_0_0.DriveMetrics"/>
+    </Schema>
+
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="DriveMetrics.v1_1_0">
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="Redfish.Release" String="2023.2"/>
@@ -136,6 +145,32 @@
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
           <Annotation Term="OData.Description" String="The current depth of the Native Command Queue."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the current depth of the Native Command Queue as defined by the SATA Specification."/>
+        </Property>
+      </EntityType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="DriveMetrics.v1_1_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="DriveMetrics" BaseType="DriveMetrics.v1_1_0.DriveMetrics"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="DriveMetrics.v1_2_0">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="Redfish.Release" String="2023.3"/>
+
+      <EntityType Name="DriveMetrics" BaseType="DriveMetrics.v1_1_1.DriveMetrics">
+        <Property Name="ReadIOKiBytes" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of kibibytes read."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of kibibytes read from the time of last reset or wrap."/>
+          <Annotation Term="Measures.Unit" String="KiBy"/>
+        </Property>
+        <Property Name="WriteIOKiBytes" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="The number of kibibytes written."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the total number of kibibytes written from the time of last reset or wrap."/>
+          <Annotation Term="Measures.Unit" String="KiBy"/>
         </Property>
       </EntityType>
     </Schema>

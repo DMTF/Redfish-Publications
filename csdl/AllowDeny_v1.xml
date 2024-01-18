@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  AllowDeny v1.0.1                                                    -->
+<!--# Redfish Schema:  AllowDeny v1.0.2                                                    -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -83,8 +83,8 @@
         </Property>
         <Property Name="StatefulSession" Type="Edm.Boolean">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
-          <Annotation Term="OData.Description" String="Indicates if this is a permission that only applies to stateful connection."/>
-          <Annotation Term="OData.LongDescription" String="This property shall indicate if this permission only applies to stateful connection, which are those using SYN, ACK, and FIN."/>
+          <Annotation Term="OData.Description" String="Indicates if this is a permission that only applies to stateful connections."/>
+          <Annotation Term="OData.LongDescription" String="This property shall indicate if this permission only applies to stateful connections, which are those using SYN, ACK, and FIN."/>
         </Property>
         <Property Name="IPAddressType" Type="AllowDeny.v1_0_0.IPAddressType">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
@@ -118,7 +118,7 @@
         </Property>
         <Property Name="DestinationPortLower" Type="Edm.Int64">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/ReadWrite"/>
-          <Annotation Term="OData.Description" String="The TCP, UDP, or other destination port to which this rule begins to application, inclusive."/>
+          <Annotation Term="OData.Description" String="The TCP, UDP, or other destination port to which this rule begins application, inclusive."/>
           <Annotation Term="OData.LongDescription" String="This property shall contain the TCP, UDP, or other destination port to which this rule begins application, inclusive."/>
         </Property>
         <Property Name="DestinationPortUpper" Type="Edm.Int64">
@@ -180,6 +180,12 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
       <Annotation Term="OData.Description" String="This version was created to remove normative language from non-normative descriptions."/>
       <EntityType Name="AllowDeny" BaseType="AllowDeny.v1_0_0.AllowDeny"/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="AllowDeny.v1_0_2">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="AllowDeny" BaseType="AllowDeny.v1_0_1.AllowDeny"/>
     </Schema>
 
   </edmx:DataServices>

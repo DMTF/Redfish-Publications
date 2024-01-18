@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!---->
 <!--################################################################################       -->
-<!--# Redfish Schema:  CompositionReservation v1.0.0                                       -->
+<!--# Redfish Schema:  CompositionReservation v1.0.1                                       -->
 <!--#                                                                                      -->
 <!--# For a detailed change log, see the README file contained in the DSP8010 bundle,      -->
 <!--# available at http://www.dmtf.org/standards/redfish                                   -->
@@ -36,7 +36,7 @@
       <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
 
       <EntityType Name="CompositionReservation" BaseType="Resource.v1_0_0.Resource" Abstract="true">
-        <Annotation Term="OData.Description" String="The CompositionReservation schema contains reservation information related to the Compose action defined in the CompositionService resource when the of RequestType parameter contains the value `PreviewReserve`."/>
+        <Annotation Term="OData.Description" String="The CompositionReservation schema contains reservation information related to the Compose action defined in the CompositionService resource when the RequestType parameter contains the value `PreviewReserve`."/>
         <Annotation Term="OData.LongDescription" String="This resource represents the composition reservation of the composition service for a Redfish implementation."/>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record>
@@ -68,7 +68,7 @@
       <EntityType Name="CompositionReservation" BaseType="CompositionReservation.CompositionReservation">
         <Property Name="ReservationTime" Type="Edm.DateTimeOffset" Nullable="false">
           <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
-          <Annotation Term="OData.Description" String="The date time the service created the reservation."/>
+          <Annotation Term="OData.Description" String="The date and time the service created the reservation."/>
           <Annotation Term="OData.LongDescription" String="This property shall indicate the date and time when the reservation was created by the service."/>
         </Property>
         <Property Name="Client" Type="Edm.String" Nullable="false">
@@ -106,6 +106,12 @@
         <Annotation Term="OData.Description" String="The available OEM-specific actions for this resource."/>
         <Annotation Term="OData.LongDescription" String="This type shall contain the available OEM-specific actions for this resource."/>
       </ComplexType>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CompositionReservation.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="DMTF"/>
+      <Annotation Term="OData.Description" String="This version was created to correct various typographical errors."/>
+      <EntityType Name="CompositionReservation" BaseType="CompositionReservation.v1_0_0.CompositionReservation"/>
     </Schema>
 
   </edmx:DataServices>
