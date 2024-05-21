@@ -1,0 +1,49 @@
+{
+    "@odata.type": "#MetricReportDefinition.v1_4_6.MetricReportDefinition",
+    "Id": "PlatformPowerUsage",
+    "Name": "Transmit and Log Platform Power Usage",
+    "MetricReportDefinitionType": "Periodic",
+    "MetricReportDefinitionEnabled": true,
+    "Schedule": {
+        "RecurrenceInterval": "PT1H"
+    },
+    "ReportActions": [
+        "RedfishEvent",
+        "LogToMetricReportsCollection"
+    ],
+    "ReportUpdates": "AppendWrapsWhenFull",
+    "AppendLimit": 256,
+    "MetricReport": {
+        "@odata.id": "/redfish/v1/TelemetryService/MetricReports/PlatformPowerUsage"
+    },
+    "Status": {
+        "State": "Enabled"
+    },
+    "Wildcards": [
+        {
+            "Name": "PWild",
+            "Values": [
+                "0"
+            ]
+        },
+        {
+            "Name": "TWild",
+            "Values": [
+                "Tray_1",
+                "Tray_2"
+            ]
+        }
+    ],
+    "MetricProperties": [
+        "/redfish/v1/Chassis/{TWild}/Power#/PowerControl/{PWild}/PowerConsumedWatts"
+    ],
+    "Links": {
+        "Triggers": [
+            {
+                "@odata.id": "/redfish/v1/TelemetryService/Triggers/PlatformPowerCapTriggers"
+            }
+        ]
+    },
+    "@odata.id": "/redfish/v1/TelemetryService/MetricReportDefinitions/PlatformPowerUsage",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

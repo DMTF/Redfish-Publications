@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!---->
+<!--################################################################################       -->
+<!--# Contoso Schema:  ContosoServiceRoot v1.0.0                                           -->
+<!--#                                                                                      -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
+<!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
+<!--################################################################################       -->
+<!---->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/csd01/complete/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/RedfishExtensions_v1.xml">
+    <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/Resource_v1.xml">
+    <edmx:Include Namespace="Resource"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/ServiceRoot_v1.xml">
+    <edmx:Include Namespace="ServiceRoot.v1_13_0"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://Contoso.com/schemas/ContosoTurboencabulatorService_v1.xml">
+    <edmx:Include Namespace="ContosoTurboencabulatorService"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ContosoServiceRoot">
+      <Annotation Term="Redfish.OwningEntity" String="Contoso"/>
+      <Annotation Term="OData.Description" String="Contoso extensions to the standard service root."/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ContosoServiceRoot.v1_0_0">
+      <Annotation Term="Redfish.OwningEntity" String="Contoso"/>
+
+      <EntityContainer Name="ServiceContainer" Extends="ServiceRoot.v1_13_0.ServiceContainer">
+        <Singleton Name="TurboencabulatorService" Type="ContosoTurboencabulatorService.ContosoTurboencabulatorService"/>
+      </EntityContainer>
+
+      <ComplexType Name="ServiceRoot" BaseType="Resource.OemObject">
+        <NavigationProperty Name="TurboencabulatorService" Type="ContosoTurboencabulatorService.ContosoTurboencabulatorService" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permission/Read"/>
+          <Annotation Term="OData.Description" String="Link to the turboencabulator service."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the link to a resource of type TurboencabulatorService."/>
+          <Annotation Term="OData.AutoExpandReferences"/>
+        </NavigationProperty>
+      </ComplexType>
+    </Schema>
+
+  </edmx:DataServices>
+</edmx:Edmx>

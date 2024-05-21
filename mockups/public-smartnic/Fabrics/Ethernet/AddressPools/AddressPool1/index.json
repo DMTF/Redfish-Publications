@@ -1,0 +1,192 @@
+{
+    "@odata.type": "#AddressPool.v1_3_0.AddressPool",
+    "Id": "AddressPool1",
+    "Name": "AddressPools for Ethernet Fabrics",
+    "Description": "Fabric Only Address resource Pools",
+    "Status": {
+        "State": "Enabled",
+        "Health": "OK"
+    },
+    "Ethernet": {
+        "IPv4": {
+            "VLANIdentifierAddressRange": {
+                "Lower": 1,
+                "Upper": 100
+            },
+            "LoopbackAddressRange": {
+                "Lower": "192.168.0.1",
+                "Upper": "192.168.3.254"
+            },
+            "FabricLinkAddressRange": {
+                "Lower": "192.168.1.1",
+                "Upper": "192.168.3.254"
+            },
+            "HostAddressRange": {
+                "Lower": "192.164.158.1",
+                "Upper": "192.164.158.254"
+            },
+            "ManagementAddressRange": {
+                "Lower": "172.16.0.1",
+                "Upper": "172.16.3.254"
+            },
+            "IBGPAddressRange": {
+                "Lower": "172.16.4.1",
+                "Upper": "172.16.6.254"
+            },
+            "EBGPAddressRange": {
+                "Lower": "172.16.7.1",
+                "Upper": "172.16.9.254"
+            },
+            "DNSServer": [
+                "10.0.0.1",
+                "10.0.0.2"
+            ],
+            "NTPServer": [
+                "10.0.0.3",
+                "10.0.0.4"
+            ],
+            "DHCP": {
+                "DHCPRelayEnabled": false,
+                "DHCPInterfaceMTUBytes": 1500,
+                "DHCPServer": [
+                    "10.0.0.5",
+                    "10.0.0.6"
+                ]
+            },
+            "DNSDomainName": "mycompany.com",
+            "DistributeIntoUnderlayEnabled": false,
+            "NTPTimezone": "EST",
+            "NTPOffsetHoursMinutes": -5
+        },
+        "BGPEvpn": {
+            "VLANIdentifierAddressRange": {
+                "Lower": 200,
+                "Upper": 2000
+            },
+            "ESINumberRange": {
+                "Lower": 1,
+                "Upper": 1000
+            },
+            "EVINumberRange": {
+                "Lower": 1,
+                "Upper": 1000
+            },
+            "RouteDistinguisherRange": {
+                "Lower": 20,
+                "Upper": 2000
+            },
+            "RouteTargetRange": {
+                "Lower": 20,
+                "Upper": 2000
+            },
+            "ARPProxyEnabled": false,
+            "ARPSuppressionEnabled": false,
+            "NDPSuppressionEnabled": false,
+            "NDPProxyEnabled": false,
+            "UnderlayMulticastEnabled": false,
+            "UnknownUnicastSuppressionEnabled": false
+        },
+        "EBGP": {
+            "AlwaysCompareMEDEnabled": false,
+            "MultihopEnabled": false,
+            "MultihopTTL": 1,
+            "ASNumberRange": {
+                "Lower": 64512,
+                "Upper": 64712
+            },
+            "BGPNeighbor": {
+                "CIDR": 14,
+                "Enabled": true,
+                "AllowOwnASEnabled": true,
+                "ConnectRetrySeconds": 30,
+                "HoldTimeSeconds": 90,
+                "KeepaliveIntervalSeconds": 30,
+                "MinimumAdvertisementIntervalSeconds": 30,
+                "TCPMaxSegmentSizeBytes": 536,
+                "PathMTUDiscoveryEnabled": false,
+                "PassiveModeEnabled": false,
+                "TreatAsWithdrawEnabled": false,
+                "ReplacePeerASEnabled": false,
+                "LogStateChangesEnabled": true,
+                "MaxPrefix": {
+                    "MaxPrefixNumber": 1000,
+                    "ThresholdWarningOnlyEnabled": false,
+                    "ShutdownThresholdPercentage": 75,
+                    "RestartTimerSeconds": 120
+                }
+            },
+            "GracefulRestart": {
+                "GracefulRestartEnabled": true,
+                "TimeSeconds": 120,
+                "StaleRoutesTimeSeconds": 300,
+                "HelperModeEnabled": true
+            },
+            "MultiplePaths": {
+                "UseMultiplePathsEnabled": false,
+                "MaximumPaths": 1
+            },
+            "BGPRoute": {
+                "FlapDampingEnabled": true,
+                "ExternalCompareRouterIdEnabled": true,
+                "AdvertiseInactiveRoutesEnabled": false,
+                "SendDefaultRouteEnabled": false,
+                "DistanceExternal": 5
+            },
+            "SendCommunityEnabled": false
+        },
+        "MultiProtocolIBGP": {
+            "ASNumberRange": {
+                "Lower": 64713,
+                "Upper": 64800
+            },
+            "BGPNeighbor": {
+                "AllowOwnASEnabled": true,
+                "ConnectRetrySeconds": 30,
+                "HoldTimeSeconds": 90,
+                "KeepaliveIntervalSeconds": 30,
+                "MinimumAdvertisementIntervalSeconds": 30,
+                "TCPMaxSegmentSizeBytes": 536,
+                "PathMTUDiscoveryEnabled": false,
+                "PassiveModeEnabled": false,
+                "TreatAsWithdrawEnabled": false,
+                "ReplacePeerASEnabled": false,
+                "LogStateChangesEnabled": true,
+                "MaxPrefix": {
+                    "MaxPrefixNumber": 1000,
+                    "ThresholdWarningOnlyEnabled": false,
+                    "ShutdownThresholdPercentage": 75,
+                    "RestartTimerSeconds": 120
+                }
+            },
+            "GracefulRestart": {
+                "GracefulRestartEnabled": true,
+                "TimeSeconds": 120,
+                "StaleRoutesTimeSeconds": 300,
+                "HelperModeEnabled": true
+            },
+            "MultiplePaths": {
+                "UseMultiplePathsEnabled": false,
+                "MaximumPaths": 1
+            },
+            "BGPRoute": {
+                "FlapDampingEnabled": true
+            }
+        },
+        "BFDSingleHopOnly": {
+            "LocalMultiplier": 5,
+            "DesiredMinTxIntervalMilliseconds": 3,
+            "RequiredMinRxIntervalMilliseconds": 3,
+            "DemandModeEnabled": true,
+            "MeticulousModeEnabled": false
+        }
+    },
+    "Links": {
+        "Zones": [
+            {
+                "@odata.id": "/redfish/v1/Fabrics/Ethernet/Zones/Zone0"
+            }
+        ]
+    },
+    "@odata.id": "/redfish/v1/Fabrics/Ethernet/AddressPools/AddressPool1",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

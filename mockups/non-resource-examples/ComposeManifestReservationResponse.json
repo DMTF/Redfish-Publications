@@ -1,0 +1,439 @@
+{
+    "RequestFormat": "Manifest",
+    "RequestType": "Apply",
+    "Manifest": {
+        "Description": "Description for this Manifest document.",
+        "Timestamp": "2019-08-22T10:35:16+06:00",
+        "Expand": "None",
+        "Stanzas": [
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "Compute1",
+                "Request": {
+                    "Links": {
+                        "ResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeServer-1"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-1"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/26011"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NetworkCard1"
+                            }
+                        ]
+                    }
+                },
+                "Response": {
+                    "error": {
+                        "code": "Composition.1.1.0.UnableToPerformReservation",
+                        "message": "The service is unable to perform the requested reservation.",
+                        "@Message.ExtendedInfo": [
+                            {
+                                "@odata.type": "#Message.v1_1_1.Message",
+                                "MessageId": "Composition.1.1.0.ResourceBlockInvalid",
+                                "Message": "Resource block 'NetworkCard1' is not valid.",
+                                "MessageArgs": [
+                                    "NetworkCard1"
+                                ],
+                                "Severity": "Critical",
+                                "MessageSeverity": "Critical",
+                                "Resolution": "Remove the resource block and resubmit the request."
+                            },
+                            {
+                                "@odata.type": "#Message.v1_1_1.Message",
+                                "MessageId": "Composition.1.1.0.ResourceBlockNotFound",
+                                "Message": "Resource block '26011' is not found.",
+                                "MessageArgs": [
+                                    "26011"
+                                ],
+                                "Severity": "Critical",
+                                "MessageSeverity": "Critical",
+                                "Resolution": "Remove the resource block and resubmit the request."
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "Compute2",
+                "Request": {
+                    "@Redfish.ZoneAffinity": "1",
+                    "PowerState": "On",
+                    "BiosVersion": "P79 v1.01 (09/20/2018)",
+                    "Processors": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 2,
+                                "@Redfish.AllowOverprovisioning": true,
+                                "ProcessorType": "CPU",
+                                "ProcessorArchitecture": "x86",
+                                "InstructionSet": "x86-64",
+                                "MaxSpeedMHz": 3700,
+                                "TotalCores": 8,
+                                "TotalThreads": 16
+                            },
+                            {
+                                "@Redfish.RequestedCount": 4,
+                                "@Redfish.AllowOverprovisioning": false,
+                                "ProcessorType": "FPGA",
+                                "ProcessorArchitecture": "x86",
+                                "InstructionSet": "x86-64",
+                                "MaxSpeedMHz": 3700,
+                                "TotalCores": 16
+                            }
+                        ]
+                    },
+                    "Memory": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 4,
+                                "MaxTDPMilliWatts": [
+                                    12000
+                                ],
+                                "CapacityMiB": 8192,
+                                "DataWidthBits": 64,
+                                "BusWidthBits": 72,
+                                "ErrorCorrection": "MultiBitECC",
+                                "MemoryType": "DRAM",
+                                "MemoryDeviceType": "DDR4",
+                                "MemoryMedia": [
+                                    "DRAM"
+                                ]
+                            }
+                        ]
+                    },
+                    "Storage": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "StorageControllers": [
+                                    {
+                                        "SupportedControllerProtocols": "NVMe"
+                                    }
+                                ],
+                                "Drives": [
+                                    {
+                                        "CapacityBytes": 299999999488
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "NetworkInterfaces": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 2,
+                                "NetworkDeviceFunctions": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "NetDevFuncType": "Ethernet"
+                                        }
+                                    ]
+                                },
+                                "Ports": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "MaxSpeedGbps": 100
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "NetworkDeviceFunctions": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "NetDevFuncType": "InfiniBand"
+                                        }
+                                    ]
+                                },
+                                "Ports": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "MaxSpeedGbps": 100
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "Response": {
+                    "error": {
+                        "code": "Composition.1.1.0.UnableToPerformReservation",
+                        "message": "Unable to perform reservation request.",
+                        "@Message.ExtendedInfo": [
+                            {
+                                "@odata.type": "#Message.v1_1_1.Message",
+                                "MessageId": "Compose.1.1.0.NoResourceMatch",
+                                "Message": "The requested resources of type 'Storage' are not available for allocation.",
+                                "MessageArgs": [
+                                    "Storage"
+                                ],
+                                "Severity": "Critical",
+                                "MessageSeverity": "Critical",
+                                "Resolution": "Change parameters associated with the resource, such as quantity or performance, and resubmit the request."
+                            },
+                            {
+                                "@odata.type": "#Message.v1_1_1.Message",
+                                "MessageId": "Compose.1.1.0.NoResourceMatch",
+                                "Message": "The requested resources of type 'NetworkInterface' are not available for allocation.",
+                                "MessageArgs": [
+                                    "NetworkInterface"
+                                ],
+                                "Severity": "Critical",
+                                "MessageSeverity": "Critical",
+                                "Resolution": "Change parameters associated with the resource, such as quantity or performance, and resubmit the request."
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "Compute3",
+                "Request": {
+                    "@Redfish.ZoneAffinity": "1",
+                    "PowerState": "On",
+                    "BiosVersion": "P79 v1.01 (09/20/2018)",
+                    "Links": {
+                        "ResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeServer-1"
+                            }
+                        ]
+                    },
+                    "Storage": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "StorageControllers": [
+                                    {
+                                        "SupportedControllerProtocols": "NVMe"
+                                    }
+                                ],
+                                "Drives": [
+                                    {
+                                        "CapacityBytes": 299999999488
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Response": {
+                    "@odata.id": "/redfish/v1/Systems/ComposedCompute3",
+                    "@odata.type": "#ComputerSystem.v1_14_0.ComputerSystem",
+                    "Id": "ComposedCompute3",
+                    "Name": "Computer system composed from Compute3",
+                    "Processors": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedCompute3/Processors"
+                    },
+                    "Memory": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedCompute3/Memory"
+                    },
+                    "NetworkInterfaces": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedCompute3/NetworkInterfaces"
+                    },
+                    "Storage": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedCompute3/Storage"
+                    },
+                    "Links": {
+                        "ResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeServer-1"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-1"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/26011"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NetworkCard1"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "NVMEStorage1",
+                "Request": {
+                    "Storage": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "StorageControllers": [
+                                    {
+                                        "SupportedControllerProtocols": "NVMe"
+                                    }
+                                ],
+                                "Drives": [
+                                    {
+                                        "CapacityBytes": 299999999488
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Response": {
+                    "@odata.id": "/redfish/v1/Systems/ComposedNVMEStorage1",
+                    "@odata.type": "#ComputerSystem.v1_14_0.ComputerSystem",
+                    "Id": "ComposedNVMEStorage1",
+                    "Name": "Computer system composed from NVMEStorage1",
+                    "Processors": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedNVMEStorage1/Processors"
+                    },
+                    "Memory": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedNVMEStorage1/Memory"
+                    },
+                    "NetworkInterfaces": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedNVMEStorage1/NetworkInterfaces"
+                    },
+                    "Storage": {
+                        "@odata.id": "/redfish/v1/Systems/ComposedNVMEStorage1/Storage"
+                    },
+                    "Links": {
+                        "ResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeServer-1"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-1"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeResource",
+                "StanzaId": "Bitfusion",
+                "Request": {
+                    "Links": {
+                        "SupplyingResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-2"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-3"
+                            }
+                        ]
+                    }
+                },
+                "Response": {
+                    "@odata.id": "/redfish/v1/redfish/v1/CompositionService/ResourceBlocks/ComposedBitfusion",
+                    "@odata.type": "#ResourceBlock.v1_4_0.ResourceBlock",
+                    "Id": "ComposedBitfusion",
+                    "Name": "Resource block composed from Bitfusion",
+                    "CompositionStatus": {
+                        "Reserved": false,
+                        "CompositionState": "Unused"
+                    },
+                    "ResourceBlockType": [
+                        "Storage",
+                        "IndependentResource"
+                    ],
+                    "Drives": [
+                        {
+                            "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-1/Drives/NVMe-TargetsAppliance-2"
+                        },
+                        {
+                            "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-1/Drives/NVMe-TargetsAppliance-3"
+                        }
+                    ],
+                    "Links": {
+                        "SupplyingResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-2"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-3"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "DecomposeResource",
+                "StanzaId": "Decompose1",
+                "Request": {
+                    "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/Appliance"
+                },
+                "Response": {
+                    "error": {
+                        "code": "Base.1.8.Success",
+                        "message": "Successfully Completed Request",
+                        "@Message.ExtendedInfo": [
+                            {
+                                "@odata.type": "#Message.v1_1_1.Message",
+                                "MessageId": "Base.1.8.Success",
+                                "Message": "Successfully Completed Request",
+                                "Severity": "OK",
+                                "MessageSeverity": "OK",
+                                "Resolution": "None"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "DecomposeSystem",
+                "StanzaId": "FreeResources1",
+                "Request": {
+                    "@odata.id": "/redfish/v1/Systems/ComposedSystem1"
+                },
+                "Response": {
+                    "error": {
+                        "code": "Base.1.8.Success",
+                        "message": "Successfully Completed Request",
+                        "@Message.ExtendedInfo": [
+                            {
+                                "@odata.type": "#Message.v1_1_1.Message",
+                                "MessageId": "Base.1.8.Success",
+                                "Message": "Successfully Completed Request",
+                                "Severity": "OK",
+                                "MessageSeverity": "OK",
+                                "Resolution": "None"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "OEM",
+                "OEMStanzaType": "OEMSpecificStanza",
+                "StanzaId": "OEMOperation1",
+                "Request": {
+                    "OEMName1": "OEMVal1"
+                },
+                "Response": {
+                    "error": {
+                        "code": "Base.1.8.Success",
+                        "message": "Successfully Completed Request",
+                        "@Message.ExtendedInfo": [
+                            {
+                                "@odata.type": "#Message.v1_1_1.Message",
+                                "MessageId": "Base.1.8.Success",
+                                "Message": "Successfully Completed Request",
+                                "Severity": "OK",
+                                "MessageSeverity": "OK",
+                                "Resolution": "None"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "@odata.type": "#MetricReportDefinition.v1_4_6.MetricReportDefinition",
+    "Id": "PowerMetricStats",
+    "Name": "Transmit Power Metric Statistics",
+    "MetricReportDefinitionType": "Periodic",
+    "MetricReportDefinitionEnabled": true,
+    "Schedule": {
+        "RecurrenceInterval": "PT.001S",
+        "Lifetime": "P5D"
+    },
+    "ReportActions": [
+        "LogToMetricReportsCollection"
+    ],
+    "MetricReport": {
+        "@odata.id": "/redfish/v1/TelemetryService/MetricReports/PowerMetricStats"
+    },
+    "ReportUpdates": "Overwrite",
+    "Status": {
+        "State": "Enabled"
+    },
+    "Metrics": [
+        {
+            "MetricId": "AverageConsumedWatts"
+        },
+        {
+            "MetricId": "MaximumConsumedWatts"
+        },
+        {
+            "MetricId": "MinimumConsumedWatts"
+        }
+    ],
+    "Links": {
+        "Triggers": [
+            {
+                "@odata.id": "/redfish/v1/TelemetryService/Triggers/PlatformPowerCapTriggers"
+            }
+        ]
+    },
+    "@odata.id": "/redfish/v1/TelemetryService/MetricReportDefinitions/PowerMetricStats",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

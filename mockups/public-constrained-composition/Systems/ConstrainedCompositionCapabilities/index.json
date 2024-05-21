@@ -1,0 +1,142 @@
+{
+    "@odata.type": "#ComputerSystem.v1_22_1.ComputerSystem",
+    "Id": "ConstrainedCompositionCapabilities",
+    "Name": "Capabilities for the Zone",
+    "Name@Redfish.RequiredOnCreate": true,
+    "Name@Redfish.SetOnlyOnCreate": true,
+    "Description@Redfish.OptionalOnCreate": true,
+    "Description@Redfish.SetOnlyOnCreate": true,
+    "HostName@Redfish.OptionalOnCreate": true,
+    "HostName@Redfish.UpdatableAfterCreate": true,
+    "Boot@Redfish.OptionalOnCreate": true,
+    "Boot": {
+        "BootSourceOverrideEnabled@Redfish.OptionalOnCreate": true,
+        "BootSourceOverrideEnabled@Redfish.UpdatableAfterCreate": true,
+        "BootSourceOverrideTarget@Redfish.OptionalOnCreate": true,
+        "BootSourceOverrideTarget@Redfish.UpdatableAfterCreate": true,
+        "BootSourceOverrideTarget@Redfish.AllowableValues": [
+            "None",
+            "Pxe",
+            "Usb",
+            "Hdd"
+        ]
+    },
+    "Processors@Redfish.RequiredOnCreate": true,
+    "Processors": {
+        "@odata.type": "#ProcessorCollection.ProcessorCollection",
+        "Members@Redfish.RequiredOnCreate": true,
+        "Members": [
+            {
+                "@odata.type": "#Processor.v1_20_0.Processor",
+                "@Redfish.RequestedCountRequired": true,
+                "ProcessorType@Redfish.RequiredOnCreate": true,
+                "TotalCores@Redfish.RequiredOnCreate": true,
+                "Model@Redfish.OptionalOnCreate": true,
+                "InstructionSet@Redfish.OptionalOnCreate": true,
+                "AchieveableSpeedMHz@Redfish.OptionalOnCreate": true
+            }
+        ]
+    },
+    "Memory@Redfish.RequiredOnCreate": true,
+    "Memory": {
+        "@odata.type": "#MemoryCollection.MemoryCollection",
+        "Members@Redfish.RequiredOnCreate": true,
+        "Members": [
+            {
+                "@odata.type": "#Memory.v1_20_0.Memory",
+                "@Redfish.RequestedCountRequired": true,
+                "MemoryType@Redfish.RequiredOnCreate": true,
+                "MemoryDeviceType@Redfish.OptionalOnCreate": true,
+                "CapacityMiB@Redfish.RequiredOnCreate": true,
+                "SpeedMHz@Redfish.OptionalOnCreate": true,
+                "DataWidthBits@Redfish.OptionalOnCreate": true,
+                "BusWidthBits@Redfish.OptionalOnCreate": true
+            }
+        ]
+    },
+    "SimpleStorage@Redfish.OptionalOnCreate": true,
+    "SimpleStorage": {
+        "@odata.type": "#SimpleStorageCollection.SimpleStorageCollection",
+        "Members@Redfish.RequiredOnCreate": true,
+        "Members": [
+            {
+                "@odata.type": "#SimpleStorage.v1_3_2.SimpleStorage",
+                "@Redfish.RequestedCountRequired": true,
+                "Devices@Redfish.RequiredOnCreate": true,
+                "Devices": {
+                    "Name": "Capabilities for SimpleStorage Device",
+                    "@Redfish.RequestedCountRequired": true,
+                    "CapacityBytes@Redfish.RequiredOnCreate": true
+                }
+            }
+        ]
+    },
+    "Storage@Redfish.OptionalOnCreate": true,
+    "Storage": {
+        "@odata.type": "#StorageCollection.StorageCollection",
+        "Members@Redfish.RequiredOnCreate": true,
+        "Members": [
+            {
+                "@odata.type": "#Storage.v1_16_0.Storage",
+                "@Redfish.RequestedCountRequired": true,
+                "StorageControllers@Redfish.OptionalOnCreate": true,
+                "StorageControllers": [
+                    {
+                        "@Redfish.RequestedCountRequired": true,
+                        "SupportedControllerProtocols@Redfish.RequiredOnCreate": true
+                    }
+                ],
+                "Drives@Redfish.RequiredOnCreate": true,
+                "Drives": [
+                    {
+                        "@odata.type": "#Drive.v1_19_0.Drive",
+                        "@Redfish.RequestedCountRequired": true,
+                        "CapacityBytes@Redfish.RequiredOnCreate": true
+                    }
+                ]
+            }
+        ]
+    },
+    "EthernetInterfaces@Redfish.OptionalOnCreate": true,
+    "EthernetInterfaces": {
+        "@odata.type": "#EthernetInterfaceCollection.EthernetInterfaceCollection",
+        "Members@Redfish.RequiredOnCreate": true,
+        "Members": [
+            {
+                "@odata.type": "#EthernetInterface.v1_12_1.EthernetInterface",
+                "@Redfish.RequestedCountRequired": true,
+                "SpeedMbps@Redfish.RequiredOnCreate": true,
+                "FullDuplex@Redfish.OptionalOnCreate": true
+            }
+        ]
+    },
+    "NetworkInterfaces@Redfish.OptionalOnCreate": true,
+    "NetworkInterfaces": {
+        "@odata.type": "#NetworkInterfaceCollection.NetworkInterfaceCollection",
+        "Members@Redfish.RequiredOnCreate": true,
+        "Members": [
+            {
+                "@odata.type": "#NetworkInterface.v1_2_2.NetworkInterface",
+                "@Redfish.RequestedCountRequired": true,
+                "NetworkPorts@Redfish.RequiredOnCreate": true,
+                "NetworkPorts": {
+                    "@odata.type": "#NetworkPortCollection.NetworkPortCollection",
+                    "Members@Redfish.RequiredOnCreate": true,
+                    "Members": [
+                        {
+                            "@odata.type": "#NetworkPort.v1_4_3.NetworkPort",
+                            "@Redfish.RequestedCountRequired": true,
+                            "ActiveLinkTechnology@Redfish.RequiredOnCreate": true,
+                            "SupportedLinkCapabilities@Redfish.OptionalOnCreate": true,
+                            "SupportedLinkCapabilities": {
+                                "LinkSpeedMbps@Redfish.RequiredOnCreate": true
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "@odata.id": "/redfish/v1/Systems/ConstrainedCompositionCapabilities",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

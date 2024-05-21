@@ -1,0 +1,32 @@
+{
+    "@odata.type": "#Application.v1_0_1.Application",
+    "Id": "Logger",
+    "Name": "Logging Agent",
+    "Version": "1.5.1",
+    "Vendor": "Contoso",
+    "StartTime": "2021-10-29T10:42:38+06:00",
+    "Status": {
+        "State": "Enabled",
+        "Health": "OK"
+    },
+    "DestinationURIs": [
+        "https://listeners.contoso.org:8000/handler"
+    ],
+    "MetricsURIs": [
+        "https://192.168.0.12:7000"
+    ],
+    "Actions": {
+        "#Application.Reset": {
+            "target": "/redfish/v1/Systems/VM1/OperatingSystem/Applications/Logger/Actions/Application.Reset",
+            "ResetType@Redfish.AllowableValues": [
+                "On",
+                "ForceOff",
+                "GracefulShutdown",
+                "GracefulRestart",
+                "ForceRestart",
+                "ForceOn"
+            ]
+        }
+    },
+    "@odata.id": "/redfish/v1/Systems/VM1/OperatingSystem/Applications/Logger"
+}

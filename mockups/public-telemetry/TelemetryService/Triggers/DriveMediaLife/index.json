@@ -1,0 +1,44 @@
+{
+    "@odata.type": "#Triggers.v1_4_0.Triggers",
+    "Id": "DriveMediaLife",
+    "Name": "Triggers for Drive media life left",
+    "MetricType": "Numeric",
+    "TriggerEnabled": true,
+    "TriggerActions": [
+        "RedfishEvent",
+        "LogToLogService"
+    ],
+    "NumericThresholds": {
+        "LowerWarning": {
+            "Reading": 10,
+            "Activation": "Decreasing"
+        },
+        "LowerCritical": {
+            "Reading": 2,
+            "Activation": "Decreasing"
+        }
+    },
+    "MetricProperties": [
+        "/redfish/v1/Chassis/{ChassisId}/Drives/{DriveId}#/PredictedMediaLifeLeftPercent"
+    ],
+    "Wildcards": [
+        {
+            "Name": "ChassisId",
+            "Values": [
+                "Fred",
+                "Ethel",
+                "1",
+                "2"
+            ]
+        },
+        {
+            "Name": "DriveId",
+            "Values": [
+                "*"
+            ]
+        }
+    ],
+    "TriggerActionMessage": "DriveMediaLife",
+    "@odata.id": "/redfish/v1/TelemetryService/Triggers/DriveMediaLife",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

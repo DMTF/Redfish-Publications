@@ -1,7 +1,7 @@
 components:
   schemas:
     Settings_MaintenanceWindow:
-      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_3_5.yaml#/components/schemas/Settings_v1_3_5_MaintenanceWindow
+      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_4_0.yaml#/components/schemas/Settings_v1_4_0_MaintenanceWindow
     Settings_OperationApplyTime:
       enum:
       - Immediate
@@ -9,6 +9,7 @@ components:
       - AtMaintenanceWindowStart
       - InMaintenanceWindowOnReset
       - OnStartUpdateRequest
+      - OnTargetReset
       type: string
       x-enumDescriptions:
         AtMaintenanceWindowStart: The requested operation is applied within the administrator-specified
@@ -18,34 +19,41 @@ components:
         InMaintenanceWindowOnReset: The requested operation is applied after a reset
           but within the administrator-specified maintenance window.
         OnReset: The requested operation is applied on a reset.
-        OnStartUpdateRequest: The requested operation is applied when the StartUpdate
+        OnStartUpdateRequest: The requested operation is applied when the `StartUpdate`
           action of the update service is invoked.
+        OnTargetReset: The requested operation is applied when the target is reset.  Targets
+          include devices, services, and systems.
       x-enumLongDescriptions:
         AtMaintenanceWindowStart: This value shall indicate the requested create,
           delete, or action operation is applied during the maintenance window that
-          the MaintenanceWindowStartTime and MaintenanceWindowDurationInSeconds properties
-          specify.  A service can complete resets during this maintenance window.
+          the `MaintenanceWindowStartTime` and `MaintenanceWindowDurationInSeconds`
+          properties specify.  A service can complete resets during this maintenance
+          window.
         Immediate: This value shall indicate the requested create, delete, or action
           operation is applied immediately.  This value may result in an immediate
           host reset, manager reset, or other side effects.
         InMaintenanceWindowOnReset: This value shall indicate the requested create,
           delete, or action operation is applied during the maintenance window that
-          the MaintenanceWindowStartTime and MaintenanceWindowDurationInSeconds properties
-          specify, and if a reset occurs within the maintenance window.
+          the `MaintenanceWindowStartTime` and `MaintenanceWindowDurationInSeconds`
+          properties specify, and if a reset occurs within the maintenance window.
         OnReset: This value shall indicate the requested create, delete, or action
           operation is applied when the system or service is reset.
         OnStartUpdateRequest: This value shall indicate the requested create, delete,
-          or action operation is applied when the StartUpdate action of the update
+          or action operation is applied when the `StartUpdate` action of the update
           service is invoked.
+        OnTargetReset: This value shall indicate the requested create, delete, or
+          action operation is applied when the target is reset.
       x-enumVersionAdded:
         OnStartUpdateRequest: v1_3_0
+        OnTargetReset: v1_4_0
       x-versionAdded: v1_2_0
     Settings_OperationApplyTimeSupport:
-      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_3_5.yaml#/components/schemas/Settings_v1_3_5_OperationApplyTimeSupport
+      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_4_0.yaml#/components/schemas/Settings_v1_4_0_OperationApplyTimeSupport
     Settings_PreferredApplyTime:
-      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_3_5.yaml#/components/schemas/Settings_v1_3_5_PreferredApplyTime
+      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_4_0.yaml#/components/schemas/Settings_v1_4_0_PreferredApplyTime
     Settings_Settings:
-      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_3_5.yaml#/components/schemas/Settings_v1_3_5_Settings
+      $ref: http://redfish.dmtf.org/schemas/v1/Settings.v1_4_0.yaml#/components/schemas/Settings_v1_4_0_Settings
 title: '#Settings'
-x-copyright: Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
 x-owningEntity: DMTF

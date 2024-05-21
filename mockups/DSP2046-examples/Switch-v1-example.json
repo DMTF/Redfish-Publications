@@ -1,0 +1,58 @@
+{
+    "@odata.type": "#Switch.v1_9_3.Switch",
+    "Id": "Switch1",
+    "Name": "SAS Switch",
+    "SwitchType": "SAS",
+    "Manufacturer": "Contoso",
+    "Model": "SAS1000",
+    "SKU": "67B",
+    "SerialNumber": "2M220100SL",
+    "PartNumber": "76-88883",
+    "Ports": {
+        "@odata.id": "/redfish/v1/Fabrics/SAS/Switches/Switch1/Ports"
+    },
+    "Redundancy": [
+        {
+            "@odata.id": "/redfish/v1/Fabrics/SAS/Switches/Switch1#/Redundancy/0",
+            "MemberId": "Redundancy",
+            "Mode": "Sharing",
+            "MaxNumSupported": 2,
+            "MinNumNeeded": 1,
+            "Status": {
+                "State": "Enabled",
+                "Health": "OK"
+            },
+            "RedundancySet": [
+                {
+                    "@odata.id": "/redfish/v1/Fabrics/SAS/Switches/Switch1"
+                },
+                {
+                    "@odata.id": "/redfish/v1/Fabrics/SAS/Switches/Switch2"
+                }
+            ]
+        }
+    ],
+    "Links": {
+        "Chassis": {
+            "@odata.id": "/redfish/v1/Chassis/Switch1"
+        },
+        "ManagedBy": [
+            {
+                "@odata.id": "/redfish/v1/Managers/Switch1"
+            },
+            {
+                "@odata.id": "/redfish/v1/Managers/Switch2"
+            }
+        ]
+    },
+    "Actions": {
+        "#Switch.Reset": {
+            "target": "/redfish/v1/Fabrics/SAS/Switches/Switch1/Actions/Switch.Reset",
+            "ResetType@Redfish.AllowableValues": [
+                "ForceRestart",
+                "GracefulRestart"
+            ]
+        }
+    },
+    "@odata.id": "/redfish/v1/Fabrics/SAS/Switches/Switch1"
+}

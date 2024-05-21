@@ -1,9 +1,9 @@
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |   Row |   Sequence# | Format   | Flags                              | Field String               |   Child Count | Offset   |
 +=======+=============+==========+====================================+============================+===============+==========+
-|     0 |           0 | Set      |                                    | Battery                    |            30 | 1        |
+|     0 |           0 | Set      |                                    | Battery                    |            31 | 1        |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|     1 |           0 | Set      | Nullable=False,                    | Actions                    |             4 | 31       |
+|     1 |           0 | Set      | Nullable=False,                    | Actions                    |             4 | 32       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |     2 |           1 | Set      | Nullable=False,Permission=Read     | Assembly                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
@@ -15,7 +15,7 @@
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |     6 |           5 | Real     | Nullable=True,Permission=Read      | CapacityRatedWattHours     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|     7 |           6 | Enum     | Nullable=True,Permission=Read      | ChargeState                |             3 | 35       |
+|     7 |           6 | Enum     | Nullable=True,Permission=Read      | ChargeState                |             3 | 36       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |     8 |           7 | String   | Nullable=True,Permission=Read      | Description                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
@@ -25,7 +25,7 @@
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |    11 |          10 | String   | Nullable=False,Permission=Read     | Id                         |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    12 |          11 | Set      | Nullable=False,                    | Location                   |            12 | 38       |
+|    12 |          11 | Set      | Nullable=False,                    | Location                   |            12 | 39       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |    13 |          12 | Boolean  | Nullable=True,Permission=ReadWrite | LocationIndicatorActive    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
@@ -53,393 +53,397 @@
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |    25 |          24 | String   | Nullable=True,Permission=Read      | SparePartNumber            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    26 |          25 | Set      | Nullable=False,                    | StateOfHealthPercent       |             2 | 50       |
+|    26 |          25 | Set      | Nullable=False,                    | StateOfHealthPercent       |             2 | 51       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    27 |          26 | Set      | Nullable=False,                    | Status                     |             5 | 52       |
+|    27 |          26 | Set      | Nullable=False,                    | Status                     |             5 | 53       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |    28 |          27 | String   | Nullable=True,Permission=Read      | Version                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    29 |          28 | Set      | Nullable=False,                    | Links                      |             3 | 57       |
+|    29 |          28 | Set      | Nullable=False,                    | Links                      |             3 | 58       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
 |    30 |          29 | Boolean  | Nullable=True,Permission=Read      | Replaceable                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    31 |           0 | Set      | Nullable=False,                    | Oem                        |             0 |          |
+|    31 |          30 | Real     | Nullable=True,Permission=Read      | NominalOutputVoltage       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    32 |           1 | Set      |                                    | #Battery.Reset             |             3 | 60       |
+|    32 |           0 | Set      | Nullable=False,                    | Oem                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    33 |           2 | Set      |                                    | #Battery.SelfTest          |             2 | 63       |
+|    33 |           1 | Set      |                                    | #Battery.Reset             |             3 | 61       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    34 |           3 | Set      |                                    | #Battery.Calibrate         |             2 | 65       |
+|    34 |           2 | Set      |                                    | #Battery.SelfTest          |             2 | 64       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    35 |           0 | String   |                                    | Charging                   |             0 |          |
+|    35 |           3 | Set      |                                    | #Battery.Calibrate         |             2 | 66       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    36 |           1 | String   |                                    | Discharging                |             0 |          |
+|    36 |           0 | String   |                                    | Charging                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    37 |           2 | String   |                                    | Idle                       |             0 |          |
+|    37 |           1 | String   |                                    | Discharging                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    38 |           0 | String   | Nullable=True,Permission=Read      | Info                       |             0 |          |
+|    38 |           2 | String   |                                    | Idle                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    39 |           1 | String   | Nullable=True,Permission=Read      | InfoFormat                 |             0 |          |
+|    39 |           0 | String   | Nullable=True,Permission=Read      | Info                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    40 |           2 | Set      | Nullable=False,                    | Oem                        |             0 |          |
+|    40 |           1 | String   | Nullable=True,Permission=Read      | InfoFormat                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    41 |           3 | Set      | Nullable=False,                    | Placement                  |             5 | 67       |
+|    41 |           2 | Set      | Nullable=False,                    | Oem                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    42 |           4 | Set      | Nullable=False,                    | PostalAddress              |            33 | 72       |
+|    42 |           3 | Set      | Nullable=False,                    | Placement                  |             5 | 68       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    43 |           5 | Set      | Nullable=False,                    | PartLocation               |             5 | 105      |
+|    43 |           4 | Set      | Nullable=False,                    | PostalAddress              |            33 | 73       |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    44 |           6 | Real     | Nullable=True,Permission=ReadWrite | AltitudeMeters             |             0 |          |
+|    44 |           5 | Set      | Nullable=False,                    | PartLocation               |             5 | 106      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    45 |           7 | Real     | Nullable=True,Permission=ReadWrite | Latitude                   |             0 |          |
+|    45 |           6 | Real     | Nullable=True,Permission=ReadWrite | AltitudeMeters             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    46 |           8 | Real     | Nullable=True,Permission=ReadWrite | Longitude                  |             0 |          |
+|    46 |           7 | Real     | Nullable=True,Permission=ReadWrite | Latitude                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    47 |           9 | Array    | Nullable=True,                     | Contacts                   |             1 | 110      |
+|    47 |           8 | Real     | Nullable=True,Permission=ReadWrite | Longitude                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    48 |          10 | String   | Nullable=True,Permission=Read      | PartLocationContext        |             0 |          |
+|    48 |           9 | Array    | Nullable=True,                     | Contacts                   |             1 | 111      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    49 |          11 | Set      | Nullable=False,                    | PhysicalAddress            |             7 | 114      |
+|    49 |          10 | String   | Nullable=True,Permission=Read      | PartLocationContext        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    50 |           5 | String   | Nullable=True,Permission=Read      | DataSourceUri              |             0 |          |
+|    50 |          11 | Set      | Nullable=False,                    | PhysicalAddress            |             7 | 115      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    51 |          22 | Real     | Nullable=True,Permission=Read      | Reading                    |             0 |          |
+|    51 |           5 | String   | Nullable=True,Permission=Read      | DataSourceUri              |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    52 |           0 | Enum     | Nullable=True,Permission=Read      | Health                     |             3 | 121      |
+|    52 |          22 | Real     | Nullable=True,Permission=Read      | Reading                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    53 |           1 | Enum     | Nullable=True,Permission=Read      | HealthRollup               |             3 | 121      |
+|    53 |           0 | Enum     | Nullable=True,Permission=Read      | Health                     |             3 | 122      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    54 |           2 | Set      | Nullable=False,                    | Oem                        |             0 |          |
+|    54 |           1 | Enum     | Nullable=True,Permission=Read      | HealthRollup               |             3 | 122      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    55 |           3 | Enum     | Nullable=True,Permission=Read      | State                      |            12 | 124      |
+|    55 |           2 | Set      | Nullable=False,                    | Oem                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    56 |           4 | Array    | Nullable=True,                     | Conditions                 |             1 | 136      |
+|    56 |           3 | Enum     | Nullable=True,Permission=Read      | State                      |            13 | 125      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    57 |           0 | Array    | Nullable=True,Permission=Read      | Memory                     |             1 | 146      |
+|    57 |           4 | Array    | Nullable=True,                     | Conditions                 |             1 | 138      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    58 |           1 | Set      | Nullable=False,                    | Oem                        |             0 |          |
+|    58 |           0 | Array    | Nullable=True,Permission=Read      | Memory                     |             1 | 148      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    59 |           2 | Array    | Nullable=True,Permission=Read      | StorageControllers         |             1 | 146      |
+|    59 |           1 | Set      | Nullable=False,                    | Oem                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    60 |           0 | String   | Nullable=False,Permission=Read     | target                     |             0 |          |
+|    60 |           2 | Array    | Nullable=True,Permission=Read      | StorageControllers         |             1 | 148      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    61 |           1 | String   | Nullable=False,Permission=Read     | title                      |             0 |          |
+|    61 |           0 | String   | Nullable=False,Permission=Read     | target                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    62 |           2 | Enum     | Nullable=True,                     | ResetType                  |            12 | 147      |
+|    62 |           1 | String   | Nullable=False,Permission=Read     | title                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    63 |           0 | String   | Nullable=False,Permission=Read     | target                     |             0 |          |
+|    63 |           2 | Enum     | Nullable=True,                     | ResetType                  |            12 | 149      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    64 |           1 | String   | Nullable=False,Permission=Read     | title                      |             0 |          |
+|    64 |           0 | String   | Nullable=False,Permission=Read     | target                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    65 |           0 | String   | Nullable=False,Permission=Read     | target                     |             0 |          |
+|    65 |           1 | String   | Nullable=False,Permission=Read     | title                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    66 |           1 | String   | Nullable=False,Permission=Read     | title                      |             0 |          |
+|    66 |           0 | String   | Nullable=False,Permission=Read     | target                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    67 |           0 | String   | Nullable=True,Permission=ReadWrite | Rack                       |             0 |          |
+|    67 |           1 | String   | Nullable=False,Permission=Read     | title                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    68 |           1 | Integer  | Nullable=True,Permission=ReadWrite | RackOffset                 |             0 |          |
+|    68 |           0 | String   | Nullable=True,Permission=ReadWrite | Rack                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    69 |           2 | Enum     | Nullable=True,Permission=ReadWrite | RackOffsetUnits            |             2 | 159      |
+|    69 |           1 | Integer  | Nullable=True,Permission=ReadWrite | RackOffset                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    70 |           3 | String   | Nullable=True,Permission=ReadWrite | Row                        |             0 |          |
+|    70 |           2 | Enum     | Nullable=True,Permission=ReadWrite | RackOffsetUnits            |             2 | 161      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    71 |           4 | String   | Nullable=True,Permission=ReadWrite | AdditionalInfo             |             0 |          |
+|    71 |           3 | String   | Nullable=True,Permission=ReadWrite | Row                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    72 |           0 | String   | Nullable=True,Permission=ReadWrite | AdditionalCode             |             0 |          |
+|    72 |           4 | String   | Nullable=True,Permission=ReadWrite | AdditionalInfo             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    73 |           1 | String   | Nullable=True,Permission=ReadWrite | Building                   |             0 |          |
+|    73 |           0 | String   | Nullable=True,Permission=ReadWrite | AdditionalCode             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    74 |           2 | String   | Nullable=True,Permission=ReadWrite | City                       |             0 |          |
+|    74 |           1 | String   | Nullable=True,Permission=ReadWrite | Building                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    75 |           3 | String   | Nullable=True,Permission=ReadWrite | Community                  |             0 |          |
+|    75 |           2 | String   | Nullable=True,Permission=ReadWrite | City                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    76 |           4 | String   | Nullable=True,Permission=ReadWrite | Country                    |             0 |          |
+|    76 |           3 | String   | Nullable=True,Permission=ReadWrite | Community                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    77 |           5 | String   | Nullable=True,Permission=ReadWrite | District                   |             0 |          |
+|    77 |           4 | String   | Nullable=True,Permission=ReadWrite | Country                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    78 |           6 | String   | Nullable=True,Permission=ReadWrite | Division                   |             0 |          |
+|    78 |           5 | String   | Nullable=True,Permission=ReadWrite | District                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    79 |           7 | String   | Nullable=True,Permission=ReadWrite | Floor                      |             0 |          |
+|    79 |           6 | String   | Nullable=True,Permission=ReadWrite | Division                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    80 |           8 | String   | Nullable=True,Permission=ReadWrite | GPSCoords                  |             0 |          |
+|    80 |           7 | String   | Nullable=True,Permission=ReadWrite | Floor                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    81 |           9 | Integer  | Nullable=True,Permission=ReadWrite | HouseNumber                |             0 |          |
+|    81 |           8 | String   | Nullable=True,Permission=ReadWrite | GPSCoords                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    82 |          10 | String   | Nullable=True,Permission=ReadWrite | HouseNumberSuffix          |             0 |          |
+|    82 |           9 | Integer  | Nullable=True,Permission=ReadWrite | HouseNumber                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    83 |          11 | String   | Nullable=True,Permission=ReadWrite | Landmark                   |             0 |          |
+|    83 |          10 | String   | Nullable=True,Permission=ReadWrite | HouseNumberSuffix          |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    84 |          12 | String   | Nullable=True,Permission=ReadWrite | LeadingStreetDirection     |             0 |          |
+|    84 |          11 | String   | Nullable=True,Permission=ReadWrite | Landmark                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    85 |          13 | String   | Nullable=True,Permission=ReadWrite | Location                   |             0 |          |
+|    85 |          12 | String   | Nullable=True,Permission=ReadWrite | LeadingStreetDirection     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    86 |          14 | String   | Nullable=True,Permission=ReadWrite | Name                       |             0 |          |
+|    86 |          13 | String   | Nullable=True,Permission=ReadWrite | Location                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    87 |          15 | String   | Nullable=True,Permission=ReadWrite | Neighborhood               |             0 |          |
+|    87 |          14 | String   | Nullable=True,Permission=ReadWrite | Name                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    88 |          16 | String   | Nullable=True,Permission=ReadWrite | POBox                      |             0 |          |
+|    88 |          15 | String   | Nullable=True,Permission=ReadWrite | Neighborhood               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    89 |          17 | String   | Nullable=True,Permission=ReadWrite | PlaceType                  |             0 |          |
+|    89 |          16 | String   | Nullable=True,Permission=ReadWrite | POBox                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    90 |          18 | String   | Nullable=True,Permission=ReadWrite | PostalCode                 |             0 |          |
+|    90 |          17 | String   | Nullable=True,Permission=ReadWrite | PlaceType                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    91 |          19 | String   | Nullable=True,Permission=ReadWrite | Road                       |             0 |          |
+|    91 |          18 | String   | Nullable=True,Permission=ReadWrite | PostalCode                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    92 |          20 | String   | Nullable=True,Permission=ReadWrite | RoadBranch                 |             0 |          |
+|    92 |          19 | String   | Nullable=True,Permission=ReadWrite | Road                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    93 |          21 | String   | Nullable=True,Permission=ReadWrite | RoadPostModifier           |             0 |          |
+|    93 |          20 | String   | Nullable=True,Permission=ReadWrite | RoadBranch                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    94 |          22 | String   | Nullable=True,Permission=ReadWrite | RoadPreModifier            |             0 |          |
+|    94 |          21 | String   | Nullable=True,Permission=ReadWrite | RoadPostModifier           |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    95 |          23 | String   | Nullable=True,Permission=ReadWrite | RoadSection                |             0 |          |
+|    95 |          22 | String   | Nullable=True,Permission=ReadWrite | RoadPreModifier            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    96 |          24 | String   | Nullable=True,Permission=ReadWrite | RoadSubBranch              |             0 |          |
+|    96 |          23 | String   | Nullable=True,Permission=ReadWrite | RoadSection                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    97 |          25 | String   | Nullable=True,Permission=ReadWrite | Room                       |             0 |          |
+|    97 |          24 | String   | Nullable=True,Permission=ReadWrite | RoadSubBranch              |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    98 |          26 | String   | Nullable=True,Permission=ReadWrite | Seat                       |             0 |          |
+|    98 |          25 | String   | Nullable=True,Permission=ReadWrite | Room                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|    99 |          27 | String   | Nullable=True,Permission=ReadWrite | Street                     |             0 |          |
+|    99 |          26 | String   | Nullable=True,Permission=ReadWrite | Seat                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   100 |          28 | String   | Nullable=True,Permission=ReadWrite | StreetSuffix               |             0 |          |
+|   100 |          27 | String   | Nullable=True,Permission=ReadWrite | Street                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   101 |          29 | String   | Nullable=True,Permission=ReadWrite | Territory                  |             0 |          |
+|   101 |          28 | String   | Nullable=True,Permission=ReadWrite | StreetSuffix               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   102 |          30 | String   | Nullable=True,Permission=ReadWrite | TrailingStreetSuffix       |             0 |          |
+|   102 |          29 | String   | Nullable=True,Permission=ReadWrite | Territory                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   103 |          31 | String   | Nullable=True,Permission=ReadWrite | Unit                       |             0 |          |
+|   103 |          30 | String   | Nullable=True,Permission=ReadWrite | TrailingStreetSuffix       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   104 |          32 | String   | Nullable=True,Permission=ReadWrite | AdditionalInfo             |             0 |          |
+|   104 |          31 | String   | Nullable=True,Permission=ReadWrite | Unit                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   105 |           0 | Integer  | Nullable=True,Permission=Read      | LocationOrdinalValue       |             0 |          |
+|   105 |          32 | String   | Nullable=True,Permission=ReadWrite | AdditionalInfo             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   106 |           1 | Enum     | Nullable=True,Permission=Read      | LocationType               |             6 | 161      |
+|   106 |           0 | Integer  | Nullable=True,Permission=Read      | LocationOrdinalValue       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   107 |           2 | Enum     | Nullable=True,Permission=Read      | Orientation                |             6 | 167      |
+|   107 |           1 | Enum     | Nullable=True,Permission=Read      | LocationType               |             6 | 163      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   108 |           3 | Enum     | Nullable=True,Permission=Read      | Reference                  |             7 | 173      |
+|   108 |           2 | Enum     | Nullable=True,Permission=Read      | Orientation                |             6 | 169      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   109 |           4 | String   | Nullable=True,Permission=Read      | ServiceLabel               |             0 |          |
+|   109 |           3 | Enum     | Nullable=True,Permission=Read      | Reference                  |             7 | 175      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   110 |           0 | Set      |                                    |                            |             3 | 111      |
+|   110 |           4 | String   | Nullable=True,Permission=Read      | ServiceLabel               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   111 |           0 | String   | Nullable=True,Permission=ReadWrite | ContactName                |             0 |          |
+|   111 |           0 | Set      |                                    |                            |             3 | 112      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   112 |           1 | String   | Nullable=True,Permission=ReadWrite | EmailAddress               |             0 |          |
+|   112 |           0 | String   | Nullable=True,Permission=ReadWrite | ContactName                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   113 |           2 | String   | Nullable=True,Permission=ReadWrite | PhoneNumber                |             0 |          |
+|   113 |           1 | String   | Nullable=True,Permission=ReadWrite | EmailAddress               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   114 |           0 | String   | Nullable=True,Permission=ReadWrite | City                       |             0 |          |
+|   114 |           2 | String   | Nullable=True,Permission=ReadWrite | PhoneNumber                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   115 |           1 | String   | Nullable=True,Permission=ReadWrite | Country                    |             0 |          |
+|   115 |           0 | String   | Nullable=True,Permission=ReadWrite | City                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   116 |           2 | String   | Nullable=True,Permission=ReadWrite | ISOCountryCode             |             0 |          |
+|   116 |           1 | String   | Nullable=True,Permission=ReadWrite | Country                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   117 |           3 | String   | Nullable=True,Permission=ReadWrite | ISOSubdivisionCode         |             0 |          |
+|   117 |           2 | String   | Nullable=True,Permission=ReadWrite | ISOCountryCode             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   118 |           4 | String   | Nullable=True,Permission=ReadWrite | PostalCode                 |             0 |          |
+|   118 |           3 | String   | Nullable=True,Permission=ReadWrite | ISOSubdivisionCode         |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   119 |           5 | String   | Nullable=True,Permission=ReadWrite | StateOrProvince            |             0 |          |
+|   119 |           4 | String   | Nullable=True,Permission=ReadWrite | PostalCode                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   120 |           6 | String   | Nullable=True,Permission=ReadWrite | StreetAddress              |             0 |          |
+|   120 |           5 | String   | Nullable=True,Permission=ReadWrite | StateOrProvince            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   121 |           0 | String   |                                    | Critical                   |             0 |          |
+|   121 |           6 | String   | Nullable=True,Permission=ReadWrite | StreetAddress              |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   122 |           1 | String   |                                    | OK                         |             0 |          |
+|   122 |           0 | String   |                                    | Critical                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   123 |           2 | String   |                                    | Warning                    |             0 |          |
+|   123 |           1 | String   |                                    | OK                         |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   124 |           0 | String   |                                    | Absent                     |             0 |          |
+|   124 |           2 | String   |                                    | Warning                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   125 |           1 | String   |                                    | Disabled                   |             0 |          |
+|   125 |           0 | String   |                                    | Absent                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   126 |           2 | String   |                                    | Enabled                    |             0 |          |
+|   126 |           1 | String   |                                    | Disabled                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   127 |           3 | String   |                                    | InTest                     |             0 |          |
+|   127 |           2 | String   |                                    | Enabled                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   128 |           4 | String   |                                    | StandbyOffline             |             0 |          |
+|   128 |           3 | String   |                                    | InTest                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   129 |           5 | String   |                                    | StandbySpare               |             0 |          |
+|   129 |           4 | String   |                                    | StandbyOffline             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   130 |           6 | String   |                                    | Starting                   |             0 |          |
+|   130 |           5 | String   |                                    | StandbySpare               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   131 |           7 | String   |                                    | UnavailableOffline         |             0 |          |
+|   131 |           6 | String   |                                    | Starting                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   132 |           8 | String   |                                    | Deferring                  |             0 |          |
+|   132 |           7 | String   |                                    | Degraded                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   133 |           9 | String   |                                    | Quiesced                   |             0 |          |
+|   133 |           8 | String   |                                    | UnavailableOffline         |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   134 |          10 | String   |                                    | Updating                   |             0 |          |
+|   134 |           9 | String   |                                    | Deferring                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   135 |          11 | String   |                                    | Qualified                  |             0 |          |
+|   135 |          10 | String   |                                    | Quiesced                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   136 |           0 | Set      |                                    |                            |             9 | 137      |
+|   136 |          11 | String   |                                    | Updating                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   137 |           0 | Set      | Nullable=False,Permission=Read     | LogEntry                   |             0 |          |
+|   137 |          12 | String   |                                    | Qualified                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   138 |           1 | String   | Nullable=False,Permission=Read     | Message                    |             0 |          |
+|   138 |           0 | Set      |                                    |                            |             9 | 139      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   139 |           2 | Array    | Nullable=False,Permission=Read     | MessageArgs                |             1 | 180      |
+|   139 |           0 | Set      | Nullable=False,Permission=Read     | LogEntry                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   140 |           3 | String   | Nullable=False,Permission=Read     | MessageId                  |             0 |          |
+|   140 |           1 | String   | Nullable=False,Permission=Read     | Message                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   141 |           4 | Set      | Nullable=False,Permission=Read     | OriginOfCondition          |             0 |          |
+|   141 |           2 | Array    | Nullable=False,Permission=Read     | MessageArgs                |             1 | 182      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   142 |           5 | Enum     | Nullable=False,Permission=Read     | Severity                   |             3 | 121      |
+|   142 |           3 | String   | Nullable=False,Permission=Read     | MessageId                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   143 |           6 | String   | Nullable=False,Permission=Read     | Timestamp                  |             0 |          |
+|   143 |           4 | Set      | Nullable=False,Permission=Read     | OriginOfCondition          |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   144 |           7 | String   | Nullable=False,Permission=Read     | Resolution                 |             0 |          |
+|   144 |           5 | Enum     | Nullable=False,Permission=Read     | Severity                   |             3 | 122      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   145 |           8 | Array    | Nullable=False,                    | ResolutionSteps            |             1 | 181      |
+|   145 |           6 | String   | Nullable=False,Permission=Read     | Timestamp                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   146 |           0 | Set      |                                    |                            |             0 |          |
+|   146 |           7 | String   | Nullable=False,Permission=Read     | Resolution                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   147 |           0 | String   |                                    | ForceOff                   |             0 |          |
+|   147 |           8 | Array    | Nullable=False,                    | ResolutionSteps            |             1 | 183      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   148 |           1 | String   |                                    | ForceOn                    |             0 |          |
+|   148 |           0 | Set      |                                    |                            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   149 |           2 | String   |                                    | ForceRestart               |             0 |          |
+|   149 |           0 | String   |                                    | ForceOff                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   150 |           3 | String   |                                    | GracefulRestart            |             0 |          |
+|   150 |           1 | String   |                                    | ForceOn                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   151 |           4 | String   |                                    | GracefulShutdown           |             0 |          |
+|   151 |           2 | String   |                                    | ForceRestart               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   152 |           5 | String   |                                    | Nmi                        |             0 |          |
+|   152 |           3 | String   |                                    | GracefulRestart            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   153 |           6 | String   |                                    | On                         |             0 |          |
+|   153 |           4 | String   |                                    | GracefulShutdown           |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   154 |           7 | String   |                                    | PushPowerButton            |             0 |          |
+|   154 |           5 | String   |                                    | Nmi                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   155 |           8 | String   |                                    | Pause                      |             0 |          |
+|   155 |           6 | String   |                                    | On                         |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   156 |           9 | String   |                                    | Resume                     |             0 |          |
+|   156 |           7 | String   |                                    | PushPowerButton            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   157 |          10 | String   |                                    | Suspend                    |             0 |          |
+|   157 |           8 | String   |                                    | Pause                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   158 |          11 | String   |                                    | PowerCycle                 |             0 |          |
+|   158 |           9 | String   |                                    | Resume                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   159 |           0 | String   |                                    | EIA_310                    |             0 |          |
+|   159 |          10 | String   |                                    | Suspend                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   160 |           1 | String   |                                    | OpenU                      |             0 |          |
+|   160 |          11 | String   |                                    | PowerCycle                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   161 |           0 | String   |                                    | Bay                        |             0 |          |
+|   161 |           0 | String   |                                    | EIA_310                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   162 |           1 | String   |                                    | Connector                  |             0 |          |
+|   162 |           1 | String   |                                    | OpenU                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   163 |           2 | String   |                                    | Slot                       |             0 |          |
+|   163 |           0 | String   |                                    | Bay                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   164 |           3 | String   |                                    | Socket                     |             0 |          |
+|   164 |           1 | String   |                                    | Connector                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   165 |           4 | String   |                                    | Backplane                  |             0 |          |
+|   165 |           2 | String   |                                    | Slot                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   166 |           5 | String   |                                    | Embedded                   |             0 |          |
+|   166 |           3 | String   |                                    | Socket                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   167 |           0 | String   |                                    | BackToFront                |             0 |          |
+|   167 |           4 | String   |                                    | Backplane                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   168 |           1 | String   |                                    | BottomToTop                |             0 |          |
+|   168 |           5 | String   |                                    | Embedded                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   169 |           2 | String   |                                    | FrontToBack                |             0 |          |
+|   169 |           0 | String   |                                    | BackToFront                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   170 |           3 | String   |                                    | LeftToRight                |             0 |          |
+|   170 |           1 | String   |                                    | BottomToTop                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   171 |           4 | String   |                                    | RightToLeft                |             0 |          |
+|   171 |           2 | String   |                                    | FrontToBack                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   172 |           5 | String   |                                    | TopToBottom                |             0 |          |
+|   172 |           3 | String   |                                    | LeftToRight                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   173 |           0 | String   |                                    | Bottom                     |             0 |          |
+|   173 |           4 | String   |                                    | RightToLeft                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   174 |           1 | String   |                                    | Front                      |             0 |          |
+|   174 |           5 | String   |                                    | TopToBottom                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   175 |           2 | String   |                                    | Left                       |             0 |          |
+|   175 |           0 | String   |                                    | Bottom                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   176 |           3 | String   |                                    | Middle                     |             0 |          |
+|   176 |           1 | String   |                                    | Front                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   177 |           4 | String   |                                    | Rear                       |             0 |          |
+|   177 |           2 | String   |                                    | Left                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   178 |           5 | String   |                                    | Right                      |             0 |          |
+|   178 |           3 | String   |                                    | Middle                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   179 |           6 | String   |                                    | Top                        |             0 |          |
+|   179 |           4 | String   |                                    | Rear                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   180 |           0 | String   |                                    |                            |             0 |          |
+|   180 |           5 | String   |                                    | Right                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   181 |           0 | Set      |                                    |                            |             8 | 182      |
+|   181 |           6 | String   |                                    | Top                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   182 |           0 | Array    | Nullable=True,                     | ActionParameters           |             1 | 190      |
+|   182 |           0 | String   |                                    |                            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   183 |           1 | String   | Nullable=False,Permission=Read     | ActionURI                  |             0 |          |
+|   183 |           0 | Set      |                                    |                            |             8 | 184      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   184 |           2 | Set      | Nullable=False,                    | Oem                        |             0 |          |
+|   184 |           0 | Array    | Nullable=True,                     | ActionParameters           |             1 | 192      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   185 |           3 | Integer  | Nullable=True,Permission=Read      | Priority                   |             0 |          |
+|   185 |           1 | String   | Nullable=False,Permission=Read     | ActionURI                  |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   186 |           4 | Enum     | Nullable=True,Permission=Read      | ResolutionType             |             8 | 203      |
+|   186 |           2 | Set      | Nullable=False,                    | Oem                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   187 |           5 | Integer  | Nullable=True,Permission=Read      | RetryCount                 |             0 |          |
+|   187 |           3 | Integer  | Nullable=True,Permission=Read      | Priority                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   188 |           6 | Integer  | Nullable=True,Permission=Read      | RetryIntervalSeconds       |             0 |          |
+|   188 |           4 | Enum     | Nullable=True,Permission=Read      | ResolutionType             |             8 | 205      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   189 |           7 | String   | Nullable=True,Permission=Read      | TargetComponentURI         |             0 |          |
+|   189 |           5 | Integer  | Nullable=True,Permission=Read      | RetryCount                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   190 |           0 | Set      |                                    |                            |            12 | 191      |
+|   190 |           6 | Integer  | Nullable=True,Permission=Read      | RetryIntervalSeconds       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   191 |           0 | Array    | Nullable=True,Permission=Read      | AllowableValues            |             1 | 180      |
+|   191 |           7 | String   | Nullable=True,Permission=Read      | TargetComponentURI         |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   192 |           1 | Enum     | Nullable=True,Permission=Read      | DataType                   |             7 | 211      |
+|   192 |           0 | Set      |                                    |                            |            12 | 193      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   193 |           2 | String   | Nullable=False,Permission=Read     | Name                       |             0 |          |
+|   193 |           0 | Array    | Nullable=True,Permission=Read      | AllowableValues            |             1 | 182      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   194 |           3 | String   | Nullable=True,Permission=Read      | ObjectDataType             |             0 |          |
+|   194 |           1 | Enum     | Nullable=True,Permission=Read      | DataType                   |             7 | 213      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   195 |           4 | Boolean  | Nullable=False,Permission=Read     | Required                   |             0 |          |
+|   195 |           2 | String   | Nullable=False,Permission=Read     | Name                       |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   196 |           5 | Real     | Nullable=True,Permission=Read      | MaximumValue               |             0 |          |
+|   196 |           3 | String   | Nullable=True,Permission=Read      | ObjectDataType             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   197 |           6 | Real     | Nullable=True,Permission=Read      | MinimumValue               |             0 |          |
+|   197 |           4 | Boolean  | Nullable=False,Permission=Read     | Required                   |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   198 |           7 | Integer  | Nullable=True,Permission=Read      | ArraySizeMaximum           |             0 |          |
+|   198 |           5 | Real     | Nullable=True,Permission=Read      | MaximumValue               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   199 |           8 | Integer  | Nullable=True,Permission=Read      | ArraySizeMinimum           |             0 |          |
+|   199 |           6 | Real     | Nullable=True,Permission=Read      | MinimumValue               |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   200 |           9 | Array    | Nullable=True,Permission=Read      | AllowableNumbers           |             1 | 180      |
+|   200 |           7 | Integer  | Nullable=True,Permission=Read      | ArraySizeMaximum           |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   201 |          10 | String   | Nullable=True,Permission=Read      | AllowablePattern           |             0 |          |
+|   201 |           8 | Integer  | Nullable=True,Permission=Read      | ArraySizeMinimum           |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   202 |          11 | Array    | Nullable=True,Permission=Read      | AllowableValueDescriptions |             1 | 180      |
+|   202 |           9 | Array    | Nullable=True,Permission=Read      | AllowableNumbers           |             1 | 182      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   203 |           0 | String   |                                    | CollectDiagnosticData      |             0 |          |
+|   203 |          10 | String   | Nullable=True,Permission=Read      | AllowablePattern           |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   204 |           1 | String   |                                    | ContactVendor              |             0 |          |
+|   204 |          11 | Array    | Nullable=True,Permission=Read      | AllowableValueDescriptions |             1 | 182      |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   205 |           2 | String   |                                    | FirmwareUpdate             |             0 |          |
+|   205 |           0 | String   |                                    | CollectDiagnosticData      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   206 |           3 | String   |                                    | OEM                        |             0 |          |
+|   206 |           1 | String   |                                    | ContactVendor              |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   207 |           4 | String   |                                    | PowerCycle                 |             0 |          |
+|   207 |           2 | String   |                                    | FirmwareUpdate             |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   208 |           5 | String   |                                    | ReplaceComponent           |             0 |          |
+|   208 |           3 | String   |                                    | OEM                        |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   209 |           6 | String   |                                    | Reset                      |             0 |          |
+|   209 |           4 | String   |                                    | PowerCycle                 |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   210 |           7 | String   |                                    | ResetToDefaults            |             0 |          |
+|   210 |           5 | String   |                                    | ReplaceComponent           |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   211 |           0 | String   |                                    | Boolean                    |             0 |          |
+|   211 |           6 | String   |                                    | Reset                      |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   212 |           1 | String   |                                    | Number                     |             0 |          |
+|   212 |           7 | String   |                                    | ResetToDefaults            |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   213 |           2 | String   |                                    | NumberArray                |             0 |          |
+|   213 |           0 | String   |                                    | Boolean                    |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   214 |           3 | String   |                                    | Object                     |             0 |          |
+|   214 |           1 | String   |                                    | Number                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   215 |           4 | String   |                                    | ObjectArray                |             0 |          |
+|   215 |           2 | String   |                                    | NumberArray                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   216 |           5 | String   |                                    | String                     |             0 |          |
+|   216 |           3 | String   |                                    | Object                     |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-|   217 |           6 | String   |                                    | StringArray                |             0 |          |
+|   217 |           4 | String   |                                    | ObjectArray                |             0 |          |
 +-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
-Total Entries: 218
-Fixed size consumed (bytes): 2192 (0x890)
-Field string size consumed (bytes): 2264 (0x8d8)
-Total size (bytes): 4456 (0x1168)
-Version: 0XF1F2F200
-Signature: 0xf1221550
+|   218 |           5 | String   |                                    | String                     |             0 |          |
++-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
+|   219 |           6 | String   |                                    | StringArray                |             0 |          |
++-------+-------------+----------+------------------------------------+----------------------------+---------------+----------+
+Total Entries: 220
+Fixed size consumed (bytes): 2212 (0x8a4)
+Field string size consumed (bytes): 2294 (0x8f6)
+Total size (bytes): 4506 (0x119a)
+Version: 0XF1F3F000
+Signature: 0xcc3024d5

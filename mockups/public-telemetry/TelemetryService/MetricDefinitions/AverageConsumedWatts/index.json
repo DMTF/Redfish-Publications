@@ -1,0 +1,30 @@
+{
+    "@odata.type": "#MetricDefinition.v1_3_4.MetricDefinition",
+    "Id": "AverageConsumedWatts",
+    "Name": "Average Consumed Watts Metric Definition",
+    "MetricType": "Numeric",
+    "Implementation": "Calculated",
+    "PhysicalContext": "PowerSupply",
+    "MetricDataType": "Decimal",
+    "Units": "W",
+    "CalculationAlgorithm": "Average",
+    "CalculationTimeInterval": "PT1S",
+    "IsLinear": true,
+    "Calculable": "NonSummable",
+    "Wildcards": [
+        {
+            "Name": "ChassisID",
+            "Values": [
+                "1"
+            ]
+        }
+    ],
+    "CalculationParameters": [
+        {
+            "SourceMetric": "/redfish/v1/Chassis/{ChassisID}/Power#/PowerControl/0/PowerConsumedWatts",
+            "ResultMetric": "/redfish/v1/Chassis/{ChassisID}/Power#/PowerControl/0/PowerMetrics/AverageConsumedWatts"
+        }
+    ],
+    "@odata.id": "/redfish/v1/TelemetryService/MetricDefinitions/AverageConsumedWatts",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

@@ -1,0 +1,45 @@
+{
+    "RequestFormat": "Manifest",
+    "RequestType": "Apply",
+    "Manifest": {
+        "Description": "Description for this Manifest document.",
+        "Timestamp": "2019-08-22T10:35:16+06:00",
+        "Expand": "Relevant",
+        "Stanzas": [
+            {
+                "StanzaType": "RegisterResourceBlock",
+                "StanzaId": "RegisteringExpandableSystemExample",
+                "Request": {
+                    "ComputerSystems": [
+                        {
+                            "@odata.id": "/redfish/v1/Systems/SystemPreResourceBlock"
+                        }
+                    ],
+                    "Links": {
+                        "ResourceZones": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceZones/3"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "ExpandingSystemExample",
+                "Request": {
+                    "Links": {
+                        "ResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/SystemBlock12"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/DriveBlock10"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,122 @@
+{
+    "@odata.type": "#Manager.v1_19_1.Manager",
+    "Name": "Enclosure Manager - StandBy",
+    "Description": "Onboard Multi-Blade Enclosure Management Controller",
+    "Id": "EncMgr2",
+    "ManagerType": "EnclosureManager",
+    "Model": "Contoso Enclosure Manager",
+    "ServiceEntryPointUUID": "0965e849-c110-4b85-8989-9102b950a5a5",
+    "UUID": "58893887-8974-2487-2389-841168418919",
+    "FirmwareVersion": "8.1.54",
+    "DateTime": "2016-12-30T04:14:33+06:00",
+    "Status": {
+        "Health": "OK",
+        "State": "Enabled"
+    },
+    "Redundancy": [
+        {
+            "@odata.id": "/redfish/v1/Managers/EncMgr1#/Redundancy/0",
+            "MemberId": "Redundancy",
+            "Name": "Manager Redundancy",
+            "Mode": "Failover",
+            "MaxNumSupported": 2,
+            "MinNumNeeded": 1,
+            "Status": {
+                "State": "Enabled",
+                "Health": "OK"
+            },
+            "RedundancySet": [
+                {
+                    "@odata.id": "/redfish/v1/Managers/EncMgr1"
+                },
+                {
+                    "@odata.id": "/redfish/v1/Managers/EncMgr2"
+                }
+            ]
+        }
+    ],
+    "GraphicalConsole": {
+        "ServiceEnabled": true,
+        "ConnectTypesSupported": [
+            "KVMIP"
+        ]
+    },
+    "SerialConsole": {
+        "ServiceEnabled": true,
+        "MaxConcurrentSessions": 1,
+        "ConnectTypesSupported": [
+            "SSH",
+            "IPMI"
+        ]
+    },
+    "CommandShell": {
+        "ServiceEnabled": true,
+        "MaxConcurrentSessions": 4,
+        "ConnectTypesSupported": [
+            "SSH",
+            "Oem"
+        ]
+    },
+    "NetworkProtocol": {
+        "@odata.id": "/redfish/v1/Managers/EncMgr1/NetworkProtocol"
+    },
+    "EthernetInterfaces": {
+        "@odata.id": "/redfish/v1/Managers/EncMgr1/EthernetInterfaces"
+    },
+    "VirtualMedia": {
+        "@odata.id": "/redfish/v1/Managers/EncMgr1/VirtualMedia"
+    },
+    "Links": {
+        "ManagerForServers": [
+            {
+                "@odata.id": "/redfish/v1/Systems/ComposedPartition1"
+            },
+            {
+                "@odata.id": "/redfish/v1/Systems/ComposedPartition2"
+            },
+            {
+                "@odata.id": "/redfish/v1/Systems/ComposedPartition2"
+            }
+        ],
+        "ManagerInChassis": {
+            "@odata.id": "/redfish/v1/Chassis/Enclosure"
+        },
+        "ManagerForChassis": [
+            {
+                "@odata.id": "/redfish/v1/Chassis/Enclosure"
+            },
+            {
+                "@odata.id": "/redfish/v1/Chassis/Blade1"
+            },
+            {
+                "@odata.id": "/redfish/v1/Chassis/Blade2"
+            },
+            {
+                "@odata.id": "/redfish/v1/Chassis/Blade3"
+            },
+            {
+                "@odata.id": "/redfish/v1/Chassis/Blade4"
+            },
+            {
+                "@odata.id": "/redfish/v1/Chassis/Blade5"
+            },
+            {
+                "@odata.id": "/redfish/v1/Chassis/Blade6"
+            }
+        ]
+    },
+    "Actions": {
+        "#Manager.Reset": {
+            "target": "/redfish/v1/Managers/EncMgr1/Actions/Manager.Reset",
+            "ResetType@Redfish.AllowableValues": [
+                "ForceRestart",
+                "GracefulRestart"
+            ]
+        },
+        "#Manager.ForceFailover": {
+            "target": "/redfish/v1/Managers/EncMgr1/Actions/Manager.ForceFailover"
+        }
+    },
+    "@odata.id": "/redfish/v1/Managers/EncMgr2",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

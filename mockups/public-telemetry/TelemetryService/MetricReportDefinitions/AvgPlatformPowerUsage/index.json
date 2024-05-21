@@ -1,0 +1,45 @@
+{
+    "@odata.type": "#MetricReportDefinition.v1_4_6.MetricReportDefinition",
+    "Id": "AvgPlatformPowerUsage",
+    "Name": "Average Platform Power Usage",
+    "MetricReportDefinitionType": "Periodic",
+    "MetricReportDefinitionEnabled": true,
+    "Schedule": {
+        "RecurrenceInterval": "PT1H"
+    },
+    "ReportActions": [
+        "RedfishEvent",
+        "LogToMetricReportsCollection"
+    ],
+    "ReportUpdates": "AppendWrapsWhenFull",
+    "AppendLimit": 256,
+    "MetricReport": {
+        "@odata.id": "/redfish/v1/TelemetryService/MetricReports/AvgPlatformPowerUsage"
+    },
+    "Status": {
+        "State": "Enabled"
+    },
+    "Wildcards": [
+        {
+            "Name": "Wild",
+            "Values": [
+                "0"
+            ]
+        }
+    ],
+    "Metrics": [
+        {
+            "MetricProperties": [
+                "/redfish/v1/Chassis/Tray_1/Power#/PowerControl/{Wild}/PowerConsumedWatts"
+            ],
+            "CollectionFunction": "Average",
+            "CollectionTimeScope": "Interval",
+            "CollectionDuration": "PT0.02S"
+        }
+    ],
+    "Links": {
+        "Triggers": []
+    },
+    "@odata.id": "/redfish/v1/TelemetryService/MetricReportDefinitions/AvgPlatformPowerUsage",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

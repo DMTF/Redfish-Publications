@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!---->
+<!--################################################################################       -->
+<!--# Contoso Schema:  ContosoAccountService v1.0.0                                        -->
+<!--#                                                                                      -->
+<!--# Copyright 2014-2021 DMTF.                                                            -->
+<!--# For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright -->
+<!--################################################################################       -->
+<!---->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/csd01/complete/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/RedfishExtensions_v1.xml">
+    <edmx:Include Namespace="RedfishExtensions.v1_0_0" Alias="Redfish"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/AccountService_v1.xml">
+    <edmx:Include Namespace="AccountService.v1_2_0"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ContosoAccountService">
+      <Annotation Term="Redfish.OwningEntity" String="Contoso"/>
+
+      <Action Name="AutoConfig" IsBound="true">
+        <Annotation Term="OData.Description" String="This action is used to perform automated configuration of the account service."/>
+        <Annotation Term="OData.LongDescription" String="This action shall perform automated configuration of the account service as specified by the Contoso service manual."/>
+        <Parameter Name="AccountService" Type="AccountService.v1_2_0.OemActions"/>
+      </Action>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ContosoAccountService.v1_0_0">
+      <Annotation Term="Redfish.OwningEntity" String="Contoso"/>
+      <Annotation Term="OData.Description" String="Initial version to track the AutoConfig action."/>
+    </Schema>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ContosoAccountService.v1_0_1">
+      <Annotation Term="Redfish.OwningEntity" String="Contoso"/>
+      <Annotation Term="OData.Description" String="Errata to correct typo in the AutoConfig description."/>
+    </Schema>
+
+  </edmx:DataServices>
+</edmx:Edmx>

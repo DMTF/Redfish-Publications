@@ -1,0 +1,30 @@
+{
+    "@odata.type": "#MetricDefinition.v1_3_4.MetricDefinition",
+    "Id": "MaximumConsumedWatts",
+    "Name": "Maximum Consumed Watts",
+    "MetricType": "Numeric",
+    "Implementation": "Calculated",
+    "PhysicalContext": "PowerSupply",
+    "MetricDataType": "Decimal",
+    "Units": "W",
+    "CalculationAlgorithm": "Maximum",
+    "CalculationTimeInterval": "PT1S",
+    "Calculable": "NonSummable",
+    "IsLinear": true,
+    "Wildcards": [
+        {
+            "Name": "ChassisID",
+            "Values": [
+                "1"
+            ]
+        }
+    ],
+    "CalculationParameters": [
+        {
+            "SourceMetric": "/redfish/v1/Chassis/{ChassisID}/Power#/PowerControl/0/PowerConsumedWatts",
+            "ResultMetric": "/redfish/v1/Chassis/{ChassisID}/Power#/PowerControl/0/PowerMetrics/MaxConsumedWatts"
+        }
+    ],
+    "@odata.id": "/redfish/v1/TelemetryService/MetricDefinitions/MaximumConsumedWatts",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

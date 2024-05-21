@@ -1,0 +1,81 @@
+{
+    "@odata.type": "#Circuit.v1_8_0.Circuit",
+    "Id": "C",
+    "Name": "Branch Circuit C",
+    "Status": {
+        "State": "Enabled",
+        "Health": "OK"
+    },
+    "CircuitType": "Branch",
+    "PhaseWiringType": "TwoPhase3Wire",
+    "NominalVoltage": "AC200To240V",
+    "RatedCurrentAmps": 16,
+    "BreakerState": "Normal",
+    "PolyPhaseVoltage": {
+        "Line3ToNeutral": {
+            "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/VoltageCL3N",
+            "Reading": 118.4
+        },
+        "Line3ToLine1": {
+            "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/VoltageCL3L1",
+            "Reading": 205.1
+        }
+    },
+    "CurrentAmps": {
+        "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/CurrentC",
+        "Reading": 4.13
+    },
+    "PolyPhaseCurrentAmps": {
+        "Line3": {
+            "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/CurrentC",
+            "Reading": 4.13
+        }
+    },
+    "PowerWatts": {
+        "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/PowerC",
+        "Reading": 816.5,
+        "ApparentVA": 816.5,
+        "ReactiveVAR": 0.1,
+        "PowerFactor": 0.99
+    },
+    "PolyPhasePowerWatts": {
+        "Line1ToNeutral": {
+            "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/PowerC1",
+            "Reading": 816.5,
+            "ApparentVA": 816.5,
+            "ReactiveVAR": 0.1,
+            "PowerFactor": 0.99
+        }
+    },
+    "FrequencyHz": {
+        "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/FrequencyC",
+        "Reading": 60.1
+    },
+    "EnergykWh": {
+        "DataSourceUri": "/redfish/v1/Chassis/PDU/Sensors/EnergyC",
+        "Reading": 121666
+    },
+    "Links": {
+        "Outlets": [
+            {
+                "@odata.id": "/redfish/v1/PowerEquipment/RackPDUs/1/Outlets/C1"
+            },
+            {
+                "@odata.id": "/redfish/v1/PowerEquipment/RackPDUs/1/Outlets/C2"
+            },
+            {
+                "@odata.id": "/redfish/v1/PowerEquipment/RackPDUs/1/Outlets/C3"
+            }
+        ]
+    },
+    "Actions": {
+        "#Circuit.BreakerControl": {
+            "target": "/redfish/v1/PowerEquipment/RackPDUs/1/Branches/C/Circuit.BreakerControl"
+        },
+        "#Circuit.ResetMetrics": {
+            "target": "/redfish/v1/PowerEquipment/RackPDUs/1/Branches/C/Circuit.ResetMetrics"
+        }
+    },
+    "@odata.id": "/redfish/v1/PowerEquipment/RackPDUs/1/Branches/C",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

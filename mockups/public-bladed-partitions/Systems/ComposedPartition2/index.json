@@ -1,0 +1,91 @@
+{
+    "@odata.type": "#ComputerSystem.v1_22_1.ComputerSystem",
+    "Name": "ComposedPartition2",
+    "Id": "ComposedPartition2",
+    "SystemType": "Composed",
+    "Model": "Constoto-2S-B Server Partition",
+    "Manufacturer": "Contoso",
+    "Description": "ComposedPartition2 - Composed Partition with 3 BladeComputeBlocks",
+    "HostName": "localhost2",
+    "PowerState": "On",
+    "BiosVersion": "5.2.3",
+    "UUID": "92384634-2938-2342-8820-489239905423",
+    "Status": {
+        "Health": "OK",
+        "State": "Enabled"
+    },
+    "ProcessorSummary": {
+        "Status": {
+            "Health": "OK",
+            "State": "Enabled"
+        },
+        "Count": 6,
+        "Model": "Intel(R) Xeon(R) processor"
+    },
+    "MemorySummary": {
+        "Status": {
+            "Health": "OK",
+            "State": "Enabled"
+        },
+        "TotalSystemMemoryGiB": 384
+    },
+    "Processors": {
+        "@odata.id": "/redfish/v1/Systems/ComposedPartition2/Processors"
+    },
+    "Memory": {
+        "@odata.id": "/redfish/v1/Systems/ComposedPartition2/Memory"
+    },
+    "EthernetInterfaces": {
+        "@odata.id": "/redfish/v1/Systems/ComposedPartition2/EthernetInterfaces"
+    },
+    "Boot": {
+        "BootSourceOverrideEnabled": "Once",
+        "BootSourceOverrideTarget": "Pxe",
+        "BootSourceOverrideTarget@Redfish.AllowableValues": [
+            "None",
+            "Pxe",
+            "Usb",
+            "Hdd"
+        ],
+        "BootSourceOverrideMode": "UEFI",
+        "UefiTargetBootSourceOverride": "/0x31/0x33/0x01/0x01"
+    },
+    "Links": {
+        "ResourceBlocks": [
+            {
+                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeComputeBlock2"
+            },
+            {
+                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeComputeBlock3"
+            },
+            {
+                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeComputeBlock5"
+            }
+        ],
+        "ManagedBy": [
+            {
+                "@odata.id": "/redfish/v1/Managers/EncMgr1"
+            },
+            {
+                "@odata.id": "/redfish/v1/Managers/EncMgr2"
+            }
+        ]
+    },
+    "Actions": {
+        "#ComputerSystem.Reset": {
+            "target": "/redfish/v1/Systems/ComposedPartition2/Actions/ComputerSystem.Reset",
+            "ResetType@Redfish.AllowableValues": [
+                "On",
+                "ForceOff",
+                "GracefulShutdown",
+                "GracefulRestart",
+                "ForceRestart",
+                "Nmi",
+                "ForceOn",
+                "PushPowerButton"
+            ]
+        }
+    },
+    "@odata.id": "/redfish/v1/Systems/ComposedPartition2",
+    "@Redfish.Copyright": "Copyright 2014-2023 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

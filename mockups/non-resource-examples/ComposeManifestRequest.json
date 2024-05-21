@@ -1,0 +1,243 @@
+{
+    "RequestFormat": "Manifest",
+    "RequestType": "Apply",
+    "Manifest": {
+        "Description": "Description for this Manifest document.",
+        "Timestamp": "2019-08-22T10:35:16+06:00",
+        "Expand": "Relevant",
+        "Stanzas": [
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "Compute1",
+                "Request": {
+                    "Links": {
+                        "ResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeServer-1"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-1"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NetworkCard1"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "Compute2",
+                "Request": {
+                    "@Redfish.ZoneAffinity": "1",
+                    "PowerState": "On",
+                    "BiosVersion": "P79 v1.01 (09/20/2018)",
+                    "Processors": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 2,
+                                "@Redfish.AllowOverprovisioning": true,
+                                "ProcessorType": "CPU",
+                                "ProcessorArchitecture": "x86",
+                                "InstructionSet": "x86-64",
+                                "MaxSpeedMHz": 3700,
+                                "TotalCores": 8,
+                                "TotalThreads": 16
+                            },
+                            {
+                                "@Redfish.RequestedCount": 4,
+                                "@Redfish.AllowOverprovisioning": false,
+                                "ProcessorType": "FPGA",
+                                "ProcessorArchitecture": "x86",
+                                "InstructionSet": "x86-64",
+                                "MaxSpeedMHz": 3700,
+                                "TotalCores": 16
+                            }
+                        ]
+                    },
+                    "Memory": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 4,
+                                "MaxTDPMilliWatts": [
+                                    12000
+                                ],
+                                "CapacityMiB": 8192,
+                                "DataWidthBits": 64,
+                                "BusWidthBits": 72,
+                                "ErrorCorrection": "MultiBitECC",
+                                "MemoryType": "DRAM",
+                                "MemoryDeviceType": "DDR4",
+                                "MemoryMedia": [
+                                    "DRAM"
+                                ]
+                            }
+                        ]
+                    },
+                    "Storage": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "StorageControllers": [
+                                    {
+                                        "SupportedControllerProtocols": [
+                                            "NVMe"
+                                        ]
+                                    }
+                                ],
+                                "Drives": [
+                                    {
+                                        "@Redfish.RequestedCount": 1,
+                                        "CapacityBytes": 299999999488
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "NetworkInterfaces": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 2,
+                                "NetworkDeviceFunctions": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "NetDevFuncType": "Ethernet"
+                                        }
+                                    ]
+                                },
+                                "Ports": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "MaxSpeedGbps": 100
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "NetworkDeviceFunctions": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "NetDevFuncType": "InfiniBand"
+                                        }
+                                    ]
+                                },
+                                "Ports": {
+                                    "Members": [
+                                        {
+                                            "@Redfish.RequestedCount": 1,
+                                            "MaxSpeedGbps": 100
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "Compute3",
+                "Request": {
+                    "@Redfish.ZoneAffinity": "1",
+                    "PowerState": "On",
+                    "BiosVersion": "P79 v1.01 (09/20/2018)",
+                    "Links": {
+                        "ResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/BladeServer-1"
+                            }
+                        ]
+                    },
+                    "Storage": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "StorageControllers": [
+                                    {
+                                        "SupportedControllerProtocols": [
+                                            "NVMe"
+                                        ]
+                                    }
+                                ],
+                                "Drives": [
+                                    {
+                                        "@Redfish.RequestedCount": 1,
+                                        "CapacityBytes": 299999999488
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeSystem",
+                "StanzaId": "NVMEStorage1",
+                "Request": {
+                    "Storage": {
+                        "Members": [
+                            {
+                                "@Redfish.RequestedCount": 1,
+                                "StorageControllers": [
+                                    {
+                                        "SupportedControllerProtocols": [
+                                            "NVMe"
+                                        ]
+                                    }
+                                ],
+                                "Drives": [
+                                    {
+                                        "@Redfish.RequestedCount": 1,
+                                        "CapacityBytes": 299999999488
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "ComposeResource",
+                "StanzaId": "Bitfusion",
+                "Request": {
+                    "Links": {
+                        "SupplyingResourceBlocks": [
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-2"
+                            },
+                            {
+                                "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/NVMe-TargetsAppliance-3"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "StanzaType": "DecomposeResource",
+                "StanzaId": "Decompose1",
+                "Request": {
+                    "@odata.id": "/redfish/v1/CompositionService/ResourceBlocks/Appliance"
+                }
+            },
+            {
+                "StanzaType": "DecomposeSystem",
+                "StanzaId": "FreeResources1",
+                "Request": {
+                    "@odata.id": "/redfish/v1/Systems/ComposedSystem1"
+                }
+            },
+            {
+                "StanzaType": "OEM",
+                "OEMStanzaType": "OEMSpecificStanza",
+                "StanzaId": "OEMOperation1",
+                "Request": {
+                    "OEMName1": "OEMVal1"
+                }
+            }
+        ]
+    }
+}

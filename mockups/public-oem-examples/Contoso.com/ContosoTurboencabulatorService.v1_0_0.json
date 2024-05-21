@@ -1,0 +1,130 @@
+{
+    "$id": "http://redfish.dmtf.org/schemas/v1/ContosoTurboencabulatorService.v1_0_0.json",
+    "$ref": "#/definitions/ContosoTurboencabulatorService",
+    "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
+    "copyright": "Copyright 2014-2021 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "definitions": {
+        "TurboencabulatorMode": {
+            "enum": [
+                "Turbo",
+                "Retro",
+                "Micro"
+            ],
+            "enumDescriptions": {
+                "Micro": "The turboencabulator is in micro mode.",
+                "Retro": "The turboencabulator is in retro mode.",
+                "Turbo": "The turboencabulator is in turbo (standard) mode."
+            },
+            "type": "string"
+        },
+        "ContosoTurboencabulatorService": {
+            "additionalProperties": false,
+            "description": "This is the schema definition for the turboencabulator service.",
+            "longDescription": "This resource shall be used to represent the turboencabulator service properties for a Contoso Redfish implementation.",
+            "patternProperties": {
+                "^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\\.[a-zA-Z_][a-zA-Z0-9_]*$": {
+                    "description": "This property shall specify a valid odata or Redfish property.",
+                    "type": [
+                        "array",
+                        "boolean",
+                        "integer",
+                        "number",
+                        "null",
+                        "object",
+                        "string"
+                    ]
+                }
+            },
+            "properties": {
+                "@odata.context": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/context"
+                },
+                "@odata.etag": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/etag"
+                },
+                "@odata.id": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/id"
+                },
+                "@odata.type": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/type"
+                },
+                "Description": {
+                    "anyOf": [
+                        {
+                            "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Description"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "readonly": true
+                },
+                "Id": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Id",
+                    "readonly": true
+                },
+                "IsCheap": {
+                    "description": "This indicates whether the turboencabulator is cheap.",
+                    "longDescription": "The value of this property shall be a boolean indicating whether the turboencabulator is cheap.",
+                    "readonly": true,
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "Name": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Name",
+                    "readonly": true
+                },
+                "Oem": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Oem",
+                    "description": "The OEM extension property.",
+                    "longDescription": "This property shall contain the OEM extensions.  All values for properties that this object contains shall conform to the Redfish Specification-described requirements."
+                },
+                "ServiceEnabled": {
+                    "description": "This indicates whether this service is enabled.",
+                    "longDescription": "The value of this property shall be a boolean indicating whether this service is enabled.",
+                    "readonly": false,
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "Status": {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Status"
+                },
+                "TurboencabulatorMode": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/TurboencabulatorMode"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The mode of operation of the turboencabulator.",
+                    "longDescription": "The value of this property shall be an enumerated value representing the mode.",
+                    "readonly": false
+                },
+                "WillGovernmentBuy": {
+                    "description": "This indicates whether the turboencabulator will be bought by the government.",
+                    "longDescription": "The value of this property shall be a boolean indicating whether the turboencabulator will be bought by the government.",
+                    "readonly": true,
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "@odata.id",
+                "@odata.type",
+                "Id",
+                "Name"
+            ],
+            "type": "object"
+        }
+    },
+    "owningEntity": "Contoso",
+    "title": "#ContosoTurboencabulatorService.v1_0_0.ContosoTurboencabulatorService"
+}
