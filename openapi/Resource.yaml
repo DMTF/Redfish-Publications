@@ -102,7 +102,7 @@ components:
       x-longDescription: This property shall contain the identifier for this resource.  The
         value shall conform with the 'Id' clause of the Redfish Specification.
     Resource_Identifier:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_0.yaml#/components/schemas/Resource_v1_19_0_Identifier
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_1.yaml#/components/schemas/Resource_v1_19_1_Identifier
       description: Any additional identifiers for a resource.
       x-longDescription: This type shall contain any additional identifiers for a
         resource.
@@ -148,7 +148,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
     Resource_Location:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_0.yaml#/components/schemas/Resource_v1_19_0_Location
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_1.yaml#/components/schemas/Resource_v1_19_1_Location
       description: The location of a resource.
       x-longDescription: This type shall describe the location of a resource.
     Resource_Name:
@@ -199,7 +199,7 @@ components:
       x-enumVersionAdded:
         Paused: v1_13_0
     Resource_ReferenceableMember:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_0.yaml#/components/schemas/Resource_v1_19_0_ReferenceableMember
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_1.yaml#/components/schemas/Resource_v1_19_1_ReferenceableMember
     Resource_ResetType:
       enum:
       - 'On'
@@ -289,9 +289,9 @@ components:
         Resume: v1_13_0
         Suspend: v1_13_0
     Resource_Resource:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_0.yaml#/components/schemas/Resource_v1_19_0_Resource
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_1.yaml#/components/schemas/Resource_v1_19_1_Resource
     Resource_ResourceCollection:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_0.yaml#/components/schemas/Resource_v1_19_0_ResourceCollection
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_19_1.yaml#/components/schemas/Resource_v1_19_1_ResourceCollection
     Resource_State:
       enum:
       - Enabled
@@ -376,7 +376,7 @@ components:
             oneOf:
             - $ref: '#/components/schemas/Resource_Condition'
             - enum:
-              - 'null'
+              - null
           type: array
           x-longDescription: This property shall represent the active conditions requiring
             attention in this or a related resource that affects the `Health` or `HealthRollup`
@@ -391,7 +391,7 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Resource_Health'
           - enum:
-            - 'null'
+            - null
           readOnly: true
           x-longDescription: This property shall represent the health state of the
             resource without considering its dependent resources.  The values shall
@@ -401,11 +401,12 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Resource_Health'
           - enum:
-            - 'null'
+            - null
           readOnly: true
           x-longDescription: This property shall represent the health state of the
             resource and its dependent resources.  The values shall conform to those
-            defined in the Redfish Specification.
+            defined in the Redfish Specification.  For additional property requirements,
+            see the corresponding definition in the Redfish Data Model Specification.
         Oem:
           $ref: '#/components/schemas/Resource_Oem'
           description: The OEM extension property.
@@ -417,7 +418,7 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Resource_State'
           - enum:
-            - 'null'
+            - null
           readOnly: true
           x-longDescription: This property shall indicate the state of the resource.
       type: object

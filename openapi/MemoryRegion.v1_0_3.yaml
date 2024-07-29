@@ -1,0 +1,272 @@
+components:
+  schemas:
+    MemoryRegion_v1_0_3_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/MemoryRegion_v1_0_3_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryRegion_v1_0_3_MemoryChunk:
+      additionalProperties: false
+      description: Definition of memory chunk providing capacity for memory region.
+      properties:
+        ChunkLink:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the memory chunk providing capacity to the memory
+            region.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `MemoryChunks` that provides capacity to the memory region.
+        ChunkOffsetMiB:
+          description: Offset of the memory chunk within the memory region in mebibytes
+            (MiB).
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be the offset of the
+            memory chunk within the memory region in mebibytes (MiB).
+          x-units: MiBy
+      type: object
+      x-longDescription: This type shall contain the definition of a memory chunk
+        providing capacity for memory region.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryRegion_v1_0_3_MemoryExtent:
+      additionalProperties: false
+      description: Definition of memory extent identifying an available address range
+        in the memory region.
+      properties:
+        ExtentOffsetMiB:
+          description: Offset of the memory extent within the memory region in mebibytes
+            (MiB).
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall be the offset of the
+            memory extent within the memory region in mebibytes (MiB).
+          x-units: MiBy
+        ExtentSizeMiB:
+          description: Size of the memory extent in mebibytes (MiB).
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the size of the memory extent
+            in MiB.
+          x-units: MiBy
+        SequenceNumber:
+          description: The memory extent sequence number.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the sequence number instructing
+            host on the relative order the extents have to be placed in the host adjacent
+            virtual address space.
+        Tag:
+          description: The tag of this memory extent.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain an opaque context attached
+            to each extent to track usage of each extent or map extent to specific
+            processes, transactions, or workloads on the host.
+      type: object
+      x-longDescription: This type shall contain the definition of a memory extent
+        identifying an available address range in the dynamic capacity memory region.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryRegion_v1_0_3_MemoryRegion:
+      additionalProperties: false
+      description: The `MemoryRegion` schema contains the definition of a memory region
+        and its configuration.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/MemoryRegion_v1_0_3_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        BlockSizeMiB:
+          description: The memory region block size in mebibytes (MiB).
+          format: int64
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the memory region block size
+            in mebibytes (MiB).  The region size, base offset, all extent sizes, and
+            all extent base offsets shall be aligned to this block size.
+          x-units: MiBy
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        ExtentsCount:
+          description: The number of extents defined for this memory region.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the number of extents defined
+            for this memory region.
+        HardwareManagedCoherencyRegion:
+          description: An indication of whether the device manages the cache coherency
+            across hosts for this memory region.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the device manages
+            the cache coherency across hosts and thereby ensures that each host has
+            a consistent view of this memory region content as defined in the 'Flags'
+            field of 'Device Scoped Memory Affinity Structure' defined in the Coherent
+            Device Attribute Table (CDAT) Specification.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        MemoryChunks:
+          description: The set of memory chunks providing capacity for this memory
+            region.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/MemoryRegion_v1_0_3_MemoryChunk'
+            - enum:
+              - null
+          type: array
+          x-longDescription: This property shall contain the set of memory chunks
+            providing capacity for this memory region.
+        MemoryExtents:
+          description: The set of memory extents defined for this memory region.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/MemoryRegion_v1_0_3_MemoryExtent'
+            - enum:
+              - null
+          type: array
+          x-longDescription: This property shall contain the set of memory extents
+            defining address ranges available for an access in dynamic capacity memory
+            regions.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        NonVolatileRegion:
+          description: An indication of whether this memory region represents non-volatile
+            memory.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether this memory region
+            represents non-volatile memory as defined in the 'Flags' field of 'Device
+            Scoped Memory Affinity Structure' defined in the Coherent Device Attribute
+            Table (CDAT) Specification.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        RegionBaseOffsetMiB:
+          description: The offset of the memory region in the device address range
+            in mebibytes (MiB).
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: The value of this property shall contain the offset of
+            the memory region in the device address range in mebibytes (MiB).
+          x-units: MiBy
+        RegionNumber:
+          description: The memory region number.
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the memory region number.
+        RegionSizeMiB:
+          description: The size of the memory region in mebibytes (MiB).
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the size of the memory region
+            in mebibytes (MiB).
+          x-units: MiBy
+        RegionType:
+          $ref: '#/components/schemas/MemoryRegion_v1_0_3_RegionType'
+          description: The type of memory region.
+          readOnly: true
+          x-longDescription: This property shall contain the type of memory region.
+        SanitizeOnRelease:
+          description: An indication of whether the capacity released from this memory
+            region will be sanitized before it is made available to any host.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the device has been
+            configured such that capacity released from this memory region will be
+            sanitized before it is made available to any host.
+        ShareableRegion:
+          description: An indication of whether this memory region can be shared across
+            multiple hosts.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether this memory region
+            can be shared across multiple hosts as defined in the 'Flags' field of
+            'Device Scoped Memory Affinity Structure' defined in the Coherent Device
+            Attribute Table (CDAT) Specification.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - RegionType
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a memory region in a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryRegion_v1_0_3_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    MemoryRegion_v1_0_3_RegionType:
+      enum:
+      - Static
+      - Dynamic
+      type: string
+      x-enumDescriptions:
+        Dynamic: Dynamic memory region.  The address range coverage may be changed
+          in the runtime.
+        Static: Static memory region.  The whole address range is always covered by
+          memory.
+title: '#MemoryRegion.v1_0_3.MemoryRegion'
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2023.2'

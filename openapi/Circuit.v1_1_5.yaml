@@ -1,0 +1,811 @@
+components:
+  schemas:
+    Circuit_v1_1_5_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Circuit.BreakerControl':
+          $ref: '#/components/schemas/Circuit_v1_1_5_BreakerControl'
+        '#Circuit.PowerControl':
+          $ref: '#/components/schemas/Circuit_v1_1_5_PowerControl'
+        '#Circuit.ResetMetrics':
+          $ref: '#/components/schemas/Circuit_v1_1_5_ResetMetrics'
+        Oem:
+          $ref: '#/components/schemas/Circuit_v1_1_5_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_BreakerControl:
+      additionalProperties: false
+      description: This action attempts to reset the circuit breaker.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall control the state of the circuit breaker
+        or over-current protection device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_BreakerControlRequestBody:
+      additionalProperties: false
+      description: This action attempts to reset the circuit breaker.
+      properties:
+        PowerState:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PowerState
+          description: The desired power state of the circuit if the breaker is reset
+            successfully.
+          x-longDescription: This parameter shall contain the desired power state
+            of the circuit.
+      type: object
+      x-longDescription: This action shall control the state of the circuit breaker
+        or over-current protection device.
+    Circuit_v1_1_5_Circuit:
+      additionalProperties: false
+      description: This `Circuit` schema contains the definition for an electrical
+        circuit.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Circuit_v1_1_5_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        BreakerState:
+          description: The state of the overcurrent protection device.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_BreakerStates
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the state of the overcurrent
+            protection device.
+        CircuitType:
+          description: The type of circuit.
+          oneOf:
+          - $ref: '#/components/schemas/Circuit_v1_1_5_CircuitType'
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the type of circuit.
+        CriticalCircuit:
+          description: Designates if this is a critical circuit.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the circuit is designated
+            as a critical circuit, and therefore is excluded from autonomous logic
+            that could affect the state of the circuit.  The value shall be `true`
+            if the circuit is deemed critical, and `false` if the circuit is not critical.
+        CurrentAmps:
+          description: The current (A) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the current, in ampere units,
+            for this circuit.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Current`.  This property shall not be present if
+            `PhaseWiringType` contains a value that indicates a 4-wire or greater
+            configuration, such as `TwoPhase4Wire`.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        ElectricalContext:
+          description: The combination of current-carrying conductors.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_ElectricalContext
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the combination of current-carrying
+            conductors that distribute power.
+        EnergykWh:
+          description: The energy (kWh) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the total energy, in kilowatt-hour
+            units, for this circuit that represents the `Total` `ElectricalContext`
+            sensor when multiple energy sensors exist for this circuit.  The value
+            of the `DataSourceUri` property, if present, shall reference a resource
+            of type `Sensor` with the `ReadingType` property containing the value
+            `EnergykWh`.
+        FrequencyHz:
+          description: The frequency (Hz) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the frequency, in hertz units,
+            for this circuit.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Frequency`.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        IndicatorLED:
+          deprecated: true
+          description: The state of the indicator LED, which identifies the circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_IndicatorLED
+          - enum:
+            - null
+          readOnly: false
+          x-deprecatedReason: This property has been deprecated in favor of the `LocationIndicatorActive`
+            property.
+          x-longDescription: This property shall contain the indicator light state
+            for the indicator light associated with this circuit.
+          x-versionDeprecated: v1_1_0
+        Links:
+          $ref: '#/components/schemas/Circuit_v1_1_5_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        LocationIndicatorActive:
+          description: An indicator allowing an operator to physically locate this
+            resource.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall contain the state of the indicator
+            used to physically identify or locate this resource.  A write to this
+            property shall update the value of `IndicatorLED` in this resource, if
+            supported, to reflect the implementation of the locating function.
+          x-versionAdded: v1_1_0
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        NominalVoltage:
+          description: The nominal voltage for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_NominalVoltageType
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the nominal voltage for this
+            circuit, in volt units.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PhaseWiringType:
+          description: The number of ungrounded current-carrying conductors (phases)
+            and the total number of conductors (wires).
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PhaseWiringType
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the number of ungrounded
+            current-carrying conductors (phases) and the total number of conductors
+            (wires).
+        PlugType:
+          description: The type of plug according to NEMA, IEC, or regional standards.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PlugType
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the type of physical plug
+            used for this circuit, as defined by IEC, NEMA, or regional standards.
+        PolyPhaseCurrentAmps:
+          description: The current readings for this circuit.
+          oneOf:
+          - $ref: '#/components/schemas/Circuit_v1_1_5_CurrentSensors'
+          - enum:
+            - null
+          x-longDescription: This property shall contain the current sensors for this
+            circuit.  For 3-wire circuits, this property shall contain a duplicate
+            copy of the current sensor referenced in the `CurrentAmps` property, if
+            present.  For other circuits, this property should contain multiple current
+            sensor readings used to fully describe the circuit.
+        PolyPhaseEnergykWh:
+          description: The energy readings for this circuit.
+          oneOf:
+          - $ref: '#/components/schemas/Circuit_v1_1_5_EnergySensors'
+          - enum:
+            - null
+          x-longDescription: This property shall contain the energy sensors for this
+            circuit.  For 3-wire circuits, this property shall contain a duplicate
+            copy of the energy sensor referenced in the `EnergykWh` property, if present.  For
+            other circuits, this property should contain multiple energy sensor readings
+            used to fully describe the circuit.
+        PolyPhasePowerWatts:
+          description: The power readings for this circuit.
+          oneOf:
+          - $ref: '#/components/schemas/Circuit_v1_1_5_PowerSensors'
+          - enum:
+            - null
+          x-longDescription: This property shall contain the power sensors for this
+            circuit.  For 3-wire circuits, this property shall contain a duplicate
+            copy of the power sensor referenced in the `PowerWatts` property, if present.  For
+            other circuits, this property should contain multiple power sensor readings
+            used to fully describe the circuit.
+        PolyPhaseVoltage:
+          description: The voltage readings for this circuit.
+          oneOf:
+          - $ref: '#/components/schemas/Circuit_v1_1_5_VoltageSensors'
+          - enum:
+            - null
+          x-longDescription: This property shall contain the voltage sensors for this
+            circuit.  For 3-wire circuits, this property shall contain a duplicate
+            copy of the voltage sensor referenced in the `Voltage` property, if present.  For
+            other circuits, this property should contain multiple voltage sensor readings
+            used to fully describe the circuit.
+        PowerCycleDelaySeconds:
+          description: The number of seconds to delay power on after a `PowerControl`
+            action to cycle power.  Zero seconds indicates no delay.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power on after a `PowerControl` action to cycle power.  The value
+            `0` shall indicate no delay to power on.
+        PowerEnabled:
+          description: Indicates if the circuit can be powered.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate the power enable state of
+            the circuit.  The value `true` shall indicate that the circuit can be
+            powered on, and `false` shall indicate that the circuit cannot be powered.
+        PowerOffDelaySeconds:
+          description: The number of seconds to delay power off after a `PowerControl`
+            action.  Zero seconds indicates no delay to power off.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power off after a `PowerControl` action.  The value `0` shall indicate
+            no delay to power off.
+        PowerOnDelaySeconds:
+          description: The number of seconds to delay power up after a power cycle
+            or a `PowerControl` action.  Zero seconds indicates no delay to power
+            up.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power up after a power cycle or a `PowerControl` action.  The value
+            `0` shall indicate no delay to power up.
+        PowerRestoreDelaySeconds:
+          description: The number of seconds to delay power on after power has been
+            restored.  Zero seconds indicates no delay.
+          nullable: true
+          readOnly: false
+          type: number
+          x-longDescription: This property shall contain the number of seconds to
+            delay power on after a power fault.  The value `0` shall indicate no delay
+            to power on.
+        PowerRestorePolicy:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PowerRestorePolicyTypes
+          description: The desired power state of the circuit when power is restored
+            after a power loss.
+          readOnly: false
+          x-longDescription: This property shall contain the desired `PowerState`
+            of the circuit when power is applied.  The value `LastState` shall return
+            the circuit to the `PowerState` it was in when power was lost.
+        PowerState:
+          description: The power state of the circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_PowerState
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the power state of the circuit.
+        PowerWatts:
+          description: The power (W) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the total power, in watt
+            units, for this circuit that represents the `Total` `ElectricalContext`
+            sensor when multiple power sensors exist for this circuit.  The value
+            of the `DataSourceUri` property, if present, shall reference a resource
+            of type `Sensor` with the `ReadingType` property containing the value
+            `Power`.
+        RatedCurrentAmps:
+          description: The rated maximum current allowed for this circuit.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the rated maximum current
+            for this circuit, in ampere units, after any required de-rating, due to
+            safety agency or other regulatory requirements, has been applied.
+          x-units: A
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        Voltage:
+          description: The voltage (V) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the voltage, in volt units,
+            for this circuit.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Voltage`.  This property shall not be present if
+            `PhaseWiringType` contains a value that indicates a 4-wire or greater
+            configuration, such as `TwoPhase4Wire`.
+        VoltageType:
+          description: The type of voltage applied to the circuit.
+          oneOf:
+          - $ref: '#/components/schemas/Circuit_v1_1_5_VoltageType'
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the type of voltage applied
+            to the circuit.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall be used to represent an electrical circuit
+        for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_CircuitType:
+      enum:
+      - Mains
+      - Branch
+      - Subfeed
+      - Feeder
+      type: string
+      x-enumDescriptions:
+        Branch: A branch (output) circuit.
+        Feeder: A feeder (output) circuit.
+        Mains: A mains input or utility circuit.
+        Subfeed: A subfeed (output) circuit.
+    Circuit_v1_1_5_CurrentSensors:
+      additionalProperties: false
+      description: The current sensors for this circuit.
+      properties:
+        Line1:
+          description: Line 1 current (A).
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for L1.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Current`.  This property shall not be present if
+            the equipment does not include an L1 measurement.
+        Line2:
+          description: Line 2 current (A).
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for L2.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Current`.  This property shall not be present if
+            the equipment does not include an L2 measurement.
+        Line3:
+          description: Line 3 current (A).
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for L3.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Current`.  This property shall not be present if
+            the equipment does not include an L3 measurement.
+        Neutral:
+          description: Neutral line current (A).
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorCurrentExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorCurrentExcerpt
+          x-longDescription: This property shall contain the line current, in ampere
+            units, for the Neutral line.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Current`.  This property shall not be present
+            if the equipment does not include a Neutral line measurement.
+      type: object
+      x-longDescription: This type shall contain properties that describe current
+        sensor readings for a circuit.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_EnergySensors:
+      additionalProperties: false
+      description: The energy readings for this circuit.
+      properties:
+        Line1ToLine2:
+          description: The Line 1 to Line 2 energy (kWh) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the energy, in kilowatt-hour
+            units, between L1 and L2.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `EnergykWh`.  This property shall not be
+            present if the equipment does not include an L1-L2 measurement.
+        Line1ToNeutral:
+          description: The Line 1 to Neutral energy (kWh) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the energy, in kilowatt-hour
+            units, between L1 and Neutral.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `EnergykWh`.  This property shall not be
+            present if the equipment does not include an L1-Neutral measurement.
+        Line2ToLine3:
+          description: The Line 2 to Line 3 energy (kWh) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the energy, in kilowatt-hour
+            units, between L2 and L3.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `EnergykWh`.  This property shall not be
+            present if the equipment does not include an L2-L3 measurement.
+        Line2ToNeutral:
+          description: The Line 2 to Neutral energy (kWh) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the energy, in kilowatt-hour
+            units, between L2 and Neutral.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `EnergykWh`.  This property shall not be
+            present if the equipment does not include an L2-Neutral measurement.
+        Line3ToLine1:
+          description: The Line 3 to Line 1 energy (kWh) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the energy, in kilowatt-hour
+            units, between L3 and L1.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `EnergykWh`.  This property shall not be
+            present if the equipment does not include an L3-L1 measurement.
+        Line3ToNeutral:
+          description: The Line 3 to Neutral energy (kWh) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorEnergykWhExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorEnergykWhExcerpt
+          x-longDescription: This property shall contain the energy, in kilowatt-hour
+            units, between L3 and Neutral.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `EnergykWh`.  This property shall not be
+            present if the equipment does not include an L3-Neutral measurement.
+      type: object
+      x-longDescription: This type shall contain properties that describe energy sensor
+        readings for a circuit.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        BranchCircuit:
+          description: A reference to the branch circuit related to this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Circuit` that represents the branch circuit associated with this circuit.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        Outlets:
+          description: An array of references to the outlets contained by this circuit.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `Outlet` that represent the outlets associated with this circuit.
+        Outlets@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_PowerControl:
+      additionalProperties: false
+      description: This action turns the circuit on or off.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall control the power state of the circuit.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_PowerControlRequestBody:
+      additionalProperties: false
+      description: This action turns the circuit on or off.
+      properties:
+        PowerState:
+          $ref: http://redfish.dmtf.org/schemas/v1/Circuit.yaml#/components/schemas/Circuit_PowerState
+          description: The desired power state of the circuit.
+          x-longDescription: This parameter shall contain the desired power state
+            of the circuit.
+      type: object
+      x-longDescription: This action shall control the power state of the circuit.
+    Circuit_v1_1_5_PowerSensors:
+      additionalProperties: false
+      description: This property contains the power sensors.
+      properties:
+        Line1ToLine2:
+          description: The Line 1 to Line 2 power (W) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, in watt units,
+            between L1 and L2.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Power`.  This property shall not be present if the
+            equipment does not include an L1-L2 measurement.
+        Line1ToNeutral:
+          description: The Line 1 to Neutral power (W) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, in watt units,
+            between L1 and Neutral.  The value of the `DataSourceUri` property, if
+            present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Power`.  This property shall not be present
+            if the equipment does not include an L1-Neutral measurement.
+        Line2ToLine3:
+          description: The Line 2 to Line 3 power (W) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, in watt units,
+            between L2 and L3.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Power`.  This property shall not be present if the
+            equipment does not include an L2-L3 measurement.
+        Line2ToNeutral:
+          description: The Line 2 to Neutral power (W) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, in watt units,
+            between L2 and Neutral.  The value of the `DataSourceUri` property, if
+            present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Power`.  This property shall not be present
+            if the equipment does not include an L2-Neutral measurement.
+        Line3ToLine1:
+          description: The Line 3 to Line 1 power (W) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, in watt units,
+            between L3 and L1.  The value of the `DataSourceUri` property, if present,
+            shall reference a resource of type `Sensor` with the `ReadingType` property
+            containing the value `Power`.  This property shall not be present if the
+            equipment does not include an L3-L1 measurement.
+        Line3ToNeutral:
+          description: The Line 3 to Neutral power (W) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorPowerExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorPowerExcerpt
+          x-longDescription: This property shall contain the power, in watt units,
+            between L3 and Neutral.  The value of the `DataSourceUri` property, if
+            present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Power`.  This property shall not be present
+            if the equipment does not include an L3-Neutral measurement.
+      type: object
+      x-longDescription: This type shall contain properties that describe power sensor
+        readings for a circuit.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_ResetMetrics:
+      additionalProperties: false
+      description: This action resets metrics related to this circuit.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this circuit.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_ResetMetricsRequestBody:
+      additionalProperties: false
+      description: This action resets metrics related to this circuit.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset any time intervals or counted values
+        for this circuit.
+    Circuit_v1_1_5_VoltageSensors:
+      additionalProperties: false
+      description: The voltage readings for this circuit.
+      properties:
+        Line1ToLine2:
+          description: The Line 1 to Line 2 voltage (V) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L1 and L2.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Voltage`.  This property shall not be present
+            if the equipment does not include an L1-L2 measurement.
+        Line1ToNeutral:
+          description: The Line 1 to Neutral voltage (V) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L1 and Neutral.  The value of the `DataSourceUri`
+            property, if present, shall reference a resource of type `Sensor` with
+            the `ReadingType` property containing the value `Voltage`.  This property
+            shall not be present if the equipment does not include an L1-Neutral measurement.
+        Line2ToLine3:
+          description: The Line 2 to Line 3 voltage (V) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L2 and L3.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Voltage`.  This property shall not be present
+            if the equipment does not include an L2-L3 measurement.
+        Line2ToNeutral:
+          description: The Line 2 to Neutral voltage (V) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L2 and Neutral.  The value of the `DataSourceUri`
+            property, if present, shall reference a resource of type `Sensor` with
+            the `ReadingType` property containing the value `Voltage`.  This property
+            shall not be present if the equipment does not include an L2-Neutral measurement.
+        Line3ToLine1:
+          description: The Line 3 to Line 1 voltage (V) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L3 and L1.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Voltage`.  This property shall not be present
+            if the equipment does not include an L3-L1 measurement.
+        Line3ToNeutral:
+          description: The Line 3 to Neutral voltage (V) for this circuit.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorVoltageExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorVoltageExcerpt
+          x-longDescription: This property shall contain the line-to-line voltage,
+            in volt units, between L3 and Neutral.  The value of the `DataSourceUri`
+            property, if present, shall reference a resource of type `Sensor` with
+            the `ReadingType` property containing the value `Voltage`.  This property
+            shall not be present if the equipment does not include an L3-Neutral measurement.
+      type: object
+      x-longDescription: This type shall contain properties that describe voltage
+        sensor readings for a circuit.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Circuit_v1_1_5_VoltageType:
+      enum:
+      - AC
+      - DC
+      type: string
+      x-enumDescriptions:
+        AC: Alternating Current (AC) circuit.
+        DC: Direct Current (DC) circuit.
+title: '#Circuit.v1_1_5.Circuit'
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2020.3'
