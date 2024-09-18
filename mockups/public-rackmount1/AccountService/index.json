@@ -1,5 +1,5 @@
 {
-    "@odata.type": "#AccountService.v1_15_1.AccountService",
+    "@odata.type": "#AccountService.v1_16_0.AccountService",
     "Id": "AccountService",
     "Name": "Account Service",
     "Description": "Account Service",
@@ -50,19 +50,36 @@
         "RemoteRoleMapping": [
             {
                 "RemoteUser": "cn=Manager,dc=example,dc=org",
-                "LocalRole": "Administrator"
+                "LocalRole": "Administrator",
+                "LocalAccountTypes": [
+                    "Redfish",
+                    "HostConsole",
+                    "ManagerConsole"
+                ]
             },
             {
                 "RemoteGroup": "cn=Admins,ou=Groups,dc=example,dc=org",
-                "LocalRole": "Administrator"
+                "LocalRole": "Administrator",
+                "LocalAccountTypes": [
+                    "Redfish",
+                    "HostConsole",
+                    "ManagerConsole"
+                ]
             },
             {
                 "RemoteGroup": "cn=PowerUsers,ou=Groups,dc=example,dc=org",
-                "LocalRole": "Operator"
+                "LocalRole": "Operator",
+                "LocalAccountTypes": [
+                    "Redfish",
+                    "HostConsole"
+                ]
             },
             {
                 "RemoteGroup": "(cn=*)",
-                "LocalRole": "ReadOnly"
+                "LocalRole": "ReadOnly",
+                "LocalAccountTypes": [
+                    "Redfish"
+                ]
             }
         ]
     },
@@ -82,19 +99,35 @@
         "RemoteRoleMapping": [
             {
                 "RemoteGroup": "Administrators",
-                "LocalRole": "Administrator"
+                "LocalRole": "Administrator",
+                "LocalAccountTypes": [
+                    "Redfish",
+                    "HostConsole",
+                    "ManagerConsole"
+                ]
             },
             {
                 "RemoteUser": "DOMAIN\\Bob",
-                "LocalRole": "Operator"
+                "LocalRole": "Operator",
+                "LocalAccountTypes": [
+                    "Redfish",
+                    "HostConsole"
+                ]
             },
             {
                 "RemoteGroup": "PowerUsers",
-                "LocalRole": "Operator"
+                "LocalRole": "Operator",
+                "LocalAccountTypes": [
+                    "Redfish",
+                    "HostConsole"
+                ]
             },
             {
                 "RemoteGroup": "Everybody",
-                "LocalRole": "ReadOnly"
+                "LocalRole": "ReadOnly",
+                "LocalAccountTypes": [
+                    "Redfish"
+                ]
             }
         ]
     },

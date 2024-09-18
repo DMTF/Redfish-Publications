@@ -1,0 +1,287 @@
+components:
+  schemas:
+    CXLLogicalDevice_v1_2_1_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/CXLLogicalDevice_v1_2_1_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CXLLogicalDevice_v1_2_1_CXLLogicalDevice:
+      additionalProperties: false
+      description: The `CXLLogicalDevice` schema contains the properties of a CXL
+        logical device within a PCIe device.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/CXLLogicalDevice_v1_2_1_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Identifiers:
+          description: The durable names for the CXL logical device.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Identifier
+          type: array
+          x-longDescription: This property shall contain a list of all known durable
+            names for the associated CXL logical device.
+        Links:
+          $ref: '#/components/schemas/CXLLogicalDevice_v1_2_1_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Log:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the log service associated with this CXL logical
+            device.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `LogService`.
+        MemoryRegions:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of memory regions associated with
+            this CXL logical device.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `MemoryRegionCollection` that represents the memory regions associated
+            with this CXL logical device.
+          x-versionAdded: v1_1_0
+        MemorySizeMiB:
+          description: The total memory capacity currently available in this CXL logical
+            device.
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the total memory capacity
+            currently available in this CXL logical device in mebibytes (MiB).  This
+            value shall equate to the sum of the dynamic capacity extents and the
+            static capacity assigned to this logical device.
+          x-units: MiBy
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        QoS:
+          $ref: '#/components/schemas/CXLLogicalDevice_v1_2_1_QoS'
+          description: The quality of service configuration for this CXL logical device.
+          x-longDescription: This property shall contain the quality of service configuration
+            for this CXL logical device.
+        QoSTelemetryCapabilities:
+          $ref: '#/components/schemas/CXLLogicalDevice_v1_2_1_QoSTelemetryCapabilities'
+          description: The quality of service telemetry capabilities for this CXL
+            logical device.
+          x-longDescription: This property shall contain the quality of service telemetry
+            capabilities for this CXL logical device.
+        SemanticsSupported:
+          description: The semantics supported by this CXL logical device.
+          items:
+            $ref: '#/components/schemas/CXLLogicalDevice_v1_2_1_CXLSemantic'
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the CXL Specification-defined
+            semantics that are supported by this CXL logical device.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a CXL logical device that is
+        a part of a PCIe device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CXLLogicalDevice_v1_2_1_CXLSemantic:
+      enum:
+      - CXLio
+      - CXLcache
+      - CXLmem
+      type: string
+      x-enumDescriptions:
+        CXLcache: CXL caching protocol semantic.
+        CXLio: CXL I/O semantic.
+        CXLmem: CXL memory access semantic.
+      x-enumLongDescriptions:
+        CXLcache: This value shall indicate the device conforms with the CXL Specification-defined
+          'CXL.cache' semantic.
+        CXLio: This value shall indicate the device conforms with the CXL Specification-defined
+          'CXL.io' semantic.
+        CXLmem: This value shall indicate the device conforms with the CXL Specification-defined
+          'CXL.mem' semantic.
+    CXLLogicalDevice_v1_2_1_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Endpoints:
+          description: An array of links to the endpoints associated with this CXL
+            logical device.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `Endpoint` that represent the endpoints associated with this CXL
+            logical device.
+        Endpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        MemoryChunks:
+          description: An array of links to the memory chunks owned by this CXL logical
+            device.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `MemoryChunks` that represent the memory chunks owned by this
+            CXL logical device.
+        MemoryChunks@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        MemoryDomains:
+          description: An array of links to the memory domains associated with this
+            CXL logical device.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `MemoryDomain` that represent the memory domains associated with
+            this CXL logical device.
+        MemoryDomains@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PCIeFunctions:
+          description: An array of links to the PCIe functions assigned to this CXL
+            logical device.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `PCIeFunction` that represent the PCIe functions assigned to this
+            CXL logical device.
+        PCIeFunctions@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CXLLogicalDevice_v1_2_1_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CXLLogicalDevice_v1_2_1_QoS:
+      additionalProperties: false
+      description: The quality of service properties for this CXL logical device.
+      properties:
+        AllocatedBandwidth:
+          description: The bandwidth allocated to this CXL logical device as a percentage.
+          format: int64
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the bandwidth allocated,
+            `0` to `100`, for this CXL logical device as a percentage.
+          x-units: '%'
+        LimitPercent:
+          description: The bandwidth limit to this CXL logical device as a percentage.
+          format: int64
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: false
+          type: integer
+          x-longDescription: This property shall contain the bandwidth limit, `0`
+            to `100`, for this CXL logical device as a percentage.
+          x-units: '%'
+      type: object
+      x-longDescription: This type shall contain the quality of service properties
+        of this CXL logical device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    CXLLogicalDevice_v1_2_1_QoSTelemetryCapabilities:
+      additionalProperties: false
+      description: The quality of service telemetry capabilities for a CXL logical
+        device.
+      properties:
+        EgressPortBackpressureSupported:
+          description: Indicates whether the device supports the CXL Specification-defined
+            'Egress Port Backpressure' mechanism.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the device supports
+            the CXL Specification-defined 'Egress Port Backpressure' mechanism.
+        TemporaryThroughputReductionSupported:
+          deprecated: true
+          description: Indicates whether the device supports the CXL Specification-defined
+            'Temporary Throughput Reduction' mechanism.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-deprecatedReason: This property has been deprecated in favor of `TemporaryThroughputReductionSupported`
+            in `PCIeDevice`.
+          x-longDescription: This property shall indicate whether the device supports
+            the CXL Specification-defined 'Temporary Throughput Reduction' mechanism.
+          x-versionDeprecated: v1_2_0
+      type: object
+      x-longDescription: This type shall contain the quality of service telemetry
+        capabilities for a CXL logical device.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#CXLLogicalDevice.v1_2_1.CXLLogicalDevice'
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2024.1'

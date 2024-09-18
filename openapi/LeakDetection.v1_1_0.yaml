@@ -1,0 +1,145 @@
+components:
+  schemas:
+    LeakDetection_v1_1_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/LeakDetection_v1_1_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LeakDetection_v1_1_0_LeakDetection:
+      additionalProperties: false
+      description: The `LeakDetection` schema contains definitions for reporting leaks
+        in liquid cooling systems or other equipment.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/LeakDetection_v1_1_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        LeakDetectorGroups:
+          description: The groups of leak detection equipment.
+          items:
+            $ref: '#/components/schemas/LeakDetection_v1_1_0_LeakDetectorGroup'
+          type: array
+          x-longDescription: This property shall contain an array of leak detection
+            groups.
+        LeakDetectors:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of leak detectors within this subsystem.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `LeakDetectorCollection`.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent the leak detection functionality
+        present in a service for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LeakDetection_v1_1_0_LeakDetectorGroup:
+      additionalProperties: false
+      description: A group of leak detection equipment.
+      properties:
+        Detectors:
+          description: The leak detection states from all related leak detection devices
+            in this group.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/LeakDetector.yaml#/components/schemas/LeakDetector_LeakDetectorArrayExcerpt
+          type: array
+          x-excerptCopy: LeakDetectorArrayExcerpt
+          x-longDescription: This property shall contain the states of all leak detection
+            devices in this detector group.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `LeakDetector`.
+        Detectors@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        GroupName:
+          description: The name of this leak detector group.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name used to describe
+            this group of leak detectors and related equipment.
+        HumidityPercent:
+          description: Humidity (percent).
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Sensor.yaml#/components/schemas/Sensor_SensorExcerpt
+          - enum:
+            - null
+          x-excerptCopy: SensorExcerpt
+          x-longDescription: This property shall contain the humidity, in percent
+            units, for this resource.  The value of the `DataSourceUri` property,
+            if present, shall reference a resource of type `Sensor` with the `ReadingType`
+            property containing the value `Humidity`.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+          x-versionAdded: v1_1_0
+      required:
+      - Status
+      type: object
+      x-longDescription: This object shall contain a group of leak detection equipment
+        that reports a unified status.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LeakDetection_v1_1_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#LeakDetection.v1_1_0.LeakDetection'
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2024.3'

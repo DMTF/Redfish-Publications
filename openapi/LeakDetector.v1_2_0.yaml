@@ -1,0 +1,301 @@
+components:
+  schemas:
+    LeakDetector_v1_2_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/LeakDetector_v1_2_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LeakDetector_v1_2_0_LeakDetector:
+      additionalProperties: false
+      description: The `LeakDetector` schema describes a state-based or digital-value
+        leak detector and its properties.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/LeakDetector_v1_2_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        DetectorState:
+          description: The state of the leak detector.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          - enum:
+            - null
+          readOnly: true
+          x-excerpt: LeakDetector
+          x-longDescription: This property shall contain the state of the leak detector.  The
+            value of this property should equate the value of `Health` in `Status`,
+            and was created primarily for use in excerpts of this resource.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        LeakDetectorType:
+          description: The type of leak detection sensor.
+          oneOf:
+          - $ref: '#/components/schemas/LeakDetector_v1_2_0_LeakDetectorType'
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the reading type of the leak
+            detection sensor.
+        Location:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Location
+          description: The location information for this leak detector.
+          x-longDescription: This property shall indicate the location information
+            for this leak detector.
+        Manufacturer:
+          description: The manufacturer of this leak detector.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the organization
+            responsible for producing the leak detector.  This organization may be
+            the entity from whom the leak detector is purchased, but this is not necessarily
+            true.
+        Model:
+          description: The model number of the leak detector.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name by which the manufacturer
+            generally refers to the leak detector.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PartNumber:
+          description: The part number of the leak detector.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a part number assigned by
+            the organization that is responsible for producing or manufacturing the
+            leak detector.
+        PhysicalContext:
+          description: The area or device to which this leak detector applies.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
+          - enum:
+            - null
+          readOnly: true
+          x-excerpt: LeakDetectorArray
+          x-longDescription: This property shall contain a description of the affected
+            component or region within the equipment to which this leak detector applies.
+        PhysicalSubContext:
+          description: The usage or location within a device to which this leak detector
+            applies.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalSubContext
+          - enum:
+            - null
+          readOnly: true
+          x-excerpt: LeakDetectorArray
+          x-longDescription: This property shall contain a description of the usage
+            or sub-region within the equipment to which this leak detector applies.  This
+            property generally differentiates multiple leak detectors within the same
+            `PhysicalContext` instance.
+        SKU:
+          description: The SKU of the leak detector.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the stock-keeping unit number
+            for this leak detector.
+        SensingFrequency:
+          description: The time interval between readings of the physical leak detector.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the time interval between
+            readings of the physical leak detector.
+        SerialNumber:
+          description: The serial number of the leak detector.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a manufacturer-allocated
+            number that identifies the leak detector.
+        SparePartNumber:
+          description: The spare part number of the leak detector.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the spare part number of
+            the leak detector.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        UserLabel:
+          description: A user-assigned label.
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain a user-assigned label used
+            to identify this resource.  If a value has not been assigned by a user,
+            the value of this property shall be an empty string.
+          x-versionAdded: v1_1_0
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a state-based or digital-value
+        leak detector for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LeakDetector_v1_2_0_LeakDetectorArrayExcerpt:
+      additionalProperties: false
+      description: The `LeakDetector` schema describes a state-based or digital-value
+        leak detector and its properties.
+      properties:
+        DataSourceUri:
+          description: The link to the resource that provides the data for this leak
+            detector.
+          format: uri-reference
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain a URI to the resource that
+            provides the source of the excerpt contained within this copy.
+        DetectorState:
+          description: The state of the leak detector.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          - enum:
+            - null
+          readOnly: true
+          x-excerpt: LeakDetector
+          x-longDescription: This property shall contain the state of the leak detector.  The
+            value of this property should equate the value of `Health` in `Status`,
+            and was created primarily for use in excerpts of this resource.
+        DeviceName:
+          description: The name of the device.
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerpt: LeakDetectorArray
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain the name of the device associated
+            with this leak detector.  If the device is represented by a resource,
+            the value shall contain the value of the `Name` property of the associated
+            resource.
+          x-versionAdded: v1_2_0
+        PhysicalContext:
+          description: The area or device to which this leak detector applies.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalContext
+          - enum:
+            - null
+          readOnly: true
+          x-excerpt: LeakDetectorArray
+          x-longDescription: This property shall contain a description of the affected
+            component or region within the equipment to which this leak detector applies.
+        PhysicalSubContext:
+          description: The usage or location within a device to which this leak detector
+            applies.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/PhysicalContext.yaml#/components/schemas/PhysicalContext_PhysicalSubContext
+          - enum:
+            - null
+          readOnly: true
+          x-excerpt: LeakDetectorArray
+          x-longDescription: This property shall contain a description of the usage
+            or sub-region within the equipment to which this leak detector applies.  This
+            property generally differentiates multiple leak detectors within the same
+            `PhysicalContext` instance.
+      type: object
+      x-excerpt: LeakDetectorArray
+      x-longDescription: This resource shall represent a state-based or digital-value
+        leak detector for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LeakDetector_v1_2_0_LeakDetectorExcerpt:
+      additionalProperties: false
+      description: The `LeakDetector` schema describes a state-based or digital-value
+        leak detector and its properties.
+      properties:
+        DataSourceUri:
+          description: The link to the resource that provides the data for this leak
+            detector.
+          format: uri-reference
+          nullable: true
+          readOnly: true
+          type: string
+          x-excerptCopyOnly: true
+          x-longDescription: This property shall contain a URI to the resource that
+            provides the source of the excerpt contained within this copy.
+        DetectorState:
+          description: The state of the leak detector.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          - enum:
+            - null
+          readOnly: true
+          x-excerpt: LeakDetector
+          x-longDescription: This property shall contain the state of the leak detector.  The
+            value of this property should equate the value of `Health` in `Status`,
+            and was created primarily for use in excerpts of this resource.
+      type: object
+      x-excerpt: LeakDetector
+      x-longDescription: This resource shall represent a state-based or digital-value
+        leak detector for a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    LeakDetector_v1_2_0_LeakDetectorType:
+      enum:
+      - Moisture
+      - FloatSwitch
+      type: string
+      x-enumDescriptions:
+        FloatSwitch: A float switch.
+        Moisture: A moisture sensor.
+    LeakDetector_v1_2_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#LeakDetector.v1_2_0.LeakDetector'
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2024.3'
