@@ -1,0 +1,418 @@
+components:
+  schemas:
+    SecurityPolicy_v1_0_3_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_SPDMAlgorithmSet:
+      additionalProperties: false
+      description: The SPDM algorithm settings.
+      properties:
+        AEAD:
+          description: The AEAD algorithms.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of AEAD algorithms.  The
+            allowable values for this property shall be the AEAD algorithm names found
+            in the 'AlgSupported' field of the 'AEAD structure' table in DSP0274,
+            `ALL`, and `NONE`.  An array containing one element with the value of
+            `ALL` or an empty array shall indicate all AEAD algorithms.  An array
+            containing one element with a value of `NONE` shall indicate no AEAD algorithms.
+        BaseAsym:
+          description: The asymmetric signature algorithms.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of asymmetric signature
+            algorithms.  The allowable values for this property shall be the asymmetric
+            key signature algorithm names found in the 'BaseAsymAlgo' field of the
+            'NEGOTIATE_ALGORITHMS' request message in DSP0274, `ALL`, and `NONE`.  An
+            array containing one element with the value of `ALL` or an empty array
+            shall indicate all asymmetric signature algorithms.  An array containing
+            one element with a value of `NONE` shall indicate no asymmetric signature
+            algorithms.
+        BaseHash:
+          description: The hash algorithms.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of hash algorithms.  The
+            allowable values for this property shall be the hash algorithm names found
+            in the 'BaseHashAlgo' field of the 'NEGOTIATE_ALGORITHMS' request message
+            in DSP0274, `ALL`, and `NONE`.  An array containing one element with the
+            value of `ALL` or an empty array shall indicate all hash algorithms.  An
+            array containing one element with a value of `NONE` shall indicate no
+            hash algorithms.
+      type: object
+      x-longDescription: This object shall contain SPDM algorithm settings.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_SPDMParameterSet:
+      additionalProperties: false
+      description: The SPDM policy settings.
+      properties:
+        Algorithms:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_SPDMAlgorithmSet'
+          description: The SPDM algorithms.
+          x-longDescription: This property shall contain the SPDM algorithms.
+        Versions:
+          description: The SPDM versions.
+          items:
+            nullable: true
+            type: string
+          pattern: ^\d+\.\d+$|^NONE$|^ALL$
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of SPDM versions.  An
+            array containing one element with the value of `ALL` or an empty array
+            shall indicate all versions.  An array containing one element with a value
+            of `NONE` shall indicate no versions.
+      type: object
+      x-longDescription: This object shall contain SPDM policy settings.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_SPDMPolicy:
+      additionalProperties: false
+      description: SPDM policy settings.
+      properties:
+        AllowExtendedAlgorithms:
+          description: An indication of whether SPDM extended algorithms are allowed.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether SPDM extended algorithms
+            as defined in DSP0274 are allowed.
+        Allowed:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_SPDMParameterSet'
+          description: The SPDM policy settings that are allowed, such as the allowable
+            SPDM versions and algorithms.
+          x-longDescription: This property shall contain the SPDM policy settings
+            that are allowed, such as the allowable SPDM versions and algorithms.
+        Denied:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_SPDMParameterSet'
+          description: The SPDM policy settings that are prohibited, such as the prohibited
+            SPDM versions and algorithms.
+          x-longDescription: This property shall contain the SPDM policy settings
+            that are prohibited, such as the prohibited SPDM versions and algorithms.
+        Enabled:
+          description: An indication of whether SPDM communication with devices is
+            enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether SPDM communication
+            with devices as defined in DSP0274 is enabled.
+        RevokedCertificates:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The revoked SPDM device certificates.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `CertificateCollection` that represents the set of revoked SPDM
+            device certificates.  Certificates in this collection may contain leaf
+            certificates, partial certificate chains, or complete certificate chains,
+            where a partial certificate chain is a chain containing only CA certificates.  If
+            `VerifyCertificate` contains the value `true` and if an SPDM endpoint
+            verifies successfully against a partial chain or exactly matches a leaf
+            certificate, that SPDM endpoint shall fail authentication.
+        SecureSessionEnabled:
+          description: An indication of whether SPDM secure sessions with devices
+            is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether SPDM secure sessions
+            with devices as defined in DSP0274 is enabled.
+        TrustedCertificates:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The trusted SPDM device certificates.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `CertificateCollection` that represents the set of trusted SPDM
+            device certificates.  Certificates in this collection may contain leaf
+            certificates, partial certificate chains, or complete certificate chains,
+            where a partial certificate chain is a chain containing only CA certificates.  If
+            `VerifyCertificate` contains the value `true` and if an SPDM endpoint
+            verifies successfully against a partial chain or exactly matches a leaf
+            certificate, that SPDM endpoint shall be considered verified and other
+            authentications checks are performed.
+        VerifyCertificate:
+          description: An indication of whether the manager will verify the certificate
+            of the SPDM endpoint.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the manager will
+            verify the certificate of the SPDM endpoint.  If `true`, the manager shall
+            verify the device certificate with the certificates found in the collections
+            referenced by the `RevokedCertificates` and `TrustedCertificates` properties.  If
+            `false`, the manager shall not perform verification of the endpoint certificate.
+      type: object
+      x-longDescription: This object shall contain SPDM policy settings.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_SecurityPolicy:
+      additionalProperties: false
+      description: The `SecurityPolicy` resource provides a central point to configure
+        the security policy of a manager.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OverrideParentManager:
+          description: Override the security policy of the parent manager.
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether this security policy
+            overrides the security policy of the managers referenced by the `ManagedBy`
+            property within the `Links` property of the `Manager` resource for this
+            security policy.  If this property is absent, the value shall be assumed
+            to be `false`.
+        SPDM:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_SPDMPolicy'
+          description: The SPDM policy.
+          x-longDescription: This property shall contain the policy requirements for
+            SPDM communication and usage.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        TLS:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_TLSCommunication'
+          description: The TLS policy.
+          x-longDescription: This property shall contain the policy requirements for
+            TLS communication and usage.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent configurable security-related
+        policies managed by a manager.  All security parameters in other resources
+        that are controlled by the manager shall follow the related settings in this
+        security policy.  For example, an outbound TLS connection established per
+        an `EventDestination` resource will follow the values of the properties in
+        the `TLS` property.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_TLSAlgorithmSet:
+      additionalProperties: false
+      description: The TLS algorithm settings.
+      properties:
+        CipherSuites:
+          description: The TLS cipher suites.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of TLS cipher suites.  The
+            allowable values for this property shall be the TLS cipher suites listed
+            in 'CipherSuites' defined in, but not limited to, RFC4346, RFC5246, or
+            RFC8446, `ALL`, and `NONE`.  An array containing one element with the
+            value of `ALL` or an empty array shall indicate all TLS cipher suites.  An
+            array containing one element with a value of `NONE` shall indicate no
+            TLS cipher suites.
+        SignatureAlgorithms:
+          description: The TLS signature algorithms.
+          items:
+            nullable: true
+            type: string
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of TLS signature
+            algorithms.  The allowable values for this property shall be the TLS signature
+            algorithms listed in 'SignatureScheme' or the concatenation of 'SignatureAlgorithm',
+            '_', and 'HashAlgorithm' defined in, but not limited to, RFC4346, RFC5246,
+            or RFC8446, `ALL`, and `NONE`.  An array containing one element with the
+            value of `ALL` or an empty array shall indicate all TLS signature algorithms.  An
+            array containing one element with a value of `NONE` shall indicate no
+            TLS signature algorithms.
+      type: object
+      x-longDescription: This object shall contain TLS algorithm settings.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_TLSCommunication:
+      additionalProperties: false
+      description: The TLS client and server policies.
+      properties:
+        Client:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_TLSPolicy'
+          description: The TLS policy where the manager acts as a TLS client for communication
+            with servers.
+          x-longDescription: This property shall contain the policy requirements and
+            usage for TLS connections where the manager acts as a TLS client.
+        Server:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_TLSPolicy'
+          description: The TLS policy where the manager acts as a TLS server for communication
+            with clients.
+          x-longDescription: This property shall contain the policy requirements and
+            usage for TLS connections where the manager acts as a TLS server.
+      type: object
+      x-longDescription: This property shall contain the policy requirements for TLS
+        communication and usage for a TLS client and server.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_TLSParameterSet:
+      additionalProperties: false
+      description: The TLS policy settings.
+      properties:
+        Algorithms:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_TLSAlgorithmSet'
+          description: The TLS algorithms.
+          x-longDescription: This property shall contain the TLS algorithms.
+        Versions:
+          description: The TLS versions.
+          items:
+            nullable: true
+            type: string
+          pattern: ^\d+\.\d+$|^NONE$|^ALL$
+          readOnly: false
+          type: array
+          x-longDescription: This property shall contain an array of TLS versions.  An
+            array containing one element with the value of `ALL` or an empty array
+            shall indicate all versions.  An array containing one element with a value
+            of `NONE` shall indicate no versions.
+      type: object
+      x-longDescription: This object shall contain TLS policy settings.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    SecurityPolicy_v1_0_3_TLSPolicy:
+      additionalProperties: false
+      description: TLS policy settings.
+      properties:
+        Allowed:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_TLSParameterSet'
+          description: The TLS policy settings that are allowed, such as the allowable
+            TLS versions and algorithms.
+          x-longDescription: This property shall contain the TLS policy settings that
+            are allowed, such as the allowable TLS versions and algorithms.  If a
+            value is missing for the same property in the `Allowed` and `Denied` object,
+            the missing value shall behave as if the value is present in the same
+            property under the `Denied` object.  If a value conflicts for the same
+            property between the `Allowed` and `Denied` object, the value of the same
+            property in the `Denied` object shall take precedence.  A Redfish service
+            can resolve or prevent conflicts at time of request as well.
+        Denied:
+          $ref: '#/components/schemas/SecurityPolicy_v1_0_3_TLSParameterSet'
+          description: The TLS policy settings that are prohibited, such as the prohibited
+            TLS versions and algorithms.
+          x-longDescription: This property shall contain the TLS policy settings that
+            are prohibited, such as the prohibited TLS versions and algorithms.  If
+            a value is missing for the same property in the `Allowed` and `Denied`
+            object, the missing value shall behave as if the value is present in the
+            same property under the `Denied` object.  If a value conflicts for the
+            same property between the `Allowed` and `Denied` object, the value of
+            the same property in the `Denied` object shall take precedence.  A Redfish
+            service can resolve or prevent conflicts at time of request as well.
+        RevokedCertificates:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The revoked TLS server certificates.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `CertificateCollection` that represents the set of revoked TLS
+            certificates.  Certificates in this collection may contain leaf certificates,
+            partial certificate chains, or complete certificate chains, where a partial
+            certificate chain is a chain containing only CA certificates.  If `VerifyCertificate`
+            contains the value `true` and if a TLS endpoint verifies successfully
+            against a partial chain or exactly matches a leaf certificate, that TLS
+            endpoint shall fail authentication.
+        TrustedCertificates:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The trusted TLS server certificates.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `CertificateCollection` that represents the set of trusted TLS
+            certificates.  Certificates in this collection may contain leaf certificates,
+            partial certificate chains, or complete certificate chains, where a partial
+            certificate chain is a chain containing only CA certificates.  If `VerifyCertificate`
+            contains the value `true` and if a TLS endpoint verifies successfully
+            against a partial chain or exactly matches a leaf certificate, that TLS
+            endpoint shall be considered verified and other authentications checks
+            are performed.
+        VerifyCertificate:
+          description: An indication of whether the manager will verify the certificate
+            of the remote TLS endpoint.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the manager will
+            verify the certificate of the remote endpoint in a TLS connection.  If
+            `true`, the manager shall verify the remote endpoint certificate with
+            the certificates found in the collections referenced by the `RevokedCertificates`
+            and `TrustedCertificates` properties.  If `false` or not present, the
+            manager shall not perform verification of the endpoint certificate.
+      type: object
+      x-longDescription: This object shall contain TLS policy settings.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#SecurityPolicy.v1_0_3.SecurityPolicy'
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2022.2'

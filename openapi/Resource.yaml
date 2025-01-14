@@ -33,6 +33,13 @@ components:
           type: string
           x-longDescription: This property shall contain a `MessageId`, as defined
             in the 'MessageId format' clause of the Redfish Specification.
+        Oem:
+          $ref: '#/components/schemas/Resource_Oem'
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+          x-versionAdded: v1_21_0
         OriginOfCondition:
           $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: A link to the resource or object that originated the condition.
@@ -121,7 +128,7 @@ components:
       x-longDescription: This property shall contain the identifier for this resource.  The
         value shall conform with the 'Id' clause of the Redfish Specification.
     Resource_Identifier:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_20_0.yaml#/components/schemas/Resource_v1_20_0_Identifier
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_Identifier
       description: Any additional identifiers for a resource.
       x-longDescription: This type shall contain any additional identifiers for a
         resource.
@@ -167,7 +174,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
     Resource_Location:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_20_0.yaml#/components/schemas/Resource_v1_20_0_Location
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_Location
       description: The location of a resource.
       x-longDescription: This type shall describe the location of a resource.
     Resource_Name:
@@ -218,7 +225,7 @@ components:
       x-enumVersionAdded:
         Paused: v1_13_0
     Resource_ReferenceableMember:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_20_0.yaml#/components/schemas/Resource_v1_20_0_ReferenceableMember
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_ReferenceableMember
     Resource_ResetType:
       enum:
       - 'On'
@@ -233,11 +240,14 @@ components:
       - Suspend
       - Pause
       - Resume
+      - FullPowerCycle
       type: string
       x-enumDescriptions:
         ForceOff: Turn off the unit immediately (non-graceful shutdown).
         ForceOn: Turn on the unit immediately.
         ForceRestart: Shut down immediately and non-gracefully and restart the unit.
+        FullPowerCycle: Full power cycle the unit.  Behaves like removing utility
+          lines, followed by restoring utility lines to the resource.
         GracefulRestart: Shut down gracefully and restart the unit.
         GracefulShutdown: Shut down gracefully and power off.
         Nmi: Generate a diagnostic interrupt, which is usually an NMI on x86 systems,
@@ -246,7 +256,7 @@ components:
         'On': Turn on the unit.
         Pause: Pause execution on the unit but do not remove power.  This is typically
           a feature of virtual machine hypervisors.
-        PowerCycle: Power cycle the unit.  Behaves like a full power removal, followed
+        PowerCycle: Power cycle the unit.  Behaves like a power removal, followed
           by a power restore to the resource.
         PushPowerButton: Simulate the pressing of the physical power button on this
           unit.
@@ -265,6 +275,21 @@ components:
           power on state, after transiting through a restart.  The transition will
           start immediately.  Upon successful completion, the `PowerState` property,
           if supported, shall contain the value `On`.
+        FullPowerCycle: This value shall indicate the resource will perform a full
+          power cycle as if utility lines to the resource are removed and restored.  This
+          is different from `PowerCycle` in that it's as close to a true power cycle
+          as possible.  For example, removing AC power cables from an enclosure and
+          then restoring the AC power cables.  If currently in the power on state,
+          the resource will transition to a power off state, then transition to a
+          power on state.  If currently in the power off state, the resource will
+          transition to a power on state.  Upon successful completion, the `PowerState`
+          property, if supported, shall contain the value `On`.  If a service supports
+          this value but there are no other distinct power cycle flows, the service
+          shall support `PowerCycle` as an alias to `FullPowerCycle`.  This type of
+          reset may cause the manager providing the Redfish service to power cycle.  If
+          the manager providing the Redfish service is affected by this type of reset,
+          the service shall send the action response before resetting to prevent client
+          timeouts.
         GracefulRestart: This value shall indicate the resource will transition to
           a power on state, after transiting through a restart.  The transition will
           start after first performing tasks to safely shut down the resource.  For
@@ -285,12 +310,15 @@ components:
         Pause: This value shall indicate the resource will transition to a paused
           state.  Upon successful completion, the `PowerState` property, if supported,
           shall contain the value `Paused`.
-        PowerCycle: This value shall indicate the resource will perform a power cycle.  If
-          currently in the power on state, the resource will transition to a power
-          off state, then transition to a power on state.  If currently in the power
-          off state, the resource will transition to a power on state.  Upon successful
-          completion, the `PowerState` property, if supported, shall contain the value
-          `On`.
+        PowerCycle: This value shall indicate the resource will perform a power cycle.  This
+          is different from `FullPowerCycle` in that it typically performs localized
+          power sequencing of the resource while external power is still present.  For
+          example, turning DC voltage regulators off and then turning DC voltage regulators
+          back on.  If currently in the power on state, the resource will transition
+          to a power off state, then transition to a power on state.  If currently
+          in the power off state, the resource will transition to a power on state.  Upon
+          successful completion, the `PowerState` property, if supported, shall contain
+          the value `On`.
         PushPowerButton: This value shall indicate the resource will behave as if
           the physical power button is pressed.  The behavior of pressing the physical
           power button may be dependent on the state of the unit and the behavior
@@ -303,14 +331,15 @@ components:
           successful completion, the `PowerState` property, if supported, shall contain
           the value `Off`.
       x-enumVersionAdded:
+        FullPowerCycle: v1_21_0
         Pause: v1_13_0
         PowerCycle: v1_4_0
         Resume: v1_13_0
         Suspend: v1_13_0
     Resource_Resource:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_20_0.yaml#/components/schemas/Resource_v1_20_0_Resource
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_Resource
     Resource_ResourceCollection:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_20_0.yaml#/components/schemas/Resource_v1_20_0_ResourceCollection
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_ResourceCollection
     Resource_State:
       enum:
       - Enabled
@@ -398,11 +427,12 @@ components:
               - null
           type: array
           x-longDescription: This property shall represent the active conditions requiring
-            attention in this or a related resource that affects the `Health` or `HealthRollup`
-            of this resource.  The service may roll up multiple conditions originating
-            from a resource, using the `ConditionInRelatedResource` message from the
-            Base Message Registry.  The array order of conditions may change as new
-            conditions occur or as conditions are resolved by the service.
+            attention in this or a related resource.  The conditions may affect the
+            `Health` or `HealthRollup` of this resource.  The service may roll up
+            multiple conditions originating from a resource, using the `ConditionInRelatedResource`
+            message from the Base Message Registry.  The array order of conditions
+            may change as new conditions occur or as conditions are resolved by the
+            service.
           x-versionAdded: v1_11_0
         Health:
           description: The health state of this resource in the absence of its dependent

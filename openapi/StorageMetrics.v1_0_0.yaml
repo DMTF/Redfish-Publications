@@ -1,0 +1,118 @@
+components:
+  schemas:
+    StorageMetrics_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/StorageMetrics_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageMetrics_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    StorageMetrics_v1_0_0_StorageMetrics:
+      additionalProperties: false
+      description: The usage and health statistics for a storage subsystem.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/StorageMetrics_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        CompressionSavingsBytes:
+          description: Current compression savings on the storage system in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value shall represent the current compression savings
+            on the storage system in bytes.
+          x-units: By
+        DeduplicationSavingsBytes:
+          description: Current deduplication savings on the storage system in bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value shall represent the current deduplication savings
+            on the storage system in bytes.
+          x-units: By
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        IOStatistics:
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/IOStatistics.yaml#/components/schemas/IOStatistics_IOStatistics
+          description: Statistics for this storage system.
+          x-longDescription: The value shall contain the I/O statistics for this storage
+            system.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        StateChangeCount:
+          description: The number of state changes for this storage subsystem.
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall contain the number of times the `State`
+            property within the `Status` property of the parent `Storage` resource
+            changed.
+        ThinProvisioningSavingsBytes:
+          description: Current thin provisioning savings on the storage system in
+            bytes.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: The value shall represent the current thin provisioning
+            savings on the storage system in bytes.
+          x-units: By
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: The `StorageMetrics` schema shall contain the usage and health
+        statistics for a storage subsystem in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#StorageMetrics.v1_0_0.StorageMetrics'
+x-copyright: Copyright 2014-2024 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2024.4'

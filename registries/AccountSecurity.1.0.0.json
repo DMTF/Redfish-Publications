@@ -1,0 +1,397 @@
+{
+    "@Redfish.Copyright": "Copyright 2024 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_6_2.MessageRegistry",
+    "Id": "AccountSecurity.1.0.0",
+    "Name": "AccountSecurity Message Registry",
+    "Language": "en",
+    "Description": "This registry defines the account security messages.  These messages are intended for audit logs and security event notifications.  Services shall not include these messages in responses to clients.",
+    "RegistryPrefix": "AccountSecurity",
+    "RegistryVersion": "1.0.0",
+    "OwningEntity": "DMTF",
+    "Messages": {
+        "InsufficientPrivilege": {
+            "Description": "Indicates that a user with valid credentials attempted an operation without the necessary privileges.",
+            "LongDescription": "This message shall indicate that a user with valid credentials attempted an operation without the necessary privileges.  Services shall not include this message in responses to clients.",
+            "Message": "'%1' attempted an operation over '%2' with the privleges '%3', but requires the privileges '%4'.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 4,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The IP address of the user that attempted the operation.",
+                "The protocol or interface over which the operation was attempted.  Examples include 'Redfish', 'Web UI'. and 'SSH'.",
+                "The privileges of the user that attempted the operation.",
+                "The required privileges for the requested operation."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the IP address of the user that attempted the operation.",
+                "This argument shall contain the protocol or interface over which the operation was attempted.",
+                "This argument shall contain the privileges of the user that attempted the operation.",
+                "This argument shall contain the required privileges for the requested operation."
+            ],
+            "Resolution": "None."
+        },
+        "InvalidCredentials": {
+            "Description": "Indicates that a user provided invalid credentials with a request.",
+            "LongDescription": "This message shall indicate that a user provided invalid credentials with a request, such as those found in the `Authorization` and `X-Auth-Token` HTTP request headers.  Services shall not include this message in responses to clients.",
+            "Message": "'%1' provided invalid credentials over '%2'.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The IP address of the user that attempted the operation.",
+                "The protocol or interface over which the operation was attempted.  Examples include 'Redfish', 'Web UI'. and 'SSH'."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the IP address of the user that attempted the operation.",
+                "This argument shall contain the protocol or interface over which the operation was attempted."
+            ],
+            "Resolution": "None."
+        },
+        "SuccessfulLogin": {
+            "Description": "Indicates that a user provided valid credentials and made a successful login.",
+            "LongDescription": "This message shall indicate that a user provided valid credentials and made a successful login.  Services shall not include this message in responses to clients.",
+            "Message": "Successful login of user '%1' from '%2' over '%3'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that made a successful login.",
+                "The IP address of the user that made a successful login.",
+                "The protocol or interface over which the login was made.  Examples include 'Redfish', 'Web UI'. and 'SSH'."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that made a successful login.",
+                "This argument shall contain the IP address of the user that made a successful login.",
+                "This argument shall contain the protocol or interface over which the login was made."
+            ],
+            "Resolution": "None."
+        },
+        "AccountCreated": {
+            "Description": "Indicates that an account was created.",
+            "LongDescription": "This message shall indicate that an account was created.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' was created.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was created."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was created."
+            ],
+            "Resolution": "None."
+        },
+        "AccountRemoved": {
+            "Description": "Indicates that an account was removed.",
+            "LongDescription": "This message shall indicate that an account was removed.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' was removed.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was removed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was removed."
+            ],
+            "Resolution": "None."
+        },
+        "AccountLocked": {
+            "Description": "Indicates that an account was locked due to failed authorization attempts.",
+            "LongDescription": "This message shall indicate that an account was locked due to failed authorization attempts.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' was locked due to excessive failed authorization attempts.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was locked."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was locked."
+            ],
+            "Resolution": "None."
+        },
+        "AccountLockoutExpired": {
+            "Description": "Indicates that the lockout timer on an account expired and the account is now unlocked.",
+            "LongDescription": "This message shall indicate that the lockout timer on an account expired and the account is now unlocked.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' was unlocked following the expiration of a lockout timer.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was unlocked."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was unlocked."
+            ],
+            "Resolution": "None."
+        },
+        "AccountUnlocked": {
+            "Description": "Indicates that an account was manually unlocked.",
+            "LongDescription": "This message shall indicate that an account was manually unlocked.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' was unlocked by an administrator.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was unlocked."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was unlocked."
+            ],
+            "Resolution": "None.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "AccountLocked"
+                ]
+            }
+        },
+        "AccountEnabled": {
+            "Description": "Indicates that an account was enabled.",
+            "LongDescription": "This message shall indicate that an account was enabled.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' was enabled.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was enabled."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was enabled."
+            ],
+            "Resolution": "None.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "AccountDisabled"
+                ]
+            }
+        },
+        "AccountDisabled": {
+            "Description": "Indicates that an account was disabled.",
+            "LongDescription": "This message shall indicate that an account was disabled.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' was disabled.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was disabled."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was disabled."
+            ],
+            "Resolution": "None."
+        },
+        "PasswordModified": {
+            "Description": "Indicates that the password of an account was changed.",
+            "LongDescription": "This message shall indicate that the password of an account was changed.  Services shall not include this message in responses to clients.",
+            "Message": "The password for account '%1' was changed.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account with the modified password."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account with the modified password."
+            ],
+            "Resolution": "None."
+        },
+        "ManagerAccountRoleChanged": {
+            "Description": "Indicates that the role for an account was changed.",
+            "LongDescription": "This message shall indicate that the role for an account was changed.  Services shall not include this message in responses to clients.",
+            "Message": "Account '%1' has changed from role '%2' to '%3'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account that was modified.",
+                "The former role for the account.",
+                "The new role for the account"
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account that was modified.",
+                "This argument shall contain the former Redfish role for the account.",
+                "This argument shall contain the new Redfish role for the account."
+            ],
+            "Resolution": "None."
+        },
+        "RolePrivilegeRemoved": {
+            "Description": "Indicates that a privilege was removed from a role.",
+            "LongDescription": "This message shall indicate that a privilege was removed from a role.  Services shall not include this message in responses to clients.",
+            "Message": "Privilege '%1' was removed from role '%2'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The privilege that was removed from the role.",
+                "The role that was modified."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the privilege that was removed from the role.",
+                "This argument shall contain the Redfish role that was modified."
+            ],
+            "Resolution": "None."
+        },
+        "RolePrivilegeAdded": {
+            "Description": "Indicates that a privilege was added to a role.",
+            "LongDescription": "This message shall indicate that a privilege was added to a role.  Services shall not include this message in responses to clients.",
+            "Message": "Privilege '%1' was added to role '%2'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The privilege that was added to the role.",
+                "The role that was modified."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the privilege that was added too the role.",
+                "This argument shall contain the Redfish role that was modified."
+            ],
+            "Resolution": "None."
+        },
+        "UserCertificateAdded": {
+            "Description": "Indicates that a user certificate was added to an account.",
+            "LongDescription": "This message shall indicate that a user certificate was added to an account.  Services shall not include this message in responses to clients.",
+            "Message": "A user certificate was added to account '%1'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account with the certificate that was addedd."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account with the certificate that was added."
+            ],
+            "Resolution": "None."
+        },
+        "UserCertificateRemoved": {
+            "Description": "Indicates that a user certificate was removed from an account.",
+            "LongDescription": "This message shall indicate that a user certificate was removed from an account.  Services shall not include this message in responses to clients.",
+            "Message": "A user certificate was removed from account '%1'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account with the certificate that was removed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account with the certificate that was removed."
+            ],
+            "Resolution": "None."
+        },
+        "UserCertificateReplaced": {
+            "Description": "Indicates that a user certificate was replaced on an account.",
+            "LongDescription": "This message shall indicate that a user certificate was replaced on an account.  Services shall not include this message in responses to clients.",
+            "Message": "A user certificate was replaced on account '%1'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account with the certificate that was replaced."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account with the certificate that was replaced."
+            ],
+            "Resolution": "None."
+        },
+        "UserKeyAdded": {
+            "Description": "Indicates that a user key was added to an account.",
+            "LongDescription": "This message shall indicate that a user key was added to an account.  Services shall not include this message in responses to clients.",
+            "Message": "A user key was added to account '%1'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account with the key that was added."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account with the key that was added."
+            ],
+            "Resolution": "None."
+        },
+        "UserKeyRemoved": {
+            "Description": "Indicates that a user key was removed from an account.",
+            "LongDescription": "This message shall indicate that a user key was removed from an account.  Services shall not include this message in responses to clients.",
+            "Message": "A user key was removed from account '%1'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The username of the account with the key that was removed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the username of the account with the key that was removed."
+            ],
+            "Resolution": "None."
+        }
+    }
+}
