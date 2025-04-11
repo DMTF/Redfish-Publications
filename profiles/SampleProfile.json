@@ -1,5 +1,5 @@
 {
-    "SchemaDefinition": "RedfishInteroperabilityProfile.v1_7_0",
+    "SchemaDefinition": "RedfishInteroperabilityProfile.v1_8_0",
     "ProfileName": "Anchovy",
     "ProfileVersion": "1.0.3",
     "Purpose": "This is a sample Redfish Interoperability profile.",
@@ -80,9 +80,9 @@
                 },
                 "IndicatorLED": {
                     "ReadRequirement": "Recommended",
+                    "ReplacedByProperty": "LocationIndicatorActive",
                     "ConditionalRequirements": [{
                         "Purpose": "Physical systems must have a writable IndicatorLED, but prefer LocationIndicatorActive.",
-                        "ReplacedByProperty": "LocationIndicatorActive",
                         "CompareProperty": "SystemType",
                         "CompareType": "AnyOf",
                         "CompareValues": ["Physical"],
@@ -108,7 +108,7 @@
         },
         "EthernetInterface": {
             "UseCases": [{
-                    "UseCaseName": "Ethernet Interface on Manager (BMC)",
+                    "UseCaseTitle": "Ethernet Interface on Manager (BMC)",
                     "URIs": ["/redfish/v1/Managers/{ManagerId}/EthernetInterfaces/{EthernetInterfaceId}"],
                     "MinVersion": "1.9.0",
                     "ReadRequirement": "Mandatory",
@@ -124,8 +124,8 @@
                     }
                 },
                 {
-                    "UseCaseName": "Host System (OS) Ethernet Interfaces",
-                    "URIs": ["/redfish/v1/Systems/{ComputerSystemId}/EthernetInterfaces/{EthernetInterfaceId}", "/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/NetworkDeviceFunctions//{NetworkDeviceFunctionId}/EthernetInterfaces/{EthernetInterfaceId}"],
+                    "UseCaseTitle": "Host System (OS) Ethernet Interfaces",
+                    "URIs": ["/redfish/v1/Systems/{ComputerSystemId}/EthernetInterfaces/{EthernetInterfaceId}", "/redfish/v1/Chassis/{ChassisId}/NetworkAdapters/{NetworkAdapterId}/NetworkDeviceFunctions/{NetworkDeviceFunctionId}/EthernetInterfaces/{EthernetInterfaceId}"],
                     "MinVersion": "1.4.0",
                     "ReadRequirement": "Mandatory",
                     "PropertyRequirements": {
@@ -219,7 +219,9 @@
                     "ConditionalRequirements": [{
                         "CompareProperty": "TimeMachineModel",
                         "CompareType": "Equal",
-                        "CompareValue": "Delorean",
+                        "CompareValues": [
+                            "Delorean"
+                        ],
                         "ReadRequirement": "Mandatory",
                         "Comparison": "AnyOf",
                         "Values": ["None", "Recoverable", "Improbable"]
