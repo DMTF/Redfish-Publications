@@ -186,16 +186,37 @@
                     "description": "Specifies a title or short name used to identify the resource use case.  This property is only present in resource use cases."
                 },
                 "UseCaseKeyProperty": {
-                    "type": "string",
-                    "description": "Specifies a property within the resource used by the UseCaseComparison to define the use case.  This property is only present in resource use cases."
+                    "$ref": "#/definitions/UseCaseKeyProperty"
                 },
                 "UseCaseKeyValues": {
-                    "description": "Specifies the values of `UseCaseKeyProperty` used to evaluate the `UseCaseComparison`.  This property is only present in resource use cases.",
-                    "$ref": "#/definitions/Values"
+                    "$ref": "#/definitions/UseCaseKeyValues"
                 },
                 "UseCaseComparison": {
-                    "description": "Specifies the type of comparison to perform using the `UseCaseKeyProperty` and the values contained in `UseCaseKeyValues`.  If the comparison is successful, this resource instance is covered by this resource use case.  This property is only present in resource use cases.",
-                    "$ref": "#/definitions/Comparison"
+                    "$ref": "#/definitions/UseCaseComparison"
+                },
+                "UseCaseAdditionalConditions": {
+                    "type": "array",
+                    "description": "An array of additional resource use case conditions, which must be validated in addition to the primary condition for the resource instance to be covered by the use case.  Additional use case conditions are always applied as if UseCaseType was `Normal`.  This property is only present in resource use cases.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "UseCaseKeyProperty": {
+                                "$ref": "#/definitions/UseCaseKeyProperty"
+                            },
+                            "UseCaseKeyValues": {
+                                "$ref": "#/definitions/UseCaseKeyValues"
+                            },
+                            "UseCaseComparison": {
+                                "$ref": "#/definitions/UseCaseComparison"
+                            }
+                        },
+                        "required": [
+                            "UseCaseKeyProperty",
+                            "UseCaseKeyValues",
+                            "UseCaseComparison"
+                        ],
+                        "additionalProperties": false
+                    }
                 },
                 "RequiredResourceProfile": {
                     "type": "object",
@@ -514,6 +535,18 @@
                 }
             },
             "additionalProperties": false
+        },
+        "UseCaseKeyProperty": {
+            "type": "string",
+            "description": "Specifies a property within the resource used by the UseCaseComparison to define the use case.  This property is only present in resource use cases."
+        },
+        "UseCaseKeyValues": {
+            "description": "Specifies the values of `UseCaseKeyProperty` used to evaluate the `UseCaseComparison`.  This property is only present in resource use cases.",
+            "$ref": "#/definitions/Values"
+        },
+        "UseCaseComparison": {
+            "description": "Specifies the type of comparison to perform using the `UseCaseKeyProperty` and the values contained in `UseCaseKeyValues`.  If the comparison is successful, this resource instance is covered by this resource use case.  This property is only present in resource use cases.",
+            "$ref": "#/definitions/Comparison"
         },
         "MinSupportValues": {
             "type": "array",
