@@ -1,0 +1,141 @@
+components:
+  schemas:
+    TelemetryData_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/TelemetryData_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    TelemetryData_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    TelemetryData_v1_0_0_TelemetryData:
+      additionalProperties: false
+      description: The `TelemetryData` schema represents bulk telemetry data from
+        a device or service.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/TelemetryData_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        AdditionalData:
+          description: A Base64-encoded string of the associated telemetry data.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a Base64-encoded string,
+            with padding characters, of the associated telemetry data.  The contents
+            shall depend on the value of the `TelemetryDataType` property.  The length
+            of the value should not exceed 4 KB.  Larger telemetry data payloads should
+            omit this property and use the `AdditionalDataURI` property to reference
+            the data.  If both `AdditionalData` and `AdditionalDataURI` are present,
+            `AdditionalData` shall contain the Base64-encoding of the data retrieved
+            from the URI specified by the `AdditionalDataURI` property.
+        AdditionalDataSizeBytes:
+          description: The size of the data available at location specified by `AdditionalDataURI`.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the size of the data available
+            at location specified by `AdditionalDataURI`:.
+        AdditionalDataURI:
+          description: The URI at which to access the associated telemetry data.
+          format: uri-reference
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the URI at which to access
+            the associated telemetry data, using the Redfish protocol and authentication
+            methods.  If both `AdditionalData` and `AdditionalDataURI` are present,
+            `AdditionalData` shall contain a Base64-encoded string, with padding characters,
+            of the data retrieved from the URI specified by the `AdditionalDataURI`
+            property.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        OEMTelemetryDataType:
+          description: The OEM-defined type of telemetry data available in the `AdditionalData`
+            property or retrieved from the URI specified by the `AdditionalDataURI`
+            property.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the OEM-defined type of telemetry
+            data available in the `AdditionalData` property or retrieved from the
+            URI specified by the `AdditionalDataURI` property.  The value of this
+            property should begin with the organization identifier.  This property
+            shall be present if `TelemetryDataType` is `OEM`.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        TelemetryDataType:
+          description: The type of telemetry data available in the `AdditionalData`
+            property or retrieved from the URI specified by the `AdditionalDataURI`
+            property.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/TelemetryData.yaml#/components/schemas/TelemetryData_TelemetryDataTypes
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the type of telemetry data
+            available in the `AdditionalData` property or retrieved from the URI specified
+            by the `AdditionalDataURI` property.
+        Timestamp:
+          description: The date and time when the telemetry data was generated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the time when the telemetry
+            data was generated.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent bulk telemetry data in a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#TelemetryData.v1_0_0.TelemetryData'
+x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2025.2'

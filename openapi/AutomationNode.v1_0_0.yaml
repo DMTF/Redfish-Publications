@@ -1,0 +1,370 @@
+components:
+  schemas:
+    AutomationNode_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#AutomationNode.Reset':
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_Reset'
+        '#AutomationNode.SendTrigger':
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_SendTrigger'
+        '#AutomationNode.Start':
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_Start'
+        '#AutomationNode.Stop':
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_Stop'
+        '#AutomationNode.Wait':
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_Wait'
+        Oem:
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_AutomationNode:
+      additionalProperties: false
+      description: The `AutomationNode` schema describes a node that carries out instructions
+        in industrial automation environments.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Instrumentation:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the instrumentation for this node.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `AutomationInstrumentation` that represents the instrumentation for this
+            automation node.
+        Links:
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        MotionAxis:
+          description: The primary axis of motion for this motion-related node.
+          oneOf:
+          - $ref: '#/components/schemas/AutomationNode_v1_0_0_MotionAxisType'
+          - enum:
+            - null
+          readOnly: false
+          x-longDescription: This property shall contain the primary axis of motion
+            for this motion-related node.
+        MotionProfile:
+          description: The motion profile type used for this node.
+          oneOf:
+          - $ref: '#/components/schemas/AutomationNode_v1_0_0_MotionProfileType'
+          - enum:
+            - null
+          readOnly: false
+          x-longDescription: This property shall contain the type of motion profile
+            used for this motion-based node.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        NodeState:
+          $ref: http://redfish.dmtf.org/schemas/v1/AutomationNode.yaml#/components/schemas/AutomationNode_NodeState
+          description: The current state of the node.
+          readOnly: true
+          x-longDescription: This property shall contain the current state of the
+            automation node.
+        NodeType:
+          $ref: '#/components/schemas/AutomationNode_v1_0_0_NodeType'
+          description: The type of automation node.
+          readOnly: true
+          x-longDescription: This property shall contain the type for the automation
+            node.
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of a resource and its children.
+          x-longDescription: This type shall contain any status or health properties
+            of a resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent an automation node for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        AutomationNodeGroup:
+          description: An array of links to the automation nodes that are included
+            in an automation node group.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `AutomationNode` that represent the nodes that provide the functionality
+            of this group.
+        AutomationNodeGroup@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Chassis:
+          description: An array of links to the chassis that contain this equipment.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `Chassis` that represent the physical containers that contain
+            this equipment.
+        Chassis@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        OutputControl:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the output control.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Control` that represent the output control associated with this node.
+        PidFeedbackSensor:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the PID feedback sensor.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Sensor` that represents the feedback sensor associated with this node.  The
+            feedback sensor is intended to return controlled value output in a PID
+            system.
+        PositionSensor:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the position sensor.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Sensor` that represents the position sensor associated with this node.
+        VelocitySensor:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the velocity sensor.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Sensor` that represents the velocity sensor associated with this node.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_MotionAxisType:
+      enum:
+      - X
+      - Y
+      - Z
+      - TwoAxis
+      - ThreeAxis
+      type: string
+      x-enumDescriptions:
+        ThreeAxis: 3-axis.
+        TwoAxis: 2-axis.
+        X: X axis.
+        Y: Y axis.
+        Z: Z axis.
+    AutomationNode_v1_0_0_MotionProfileType:
+      enum:
+      - Trapezoidal
+      - SCurve
+      - None
+      type: string
+      x-enumDescriptions:
+        None: No profile specified.
+        SCurve: S-curve profile.
+        Trapezoidal: Trapezoidal profile.
+    AutomationNode_v1_0_0_NodeType:
+      enum:
+      - MotionPosition
+      - MotionVelocity
+      - MotionPositionGroup
+      - PID
+      - Simple
+      type: string
+      x-enumDescriptions:
+        MotionPosition: A position-based profiled motion node where position, velocity,
+          and acceleration are all controlled.
+        MotionPositionGroup: A multi-axis position-based profiled motion node where
+          position, velocity and acceleration are all controlled.
+        MotionVelocity: A velocity-based profiled motion node where position, velocity
+          and acceleration are all controlled.
+        PID: A node that attempts to match a set point using a PID control algorithm.
+        Simple: A simple node that incorporates no automated control function.
+    AutomationNode_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_Reset:
+      additionalProperties: false
+      description: Resets the node.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall reset the node to its power-on state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_ResetRequestBody:
+      additionalProperties: false
+      description: Resets the node.
+      properties: {}
+      type: object
+      x-longDescription: This action shall reset the node to its power-on state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_SendTrigger:
+      additionalProperties: false
+      description: Sends a trigger to the node.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall pulse the trigger signal for the node.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_SendTriggerRequestBody:
+      additionalProperties: false
+      description: Sends a trigger to the node.
+      properties: {}
+      type: object
+      x-longDescription: This action shall pulse the trigger signal for the node.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_Start:
+      additionalProperties: false
+      description: Starts the node.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall transition the node to the `Running` state.  This
+        action shall pulse the trigger signal to other connected nodes that are in
+        the `Waiting` state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_StartRequestBody:
+      additionalProperties: false
+      description: Starts the node.
+      properties: {}
+      type: object
+      x-longDescription: This action shall transition the node to the `Running` state.  This
+        action shall pulse the trigger signal to other connected nodes that are in
+        the `Waiting` state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_Stop:
+      additionalProperties: false
+      description: Stops the node.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall transition the node to the `Idle` state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_StopRequestBody:
+      additionalProperties: false
+      description: Stops the node.
+      properties: {}
+      type: object
+      x-longDescription: This action shall transition the node to the `Idle` state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_Wait:
+      additionalProperties: false
+      description: Signals the node to wait for the next instruction.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall transition the node to the `Waiting` state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    AutomationNode_v1_0_0_WaitRequestBody:
+      additionalProperties: false
+      description: Signals the node to wait for the next instruction.
+      properties: {}
+      type: object
+      x-longDescription: This action shall transition the node to the `Waiting` state.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#AutomationNode.v1_0_0.AutomationNode'
+x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2025.2'

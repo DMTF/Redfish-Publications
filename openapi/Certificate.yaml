@@ -1,7 +1,7 @@
 components:
   schemas:
     Certificate_Certificate:
-      $ref: http://redfish.dmtf.org/schemas/v1/Certificate.v1_9_0.yaml#/components/schemas/Certificate_v1_9_0_Certificate
+      $ref: http://redfish.dmtf.org/schemas/v1/Certificate.v1_10_0.yaml#/components/schemas/Certificate_v1_10_0_Certificate
       description: The `Certificate` schema describes a certificate that proves the
         identity of a component, account, or service.
       x-longDescription: This resource shall represent a certificate for a Redfish
@@ -11,10 +11,12 @@ components:
       - PEM
       - PEMchain
       - PKCS7
+      - PKCS12
       type: string
       x-enumDescriptions:
         PEM: A Privacy Enhanced Mail (PEM)-encoded single certificate.
         PEMchain: A Privacy Enhanced Mail (PEM)-encoded certificate chain.
+        PKCS12: A Base64-encoded PKCS12 certificate bundle.
         PKCS7: A Privacy Enhanced Mail (PEM)-encoded PKCS7 certificate.
       x-enumLongDescriptions:
         PEM: This value shall indicate the format of the certificate shall contain
@@ -22,12 +24,21 @@ components:
           structures, representing a single certificate.
         PEMchain: This value shall indicate the format of the certificate shall contain
           a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined
-          structures, representing a certificate chain.
+          structures, representing a certificate chain.  When this value is specified,
+          the properties of the resource, except for `CertificateString`, shall contain
+          the information from the leaf certificate.  When this value is specified,
+          `CertificateString` shall contain the entire PEM chain.
+        PKCS12: This value shall indicate the format of the certificate shall contain
+          a Base64-encoded string, with padding characters, containing RFC7292-defined
+          structures, representing a PKCS12 archive of one or more certificates, keys,
+          or other cryptographic data.  The service may discard additional certificates
+          or other data in the structure.
         PKCS7: The format of the certificate shall contain a Privacy Enhanced Mail
           (PEM)-encoded string, containing RFC5280-defined and RFC2315-defined structures.  The
-          service can discard additional certificates or other data in the structure.
+          service may discard additional certificates or other data in the structure.
       x-enumVersionAdded:
         PEMchain: v1_4_0
+        PKCS12: v1_10_0
     Certificate_KeyUsage:
       description: The usages of a key contained within a certificate.
       enum:

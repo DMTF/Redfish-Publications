@@ -11,8 +11,11 @@ components:
       - KVMIP
       - VirtualMedia
       - WebUI
+      - ControlPanel
       type: string
       x-enumDescriptions:
+        ControlPanel: Allow PIN-based access via an external control panel, such as
+          a keypad, touchscreen, or other human interface.
         HostConsole: Allow access to the host's console, which could be connected
           through Telnet, SSH, or another protocol.
         IPMI: Allow access to the Intelligent Platform Management Interface service.
@@ -26,6 +29,12 @@ components:
         WebUI: Allow access to a web user interface session, such as a graphical interface
           or another web-based protocol.
       x-enumLongDescriptions:
+        ControlPanel: This value shall indicate the account is used to allow PIN-based
+          access via an external control panel.  If this value is specified, the `AccountTypes`
+          property should not contain other values for the same `ManagerAccount` resource.  If
+          this value is specified, `Password` shall contain the PIN to enable access,
+          and may not follow other password-related rules.  The `ChangePassword` action,
+          if supported, may be used to update the PIN.
         HostConsole: This value shall indicate the account is allowed to access the
           host console.
         IPMI: This value shall indicate the account is allowed to access the Intelligent
@@ -47,6 +56,7 @@ components:
         WebUI: This value shall indicate the account is allowed to access the web
           interface.
       x-enumVersionAdded:
+        ControlPanel: v1_14_0
         HostConsole: v1_7_0
         IPMI: v1_7_0
         KVMIP: v1_7_0
@@ -55,7 +65,7 @@ components:
         WebUI: v1_7_0
       x-versionAdded: v1_4_0
     ManagerAccount_ManagerAccount:
-      $ref: http://redfish.dmtf.org/schemas/v1/ManagerAccount.v1_13_0.yaml#/components/schemas/ManagerAccount_v1_13_0_ManagerAccount
+      $ref: http://redfish.dmtf.org/schemas/v1/ManagerAccount.v1_14_0.yaml#/components/schemas/ManagerAccount_v1_14_0_ManagerAccount
       description: The `ManagerAccount` schema defines the user accounts that are
         owned by a manager.  Changes to a manager account might affect the current
         Redfish service connection if this manager is responsible for the Redfish

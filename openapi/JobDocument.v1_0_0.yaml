@@ -1,0 +1,346 @@
+components:
+  schemas:
+    JobDocument_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#JobDocument.SubmitJob':
+          $ref: '#/components/schemas/JobDocument_v1_0_0_SubmitJob'
+        Oem:
+          $ref: '#/components/schemas/JobDocument_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    JobDocument_v1_0_0_DataType:
+      enum:
+      - Boolean
+      - Number
+      - String
+      type: string
+      x-enumDescriptions:
+        Boolean: A boolean.
+        Number: A number.
+        String: A string.
+    JobDocument_v1_0_0_JobDocument:
+      additionalProperties: false
+      description: The `JobDocument` schema describes the template for a job with
+        a set of parameters.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/JobDocument_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        CreationTime:
+          description: The date and time when this job document resource was created.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time when this
+            job document resource was created.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        DocumentData:
+          description: The job document data as a Base64-encoded string.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a Base64-encoded string of
+            the job document data.  This property shall not be present if `DocumentDataURI`
+            is present.
+        DocumentDataHash:
+          description: The hash of the job document data.
+          pattern: ^[0-9a-fA-F]+$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the hash of the job document
+            data as a hex-encoded string.
+        DocumentDataURI:
+          description: The URI at which to access the job document data.
+          format: uri-reference
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the URI at which to access
+            the job document data.  This property shall not be present if `DocumentData`
+            is present.
+        DocumentType:
+          description: The type of job document data associated with this job document.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the type of job document
+            data associated with this job document.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/JobDocument_v1_0_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        ParameterMetadata:
+          description: The metadata for each of the parameters supported by this job
+            document for the `SubmitJob` action.
+          items:
+            $ref: '#/components/schemas/JobDocument_v1_0_0_ParameterMetadata'
+          type: array
+          x-longDescription: This property shall contain the metadata for each of
+            the parameters supported by this job document for the `SubmitJob` action.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        Version:
+          description: The version of this job document.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the version of this job document.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a job document for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    JobDocument_v1_0_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        SupportedExecutors:
+          description: An array of links to the executors that are capable of running
+            jobs instantiated from this job document.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `JobExecutor` that represent the executors that are capable of
+            running jobs instantiated from this job document.
+        SupportedExecutors@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    JobDocument_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    JobDocument_v1_0_0_Parameter:
+      additionalProperties: false
+      description: An object containing a set of parameters for submitting a new job
+        based on a job document.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain a set of parameters for submitting
+        a new job based on a job document.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+        ^[A-Za-z][A-Za-z0-9_]+$: {}
+    JobDocument_v1_0_0_ParameterMetadata:
+      additionalProperties: false
+      description: The metadata for a parameter supported by a job document for the
+        `SubmitJob` action.
+      properties:
+        AllowableNumbers:
+          description: The allowable numeric values or duration values, inclusive
+            ranges of values, and incremental step values for this parameter.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall indicate the allowable numeric values,
+            inclusive ranges of values, and incremental step values for this parameter,
+            as defined in the 'Allowable values for numbers and durations' clause
+            of the Redfish Specification.  This property shall only be present for
+            numeric parameters or string parameters that specify a duration.
+        AllowablePattern:
+          description: The allowable pattern for this parameter.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a regular expression that
+            describes the allowable values for this parameter.  This property shall
+            only be present for string parameters.
+        AllowableValueDescriptions:
+          description: Descriptions of allowable values for this parameter.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain the descriptions of allowable
+            values for this parameter.  The descriptions shall appear in the same
+            array order as the `AllowableValues` property.
+        AllowableValues:
+          description: The allowable values for this parameter.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall indicate the allowable values for
+            this parameter.
+        DataType:
+          $ref: '#/components/schemas/JobDocument_v1_0_0_DataType'
+          description: The JSON property type for this parameter.
+          readOnly: true
+          x-longDescription: This property shall contain the JSON property type for
+            this parameter.
+        Description:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          description: A description of the parameter.
+          readOnly: true
+          x-longDescription: This property shall contain a description of the parameter.
+        MaximumValue:
+          description: The maximum supported value for this parameter.
+          readOnly: true
+          type: number
+          x-longDescription: This integer or number property shall contain the maximum
+            value that this service supports.  This property shall not be present
+            for non-integer or number parameters.
+        MinimumValue:
+          description: The minimum supported value for this parameter.
+          readOnly: true
+          type: number
+          x-longDescription: This integer or number property shall contain the minimum
+            value that this service supports.  This property shall not be present
+            for non-integer or number parameters.
+        Name:
+          description: The name of the parameter.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the name of the parameter.
+        Required:
+          description: An indication of whether the parameter is required.
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the parameter is
+            required.
+        ValueHint:
+          description: A hint value for the parameter.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain a hint value for the parameter.
+      required:
+      - DataType
+      - Name
+      type: object
+      x-longDescription: This type shall contain the metadata a parameter supported
+        by a job document for the `SubmitJob` action.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    JobDocument_v1_0_0_SubmitJob:
+      additionalProperties: false
+      description: Creates a new job based on the contents of this job document and
+        additional parameters.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall create a new `Job` resource based on the
+        contents of this job document and additional parameters.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    JobDocument_v1_0_0_SubmitJobRequestBody:
+      additionalProperties: false
+      description: Creates a new job based on the contents of this job document and
+        additional parameters.
+      properties:
+        HidePayload:
+          description: An indication of whether the contents of the parameters should
+            be hidden from view after the job has been created.  If `true`, responses
+            do not return the parameters.  If `false`, responses return the parameters.  If
+            this parameter is not present when the job is created, the default is
+            `false`.
+          type: boolean
+          x-longDescription: This parameter shall indicate whether the contents of
+            the parameters should be hidden from view after the job has been created.  If
+            `true`, responses shall not return the `Parameters` property.  If `false`,
+            responses shall return the `Parameters` property.  If this parameter is
+            not present when the job is created, the default is `false`.
+        JobCreator:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the job that is submitting this job.
+          x-longDescription: This parameter shall contain a link to a resource of
+            type `Job` that represents the job that is submitting this job.
+        Parameters:
+          $ref: '#/components/schemas/JobDocument_v1_0_0_Parameter'
+          description: The list of parameters for the new job that are specific to
+            this job document.
+          x-longDescription: This parameter shall contain the list of parameters for
+            the new job that are specific to this job document.  Services shall reject
+            requests containing parameters that do not meet the requirements specified
+            by the `ParameterMetadata` property.
+        PreferredExecutors:
+          description: An array of links to the preferred executors to run this job.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          type: array
+          x-longDescription: This parameter shall contain an array of links to resources
+            of type `JobExecutor` that represent the preferred executors to run this
+            job.
+        StartTime:
+          description: The date and time when the job is scheduled to start.
+          format: date-time
+          type: string
+          x-longDescription: This parameter shall contain the date and time when the
+            job is scheduled to start.
+      required:
+      - Parameters
+      - PreferredExecutors
+      type: object
+      x-longDescription: This action shall create a new `Job` resource based on the
+        contents of this job document and additional parameters.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#JobDocument.v1_0_0.JobDocument'
+x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2025.2'

@@ -1,0 +1,775 @@
+components:
+  schemas:
+    Job_v1_3_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        '#Job.Cancel':
+          $ref: '#/components/schemas/Job_v1_3_0_Cancel'
+        '#Job.ForceStart':
+          $ref: '#/components/schemas/Job_v1_3_0_ForceStart'
+        '#Job.Invalidate':
+          $ref: '#/components/schemas/Job_v1_3_0_Invalidate'
+        '#Job.Resubmit':
+          $ref: '#/components/schemas/Job_v1_3_0_Resubmit'
+        '#Job.Resume':
+          $ref: '#/components/schemas/Job_v1_3_0_Resume'
+        '#Job.Suspend':
+          $ref: '#/components/schemas/Job_v1_3_0_Suspend'
+        '#Job.Validate':
+          $ref: '#/components/schemas/Job_v1_3_0_Validate'
+        Oem:
+          $ref: '#/components/schemas/Job_v1_3_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Cancel:
+      additionalProperties: false
+      description: Cancels the job.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall cancel the job if it is currently in the
+        `Running`, `Invalid`, or `Suspended` states.  The job shall transition to
+        `Cancelled` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_3_0
+    Job_v1_3_0_CancelRequestBody:
+      additionalProperties: false
+      description: Cancels the job.
+      properties: {}
+      type: object
+      x-longDescription: This action shall cancel the job if it is currently in the
+        `Running`, `Invalid`, or `Suspended` states.  The job shall transition to
+        `Cancelled` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_ForceStart:
+      additionalProperties: false
+      description: Forces the job to start.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall force the job to start running if it is
+        in the `Pending` state.  The job shall transition to `Running` if the action
+        is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_3_0
+    Job_v1_3_0_ForceStartRequestBody:
+      additionalProperties: false
+      description: Forces the job to start.
+      properties: {}
+      type: object
+      x-longDescription: This action shall force the job to start running if it is
+        in the `Pending` state.  The job shall transition to `Running` if the action
+        is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Invalidate:
+      additionalProperties: false
+      description: Invalidates the job.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall invalidate the job if it is in the `Pending`
+        state.  The job shall transition to `Invalid` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_3_0
+    Job_v1_3_0_InvalidateRequestBody:
+      additionalProperties: false
+      description: Invalidates the job.
+      properties: {}
+      type: object
+      x-longDescription: This action shall invalidate the job if it is in the `Pending`
+        state.  The job shall transition to `Invalid` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Job:
+      additionalProperties: false
+      description: The `Job` schema contains information about a job that a Redfish
+        job service schedules or executes.  Clients create jobs to describe a series
+        of operations that occur at periodic intervals.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/Job_v1_3_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        CreatedBy:
+          description: The person or program that created this job entry.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the username, software program
+            name, or other identifier indicating the creator of this job.
+        CreationTime:
+          description: The date and time when the job was created.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time when the
+            job was created.
+          x-versionAdded: v1_3_0
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        EndTime:
+          description: The date and time when the job was completed.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time when the
+            job was completed.  This property shall not appear if the job is running
+            or was not completed.  This property shall appear only if the `JobState`
+            is `Completed`, `Cancelled`, or `Exception`.
+        EstimatedCompletionTime:
+          description: The date and time when the job is expected to complete.
+          format: date-time
+          readOnly: true
+          type: string
+          x-excerpt: Job
+          x-longDescription: This property shall contain the date and time when the
+            job is expected to complete.  If the `EstimatedDuration` property is supported,
+            the value of this property shall contain the summation of the `StartTime`
+            property and the `EstimatedDuration` property.
+          x-versionAdded: v1_3_0
+        EstimatedDuration:
+          description: The estimated total time required to complete the job.
+          nullable: true
+          pattern: ^P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the estimated total time
+            needed to complete the job.  The value is not expected to change while
+            the job is in progress, but the service may update the value if it obtains
+            new information that significantly changes the expected duration.  Services
+            should be conservative in the reported estimate and clients should treat
+            this value as an estimate.
+          x-versionAdded: v1_1_0
+        HidePayload:
+          description: An indication of whether the contents of the payload or parameters
+            should be hidden from view after the job has been created.  If `true`,
+            responses do not return the payload or parameters.  If `false`, responses
+            return the payload or parameters.  If this property is not present when
+            the job is created, the default is `false`.
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the contents of
+            the payload should be hidden from view after the job has been created.  If
+            `true`, responses shall not return the `Payload` or `Parameters` properties.  If
+            `false`, responses shall return the `Payload` or `Parameters` properties.  If
+            this property is not present when the job is created, the default is `false`.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        JobPriority:
+          description: The requested priority for this job.
+          format: int64
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the requested priority of
+            this job.  The value `0` shall indicate the highest priority.  Increasing
+            values shall represent decreasing priority.
+          x-versionAdded: v1_3_0
+        JobState:
+          $ref: '#/components/schemas/Job_v1_3_0_JobState'
+          description: The state of the job.
+          readOnly: false
+          x-excerpt: Job
+          x-longDescription: This property shall contain the state of the job.
+        JobStatus:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Health
+          description: The status of the job.
+          readOnly: true
+          x-longDescription: This property shall contain the health status of the
+            job.  This property should contain `Critical` if one or more messages
+            in the `Messages` array contains the severity `Critical`.  This property
+            should contain `Warning` if one or more messages in the `Messages` array
+            contains the severity `Warning` and if no messages contain the severity
+            `Critical`.  This property should contain `OK` if all messages in the
+            `Messages` array contain the severity `OK` or if the array is empty.
+        JobType:
+          $ref: '#/components/schemas/Job_v1_3_0_JobType'
+          description: The type of this job.
+          readOnly: true
+          x-longDescription: This property shall contain the type of this job.
+          x-versionAdded: v1_3_0
+        Links:
+          $ref: '#/components/schemas/Job_v1_3_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+          x-versionAdded: v1_2_0
+        MaxExecutionTime:
+          description: The maximum amount of time the job is allowed to execute.
+          nullable: true
+          pattern: ^P(\d+D)?(T(\d+H)?(\d+M)?(\d+(.\d+)?S)?)?$
+          readOnly: false
+          type: string
+          x-longDescription: This property shall contain the maximum duration the
+            job is allowed to execute before being stopped by the service.
+        Messages:
+          description: An array of messages associated with the job.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Message.yaml#/components/schemas/Message_Message
+          type: array
+          x-longDescription: This property shall contain an array of messages associated
+            with the job.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Parameters:
+          $ref: '#/components/schemas/Job_v1_3_0_Parameters'
+          description: The parameters specified for running this document-based job.
+          x-longDescription: This property shall contain the parameters specified
+            for running this document-based job.  This property shall only be present
+            for document-based jobs and if the `HidePayload` property is `false`.
+          x-versionAdded: v1_3_0
+        Payload:
+          $ref: '#/components/schemas/Job_v1_3_0_Payload'
+          description: The HTTP and JSON request payload details for this user-specified
+            job.
+          x-longDescription: This property shall contain the HTTP and JSON request
+            payload information for executing this user-specified job.  This property
+            shall only be present for user-specified jobs and if the `HidePayload`
+            property is `false`.
+        PercentComplete:
+          description: The completion percentage of this job.
+          format: int64
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-excerpt: Job
+          x-longDescription: This property shall contain the completion progress of
+            the job, reported in percent of completion, `0` to `100`.  If the job
+            has not been started, the value shall be zero.
+          x-units: '%'
+        Schedule:
+          $ref: http://redfish.dmtf.org/schemas/v1/Schedule.yaml#/components/schemas/Schedule_Schedule
+          description: The schedule settings for this job.
+          x-longDescription: This property shall contain the scheduling details for
+            this job and the recurrence frequency for future instances of this job.  This
+            property shall not be present for document-based jobs.
+        StartTime:
+          description: The date and time when the job was started or is scheduled
+            to start.
+          format: date-time
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the date and time when the
+            job was last started or is scheduled to start.
+        StepOrder:
+          description: The serialized execution order of the job steps.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of `Id` property
+            values for the job steps in the order that they shall be executed.  Each
+            step shall be completed prior to the execution of the next step in array
+            order.  An incomplete list of steps shall be considered an invalid configuration.  If
+            this property is not present or contains an empty array it shall indicate
+            that the step execution order is omitted and may occur in parallel or
+            in series as determined by the service.  This property shall not be present
+            for document-based jobs.
+        Steps:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to a collection of steps for this job.
+          readOnly: true
+          x-longDescription: This property shall contain the link to a resource collection
+            of type `JobCollection`.  This property shall not be present if this resource
+            represents a step for a job.  This property shall not be present for document-based
+            jobs.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall contain a job in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_JobExcerpt:
+      additionalProperties: false
+      description: The `Job` schema contains information about a job that a Redfish
+        job service schedules or executes.  Clients create jobs to describe a series
+        of operations that occur at periodic intervals.
+      properties:
+        EstimatedCompletionTime:
+          description: The date and time when the job is expected to complete.
+          format: date-time
+          readOnly: true
+          type: string
+          x-excerpt: Job
+          x-longDescription: This property shall contain the date and time when the
+            job is expected to complete.  If the `EstimatedDuration` property is supported,
+            the value of this property shall contain the summation of the `StartTime`
+            property and the `EstimatedDuration` property.
+          x-versionAdded: v1_3_0
+        JobState:
+          $ref: '#/components/schemas/Job_v1_3_0_JobState'
+          description: The state of the job.
+          readOnly: false
+          x-excerpt: Job
+          x-longDescription: This property shall contain the state of the job.
+        PercentComplete:
+          description: The completion percentage of this job.
+          format: int64
+          maximum: 100
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: integer
+          x-excerpt: Job
+          x-longDescription: This property shall contain the completion progress of
+            the job, reported in percent of completion, `0` to `100`.  If the job
+            has not been started, the value shall be zero.
+          x-units: '%'
+      type: object
+      x-excerpt: Job
+      x-longDescription: This resource shall contain a job in a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_JobState:
+      enum:
+      - New
+      - Starting
+      - Running
+      - Suspended
+      - Interrupted
+      - Pending
+      - Stopping
+      - Completed
+      - Cancelled
+      - Exception
+      - Service
+      - UserIntervention
+      - Continue
+      - Validating
+      - Invalid
+      type: string
+      x-enumDescriptions:
+        Cancelled: Job was cancelled.
+        Completed: Job was completed.
+        Continue: Job is to resume operation.
+        Exception: Job has stopped due to an exception condition.
+        Interrupted: Job has been interrupted.
+        Invalid: Job is invalid.
+        New: A new job.
+        Pending: Job is pending and has not started.
+        Running: Job is running normally.
+        Service: Job is running as a service.
+        Starting: Job is starting.
+        Stopping: Job is in the process of stopping.
+        Suspended: Job has been suspended.
+        UserIntervention: Job is waiting for user intervention.
+        Validating: Job is validating.
+      x-enumLongDescriptions:
+        Cancelled: This value shall indicate that the operation completed because
+          the job was cancelled by an operator.  The job may restart in the future
+          based on the scheduling configuration of the job or operations performed
+          by a user.
+        Completed: This value shall indicate that the operation completed successfully
+          or with warnings.  The job may restart in the future based on the scheduling
+          configuration of the job or operations performed by a user.
+        Continue: This value shall indicate that the operation has been resumed from
+          a paused condition and should return to a Running state.
+        Exception: This value shall indicate that the operation completed with errors.  The
+          job may restart in the future based on the scheduling configuration of the
+          job or operations performed by a user.
+        Interrupted: This value shall indicate that the operation has been interrupted
+          but is expected to restart and is therefore not complete.
+        Invalid: This value shall indicate that validation has determined that the
+          system is not properly configured to run the document-based job.  To perform
+          validation checks again, perform the `Validate` action.
+        New: This value shall indicate that this job is newly created but the operation
+          has not yet started.  This shall be the initial state for document-based
+          jobs.  Upon receiving the `Validate` action, or if the value of `ValidationPolicy`
+          in the `JobService` resource contains `Automatic`, the document-based job's
+          `JobState` shall transition to `Validating`.  If the `ValidationPolicy`
+          property in the `JobService` resource contains `Bypass`, the `JobState`
+          for a document-based job shall transition to `Pending`.
+        Pending: This value shall indicate that the operation is pending some condition
+          and has not yet begun to execute.
+        Running: This value shall indicate that the operation is executing.  Jobs
+          that complete successfully shall transition from this state to the `Completed`
+          state.  Jobs that do not complete successfully shall transition from this
+          state to the `Exception` state.
+        Service: This value shall indicate that the operation is now running as a
+          service and expected to continue operation until stopped or killed.
+        Starting: This value shall indicate that the operation is starting.
+        Stopping: This value shall indicate that the operation is stopping but is
+          not yet complete.
+        Suspended: This value shall indicate that the operation has been suspended
+          but is expected to restart and is therefore not complete.  To resume a job,
+          perform the `Resume` action.
+        UserIntervention: This value shall indicate that the operation is waiting
+          for a user to intervene and needs to be manually continued, stopped, or
+          cancelled.
+        Validating: This value shall indicate that the document-based job is validating
+          the state of the system to determine if it can run.  For example, a job
+          that runs on factory equipment might check to ensure that the equipment
+          is properly configured and has sufficient ingredients to run the job.  If
+          the validation checks fail, the job shall transition to the `Invalid` state.  If
+          the validation checks are successful, the job shall transition to the `Pending`
+          state.
+      x-enumVersionAdded:
+        Invalid: v1_3_0
+        Validating: v1_3_0
+    Job_v1_3_0_JobType:
+      enum:
+      - DocumentBased
+      - UserSpecified
+      - ServiceGenerated
+      type: string
+      x-enumDescriptions:
+        DocumentBased: A document-based job.
+        ServiceGenerated: A service-generated job.
+        UserSpecified: A user-specified job.
+      x-enumLongDescriptions:
+        DocumentBased: This value shall indicate a job that was created by performing
+          the `SubmitJob` action on a `JobDocument` resource.
+        ServiceGenerated: This value shall indicate a job that was created automatically
+          by the service as part of its internal policies.
+        UserSpecified: This value shall indicate a job that was created by performing
+          an HTTP `POST` operation on a `JobCollection` resource.
+    Job_v1_3_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        CreatedResources:
+          description: An array of URIs referencing the resources created as the result
+            of this job.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            indicating the resources created as the result of this job.  Services
+            shall set this property prior to the job entering its final state.
+          x-versionAdded: v1_2_0
+        CreatedResources@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Executor:
+          description: A link to the executor that is running this job.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `JobExecutor` that represents the executor that is running this job.
+          x-versionAdded: v1_3_0
+        JobDocument:
+          description: A link to the job document that was used to create this job.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `JobDocument` that represents the job document that was used to create
+            this job.
+          x-versionAdded: v1_3_0
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        ParentJob:
+          description: The link to the job that created this job.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Job` that represents the job that created this job.
+          x-versionAdded: v1_3_0
+        PreferredExecutors:
+          description: An array of links to the preferred executors to run this job.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `JobExecutor` that represent the preferred executors to run this
+            job.
+          x-versionAdded: v1_3_0
+        PreferredExecutors@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        SubsidiaryJobs:
+          description: An array of links to the jobs created by this job.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `Job` that represent the jobs created by this job.
+          x-versionAdded: v1_3_0
+        SubsidiaryJobs@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        ValidatedExecutors:
+          description: An array of links to the executors that have been validated
+            to run this job.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `JobExecutor` that represent the executors that have been validated
+            to run this job.
+          x-versionAdded: v1_3_0
+        ValidatedExecutors@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Parameters:
+      additionalProperties: true
+      description: The parameters used when running this instance of the job.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the parameters to use when running
+        this job.  Each property-value pair specifies a parameter and its value as
+        specified when the job was submitted.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+        ^[A-Za-z][A-Za-z0-9_]+$: {}
+    Job_v1_3_0_Payload:
+      additionalProperties: false
+      description: The HTTP and JSON payload details for this job.
+      properties:
+        HttpHeaders:
+          description: An array of HTTP headers in this job.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of HTTP headers
+            in this job.
+        HttpOperation:
+          description: The HTTP operation that executes this job.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the HTTP operation that executes
+            this job.
+        JsonBody:
+          description: The JSON payload to use in the execution of this job.
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain JSON-formatted payload for
+            this job.
+        TargetUri:
+          description: The link to the target for this job.
+          format: uri-reference
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain link to a target location
+            for an HTTP operation.
+      type: object
+      x-longDescription: This object shall contain information detailing the HTTP
+        and JSON payload information for executing this job.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Resubmit:
+      additionalProperties: false
+      description: Resubmits the job.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall resubmit a job to the job service.  The
+        new job shall be based on the job document, and properties of the resource
+        associated with this action.  Services shall take appropriate measures to
+        make sure that appropriate security is maintained - for instance, only allowing
+        the same user that created the job to resubmit it.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_3_0
+    Job_v1_3_0_ResubmitRequestBody:
+      additionalProperties: false
+      description: Resubmits the job.
+      properties:
+        StartTime:
+          description: The time to start the job.
+          format: date-time
+          type: string
+          x-longDescription: This parameter shall contain the time to start the job.
+      type: object
+      x-longDescription: This action shall resubmit a job to the job service.  The
+        new job shall be based on the job document, and properties of the resource
+        associated with this action.  Services shall take appropriate measures to
+        make sure that appropriate security is maintained - for instance, only allowing
+        the same user that created the job to resubmit it.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Resume:
+      additionalProperties: false
+      description: Resumes the job.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall resume the job if it is in the `Suspended`
+        state.  The job shall transition to `Running` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_3_0
+    Job_v1_3_0_ResumeRequestBody:
+      additionalProperties: false
+      description: Resumes the job.
+      properties: {}
+      type: object
+      x-longDescription: This action shall resume the job if it is in the `Suspended`
+        state.  The job shall transition to `Running` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Suspend:
+      additionalProperties: false
+      description: Suspends the job.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall suspend the job if it is in the `Running`
+        state.  The job shall transition to `Suspended` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_3_0
+    Job_v1_3_0_SuspendRequestBody:
+      additionalProperties: false
+      description: Suspends the job.
+      properties: {}
+      type: object
+      x-longDescription: This action shall suspend the job if it is in the `Running`
+        state.  The job shall transition to `Suspended` if the action is successful.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    Job_v1_3_0_Validate:
+      additionalProperties: false
+      description: Validates the job.
+      properties:
+        target:
+          description: Link to invoke action
+          format: uri-reference
+          type: string
+        title:
+          description: Friendly action name
+          type: string
+      type: object
+      x-longDescription: This action shall request the validation the job if it is
+        in the `New` state.  The job shall transition to `Pending` if the action is
+        successful.  If the job is not valid, it shall transition to `Invalid`.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+      x-versionAdded: v1_3_0
+    Job_v1_3_0_ValidateRequestBody:
+      additionalProperties: false
+      description: Validates the job.
+      properties: {}
+      type: object
+      x-longDescription: This action shall request the validation the job if it is
+        in the `New` state.  The job shall transition to `Pending` if the action is
+        successful.  If the job is not valid, it shall transition to `Invalid`.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#Job.v1_3_0.Job'
+x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2025.2'

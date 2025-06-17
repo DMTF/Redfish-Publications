@@ -4,6 +4,15 @@ components:
       additionalProperties: false
       description: A condition that requires attention.
       properties:
+        ConditionType:
+          description: The type of condition.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_22_0.yaml#/components/schemas/Resource_v1_22_0_ConditionType
+          - enum:
+            - null
+          readOnly: true
+          x-longDescription: This property shall contain the type of condition.
+          x-versionAdded: v1_22_0
         LogEntry:
           $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
           description: The link to the log entry created for this condition.
@@ -128,7 +137,7 @@ components:
       x-longDescription: This property shall contain the identifier for this resource.  The
         value shall conform with the 'Id' clause of the Redfish Specification.
     Resource_Identifier:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_Identifier
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_22_0.yaml#/components/schemas/Resource_v1_22_0_Identifier
       description: Any additional identifiers for a resource.
       x-longDescription: This type shall contain any additional identifiers for a
         resource.
@@ -174,7 +183,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
     Resource_Location:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_Location
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_22_0.yaml#/components/schemas/Resource_v1_22_0_Location
       description: The location of a resource.
       x-longDescription: This type shall describe the location of a resource.
     Resource_Name:
@@ -225,7 +234,7 @@ components:
       x-enumVersionAdded:
         Paused: v1_13_0
     Resource_ReferenceableMember:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_ReferenceableMember
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_22_0.yaml#/components/schemas/Resource_v1_22_0_ReferenceableMember
     Resource_ResetType:
       enum:
       - 'On'
@@ -337,9 +346,9 @@ components:
         Resume: v1_13_0
         Suspend: v1_13_0
     Resource_Resource:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_Resource
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_22_0.yaml#/components/schemas/Resource_v1_22_0_Resource
     Resource_ResourceCollection:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_21_0.yaml#/components/schemas/Resource_v1_21_0_ResourceCollection
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_22_0.yaml#/components/schemas/Resource_v1_22_0_ResourceCollection
     Resource_State:
       enum:
       - Enabled

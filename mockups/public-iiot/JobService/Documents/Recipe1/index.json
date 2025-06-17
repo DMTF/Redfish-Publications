@@ -1,0 +1,66 @@
+{
+    "@odata.type": "#JobDocument.v1_0_0.JobDocument",
+    "Id": "Recipe1",
+    "Name": "Sweet candy",
+    "Description": "Produce specified amount of the sweet candies",
+    "Actions": {
+        "#JobDocument.SubmitJob": {
+            "target": "/redfish/v1/JobService/Documents/Recipe1/Actions/JobDocument.SubmitJob"
+        }
+    },
+    "DocumentType": "Script",
+    "Version": "1.0.0-20210215",
+    "CreationTime": "2022-01-16T04:14:33+06:00",
+    "DocumentDataURI": "https://recipestore.vendor.com/recipes?Action=Download&RecipeId=SweetCandy",
+    "Status": {
+        "State": "Enabled",
+        "Health": "OK"
+    },
+    "ParameterMetadata": [
+        {
+            "Name": "AmountPieces",
+            "DataType": "Number",
+            "MinimumValue": 0,
+            "Required": true,
+            "Description": "something",
+            "ValueHint": "10000"
+        },
+        {
+            "Name": "Flavors",
+            "AllowableValues": [
+                "Orange",
+                "Strawberry",
+                "Lemon",
+                "Lime",
+                "Raspberry",
+                "Vanilla"
+            ],
+            "DataType": "String",
+            "Required": true,
+            "Description": "The flavors of the candy.  One or two choices may be given",
+            "ValueHint": "Orange"
+        },
+        {
+            "Name": "Shape",
+            "AllowableValues": [
+                "Cylinder",
+                "Sphere",
+                "Dome",
+                "Cone"
+            ],
+            "DataType": "String",
+            "Required": true,
+            "Description": "The shape of the candy.",
+            "ValueHint": "Dome"
+        }
+    ],
+    "Links": {
+        "SupportedExecutors": [
+            {
+                "@odata.id": "/redfish/v1/JobService/Executors/1"
+            }
+        ]
+    },
+    "@odata.id": "/redfish/v1/JobService/Documents/Recipe1",
+    "@Redfish.Copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}

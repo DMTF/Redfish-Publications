@@ -1,7 +1,7 @@
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
 |   Row |   Sequence# | Format   | Flags                          | Field String                    |   Child Count | Offset   |
 +=======+=============+==========+================================+=================================+===============+==========+
-|     0 |           0 | Set      |                                | ServiceRoot                     |            38 | 1        |
+|     0 |           0 | Set      |                                | ServiceRoot                     |            39 | 1        |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
 |     1 |           0 | Set      | Nullable=False,Permission=Read | AccountService                  |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
@@ -15,7 +15,7 @@
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
 |     6 |           5 | Set      | Nullable=False,Permission=Read | JsonSchemas                     |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|     7 |           6 | Set      | Nullable=False,                | Links                           |             3 | 39       |
+|     7 |           6 | Set      | Nullable=False,                | Links                           |             3 | 40       |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
 |     8 |           7 | Set      | Nullable=False,Permission=Read | Managers                        |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
@@ -43,7 +43,7 @@
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
 |    20 |          19 | String   | Nullable=True,Permission=Read  | Product                         |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    21 |          20 | Set      | Nullable=False,                | ProtocolFeaturesSupported       |            11 | 42       |
+|    21 |          20 | Set      | Nullable=False,                | ProtocolFeaturesSupported       |            11 | 43       |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
 |    22 |          21 | Set      | Nullable=False,Permission=Read | JobService                      |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
@@ -79,53 +79,55 @@
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
 |    38 |          37 | Set      | Nullable=False,Permission=Read | ThermalEquipment                |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    39 |           0 | Set      | Nullable=False,                | Oem                             |             0 |          |
+|    39 |          38 | Set      | Nullable=False,Permission=Read | AutomationNodes                 |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    40 |           1 | Set      | Nullable=False,Permission=Read | Sessions                        |             0 |          |
+|    40 |           0 | Set      | Nullable=False,                | Oem                             |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    41 |           2 | Set      | Nullable=False,Permission=Read | ManagerProvidingService         |             0 |          |
+|    41 |           1 | Set      | Nullable=False,Permission=Read | Sessions                        |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    42 |           0 | Set      | Nullable=False,                | ExpandQuery                     |             5 | 53       |
+|    42 |           2 | Set      | Nullable=False,Permission=Read | ManagerProvidingService         |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    43 |           1 | Boolean  | Nullable=False,Permission=Read | FilterQuery                     |             0 |          |
+|    43 |           0 | Set      | Nullable=False,                | ExpandQuery                     |             5 | 54       |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    44 |           2 | Boolean  | Nullable=False,Permission=Read | SelectQuery                     |             0 |          |
+|    44 |           1 | Boolean  | Nullable=False,Permission=Read | FilterQuery                     |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    45 |           3 | Boolean  | Nullable=False,Permission=Read | ExcerptQuery                    |             0 |          |
+|    45 |           2 | Boolean  | Nullable=False,Permission=Read | SelectQuery                     |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    46 |           4 | Boolean  | Nullable=False,Permission=Read | OnlyMemberQuery                 |             0 |          |
+|    46 |           3 | Boolean  | Nullable=False,Permission=Read | ExcerptQuery                    |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    47 |           5 | Set      | Nullable=False,                | DeepOperations                  |             3 | 58       |
+|    47 |           4 | Boolean  | Nullable=False,Permission=Read | OnlyMemberQuery                 |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    48 |           6 | Boolean  | Nullable=False,Permission=Read | MultipleHTTPRequests            |             0 |          |
+|    48 |           5 | Set      | Nullable=False,                | DeepOperations                  |             3 | 59       |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    49 |           7 | Boolean  | Nullable=False,Permission=Read | FilterQueryComparisonOperations |             0 |          |
+|    49 |           6 | Boolean  | Nullable=False,Permission=Read | MultipleHTTPRequests            |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    50 |           8 | Boolean  | Nullable=False,Permission=Read | FilterQueryCompoundOperations   |             0 |          |
+|    50 |           7 | Boolean  | Nullable=False,Permission=Read | FilterQueryComparisonOperations |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    51 |           9 | Boolean  | Nullable=False,Permission=Read | TopSkipQuery                    |             0 |          |
+|    51 |           8 | Boolean  | Nullable=False,Permission=Read | FilterQueryCompoundOperations   |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    52 |          10 | Boolean  | Nullable=False,Permission=Read | IncludeOriginOfConditionQuery   |             0 |          |
+|    52 |           9 | Boolean  | Nullable=False,Permission=Read | TopSkipQuery                    |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    53 |           0 | Boolean  | Nullable=False,Permission=Read | ExpandAll                       |             0 |          |
+|    53 |          10 | Boolean  | Nullable=False,Permission=Read | IncludeOriginOfConditionQuery   |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    54 |           1 | Boolean  | Nullable=False,Permission=Read | Levels                          |             0 |          |
+|    54 |           0 | Boolean  | Nullable=False,Permission=Read | ExpandAll                       |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    55 |           2 | Boolean  | Nullable=False,Permission=Read | Links                           |             0 |          |
+|    55 |           1 | Boolean  | Nullable=False,Permission=Read | Levels                          |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    56 |           3 | Integer  | Nullable=False,Permission=Read | MaxLevels                       |             0 |          |
+|    56 |           2 | Boolean  | Nullable=False,Permission=Read | Links                           |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    57 |           4 | Boolean  | Nullable=False,Permission=Read | NoLinks                         |             0 |          |
+|    57 |           3 | Integer  | Nullable=False,Permission=Read | MaxLevels                       |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    58 |           0 | Boolean  | Nullable=False,Permission=Read | DeepPATCH                       |             0 |          |
+|    58 |           4 | Boolean  | Nullable=False,Permission=Read | NoLinks                         |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    59 |           1 | Boolean  | Nullable=False,Permission=Read | DeepPOST                        |             0 |          |
+|    59 |           0 | Boolean  | Nullable=False,Permission=Read | DeepPATCH                       |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-|    60 |           2 | Integer  | Nullable=False,Permission=Read | MaxLevels                       |             0 |          |
+|    60 |           1 | Boolean  | Nullable=False,Permission=Read | DeepPOST                        |             0 |          |
 +-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
-Total Entries: 61
-Fixed size consumed (bytes): 622 (0x26e)
-Field string size consumed (bytes): 802 (0x322)
-Total size (bytes): 1424 (0x590)
-Version: 0XF118F000
-Signature: 0x4e527375
+|    61 |           2 | Integer  | Nullable=False,Permission=Read | MaxLevels                       |             0 |          |
++-------+-------------+----------+--------------------------------+---------------------------------+---------------+----------+
+Total Entries: 62
+Fixed size consumed (bytes): 632 (0x278)
+Field string size consumed (bytes): 818 (0x332)
+Total size (bytes): 1450 (0x5aa)
+Version: 0XF119F000
+Signature: 0x2c5e9cfe

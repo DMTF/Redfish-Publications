@@ -22,22 +22,25 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_3_4.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_4_4.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_4_5.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_5_4.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_5_5.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_6_3.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_6_4.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_7_3.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_7_4.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_8_3.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_8_4.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_9_0.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_9_1.json#/definitions/Certificate"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_10_0.json#/definitions/Certificate"
                 }
             ],
             "deletable": true,
@@ -126,26 +129,37 @@
                 "/redfish/v1/AccountService/OutboundConnections/{OutboundConnectionId}/Certificates/{CertificateId}",
                 "/redfish/v1/AccountService/OutboundConnections/{OutboundConnectionId}/ClientCertificates/{CertificateId}",
                 "/redfish/v1/Chassis/{ChassisId}/PowerSubsystem/PowerSupplies/{PowerSupplyId}/Certificates/{CertificateId}"
+            ],
+            "urisDeprecated": [
+                "/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/Drives/{DriveId}/Certificates/{CertificateId}",
+                "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/Drives/{DriveId}/Certificates/{CertificateId}",
+                "/redfish/v1/CompositionService/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/Drives/{DriveId}/Certificates/{CertificateId}",
+                "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Storage/{StorageId}/Drives/{DriveId}/Certificates/{CertificateId}",
+                "/redfish/v1/ResourceBlocks/{ResourceBlockId}/Systems/{ComputerSystemId}/Storage/{StorageId}/Drives/{DriveId}/Certificates/{CertificateId}"
             ]
         },
         "CertificateType": {
             "enum": [
                 "PEM",
                 "PEMchain",
-                "PKCS7"
+                "PKCS7",
+                "PKCS12"
             ],
             "enumDescriptions": {
                 "PEM": "A Privacy Enhanced Mail (PEM)-encoded single certificate.",
                 "PEMchain": "A Privacy Enhanced Mail (PEM)-encoded certificate chain.",
+                "PKCS12": "A Base64-encoded PKCS12 certificate bundle.",
                 "PKCS7": "A Privacy Enhanced Mail (PEM)-encoded PKCS7 certificate."
             },
             "enumLongDescriptions": {
                 "PEM": "This value shall indicate the format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined structures, representing a single certificate.",
-                "PEMchain": "This value shall indicate the format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined structures, representing a certificate chain.",
-                "PKCS7": "The format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined and RFC2315-defined structures.  The service can discard additional certificates or other data in the structure."
+                "PEMchain": "This value shall indicate the format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined structures, representing a certificate chain.  When this value is specified, the properties of the resource, except for `CertificateString`, shall contain the information from the leaf certificate.  When this value is specified, `CertificateString` shall contain the entire PEM chain.",
+                "PKCS12": "This value shall indicate the format of the certificate shall contain a Base64-encoded string, with padding characters, containing RFC7292-defined structures, representing a PKCS12 archive of one or more certificates, keys, or other cryptographic data.  The service may discard additional certificates or other data in the structure.",
+                "PKCS7": "The format of the certificate shall contain a Privacy Enhanced Mail (PEM)-encoded string, containing RFC5280-defined and RFC2315-defined structures.  The service may discard additional certificates or other data in the structure."
             },
             "enumVersionAdded": {
-                "PEMchain": "v1_4_0"
+                "PEMchain": "v1_4_0",
+                "PKCS12": "v1_10_0"
             },
             "type": "string"
         },

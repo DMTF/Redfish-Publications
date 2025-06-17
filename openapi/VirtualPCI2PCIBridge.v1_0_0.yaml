@@ -1,0 +1,197 @@
+components:
+  schemas:
+    VirtualPCI2PCIBridge_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/VirtualPCI2PCIBridge_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    VirtualPCI2PCIBridge_v1_0_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Endpoints:
+          description: The links to the endpoints associated with this vPPB.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain an array of links to resources
+            of type `Endpoint` that represent the endpoints associated with this vPPB.
+        Endpoints@odata.count:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_count
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        Port:
+          description: The link to the port associated with this vPPB.
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          - enum:
+            - null
+          readOnly: false
+          x-longDescription: This property shall contain a link to a resource of type
+            `Port` that represents the port associated with this vPPB.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    VirtualPCI2PCIBridge_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    VirtualPCI2PCIBridge_v1_0_0_VirtualPCI2PCIBridge:
+      additionalProperties: false
+      description: The `VirtualPCI2PCIBridge` schema describes Virtual PCI-to-PCI
+        Bridge (vPPB) inside a CXL switch that is owned by the host.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/VirtualPCI2PCIBridge_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        BindingStatus:
+          $ref: '#/components/schemas/VirtualPCI2PCIBridge_v1_0_0_vPPBStatusTypes'
+          description: The binding status of the vPPB.
+          readOnly: true
+          x-longDescription: This property shall contain the binding status of the
+            vPPB.
+        BoundLDId:
+          description: The identifier of the bound local logical device.
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the identifier of the bound
+            local logical device bound to this vPPB.  This property shall only be
+            present if `BindingStatus` contains `BoundLD`.
+        BoundPBRId:
+          description: The identifier of the bound PBR.
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the identifier of PBR bound
+            to this vPPB.  This property shall only be present if `BindingStatus`
+            contains `BoundPID`.
+        BoundPortId:
+          description: The physical port number of the bound port.
+          format: int64
+          readOnly: true
+          type: integer
+          x-longDescription: This property shall contain the physical port number
+            of the port bound to this vPPB.  This property shall only be present if
+            `BindingStatus` contains `BoundPhysicalPort` or `BoundLD`.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        GCXLID:
+          description: The GCXLID for the CXL logical device bound to this vPPB.
+          nullable: true
+          pattern: ^([0-9A-Fa-f]{2}-){7}[0-9A-Fa-f]{2}:([0-9A-Fa-f]{4})$
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the globally unique CXL logical
+            device identifier (GCXLID) for the CXL logical device that is bound to
+            this vPPB.
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/VirtualPCI2PCIBridge_v1_0_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+        VPPBId:
+          description: The Virtual PCI-PCI Bridge identifier.
+          nullable: true
+          readOnly: true
+          type: string
+          x-longDescription: This property shall contain the identifier of the vPPB.  This
+            property shall contain the same value as the `Id` property.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a Virtual PCI-to-PCI Bridge
+        (vPPB) inside a CXL switch that is host-owned.  This can be bound to a port
+        that is either disconnected, connected to a PCIe component, or connected to
+        a CXL component.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    VirtualPCI2PCIBridge_v1_0_0_vPPBStatusTypes:
+      enum:
+      - Unbound
+      - Busy
+      - BoundPhysicalPort
+      - BoundLD
+      - BoundPID
+      type: string
+      x-enumDescriptions:
+        BoundLD: This vPPB is bound to a CXL logical device.
+        BoundPID: This vPPB is bound to a PBR ID.
+        BoundPhysicalPort: This vPPB is bound to a physical port.
+        Busy: Binding or unbinding is in progress for this vPPB.
+        Unbound: This vPPB is in unbound state.
+      x-enumLongDescriptions:
+        BoundLD: This value shall indicate the CXL Specification-defined 'Bound LD'
+          state for the vPPB.
+        BoundPID: This value shall indicate the CXL Specification-defined 'Bound PBR
+          Id' state for the vPPB.
+        BoundPhysicalPort: This value shall indicate the CXL Specification-defined
+          'Bound Physical Port' state for the vPPB.
+        Busy: This value shall indicate the CXL Specification-defined 'Binding or
+          Unbinding' state for the vPPB.
+        Unbound: This value shall indicate the CXL Specification-defined 'Unbound'
+          state for the vPPB.
+title: '#VirtualPCI2PCIBridge.v1_0_0.VirtualPCI2PCIBridge'
+x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-owningEntity: DMTF
+x-release: '2025.2'

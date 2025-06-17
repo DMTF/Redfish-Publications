@@ -1,0 +1,55 @@
+{
+    "@odata.type": "#AutomationNode.v1_0_0.AutomationNode",
+    "Id": "VelocityMover",
+    "Name": "Conveyor",
+    "Description": "An example of a velocity-based motion automation node.",
+    "Status": {
+        "State": "Enabled",
+        "Health": "Warning",
+        "Conditions": [
+            {
+                "MessageId": "Power.CurrentAboveUpperCriticalThreshold",
+                "Message": "Current 'Conveyor' reading of 9.3 amperes is above the 6.0 upper critical threshold.",
+                "MessageArgs": [
+                    "Conveyor",
+                    "9.3",
+                    "6.0"
+                ],
+                "Severity": "Warning",
+                "Timestamp": "2024-03-07T14:44:00Z"
+            }
+        ]
+    },
+    "NodeState": "ConditionStop",
+    "NodeType": "MotionVelocity",
+    "MotionProfile": "SCurve",
+    "Instrumentation": {
+        "@odata.id": "/redfish/v1/AutomationNodes/VelocityMover/AutomationInstrumentation"
+    },
+    "Links": {
+        "Chassis": [
+            {
+                "@odata.id": "/redfish/v1/Chassis/Conveyor"
+            }
+        ]
+    },
+    "Actions": {
+        "#AutomationNode.Reset": {
+            "target": "/redfish/v1/AutomationNodes/VelocityMover/Actions/AutomationNode.Reset"
+        },
+        "#AutomationNode.SendTrigger": {
+            "target": "/redfish/v1/AutomationNodes/VelocityMover/Actions/AutomationNode.SendTrigger"
+        },
+        "#AutomationNode.Start": {
+            "target": "/redfish/v1/AutomationNodes/VelocityMover/Actions/AutomationNode.Start"
+        },
+        "#AutomationNode.Stop": {
+            "target": "/redfish/v1/AutomationNodes/VelocityMover/Actions/AutomationNode.Stop"
+        },
+        "#AutomationNode.Wait": {
+            "target": "/redfish/v1/AutomationNodes/VelocityMover/Actions/AutomationNode.Wait"
+        }
+    },
+    "@odata.id": "/redfish/v1/AutomationNodes/VelocityMover",
+    "@Redfish.Copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}
