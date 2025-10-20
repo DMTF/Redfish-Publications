@@ -80,6 +80,9 @@ components:
       x-longDescription: This action shall be used to establish a replication relationship
         by assigning an existing volume to serve as a target replica for an existing
         source volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_ChangeRAIDLayout:
       additionalProperties: false
       description: Request system change the RAID layout of the volume.
@@ -139,6 +142,9 @@ components:
         number of drives used by the volume, or another configuration change supported
         by the system. Note that usage of this action while online may potentially
         cause data loss if the available capacity is reduced.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_CheckConsistency:
       additionalProperties: false
       description: This action is used to force a check of the Volume's parity or
@@ -165,6 +171,9 @@ components:
       type: object
       x-longDescription: This defines the name of the custom action supported on this
         resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_CreateReplicaTarget:
       additionalProperties: false
       description: This action is used to create a new volume resource to provide
@@ -219,6 +228,9 @@ components:
       x-longDescription: This action shall be used to create a new volume resource
         to provide expanded data protection through a replica relationship with the
         specified source volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_ForceEnable:
       additionalProperties: false
       description: Request system force the volume to an enabled state regardless
@@ -246,6 +258,9 @@ components:
       type: object
       x-longDescription: This action shall request the system to force the volume
         to enabled state regardless of data loss scenarios.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_Initialize:
       additionalProperties: false
       description: This action is used to prepare the contents of the volume for use
@@ -293,6 +308,9 @@ components:
         resource. If InitializeMethod is not specified in the request body, but the
         property InitializeMethod is specified, the property InitializeMethod value
         should be used. If neither is specified, the InitializeMethod should be Foreground.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_Links:
       additionalProperties: false
       description: Add ability to manage spare capacity.
@@ -674,6 +692,9 @@ components:
       x-longDescription: This action shall be used to disable data synchronization
         between a source and target volume, remove the replication relationship, and
         optionally delete the target volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_ResumeReplication:
       additionalProperties: false
       description: This action is used to resume the active data synchronization between
@@ -710,6 +731,9 @@ components:
       x-longDescription: This action shall be used to resume the active data synchronization
         between a source and target volume, without otherwise altering the replication
         relationship.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_ReverseReplicationRelationship:
       additionalProperties: false
       description: This action is used to reverse the replication relationship between
@@ -744,6 +768,9 @@ components:
       type: object
       x-longDescription: This action shall be used to reverse the replication relationship
         between a source and target volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_SplitReplication:
       additionalProperties: false
       description: This action is used to split the replication relationship and suspend
@@ -778,6 +805,9 @@ components:
       type: object
       x-longDescription: This action shall be used to split the replication relationship
         and suspend data synchronization between a source and target volume.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_SuspendReplication:
       additionalProperties: false
       description: This action is used to suspend active data synchronization between
@@ -814,6 +844,9 @@ components:
       x-longDescription: This action shall be used to suspend active data synchronization
         between a source and target volume, without otherwise altering the replication
         relationship.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
     Volume_v1_6_3_Volume:
       additionalProperties: false
       description: Volume contains properties used to describe a volume, virtual disk,
@@ -862,7 +895,7 @@ components:
             unit of the associated volume.
           x-units: By
         Capacity:
-          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.v1_0_0.yaml#/components/schemas/Capacity_v1_0_0_Capacity
+          $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Capacity.yaml#/components/schemas/Capacity_Capacity
           description: Capacity utilization.
           x-longDescription: Information about the utilization of capacity allocated
             to this storage volume.
@@ -1228,7 +1261,8 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
 title: '#Volume.v1_6_3.Volume'
-x-copyright: Copyright 2015-2024 Storage Networking Industry Association (SNIA), USA.
+x-copyright: Copyright 2015-2025 Storage Networking Industry Association (SNIA), USA.
   All rights reserved.
+x-language: en
 x-owningEntity: SNIA
 x-release: 1.2.1

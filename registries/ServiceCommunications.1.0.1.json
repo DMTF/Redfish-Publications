@@ -1,0 +1,95 @@
+{
+    "@Redfish.Copyright": "Copyright 2014-2025 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_7_0.MessageRegistry",
+    "Id": "ServiceCommunications.1.0.1",
+    "Name": "Service Communications Message Registry",
+    "Language": "en",
+    "Description": "This registry defines messages to be used by a service to indicate communication problems with clients or other services.",
+    "RegistryPrefix": "ServiceCommunications",
+    "RegistryVersion": "1.0.1",
+    "OwningEntity": "DMTF",
+    "Release": "2024.4",
+    "Messages": {
+        "NameResolutionFailure": {
+            "Description": "Indicates that DNS or other name resolution failed on the indicated name.",
+            "LongDescription": "This message shall indicate that DNS or other name resolution failed on the indicated name.",
+            "Message": "There was an error resolving the name '%1'.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The network name that could not be resolved."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the network name of the remote service that could not be resolved."
+            ],
+            "Resolution": "Check your name server settings or the name provided."
+        },
+        "ConnectionRefused": {
+            "Description": "Indicates that a connection to the remote service was refused.",
+            "LongDescription": "This message shall indicate that a connection to the remote service was refused.",
+            "Message": "The connection to '%1:%2' was refused.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The network name of the service that refused the connection.",
+                "The port number that was refused."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the network name of the remote service that refused the connection.",
+                "This argument shall contain the port number that was refused."
+            ],
+            "Resolution": "Check the settings on the remote service or the port settings."
+        },
+        "ConnectionTimeout": {
+            "Description": "Indicates that a connection to the remote service timed out.",
+            "LongDescription": "This message shall indicate that a connection to the remote service timed out.",
+            "Message": "The connection to '%1:%2' timed out.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The network name of the service that timed out.",
+                "The port number that timed out."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the network name of the remote service that timed out.",
+                "This argument shall contain the port number that timed out."
+            ],
+            "Resolution": "Check the settings on the remote service or the port settings."
+        },
+        "HTTPFailure": {
+            "Description": "Indicates that an HTTP failure code was returned.",
+            "LongDescription": "This message shall indicate that an HTTP failure code was returned.",
+            "Message": "Received HTTP status code %1 from '%2'.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "number",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The HTTP status code that was returned.",
+                "The network name of the service that returned the status code."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the HTTP status code indicating an error that was returned.  This argument should contain a value in the `4XX` or `5XX` range.",
+                "This argument shall contain the network name of the remote service that returned the status code."
+            ],
+            "Resolution": "Check the payload settings and the remote service for errors."
+        }
+    }
+}

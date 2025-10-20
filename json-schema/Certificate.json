@@ -13,34 +13,37 @@
                     "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_0_8.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_1_7.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_1_8.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_2_7.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_2_8.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_3_4.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_3_5.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_4_5.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_4_6.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_5_5.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_5_6.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_6_4.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_6_5.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_7_4.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_7_5.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_8_4.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_8_5.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_9_1.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_9_2.json#/definitions/Certificate"
                 },
                 {
-                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_10_0.json#/definitions/Certificate"
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_10_1.json#/definitions/Certificate"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/Certificate.v1_11_0.json#/definitions/Certificate"
                 }
             ],
             "deletable": true,
@@ -128,7 +131,8 @@
                 "/redfish/v1/Chassis/{ChassisId}/TrustedComponents/{TrustedComponentId}/Certificates/{CertificateId}",
                 "/redfish/v1/AccountService/OutboundConnections/{OutboundConnectionId}/Certificates/{CertificateId}",
                 "/redfish/v1/AccountService/OutboundConnections/{OutboundConnectionId}/ClientCertificates/{CertificateId}",
-                "/redfish/v1/Chassis/{ChassisId}/PowerSubsystem/PowerSupplies/{PowerSupplyId}/Certificates/{CertificateId}"
+                "/redfish/v1/Chassis/{ChassisId}/PowerSubsystem/PowerSupplies/{PowerSupplyId}/Certificates/{CertificateId}",
+                "/redfish/v1/CertificateService/EnrollmentCACertificates/{CertificateId}"
             ],
             "urisDeprecated": [
                 "/redfish/v1/Systems/{ComputerSystemId}/Storage/{StorageId}/Drives/{DriveId}/Certificates/{CertificateId}",
@@ -162,6 +166,43 @@
                 "PKCS12": "v1_10_0"
             },
             "type": "string"
+        },
+        "CertificateUsageType": {
+            "enum": [
+                "User",
+                "Web",
+                "SSH",
+                "Device",
+                "Platform",
+                "BIOS",
+                "IDevID",
+                "LDevID",
+                "IAK",
+                "LAK",
+                "EK"
+            ],
+            "enumDescriptions": {
+                "BIOS": "This certificate is a BIOS certificate like those associated with UEFI.",
+                "Device": "This certificate is a device type certificate like those associated with SPDM and other standards.",
+                "EK": "This certificate is an EK certificate like those associated with TCG TPMs.",
+                "IAK": "This certificate is an IAK certificate like those associated with TCG TPMs.",
+                "IDevID": "This certificate is an IDevID certificate like those associated with TCG TPMs.",
+                "LAK": "This certificate is an LAK certificate like those associated with TCG TPMs.",
+                "LDevID": "This certificate is an LDevID certificate like those associated with TCG TPMs.",
+                "Platform": "This certificate is a platform type certificate like those associated with SPDM and other standards.",
+                "SSH": "This certificate is used for SSH.",
+                "User": "This certificate is a user certificate like those associated with a manager account.",
+                "Web": "This certificate is a web or HTTPS certificate like those used for event destinations."
+            },
+            "enumVersionAdded": {
+                "EK": "v1_9_0",
+                "IAK": "v1_8_0",
+                "IDevID": "v1_8_0",
+                "LAK": "v1_8_0",
+                "LDevID": "v1_8_0"
+            },
+            "type": "string",
+            "versionAdded": "v1_4_0"
         },
         "KeyUsage": {
             "description": "The usages of a key contained within a certificate.",

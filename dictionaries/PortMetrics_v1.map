@@ -1,13 +1,13 @@
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |   Row |   Sequence# | Format   | Flags                          | Field String                       |   Child Count | Offset   |
 +=======+=============+==========+================================+====================================+===============+==========+
-|     0 |           0 | Set      |                                | PortMetrics                        |            16 | 1        |
+|     0 |           0 | Set      |                                | PortMetrics                        |            17 | 1        |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|     1 |           0 | Set      | Nullable=False,                | Actions                            |             2 | 17       |
+|     1 |           0 | Set      | Nullable=False,                | Actions                            |             2 | 18       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     2 |           1 | String   | Nullable=True,Permission=Read  | Description                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|     3 |           2 | Set      | Nullable=False,                | GenZ                               |            11 | 19       |
+|     3 |           2 | Set      | Nullable=False,                | GenZ                               |            11 | 20       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     4 |           3 | String   | Nullable=False,Permission=Read | Id                                 |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
@@ -15,203 +15,235 @@
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     6 |           5 | Set      | Nullable=False,                | Oem                                |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|     7 |           6 | Set      | Nullable=False,                | Networking                         |            34 | 30       |
+|     7 |           6 | Set      | Nullable=False,                | Networking                         |            34 | 31       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     8 |           7 | Integer  | Nullable=True,Permission=Read  | RXBytes                            |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |     9 |           8 | Integer  | Nullable=True,Permission=Read  | RXErrors                           |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    10 |           9 | Array    | Nullable=False,                | SAS                                |             1 | 64       |
+|    10 |           9 | Array    | Nullable=False,                | SAS                                |             1 | 65       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |    11 |          10 | Integer  | Nullable=True,Permission=Read  | TXBytes                            |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
 |    12 |          11 | Integer  | Nullable=True,Permission=Read  | TXErrors                           |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    13 |          12 | Array    | Nullable=False,                | Transceivers                       |             1 | 69       |
+|    13 |          12 | Array    | Nullable=False,                | Transceivers                       |             1 | 70       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    14 |          13 | Set      | Nullable=False,                | FibreChannel                       |            15 | 75       |
+|    14 |          13 | Set      | Nullable=False,                | FibreChannel                       |            15 | 77       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    15 |          14 | Set      | Nullable=False,                | PCIeErrors                         |            11 | 90       |
+|    15 |          14 | Set      | Nullable=False,                | PCIeErrors                         |            11 | 92       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    16 |          15 | Set      | Nullable=False,                | CXL                                |             1 | 101      |
+|    16 |          15 | Set      | Nullable=False,                | CXL                                |             1 | 103      |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    17 |           0 | Set      | Nullable=False,                | Oem                                |             0 |          |
+|    17 |          16 | Set      | Nullable=False,                | PCIeMetrics                        |             9 | 104      |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    18 |           1 | Set      |                                | #PortMetrics.ResetMetrics          |             2 | 102      |
+|    18 |           0 | Set      | Nullable=False,                | Oem                                |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    19 |           0 | Integer  | Nullable=True,Permission=Read  | AccessKeyViolations                |             0 |          |
+|    19 |           1 | Set      |                                | #PortMetrics.ResetMetrics          |             2 | 113      |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    20 |           1 | Integer  | Nullable=True,Permission=Read  | EndToEndCRCErrors                  |             0 |          |
+|    20 |           0 | Integer  | Nullable=True,Permission=Read  | AccessKeyViolations                |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    21 |           2 | Integer  | Nullable=True,Permission=Read  | LLRRecovery                        |             0 |          |
+|    21 |           1 | Integer  | Nullable=True,Permission=Read  | EndToEndCRCErrors                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    22 |           3 | Integer  | Nullable=True,Permission=Read  | LinkNTE                            |             0 |          |
+|    22 |           2 | Integer  | Nullable=True,Permission=Read  | LLRRecovery                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    23 |           4 | Integer  | Nullable=True,Permission=Read  | MarkedECN                          |             0 |          |
+|    23 |           3 | Integer  | Nullable=True,Permission=Read  | LinkNTE                            |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    24 |           5 | Integer  | Nullable=True,Permission=Read  | NonCRCTransientErrors              |             0 |          |
+|    24 |           4 | Integer  | Nullable=True,Permission=Read  | MarkedECN                          |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    25 |           6 | Integer  | Nullable=True,Permission=Read  | PacketCRCErrors                    |             0 |          |
+|    25 |           5 | Integer  | Nullable=True,Permission=Read  | NonCRCTransientErrors              |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    26 |           7 | Integer  | Nullable=True,Permission=Read  | PacketDeadlineDiscards             |             0 |          |
+|    26 |           6 | Integer  | Nullable=True,Permission=Read  | PacketCRCErrors                    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    27 |           8 | Integer  | Nullable=True,Permission=Read  | RXStompedECRC                      |             0 |          |
+|    27 |           7 | Integer  | Nullable=True,Permission=Read  | PacketDeadlineDiscards             |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    28 |           9 | Integer  | Nullable=True,Permission=Read  | ReceivedECN                        |             0 |          |
+|    28 |           8 | Integer  | Nullable=True,Permission=Read  | RXStompedECRC                      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    29 |          10 | Integer  | Nullable=True,Permission=Read  | TXStompedECRC                      |             0 |          |
+|    29 |           9 | Integer  | Nullable=True,Permission=Read  | ReceivedECN                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    30 |           0 | Integer  | Nullable=True,Permission=Read  | RDMAProtectionErrors               |             0 |          |
+|    30 |          10 | Integer  | Nullable=True,Permission=Read  | TXStompedECRC                      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    31 |           1 | Integer  | Nullable=True,Permission=Read  | RDMAProtocolErrors                 |             0 |          |
+|    31 |           0 | Integer  | Nullable=True,Permission=Read  | RDMAProtectionErrors               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    32 |           2 | Integer  | Nullable=True,Permission=Read  | RDMARXBytes                        |             0 |          |
+|    32 |           1 | Integer  | Nullable=True,Permission=Read  | RDMAProtocolErrors                 |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    33 |           3 | Integer  | Nullable=True,Permission=Read  | RDMARXRequests                     |             0 |          |
+|    33 |           2 | Integer  | Nullable=True,Permission=Read  | RDMARXBytes                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    34 |           4 | Integer  | Nullable=True,Permission=Read  | RDMATXBytes                        |             0 |          |
+|    34 |           3 | Integer  | Nullable=True,Permission=Read  | RDMARXRequests                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    35 |           5 | Integer  | Nullable=True,Permission=Read  | RDMATXReadRequests                 |             0 |          |
+|    35 |           4 | Integer  | Nullable=True,Permission=Read  | RDMATXBytes                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    36 |           6 | Integer  | Nullable=True,Permission=Read  | RDMATXRequests                     |             0 |          |
+|    36 |           5 | Integer  | Nullable=True,Permission=Read  | RDMATXReadRequests                 |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    37 |           7 | Integer  | Nullable=True,Permission=Read  | RDMATXSendRequests                 |             0 |          |
+|    37 |           6 | Integer  | Nullable=True,Permission=Read  | RDMATXRequests                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    38 |           8 | Integer  | Nullable=True,Permission=Read  | RDMATXWriteRequests                |             0 |          |
+|    38 |           7 | Integer  | Nullable=True,Permission=Read  | RDMATXSendRequests                 |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    39 |           9 | Integer  | Nullable=True,Permission=Read  | RXBroadcastFrames                  |             0 |          |
+|    39 |           8 | Integer  | Nullable=True,Permission=Read  | RDMATXWriteRequests                |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    40 |          10 | Integer  | Nullable=True,Permission=Read  | RXDiscards                         |             0 |          |
+|    40 |           9 | Integer  | Nullable=True,Permission=Read  | RXBroadcastFrames                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    41 |          11 | Integer  | Nullable=True,Permission=Read  | RXFCSErrors                        |             0 |          |
+|    41 |          10 | Integer  | Nullable=True,Permission=Read  | RXDiscards                         |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    42 |          12 | Integer  | Nullable=True,Permission=Read  | RXFalseCarrierErrors               |             0 |          |
+|    42 |          11 | Integer  | Nullable=True,Permission=Read  | RXFCSErrors                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    43 |          13 | Integer  | Nullable=True,Permission=Read  | RXFrameAlignmentErrors             |             0 |          |
+|    43 |          12 | Integer  | Nullable=True,Permission=Read  | RXFalseCarrierErrors               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    44 |          14 | Integer  | Nullable=True,Permission=Read  | RXFrames                           |             0 |          |
+|    44 |          13 | Integer  | Nullable=True,Permission=Read  | RXFrameAlignmentErrors             |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    45 |          15 | Integer  | Nullable=True,Permission=Read  | RXMulticastFrames                  |             0 |          |
+|    45 |          14 | Integer  | Nullable=True,Permission=Read  | RXFrames                           |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    46 |          16 | Integer  | Nullable=True,Permission=Read  | RXOversizeFrames                   |             0 |          |
+|    46 |          15 | Integer  | Nullable=True,Permission=Read  | RXMulticastFrames                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    47 |          17 | Integer  | Nullable=True,Permission=Read  | RXPFCFrames                        |             0 |          |
+|    47 |          16 | Integer  | Nullable=True,Permission=Read  | RXOversizeFrames                   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    48 |          18 | Integer  | Nullable=True,Permission=Read  | RXPauseXOFFFrames                  |             0 |          |
+|    48 |          17 | Integer  | Nullable=True,Permission=Read  | RXPFCFrames                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    49 |          19 | Integer  | Nullable=True,Permission=Read  | RXPauseXONFrames                   |             0 |          |
+|    49 |          18 | Integer  | Nullable=True,Permission=Read  | RXPauseXOFFFrames                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    50 |          20 | Integer  | Nullable=True,Permission=Read  | RXUndersizeFrames                  |             0 |          |
+|    50 |          19 | Integer  | Nullable=True,Permission=Read  | RXPauseXONFrames                   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    51 |          21 | Integer  | Nullable=True,Permission=Read  | RXUnicastFrames                    |             0 |          |
+|    51 |          20 | Integer  | Nullable=True,Permission=Read  | RXUndersizeFrames                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    52 |          22 | Integer  | Nullable=True,Permission=Read  | TXBroadcastFrames                  |             0 |          |
+|    52 |          21 | Integer  | Nullable=True,Permission=Read  | RXUnicastFrames                    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    53 |          23 | Integer  | Nullable=True,Permission=Read  | TXDiscards                         |             0 |          |
+|    53 |          22 | Integer  | Nullable=True,Permission=Read  | TXBroadcastFrames                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    54 |          24 | Integer  | Nullable=True,Permission=Read  | TXExcessiveCollisions              |             0 |          |
+|    54 |          23 | Integer  | Nullable=True,Permission=Read  | TXDiscards                         |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    55 |          25 | Integer  | Nullable=True,Permission=Read  | TXFrames                           |             0 |          |
+|    55 |          24 | Integer  | Nullable=True,Permission=Read  | TXExcessiveCollisions              |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    56 |          26 | Integer  | Nullable=True,Permission=Read  | TXLateCollisions                   |             0 |          |
+|    56 |          25 | Integer  | Nullable=True,Permission=Read  | TXFrames                           |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    57 |          27 | Integer  | Nullable=True,Permission=Read  | TXMulticastFrames                  |             0 |          |
+|    57 |          26 | Integer  | Nullable=True,Permission=Read  | TXLateCollisions                   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    58 |          28 | Integer  | Nullable=True,Permission=Read  | TXMultipleCollisions               |             0 |          |
+|    58 |          27 | Integer  | Nullable=True,Permission=Read  | TXMulticastFrames                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    59 |          29 | Integer  | Nullable=True,Permission=Read  | TXPFCFrames                        |             0 |          |
+|    59 |          28 | Integer  | Nullable=True,Permission=Read  | TXMultipleCollisions               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    60 |          30 | Integer  | Nullable=True,Permission=Read  | TXPauseXOFFFrames                  |             0 |          |
+|    60 |          29 | Integer  | Nullable=True,Permission=Read  | TXPFCFrames                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    61 |          31 | Integer  | Nullable=True,Permission=Read  | TXPauseXONFrames                   |             0 |          |
+|    61 |          30 | Integer  | Nullable=True,Permission=Read  | TXPauseXOFFFrames                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    62 |          32 | Integer  | Nullable=True,Permission=Read  | TXSingleCollisions                 |             0 |          |
+|    62 |          31 | Integer  | Nullable=True,Permission=Read  | TXPauseXONFrames                   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    63 |          33 | Integer  | Nullable=True,Permission=Read  | TXUnicastFrames                    |             0 |          |
+|    63 |          32 | Integer  | Nullable=True,Permission=Read  | TXSingleCollisions                 |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    64 |           0 | Set      |                                |                                    |             4 | 65       |
+|    64 |          33 | Integer  | Nullable=True,Permission=Read  | TXUnicastFrames                    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    65 |           0 | Integer  | Nullable=True,Permission=Read  | InvalidDwordCount                  |             0 |          |
+|    65 |           0 | Set      |                                |                                    |             4 | 66       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    66 |           1 | Integer  | Nullable=True,Permission=Read  | LossOfDwordSynchronizationCount    |             0 |          |
+|    66 |           0 | Integer  | Nullable=True,Permission=Read  | InvalidDwordCount                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    67 |           2 | Integer  | Nullable=True,Permission=Read  | RunningDisparityErrorCount         |             0 |          |
+|    67 |           1 | Integer  | Nullable=True,Permission=Read  | LossOfDwordSynchronizationCount    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    68 |           3 | Integer  | Nullable=True,Permission=Read  | PhyResetProblemCount               |             0 |          |
+|    68 |           2 | Integer  | Nullable=True,Permission=Read  | RunningDisparityErrorCount         |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    69 |           0 | Set      |                                |                                    |             5 | 70       |
+|    69 |           3 | Integer  | Nullable=True,Permission=Read  | PhyResetProblemCount               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    70 |           0 | Real     | Nullable=True,Permission=Read  | RXInputPowerMilliWatts             |             0 |          |
+|    70 |           0 | Set      |                                |                                    |             6 | 71       |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    71 |           1 | Real     | Nullable=True,Permission=Read  | SupplyVoltage                      |             0 |          |
+|    71 |           0 | Real     | Nullable=True,Permission=Read  | RXInputPowerMilliWatts             |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    72 |           2 | Real     | Nullable=True,Permission=Read  | TXBiasCurrentMilliAmps             |             0 |          |
+|    72 |           1 | Real     | Nullable=True,Permission=Read  | SupplyVoltage                      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    73 |           3 | Real     | Nullable=True,Permission=Read  | TXOutputPowerMilliWatts            |             0 |          |
+|    73 |           2 | Real     | Nullable=True,Permission=Read  | TXBiasCurrentMilliAmps             |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    74 |           4 | String   | Nullable=True,Permission=Read  | WavelengthNanometers               |             0 |          |
+|    74 |           3 | Real     | Nullable=True,Permission=Read  | TXOutputPowerMilliWatts            |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    75 |           0 | Integer  | Nullable=True,Permission=Read  | CorrectableFECErrors               |             0 |          |
+|    75 |           4 | String   | Nullable=True,Permission=Read  | WavelengthNanometers               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    76 |           1 | Integer  | Nullable=True,Permission=Read  | InvalidCRCs                        |             0 |          |
+|    76 |           5 | Array    | Nullable=False,                | ByLane                             |             1 | 115      |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    77 |           2 | Integer  | Nullable=True,Permission=Read  | InvalidTXWords                     |             0 |          |
+|    77 |           0 | Integer  | Nullable=True,Permission=Read  | CorrectableFECErrors               |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    78 |           3 | Integer  | Nullable=True,Permission=Read  | LinkFailures                       |             0 |          |
+|    78 |           1 | Integer  | Nullable=True,Permission=Read  | InvalidCRCs                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    79 |           4 | Integer  | Nullable=True,Permission=Read  | LossesOfSignal                     |             0 |          |
+|    79 |           2 | Integer  | Nullable=True,Permission=Read  | InvalidTXWords                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    80 |           5 | Integer  | Nullable=True,Permission=Read  | LossesOfSync                       |             0 |          |
+|    80 |           3 | Integer  | Nullable=True,Permission=Read  | LinkFailures                       |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    81 |           6 | Integer  | Nullable=True,Permission=Read  | RXBBCreditZero                     |             0 |          |
+|    81 |           4 | Integer  | Nullable=True,Permission=Read  | LossesOfSignal                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    82 |           7 | Integer  | Nullable=True,Permission=Read  | RXExchanges                        |             0 |          |
+|    82 |           5 | Integer  | Nullable=True,Permission=Read  | LossesOfSync                       |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    83 |           8 | Integer  | Nullable=True,Permission=Read  | RXSequences                        |             0 |          |
+|    83 |           6 | Integer  | Nullable=True,Permission=Read  | RXBBCreditZero                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    84 |           9 | Integer  | Nullable=True,Permission=Read  | TXBBCreditZero                     |             0 |          |
+|    84 |           7 | Integer  | Nullable=True,Permission=Read  | RXExchanges                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    85 |          10 | Integer  | Nullable=True,Permission=Read  | TXBBCreditZeroDurationMilliseconds |             0 |          |
+|    85 |           8 | Integer  | Nullable=True,Permission=Read  | RXSequences                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    86 |          11 | Integer  | Nullable=True,Permission=Read  | TXBBCredits                        |             0 |          |
+|    86 |           9 | Integer  | Nullable=True,Permission=Read  | TXBBCreditZero                     |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    87 |          12 | Integer  | Nullable=True,Permission=Read  | TXExchanges                        |             0 |          |
+|    87 |          10 | Integer  | Nullable=True,Permission=Read  | TXBBCreditZeroDurationMilliseconds |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    88 |          13 | Integer  | Nullable=True,Permission=Read  | TXSequences                        |             0 |          |
+|    88 |          11 | Integer  | Nullable=True,Permission=Read  | TXBBCredits                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    89 |          14 | Integer  | Nullable=True,Permission=Read  | UncorrectableFECErrors             |             0 |          |
+|    89 |          12 | Integer  | Nullable=True,Permission=Read  | TXExchanges                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    90 |           0 | Integer  | Nullable=True,Permission=Read  | CorrectableErrorCount              |             0 |          |
+|    90 |          13 | Integer  | Nullable=True,Permission=Read  | TXSequences                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    91 |           1 | Integer  | Nullable=True,Permission=Read  | FatalErrorCount                    |             0 |          |
+|    91 |          14 | Integer  | Nullable=True,Permission=Read  | UncorrectableFECErrors             |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    92 |           2 | Integer  | Nullable=True,Permission=Read  | L0ToRecoveryCount                  |             0 |          |
+|    92 |           0 | Integer  | Nullable=True,Permission=Read  | CorrectableErrorCount              |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    93 |           3 | Integer  | Nullable=True,Permission=Read  | NAKReceivedCount                   |             0 |          |
+|    93 |           1 | Integer  | Nullable=True,Permission=Read  | FatalErrorCount                    |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    94 |           4 | Integer  | Nullable=True,Permission=Read  | NAKSentCount                       |             0 |          |
+|    94 |           2 | Integer  | Nullable=True,Permission=Read  | L0ToRecoveryCount                  |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    95 |           5 | Integer  | Nullable=True,Permission=Read  | NonFatalErrorCount                 |             0 |          |
+|    95 |           3 | Integer  | Nullable=True,Permission=Read  | NAKReceivedCount                   |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    96 |           6 | Integer  | Nullable=True,Permission=Read  | ReplayCount                        |             0 |          |
+|    96 |           4 | Integer  | Nullable=True,Permission=Read  | NAKSentCount                       |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    97 |           7 | Integer  | Nullable=True,Permission=Read  | ReplayRolloverCount                |             0 |          |
+|    97 |           5 | Integer  | Nullable=True,Permission=Read  | NonFatalErrorCount                 |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    98 |           8 | Integer  | Nullable=True,Permission=Read  | UnsupportedRequestCount            |             0 |          |
+|    98 |           6 | Integer  | Nullable=True,Permission=Read  | ReplayCount                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|    99 |           9 | Integer  | Nullable=True,Permission=Read  | BadDLLPCount                       |             0 |          |
+|    99 |           7 | Integer  | Nullable=True,Permission=Read  | ReplayRolloverCount                |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|   100 |          10 | Integer  | Nullable=True,Permission=Read  | BadTLPCount                        |             0 |          |
+|   100 |           8 | Integer  | Nullable=True,Permission=Read  | UnsupportedRequestCount            |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|   101 |           0 | Integer  | Nullable=False,Permission=Read | BackpressureAveragePercentage      |             0 |          |
+|   101 |           9 | Integer  | Nullable=True,Permission=Read  | BadDLLPCount                       |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|   102 |           0 | String   | Nullable=False,Permission=Read | target                             |             0 |          |
+|   102 |          10 | Integer  | Nullable=True,Permission=Read  | BadTLPCount                        |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-|   103 |           1 | String   | Nullable=False,Permission=Read | title                              |             0 |          |
+|   103 |           0 | Integer  | Nullable=False,Permission=Read | BackpressureAveragePercentage      |             0 |          |
 +-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
-Total Entries: 104
-Fixed size consumed (bytes): 1052 (0x41c)
-Field string size consumed (bytes): 1589 (0x635)
-Total size (bytes): 2641 (0xa51)
-Version: 0XF1F7F000
-Signature: 0xe53ed0ce
+|   104 |           0 | Integer  | Nullable=True,Permission=Read  | CompletionCreditExhaustionDrops    |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   105 |           1 | Integer  | Nullable=True,Permission=Read  | NPCreditExhaustionDrops            |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   106 |           2 | Integer  | Nullable=True,Permission=Read  | OutboundCompletionTLPBytes         |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   107 |           3 | Integer  | Nullable=True,Permission=Read  | OutboundCompletionTLPCount         |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   108 |           4 | Integer  | Nullable=True,Permission=Read  | OutboundReadTLPBytes               |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   109 |           5 | Integer  | Nullable=True,Permission=Read  | OutboundReadTLPCount               |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   110 |           6 | Integer  | Nullable=True,Permission=Read  | OutboundWriteTLPBytes              |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   111 |           7 | Integer  | Nullable=True,Permission=Read  | OutboundWriteTLPCount              |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   112 |           8 | Integer  | Nullable=True,Permission=Read  | TagUnavailabilityDrops             |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   113 |           0 | String   | Nullable=False,Permission=Read | target                             |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   114 |           1 | String   | Nullable=False,Permission=Read | title                              |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   115 |           0 | Set      |                                |                                    |             4 | 116      |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   116 |           0 | Integer  | Nullable=True,Permission=Read  | LaneId                             |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   117 |           1 | Real     | Nullable=True,Permission=Read  | RXInputPowerMilliWatts             |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   118 |           2 | Real     | Nullable=True,Permission=Read  | TXBiasCurrentMilliAmps             |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+|   119 |           3 | Real     | Nullable=True,Permission=Read  | TXOutputPowerMilliWatts            |             0 |          |
++-------+-------------+----------+--------------------------------+------------------------------------+---------------+----------+
+Total Entries: 120
+Fixed size consumed (bytes): 1212 (0x4bc)
+Field string size consumed (bytes): 1834 (0x72a)
+Total size (bytes): 3046 (0xbe6)
+Version: 0XF1F8F000
+Signature: 0x3ebca89

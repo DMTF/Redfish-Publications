@@ -1,5 +1,5 @@
 {
-    "@odata.type": "#CXLLogicalDevice.v1_2_1.CXLLogicalDevice",
+    "@odata.type": "#CXLLogicalDevice.v1_3_0.CXLLogicalDevice",
     "Id": "1",
     "Name": "CXL Logical Device Type 3",
     "Description": "Locally attached CXL Logical Device Type 3",
@@ -26,6 +26,9 @@
         "LimitPercent": 85
     },
     "MemorySizeMiB": 16384,
+    "MemoryRegions": {
+        "@odata.id": "/redfish/v1/Chassis/CXLType3/PCIeDevices/1/CXLLogicalDevices/1/MemoryRegions"
+    },
     "Links": {
         "PCIeFunctions": [
             {
@@ -42,6 +45,35 @@
                 "@odata.id": "/redfish/v1/Chassis/CXLType3/MemoryDomains/1/MemoryChunks/1"
             }
         ]
+    },
+    "Actions": {
+        "#CXLLogicalDevice.DisablePassphrase": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/PCIeDevices/1/CXLLogicalDevices/1/Actions/CXLLogicalDevice.DisablePassphrase",
+            "PassphraseType@Redfish.AllowableValues": [
+                "User",
+                "Master"
+            ]
+        },
+        "#CXLLogicalDevice.SetPassphrase": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/PCIeDevices/1/CXLLogicalDevices/1/Actions/CXLLogicalDevice.SetPassphrase",
+            "PassphraseType@Redfish.AllowableValues": [
+                "User",
+                "Master"
+            ]
+        },
+        "#CXLLogicalDevice.Unlock": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/PCIeDevices/1/CXLLogicalDevices/1/Actions/CXLLogicalDevice.Unlock"
+        },
+        "#CXLLogicalDevice.PassphraseSecureErase": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/PCIeDevices/1/CXLLogicalDevices/1/Actions/CXLLogicalDevice.PassphraseSecureErase",
+            "PassphraseType@Redfish.AllowableValues": [
+                "User",
+                "Master"
+            ]
+        },
+        "#CXLLogicalDevice.FreezeSecurityState": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/PCIeDevices/1/CXLLogicalDevices/1/Actions/CXLLogicalDevice.FreezeSecurityState"
+        }
     },
     "@odata.id": "/redfish/v1/Chassis/CXLType3/PCIeDevices/1/CXLLogicalDevices/1",
     "@Redfish.Copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."

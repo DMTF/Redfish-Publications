@@ -1,0 +1,586 @@
+{
+    "@Redfish.Copyright": "Copyright 2025 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_7_0.MessageRegistry",
+    "Id": "Platform.1.3.1",
+    "Name": "Compute Platform Message Registry",
+    "Language": "en",
+    "Description": "This registry defines messages for compute platforms, covering topics related to processor, memory, and I/O device connectivity.",
+    "RegistryPrefix": "Platform",
+    "RegistryVersion": "1.3.1",
+    "OwningEntity": "DMTF",
+    "Release": "2025.2",
+    "Messages": {
+        "UnhandledExceptionDetectedAfterReset": {
+            "Description": "Indicates that an unhandled exception caused the platform to reset.",
+            "LongDescription": "This message shall indicate that an unhandled exception caused a compute platform to reset.  The exception was detected after the reset occurred.",
+            "Message": "An unhandled exception caused a platform reset.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "OperatingSystemCrash": {
+            "Description": "Indicates the operating system was halted due to a catastrophic error.",
+            "LongDescription": "This message shall indicate that an unhandled exception caused a compute platform to crash or otherwise halt.",
+            "Message": "An operating system crash occurred.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "PlatformError": {
+            "Description": "Indicates that a platform error occurred.",
+            "LongDescription": "This message shall indicate that a platform error occurred.",
+            "Message": "A platform error occurred.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "PlatformErrorAtLocation": {
+            "Description": "Indicates that a platform error occurred and device or other location information is available.",
+            "LongDescription": "This message shall indicate that a platform error occurred with specific device identification information available.",
+            "Message": "A platform error occurred at location '%1'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The device description or location where the error occurred."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a description of the device or location where the error occurred."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "NVRAMClearAsserted": {
+            "Description": "Indicates that the 'NVRAM Clear' jumper or switch is currently asserted.",
+            "LongDescription": "This message shall indicate that the 'NVRAM Clear' jumper or switch is currently asserted.",
+            "Message": "'NVRAM Clear' is currently on.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.1.0",
+            "NumberOfArgs": 0,
+            "Resolution": "Turn off the 'NVRAM Clear' jumper or switch."
+        },
+        "SecurityBypassAsserted": {
+            "Description": "Indicates that the 'Security Bypass' jumper or switch is currently asserted.",
+            "LongDescription": "This message shall indicate that the 'Security Bypass' or 'Password Bypass' jumper or switch is currently asserted.",
+            "Message": "'Security Bypass' is currently on.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.1.0",
+            "NumberOfArgs": 0,
+            "Resolution": "Turn off the 'Security Bypass' jumper or switch."
+        },
+        "PlatformReset": {
+            "Description": "Indicates that the platform reset occurred.",
+            "LongDescription": "This message shall indicate that a platform reset occurred.",
+            "Message": "A platform performed a '%1' type of reset.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The type of reset that occurred."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the type of reset that occurred.  This argument shall contain one of the values of the `ResetType` enumeration from the `Resource` schema."
+            ],
+            "Resolution": "None."
+        },
+        "PlatformResetWatchdogTimer": {
+            "Description": "Indicates that the platform reset occurred due to a watchdog timer action.",
+            "LongDescription": "This message shall indicate that a platform reset occurred due to a watchdog timer action.",
+            "Message": "A platform performed a '%1' type of reset due to watchdog timer action.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The type of reset that occurred."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the type of reset that occurred.  This argument shall contain one of the values of the `ResetType` enumeration from the `Resource` schema."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "PowerBrake": {
+            "Description": "Indicates that a power brake is applied to a component or equipment.",
+            "LongDescription": "This message shall indicate that a power brake is applied to a component or equipment.",
+            "Message": "A power brake is applied to '%1'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the component or equipment."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the component or equipment."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "VoltageRegulatorFault": {
+            "Description": "Indicates that a voltage regulator has faulted.",
+            "LongDescription": "This message shall indicate that a voltage regulator has faulted.",
+            "Message": "Voltage regulator '%1' has faulted.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the voltage regulator."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the voltage regulator."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "MemoryRowRemappingError": {
+            "Description": "Indicates that a memory device encountered a row remapping failure.",
+            "LongDescription": "This message shall indicate that a memory device encountered a row remapping failure.",
+            "Message": "Memory device '%1' encountered a row remapping failure.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the memory device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Memory` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "MemoryRowRemappingPending": {
+            "Description": "Indicates that row remapping is pending for a memory device.",
+            "LongDescription": "This message shall indicate that row remapping is pending for a memory device.",
+            "Message": "Row remapping is pending for memory device '%1'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the memory device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Memory` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "MemoryUncorrectableError": {
+            "Description": "Indicates that a memory device detected an uncorrectable error and the error was not contained.",
+            "LongDescription": "This message shall indicate that a memory device detected an uncorrectable error and the error was not contained.",
+            "Message": "Memory device '%1' detected an uncorrectable error.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the memory device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Memory` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "MemoryContainedError": {
+            "Description": "Indicates that a memory device detected an uncorrectable error, but contained it.",
+            "LongDescription": "This message shall indicate that a memory device detected an uncorrectable error, but contained it.",
+            "Message": "Memory device '%1' contained an uncorrectable error.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the memory device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `Memory` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeLinkSpeedChange": {
+            "Description": "Indicates that a PCIe link speed changed at runtime.",
+            "LongDescription": "This message shall indicate that a PCIe link speed changed at runtime.",
+            "Message": "PCIe device '%1' detected a runtime speed change to %2 Gbps.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device.",
+                "The new link speed (Gbps)."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource.",
+                "This argument shall contain the new link speed (Gbps)."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeLinkWidthChange": {
+            "Description": "Indicates that a PCIe link width changed at runtime.",
+            "LongDescription": "This message shall indicate that a PCIe link width changed at runtime.",
+            "Message": "PCIe device '%1' detected a runtime speed change to %2 Gbps.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device.",
+                "The new link width."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource.",
+                "This argument shall contain the new link width."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeLinkTrainingError": {
+            "Description": "Indicates that a PCIe device could not establish a link with the upstream interface.",
+            "LongDescription": "This message shall indicate that a PCIe device could not establish a link with the upstream interface.",
+            "Message": "PCIe device '%1' could not train its link.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeLinkDown": {
+            "Description": "Indicates that a PCIe device lost its link with the upstream interface.",
+            "LongDescription": "This message shall indicate that a PCIe device lost its link with the upstream interface.",
+            "Message": "PCIe device '%1' lost its link.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeIncorrectLinkSpeed": {
+            "Description": "Indicates that a PCIe device did not train to its expected link speed.",
+            "LongDescription": "This message shall indicate that a PCIe device did not train to its expected link speed.",
+            "Message": "PCIe device '%1' did not train to its expected link speed.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeIncorrectLinkWidth": {
+            "Description": "Indicates that a PCIe device did not train to its expected link width.",
+            "LongDescription": "This message shall indicate that a PCIe device did not train to its expected link width.",
+            "Message": "PCIe device '%1' did not train to its expected link width.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeUncorrectableError": {
+            "Description": "Indicates that a PCIe device detected an uncorrectable error.",
+            "LongDescription": "This message shall indicate that a PCIe device detected an uncorrectable error.",
+            "Message": "PCIe device '%1' detected an uncorrectable error.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "PCIeLinkRestored": {
+            "Description": "Indicates that a PCIe device restored its link with the upstream interface.",
+            "LongDescription": "This message shall indicate that a PCIe device restored its link with the upstream interface.",
+            "Message": "PCIe device '%1' restored its link.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the PCIe device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the `PCIeDevice` resource."
+            ],
+            "Resolution": "Check additional diagnostic data if available.  Check the platform and connectors for any faults."
+        },
+        "DeviceDisabled": {
+            "Description": "Indicates that a device was disabled or halted.",
+            "LongDescription": "This message shall indicate that a device was disabled or halted.",
+            "Message": "Device '%1' was disabled or halted.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceManagementInterfaceUnresponsive": {
+            "Description": "Indicates that the management interface for a device is unresponsive.",
+            "LongDescription": "This message shall indicate that the management interface for a device is unresponsive.",
+            "Message": "The management interface for device '%1' is unresponsive.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceMissing": {
+            "Description": "Indicates that the device has asserted Device Missing ",
+            "LongDescription": "This message shall be used to indicate the device has asserted Device Missing ",
+            "Message": "The Device %1 state changed to  absent. ",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "Indicates the device component Id that asserted this message"
+            ],
+            "ArgLongDescriptions": [
+                "The argument shall contain the device component Id that asserted this message"
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceAssemblyDataInaccessible": {
+            "Description": "Indicates that the assembly data, historically 'FRU data', for a device is inaccessible.",
+            "LongDescription": "This message shall indicate that the assembly data for a device is inaccessible.",
+            "Message": "Unable to access the assembly data for device '%1'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceAssemblyDataMalformed": {
+            "Description": "Indicates that the assembly data, historically 'FRU data', for a device is malformed, such as due to a checksum error.",
+            "LongDescription": "This message shall indicate that the assembly data for a device is malformed, such as due to a checksum error.",
+            "Message": "Malformed assembly data detected for device '%1'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceWatchdogTimeout": {
+            "Description": "Indicates that a device encountered a watchdog timeout.",
+            "LongDescription": "This message shall indicate that a device encountered a watchdog timeout.",
+            "Message": "Device '%1' encountered a watchdog timeout.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceBootTimeout": {
+            "Description": "Indicates that a device encountered a boot timeout.",
+            "LongDescription": "This message shall indicate that a device encountered a boot timeout.",
+            "Message": "Device '%1' encountered a boot timeout.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceSecureBootFailure": {
+            "Description": "Indicates that a device encountered a secure boot failure.",
+            "LongDescription": "This message shall indicate that a device encountered a secure boot failure.",
+            "Message": "Device '%1' encountered a secure boot failure.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceInRecovery": {
+            "Description": "Indicates that a device is not operating properly and entered recovery mode to restore firmware or critical data to a state of integrity.",
+            "LongDescription": "This message shall indicate that a device is not operating properly and entered recovery mode, such as defined by the OCP Secure Firmware Recovery specification, to restore firmware or critical data to a state of integrity.",
+            "Message": "Device '%1' entered recovery mode due to: %2.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device.",
+                "The reason the device entered recovery mode."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device.",
+                "This argument shall contain a string that describes the reason the device entered recovery mode."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "DeviceManagementInterfaceError": {
+            "Description": "Indicates that the management interface for a device encountered an error.",
+            "LongDescription": "This message shall indicate that the management interface for a device encountered an error.",
+            "Message": "The management interface for device '%1' encountered the error: %2.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "VersionAdded": "1.3.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the device.",
+                "The error encountered on the management interface of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes device.",
+                "This argument shall contain a string that describes error encountered on the management interface of the device."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        }
+    }
+}

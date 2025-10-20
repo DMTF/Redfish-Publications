@@ -1,0 +1,80 @@
+{
+    "@odata.type": "#Memory.v1_22_0.Memory",
+    "Id": "3DXP",
+    "Name": "3DXP memory",
+    "MemoryType": "IntelOptane",
+    "MemoryMedia": [
+        "Intel3DXPoint"
+    ],
+    "CapacityMiB": 16384,
+    "OperatingSpeedMhz": 1333,
+    "Status": {
+        "Health": "OK",
+        "State": "Enabled",
+        "HealthRollup": "OK"
+    },
+    "PoisonListMaxMediaErrorRecords": 2048,
+    "CXL": {
+        "LabelStorageSizeBytes": 1280,
+        "StagedVolatileSizeMiB": 0,
+        "StagedNonVolatileSizeMiB": 16384
+    },
+    "VolatileSizeLimitMiB": 0,
+    "NonVolatileSizeLimitMiB": 16384,
+    "Regions": [
+        {
+            "RegionId": "1",
+            "MemoryClassification": "ByteAccessiblePersistent",
+            "OffsetMiB": 0,
+            "SizeMiB": 8192,
+            "PassphraseEnabled": false,
+            "MasterPassphraseEnabled": false
+        },
+        {
+            "RegionId": "2",
+            "MemoryClassification": "ByteAccessiblePersistent",
+            "OffsetMiB": 8192,
+            "SizeMiB": 8192,
+            "PassphraseEnabled": false,
+            "MasterPassphraseEnabled": false
+        }
+    ],
+    "SecurityStates": {
+        "UserPassphraseAttemptCountReached": true,
+        "MasterPassphraseAttemptCountReached": true
+    },
+    "HealthData": {
+        "PredictedMediaLifeLeftPercent": 75
+    },
+    "Actions": {
+        "#Memory.SetMasterPassphrase": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/Memory/3DXP/Actions/Memory.SetMasterPassphrase",
+            "RegionId@Redfish.AllowableValues": [
+                "1",
+                "2"
+            ],
+            "Passphrase@Redfish.AllowableValues": "string"
+        },
+        "#Memory.DisableMasterPassphrase": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/Memory/3DXP/Actions/Memory.DisableMasterPassphrase",
+            "RegionId@Redfish.AllowableValues": [
+                "1",
+                "2"
+            ],
+            "Passphrase@Redfish.AllowableValues": "string"
+        },
+        "#Memory.SecureEraseUnit": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/Memory/3DXP/Actions/Memory.SecureEraseUnit",
+            "RegionId@Redfish.AllowableValues": [
+                "1",
+                "2"
+            ],
+            "MasterPassphrase@Redfish.AllowableValues": "string"
+        },
+        "#Memory.FreezeSecurityState": {
+            "target": "/redfish/v1/Chassis/PooledCXLType3/Memory/3DXP/Actions/Memory.FreezeSecurityState"
+        }
+    },
+    "@odata.id": "/redfish/v1/Chassis/PooledCXLType3/Memory/3DXP",
+    "@Redfish.Copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+}
