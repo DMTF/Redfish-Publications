@@ -1,0 +1,74 @@
+{
+    "@Redfish.Copyright": "Copyright 2025 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_7_0.MessageRegistry",
+    "Id": "ManagerEvent.1.0.0",
+    "Name": "Manager Event Message Registry",
+    "Language": "en",
+    "Description": "This registry defines messages to be used by a service to indicate conditions or configuration changes related to a manager.  The affected manager may provide the Redfish service.",
+    "RegistryPrefix": "ManagerEvent",
+    "RegistryVersion": "1.0.0",
+    "OwningEntity": "DMTF",
+    "Release": "2025.4",
+    "Messages": {
+        "ManagerReset": {
+            "Description": "Indicates that a manager reset occurred.",
+            "LongDescription": "This message shall indicate that a manager reset occurred.",
+            "Message": "Manager `%1` performed a '%2' type of reset.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager that was reset.",
+                "The type of reset that occurred."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected manager.",
+                "This argument shall contain the type of reset that occurred.  This argument shall contain one of the values of the `ResetType` enumeration from the `Resource` schema."
+            ],
+            "Resolution": "None."
+        },
+        "ManagerResetWatchdogTimer": {
+            "Description": "Indicates that a manager reset occurred due to a watchdog timer action.",
+            "LongDescription": "This message shall indicate that a manager reset occurred due to a watchdog timer action.",
+            "Message": "Manager `%1` performed a '%2' type of reset due to watchdog timer action.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager that was reset.",
+                "The type of reset that occurred."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected manager.",
+                "This argument shall contain the type of reset that occurred.  This argument shall contain one of the values of the `ResetType` enumeration from the `Resource` schema."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "ManagerSwitchedToBackupSoftwareImage": {
+            "Description": "Indicates that a manager switched to a backup software image.",
+            "LongDescription": "This message shall indicate that a manager is using a backup software image.",
+            "Message": "Manager `%1` switched to a backup software image.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected manager."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        }
+    }
+}

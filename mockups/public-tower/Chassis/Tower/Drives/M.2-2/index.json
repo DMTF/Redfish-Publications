@@ -1,5 +1,5 @@
 {
-    "@odata.type": "#Drive.v1_21_0.Drive",
+    "@odata.type": "#Drive.v1_22_0.Drive",
     "IndicatorLED": "Off",
     "StatusIndicator": "OK",
     "Model": "NVMe 1000",
@@ -19,6 +19,65 @@
                 "@odata.id": "/redfish/v1/Systems/437XR1238R2/Storage/NVMeSWRAID/Volumes/Boot"
             }
         ]
+    },
+    "NVMe": {
+        "ActivePersonalities": [
+            {
+                "Identifier": 0,
+                "Default": false,
+                "Frozen": false,
+                "Pending": false,
+                "MinimumRequiredResetType": "NVMSubsystemReset",
+                "ChangeAffectsUserData": true,
+                "UnfreezeAuthenticationModes": [
+                    "ProgrammedKey",
+                    "PhysicalId"
+                ]
+            },
+            {
+                "Identifier": 1,
+                "Default": false,
+                "Frozen": true,
+                "Pending": false,
+                "Data": "AAFF0000FFFFFFFF",
+                "MinimumRequiredResetType": "NVMSubsystemReset",
+                "ChangeAffectsUserData": true,
+                "UnfreezeAuthenticationModes": [
+                    "ProgrammedKey",
+                    "PhysicalId"
+                ]
+            },
+            {
+                "Identifier": 245,
+                "Default": false,
+                "Frozen": false,
+                "Pending": false,
+                "Data": "00",
+                "MinimumRequiredResetType": "NoReset",
+                "ChangeAffectsUserData": false,
+                "UnfreezeAuthenticationModes": [
+                    "ProgrammedKey",
+                    "PhysicalId"
+                ]
+            }
+        ]
+    },
+    "Actions": {
+        "#Drive.SetPersonalityKey": {
+            "target": "/redfish/v1/Chassis/Tower/Drives/M.2-2/Actions/Drive.SetPersonalityKey"
+        },
+        "#Drive.FreezePersonality": {
+            "target": "/redfish/v1/Chassis/Tower/Drives/M.2-2/Actions/Drive.FreezePersonality"
+        },
+        "#Drive.GetPersonalityNonce": {
+            "target": "/redfish/v1/Chassis/Tower/Drives/M.2-2/Actions/Drive.GetPersonalityNonce"
+        },
+        "#Drive.UnfreezePersonality": {
+            "target": "/redfish/v1/Chassis/Tower/Drives/M.2-2/Actions/Drive.UnfreezePersonality"
+        },
+        "#Drive.RevertPersonalitiesToDefaults": {
+            "target": "/redfish/v1/Chassis/Tower/Drives/M.2-2/Actions/Drive.RevertPersonalitiesToDefaults"
+        }
     },
     "@odata.id": "/redfish/v1/Chassis/Tower/Drives/M.2-2",
     "@Redfish.Copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
