@@ -1,66 +1,70 @@
 {
-    "@odata.type": "#ComponentIntegrity.v1_3_2.ComponentIntegrity",
-    "Id": "TPM-0",
-    "Description": "TPM physically attached to a GPU.",
+    "@odata.type": "#ComponentIntegrity.v1_4_0.ComponentIntegrity",
+    "Id": "SS-SPDM-0",
+    "Name": "Component Integrity",
+    "Description": "SPDM Integrity Information for CPU1 reported by AC-RoT0",
     "Status": {
         "Health": "OK",
         "State": "Enabled"
     },
-    "ComponentIntegrityType": "TPM",
-    "ComponentIntegrityTypeVersion": "1.2.0",
+    "ComponentIntegrityType": "SPDM",
+    "ComponentIntegrityTypeVersion": "1.1.0",
     "ComponentIntegrityEnabled": true,
-    "LastUpdated": "2021-11-02T14:09:54-07:00",
-    "TargetComponentURI": "/redfish/v1/Systems/437XR1138R2#/TrustedModules/0",
-    "Links": {
-        "ComponentsProtected": [
-            {
-                "@odata.id": "/redfish/v1/Systems/437XR1138R2/GraphicsControllers/GPU1"
-            }
-        ]
-    },
-    "TPM": {
+    "TargetComponentURI": "/redfish/v1/Chassis/1U/TrustedComponents/AC-RoT0",
+    "LastUpdated": "2021-11-02T14:05:39-07:00",
+    "SPDM": {
+        "Requester": {
+            "@odata.id": "/redfish/v1/Managers/BMC"
+        },
         "MeasurementSet": {
+            "MeasurementSpecification": "DMTF",
+            "MeasurementSummary": "oylHo8JAT1RqtB0Vlx9dCzogavikhSvIZpVEDhI1X1+TKeyZZvwuUb5qF9uWqPVa",
+            "MeasurementSummaryHashAlgorithm": "TPM_ALG_SHA_384",
+            "MeasurementSummaryType": "TCB",
             "Measurements": [
                 {
-                    "PCR": 1,
-                    "Measurement": "h6spEuxbyOtGhP35UoGhTcVX3iRaZQGDw4Yk5oQcabw=",
-                    "LastUpdated": "2021-10-31T20:14:27-07:00",
-                    "MeasurementHashAlgorithm": "TPM_ALG_SHA256"
+                    "MeasurementIndex": 1,
+                    "PartofSummaryHash": false,
+                    "LastUpdated": "2021-10-31T19:08:02-07:00",
+                    "Measurement": "K0zqzG/MFbeV7OVAhvDugxEzc7nMnRvdoKy8g2zU5JovPrUNSeFJxibTZE+0kOR9QhDR5RzumnomFECF8zI/Lw==",
+                    "MeasurementHashAlgorithm": "TPM_ALG_SHA_512"
                 },
                 {
-                    "PCR": 3,
-                    "Measurement": "GnbzS4ToNQb+Y7SxXw4AvRDTf4SzO5eeAlAlDca28AA=",
-                    "LastUpdated": "2021-10-31T20:14:27-07:00",
-                    "MeasurementHashAlgorithm": "TPM_ALG_SHA256"
+                    "MeasurementIndex": 3,
+                    "PartofSummaryHash": true,
+                    "LastUpdated": "2021-10-31T19:08:02-07:00",
+                    "Measurement": "4wEF1nnub2ozuYTWyjyvFGrYnSn0eidy54uaIYXjp/HKRByaco9UtCZeyNfA3rQ3YsRD/6csLcqGw9Nd9/HPAw==",
+                    "MeasurementHashAlgorithm": "TPM_ALG_SHA_512",
+                    "MeasurementType": "ImmutableROM"
                 },
                 {
-                    "PCR": 1,
-                    "Measurement": "pLJa5Dyh8CDYFZ1WNOrsiSG1eyCPBlre42CD7CTywg7VkcC4afw4ZG3gQxi2XEFCt5jxz6tN1/cbx/DNx2/tOg==",
-                    "LastUpdated": "2021-10-31T20:14:27-07:00",
-                    "MeasurementHashAlgorithm": "TPM_ALG_SHA512"
-                },
-                {
-                    "PCR": 3,
-                    "Measurement": "GBgEucATV8omirTmYqY+vvbbisHR1jBKfVAEK1XSifBHnnIYXopsc0NExURDSSyPjO21NrPqnwiq5LhI1p6rzQ==",
-                    "LastUpdated": "2021-10-31T20:14:27-07:00",
-                    "MeasurementHashAlgorithm": "TPM_ALG_SHA512"
+                    "MeasurementIndex": 150,
+                    "PartofSummaryHash": true,
+                    "LastUpdated": "2021-10-31T19:08:02-07:00",
+                    "Measurement": "dZyksxnM/LZbSUY8INpp4wqcCM8m6XOKoy8cLaXOjUzqYYJT92AmEp7hKVFULNz1aCpKk69VULMyaDIv9hmJSQ==",
+                    "MeasurementHashAlgorithm": "TPM_ALG_SHA_512"
                 }
             ]
         },
         "IdentityAuthentication": {
-            "VerificationStatus": "Success",
-            "ComponentCertificate": {
-                "@odata.id": "/redfish/v1/Systems/437XR1138R2/Certificates/TPMcert"
+            "ResponderAuthentication": {
+                "ComponentCertificate": {
+                    "@odata.id": "/redfish/v1/Chassis/1U/TrustedComponents/AC-RoT0/Certificates/DeviceCert"
+                }
             }
         },
         "ComponentCommunication": {
             "Sessions": [
                 {
-                    "SessionId": 4556,
-                    "SessionType": "Plain"
+                    "SessionId": 15999129,
+                    "SessionType": "EncryptedAuthenticated"
+                },
+                {
+                    "SessionId": 1193013,
+                    "SessionType": "EncryptedAuthenticated"
                 }
             ]
         }
     },
-    "@odata.id": "/redfish/v1/ComponentIntegrity/TPM-0"
+    "@odata.id": "/redfish/v1/ComponentIntegrity/SS-SPDM-0"
 }

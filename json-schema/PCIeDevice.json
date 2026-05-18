@@ -2,8 +2,36 @@
     "$id": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.json",
     "$ref": "#/definitions/PCIeDevice",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
+    "copyright": "Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright",
     "definitions": {
+        "CXLDynamicCapacityPolicies": {
+            "enum": [
+                "Free",
+                "Contiguous",
+                "Prescriptive",
+                "TagBased",
+                "EnableSharedAccess"
+            ],
+            "enumDescriptions": {
+                "Contiguous": "Contiguous add capacity policy.",
+                "EnableSharedAccess": "Enable shared access add policy.",
+                "Free": "Free add capacity policy.",
+                "Prescriptive": "Prescriptive add or release policy.",
+                "TagBased": "Tag-based release policy."
+            },
+            "enumLongDescriptions": {
+                "Contiguous": "This value shall indicate the CXL Specification-defined contiguous add capacity policy.",
+                "EnableSharedAccess": "This value shall indicate the CXL Specification-defined enable shared access add capacity policy.",
+                "Free": "This value shall indicate the CXL Specification-defined free add capacity policy.",
+                "Prescriptive": "This value shall indicate the CXL Specification-defined prescriptive add or release policy.",
+                "TagBased": "This value shall indicate the CXL Specification-defined tag-based release policy."
+            },
+            "enumVersionAdded": {
+                "EnableSharedAccess": "v1_22_0"
+            },
+            "type": "string",
+            "versionAdded": "v1_12_0"
+        },
         "PCIeDevice": {
             "anyOf": [
                 {
@@ -74,6 +102,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.json#/definitions/PCIeDevice"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.json#/definitions/PCIeDevice"
                 }
             ],
             "deletable": false,
@@ -131,6 +162,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.json#/definitions/PCIeErrors"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.json#/definitions/PCIeErrors"
                 }
             ],
             "description": "The PCIe errors associated with this device.",
@@ -194,6 +228,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.json#/definitions/PCIeInterface"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.json#/definitions/PCIeInterface"
                 }
             ],
             "description": "This type describes a PCIe Interface.",
@@ -206,6 +243,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.json#/definitions/PCIeMetrics"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.json#/definitions/PCIeMetrics"
                 }
             ],
             "description": "The PCIe metrics associated with this device.",

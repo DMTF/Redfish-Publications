@@ -1,7 +1,35 @@
 components:
   schemas:
+    PCIeDevice_CXLDynamicCapacityPolicies:
+      enum:
+      - Free
+      - Contiguous
+      - Prescriptive
+      - TagBased
+      - EnableSharedAccess
+      type: string
+      x-enumDescriptions:
+        Contiguous: Contiguous add capacity policy.
+        EnableSharedAccess: Enable shared access add policy.
+        Free: Free add capacity policy.
+        Prescriptive: Prescriptive add or release policy.
+        TagBased: Tag-based release policy.
+      x-enumLongDescriptions:
+        Contiguous: This value shall indicate the CXL Specification-defined contiguous
+          add capacity policy.
+        EnableSharedAccess: This value shall indicate the CXL Specification-defined
+          enable shared access add capacity policy.
+        Free: This value shall indicate the CXL Specification-defined free add capacity
+          policy.
+        Prescriptive: This value shall indicate the CXL Specification-defined prescriptive
+          add or release policy.
+        TagBased: This value shall indicate the CXL Specification-defined tag-based
+          release policy.
+      x-enumVersionAdded:
+        EnableSharedAccess: v1_22_0
+      x-versionAdded: v1_12_0
     PCIeDevice_PCIeDevice:
-      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.yaml#/components/schemas/PCIeDevice_v1_21_0_PCIeDevice
+      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.yaml#/components/schemas/PCIeDevice_v1_22_0_PCIeDevice
       description: The `PCIeDevice` schema describes the properties of a PCIe device
         that is attached to a system.  It also describes the location, such as a slot,
         socket, or bay, where a unit can be installed, by populating a resource instance
@@ -11,17 +39,17 @@ components:
         or bay, where a unit may be installed, but the `State` property within the
         `Status` property contains `Absent`.
     PCIeDevice_PCIeErrors:
-      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.yaml#/components/schemas/PCIeDevice_v1_21_0_PCIeErrors
+      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.yaml#/components/schemas/PCIeDevice_v1_22_0_PCIeErrors
       description: The PCIe errors associated with this device.
       x-longDescription: This property shall contain properties that describe the
         PCIe errors associated with this device.
     PCIeDevice_PCIeInterface:
-      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.yaml#/components/schemas/PCIeDevice_v1_21_0_PCIeInterface
+      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.yaml#/components/schemas/PCIeDevice_v1_22_0_PCIeInterface
       description: This type describes a PCIe Interface.
       x-longDescription: This type shall describe the PCIe interface characteristics
         of a PCIe device.
     PCIeDevice_PCIeMetrics:
-      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_21_0.yaml#/components/schemas/PCIeDevice_v1_21_0_PCIeMetrics
+      $ref: http://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_22_0.yaml#/components/schemas/PCIeDevice_v1_22_0_PCIeMetrics
       description: The PCIe metrics associated with this device.
       x-longDescription: This property shall contain properties that describe the
         PCIe metrics associated with this device.
@@ -45,6 +73,6 @@ components:
         Gen6: v1_16_0
       x-versionAdded: v1_3_0
 title: '#PCIeDevice.PCIeDevice'
-x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-copyright: Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
 x-language: en
 x-owningEntity: DMTF

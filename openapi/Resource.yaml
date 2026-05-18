@@ -137,12 +137,12 @@ components:
       x-longDescription: This property shall contain the identifier for this resource.  The
         value shall conform with the 'Id' clause of the Redfish Specification.
     Resource_Identifier:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_23_0.yaml#/components/schemas/Resource_v1_23_0_Identifier
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_24_0.yaml#/components/schemas/Resource_v1_24_0_Identifier
       description: Any additional identifiers for a resource.
       x-longDescription: This type shall contain any additional identifiers for a
         resource.
     Resource_ImportParameters:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_23_0.yaml#/components/schemas/Resource_v1_23_0_ImportParameters
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_24_0.yaml#/components/schemas/Resource_v1_24_0_ImportParameters
     Resource_IndicatorLED:
       enum:
       - Lit
@@ -185,7 +185,7 @@ components:
         ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
           description: This property shall specify a valid odata or Redfish property.
     Resource_Location:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_23_0.yaml#/components/schemas/Resource_v1_23_0_Location
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_24_0.yaml#/components/schemas/Resource_v1_24_0_Location
       description: The location of a resource.
       x-longDescription: This type shall describe the location of a resource.
     Resource_Name:
@@ -223,8 +223,12 @@ components:
       - PoweringOn
       - PoweringOff
       - Paused
+      - Sleeping
+      - Hibernating
       type: string
       x-enumDescriptions:
+        Hibernating: The resource is hibernating.  The resource is in a low-power
+          state, state is preserved in non-volatile memory.
         'Off': The resource is powered off.  The components within the resource might
           continue to have AUX power.
         'On': The resource is powered on.
@@ -233,10 +237,21 @@ components:
           the resource can take time to process the power off action.
         PoweringOn: A temporary state between off and on.  The components within the
           resource can take time to process the power on action.
+        Sleeping: The resource is sleeping.  The resource is in a low-power state,
+          state is preserved in memory.
+      x-enumLongDescriptions:
+        Hibernating: This value shall indicate the resource is in a low-power state
+          and its state is preserved in non-volatile memory.  For ACPI devices, this
+          shall equate to the S4 sleep state.
+        Sleeping: This value shall indicate the resource is in a low-power state and
+          its state is preserved in memory.  For ACPI devices, this shall equate to
+          the S3 sleep state.
       x-enumVersionAdded:
+        Hibernating: v1_24_0
         Paused: v1_13_0
+        Sleeping: v1_24_0
     Resource_ReferenceableMember:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_23_0.yaml#/components/schemas/Resource_v1_23_0_ReferenceableMember
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_24_0.yaml#/components/schemas/Resource_v1_24_0_ReferenceableMember
     Resource_ResetType:
       enum:
       - 'On'
@@ -252,6 +267,8 @@ components:
       - Pause
       - Resume
       - FullPowerCycle
+      - Sleep
+      - Hibernate
       type: string
       x-enumDescriptions:
         ForceOff: Turn off the unit immediately (non-graceful shutdown).
@@ -262,6 +279,9 @@ components:
           resource.
         GracefulRestart: Shut down gracefully and restart the unit.
         GracefulShutdown: Shut down gracefully and power off.
+        Hibernate: Write the state of the unit to disk before powering off.  This
+          allows for the state to be restored when powered back on.  Returning from
+          this type of reset goes through an abbreviated power-on process.
         Nmi: Generate a diagnostic interrupt, which is usually an NMI on x86 systems,
           to stop normal operations, complete diagnostic actions, and, typically,
           halt the system.
@@ -274,8 +294,11 @@ components:
           unit.
         Resume: Resume execution on the paused unit.  This is typically a feature
           of virtual machine hypervisors.
+        Sleep: Write the state of the unit to memory before entering a low-power sleep
+          state.  This allows for the state to be restored when full power is restored.
         Suspend: Write the state of the unit to disk before powering off.  This allows
-          for the state to be restored when powered back on.
+          for the state to be restored when powered back on.  Returning from this
+          type of reset goes through a full power-on process.
       x-enumLongDescriptions:
         ForceOff: This value shall indicate the resource will transition to a power
           off state.  The transition will start immediately.  Upon successful completion,
@@ -315,6 +338,10 @@ components:
           system, the host operating system is allowed to safely shut down processes
           and close connections.  Upon successful completion, the `PowerState` property,
           if supported, shall contain the value `Off`.
+        Hibernate: This value shall indicate the resource will have any state information
+          written to persistent memory and then transition to a power off state.  Upon
+          successful completion, the `PowerState` property, if supported, shall contain
+          the value `Hibernating`.
         Nmi: This value shall indicate the resource will generate a diagnostic interrupt.
         'On': This value shall indicate the resource will transition to a power on
           state.  Upon successful completion, the `PowerState` property, if supported,
@@ -338,20 +365,26 @@ components:
         Resume: This value shall indicate the resource will transition to a power
           on state.  Upon successful completion, the `PowerState` property, if supported,
           shall contain the value `On`.
+        Sleep: This value shall indicate the resource will have any state information
+          written to memory and then transition to a low-power sleep state.  Upon
+          successful completion, the `PowerState` property, if supported, shall contain
+          the value `Sleeping`.
         Suspend: This value shall indicate the resource will have any state information
           written to persistent memory and then transition to a power off state.  Upon
           successful completion, the `PowerState` property, if supported, shall contain
           the value `Off`.
       x-enumVersionAdded:
         FullPowerCycle: v1_21_0
+        Hibernate: v1_24_0
         Pause: v1_13_0
         PowerCycle: v1_4_0
         Resume: v1_13_0
+        Sleep: v1_24_0
         Suspend: v1_13_0
     Resource_Resource:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_23_0.yaml#/components/schemas/Resource_v1_23_0_Resource
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_24_0.yaml#/components/schemas/Resource_v1_24_0_Resource
     Resource_ResourceCollection:
-      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_23_0.yaml#/components/schemas/Resource_v1_23_0_ResourceCollection
+      $ref: http://redfish.dmtf.org/schemas/v1/Resource.v1_24_0.yaml#/components/schemas/Resource_v1_24_0_ResourceCollection
     Resource_State:
       enum:
       - Enabled
@@ -492,6 +525,6 @@ components:
       pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
       type: string
 title: '#Resource'
-x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-copyright: Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
 x-language: en
 x-owningEntity: DMTF

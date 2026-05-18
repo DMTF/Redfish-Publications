@@ -1,7 +1,7 @@
 components:
   schemas:
     Outlet_Outlet:
-      $ref: http://redfish.dmtf.org/schemas/v1/Outlet.v1_4_4.yaml#/components/schemas/Outlet_v1_4_4_Outlet
+      $ref: http://redfish.dmtf.org/schemas/v1/Outlet.v1_5_0.yaml#/components/schemas/Outlet_v1_5_0_Outlet
       description: The `Outlet` schema contains a definition for an electrical outlet.
       x-longDescription: This resource shall be used to represent an electrical outlet
         for a Redfish implementation.
@@ -30,21 +30,27 @@ components:
       - NEMA_L6_20R
       - NEMA_L6_30R
       - IEC_60320_C13
+      - IEC_60320_C15
       - IEC_60320_C19
+      - IEC_60320_C21
       - CEE_7_Type_E
       - CEE_7_Type_F
       - SEV_1011_TYPE_12
       - SEV_1011_TYPE_23
       - BS_1363_Type_G
       - BusConnection
+      - Combination
       type: string
       x-enumDescriptions:
         BS_1363_Type_G: BS 1363 Type G (250V; 13A).
         BusConnection: Electrical bus connection.
         CEE_7_Type_E: CEE 7/7 Type E (250V; 16A).
         CEE_7_Type_F: CEE 7/7 Type F (250V; 16A).
+        Combination: Combination receptacle.  See `OutletCombinationTypes`.
         IEC_60320_C13: IEC C13 (250V; 10A or 15A).
+        IEC_60320_C15: IEC C15 (250V; 10A or 15A; high-temperature).
         IEC_60320_C19: IEC C19 (250V; 16A or 20A).
+        IEC_60320_C21: IEC C21 (250V; 16A or 20A; high-temperature).
         NEMA_5_15R: NEMA 5-15R (120V; 15A).
         NEMA_5_20R: NEMA 5-20R (120V; 20A).
         NEMA_L5_20R: NEMA L5-20R (120V; 20A).
@@ -62,10 +68,17 @@ components:
           specified CEE 7/7 Type E receptacle (250V; 16A).
         CEE_7_Type_F: This value shall represent a receptacle that matches the Schuko
           specified CEE 7/7 Type F receptacle (250V; 16A).
+        Combination: This value shall represent a receptacle that supports two or
+          more receptacle types.  The supported types shall be listed as the values
+          of the `OutletCombinationTypes` property.
         IEC_60320_C13: This value shall represent a receptacle that matches the IEC
           60320 Sheet F C13 specified receptacle (250V; 10A per IEC, 15A per UL).
+        IEC_60320_C15: This value shall represent a receptacle that matches the IEC
+          60320 C15 specified receptacle (250V; 10A per IEC, 15A per UL; high-temperature).
         IEC_60320_C19: This value shall represent a receptacle that matches the IEC
           60320 Sheet J C19 specified receptacle (250V; 16A per IEC, 20A per UL).
+        IEC_60320_C21: This value shall represent a receptacle that matches the IEC
+          60320 C21 specified receptacle (250V; 16A per IEC, 20A per UL; high-temperature).
         NEMA_5_15R: This value shall represent a receptacle that matches the NEMA
           specified 5-15 receptacle (120V; 15A).  The current is commonly de-rated
           to 12A if it is protected by a 15A breaker.
@@ -90,7 +103,10 @@ components:
           SEV 1011 specified Type 23 receptacle (250V; 16A).
       x-enumVersionAdded:
         BusConnection: v1_3_0
+        Combination: v1_5_0
+        IEC_60320_C15: v1_5_0
+        IEC_60320_C21: v1_5_0
 title: '#Outlet.Outlet'
-x-copyright: Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-copyright: Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
 x-language: en
 x-owningEntity: DMTF
