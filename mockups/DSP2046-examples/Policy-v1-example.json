@@ -1,0 +1,40 @@
+{
+    "@odata.type": "#Policy.v1_0_0.Policy",
+    "Id": "RackPowerCap",
+    "Name": "Rack Power Cap Policy",
+    "Predefined": false,
+    "Enabled": true,
+    "TriggerCondition": {
+        "Type": "Sum",
+        "CompareValue": "10000",
+        "Operator": "GreaterThanOrEqual",
+        "SubordinateConditions": [
+            {
+                "Type": "Read",
+                "ResourcePath": "/redfish/v1/Chassis/1/Power",
+                "PropertyPath": "/PowerControl/0/PowerConsumedWatts"
+            },
+            {
+                "Type": "Read",
+                "ResourcePath": "/redfish/v1/Chassis/Blade1/Sensors/PowerConsumption"
+            }
+        ]
+    },
+    "Response": [
+        {
+            "ResponseAction": "Reset",
+            "TargetURI": "/redfish/v1/Systems/1",
+            "ResetType": "GracefulShutdown"
+        },
+        {
+            "ResponseAction": "Recheck",
+            "DelaySeconds": 60
+        },
+        {
+            "ResponseAction": "Reset",
+            "TargetURI": "/redfish/v1/Chassis/Blade1",
+            "ResetType": "GracefulShutdown"
+        }
+    ],
+    "@odata.id": "/redfish/v1/PolicyService/Policies/RackPowerCap"
+}

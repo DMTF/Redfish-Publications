@@ -1,0 +1,323 @@
+components:
+  schemas:
+    PowerSubsystem_v1_2_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/PowerSubsystem_v1_2_0_OemActions'
+          description: This property contains the available OEM-specific actions for
+            this resource.
+          x-longDescription: This property shall contain any additional OEM actions
+            for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSubsystem_v1_2_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+        PowerBrakeLoadPercentSensor:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the load percent sensor used to determine when to
+            apply the emergency power brake.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Sensor` that represents the load percent sensor whose thresholds are
+            monitored to determine when to apply the emergency power brake.  This
+            property applies to equipment that implements the power brake control
+            and shall not be present on equipment that only receive the power brake.
+          x-versionAdded: v1_2_0
+        PowerBrakeTemperatureSensor:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: A link to the temperature sensor used to determine when to
+            apply the emergency power brake.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource of type
+            `Sensor` that represents the temperature sensor whose thresholds are monitored
+            to determine when to apply the emergency power brake.  This property applies
+            to equipment that implements the power brake control and shall not be
+            present on equipment that only receive the power brake.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSubsystem_v1_2_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain any additional OEM actions for this
+        resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSubsystem_v1_2_0_PowerAllocation:
+      additionalProperties: false
+      description: Power allocation for a subsystem.
+      properties:
+        AllocatedWatts:
+          description: The total amount of power that has been allocated or budgeted
+            to this subsystem.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall represent the total power currently
+            allocated or budgeted to this subsystem.
+          x-units: W
+        RequestedWatts:
+          description: The potential power, in watt units, that the subsystem requests,
+            which might be higher than the current level being consumed because the
+            requested power includes a budget that the subsystem wants for future
+            use.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall represent the amount of power, in
+            watt units, that the subsystem currently requests to be budgeted for future
+            use.
+          x-units: W
+      type: object
+      x-longDescription: This type shall contain the set of properties describing
+        the allocation of power for a subsystem.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSubsystem_v1_2_0_PowerBrake:
+      additionalProperties: false
+      description: The emergency power brake settings.
+      properties:
+        Applied:
+          description: An indication of whether the emergency power brake is currently
+            applied.
+          nullable: true
+          readOnly: true
+          type: boolean
+          x-longDescription: This property shall indicate whether the emergency power
+            brake is currently applied.  The value `true` shall indicate the power
+            brake is applied.  For equipment that receives the power brake, this shall
+            indicate the equipment is subject to an applied power brake.  The value
+            `false` shall indicate the power brake is not applied.
+          x-versionAdded: v1_2_0
+        Enabled:
+          description: An indication of whether the emergency power brake is enabled.
+          nullable: true
+          readOnly: false
+          type: boolean
+          x-longDescription: This property shall indicate whether the emergency power
+            brake is enabled for this equipment.  The value `true` shall indicate
+            the power brake is enabled.  The value `false` shall indicate the emergency
+            power brake is disabled.
+          x-versionAdded: v1_2_0
+        LoadPercentThreshold:
+          description: The sensor threshold level at which the load-percent-based
+            emergency power brake is applied.
+          oneOf:
+          - $ref: '#/components/schemas/PowerSubsystem_v1_2_0_ThresholdLevel'
+          - enum:
+            - null
+          readOnly: false
+          x-longDescription: This property shall contain the threshold level of the
+            associated load percent sensor at which the emergency power brake is applied.  This
+            property shall not be present on equipment that only receives the power
+            brake.
+          x-versionAdded: v1_2_0
+        TemperatureThreshold:
+          description: The sensor threshold level at which the temperature-based emergency
+            power brake is applied.
+          oneOf:
+          - $ref: '#/components/schemas/PowerSubsystem_v1_2_0_ThresholdLevel'
+          - enum:
+            - null
+          readOnly: false
+          x-longDescription: This property shall contain the threshold level of the
+            associated temperature sensor at which the emergency power brake is applied.  This
+            property shall not be present on equipment that only receives the power
+            brake.
+          x-versionAdded: v1_2_0
+      type: object
+      x-longDescription: This type shall contain properties that describe the emergency
+        power brake.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSubsystem_v1_2_0_PowerBrakeReason:
+      enum:
+      - LoadPercent
+      - Temperature
+      - LossOfComms
+      - ExternalSignal
+      type: string
+      x-enumDescriptions:
+        ExternalSignal: The power brake is applied due to an external signal or command.
+        LoadPercent: The power brake is applied due to load percent threshold exceeded.
+        LossOfComms: The power brake is applied due to loss of communications.
+        Temperature: The power brake is applied due to temperature threshold exceeded.
+      x-enumLongDescriptions:
+        ExternalSignal: This value shall indicate the power brake is applied due to
+          the receipt of a signal or command from an external source.  In large deployments,
+          this value may be used to indicate the power brake was triggered from a
+          rack-scale power management system.
+        LoadPercent: This value shall indicate the power brake is applied because
+          the load percent sensor reading exceeded the configured threshold.
+        LossOfComms: This value shall indicate the power brake is applied because
+          communications with the power equipment have been lost.
+        Temperature: This value shall indicate the power brake is applied because
+          the temperature sensor reading exceeded the configured threshold.
+    PowerSubsystem_v1_2_0_PowerSubsystem:
+      additionalProperties: false
+      description: This `PowerSubsystem schema` contains the definition for the power
+        subsystem of a chassis.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PowerSubsystem_v1_2_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: The `Actions` property shall contain the available actions
+            for this resource.
+        Allocation:
+          $ref: '#/components/schemas/PowerSubsystem_v1_2_0_PowerAllocation'
+          description: Power allocation for this subsystem when it represents a subset
+            of the power infrastructure for the chassis or its upstream chassis, such
+            as a chassis containing multiple server blades.
+          x-longDescription: This property shall contain the set of properties describing
+            the allocation of power for this subsystem as part of the power infrastructure
+            for the chassis or an upstream chassis.  This property should not be present
+            in resources that are not part of a shared power infrastructure.
+        Batteries:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of batteries within this subsystem.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `BatteryCollection`.
+          x-versionAdded: v1_1_0
+        CapacityWatts:
+          description: The total amount of power that this subsystem can draw.
+          minimum: 0
+          nullable: true
+          readOnly: true
+          type: number
+          x-longDescription: This property shall represent the total amount of power
+            that this subsystem can draw, either from power supplies or other physically
+            installed means of power delivery. This value does not take into account
+            the status or health of power delivery components.
+          x-units: W
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/PowerSubsystem_v1_2_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+          x-versionAdded: v1_2_0
+        MaxRampRateWattsPerSecond:
+          $ref: http://redfish.dmtf.org/schemas/v1/Control.yaml#/components/schemas/Control_ControlSingleExcerpt
+          description: The maximum AC power ramp rate settings for this subsystem.
+          x-excerptCopy: ControlSingleExcerpt
+          x-longDescription: This property shall contain the maximum AC power ramp
+            rate settings for this subsystem, including the desired ramp rate and
+            the allowable range, in watts per second.  The value of the `DataSourceUri`
+            property, if present, shall reference a resource of type `Control` with
+            the `ControlType` property containing the value of `Power`.
+          x-versionAdded: v1_2_0
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        PowerBrake:
+          $ref: '#/components/schemas/PowerSubsystem_v1_2_0_PowerBrake'
+          description: The emergency power brake settings for this subsystem.
+          x-longDescription: This property shall contain the emergency power brake
+            settings for this subsystem.  Equipment that implements power brake control,
+            such as a power shelf, monitors associated sensors and applies the power
+            brake when configured conditions are met.  Equipment that receives the
+            power brake, such as a server, shall report when the power brake is applied
+            and shall immediately limit power consumption while it is applied.
+          x-versionAdded: v1_2_0
+        PowerSupplies:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to the collection of power supplies within this subsystem.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `PowerSupplyCollection`.
+        PowerSupplyRedundancy:
+          description: The redundancy information for the set of power supplies in
+            this subsystem.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Redundancy.yaml#/components/schemas/Redundancy_RedundantGroup
+          type: array
+          x-longDescription: This property shall contain redundancy information for
+            the set of power supplies in this subsystem.  The values of the `RedundancyGroup`
+            array shall reference resources of type `PowerSupply`.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource shall represent a power subsystem for a Redfish
+        implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PowerSubsystem_v1_2_0_ThresholdLevel:
+      enum:
+      - Disabled
+      - UpperCaution
+      - UpperCritical
+      type: string
+      x-enumDescriptions:
+        Disabled: Disabled.
+        UpperCaution: The upper caution threshold.
+        UpperCritical: The upper critical threshold.
+      x-enumLongDescriptions:
+        Disabled: This value shall indicate the associated sensor is not used to apply
+          the power brake.
+        UpperCaution: This value shall indicate the power brake is applied when the
+          associated sensor reading exceeds the upper caution threshold.
+        UpperCritical: This value shall indicate the power brake is applied when the
+          associated sensor reading exceeds the upper critical threshold.
+title: '#PowerSubsystem.v1_2_0.PowerSubsystem'
+x-copyright: Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2026.2'

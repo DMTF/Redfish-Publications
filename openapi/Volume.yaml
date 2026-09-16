@@ -296,8 +296,40 @@ components:
         'Off': The read cache is disabled.
         ReadAhead: A caching technique in which the controller pre-fetches data anticipating
           future read requests.
+    Volume_ReservationType:
+      description: Indicate the possible type of reservations.
+      enum:
+      - WriteExclusive
+      - ExclusiveAccess
+      - WriteExclusiveRegistrantsOnly
+      - ExclusiveAccessRegistrantsOnly
+      - WriteExclusiveAllRegistrants
+      - ExclusiveAccessAllRegistrants
+      type: string
+      x-enumDescriptions:
+        ExclusiveAccess: Reservation type that allows only the host holding the reservation
+          to read and write to a shared namespace. Only one reservation holder is
+          allowed. All other hosts are denied access.
+        ExclusiveAccessAllRegistrants: Reservation type that allows all hosts that
+          have registered to act as reservation holder and to have read and write
+          access to a shared namespace. Hosts not holding registrations are not permitted
+          access.
+        ExclusiveAccessRegistrantsOnly: Reservation type that allows the host holding
+          a reservation to read and write to a shared namespace. Only one reservation
+          holder is allowed. Hosts that have registered are permitted read/write access.
+          Hosts not holding registrations are not permitted access.
+        WriteExclusive: Reservation type that allows only the host holding the reservation
+          to read and write to a shared namespace. Only one reservation holder is
+          allowed. All other hosts have read-only access to the shared namespace.
+        WriteExclusiveAllRegistrants: Reservation type that allows all hosts that
+          have registered to act as reservation holder and to read and write to a
+          shared namespace. Hosts not holding registrations have read-only access.
+        WriteExclusiveRegistrantsOnly: Reservation type that allows the host holding
+          a reservation to read and write to a shared namespace. Only one reservation
+          holder is allowed. Hosts that have registered are permitted read/write access.
+          Hosts not holding registrations have read-only access.
     Volume_Volume:
-      $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_10_2.yaml#/components/schemas/Volume_v1_10_2_Volume
+      $ref: http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_11_0.yaml#/components/schemas/Volume_v1_11_0_Volume
       description: Volume contains properties used to describe a volume, virtual disk,
         LUN, or other logical storage entity for any system.
       x-longDescription: This resource shall be used to represent a volume, virtual
@@ -426,7 +458,7 @@ components:
         'Off': The support for addressing the write hole issue is disabled. The volume
           is not performing any additional activities to close the RAID write hole.
 title: '#Volume.Volume'
-x-copyright: Copyright 2015-2025 Storage Networking Industry Association (SNIA), USA.
+x-copyright: Copyright 2015-2026 Storage Networking Industry Association (SNIA), USA.
   All rights reserved.
 x-language: en
 x-owningEntity: SNIA

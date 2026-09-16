@@ -1,0 +1,109 @@
+{
+    "@Redfish.Copyright": "Copyright 2019-2026 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_9_0.MessageRegistry",
+    "Id": "Composition.1.0.3",
+    "Name": "Composition Message Registry",
+    "Language": "en",
+    "Description": "This registry defines the messages for composition related events.",
+    "RegistryPrefix": "Composition",
+    "RegistryVersion": "1.0.3",
+    "Release": "2019.2",
+    "OwningEntity": "DMTF",
+    "Messages": {
+        "ResourceBlockChanged": {
+            "Description": "Indicates that a resource block has changed.  This is not used whenever there is another event message for that specific change, such as when only the state has changed.",
+            "LongDescription": "This message shall indicate that one or more properties of a `ResourceBlock` resource have changed.  This message shall not be used for cases where a more specific message could be used in its place.",
+            "Message": "Resource block '%1' has changed on the service.",
+            "Example": "Resource block 'Block1' has changed on the service.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The `Id` of the resource block that has changed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the value of the `Id` property of the `ResourceBlock` resource that has changed."
+            ],
+            "Resolution": "None."
+        },
+        "ResourceBlockStateChanged": {
+            "Description": "Indicates that the state of a resource block has changed, specifically the value of the `State` property within `Status`.",
+            "LongDescription": "This message shall indicate that the `State` property within the `Status` object of a `ResourceBlock` resource has changed.",
+            "Message": "The state of resource block '%1' has changed.",
+            "Example": "The state of resource block 'Block1' has changed.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The `Id` of the resource block that has changed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the value of the `Id` property of the `ResourceBlock` resource that has changed."
+            ],
+            "Resolution": "None."
+        },
+        "ResourceBlockCompositionStateChanged": {
+            "Description": "Indicates that the composition state of a resource block has changed, specifically the value of the `CompositionState` property within `CompositionStatus`.",
+            "LongDescription": "This message shall indicate that the `CompositionState` property within the `CompositionStatus` object of a `ResourceBlock` resource has changed.",
+            "Message": "The composition status of the resource block '%1' has changed.",
+            "Example": "The composition status of the resource block 'Block1' has changed.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The `Id` of the resource block that has changed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the value of the `Id` property of the `ResourceBlock` resource that has changed."
+            ],
+            "Resolution": "None."
+        },
+        "ResourceZoneMembershipChanged": {
+            "Description": "Indicates that the membership of a resource zone has changed due to resource blocks being added or removed from the resource zone.",
+            "LongDescription": "This message shall indicate that entries found in the `ResourceBlocks` array within the `Links` object for a resource zone have been added or removed.",
+            "Message": "The membership of resource zone '%1' has been changed.",
+            "Example": "The membership of resource zone 'Zone1' has been changed.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The `Id` of the resource zone that has changed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the value of the `Id` property of the `Zone` resource that represents the resource zone that has changed."
+            ],
+            "Resolution": "None."
+        },
+        "ResourceBlockInUse": {
+            "Description": "Indicates that the composition request contains a resource block that is unable to participate in more compositions.",
+            "LongDescription": "This message shall indicate that the composition request contains a `ResourceBlock` resource that is unable to participate in more compositions due to restrictions specified in its `CompositionStatus` property.  For example, the resource block has reached its composition limit specified by the `MaxCompositions` property.",
+            "Message": "Resource block '%1' cannot be part of any new compositions.",
+            "Example": "Resource block 'Block1' cannot be part of any new compositions.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The `Id` of the resource block that cannot be part of any new compositions."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the value of the `Id` property of the `ResourceBlock` resource that cannot be part of any new compositions."
+            ],
+            "Resolution": "Remove the resource block from the request and resubmit the request."
+        }
+    }
+}

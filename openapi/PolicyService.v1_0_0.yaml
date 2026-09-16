@@ -1,0 +1,169 @@
+components:
+  schemas:
+    PolicyService_v1_0_0_Actions:
+      additionalProperties: false
+      description: The available actions for this resource.
+      properties:
+        Oem:
+          $ref: '#/components/schemas/PolicyService_v1_0_0_OemActions'
+          description: The available OEM-specific actions for this resource.
+          x-longDescription: This property shall contain the available OEM-specific
+            actions for this resource.
+      type: object
+      x-longDescription: This type shall contain the available actions for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PolicyService_v1_0_0_Links:
+      additionalProperties: false
+      description: The links to other resources that are related to this resource.
+      properties:
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties contained in this object shall conform to the Redfish
+            Specification-described requirements.
+      type: object
+      x-longDescription: This Redfish Specification-described type shall contain links
+        to resources that are related to but are not contained by, or subordinate
+        to, this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PolicyService_v1_0_0_OemActions:
+      additionalProperties: true
+      description: The available OEM-specific actions for this resource.
+      properties: {}
+      type: object
+      x-longDescription: This type shall contain the available OEM-specific actions
+        for this resource.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+    PolicyService_v1_0_0_OperatingMode:
+      enum:
+      - Disabled
+      - AlertOnly
+      - Enabled
+      type: string
+      x-enumDescriptions:
+        AlertOnly: The policy service is operating in alert only mode.
+        Disabled: The policy service is disabled.
+        Enabled: The policy service is fully enabled.
+      x-enumLongDescriptions:
+        AlertOnly: This value shall indicate that the policy service is operating
+          in alert only mode and shall only perform responses of type `Event` or `Recheck`.  The
+          underlying service implementation may still perform some actions as determined
+          by the manufacturer, such as throttling on thermal events, in order to preserve
+          the system.
+        Disabled: This value shall indicate that the policy service is disabled and
+          shall take no automatic action.  The underlying service implementation may
+          still perform some actions as determined by the manufacturer, such as throttling
+          on thermal events, in order to preserve the system.
+        Enabled: This value shall indicate that the policy service is operating in
+          autonomous mode where it performs all responses.
+    PolicyService_v1_0_0_PolicyService:
+      additionalProperties: false
+      description: The `PolicyService` schema describes the policy service and its
+        properties, with links to the list of policies configured on this service.
+      properties:
+        '@odata.context':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_context
+        '@odata.etag':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_etag
+        '@odata.id':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_id
+        '@odata.type':
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_type
+        Actions:
+          $ref: '#/components/schemas/PolicyService_v1_0_0_Actions'
+          description: The available actions for this resource.
+          x-longDescription: This property shall contain the available actions for
+            this resource.
+        ActionsSupported:
+          description: The response actions this policy service can perform.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Policy.yaml#/components/schemas/Policy_ResponseAction
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain a list of all action types
+            that this policy service can perform.
+        ConditionTypesSupported:
+          description: The condition types this policy service can check.
+          items:
+            $ref: http://redfish.dmtf.org/schemas/v1/Policy.yaml#/components/schemas/Policy_ConditionType
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain a list of all condition types
+            that this policy service can check.
+        Description:
+          oneOf:
+          - $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Description
+          - enum:
+            - null
+          readOnly: true
+        Id:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Id
+          readOnly: true
+        Links:
+          $ref: '#/components/schemas/PolicyService_v1_0_0_Links'
+          description: The links to other resources that are related to this resource.
+          x-longDescription: This property shall contain links to resources that are
+            related to but are not contained by, or subordinate to, this resource.
+        Name:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Name
+          readOnly: true
+        Oem:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Oem
+          description: The OEM extension property.
+          x-longDescription: This property shall contain the OEM extensions.  All
+            values for properties that this object contains shall conform to the Redfish
+            Specification-described requirements.
+        OperatingMode:
+          description: The mode in which this service is operating.
+          oneOf:
+          - $ref: '#/components/schemas/PolicyService_v1_0_0_OperatingMode'
+          - enum:
+            - null
+          readOnly: false
+          x-longDescription: This property shall contain the mode in which this service
+            is operating.
+        Policies:
+          $ref: http://redfish.dmtf.org/schemas/v1/odata-v4.yaml#/components/schemas/odata-v4_idRef
+          description: The link to a collection of policies.
+          readOnly: true
+          x-longDescription: This property shall contain a link to a resource collection
+            of type `PolicyCollection`.
+        ResourceTypesSupported:
+          description: The resource types this policy service can act upon.
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-longDescription: This property shall contain a list of all resource types
+            that this policy service can reference in a response.  Values shall contain
+            the schema name and shall not contain the complete `@odata.type` value
+            with version information.
+        Status:
+          $ref: http://redfish.dmtf.org/schemas/v1/Resource.yaml#/components/schemas/Resource_Status
+          description: The status and health of the resource and its subordinate or
+            dependent resources.
+          x-longDescription: This property shall contain any status or health properties
+            of the resource.
+      required:
+      - '@odata.id'
+      - '@odata.type'
+      - Id
+      - Name
+      type: object
+      x-longDescription: This resource contains the policy service properties for
+        a Redfish implementation.
+      x-patternProperties:
+        ^([a-zA-Z_][a-zA-Z0-9_]*)?@(odata|Redfish|Message)\.[a-zA-Z_][a-zA-Z0-9_]*$:
+          description: This property shall specify a valid odata or Redfish property.
+title: '#PolicyService.v1_0_0.PolicyService'
+x-copyright: Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF
+x-release: '2026.2'

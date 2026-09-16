@@ -1,0 +1,96 @@
+components:
+  schemas:
+    Policy_ConditionType:
+      enum:
+      - And
+      - Or
+      - Compare
+      - Read
+      - Sum
+      - Average
+      - Event
+      type: string
+      x-enumDescriptions:
+        And: All subordinate conditions trigger for this condition to trigger.
+        Average: Average the values of all subordinate conditions together and compare
+          the average to the given value.
+        Compare: Compare a value from a Redfish resource to a specified value.
+        Event: The condition triggers when the message specified is emitted by the
+          service.
+        Or: Any subordinate conditions trigger for this condition to trigger.
+        Read: Read a value from a Redfish resource.  This condition type is used to
+          provide values to a parent condition.
+        Sum: Add the values of all subordinate conditions together and compare the
+          sum to the specified value.
+      x-enumLongDescriptions:
+        And: This value shall indicate that this condition requires all conditions
+          in the `SubordinateConditions` property to evaluate to true at the same
+          time before this condition triggers.  This condition shall contain the `SubordinateConditions`
+          property.  All other properties in this condition shall be omitted.
+        Average: This value shall indicate that the values specified by each member
+          of `SubordinateConditions` are averaged, by performing an arithmetic mean,
+          and then compared using the `Operator` and `Value` properties.  This condition
+          shall not contain the `Property` or `Resource` properties.  If the result
+          of the subordinate conditions cannot be converted to a number then the value
+          for that condition shall be `0`.
+        Compare: This value shall indicate that the `Resource` and `Property` values
+          are used to determine the data to read and compare to the `Value` property.  This
+          condition shall not contain the `SubordinateConditions` property.
+        Event: This value shall indicate that the condition evaluates to true when
+          the message specified in the `Value` property is emitted by the service.  If
+          the `Resource` property is specified and is not an empty string, then the
+          condition shall only evaluate to true if the event was emitted with the
+          resource referenced by `OriginOfCondition`.  If the `MessageId` specified
+          by the `Value` property does not specify the version of the message, then
+          it shall apply to all versions of the message.
+        Or: This value shall indicate that this condition requires any condition in
+          the `SubordinateConditions` property to evaluate to true before this condition
+          triggers.  This condition shall contain the `SubordinateConditions` property.  All
+          other properties in this condition shall be omitted.
+        Read: This value shall indicate that the `Resource` and `Property` values
+          to determine the data to read.  This condition shall not contain the `SubordinateConditions`
+          and `Value` properties.  This condition shall be subordinate to another
+          condition.
+        Sum: This value shall indicate that the values specified by each member of
+          `SubordinateConditions` are added, and then compared using the `Operator`
+          and `Value` properties.  This condition shall not contain the `Property`
+          or `Resource` properties.  If the result of the subordinate conditions cannot
+          be converted to a number then the value for that condition shall be `0`.
+    Policy_Policy:
+      $ref: http://redfish.dmtf.org/schemas/v1/Policy.v1_0_0.yaml#/components/schemas/Policy_v1_0_0_Policy
+      description: The `Policy` schema contains a definition for a policy.
+      x-longDescription: This resource shall be used to represent a policy for a Redfish
+        implementation.
+    Policy_ResponseAction:
+      enum:
+      - Recheck
+      - Event
+      - Reset
+      - HTTP
+      - OEM
+      type: string
+      x-enumDescriptions:
+        Event: The response sends an event corresponding to the event parameters specified.
+        HTTP: The response performs an HTTP/HTTPS operation as specified by the parameters.
+        OEM: The response performs an OEM-defined operation as specified by the parameters.
+        Recheck: The response reevaluates and, if the condition is no longer true,
+          the response actions stop at this point.
+        Reset: The response performs a `Reset` action on the specified resource.
+      x-enumLongDescriptions:
+        Event: This value shall indicate that the response sends the event specified
+          by the parameters in the `Event` property of the response.
+        HTTP: This value shall indicate that the response performs an HTTP/HTTPS operation
+          as specified by the `HTTP` property.
+        OEM: This value shall indicate that the response performs an OEM-defined operation
+          as specified by the `Oem` property.
+        Recheck: This value shall indicate that the response causes the policy condition
+          to be reevaluated.  If the condition is still true after this reevaluation,
+          then the response actions shall continue.  If the condition is no longer
+          true, then the response actions shall stop at this point.
+        Reset: This value shall indicate that the response performs a `Reset` action
+          on the resource specified by the `Resource` property with the specified
+          `ResetType`.
+title: '#Policy.Policy'
+x-copyright: Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright
+x-language: en
+x-owningEntity: DMTF

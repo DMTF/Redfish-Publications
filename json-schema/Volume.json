@@ -2,7 +2,7 @@
     "$id": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.json",
     "$ref": "#/definitions/Volume",
     "$schema": "http://redfish.dmtf.org/schemas/v1/redfish-schema-v1.json",
-    "copyright": "Copyright 2015-2025 Storage Networking Industry Association (SNIA), USA. All rights reserved.",
+    "copyright": "Copyright 2015-2026 Storage Networking Industry Association (SNIA), USA. All rights reserved.",
     "definitions": {
         "EncryptionTypes": {
             "enum": [
@@ -228,6 +228,26 @@
             },
             "type": "string"
         },
+        "ReservationType": {
+            "description": "Indicate the possible type of reservations.",
+            "enum": [
+                "WriteExclusive",
+                "ExclusiveAccess",
+                "WriteExclusiveRegistrantsOnly",
+                "ExclusiveAccessRegistrantsOnly",
+                "WriteExclusiveAllRegistrants",
+                "ExclusiveAccessAllRegistrants"
+            ],
+            "enumDescriptions": {
+                "ExclusiveAccess": "Reservation type that allows only the host holding the reservation to read and write to a shared namespace. Only one reservation holder is allowed. All other hosts are denied access.",
+                "ExclusiveAccessAllRegistrants": "Reservation type that allows all hosts that have registered to act as reservation holder and to have read and write access to a shared namespace. Hosts not holding registrations are not permitted access.",
+                "ExclusiveAccessRegistrantsOnly": "Reservation type that allows the host holding a reservation to read and write to a shared namespace. Only one reservation holder is allowed. Hosts that have registered are permitted read/write access. Hosts not holding registrations are not permitted access.",
+                "WriteExclusive": "Reservation type that allows only the host holding the reservation to read and write to a shared namespace. Only one reservation holder is allowed. All other hosts have read-only access to the shared namespace.",
+                "WriteExclusiveAllRegistrants": "Reservation type that allows all hosts that have registered to act as reservation holder and to read and write to a shared namespace. Hosts not holding registrations have read-only access.",
+                "WriteExclusiveRegistrantsOnly": "Reservation type that allows the host holding a reservation to read and write to a shared namespace. Only one reservation holder is allowed. Hosts that have registered are permitted read/write access. Hosts not holding registrations have read-only access."
+            },
+            "type": "string"
+        },
         "Volume": {
             "anyOf": [
                 {
@@ -265,6 +285,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_10_2.json#/definitions/Volume"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/swordfish/v1/Volume.v1_11_0.json#/definitions/Volume"
                 }
             ],
             "deletable": true,

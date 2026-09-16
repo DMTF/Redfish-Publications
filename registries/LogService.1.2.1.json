@@ -1,0 +1,186 @@
+{
+    "@Redfish.Copyright": "Copyright 2020-2026 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_9_0.MessageRegistry",
+    "Id": "LogService.1.2.1",
+    "Name": "Log Service Message Registry",
+    "Language": "en",
+    "Description": "This registry defines the messages for log service related events.",
+    "RegistryPrefix": "LogService",
+    "RegistryVersion": "1.2.1",
+    "OwningEntity": "DMTF",
+    "Release": "2026.1",
+    "Messages": {
+        "DiagnosticDataCollected": {
+            "Description": "Indicates that diagnostic data was collected due to a client invoking the `CollectDiagnosticData` action.",
+            "LongDescription": "This message shall indicate that diagnostic data was collected due to a client invoking the `CollectDiagnosticData` action.",
+            "Message": "'%1' diagnostic data collected.",
+            "Example": "'Manager' diagnostic data collected.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The value of the `DiagnosticDataType` parameter."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the value of the `DiagnosticDataType` parameter provided by the client when the `CollectDiagnosticData` action was invoked."
+            ],
+            "Resolution": "None."
+        },
+        "LogCleared": {
+            "Description": "Indicates that the log was cleared.",
+            "LongDescription": "This message shall indicate that the log was cleared.",
+            "Message": "Log '%1' was cleared.",
+            "Example": "Log 'SystemEventLog' was cleared.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "VersionAdded": "1.1.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the log."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the log."
+            ],
+            "Resolution": "None."
+        },
+        "DiagnosticDataCollectionStarted": {
+            "Description": "Indicates that the service started collecting diagnostic data automatically based on its own policies, such as in response to hardware errors.",
+            "LongDescription": "This message shall indicate that the service started collecting diagnostic data automatically based on its own policies.",
+            "Message": "'%1' diagnostic data collection started for device '%2'.",
+            "Example": "'CPER' diagnostic data collection started for device 'CPU0'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The type of diagnostic data.",
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the type of diagnostic data the service is collecting.  The value shall be one of the values defined by the `LogDiagnosticDataTypes` enumeration in the `LogEntry` schema or an OEM-defined value for `OEM` diagnostic data types.",
+                "This argument shall contain a string that identifies or describes the device."
+            ],
+            "Resolution": "None."
+        },
+        "DiagnosticDataCollectionCompleted": {
+            "Description": "Indicates that the service completed automated diagnostic data collection, such as in response to hardware errors.",
+            "LongDescription": "This message shall indicate that the service completed automated diagnostic data collection based on its own policies.",
+            "Message": "'%1' diagnostic data collection completed for device '%2'.",
+            "Example": "'CPER' diagnostic data collection completed for device 'CPU0'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The type of diagnostic data.",
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the type of diagnostic data the service is collecting.  The value shall be one of the values defined by the `LogDiagnosticDataTypes` enumeration in the `LogEntry` schema or an OEM-defined value for `OEM` diagnostic data types.",
+                "This argument shall contain a string that identifies or describes the device."
+            ],
+            "Resolution": "None.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "DiagnosticDataCollectionStarted"
+                ]
+            }
+        },
+        "DiagnosticDataCollectionFailed": {
+            "Description": "Indicates that the service failed to collect diagnostic data automatically based on its own policies, such as in response to hardware errors.",
+            "LongDescription": "This message shall indicate that the service failed to collect diagnostic data automatically based on its own policies.",
+            "Message": "'%1' diagnostic data collection failed for device '%2'.",
+            "Example": "'CPER' diagnostic data collection failed for device 'CPU0'.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The type of diagnostic data.",
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the type of diagnostic data the service is collecting.  The value shall be one of the values defined by the `LogDiagnosticDataTypes` enumeration in the `LogEntry` schema or an OEM-defined value for `OEM` diagnostic data types.",
+                "This argument shall contain a string that identifies or describes the device."
+            ],
+            "Resolution": "Check the service's storage availability.  Check for additional conditions preventing the collection of diagnostic data.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "DiagnosticDataCollectionStarted"
+                ]
+            }
+        },
+        "DiagnosticDataInvalid": {
+            "Description": "Indicates that the service completed collecting diagnostic data automatically based on its own policies, such as in response to hardware errors, but the data is not usable.  Examples includes truncated diagnostic data and invalid checksums for the diagnostic data.",
+            "LongDescription": "This message shall indicate that the service completed collecting diagnostic data automatically based on its own policies, but the data is not usable.",
+            "Message": "'%1' diagnostic data collection completed for device '%2', but is not usable.",
+            "Example": "'CPER' diagnostic data collection completed for device 'CPU0', but is not usable.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The type of diagnostic data.",
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the type of diagnostic data the service is collecting.  The value shall be one of the values defined by the `LogDiagnosticDataTypes` enumeration in the `LogEntry` schema or an OEM-defined value for `OEM` diagnostic data types.",
+                "This argument shall contain a string that identifies or describes the device."
+            ],
+            "Resolution": "Check the service's storage availability.  Check for additional conditions preventing the collection of diagnostic data.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "DiagnosticDataCollectionStarted"
+                ]
+            }
+        },
+        "DiagnosticDataBlocked": {
+            "Description": "Indicates that the service attempted to collect diagnostic data automatically based on its own policies, such as in response to hardware errors, but restrictions are preventing it from starting.  For example, a setting in a device that blocks sideband access to collecting diagnostic data.",
+            "LongDescription": "This message shall indicate that the service attempted to collect diagnostic data automatically based on its own policies, such as in response to hardware errors, but restrictions are preventing it from starting.",
+            "Message": "'%1' diagnostic data collection was attempted for device '%2', but was blocked.",
+            "Example": "'CPER' diagnostic data collection was attempted for device 'CPU0', but was blocked.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The type of diagnostic data.",
+                "The name or identifier of the device."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain the type of diagnostic data the service is collecting.  The value shall be one of the values defined by the `LogDiagnosticDataTypes` enumeration in the `LogEntry` schema or an OEM-defined value for `OEM` diagnostic data types.",
+                "This argument shall contain a string that identifies or describes the device."
+            ],
+            "Resolution": "Check device settings or other policies that can prevent the collection of diagnostic data."
+        }
+    }
+}

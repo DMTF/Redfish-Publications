@@ -29,6 +29,9 @@
                 },
                 {
                     "$ref": "http://redfish.dmtf.org/schemas/v1/PowerDistribution.v1_6_0.json#/definitions/PowerDistribution"
+                },
+                {
+                    "$ref": "http://redfish.dmtf.org/schemas/v1/PowerDistribution.v1_7_0.json#/definitions/PowerDistribution"
                 }
             ],
             "deletable": false,
@@ -44,6 +47,22 @@
                 "/redfish/v1/PowerEquipment/Switchgear/{PowerDistributionId}",
                 "/redfish/v1/PowerEquipment/ElectricalBuses/{PowerDistributionId}"
             ]
+        },
+        "PowerState": {
+            "enum": [
+                "On",
+                "Off",
+                "PowerCycle"
+            ],
+            "enumDescriptions": {
+                "Off": "Power off.",
+                "On": "Power on.",
+                "PowerCycle": "Power cycle."
+            },
+            "enumLongDescriptions": {
+                "PowerCycle": "This value shall indicate the resource will transition to a power off state, then transition to a power on state.  The transition to a power on state shall be delayed by the value of the `PowerCycleDelaySeconds` property, if present in the resource."
+            },
+            "type": "string"
         }
     },
     "language": "en",

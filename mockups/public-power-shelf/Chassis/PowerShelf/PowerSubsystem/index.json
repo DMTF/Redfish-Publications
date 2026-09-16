@@ -1,8 +1,33 @@
 {
-    "@odata.type": "#PowerSubsystem.v1_1_4.PowerSubsystem",
+    "@odata.type": "#PowerSubsystem.v1_2_0.PowerSubsystem",
     "Id": "PowerSubsystem",
     "Name": "Power Subsystem for Chassis",
+    "Status": {
+        "Health": "Warning",
+        "Conditions": [
+            {
+                "MessageId": "Power.1.4.PowerBrakeApplied",
+                "TimeStamp": "2026-11-08T12:25:00-05:00 ",
+                "Message": "Power brake applied due to 'LoadPercent'.",
+                "MessageSeverity": "Warning",
+                "MessageArgs": [
+                    "LoadPercent"
+                ]
+            }
+        ]
+    },
     "CapacityWatts": 12000,
+    "MaxRampRateWattsPerSecond": {
+        "SetPoint": 1800,
+        "AllowableMin": 5,
+        "AllowableMax": 3600
+    },
+    "PowerBrake": {
+        "Enabled": true,
+        "Applied": true,
+        "TemperatureThreshold": "UpperCaution",
+        "LoadPercentThreshold": "UpperCaution"
+    },
     "PowerSupplyRedundancy": [
         {
             "RedundancyType": "NPlusM",
@@ -37,10 +62,14 @@
     "PowerSupplies": {
         "@odata.id": "/redfish/v1/Chassis/PowerShelf/PowerSubsystem/PowerSupplies"
     },
-    "Status": {
-        "State": "Enabled",
-        "Health": "OK"
+    "Links": {
+        "PowerBrakeTemperatureSensor": {
+            "@odata.id": "/redfish/v1/Chassis/PowerShelf/Sensors/BusBarTemp"
+        },
+        "PowerBrakeLoadPercentSensor": {
+            "@odata.id": "/redfish/v1/Chassis/PowerShelf/Sensors/LoadPercent"
+        }
     },
     "@odata.id": "/redfish/v1/Chassis/PowerShelf/PowerSubsystem",
-    "@Redfish.Copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+    "@Redfish.Copyright": "Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
 }

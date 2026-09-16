@@ -1,7 +1,8 @@
 {
-    "@odata.type": "#Chassis.v1_28_0.Chassis",
+    "@odata.type": "#Chassis.v1_29_0.Chassis",
     "Id": "PowerShelf",
     "Name": "Power Shelf Chassis",
+    "ChassisType": "Enclosure",
     "Version": "1.01a",
     "Manufacturer": "Contoso",
     "Model": "ZAP33000",
@@ -12,7 +13,17 @@
     "Status": {
         "State": "Enabled",
         "Health": "OK",
-        "Conditions": []
+        "HealthRollup": "Warning",
+        "Conditions": [
+            {
+                "MessageId": "Base.1.23.ConditionInRelatedResource",
+                "Message": "One or more conditions exist in a related resource. See the OriginOfCondition property.",
+                "MessageSeverity": "Warning",
+                "OriginOfCondition": {
+                    "@odata.id": "/redfish/v1/Chassis/PowerShelf/PowerSubsystem"
+                }
+            }
+        ]
     },
     "Location": {
         "Placement": {
@@ -20,8 +31,11 @@
             "Rack": "42"
         }
     },
-    "PowerSubsystem": {
+    "Sensors": {
         "@odata.id": "/redfish/v1/Chassis/PowerShelf/Sensors"
+    },
+    "PowerSubsystem": {
+        "@odata.id": "/redfish/v1/Chassis/PowerShelf/PowerSubsystem"
     },
     "EnvironmentMetrics": {
         "@odata.id": "/redfish/v1/Chassis/PowerShelf/EnvironmentMetrics"
@@ -45,5 +59,5 @@
         ]
     },
     "@odata.id": "/redfish/v1/Chassis/PowerShelf",
-    "@Redfish.Copyright": "Copyright 2014-2025 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
+    "@Redfish.Copyright": "Copyright 2014-2026 DMTF. For the full DMTF copyright policy, see http://www.dmtf.org/about/policies/copyright."
 }
