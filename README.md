@@ -3,11 +3,14 @@
 
 # Redfish publications
 
-This repository contains official read-only copies of published DMTF Redfish schemas and message registries.  
+This repository contains official copies of published DMTF Redfish schemas and message registries.
 
 This replicates the contents of DMTF publications DSP8010 and DSP8011, with release tags that match the publication versions.
 
-Issues and pull requests cannot be created in this repository.  Issues, questions, and enhancement requests are encouraged, and should be directed to the public [Redfish Forum](https://www.redfishforum.com), or submitted as feedback to the DMTF via the [Feedback and Technology Submission Portal](https://www.dmtf.org/standards/feedback).
+Non-DMTF members may file issues and create pull requests to propose changes to the Redfish standard message registries (DSP8011).
+This includes proposals for entirely new message registries as well as new messages to existing registries.
+
+For other content, issues, questions, and enhancement requests are encouraged, and should be directed to the public [Redfish Forum](https://www.redfishforum.com), or submitted as feedback to the DMTF via the [Feedback and Technology Submission Portal](https://www.dmtf.org/standards/feedback).
 
 Employees of DMTF member companies should contact their representative, or join the working group to actively participate in the development of future Redfish releases.
 
@@ -17,7 +20,31 @@ The folders of this repository contain the following materials:
 * `dictionaries` - RDE dictionary files from DSP8010
 * `json-schema` - Redfish schema files, from DSP8010, in JSON Schema format
 * `openapi` - Redfish schema files, from DSP8010, in OpenAPI YAML format
+* `messages` - Primary copy of Redfish standard message registries from DSP8011; used to generate the contents of the `registries` directory
 * `registries` - Redfish standard message registries from DSP8011
+
+# Proposing changes to DSP8011
+
+To propose changes to the Redfish standard message registries (DSP8011):
+
+1) File an issue with proposed new messages, new registries, or fixes to existing messages.  Provide use cases and other justifications for the proposal in the issue.
+2) DMTF will review and provide feedback on the issue during DMTF meetings.
+3) If the issue is approved, create a branch and make a pull request with the proposed changes.
+    * Changes are made in the `messages` directory.
+    * Update `Release` term appropriately if a new release is not yet staged.
+    * When adding new messages, increment the minor version of `RegistryVersion` if a new version is not yet staged.  Ensure the new message contains the `VersionAdded` term.
+    * When editing existing messages, increment the errata version of `RegistryVersion` if a new version is not yet staged.
+4) DMTF will review and provide feedback on the pull request during DMTF meetings, and may make edits appropriately.
+5) If the pull request is approved, it will merge to the 'staging' branch.
+
+# Staging process
+
+Once a pull request is approved, it is merged into the 'staging' branch.
+This does not automatically make the contribution part of a DMTF standard.
+The tagged version of the 'main' branch remains the approved, normative material.
+
+DMTF processes require DMTF board approval prior to publication.
+Once approved, the 'staging' branch merges to 'main', and is then tagged for the appropriate release.
 
 # Links to additional DMTF Redfish publications
 
