@@ -1,0 +1,299 @@
+{
+    "@Redfish.Copyright": "Copyright 2026 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_9_0.MessageRegistry",
+    "Id": "ManagerEvent.1.2.0",
+    "Name": "Manager Event Message Registry",
+    "Language": "en",
+    "Description": "This registry defines messages to be used by a service to indicate conditions or configuration changes related to a manager.  The affected manager may provide the Redfish service.",
+    "RegistryPrefix": "ManagerEvent",
+    "RegistryVersion": "1.2.0",
+    "OwningEntity": "DMTF",
+    "Release": "2026.2",
+    "Messages": {
+        "ManagerReset": {
+            "Description": "Indicates that a manager reset occurred.",
+            "LongDescription": "This message shall indicate that a manager reset occurred.",
+            "Message": "Manager '%1' performed a '%2' type of reset.",
+            "Example": "Manager 'Manager1' performed a 'ForceRestart' type of reset.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager that was reset.",
+                "The type of reset that occurred."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected manager.",
+                "This argument shall contain the type of reset that occurred.  This argument shall contain one of the values of the `ResetType` enumeration from the `Resource` schema."
+            ],
+            "Resolution": "None."
+        },
+        "ManagerResetWatchdogTimer": {
+            "Description": "Indicates that a manager reset occurred due to a watchdog timer action.",
+            "LongDescription": "This message shall indicate that a manager reset occurred due to a watchdog timer action.",
+            "Message": "Manager '%1' performed a '%2' type of reset due to watchdog timer action.",
+            "Example": "Manager 'Manager1' performed a 'ForceRestart' type of reset due to watchdog timer action.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 2,
+            "ParamTypes": [
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager that was reset.",
+                "The type of reset that occurred."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected manager.",
+                "This argument shall contain the type of reset that occurred.  This argument shall contain one of the values of the `ResetType` enumeration from the `Resource` schema."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "ManagerSwitchedToBackupSoftwareImage": {
+            "Description": "Indicates that a manager switched to a backup software image.",
+            "LongDescription": "This message shall indicate that a manager is using a backup software image.",
+            "Message": "Manager '%1' switched to a backup software image.",
+            "Example": "Manager 'Manager1' switched to a backup software image.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected manager."
+            ],
+            "Resolution": "Check additional diagnostic data if available."
+        },
+        "ManagerGoingOfflineTemporarily": {
+            "Description": "Indicates that a manager is going offline temporarily, such as due to a maintenance operation.",
+            "LongDescription": "This message shall indicate that a manager is going offline temporarily.",
+            "Message": "Manager '%1' is going offline temporarily and should be available again in %2 seconds; clients should allow for up to %3 seconds before taking action.",
+            "Example": "Manager 'BMC' is going offline temporarily and should be available again in 120 seconds; clients should allow for up to 600 seconds before taking action.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "number",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager.",
+                "The duration the manager is expected to be offline in seconds.",
+                "The duration clients should allow for the manager to be offline in seconds."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected manager.",
+                "This argument shall contain the duration the manager is expected to be offline in seconds.",
+                "This argument shall contain the duration clients should allow for the manager to be offline in seconds."
+            ],
+            "Resolution": "Wait the specified amount of time before accessing the service again."
+        },
+        "RedundancyGroupCritical": {
+            "Description": "Indicates that a manager redundancy group has a critical status.",
+            "LongDescription": "This message shall indicate that a manager redundancy group is operating in a critical state due to a fault or a change in configuration.",
+            "Message": "Manager redundancy group '%1' is in a critical state.",
+            "Example": "Manager redundancy group 'BmcRedundancy' is in a critical state.",
+            "MessageSeverity": "Critical",
+            "Severity": "Critical",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager redundancy group."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the group of `Manager` resources."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedCritical"
+            ],
+            "Resolution": "None."
+        },
+        "RedundancyGroupWarning": {
+            "Description": "Indicates that a manager redundancy group has a warning status.",
+            "LongDescription": "This message shall indicate that a manager redundancy group is operating with a warning status or in a non-redundant state due to a fault or a change in configuration.",
+            "Message": "Manager redundancy group '%1' is in a warning state.",
+            "Example": "Manager redundancy group 'BmcRedundancy' is in a warning state.",
+            "MessageSeverity": "Warning",
+            "Severity": "Warning",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager redundancy group."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the group of `Manager` resources."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ],
+            "Resolution": "None."
+        },
+        "RedundancyGroupNormal": {
+            "Description": "Indicates that a manager redundancy group has returned to normal operations.",
+            "LongDescription": "This message shall indicate that a manager redundancy group has returned to a normal operating state.",
+            "Message": "Manager redundancy group '%1' is operating normally.",
+            "Example": "Manager redundancy group 'BmcRedundancy' is operating normally.",
+            "MessageSeverity": "OK",
+            "Severity": "OK",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager redundancy group."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies or describes the group of `Manager` resources."
+            ],
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ],
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "RedundancyGroupCritical",
+                    "RedundancyGroupWarning"
+                ]
+            },
+            "Resolution": "None."
+        },
+        "RedundancyDisabled": {
+            "Description": "Indicates that a manager redundancy group was manually disabled.",
+            "LongDescription": "This message shall indicate that a manager redundancy group was manually disabled by a client.",
+            "Message": "Redundancy on redundancy group '%1' was manually disabled.",
+            "Example": "Redundancy on redundancy group 'BmcRedundancy' was manually disabled.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the redundancy group."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the affected redundancy group."
+            ],
+            "Resolution": "Re-enable redundancy if it was disabled unintentionally."
+        },
+        "PeerMissing": {
+            "Description": "Indicates that the peer manager cannot be detected.",
+            "LongDescription": "This message shall indicate that the peer manager cannot be detected and redundancy is therefore unavailable.",
+            "Message": "The peer manager of '%1' is missing.",
+            "Example": "The peer manager of 'Manager1' is missing.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager reporting the condition."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the manager that detected the missing peer."
+            ],
+            "Resolution": "Check that the peer manager is installed, powered, and connected."
+        },
+        "PeerUnavailable": {
+            "Description": "Indicates that the peer manager is present but not responding.",
+            "LongDescription": "This message shall indicate that the peer manager is present but not responding, and redundancy is therefore unavailable.",
+            "Message": "The peer manager of '%1' is not responding.",
+            "Example": "The peer manager of 'Manager1' is not responding.",
+            "Severity": "Critical",
+            "MessageSeverity": "Critical",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager reporting the condition."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the manager that detected the unresponsive peer."
+            ],
+            "Resolution": "Check the peer manager for errors and verify its health status."
+        },
+        "PeerNotProvisioned": {
+            "Description": "Indicates that the peer manager is not provisioned.",
+            "LongDescription": "This message shall indicate that the peer manager is present but is not provisioned, and redundancy is therefore unavailable.",
+            "Message": "The peer manager of '%1' is not provisioned.",
+            "Example": "The peer manager of 'Manager1' is not provisioned.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager reporting the condition."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the manager that detected the unprovisioned peer."
+            ],
+            "Resolution": "Complete provisioning of the peer manager."
+        },
+        "PeerInvalidState": {
+            "Description": "Indicates that the peer manager is not in a valid state for redundancy.",
+            "LongDescription": "This message shall indicate that the peer manager is not in a valid state to establish redundancy, and redundancy is therefore unavailable.",
+            "Message": "The peer manager of '%1' is not in a valid state for redundancy.",
+            "Example": "The peer manager of 'Manager1' is not in a valid state for redundancy.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager reporting the condition."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the manager that detected the invalid state on the peer."
+            ],
+            "Resolution": "Check the peer manager state and ensure it is configured correctly for redundancy."
+        },
+        "PeerVersionMismatch": {
+            "Description": "Indicates that the managers in the redundancy group are running mismatched firmware versions, preventing redundancy.",
+            "LongDescription": "This message shall indicate that the managers in the redundancy group are running mismatched firmware versions, and redundancy is therefore unavailable.",
+            "Message": "Manager '%1' and its peer are running mismatched firmware versions.",
+            "Example": "Manager 'Manager1' and its peer are running mismatched firmware versions.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "VersionAdded": "1.2.0",
+            "NumberOfArgs": 1,
+            "ParamTypes": [
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The name or identifier of the manager reporting the condition."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the manager that detected the firmware version mismatch."
+            ],
+            "Resolution": "Update both managers to the same firmware version."
+        }
+    }
+}

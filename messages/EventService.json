@@ -1,0 +1,177 @@
+{
+    "@Redfish.Copyright": "Copyright 2021-2026 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_9_0.MessageRegistry",
+    "Id": "EventService.1.0.0",
+    "Name": "Event Service Message Registry",
+    "Language": "en",
+    "Description": "This registry defines messages for the lifecycle of Redfish event subscriptions and the health of event delivery.",
+    "RegistryPrefix": "EventService",
+    "RegistryVersion": "1.0.0",
+    "OwningEntity": "DMTF",
+    "Release": "2026.2",
+    "Messages": {
+        "EventSubscriptionCreated": {
+            "Description": "Indicates that an event subscription was created and is now active.",
+            "LongDescription": "This message shall indicate that an event subscription was created and is now active.",
+            "Message": "Event subscription '%1' was created successfully with protocol '%2' and destination '%3'.",
+            "Example": "Event subscription 'contoso-listener' was created successfully with protocol 'Redfish' and destination 'https://contoso.com/events'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The identifier of the event subscription.",
+                "The protocol of the event subscription.",
+                "The destination URI of the event subscription."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the event subscription that was removed successfully.",
+                "This argument shall contain the protocol from the `Protocol` property of the event subscription.",
+                "This argument shall contain the destination URI from the `Destination` property of the event subscription."
+            ],
+            "Resolution": "None."
+        },
+        "EventSubscriptionRemoved": {
+            "Description": "Indicates that an event subscription was removed and is no longer active.",
+            "LongDescription": "This message shall indicate that an event subscription was removed and is no longer active.",
+            "Message": "Event subscription '%1' was removed successfully with protocol '%2' and destination '%3'.",
+            "Example": "Event subscription 'contoso-listener' was removed successfully with protocol 'Redfish' and destination 'https://contoso.com/events'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The identifier of the event subscription.",
+                "The protocol of the event subscription.",
+                "The destination URI of the event subscription."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the event subscription that was removed successfully.",
+                "This argument shall contain the protocol from the `Protocol` property of the event subscription.",
+                "This argument shall contain the destination URI from the `Destination` property of the event subscription."
+            ],
+            "Resolution": "Crated a new event subscription if continued event delivery is required.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsAll": true
+            }
+        },
+        "EventDeliveryFailed": {
+            "Description": "Indicates that an attempt to deliver an event to a subscriber failed.",
+            "LongDescription": "This message shall indicate that an attempt to deliver an event to a subscriber failed.  This message shall only be used after all retries are performed.  This message shall not be used for subscriptions configured to retry forever.",
+            "Message": "Event delivery to subscriber '%1' failed with protocol '%2' and destination '%3'.",
+            "Example": "Event delivery to subscriber 'contoso-listener' failed with protocol 'Redfish' and destination 'https://contoso.com/events'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The identifier of the event subscription.",
+                "The protocol of the event subscription.",
+                "The destination URI of the event subscription."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the event subscription for which the event delivery failed.",
+                "This argument shall contain the protocol from the `Protocol` property of the event subscription.",
+                "This argument shall contain the destination URI from the `Destination` property of the event subscription."
+            ],
+            "Resolution": "Check the subscriber endpoint availability and network connectivity.  Check the configuration of the event subscription."
+        },
+        "EventDeliverySucceededWithRetries": {
+            "Description": "Indicates that an attempt to deliver an event to a subscriber succeeded, but required retries.",
+            "LongDescription": "This message shall indicate that an attempt to deliver an event to a subscriber succeeded, but required retries.  This message shall only be used when retries were performed.",
+            "Message": "Event delivery to subscriber '%1' succeeded with protocol '%2' and destination '%3' after %4 retries.",
+            "Example": "Event delivery to subscriber 'contoso-listener' succeeded with protocol 'Redfish' and destination 'https://contoso.com/events' after 3 retries.",
+            "Severity": "OK",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 4,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string",
+                "number"
+            ],
+            "ArgDescriptions": [
+                "The identifier of the event subscription.",
+                "The protocol of the event subscription.",
+                "The destination URI of the event subscription.",
+                "The number of retries that were performed."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the event subscription for which the event delivery failed.",
+                "This argument shall contain the protocol from the `Protocol` property of the event subscription.",
+                "This argument shall contain the destination URI from the `Destination` property of the event subscription.",
+                "This argument shall contain the number of retries that were performed."
+            ],
+            "Resolution": "Check the subscriber endpoint availability and network connectivity.  Check the configuration of the event subscription."
+        },
+        "EventSubscriptionSuspended": {
+            "Description": "Indicates that an event subscription was suspended.",
+            "LongDescription": "This message shall indicate that an event subscription was suspended.  Services may suspend an event subscription due to repeated delivery failures or an administrator performing the `EventDestnation.SuspendSubscription` action.",
+            "Message": "Event subscription '%1' was suspended with protocol '%2' and destination '%3'.",
+            "Example": "Event subscription 'contoso-listener' was suspended with protocol 'Redfish' and destination 'https://contoso.com/events'.",
+            "Severity": "Warning",
+            "MessageSeverity": "Warning",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The identifier of the event subscription.",
+                "The protocol of the event subscription.",
+                "The destination URI of the event subscription."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the event subscription that was suspended.",
+                "This argument shall contain the protocol from the `Protocol` property of the event subscription.",
+                "This argument shall contain the destination URI from the `Destination` property of the event subscription."
+            ],
+            "Resolution": "Determine the reason for suspension.  If due to delivery failures, check subscriber endpoint availability and check the subscription configuration.  If due to an administrative action, resume the subscription when necessary."
+        },
+        "EventSubscriptionResumed": {
+            "Description": "Indicates that an event subscription was resumed.",
+            "LongDescription": "This message shall indicate that an event subscription was resumed.  Services may resume an event subscription due an administrator performing the `EventDestnation.ResumeSubscription` action.",
+            "Message": "Event subscription '%1' was resumed with protocol '%2' and destination '%3'.",
+            "Example": "Event subscription 'contoso-listener' was resumed with protocol 'Redfish' and destination 'https://contoso.com/events'.",
+            "Severity": "OK",
+            "MessageSeverity": "OK",
+            "NumberOfArgs": 3,
+            "ParamTypes": [
+                "string",
+                "string",
+                "string"
+            ],
+            "ArgDescriptions": [
+                "The identifier of the event subscription.",
+                "The protocol of the event subscription.",
+                "The destination URI of the event subscription."
+            ],
+            "ArgLongDescriptions": [
+                "This argument shall contain a string that identifies the event subscription that was resumed.",
+                "This argument shall contain the protocol from the `Protocol` property of the event subscription.",
+                "This argument shall contain the destination URI from the `Destination` property of the event subscription."
+            ],
+            "Resolution": "None.",
+            "ClearingLogic": {
+                "ClearsIf": "SameOriginOfCondition",
+                "ClearsMessage": [
+                    "EventSubscriptionSuspended"
+                ]
+            }
+        }
+    }
+}
