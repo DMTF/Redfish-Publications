@@ -1,0 +1,277 @@
+{
+    "@Redfish.Copyright": "Copyright 2024-2025 DMTF. All rights reserved.",
+    "@odata.type": "#MessageRegistry.v1_9_0.MessageRegistry",
+    "Id": "CXL.1.0.0",
+    "Name": "CXL Device Health and Media Message Registry",
+    "Language": "en",
+    "Description": "This registry defines health, media status, and telemetry condition messages for Compute Express Link (CXL) Type 3 memory device.",
+    "RegistryPrefix": "CXL",
+    "RegistryVersion": "1.0.0",
+    "OwningEntity": "DMTF",
+    "Release": "2026.3",
+    "Messages": {
+        "DeviceHealthNormal": {
+            "Description": "Indicates that the overall CXL device health is normal and functioning within nominal parameters.",
+            "LongDescription": "This message indicates that the CXL device has reported a normal operational health status. All internal diagnostics, hardware logic, and subsystem metrics are healthy and no maintenance or replacement actions are required.",
+            "Message": "Device health is normal.",
+            "Severity": "OK",
+            "NumberOfArgs": 0,
+            "Resolution": "None.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ]
+        },
+        "DeviceMaintenanceNeeded": {
+            "Description": "Indicates that the CXL device has reported that device maintenance is needed.",
+            "LongDescription": "This message indicates that the CXL device has transitioned its internal health reporting to indicate that maintenance is required. This may be triggered by diagnostic self-tests, endurance wear counters, or periodic recalibration intervals defined by the device firmware.",
+            "Message": "Device maintenance is required.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Schedule preventative maintenance or calibration for the CXL module.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ]
+        },
+        "DevicePerformanceDegraded": {
+            "Description": "Indicates that the CXL device is operating with degraded performance or reduced throughput.",
+            "LongDescription": "This message indicates that the CXL device is actively operating under degraded bandwidth, latency, or throughput constraints. This condition typically arises from power throttling, internal thermal throttling, reduced PCIe/CXL link lane width, or degraded memory channel availability.",
+            "Message": "Device is operating with degraded performance.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Verify cooling, power delivery, and link configuration; shift latency-critical workloads.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ]
+        },
+        "DeviceReplacementRecommended": {
+            "Description": "Indicates that the CXL device health indicates the hardware is nearing failure or has exceeded allowable error thresholds.",
+            "LongDescription": "This message indicates that the CXL device has crossed a severe predictive failure threshold. Hardware degradation has reached a level where catastrophic failure is anticipated, and immediate physical dispatch is recommended.",
+            "Message": "Device health status recommends hardware replacement.",
+            "Severity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Migrate workloads, unbind memory regions, and replace the CXL device.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedCritical"
+            ]
+        },
+        "MediaNormal": {
+            "Description": "Indicates that the CXL device media is operating normally.",
+            "LongDescription": "This message indicates that the backend memory media of the CXL device is fully initialized, healthy, and operating within normal operational and persistence parameters.",
+            "Message": "Media is operating normally.",
+            "Severity": "OK",
+            "NumberOfArgs": 0,
+            "Resolution": "None.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ]
+        },
+        "MediaNotReady": {
+            "Description": "Indicates that the CXL device backend memory media is not ready for host transactions.",
+            "LongDescription": "This message indicates that while the CXL controller ASIC is powered and responding over management interfaces, the backend memory media is still performing internal boot, calibration, training, or initialization sequences. Host memory transactions to this device will fail while in this state. If persistent beyond expected initialization timeouts, this indicates a media initialization failure.",
+            "Message": "Media is not ready.",
+            "Severity": "OK",
+            "NumberOfArgs": 0,
+            "Resolution": "Wait for device media initialization to complete before accessing memory partitions. If this condition persists beyond platform initialization timeout, inspect device firmware logs and power delivery."
+        },
+        "MediaWritePersistenceLost": {
+            "Description": "Indicates that the CXL device cannot persist write requests but can read stored data.",
+            "LongDescription": "This message indicates that a CXL persistent memory device has lost the guarantee to persist subsequently written data to non-volatile storage, while still permitting host read transactions. This occurs when backup battery, supercapacitor, or Asynchronous DRAM Refresh (ADR) energy sources fail or deplete.",
+            "Message": "Media write persistency has been lost.",
+            "Severity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Backup critical data immediately. Check backup energy source and schedule module servicing.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedCritical"
+            ]
+        },
+        "MediaAllDataLost": {
+            "Description": "Indicates that all stored data on the CXL device has been lost.",
+            "LongDescription": "This message indicates that catastrophic media failure has occurred across all storage or persistent memory partitions of the CXL device, resulting in complete data loss and unrecoverable media access failure.",
+            "Message": "Total data loss has occurred across all media.",
+            "Severity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Restore dataset from backup and replace the failed CXL memory module.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedCritical"
+            ]
+        },
+        "MediaWritePersistenceLossOnPowerLoss": {
+            "Description": "Indicates that the ability to persist write requests may be lost if power is lost.",
+            "LongDescription": "This message indicates that the CXL device cannot guarantee write persistence if an unexpected power loss event occurs, indicating degradation of auxiliary energy retention buffers.",
+            "Message": "Write persistency may be lost in the event of a power loss.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Inspect battery backup or supercapacitor health on the CXL device or platform.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ]
+        },
+        "MediaWritePersistenceLossOnShutdown": {
+            "Description": "Indicates that the ability to persist write requests may be lost when the device is shut down.",
+            "LongDescription": "This message indicates that write persistence capabilities on the CXL device may be compromised during controlled system shutdown or device reset sequences.",
+            "Message": "Write persistency may be lost upon system shutdown.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Verify power-down sequence and backup power before initiating platform shutdown.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ]
+        },
+        "MediaWritePersistenceLossImminent": {
+            "Description": "Indicates that the CXL device ability to persist subsequent write requests is imminently failing.",
+            "LongDescription": "This message indicates that degradation of auxiliary energy retention circuitry or internal flash backing stores has progressed to a critical state where loss of write persistence will occur imminently.",
+            "Message": "Media write persistency loss is imminent.",
+            "Severity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Flush all write buffers immediately, migrate memory allocations, and replace device.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedCritical"
+            ]
+        },
+        "MediaAllDataLossOnPowerLoss": {
+            "Description": "Indicates that all data on the CXL device may be lost in the event of power loss.",
+            "LongDescription": "This message indicates that the entire memory media contents on the CXL device will be lost if host platform power is terminated, indicating failure of non-volatile retention buffers.",
+            "Message": "All data may be lost in the event of a power loss.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Check auxiliary energy buffers and perform immediate backup of active persistent pools.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ]
+        },
+        "MediaAllDataLossOnShutdown": {
+            "Description": "Indicates that all data on the CXL device may be lost when the device is shut down.",
+            "LongDescription": "This message indicates that all data stored on the CXL device will fail to persist through an orderly shutdown sequence.",
+            "Message": "All data may be lost upon system shutdown.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Backup all persistent data partitions before shutting down the host system.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedWarning"
+            ]
+        },
+        "MediaAllDataLossImminent": {
+            "Description": "Indicates that all data on the CXL device is at imminent risk of total loss.",
+            "LongDescription": "This message indicates that total data corruption or loss across all media arrays on the CXL device is imminent due to catastrophic internal hardware degradation.",
+            "Message": "Total data loss across all media is imminent.",
+            "Severity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Evacuate datasets immediately. Unmount persistent namespaces and replace the module.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedCritical"
+            ]
+        },
+        "LifeUsedNormal": {
+            "Description": "Indicates that the CXL device life used is within normal operating range.",
+            "LongDescription": "This message indicates that the estimated endurance wear percentage of the memory media is within nominal operating boundaries and has not exceeded the programmed warning threshold.",
+            "Message": "Media life used is within normal range.",
+            "Severity": "OK",
+            "NumberOfArgs": 0,
+            "Resolution": "None.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ]
+        },
+        "LifeUsedWarning": {
+            "Description": "Indicates that the CXL device life used metric has reached the user programmable warning threshold.",
+            "LongDescription": "This message indicates that the estimated remaining endurance life of the CXL memory media has reached or exceeded the user-configurable warning threshold, signaling the need to schedule device retirement.",
+            "Message": "Media life used percentage has reached warning threshold.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Monitor device wear telemetry and plan for device replacement during upcoming maintenance.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceWarningThresholdExceeded"
+            ]
+        },
+        "LifeUsedCritical": {
+            "Description": "Indicates that the CXL device life used metric has reached the critical threshold.",
+            "LongDescription": "This message indicates that the memory media endurance has depleted to the point where performance or reliability is directly affected, and immediate device replacement is required.",
+            "Message": "Media life used percentage has reached critical threshold.",
+            "Severity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Migrate data and replace the CXL device immediately.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceCriticalThresholdExceeded"
+            ]
+        },
+        "DeviceTemperatureNormal": {
+            "Description": "Indicates that the CXL device operating temperature is within normal operating range.",
+            "LongDescription": "This message indicates that the internal operating temperature reported by the CXL device sensors is within nominal operating boundaries, below both warning and critical thresholds.",
+            "Message": "Device temperature is within normal range.",
+            "Severity": "OK",
+            "NumberOfArgs": 0,
+            "Resolution": "None.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ]
+        },
+        "DeviceTemperatureWarning": {
+            "Description": "Indicates that the CXL device temperature has reached the warning threshold.",
+            "LongDescription": "This message indicates that the operating temperature reported by internal device sensors has reached or exceeded the user-programmable warning threshold.",
+            "Message": "Device temperature has reached warning threshold.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Verify platform cooling, check fan speeds, and inspect airflow over the CXL module.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceWarningThresholdExceeded",
+                "Sensor.SensorThresholdWarning"
+            ]
+        },
+        "DeviceTemperatureCritical": {
+            "Description": "Indicates that the CXL device temperature has reached the critical threshold.",
+            "LongDescription": "This message indicates that device temperature has exceeded critical operating limits, potentially triggering hardware throttling or thermal emergency procedures.",
+            "Message": "Device temperature has reached critical threshold.",
+            "Severity": "Critical",
+            "NumberOfArgs": 0,
+            "Resolution": "Reduce system thermal load, verify fan operation, and inspect heat sink seating immediately.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceCriticalThresholdExceeded",
+                "Sensor.SensorThresholdCritical"
+            ]
+        },
+        "CorrectedVolatileErrorCountNormal": {
+            "Description": "Indicates that the corrected volatile error count is below the warning threshold.",
+            "LongDescription": "This message indicates that the cumulative count of corrected hardware memory errors within volatile memory arrays is operating normally and remains below the user-programmable warning threshold.",
+            "Message": "Corrected volatile error count is within normal range.",
+            "Severity": "OK",
+            "NumberOfArgs": 0,
+            "Resolution": "None.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ]
+        },
+        "CorrectedVolatileErrorCountWarning": {
+            "Description": "Indicates that the corrected volatile error count has reached or exceeded the warning threshold.",
+            "LongDescription": "This message indicates that the cumulative count of corrected hardware memory errors within volatile memory arrays has exceeded the configured warning threshold, signaling possible physical cell degradation.",
+            "Message": "Corrected volatile error count reached warning threshold.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Inspect memory error logs, enable memory scrubbing, and verify physical module seating.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceWarningThresholdExceeded"
+            ]
+        },
+        "CorrectedPersistentErrorCountNormal": {
+            "Description": "Indicates that the corrected persistent error count is below the warning threshold.",
+            "LongDescription": "This message indicates that the cumulative count of corrected hardware memory errors within persistent memory media is operating normally and remains below the user-programmable warning threshold.",
+            "Message": "Corrected persistent error count is within normal range.",
+            "Severity": "OK",
+            "NumberOfArgs": 0,
+            "Resolution": "None.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceStatusChangedOK"
+            ]
+        },
+        "CorrectedPersistentErrorCountWarning": {
+            "Description": "Indicates that the corrected persistent error count has reached or exceeded the warning threshold.",
+            "LongDescription": "This message indicates that the cumulative count of corrected hardware memory errors within persistent memory media has exceeded the configured warning threshold, signaling media degradation.",
+            "Message": "Corrected persistent error count reached warning threshold.",
+            "Severity": "Warning",
+            "NumberOfArgs": 0,
+            "Resolution": "Inspect persistent memory logs, back up data partitions, and monitor error accumulation.",
+            "MapsToGeneralMessages": [
+                "ResourceEvent.ResourceWarningThresholdExceeded"
+            ]
+        }
+    }
+}
